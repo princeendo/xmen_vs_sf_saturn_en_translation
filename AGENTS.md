@@ -73,8 +73,9 @@ is not confirmation. An MSHvSF result is an analogous game.
 15. Use reference releases as evidence and translation oracles, not templates.
 16. Use stock Mednafen first. The MSHvSF frontend-only agent-interface patch may
     be reused once stock Mednafen boots XvSF (`EMU-004`) and `EMU-020` records
-    why stock Mednafen is insufficient here. Re-run the interface validations
-    V1-V4 on XvSF before using it as evidence.
+    why stock Mednafen is insufficient here, citing the MSHvSF evidence (user
+    decision, 2026-10-27). Re-run the interface validations V1-V4 on XvSF
+    before using it as evidence.
 17. Any Mednafen change beyond that patch is the smallest useful change, with the
     upstream URL, version/revision, patches, rationale, and build steps preserved.
 18. Python 3.12+ is the default implementation language. Avoid large dependencies

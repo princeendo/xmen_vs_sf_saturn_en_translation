@@ -14,9 +14,12 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   Python project, rules, ignore list, and the identity of the Saturn source
   image (`ENV-006`, `references/saturn_jp/README.md`).
 - Reverse-engineering experiments in progress: none.
+- **2026-10-27: policy confirmed** (`DOC-002`, `docs/localization_policy.md`):
+  official arcade English, opt-in grammar fixes, recorded new translations
+  for gaps, two name variants (Saturn default), all special surfaces in
+  eventual scope, xdelta and SSP released only after the open tasks.
 - Next unblocked tasks: `EMU-001` (pin and build stock Mednafen), `REF-001`
-  (arcade set intake), `REF-002` (PS1 intake), and `DOC-002` (confirm the
-  carried-over user decisions).
+  (arcade set intake), and `REF-002` (PS1 intake).
 - Nothing about XvSF's internals is confirmed yet.
 
 ## Milestones
@@ -123,13 +126,13 @@ prerequisites before English text goes on disc).
 
 ### DOC-002 - Confirm the MSHvSF user decisions for XvSF
 
-- **Status:** `READY`
+- **Status:** `DONE`
 - **Milestone:** GATE-TRANSLATION
 - **Dependencies:** DOC-001.
 - **Blockers:** None.
 - **Objective:** Ask the user to confirm, change, or defer each decision in the playbook's "The User's MSHvSF Localization Decisions" table.
 - **Acceptance criteria:** Each decision has a recorded XvSF answer (verbatim, dated) or an explicit deferral, in `research_log.md` and the relevant policy file.
-- **Notes:** Policy questions only; facts are still found by experiment. The release-timing rule in `local_agent_guidance.md` is one of them.
+- **Notes:** Policy questions only; facts are still found by experiment. Done 2026-10-27: eight decisions answered and recorded in `docs/localization_policy.md` and `research_log.md`; seven evidence-dependent decisions deferred there, each to the task that produces its evidence.
 
 ### DOC-003 - Point to the shared platform references
 
@@ -402,4 +405,4 @@ for each is in `docs/playbook_from_mshvsf.md`.
 | UI-002 | after M8, user request | Attract-mode captions: which layer draws them, which container and codecs hold them, arcade and PS1 oracles. |
 | UI-003 | after M8, user request | Other UI text (continue screen, hints): find the arcade English by tracing the arcade code, not only by data search. |
 | TXT-001 | after M8, user request | Rare, random, or region-gated text: trace every reader of every text table. |
-| LOC-001 | after M8, user request | Name variants: whether both conventions' art and voice are already on the disc. |
+| LOC-001 | after M8 | Name variants (user decision 2026-10-27: both, Saturn names default): whether both conventions' art and voice are already on the disc. |

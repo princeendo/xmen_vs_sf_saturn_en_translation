@@ -80,3 +80,35 @@ agree; same data as the earlier rip) but not database-verified (`ENV-007`,
 Next action: `EMU-001` (pin and build stock Mednafen; ask before downloading),
 `REF-001` and `REF-002` (arcade and PS1 intake), and `DOC-002` (ask the user to
 confirm the carried-over decisions).
+
+## 2026-10-27 — SESSION-0002: carried-over decisions confirmed
+
+Task: DOC-002
+
+Goal: confirm, change or defer each MSHvSF user decision for XvSF.
+
+Action: two rounds of multiple-choice questions, each option describing the
+MSHvSF precedent. Evidence-dependent decisions (capacity route, roster and
+exclusions, ending dialogue layout, caption font and colour, attract-caption
+style, per-option defaults, name-variant presentation) were not asked; they
+are deferred to the tasks that produce their evidence.
+
+Result (the user's chosen options, verbatim):
+
+- English source: "Official; fixes opt-in (Recommended)".
+- Text with no official English: "Recorded new translation (Recommended)".
+- Names: "Both variants, Saturn default".
+- Eventual scope: "Secret characters & bosses", "UI art & attract captions",
+  "Hints, story & rare text", "Optional unlocks".
+- Release formats: "xdelta + SSP (Recommended)".
+- Release timing: "After open tasks (Recommended)".
+- Patched Mednafen reuse after a short `EMU-020`: "Yes, reuse it
+  (Recommended)".
+- Workflow: "Cold-boot play check closes tasks", "Silent unattended runs",
+  "Ask before downloads/installs", "Prune uncited states".
+
+Conclusion: recorded in `docs/localization_policy.md`; `AGENTS.md` rule 16
+notes the decision; `DOC-002` is `DONE`. Scope answers do not lift any gate:
+special surfaces still wait for M9 and their own tasks (rule 24).
+
+Next action: `EMU-001`, `REF-001`, `REF-002`.
