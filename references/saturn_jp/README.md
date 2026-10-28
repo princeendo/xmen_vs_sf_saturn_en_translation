@@ -90,3 +90,17 @@ and agree with an independent `shasum -a 256` of the same files.
   cartridge. `EMU-005` confirms the emulator configuration.
 
 The earlier ISO-plus-MP3 rip is superseded for all purposes by this image.
+
+## Data-Track Files (`DISC-001`, 2026-10-28)
+
+[`iso_listing.json`](iso_listing.json) lists Track 01's 236 ISO 9660 files
+with LSN, size and SHA-256, plus the primary volume and the sector check
+(71,908 Mode 1 sectors, no bad sync or address mismatch). Produced by:
+
+```bash
+./invenv.sh python -m tools.disc.iso9660 --check \
+  "local/disc_images/xmvsf_saturn_jp_3m/X-Men vs. Street Fighter (Japan) (3M) (Track 01).bin"
+```
+
+(the `track` field keeps only the file name). Ryu's win-quote table comes from
+`MC09.SHP` (D-012).

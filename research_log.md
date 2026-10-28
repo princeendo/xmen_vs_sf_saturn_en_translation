@@ -811,3 +811,41 @@ Checks: `./invenv.sh pytest -q` 89 passed; `ruff check`, `ruff format
 Conclusion: **M1 reached** (**CONFIRMED**, D-011). Next is M2; its tasks must
 be written in full first (rule 8: nothing past M1 before M1 is confirmed, and
 it now is).
+
+## 2026-10-28 — SESSION-0026 / EXP-0017: quote table traced to `MC09.SHP`
+
+Task: DISC-001 (M2 tasks `DISC-001`, `DISC-002`, `FONT-001`, `FONT-002`
+written in full first, at the user's request: "Start M2: write up the M2
+tasks, then begin DISC-001").
+
+Actions and results:
+
+- ISO listing regenerated with `--check`: 71,908 Mode 1 sectors, no errors,
+  236 files, identical to `EXP-0011`'s. Committed as
+  `references/saturn_jp/iso_listing.json`.
+- Raw search of all files for the 1,672-byte table: no hit.
+- **DISPROVEN for XvSF:** a standard PRS decoder (LE long word, from offset
+  0). It failed at output 0 on all 60 `.PRS` files. The real format has a
+  4-byte count header and a big-endian long word.
+- Not tried after the trace made them moot: the playbook's MSHvSF LZSS
+  (MSB-first flags, header 0x10/0x14) and treating the `SELALL.PRS` header as
+  an entry table.
+- Control: from state 5696, a write breakpoint on the table and no input for
+  120 frames gave 0 hits.
+- Trial (`catch_loader.py`): pad A was bound to K in a scratch home and held
+  0.2 s. It halted at `0x0600D124` with R12 = `0x0024F5D8`; a second run gave
+  identical registers and WRAM-L.
+- Disassembly (MSHvSF `tools/sh2/disasm.py` copied from `69c666c`, with
+  `bsrf`/`braf` added): sector reader `0x0600D09C`, file size `0x50CE`,
+  destination `0x0024D000`, LZ77 decompressor `0x0601077C`.
+- `MC09.SHP` is the only 20,686-byte file. Decoding gives 43,064 bytes with
+  the table at offset `0x25D8`. They equal RAM at state 5750 apart from 259
+  fields relocated by `+0x0024D040`.
+
+Checks: `./invenv.sh pytest -q` 119 passed (new `test_prs.py` and
+`test_sh2_disasm.py`); `ruff check`, `ruff format --check` and `mypy` clean
+(`catch_loader.py` also `mypy --strict`). Source track hash unchanged
+(`c904a386…`).
+
+Conclusion: `DISC-001` is `DONE` (**CONFIRMED**, D-012). `DISC-002` and
+`FONT-001` are now unblocked.

@@ -132,3 +132,31 @@ WRAM-L `0x0024F8D6` (record 10, line 1, cells 3-5) made Ryu's quote read
 control showed the original quote, byte-identical to the live capture.
 
 Reproduce: `research/experiments/EXP-0016/README.md`, "Procedure".
+
+## D-012 (M2): Ryu's quote table comes from `MC09.SHP`, LZ77-compressed (`DISC-001`, `EXP-0017`)
+
+When Ryu is picked, the game loads `MC09.SHP` (Track 01 LSN 53,719, 20,686
+bytes, SHA-256 `e9a5605b333c0cc311458fe225a7812b30c3223237a6f4c69e1e65397de1641a`)
+to WRAM-L `0x0024D000`. The loader decompresses it through the streaming
+routine at WRAM-H `0x0601077C`.
+
+**File format.** A big-endian 32-bit entry count (0 = one stream), then an
+LZ77 stream:
+
+- Control bits are read LSB first; 1 is a literal.
+- 0,0 then two bits n (first high) and an offset byte: copy n + 2 bytes from
+  byte − `0x100`.
+- 0,1 then a big-endian word v: copy (v & 7) + 2 bytes from (v >> 3) −
+  `0x2000`. When v & 7 is 0, a count byte gives n + 1 bytes, and 0 ends the
+  stream.
+
+**Result.** `tools/disc/prs.py` decodes the file to 43,064 bytes. The quote
+table is at decompressed offset `0x25D8`, byte-identical; record 10 (M1) is at
+`0x28D0`. The rest equals RAM after the load except 259 32-bit fields, each
+relocated by `+0x0024D040`, none in the table.
+
+**Evidence.** With a write breakpoint on the table, the control (no input)
+has no hit. Two picks halted identically at `0x0600D124`. The same decoder
+fully consumes 50 files: `MC*.SHP`, `MS*.SHP` and `*.PCA`.
+
+Reproduce: `research/experiments/EXP-0017/README.md`, "Procedure".

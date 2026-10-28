@@ -85,9 +85,11 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   **M1 reached** (`RE-001`, `EXP-0016`, D-011): writing あいう into Ryu's
   quote record in live RAM changed exactly those glyphs on screen; the
   no-write control showed the original.
-- Next: M2 (reproduce the change from an untouched source image). Its
-  outline tasks (`DISC-001`, `DISC-002`, `FONT-001`, `FONT-002`) become full
-  tasks before work starts.
+- **2026-10-28** (`SESSION-0026`, `EXP-0017`): M2 tasks written in full.
+  Ryu's quote table is loaded from `MC09.SHP` (LSN 53,719), a 4-byte header
+  plus an LZ77 stream decoded by `tools/disc/prs.py`; the table is at
+  decompressed offset `0x25D8` (`DISC-001`, D-012). ISO listing committed.
+- Next: `DISC-002` (rebuild the image with the M1 change) or `FONT-001`.
 
 ## Milestones
 
@@ -473,6 +475,48 @@ prerequisites before English text goes on disc).
 - **Notes:** Live RAM only; nothing is written to the disc image. Glyph codes come from the hiragana relation measured in `EXP-0015` (Unicode − `0x2661`).
 - **Evidence:** 2026-10-28, `EXP-0016`, D-011. A cold-boot play check does not apply to a live-RAM change (a boot clears it); it applies from M2, when the change is on the disc image.
 
+## Phase G: M2
+
+### DISC-001 - Trace the quote table to its disc file
+
+- **Status:** `DONE`
+- **Milestone:** M2
+- **Dependencies:** RE-001.
+- **Blockers:** None.
+- **Objective:** Find the disc file (and offset) that the WRAM-L quote table (`0x0024F5D8`, `EXP-0015`) is loaded from, and its storage format.
+- **Acceptance criteria:** The data track's ISO 9660 layout is recorded (file list with LSN, size, SHA-256); a controlled trace (write breakpoint or read correlation) links the table's bytes to one file and offset; compression, pointers, lengths, checksums and alignment are tested as applicable; facts and uncertainty are recorded.
+- **Notes:** The table equals the arcade's Japanese slot-9 data (`EXP-0015`), so a raw search of the files is the first test.
+- **Evidence:** `EXP-0017`, D-012. Listing: `references/saturn_jp/iso_listing.json`. The no-input control had no hit; two picks halted in the loader identically. `MC09.SHP` decodes to 43,064 bytes with the table at `0x25D8`, equal to RAM after the load except 259 fields relocated by `+0x0024D040`.
+
+### DISC-002 - Reproduce the M1 change from a rebuilt image
+
+- **Status:** `READY`
+- **Milestone:** M2
+- **Dependencies:** DISC-001 (done).
+- **Blockers:** None.
+- **Objective:** Make the same あいう change on a disc image built from the untouched source, and see it after a cold boot.
+- **Acceptance criteria:** A tool patches the source file found by `DISC-001` into a new image under `build/` (same size, in place, Mode 1 EDC/ECC regenerated for every changed sector); unchanged sectors stay byte-identical to the source; the source hashes are unchanged; an unattended cold boot plus the `pre_ko`-style route (or a user play check) shows the changed glyphs; the user does a cold-boot play check (policy).
+- **Notes:** Original and new bytes, offsets and sector numbers recorded (rule 12). From `DISC-001`: `MC09.SHP` is compressed. Record 10 is at decompressed offset `0x28D0`, and the M1 bytes `0A21 09E5 0AC8` are at `0x28D6`. The file takes 11 sectors (20,686 bytes, 1,842 bytes of slack). Either re-encode (an encoder the game's decoder accepts) or change the stream in place, and test both against the decoder first.
+
+### FONT-001 - Find the quote font and prove its format
+
+- **Status:** `READY`
+- **Milestone:** M2
+- **Dependencies:** DISC-001 (done).
+- **Blockers:** None.
+- **Objective:** Locate the glyph data behind the quote codes (in RAM and on disc) and the routine that copies glyphs into the VDP1 cells.
+- **Acceptance criteria:** The font's RAM location and disc source are found by a controlled trace; its format is proven by a byte-identical repack of the original; the code-to-glyph mapping is tested against the rendered cells.
+- **Notes:** MSHvSF's font was compressed and loaded once (a HYPOTHESIS here).
+
+### FONT-002 - Latin codes, line length and cell grid
+
+- **Status:** `BLOCKED`
+- **Milestone:** M2
+- **Dependencies:** FONT-001.
+- **Blockers:** FONT-001.
+- **Objective:** Find which Latin glyphs the quote font has and their codes, and measure how many cells a line and a record hold.
+- **Acceptance criteria:** A live display with a control shows the predicted Latin glyphs; the per-line cell count and any width limits are measured on screen; capacity against the arcade English records (2 × 25 codes) is stated.
+
 ## Later Milestones (outline only)
 
 These are placeholders so the order is visible. Each becomes a full task, with
@@ -481,10 +525,6 @@ for each is in `docs/playbook_from_mshvsf.md`.
 
 | ID | Milestone | Outline |
 | --- | --- | --- |
-| DISC-001 | M2 | Map the ISO 9660 layout; trace the RAM table to its disc file by a write breakpoint; identify the format. |
-| DISC-002 | M2 | Reproduce the M1 change from a rebuilt image (same-size, in place, EDC/ECC regenerated); cold boot. |
-| FONT-001 | M2 | Find the glyph routine and font; prove the font format by a byte-identical repack. |
-| FONT-002 | M2 | Find which Latin codes exist and how they look; measure line length and cell grid. |
 | LAYOUT-001 | M3 | Choose a capacity route (pair glyphs or other) from measured headroom. |
 | RE-002 | M3 | Selection: record pointer, index setter, forcing from a checkpoint; all quote states. |
 | RE-003 | M3 | Caption compiler for one character; every record verified live by forcing. |
