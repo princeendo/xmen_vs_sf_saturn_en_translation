@@ -40,9 +40,12 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   D-003).
 - **2026-10-28** (`SESSION-0011`, `EXP-0004`): stock debugger dumps, a
   memory write, and a write breakpoint, all unattended (`EMU-007`, D-004).
-- Next unblocked tasks: `EMU-020` (record why stock Mednafen is
-  insufficient), `DBG-001` (validate the state extractor; run A of
-  `EXP-0004` saved a state with same-instant dumps), and `REF-003`.
+- **2026-10-28** (`SESSION-0012`): `EMU-020` recorded
+  (`docs/mednafen_agent_interface.md`). `SESSION-0013` / `EXP-0005`: the
+  state extractor matches debugger dumps for WRAM-L, WRAM-H, VDP1 and VDP2
+  VRAM (`DBG-001`, D-005); cart RAM stays HYPOTHESIS.
+- Next unblocked tasks: `EMU-021` (reuse and validate the agent interface),
+  `DBG-002` (copy analysis tools as needed), and `REF-003`.
 - Nothing about XvSF's internals is confirmed yet.
 
 ## Milestones
@@ -260,13 +263,13 @@ prerequisites before English text goes on disc).
 
 ### DBG-001 - Copy and validate the save-state extractor
 
-- **Status:** `READY`
+- **Status:** `DONE`
 - **Milestone:** M0
 - **Dependencies:** EMU-007.
 - **Blockers:** None.
 - **Objective:** Extract WRAM-L, WRAM-H, VDP1 and VDP2 VRAM from states, validated byte for byte against debugger dumps of the same instant on XvSF.
 - **Acceptance criteria:** Each region matches a stock debugger dump exactly; the result goes to `docs/discoveries.md`; cart RAM stays `HYPOTHESIS`.
-- **Notes:** MSHvSF found each stored 16-bit element byte-swapped (MSHvSF `DBG-012`, `EXP-0008`). Re-test, do not assume.
+- **Notes:** MSHvSF found each stored 16-bit element byte-swapped (MSHvSF `DBG-012`, `EXP-0008`). Re-test, do not assume. Done 2026-10-28 (`EXP-0005`, D-005): byte swap re-tested and confirmed on XvSF; all four regions identical to same-instant dumps; cart RAM unvalidated.
 
 ### DBG-002 - Copy the game-independent analysis tools
 

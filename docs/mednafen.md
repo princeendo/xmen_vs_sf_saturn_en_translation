@@ -302,3 +302,14 @@ example step files are in `research/experiments/EXP-0004/steps/`.
 - Window capture needs Screen Recording for the same Claude Code bundle.
   macOS showed the user a dialog about bypassing the private window picker on
   the first capture; captures worked.
+
+## Save-State Extraction (`DBG-001`, `EXP-0005`)
+
+```bash
+./invenv.sh python -m tools.memory.mcs_extract STATE [--region wram_h ...] [--out-dir DIR]
+```
+
+Validated on XvSF against same-instant debugger dumps: `wram_l`, `wram_h`,
+`vdp1_vram`, `vdp2_vram` (D-005). `cart_ram` is extracted but unvalidated.
+To capture a state with no frames run after it, freeze with `option+a`
+before `F5`.

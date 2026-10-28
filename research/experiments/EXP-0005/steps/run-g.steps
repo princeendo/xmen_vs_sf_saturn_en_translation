@@ -1,0 +1,34 @@
+# DBG-001 run G: freeze, save a state, dump WRAM-L, WRAM-H, VDP1 VRAM, VDP2 VRAM in one freeze
+70 option+a
+70 F5
+70 option+d
+70 option+3
+70 period
+70 window=local/dbg001/win/g1-space.png
+70 d
+70 type=00000000 000fffff research/memory_dumps/dbg001/g-wraml.bin
+70 return
+70 period
+70 window=local/dbg001/win/g2-space.png
+70 d
+70 type=00000000 000fffff research/memory_dumps/dbg001/g-wramh.bin
+70 return
+70 period
+70 period
+70 period
+70 period
+70 period
+70 period
+70 period
+70 window=local/dbg001/win/g3-space.png
+70 d
+70 type=00000000 0007ffff research/memory_dumps/dbg001/g-vdp1.bin
+70 return
+70 period
+70 period
+70 period
+70 window=local/dbg001/win/g4-space.png
+70 d
+70 type=00000000 0007ffff research/memory_dumps/dbg001/g-vdp2.bin
+70 return
+70 window=local/dbg001/win/g5-done.png

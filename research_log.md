@@ -463,3 +463,27 @@ provenance (`c30146ef…5244`, MSHvSF `b9a6593`) and the V1-V4 re-validation
 plan are recorded for `EMU-021`.
 
 Conclusion: `EMU-020` is `DONE`; `EMU-021` is `READY`. Documentation only.
+
+## 2026-10-28 — SESSION-0013 / EXP-0005: extractor validated on XvSF
+
+Task: DBG-001
+
+Action: copied `tools/memory/mcs_extract.py` and its test unchanged from
+MSHvSF `69c666c` with provenance notes; re-checked its region table against
+this repository's Mednafen source. Extracted the `EXP-0004` run A state and
+a new run G state (freeze, `F5`, dumps of all four spaces with name-checking
+window captures).
+
+Result: WRAM-L and WRAM-H identical at two instants; VDP1 and VDP2 VRAM
+identical at one. The raw stored order equals the dumps only after a 16-bit
+swap, confirming MSHvSF's byte-order finding on XvSF. Cart RAM identical
+between the two states but unvalidated (no debugger space). Source
+unchanged.
+
+Checks: `./invenv.sh pytest -q` 47 passed; `ruff check`, `ruff format
+--check`, and `mypy` clean.
+
+Conclusion: `DBG-001` is `DONE` (**CONFIRMED** for four regions, D-005).
+
+Next action: `EMU-021` (copy the MSHvSF agent patch and client, build,
+re-run V1-V4 on XvSF), or `REF-003`.

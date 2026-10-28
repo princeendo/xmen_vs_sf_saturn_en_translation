@@ -51,3 +51,14 @@ it. A CPU-view write breakpoint on `06000000-060fffff 26000000-260fffff` halts
 the game at a byte store into WRAM-H (`mov.b r0,@r9`, R9 `060C9047`).
 
 Reproduce: `research/experiments/EXP-0004/README.md`, "Procedure".
+
+## D-005: The save-state extractor is valid for WRAM and VDP VRAM on XvSF (`DBG-001`, `EXP-0005`)
+
+`tools/memory/mcs_extract.py` (default `saturn` byte order) reproduces stock
+debugger dumps of the same frame-advance freeze byte for byte: WRAM-L and
+WRAM-H at two instants, VDP1 VRAM and VDP2 VRAM at one. The state stores each
+16-bit element byte-swapped; the extractor undoes it. These four regions
+from states are usable evidence. Cart RAM (4 MiB) is extracted but has no
+debugger space to compare against, so it stays **HYPOTHESIS**.
+
+Reproduce: `research/experiments/EXP-0005/README.md`, "Procedure".
