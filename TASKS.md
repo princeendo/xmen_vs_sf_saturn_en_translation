@@ -70,8 +70,12 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   the `EXP-0007` session, transcribed and blind-checked (`REF-008`).
 - **2026-10-28** (`SESSION-0021`): analysis tools copied from MSHvSF with
   provenance and smoke-tested on XvSF data (`DBG-002`).
-- Next unblocked task: `DBG-003` (observe win-quote selection from a pre-KO
-  state; needs one user session picking Ryu).
+- **2026-10-28** (`SESSION-0022`, `EXP-0013`): a second user session (Ryu
+  and Gouki, first-fight win). 12 of 12 replays of four pre-quote states,
+  the earliest before the K.O., show the same quote; it differs from the
+  first session's (`DBG-003`). Checkpoints kept in `local/checkpoints/dbg003/`.
+- Next unblocked task: `DBG-004` (quote checkpoints; mostly available from
+  this session).
 - Nothing about XvSF's internals is confirmed yet.
 
 ## Milestones
@@ -395,19 +399,20 @@ prerequisites before English text goes on disc).
 
 ### DBG-003 - Observe win-quote selection behaviour
 
-- **Status:** `READY`
+- **Status:** `DONE`
 - **Milestone:** M1
 - **Dependencies:** EMU-021, REF-008.
 - **Blockers:** None.
 - **Objective:** Learn whether the quote varies from one pre-KO checkpoint before planning checkpoints.
 - **Acceptance criteria:** Several replays of one pre-KO state, with the quotes shown recorded.
+- **Notes:** Done 2026-10-28 (`EXP-0013`): the quote is fixed from a pre-KO state (12/12 replays) but varies between sessions. One checkpoint gives one quote.
 
 ### DBG-004 - Capture quote checkpoints
 
-- **Status:** `BLOCKED`
+- **Status:** `READY`
 - **Milestone:** M1
 - **Dependencies:** DBG-003.
-- **Blockers:** DBG-003.
+- **Blockers:** None.
 - **Objective:** States and screenshots before the fight end, after the KO, with the quote visible, and after it disappears.
 - **Acceptance criteria:** Each checkpoint is reproducible from its state and named in an experiment record.
 

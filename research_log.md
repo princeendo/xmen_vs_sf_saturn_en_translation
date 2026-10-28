@@ -707,3 +707,32 @@ Checks: `./invenv.sh pytest -q` 89 passed; `ruff check`, `ruff format
 
 Conclusion: `DBG-002` is `DONE`. Next: `DBG-003` (needs a user session with
 Ryu).
+
+## 2026-10-28 — SESSION-0022 / EXP-0013: win-quote selection from one state
+
+Task: DBG-003
+
+Action: launched the patched build in the interactive home with the
+recorder at one state per second (keep 180); the user picked Ryu and Gouki
+and won the first fight (user: "I completed the playthrough. Not sure if the
+quote was the same (don't read Japanese)"). Replayed four states (before the
+K.O., K.O., WIN banner, pre-quote transition) three times each with
+`replay_state`.
+
+Result: all 12 replays show the live session's quote (bubble crop hashes
+equal). It is a different line from session 1's, with the same team and a
+first-fight win.
+
+Pitfall: a contact-sheet step used `rm -f DIR/*`; the built-in safety check
+refused it (target not statically resolvable). It was not needed: the step
+now writes to a fresh folder.
+
+Checks: `./invenv.sh pytest -q` 89 passed; `ruff check`, `ruff format
+--check`, and `mypy` clean (documentation and local evidence only).
+
+Conclusion: `DBG-003` is `DONE` (**CONFIRMED**): one checkpoint yields one
+quote; quotes vary between sessions. `DBG-004` is `READY`.
+
+Next action: `DBG-004` (name checkpoints before the fight end, after the K.O.,
+with the quote visible, and after it disappears; most exist in
+`local/checkpoints/dbg003/`).
