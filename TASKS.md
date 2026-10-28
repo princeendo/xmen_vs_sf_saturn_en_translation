@@ -68,8 +68,10 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
 - **2026-10-28** (`SESSION-0020`, `EXP-0012`): the user kept American names
   as the default. M1 target chosen: Ryu, the quote after the player's win in
   the `EXP-0007` session, transcribed and blind-checked (`REF-008`).
-- Next unblocked tasks: `DBG-003` (observe win-quote selection from a pre-KO
-  state; needs one user session picking Ryu) and `DBG-002`.
+- **2026-10-28** (`SESSION-0021`): analysis tools copied from MSHvSF with
+  provenance and smoke-tested on XvSF data (`DBG-002`).
+- Next unblocked task: `DBG-003` (observe win-quote selection from a pre-KO
+  state; needs one user session picking Ryu).
 - Nothing about XvSF's internals is confirmed yet.
 
 ## Milestones
@@ -298,13 +300,13 @@ prerequisites before English text goes on disc).
 
 ### DBG-002 - Copy the game-independent analysis tools
 
-- **Status:** `BACKLOG`
+- **Status:** `DONE`
 - **Milestone:** M0
 - **Dependencies:** ENV-003.
 - **Blockers:** None.
 - **Objective:** Bring over the memory diff, encoding search, equality-pattern search, code-sequence search, VDP1 sprite walker, session recorder, and replay tools with their tests.
 - **Acceptance criteria:** Each copied file has a provenance note; tests pass; nothing with an MSHvSF address, offset, or file format is copied without parameterization.
-- **Notes:** Copy each tool when the first task needs it, not all at once. Copied so far (2026-10-28, `REF-001`): `tools/reference/mame_audit.py` with its test, and `mame_snap_frames.lua`.
+- **Notes:** Copy each tool when the first task needs it, not all at once. Copied with earlier tasks: `mame_audit.py`, `mame_snap_frames.lua` (`REF-001`), `mcs_extract.py` (`DBG-001`), `agent.py` (`EMU-021`), `session_recorder.py` (`REF-005`), `iso9660.py` (`REF-006`), `mame_timeline.lua` (`REF-004`). Done 2026-10-28 for the `DBG-003` to `DBG-005` set: `tools/memory/diff.py` (+ schema), `tools/text/search.py`, `pattern_search.py`, `code_search.py`, `tools/memory/vdp1_sprites.py` (unchanged, with tests), and `tools/mednafen/replay_state.py` (its `quiet_home()` replaced by `tools.mednafen.home.configure`; MSHvSF's quiet-home test not copied). 89 tests pass; each tool smoke-tested on XvSF dumps or states.
 
 ## Phase D: References And The Translation Oracle
 

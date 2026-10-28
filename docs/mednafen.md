@@ -313,3 +313,15 @@ Validated on XvSF against same-instant debugger dumps: `wram_l`, `wram_h`,
 `vdp1_vram`, `vdp2_vram` (D-005). `cart_ram` is extracted but unvalidated.
 To capture a state with no frames run after it, freeze with `option+a`
 before `F5`.
+
+## Replaying a State (`DBG-002`)
+
+```bash
+./invenv.sh python -m tools.mednafen.replay_state IMAGE.cue STATE OUT \
+  [--steps N --step-frames F] [--bp write:RANGES] [--halt-pc RANGE] [--agent-dir DIR]
+```
+
+Launches the patched build in the silent home (pinned by
+`tools.mednafen.home`), loads the state, and saves a screenshot after each
+step; breakpoint hits go to `OUT/events.log`. Smoke test (2026-10-28): the
+`EXP-0005` title state replayed to the title.

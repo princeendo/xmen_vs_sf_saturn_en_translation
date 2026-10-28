@@ -681,3 +681,29 @@ Not available: a pre-KO state (the recorder kept only the last 3 minutes).
 
 Conclusion: `REF-008` is `DONE`; `DBG-003` is `READY` and needs one user
 session with Ryu.
+
+## 2026-10-28 — SESSION-0021: analysis tools copied (DBG-002)
+
+Task: DBG-002
+
+Action: copied from MSHvSF `69c666c`, each with a provenance note and its
+tests: `tools/memory/diff.py` (+ `diff_result.schema.json`),
+`tools/text/search.py`, `tools/text/pattern_search.py`,
+`tools/text/code_search.py`, `tools/memory/vdp1_sprites.py`. The audit found
+only Saturn hardware constants in them (work-RAM bus bases, the VDP1 command
+layout from Mednafen's source), no MSHvSF addresses or formats.
+`tools/mednafen/replay_state.py` was adapted: its own `quiet_home()` is
+replaced by `tools.mednafen.home.configure`, so one tool pins the silent
+home. MSHvSF's quiet-home test was not copied.
+
+Smoke tests on XvSF data: `replay_state` replayed the `EXP-0005` state to the
+title (2 screenshots; silent-home config hash unchanged); `diff` of the two
+validated WRAM-H instants reports 3,990 changed bytes, matching `EXP-0005`;
+`code_search` and `search` find the known WRAM-H start words at
+`0x06000000`; `vdp1_sprites` lists 649 commands from the run-G VDP1 dump.
+
+Checks: `./invenv.sh pytest -q` 89 passed; `ruff check`, `ruff format
+--check`, and `mypy` clean.
+
+Conclusion: `DBG-002` is `DONE`. Next: `DBG-003` (needs a user session with
+Ryu).
