@@ -611,3 +611,28 @@ Conclusion: `REF-004` is `DONE` (**CONFIRMED**, D-008). `REF-007` is
 `READY`.
 
 Next action: `REF-006`, `REF-007`, or `REF-008`.
+
+## 2026-10-28 — SESSION-0018 / EXP-0010: PS1 US English vs arcade
+
+Task: REF-006
+
+Action: copied `tools/disc/iso9660.py` and its test from MSHvSF `69c666c`;
+listed (295 entries) and extracted (269 files) the US PS1 data track;
+searched every arcade English record in every file in both byte orders.
+
+Result: 293/294 records, all in `P/P4/SELECT.BIN`, little-endian,
+byte-identical. Win quotes and endings complete and in order. Hints appear
+twice: set A is the arcade's minus record 286; set B has 16 arcade records
+(one repeated) and 7 PS1-only records. Record 293 ("coming soon") is
+absent. No Spanish, Portuguese or Japanese tables in any file. MSHvSF's
+little-endian finding holds for XvSF.
+
+Not done: attract-caption comparison (needs the PS1 running, so a PS1
+BIOS); the JP EX image.
+
+Checks: `./invenv.sh pytest -q` 63 passed; `ruff check`, `ruff format
+--check`, and `mypy` clean (compare.py also `mypy --strict`).
+
+Conclusion: `REF-006` is `DONE` (**CONFIRMED**, D-009).
+
+Next action: `REF-007` (names) or `REF-008` (first character and quote).

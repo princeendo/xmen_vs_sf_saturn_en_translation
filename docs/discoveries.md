@@ -99,3 +99,14 @@ made the game read and draw slot 0's record at the same index, as predicted.
 `0xFF2490` only copies the printed record's address.
 
 Reproduce: `research/experiments/EXP-0009/README.md`, "Procedure".
+
+## D-009: The US PS1 stores the arcade English byte-identically (`REF-006`, `EXP-0010`)
+
+`P/P4/SELECT.BIN` on the US PS1 disc holds 293 of the arcade's 294 English
+records, little-endian and byte-identical. Win quotes (161) and endings (109)
+are complete and in arcade order. The arcade hints appear twice: verbatim
+less one record, and a PS1 variant with 7 rewritten records. The arcade's
+"coming soon" line is absent. No Spanish, Portuguese or Japanese tables are
+on the disc.
+
+Reproduce: `research/experiments/EXP-0010/README.md`, "Procedure".

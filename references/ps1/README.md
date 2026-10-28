@@ -39,3 +39,13 @@ SHA-256 `d5c9acd791513686a6e94061f2efb49f0c46d13260aa0465ade8ebe84a0fbc1f`).
   `BOOT = cdrom:\SLPS_012.84`. Identity is as named by the archive only.
 
 These results equal what MSHvSF recorded for the same files on 2026-10-24.
+
+## English Text (`REF-006`, `EXP-0010`)
+
+`P/P4/SELECT.BIN` (LSN 142996, 167,108 bytes, SHA-256
+`3fd5810b8f0cf6011a68b10478e407ed9597213008702932b0976d609d61e53c`) holds 293
+of the arcade's 294 English records (`EXP-0008`), little-endian and
+byte-identical: all win quotes and endings in arcade order, the arcade hints
+less one record, and a second hint set with 7 PS1-only records. The arcade's
+"coming soon" line and its Spanish, Portuguese and Japanese tables are not on
+the disc.

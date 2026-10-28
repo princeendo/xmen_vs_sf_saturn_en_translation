@@ -58,9 +58,11 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
 - **2026-10-28** (`SESSION-0017`, `EXP-0009`): the US arcade draws the
   decoded win quote and hints exactly; work RAM `0xFF8BB4` selects the
   win-quote slot (`REF-004`, D-008).
-- Next unblocked tasks: `REF-006` (PS1 US English vs arcade), `REF-007`
-  (character names across releases), `REF-008` (first character and
-  quote), and `DBG-002`.
+- **2026-10-28** (`SESSION-0018`, `EXP-0010`): the US PS1 holds the arcade
+  English win quotes and endings byte-identically, plus a 7-record PS1 hint
+  variant (`REF-006`, D-009).
+- Next unblocked tasks: `REF-007` (character names across releases),
+  `REF-008` (first character and quote), and `DBG-002`.
 - Nothing about XvSF's internals is confirmed yet.
 
 ## Milestones
@@ -352,12 +354,13 @@ prerequisites before English text goes on disc).
 
 ### REF-006 - Compare the PS1 US English with the arcade
 
-- **Status:** `READY`
+- **Status:** `DONE`
 - **Milestone:** GATE-TRANSLATION
 - **Dependencies:** REF-002, REF-003.
 - **Blockers:** None.
 - **Objective:** Decide whether the PS1 US release is a second oracle for any surface.
 - **Acceptance criteria:** Byte or text comparison per surface, with differences listed.
+- **Notes:** Done 2026-10-28 (`EXP-0010`, D-009): second oracle for win quotes and endings (byte-identical) and arcade hints; adds a PS1 hint variant; not compared: attract captions (needs a PS1 BIOS).
 
 ### REF-007 - Inventory character names across releases
 
