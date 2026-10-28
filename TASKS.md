@@ -65,7 +65,11 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   (`docs/names.md`): Saturn GOUKI vs US arcade AKUMA (art), Saturn NASH vs
   English Charlie, English Bison; Saturn Bison/Vega and voice unknown
   (`REF-007`).
-- Next unblocked tasks: `REF-008` (first character and quote), `DBG-002`.
+- **2026-10-28** (`SESSION-0020`, `EXP-0012`): the user kept American names
+  as the default. M1 target chosen: Ryu, the quote after the player's win in
+  the `EXP-0007` session, transcribed and blind-checked (`REF-008`).
+- Next unblocked tasks: `DBG-003` (observe win-quote selection from a pre-KO
+  state; needs one user session picking Ryu) and `DBG-002`.
 - Nothing about XvSF's internals is confirmed yet.
 
 ## Milestones
@@ -377,21 +381,22 @@ prerequisites before English text goes on disc).
 
 ### REF-008 - Choose the first character and quote
 
-- **Status:** `READY`
+- **Status:** `DONE`
 - **Milestone:** M1
 - **Dependencies:** REF-005.
 - **Blockers:** None.
 - **Objective:** Pick one ordinary character and one win quote as the M1 target.
 - **Acceptance criteria:** The choice and the reason are recorded; the Japanese is captured on screen and transcribed.
+- **Notes:** Done 2026-10-28 (`EXP-0012`): Ryu; quote at session frame 11244, two lines, blind-checked. Speaker identity and arcade slot 9 are HYPOTHESIS. No pre-KO state yet.
 
 ## Phase E: Checkpoints And Memory Analysis
 
 ### DBG-003 - Observe win-quote selection behaviour
 
-- **Status:** `BLOCKED`
+- **Status:** `READY`
 - **Milestone:** M1
 - **Dependencies:** EMU-021, REF-008.
-- **Blockers:** EMU-021.
+- **Blockers:** None.
 - **Objective:** Learn whether the quote varies from one pre-KO checkpoint before planning checkpoints.
 - **Acceptance criteria:** Several replays of one pre-KO state, with the quotes shown recorded.
 

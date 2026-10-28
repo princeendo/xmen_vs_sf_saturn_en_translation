@@ -660,3 +660,24 @@ Checks: `./invenv.sh pytest -q` 63 passed; `ruff check`, `ruff format
 Conclusion: `REF-007` is `DONE` with options and costs in `docs/names.md`.
 
 Next action: `REF-008`.
+
+## 2026-10-28 — SESSION-0020 / EXP-0012: M1 target chosen
+
+Task: REF-008
+
+User decision (2026-10-28, verbatim): "Keep American names as the default."
+
+Choice: Ryu, and the win quote after the player's win in the `EXP-0007`
+session (frame 11244, `8428bf99…11a6`). Reasons: ordinary character,
+reachable again by a player win, captured by the agent interface, and an
+arcade English slot exists (slot 9 by name-list order, HYPOTHESIS).
+
+Transcription by the agent from a 3x enlargement; a separate agent's blind
+transcription is identical (two lines, six dots as two ellipses, full-width
+exclamation mark). Keyword counts over arcade slots 9, 10 and 15 did not
+single out Ryu's slot; slot 9 stays a hypothesis.
+
+Not available: a pre-KO state (the recorder kept only the last 3 minutes).
+
+Conclusion: `REF-008` is `DONE`; `DBG-003` is `READY` and needs one user
+session with Ryu.
