@@ -123,3 +123,12 @@ ending's first records. Hiragana codes are Unicode − `0x2661`. The table is
 resident from before the K.O. The M1 quote is record 10.
 
 Reproduce: `research/experiments/EXP-0015/README.md`, "Procedure".
+
+## D-011 (M1): Writing codes into the WRAM-L record changes the quote (`RE-001`, `EXP-0016`)
+
+At the `pre_ko` checkpoint, writing `09E1 09E3 09E5` over `0A21 09E5 0AC8` at
+WRAM-L `0x0024F8D6` (record 10, line 1, cells 3-5) made Ryu's quote read
+あいう度鍛え直してこい。; only those three cells changed on screen. The no-write
+control showed the original quote, byte-identical to the live capture.
+
+Reproduce: `research/experiments/EXP-0016/README.md`, "Procedure".

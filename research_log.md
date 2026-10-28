@@ -787,3 +787,27 @@ Checks: `./invenv.sh pytest -q` 89 passed; `ruff check`, `ruff format
 Conclusion: `DBG-005` is `DONE` (**CONFIRMED**, D-010). Every `GATE-M0`
 dependency is `DONE`; the gate awaits the user's go/no-go before `RE-001`
 (the first live RAM mutation).
+
+## 2026-10-28 — SESSION-0025 / EXP-0016: M1, quote changed in live RAM
+
+Task: GATE-M0, RE-001
+
+User decision (2026-10-28, verbatim): "GATE-M0: go. Start RE-001: change the
+chosen quote in live RAM, with a no-write control." `GATE-M0` marked `DONE`;
+`RE-001` written up as a full task before work.
+
+Action: `research/experiments/EXP-0016/m1_trial.py` from `pre_ko`: control
+(no write), then trial writing `09E1 09E3 09E5` (あいう) over `0A21 09E5 0AC8`
+(もう一) at WRAM-L `0x0024F8D6`.
+
+Result: trial quote line 1 reads あいう度鍛え直してこい。; control is
+byte-identical to the live capture. 318 pixels differ, all within cells 3-5
+of line 1. The record held the written bytes at the quote screen. Source
+image unchanged.
+
+Checks: `./invenv.sh pytest -q` 89 passed; `ruff check`, `ruff format
+--check`, and `mypy` clean (`m1_trial.py` also `mypy --strict`).
+
+Conclusion: **M1 reached** (**CONFIRMED**, D-011). Next is M2; its tasks must
+be written in full first (rule 8: nothing past M1 before M1 is confirmed, and
+it now is).

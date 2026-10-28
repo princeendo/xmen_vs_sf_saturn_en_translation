@@ -81,9 +81,13 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   (controlled change); its text is a WRAM-L table at `0x0024F5D8` that equals
   the arcade Japanese slot 9 (Ryu) byte for byte; the M1 quote is record 10
   (`DBG-005`, D-010).
-- All `GATE-M0` dependencies are `DONE`. The gate needs an explicit go/no-go
-  before the first live RAM mutation (M1, `RE-001`).
-- Nothing about XvSF's internals is confirmed yet.
+- **2026-10-28** (`SESSION-0025`): the user passed `GATE-M0` ("GATE-M0: go").
+  **M1 reached** (`RE-001`, `EXP-0016`, D-011): writing あいう into Ryu's
+  quote record in live RAM changed exactly those glyphs on screen; the
+  no-write control showed the original.
+- Next: M2 (reproduce the change from an untouched source image). Its
+  outline tasks (`DISC-001`, `DISC-002`, `FONT-001`, `FONT-002`) become full
+  tasks before work starts.
 
 ## Milestones
 
@@ -439,12 +443,13 @@ prerequisites before English text goes on disc).
 
 ### GATE-M0 - Confirm environment and checkpoint prerequisites
 
-- **Status:** `READY`
+- **Status:** `DONE`
 - **Milestone:** M0
 - **Dependencies:** ENV-001 to ENV-006, EMU-001 to EMU-007, EMU-020, EMU-021, DBG-001, DBG-003, DBG-004, DBG-005, REF-008.
 - **Blockers:** None; every dependency is `DONE` (2026-10-28). Needs the explicit go/no-go.
 - **Objective:** Make an explicit go/no-go decision before the first live RAM mutation.
 - **Acceptance criteria:** Every dependency is `DONE`; no unresolved workflow blocker can invalidate M1 evidence.
+- **Decision:** GO, by the user on 2026-10-28 (verbatim): "GATE-M0: go. Start RE-001: change the chosen quote in live RAM, with a no-write control."
 
 ### GATE-TRANSLATION - Confirm reference and translation prerequisites
 
@@ -455,6 +460,19 @@ prerequisites before English text goes on disc).
 - **Objective:** No English text goes on disc before the oracle, the pairing method, and the user's policy are settled.
 - **Acceptance criteria:** Every dependency is `DONE`; the user gives a recorded GO.
 
+## Phase F: M1
+
+### RE-001 - Change the chosen quote in live RAM
+
+- **Status:** `DONE`
+- **Milestone:** M1
+- **Dependencies:** GATE-M0.
+- **Blockers:** None.
+- **Objective:** Show that writing known codes into the WRAM-L quote record (`0x0024F5D8` table, record 10, `EXP-0015`) changes the Saturn's on-screen win quote.
+- **Acceptance criteria:** From the `pre_ko` checkpoint, a trial writes a few known codes into record 10 and the quote screen shows exactly the predicted glyphs in those cells, with everything else unchanged; a no-write control from the same checkpoint shows the original quote; original bytes, written bytes, address, purpose, expected and observed results are recorded (`AGENTS.md` rule 12); the source image is unchanged.
+- **Notes:** Live RAM only; nothing is written to the disc image. Glyph codes come from the hiragana relation measured in `EXP-0015` (Unicode − `0x2661`).
+- **Evidence:** 2026-10-28, `EXP-0016`, D-011. A cold-boot play check does not apply to a live-RAM change (a boot clears it); it applies from M2, when the change is on the disc image.
+
 ## Later Milestones (outline only)
 
 These are placeholders so the order is visible. Each becomes a full task, with
@@ -463,7 +481,6 @@ for each is in `docs/playbook_from_mshvsf.md`.
 
 | ID | Milestone | Outline |
 | --- | --- | --- |
-| RE-001 | M1 | Change the chosen quote in live RAM, with a no-write control. |
 | DISC-001 | M2 | Map the ISO 9660 layout; trace the RAM table to its disc file by a write breakpoint; identify the format. |
 | DISC-002 | M2 | Reproduce the M1 change from a rebuilt image (same-size, in place, EDC/ECC regenerated); cold boot. |
 | FONT-001 | M2 | Find the glyph routine and font; prove the font format by a byte-identical repack. |
