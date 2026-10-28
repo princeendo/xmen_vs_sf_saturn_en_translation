@@ -90,3 +90,20 @@ SNAP_FRAMES="1200 3000" mame xmvsfu -rompath local/arcade_roms/xmvsf_mame0289 \
 Both runs exited 0. Both frame-3000 hashes equal the values MSHvSF recorded on
 2026-10-24 for the same sets, so the headless boot is reproducible across the
 two checkouts.
+
+## English Text Tables (`REF-003`, `EXP-0008`)
+
+Decoder: `tools/reference/xvsf_text.py` (reports go to ignored paths only).
+
+| Content | Records (2 × 25 codes) | Table |
+| --- | --- | --- |
+| Win quotes | 0-160 (161 unique; 19 slots, two aliases) | `0x17E1E8` |
+| Endings | 161-269 (109 unique) | `0x17E318` |
+| Gameplay hints (continue screen) | 270-292 | none found |
+
+The English area runs from `0x186EA2` to `0x18E17A` in the shared ROM
+`xvs.06a` (68000 program addresses). The code map is a tile-sheet layout of
+ASCII (`0x0681` = `A`, `0x0691` = `a`, `0x0677` = `'`, space `0x0020`).
+Spanish and Portuguese twins use ASCII + `0x80`; the Japanese twins are not
+decoded. All 11 held sets carry identical text; Japan 960909 has it `0x4C`
+bytes earlier. Stage names and UI words are plain 8-bit ASCII near `0x4300`.

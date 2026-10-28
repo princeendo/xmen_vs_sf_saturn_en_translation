@@ -543,3 +543,39 @@ Conclusion: `REF-005` is `DONE`; `REF-008` is `READY`.
 Next action: `REF-008` (pick the M1 character and win quote; the session's
 Ryu/Gouki win at frame 11244 and its states are candidates, but the states
 kept are only the last 3 minutes), or `REF-003`.
+
+## 2026-10-28 — SESSION-0016 / EXP-0008: arcade English text located and decoded
+
+Task: REF-003
+
+Action and results, in order (details in `EXP-0008`):
+
+- Rebuilt the `maincpu` region of each held set from its zips (68000 order:
+  each 16-bit word swapped). Stage names and UI words are plain 8-bit ASCII
+  near `0x4300`; long ASCII runs are boot, legal and test-menu text.
+- **DISPROVEN for XvSF:** MSHvSF's arcade map (16-bit, `A` = `0x0140`,
+  `a` = `0x0161`, space `0x0020`) gives 0 phrase runs in all three tested
+  sets.
+- An offset histogram of common words found ASCII + `0x80` (Spanish and
+  Portuguese twins) and a single-case English hit (`hadaloo`, offset 1584).
+  Context fixed the English map as a tile-sheet layout of ASCII.
+- Pointer tables `0x17E1E8` (win quotes) and `0x17E318` (endings), 19 slots
+  each; records of 2 × 25 codes. A first guess at the endings' end
+  (`0x18D55E`) truncated the last slot. Reading on, the real end is record
+  270, and records 270-292 are the continue-screen hints. The area totals
+  294 records exactly.
+- Punctuation in expected context: 88-100% per mark. Unmapped codes only in
+  hints (`0x0134`-`0x013A`), probably joystick arrows (HYPOTHESIS).
+- All 11 held sets carry the same English; Japan 960909 has it `0x4C` bytes
+  earlier. The loader now falls back to SHA-1 for relabelled zip members
+  (`xmvsfur1`).
+- Game text stays in ignored `local/ref003/`.
+
+Checks: `./invenv.sh pytest -q` 58 passed; `ruff check`, `ruff format
+--check`, and `mypy` clean.
+
+Conclusion: `REF-003` is `DONE` (**CONFIRMED**, D-007). `REF-004` and
+`REF-006` are `READY`.
+
+Next action: `REF-004` (show a decoded win quote on the arcade screen in
+MAME, with the RAM pointer that selects it), `REF-006`, or `REF-008`.

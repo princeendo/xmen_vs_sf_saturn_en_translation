@@ -74,3 +74,16 @@ extraction of a state saved in the same poll; writes round-trip; `pause`,
 `EXP-0004`) and `06021B6A` without halting.
 
 Reproduce: `research/experiments/EXP-0006/README.md`, "Procedure".
+
+## D-007: The arcade English text is fixed records in the shared program ROM (`REF-003`, `EXP-0008`)
+
+In every held CPS-II set, the English win quotes, endings and continue-screen
+hints are 294 records of two 25-code lines at `0x186EA2`-`0x18E17A` (shared
+ROM `xvs.06a`; `0x4C` earlier in Japan 960909). Pointer tables: win quotes
+`0x17E1E8`, endings `0x17E318` (19 slots each). Codes are ASCII laid out as a
+tile sheet (row bases `0x0670`/`0x06D0`/`0x0680`/`0x06E0`/`0x0690`/`0x06F0`
+for ASCII rows 2-7; space `0x0020`). `tools/reference/xvsf_text.py` decodes
+them with no leftover codes outside the hints; punctuation falls in its
+expected context 88-100% of the time. MSHvSF's arcade map does not apply.
+
+Reproduce: `research/experiments/EXP-0008/README.md`, "Procedure".

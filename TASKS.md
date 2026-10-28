@@ -51,9 +51,13 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   Japanese text on attract captions, win quotes and continue hints
   (`REF-005`, `docs/text_surfaces.md`). US arcade attract captions are
   English.
-- Next unblocked tasks: `REF-008` (choose the first character and quote),
-  `REF-003` (arcade English text), and `DBG-002` (copy analysis tools as
-  needed).
+- **2026-10-28** (`SESSION-0016`, `EXP-0008`): arcade English located and
+  decoded: 161 win-quote, 109 ending and 23 hint records in the shared ROM,
+  same in every held set (`REF-003`, D-007). MSHvSF's arcade map is
+  disproven for XvSF.
+- Next unblocked tasks: `REF-004` (show a decoded entry on the arcade
+  screen), `REF-006` (PS1 US English vs arcade), `REF-008` (first character
+  and quote), and `DBG-002`.
 - Nothing about XvSF's internals is confirmed yet.
 
 ## Milestones
@@ -314,19 +318,20 @@ prerequisites before English text goes on disc).
 
 ### REF-003 - Locate and decode the arcade English text
 
-- **Status:** `READY`
+- **Status:** `DONE`
 - **Milestone:** GATE-TRANSLATION
 - **Dependencies:** REF-001.
 - **Blockers:** None.
 - **Objective:** Find where the arcade stores its English win quotes and ending text, and how it is encoded.
 - **Acceptance criteria:** A decoder reproduces known English strings from the local ROM; the table shape and any regional differences are recorded; punctuation mappings are tested statistically.
+- **Notes:** Done 2026-10-28 (`EXP-0008`, D-007): `tools/reference/xvsf_text.py`. Arrow codes and hint grouping are HYPOTHESIS/UNKNOWN; which region shows which language is `REF-004`.
 
 ### REF-004 - Confirm the decoded arcade text on screen
 
-- **Status:** `BLOCKED`
+- **Status:** `READY`
 - **Milestone:** GATE-TRANSLATION
 - **Dependencies:** REF-003.
-- **Blockers:** REF-003.
+- **Blockers:** None.
 - **Objective:** Show that the decoded table is what the arcade draws.
 - **Acceptance criteria:** A scripted MAME route shows a predicted entry on screen, with the RAM pointer that selects it.
 
@@ -343,10 +348,10 @@ prerequisites before English text goes on disc).
 
 ### REF-006 - Compare the PS1 US English with the arcade
 
-- **Status:** `BLOCKED`
+- **Status:** `READY`
 - **Milestone:** GATE-TRANSLATION
 - **Dependencies:** REF-002, REF-003.
-- **Blockers:** REF-003.
+- **Blockers:** None.
 - **Objective:** Decide whether the PS1 US release is a second oracle for any surface.
 - **Acceptance criteria:** Byte or text comparison per surface, with differences listed.
 
