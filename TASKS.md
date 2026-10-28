@@ -241,19 +241,20 @@ prerequisites before English text goes on disc).
 
 ### EMU-020 - Record why stock Mednafen is insufficient
 
-- **Status:** `READY`
+- **Status:** `DONE`
 - **Milestone:** M0
 - **Dependencies:** EMU-007.
 - **Blockers:** None.
 - **Objective:** Satisfy `AGENTS.md` rule 16 before using the patched build.
 - **Acceptance criteria:** A short record cites MSHvSF `EMU-012`/`EMU-020` and confirms the same limits apply here (no scripted memory access, breakpoints, or states without manual debugger work).
+- **Notes:** Done 2026-10-28: `docs/mednafen_agent_interface.md`. Refinement of the wording: on XvSF, stock *can* be scripted through GUI automation (`EXP-0003`, `EXP-0004`), but only with key latency, focus stealing, two macOS grants, and registers read by eye; there is still no programmatic interface. The conclusion (reuse the patch) stands.
 
 ### EMU-021 - Reuse and validate the agent interface
 
-- **Status:** `BLOCKED`
+- **Status:** `READY`
 - **Milestone:** M0
 - **Dependencies:** EMU-020.
-- **Blockers:** EMU-020.
+- **Blockers:** None.
 - **Objective:** Drive Mednafen from Python so the user only plays.
 - **Acceptance criteria:** The MSHvSF patch applies to the pinned version and builds; validations V1-V4 (MSHvSF `docs/mednafen_agent_interface.md`) pass on XvSF states; `tools/mednafen/agent.py` and its tests are copied with provenance.
 

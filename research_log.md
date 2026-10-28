@@ -446,3 +446,20 @@ Conclusion: `EMU-007` is `DONE` (**CONFIRMED**, D-004). `EMU-020` and
 
 Next action: `EMU-020` (short record that stock Mednafen is insufficient,
 citing MSHvSF), then `DBG-001`; or `REF-003`.
+
+## 2026-10-28 — SESSION-0012: EMU-020 record
+
+Task: EMU-020
+
+Action: wrote `docs/mednafen_agent_interface.md`. It cites MSHvSF `EMU-012`
+and `EMU-020`, then sets out what this project observed on XvSF with stock
+1.32.1 driven by GUI automation (`EXP-0003`, `EXP-0004`): it works for M0
+checks, but each key costs about 1 s and the user's focus, it needs
+Accessibility (on a versioned Claude Code bundle path) and screen capture,
+breakpoint hits only halt, registers are read by eye from captures, and
+act-after-hit is out of reach. MSHvSF rejected GUI automation without trying
+it; here it was tried, and the conclusion is the same. The patch's
+provenance (`c30146ef…5244`, MSHvSF `b9a6593`) and the V1-V4 re-validation
+plan are recorded for `EMU-021`.
+
+Conclusion: `EMU-020` is `DONE`; `EMU-021` is `READY`. Documentation only.
