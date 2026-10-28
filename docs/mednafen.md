@@ -172,3 +172,25 @@ MEDNAFEN_HOME="$PWD/local/mednafen" \
 Unattended: the same with `MEDNAFEN_HOME="$PWD/local/mednafen_quiet"`, with
 stdout and stderr redirected to a file under the ignored `local/logs/`.
 Stock Mednafen has no log-directory setting.
+
+## Unattended Cold Boot (`EMU-003`, `EXP-0001`)
+
+Stock Mednafen has no scripted screenshot. `tools/mednafen/cold_boot.py` lets
+the agent see unattended runs without input or the agent interface:
+
+```bash
+rm -f local/mednafen_quiet/sav/*   # start with no backup RAM
+./invenv.sh python -m tools.mednafen.cold_boot \
+  "local/disc_images/xmvsf_saturn_jp_3m/X-Men vs. Street Fighter (Japan) (3M).cue" \
+  local/emu003/bootN --seconds 90
+```
+
+- It adds `-qtrecord FILE`, a command-line option that is not saved to the
+  configuration. Mednafen catches SIGTERM, prints "Signal has been caught and
+  dealt with: SIGTERM", exits 0 and finalizes the movie.
+- The movie is a 10560x480 CamStudio (`cscd`) canvas (30 × 352). Frames are
+  scaled to 352x240 with ffmpeg 9.0.1, so they approximate native
+  screenshots. The movie is deleted afterwards (about 960 MB per 90 s); its
+  hash stays in `run.json`.
+- Result: title screen at about 68-75 s, identical across three boots
+  (`docs/discoveries.md` D-001).

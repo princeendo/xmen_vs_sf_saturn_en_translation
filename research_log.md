@@ -245,3 +245,40 @@ and cart selection are `EMU-003` and `EMU-004`.
 
 Next action: `EMU-003` (three cold boots of the untouched image to the title
 screen, in the quiet home, source hashes checked before and after).
+
+## 2026-10-28 — SESSION-0007 / EXP-0001: unattended cold boots
+
+Task: EMU-003
+
+Goal: three cold boots of the untouched image reach a stable title screen.
+
+Action:
+
+- Chose stock `-qtrecord` video plus SIGTERM as the way to see unattended
+  runs (no input, no agent interface, no setting change). A 20 s pilot showed
+  SIGTERM is caught, exit 0, and the movie finalized; it reached only the
+  SEGA licence screen, so the runs use 90 s.
+- The pilot left backup RAM in `local/mednafen_quiet/sav/`; it was emptied
+  before each boot so all three start alike.
+- Added `tools/mednafen/cold_boot.py` (run, record, stop, extract 1 fps
+  frames and contact sheets, hash, delete the movie).
+- Three boots, source hashed before and after.
+
+Result: all three exit 0 and log `T-1226G`, area `J`, `Cart: 4MiB Extended
+RAM`. All 89 per-second frames are byte-identical across boots. The title
+logo with `PRESS START BUTTON` shows at frames 068-075 (frame 070
+`ebfbb7da…e662`). Source manifests identical; config and binary hashes
+unchanged. Details: `research/experiments/EXP-0001/README.md`.
+
+Not tested: whether emulation stalls while the display sleeps (MSHvSF's
+vsync observation), and frame-exact determinism between samples.
+
+Checks: `./invenv.sh pytest -q` 15 passed; `ruff check`, `ruff format
+--check`, and `mypy` clean. `cold_boot.py` has no unit test; it wraps
+Mednafen and ffmpeg, and this experiment exercised it end to end.
+
+Conclusion: `EMU-003` is `DONE` (**CONFIRMED**, D-001). `EMU-004`,
+`EMU-005`, and `EMU-006` are now `READY`.
+
+Next action: `EMU-004` (forced `extram4` boots and one control boot without
+the cart), unattended with the same tool.

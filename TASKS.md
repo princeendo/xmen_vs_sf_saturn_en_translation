@@ -28,8 +28,11 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
 - **2026-10-28** (`SESSION-0006`): project-local Mednafen homes (interactive
   and silent) pinned by `tools/mednafen/home.py`; Saturn BIOS hashes match
   Mednafen's documentation (`EMU-002`, `docs/mednafen.md`).
-- Next unblocked tasks: `EMU-003` (boot XvSF) and `REF-003` (locate and
-  decode the arcade English text).
+- **2026-10-28** (`SESSION-0007`, `EXP-0001`): three unattended cold boots
+  reach the title screen identically (`EMU-003`, `docs/discoveries.md` D-001).
+- Next unblocked tasks: `EMU-004` (4 MB cart with a control boot), `EMU-005`
+  (pad; needs the user), `EMU-006` (screenshots and save states), and
+  `REF-003` (arcade English text).
 - Nothing about XvSF's internals is confirmed yet.
 
 ## Milestones
@@ -178,40 +181,40 @@ prerequisites before English text goes on disc).
 
 ### EMU-003 - Boot XvSF
 
-- **Status:** `READY`
+- **Status:** `DONE`
 - **Milestone:** M0
 - **Dependencies:** EMU-002, ENV-006.
 - **Blockers:** None.
 - **Objective:** Reach the title screen from a cold boot of the untouched image.
 - **Acceptance criteria:** Three cold boots reach a stable title screen; the boot log shows `T-1226G`; source hashes match before and after; screenshots kept locally.
-- **Notes:** Run unattended boots silently (MSHvSF `local/mednafen_quiet` approach) so they do not disturb the user.
+- **Notes:** Run unattended boots silently (MSHvSF `local/mednafen_quiet` approach) so they do not disturb the user. Done 2026-10-28 (`EXP-0001`): three boots with no input log `T-1226G` and show the title at frames 068-075; all 89 per-second frames identical across boots; source unchanged. Frames come from stock `-qtrecord` video via `tools/mednafen/cold_boot.py`.
 
 ### EMU-004 - Verify the 4 MB RAM cartridge
 
-- **Status:** `BLOCKED`
+- **Status:** `READY`
 - **Milestone:** M0
 - **Dependencies:** EMU-003.
-- **Blockers:** EMU-003.
+- **Blockers:** None.
 - **Objective:** Confirm the cartridge setting the game needs, with a control.
 - **Acceptance criteria:** With `ss.cart=extram4` the log shows the 4 MiB cart and the game runs; one control boot without it records what happens.
 - **Notes:** The user states the 4 MB cart is required (2026-10-27). The control documents the failure mode, which helps diagnose later misconfiguration.
 
 ### EMU-005 - Configure and document the pad
 
-- **Status:** `BLOCKED`
+- **Status:** `READY`
 - **Milestone:** M0
 - **Dependencies:** EMU-003.
-- **Blockers:** EMU-003.
+- **Blockers:** None.
 - **Objective:** The user's controller drives all six attack buttons and Start in game.
 - **Acceptance criteria:** A mapping table is recorded and each button is observed in the game's button test or in play.
 - **Notes:** Reuse the MSHvSF fightpad mapping as the starting configuration.
 
 ### EMU-006 - Verify screenshots and save states
 
-- **Status:** `BLOCKED`
+- **Status:** `READY`
 - **Milestone:** M0
 - **Dependencies:** EMU-003.
-- **Blockers:** EMU-003.
+- **Blockers:** None.
 - **Objective:** Screenshots and save/load states work and are stored under ignored paths.
 - **Acceptance criteria:** A state saved and reloaded reproduces the same screen; files are ignored by git.
 
