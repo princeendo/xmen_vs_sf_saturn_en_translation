@@ -311,3 +311,33 @@ recorded as a Saturn-only text surface for `REF-005`.
 Next action: `EMU-006` (screenshots and save states, which may need input or
 the debugger: decide the method first), `EMU-005` (needs the user's pad), or
 `REF-003`.
+
+## 2026-10-28 — SESSION-0009: pad bindings from MSHvSF
+
+Task: EMU-005
+
+Request (user, 2026-10-28): "Can you re-use the map from the MSHvSF repo?"
+
+Action:
+
+- Diffed MSHvSF's interactive `mednafen.cfg` (`b308aab2…9a50`) against this
+  home's. Differences: the 13 `ss.input.port1.gamepad.*` lines, `cheats`,
+  and `psx.bios_na`. Only the 13 pad lines were copied.
+- MSHvSF's documented M30 table (D-pad buttons 12-15, Start button 9) does
+  not match its configuration (D-pad on `abs_0`/`abs_1`, Start `button_6`,
+  C `button_10`, Z `button_9`). The configuration, last changed 2026-10-28
+  11:02, is what MSHvSF was played with, so it was used. MSHvSF's docs were
+  not changed (rule 25).
+- Added `--bindings-from` and `read_settings` to `tools/mednafen/home.py`
+  with a unit test; applied to both homes; a second plain run reports no
+  change; both load 7,904 settings, 0 unknown.
+- An 8 s silent probe boot logged the connected pad as
+  `0xecccd365fc40db2f0006000c00010000 - PS4 Controller`, the bound ID.
+
+Checks: `./invenv.sh pytest -q` 16 passed; `ruff check`, `ruff format
+--check`, and `mypy` clean.
+
+Conclusion: mapping configured and recorded. `EMU-005` stays `IN_PROGRESS`
+until the user observes each control in game.
+
+Next action: the user's in-game check (interactive home).

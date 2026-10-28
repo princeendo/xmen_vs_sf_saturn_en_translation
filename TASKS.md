@@ -33,7 +33,9 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
 - **2026-10-28** (`SESSION-0008`, `EXP-0002`): the 4 MiB cart is required;
   forced `extram4` equals `auto`, and no cart stops on a warning (`EMU-004`,
   D-002).
-- Next unblocked tasks: `EMU-005` (pad; needs the user), `EMU-006`
+- **2026-10-28** (`SESSION-0009`): MSHvSF pad bindings copied to both
+  homes; `EMU-005` waits for the user's in-game button check.
+- Next unblocked tasks: `EMU-005` (in-game check; needs the user), `EMU-006`
   (screenshots and save states), and `REF-003` (arcade English text).
 - Nothing about XvSF's internals is confirmed yet.
 
@@ -203,13 +205,13 @@ prerequisites before English text goes on disc).
 
 ### EMU-005 - Configure and document the pad
 
-- **Status:** `READY`
+- **Status:** `IN_PROGRESS`
 - **Milestone:** M0
 - **Dependencies:** EMU-003.
 - **Blockers:** None.
 - **Objective:** The user's controller drives all six attack buttons and Start in game.
 - **Acceptance criteria:** A mapping table is recorded and each button is observed in the game's button test or in play.
-- **Notes:** Reuse the MSHvSF fightpad mapping as the starting configuration.
+- **Notes:** Reuse the MSHvSF fightpad mapping as the starting configuration. 2026-10-28: the 13 port 1 bindings were copied from MSHvSF's current configuration (`docs/mednafen.md`, "Pad Mapping"); the pad is connected with the bound ID. Waiting for the user's in-game check of each control.
 
 ### EMU-006 - Verify screenshots and save states
 

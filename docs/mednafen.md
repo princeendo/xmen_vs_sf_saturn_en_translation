@@ -205,3 +205,39 @@ as that warning at about 14 s after launch.
 `cold_boot.py --setting KEY=VALUE` passes a per-run setting. Mednafen saves it
 into the home on exit, so run `./invenv.sh python -m tools.mednafen.home`
 afterwards; the quiet home's config SHA-256 should return to `ef897288…5019`.
+
+## Pad Mapping (`EMU-005`, 2026-10-28)
+
+The port 1 gamepad bindings were copied from the MSHvSF interactive
+configuration (`/Users/colinwhite/workspace/personal/msh_vs_sf_saturn_en_translation/local/mednafen/mednafen.cfg`,
+SHA-256 `b308aab2…9a50`, modified 2026-10-28 11:02) into both homes:
+
+```bash
+./invenv.sh python -m tools.mednafen.home --bindings-from \
+  ../msh_vs_sf_saturn_en_translation/local/mednafen/mednafen.cfg
+```
+
+This is the mapping MSHvSF was last played with. It differs from the M30
+table in MSHvSF's `docs/mednafen.md` (D-pad buttons 12-15, Start button 9),
+which is out of date there; the configuration file is the source used.
+
+| Saturn control | Binding (joystick `0xecccd365fc40db2f0006000c00010000`) |
+| --- | --- |
+| Up / Down | `abs_1-` / `abs_1+` |
+| Left / Right | `abs_0-` / `abs_0+` |
+| A / B / C | `button_0` / `button_1` / `button_10` |
+| X / Y / Z | `button_2` / `button_3` / `button_9` |
+| Start | `button_6` |
+| L / R | `keyboard 0x0 19` (both; no pad button) |
+
+- The joystick ID is the 8BitDo M30 in its wired PS4-compatible mode (MSHvSF
+  `EMU-006`). A silent probe boot on 2026-10-28 logged
+  `ID: 0xecccd365fc40db2f0006000c00010000 - PS4 Controller`, the ID the
+  bindings use.
+- Physical button labels for each SDL index are not recorded here; the
+  in-game check names what each one does.
+- Both configurations load 7,904 settings, 0 unknown. New SHA-256:
+  `local/mednafen/mednafen.cfg` `cb1c2d3b…a1e9`,
+  `local/mednafen_quiet/mednafen.cfg` `aad9a7ef…57cf`.
+- Hotkeys (1.32.1 defaults): F9 screenshot, F12 exit.
+- Still open: observing each control in the game (`EMU-005` acceptance).

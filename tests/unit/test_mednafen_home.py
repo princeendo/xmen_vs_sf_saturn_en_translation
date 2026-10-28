@@ -9,6 +9,8 @@ from tools.mednafen.home import (
     QUIET_SETTINGS,
     apply_settings,
     configure,
+    main,
+    read_settings,
 )
 
 KEYS = {**PROJECT_SETTINGS, **QUIET_SETTINGS}
@@ -63,3 +65,25 @@ def test_configure_creates_quiet_home_sharing_firmware(tmp_path: Path) -> None:
     assert "ss.bios_jp sega_101.bin" in quiet_lines
     assert (quiet / "firmware").resolve() == (home / "firmware").resolve()
     assert configure(home, quiet) == {str(home): [], str(quiet): []}
+
+
+def test_bindings_from_copies_pad_lines_to_both_homes(tmp_path: Path) -> None:
+    home, quiet = tmp_path / "mednafen", tmp_path / "mednafen_quiet"
+    pad = {"ss.input.port1.gamepad.a": "keyboard 0x0 89"}
+    generated_config(home / "mednafen.cfg", pad)
+    (home / "firmware").mkdir()
+    source = generated_config(
+        tmp_path / "other" / "mednafen.cfg",
+        {"ss.input.port1.gamepad.a": "joystick 0xabc button_0", "cheats": "0"},
+    )
+
+    assert read_settings(source, "ss.input.port1.gamepad.") == {
+        "ss.input.port1.gamepad.a": "joystick 0xabc button_0"
+    }
+    args = ["--home", str(home), "--quiet-home", str(quiet)]
+    assert main([*args, "--bindings-from", str(source)]) == 0
+
+    for config in (home / "mednafen.cfg", quiet / "mednafen.cfg"):
+        lines = config.read_text("latin-1").split("\n")
+        assert "ss.input.port1.gamepad.a joystick 0xabc button_0" in lines
+        assert "cheats 0" not in lines

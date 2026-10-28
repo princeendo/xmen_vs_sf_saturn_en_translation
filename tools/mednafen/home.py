@@ -8,6 +8,10 @@ generates on its first run; this tool only rewrites existing `key value` lines.
 Mednafen saves command-line settings into the configuration on exit, so rerun
 this tool after any run that passed settings on the command line.
 
+`--bindings-from CFG` copies the port 1 gamepad bindings from another
+Mednafen configuration (for example MSHvSF's) into both homes. Bindings are
+not pinned, so later runs of this tool leave them alone.
+
 `apply_settings` and the quiet-home layout are adapted from MSHvSF
 `tools/mednafen/replay_state.py` `quiet_home()` at commit `69c666c`. The
 settings are parameters, not MSHvSF facts; each value is recorded in
@@ -42,6 +46,8 @@ PROJECT_SETTINGS = {
     "ss.cart": "auto",
     "ss.region_autodetect": "1",
 }
+
+PAD_PREFIX = "ss.input.port1.gamepad."
 
 QUIET_SETTINGS = {
     "sound.volume": "0",
@@ -90,12 +96,34 @@ def configure(home: Path = HOME, quiet: Path = QUIET_HOME) -> dict[str, list[str
     return changed
 
 
+def read_settings(config: Path, prefix: str) -> dict[str, str]:
+    """Return every `key value` line of ``config`` whose key starts with ``prefix``."""
+    settings = {}
+    for line in config.read_bytes().split(b"\n"):
+        key, _, value = line.decode("latin-1").partition(" ")
+        if key.startswith(prefix):
+            settings[key] = value
+    return settings
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--home", type=Path, default=HOME)
     parser.add_argument("--quiet-home", type=Path, default=QUIET_HOME)
+    parser.add_argument(
+        "--bindings-from",
+        type=Path,
+        help=f"copy every {PAD_PREFIX}* line from this mednafen.cfg to both homes",
+    )
     args = parser.parse_args(argv)
-    for path, keys in configure(args.home, args.quiet_home).items():
+    changed = configure(args.home, args.quiet_home)
+    if args.bindings_from:
+        bindings = read_settings(args.bindings_from, PAD_PREFIX)
+        if not bindings:
+            parser.error(f"no {PAD_PREFIX}* lines in {args.bindings_from}")
+        for home in (args.home, args.quiet_home):
+            changed[str(home)] += apply_settings(home / "mednafen.cfg", bindings)
+    for path, keys in changed.items():
         print(f"{path}: {', '.join(keys) if keys else 'no change'}")
     return 0
 
