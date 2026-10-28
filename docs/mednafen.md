@@ -194,3 +194,14 @@ rm -f local/mednafen_quiet/sav/*   # start with no backup RAM
   hash stays in `run.json`.
 - Result: title screen at about 68-75 s, identical across three boots
   (`docs/discoveries.md` D-001).
+
+## 4 MiB Cart (`EMU-004`, `EXP-0002`)
+
+`ss.cart auto` stays the project setting: forced `-ss.cart extram4` gives the
+same log cart line and byte-identical frames. With `-ss.cart none` the game
+stops on a cart-missing warning (D-002). A wrong cart setting therefore shows
+as that warning at about 14 s after launch.
+
+`cold_boot.py --setting KEY=VALUE` passes a per-run setting. Mednafen saves it
+into the home on exit, so run `./invenv.sh python -m tools.mednafen.home`
+afterwards; the quiet home's config SHA-256 should return to `ef897288…5019`.

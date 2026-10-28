@@ -30,9 +30,11 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   Mednafen's documentation (`EMU-002`, `docs/mednafen.md`).
 - **2026-10-28** (`SESSION-0007`, `EXP-0001`): three unattended cold boots
   reach the title screen identically (`EMU-003`, `docs/discoveries.md` D-001).
-- Next unblocked tasks: `EMU-004` (4 MB cart with a control boot), `EMU-005`
-  (pad; needs the user), `EMU-006` (screenshots and save states), and
-  `REF-003` (arcade English text).
+- **2026-10-28** (`SESSION-0008`, `EXP-0002`): the 4 MiB cart is required;
+  forced `extram4` equals `auto`, and no cart stops on a warning (`EMU-004`,
+  D-002).
+- Next unblocked tasks: `EMU-005` (pad; needs the user), `EMU-006`
+  (screenshots and save states), and `REF-003` (arcade English text).
 - Nothing about XvSF's internals is confirmed yet.
 
 ## Milestones
@@ -191,13 +193,13 @@ prerequisites before English text goes on disc).
 
 ### EMU-004 - Verify the 4 MB RAM cartridge
 
-- **Status:** `READY`
+- **Status:** `DONE`
 - **Milestone:** M0
 - **Dependencies:** EMU-003.
 - **Blockers:** None.
 - **Objective:** Confirm the cartridge setting the game needs, with a control.
 - **Acceptance criteria:** With `ss.cart=extram4` the log shows the 4 MiB cart and the game runs; one control boot without it records what happens.
-- **Notes:** The user states the 4 MB cart is required (2026-10-27). The control documents the failure mode, which helps diagnose later misconfiguration.
+- **Notes:** The user states the 4 MB cart is required (2026-10-27). The control documents the failure mode, which helps diagnose later misconfiguration. Done 2026-10-28 (`EXP-0002`): three `extram4` boots match `auto` frame for frame; the `none` control stops at about 14 s on a cart-missing warning screen.
 
 ### EMU-005 - Configure and document the pad
 

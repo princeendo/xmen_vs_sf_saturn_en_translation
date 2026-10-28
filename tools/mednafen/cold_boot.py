@@ -34,13 +34,28 @@ def sha256(path: Path) -> str:
 
 
 def boot(
-    image: Path, out: Path, seconds: float, home: Path, mednafen: Path
+    image: Path,
+    out: Path,
+    seconds: float,
+    home: Path,
+    mednafen: Path,
+    settings: Sequence[str] = (),
 ) -> dict[str, object]:
-    """Run one cold boot; return the run record (also written to run.json)."""
+    """Run one cold boot; return the run record (also written to run.json).
+
+    ``settings`` are ``KEY=VALUE`` strings passed as ``-KEY VALUE``. Mednafen
+    saves them into the home's configuration on exit; rerun
+    ``tools.mednafen.home`` afterwards.
+    """
     out.mkdir(parents=True, exist_ok=False)
     video, log = out / "boot.mov", out / "mednafen.log"
     env = {**os.environ, "MEDNAFEN_HOME": str(home.resolve())}
-    command = [str(mednafen), "-qtrecord", str(video), str(image)]
+    options = [
+        part
+        for setting in settings
+        for part in (f"-{setting.split('=', 1)[0]}", setting.split("=", 1)[1])
+    ]
+    command = [str(mednafen), *options, "-qtrecord", str(video), str(image)]
     with log.open("wb") as handle:
         process = subprocess.Popen(
             command, env=env, stdout=handle, stderr=subprocess.STDOUT
@@ -92,9 +107,18 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--size", default="352x240", help="frame size WxH")
     parser.add_argument("--columns", type=int, default=5, help="sheet is NxN")
     parser.add_argument("--keep-video", action="store_true")
+    parser.add_argument(
+        "--setting",
+        action="append",
+        default=[],
+        metavar="KEY=VALUE",
+        help="Mednafen setting for this run (saved to the home on exit)",
+    )
     args = parser.parse_args(argv)
 
-    record = boot(args.image, args.out, args.seconds, args.home, args.mednafen)
+    record = boot(
+        args.image, args.out, args.seconds, args.home, args.mednafen, args.setting
+    )
     record["frames"] = extract_frames(args.out, args.size, args.columns)
     if not args.keep_video:
         (args.out / "boot.mov").unlink()

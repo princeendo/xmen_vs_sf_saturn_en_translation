@@ -18,3 +18,14 @@ gave byte-identical frames at one-second sampling; title frame 070 hashes
 `ebfbb7da…e662`. Source hashes were unchanged.
 
 Reproduce: `research/experiments/EXP-0001/README.md`, "Procedure".
+
+## D-002: XvSF needs the 4 MiB extended-RAM cart (`EMU-004`, `EXP-0002`)
+
+With `-ss.cart extram4` three boots log `Cart: 4MiB Extended RAM` and give
+frames byte-identical to D-001's `ss.cart auto` boots (89 of 89). With
+`-ss.cart none` the log shows `Cart: None` and, from about 14 s, the game shows
+only a Japanese warning that the 4MB extended RAM cartridge is not inserted
+(frame `5af68833…f2c7`), and never reaches the title. `ss.cart auto` is the
+project setting.
+
+Reproduce: `research/experiments/EXP-0002/README.md`, "Procedure".

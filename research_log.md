@@ -282,3 +282,32 @@ Conclusion: `EMU-003` is `DONE` (**CONFIRMED**, D-001). `EMU-004`,
 
 Next action: `EMU-004` (forced `extram4` boots and one control boot without
 the cart), unattended with the same tool.
+
+## 2026-10-28 — SESSION-0008 / EXP-0002: forced cart and no-cart control
+
+Task: EMU-004
+
+Goal: confirm the cart setting with three forced `extram4` boots and one
+control boot without a cart.
+
+Action: added `--setting KEY=VALUE` to `tools/mednafen/cold_boot.py`. Ran
+`extram4` three times and `none` once (90 s each, no input, `sav/` emptied
+first). After each run Mednafen had saved the value into the quiet home;
+`tools.mednafen.home` restored `ss.cart auto` and the config SHA-256 returned
+to `ef897288…5019`.
+
+Result: `extram4` logs `Cart: 4MiB Extended RAM` and all 89 frames equal
+`EXP-0001`'s. `none` logs `Cart: None`; frames 001-014 match, then from 015
+one static Japanese warning that the 4MB extended RAM cartridge is not
+inserted correctly (agent transcription and translation in `EXP-0002`). It
+never reaches the title. Source manifests identical before and after.
+
+Checks: `./invenv.sh pytest -q` 15 passed; `ruff check`, `ruff format
+--check`, and `mypy` clean.
+
+Conclusion: `EMU-004` is `DONE` (**CONFIRMED**, D-002). The warning screen is
+recorded as a Saturn-only text surface for `REF-005`.
+
+Next action: `EMU-006` (screenshots and save states, which may need input or
+the debugger: decide the method first), `EMU-005` (needs the user's pad), or
+`REF-003`.
