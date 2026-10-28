@@ -21,8 +21,12 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
 - **2026-10-28:** playbook re-copied from MSHvSF `69c666c` (through MSHvSF
   release 0.1.0). The user made American names the XvSF default, like MSHvSF
   (`docs/localization_policy.md`).
-- Next unblocked tasks: `EMU-001` (pin and build stock Mednafen), `REF-001`
-  (arcade set intake), and `REF-002` (PS1 intake).
+- **2026-10-28** (`SESSION-0005`): stock Mednafen 1.32.1 built (`EMU-001`,
+  `docs/mednafen.md`); arcade sets identified and the US set booted in MAME
+  0.289 (`REF-001`, `references/arcade/`); PS1 images recorded (`REF-002`,
+  `references/ps1/`).
+- Next unblocked tasks: `EMU-002` (project-local Mednafen configuration) and
+  `REF-003` (locate and decode the arcade English text).
 - Nothing about XvSF's internals is confirmed yet.
 
 ## Milestones
@@ -151,20 +155,20 @@ prerequisites before English text goes on disc).
 
 ### EMU-001 - Pin and build stock Mednafen
 
-- **Status:** `READY`
+- **Status:** `DONE`
 - **Milestone:** M0
 - **Dependencies:** ENV-002.
 - **Blockers:** Ask before downloading source or installing build dependencies.
 - **Objective:** Have a stock Mednafen build under ignored `vendor/` with its exact version, source URL, hash, and build commands recorded.
 - **Acceptance criteria:** `docs/mednafen.md` records the version, source hash, configure and build commands, and the binary's `-help` banner.
-- **Notes:** MSHvSF used stock Mednafen 1.32.1 (MSHvSF `EMU-001`, `docs/mednafen.md`). Using the same version lets the MSHvSF agent-interface patch apply unchanged.
+- **Notes:** MSHvSF used stock Mednafen 1.32.1 (MSHvSF `EMU-001`, `docs/mednafen.md`). Using the same version lets the MSHvSF agent-interface patch apply unchanged. Done 2026-10-28: the archive (download approved by the user) hashed `de7eb94a…3832`, equal to MSHvSF's record; built binary `892bb60a…29dd`; `-help` shows 1.32.1 with the `ss` module.
 
 ### EMU-002 - Create the project-local Mednafen configuration
 
-- **Status:** `BLOCKED`
+- **Status:** `READY`
 - **Milestone:** M0
 - **Dependencies:** EMU-001.
-- **Blockers:** EMU-001.
+- **Blockers:** None.
 - **Objective:** Run Mednafen with a configuration and BIOS path local to this checkout, never the user's global configuration.
 - **Acceptance criteria:** The launch command, base directory, BIOS identity (filename, size, SHA-256), and forced settings are recorded.
 - **Notes:** The Japanese Saturn BIOS used by MSHvSF can be reused; record its hash here.
@@ -253,36 +257,36 @@ prerequisites before English text goes on disc).
 - **Blockers:** None.
 - **Objective:** Bring over the memory diff, encoding search, equality-pattern search, code-sequence search, VDP1 sprite walker, session recorder, and replay tools with their tests.
 - **Acceptance criteria:** Each copied file has a provenance note; tests pass; nothing with an MSHvSF address, offset, or file format is copied without parameterization.
-- **Notes:** Copy each tool when the first task needs it, not all at once.
+- **Notes:** Copy each tool when the first task needs it, not all at once. Copied so far (2026-10-28, `REF-001`): `tools/reference/mame_audit.py` with its test, and `mame_snap_frames.lua`.
 
 ## Phase D: References And The Translation Oracle
 
 ### REF-001 - Intake the arcade sets
 
-- **Status:** `READY`
+- **Status:** `DONE`
 - **Milestone:** GATE-TRANSLATION
 - **Dependencies:** ENV-002.
 - **Blockers:** None.
 - **Objective:** Identify every arcade zip and key against a pinned MAME, and boot the sets needed for capture.
 - **Acceptance criteria:** Each file is hashed and matched to a MAME set name; the pinned MAME version is recorded; the US set boots headless.
-- **Notes:** MSHvSF intake (2026-10-24): 10 of 11 sets verify in MAME 0.289; `xmvsfb.key` is missing (a bootleg set). Re-hash here; the source files are in `~/Downloads/xmvsf/`.
+- **Notes:** MSHvSF intake (2026-10-24): 10 of 11 sets verify in MAME 0.289; `xmvsfb.key` is missing (a bootleg set). Re-hash here; the source files are in `~/Downloads/xmvsf/`. Done 2026-10-28 (`references/arcade/`): all 11 zips and 6 keys identified by SHA-1 against MAME 0.289 `-listxml`; `-verifyroms` 10 of 11 OK (`xmvsfb.key` missing); `xmvsfu` boots headless to the title. Frame-3000 hashes equal MSHvSF's.
 
 ### REF-002 - Intake the PlayStation images
 
-- **Status:** `READY`
+- **Status:** `DONE`
 - **Milestone:** GATE-TRANSLATION
 - **Dependencies:** ENV-002.
 - **Blockers:** None.
 - **Objective:** Record the PS1 US and JP EX Edition images as secondary references.
 - **Acceptance criteria:** Every component hashed; identity status recorded per image.
-- **Notes:** MSHvSF intake: US **CONFIRMED** against MAME 0.289 `psx.xml` `xmvsf`; JP EX **UNKNOWN**.
+- **Notes:** MSHvSF intake: US **CONFIRMED** against MAME 0.289 `psx.xml` `xmvsf`; JP EX **UNKNOWN**. Done 2026-10-28 (`references/ps1/README.md`): the same result reproduced here; US `SLUS-00627`, JP EX boot file `SLPS_012.84`.
 
 ### REF-003 - Locate and decode the arcade English text
 
-- **Status:** `BLOCKED`
+- **Status:** `READY`
 - **Milestone:** GATE-TRANSLATION
 - **Dependencies:** REF-001.
-- **Blockers:** REF-001.
+- **Blockers:** None.
 - **Objective:** Find where the arcade stores its English win quotes and ending text, and how it is encoded.
 - **Acceptance criteria:** A decoder reproduces known English strings from the local ROM; the table shape and any regional differences are recorded; punctuation mappings are tested statistically.
 

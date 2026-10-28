@@ -155,3 +155,56 @@ Action: `docs/localization_policy.md` (names row, note, deferred row) and
 `TASKS.md` (Current State, `LOC-001` outline) updated. Documentation only.
 
 Next action: `EMU-001`, `REF-001`, `REF-002`.
+
+## 2026-10-28 — SESSION-0005: stock Mednafen, arcade and PS1 intake
+
+Task: EMU-001, REF-001, REF-002
+
+Goal: build the pinned stock emulator and identify the reference releases.
+
+User decision (2026-10-28): asked how to get the Mednafen source (MSHvSF kept
+only an extracted tree, which cannot be hash-checked), the user chose
+"Download archive (Recommended)".
+
+Action and result:
+
+- `EMU-001`: downloaded `mednafen-1.32.1.tar.xz` into the new, ignored
+  `local/downloads/mednafen-1.32.1/`. Size 3,571,236 bytes and SHA-256
+  `de7eb94a…3832`, both equal to MSHvSF's record. Extracted to
+  `vendor/mednafen/src/`, configured with `--enable-debugger --enable-ss`, and
+  built out of tree with `make -j12` (both exit 0). Binary SHA-256
+  `892bb60a…29dd`. `-help` prints `Starting Mednafen 1.32.1` with the `ss`
+  module and exits 255. The MSHvSF stock binary also exits 255 for the same
+  command, so 255 is how 1.32.1 handles `-help`. MSHvSF's docs say "exited
+  successfully"; that wording does not match what the binary returns. Details
+  in `docs/mednafen.md`.
+- `REF-001`: copied the 11 zips and 6 keys unchanged (`cmp` clean) to
+  `local/arcade_roms/xmvsf/`. The copied `mame_audit.py` matches by member
+  name, so it reported 0 matches for relabelled zips (for example
+  `xmvsfur1.zip`). Added `tools/reference/listxml_match.py`, which matches by
+  SHA-1 against `mame -listxml 'xmvsf*'` (MAME 0.289). Every zip maps to one
+  set and every member matches; every key maps to its sets.
+  `-verifyroms 'xmvsf*'` on the renamed rompath: 10 of 11 OK (`xmvsfb.key`
+  missing). Headless boots of `xmvsfu` and `xmvsfjr2` exited 0. Frame-3000
+  PNG hashes `e8a8ab8e…` and `e19f6bae…` equal MSHvSF's. The agent reviewed
+  all four snapshots: the `xmvsfu` title shows `INSERT COINS`.
+- `REF-002`: extracted both PS1 archives into new ignored folders and hashed
+  them. US `.bin` and `.cue` match MAME 0.289 `psx.xml` `xmvsf`
+  (`SLUS-00627`): **CONFIRMED**. JP EX is in no MAME 0.289 hash file:
+  **UNKNOWN**. Text search of the images finds the boot lines
+  `SLUS_006.27` and `SLPS_012.84`.
+
+Tools copied from MSHvSF `69c666c` with provenance notes:
+`tools/reference/mame_audit.py`, `tests/unit/test_mame_audit.py`,
+`tools/reference/mame_snap_frames.lua`. `qsound.zip` (SHA-256 `55feb9b7…5356`)
+and the MAME driver source `cps2.cpp` (SHA-256 `a8c09ef8…1602`, equal to
+MSHvSF's pin) were copied from MSHvSF's ignored `local/` folder.
+
+Checks: `./invenv.sh pytest -q` 12 passed; `ruff check`, `ruff format
+--check`, and `mypy` clean.
+
+Conclusion: `EMU-001`, `REF-001`, and `REF-002` are `DONE`. Nothing about XvSF
+internals is confirmed by this work.
+
+Next action: `EMU-002` (project-local configuration and BIOS identity), then
+`EMU-003` (boot); `REF-003` (arcade English text) can run alongside.
