@@ -11,7 +11,25 @@ transcribed. The `EXP-0007` session showed three Saturn win-quote screens: one
 after the player's win (team Ryu and Gouki) and two after CPU wins (team
 Chun-Li and Rogue).
 
-## Choice
+## Target Switched (2026-10-28)
+
+The user decided: "Yes, switch the M1 target to this session's Ryu quote and
+start DBG-004." The M1 target is now Ryu's quote from the `EXP-0013` session
+(same team and screen, a different line), because checkpoints exist up to
+it:
+
+```text
+もう一度鍛え直してこい。
+その時にまた会おう！
+```
+
+Live screenshot `local/dbg003/session/shots/f00010336.png` (`e006ebd8…7cc0`),
+transcribed by the agent. A separate agent's blind transcription is identical
+(kanji 一 度 鍛 直 時 会; 一 read as the kanji, not the long-vowel mark; both
+end marks full-width). The original line below stays recorded but has no
+checkpoint.
+
+## Original Choice
 
 **Ryu**, and the quote shown after the player's win in the `EXP-0007` session
 (frame 11244). Reasons:

@@ -736,3 +736,27 @@ quote; quotes vary between sessions. `DBG-004` is `READY`.
 Next action: `DBG-004` (name checkpoints before the fight end, after the K.O.,
 with the quote visible, and after it disappears; most exist in
 `local/checkpoints/dbg003/`).
+
+## 2026-10-28 — SESSION-0023 / EXP-0014: M1 target switched; checkpoints named
+
+Task: REF-008 (amended), DBG-004
+
+User decision (2026-10-28, verbatim): "Yes, switch the M1 target to this
+session's Ryu quote and start DBG-004." Recorded in `EXP-0012` and `TASKS.md`.
+A separate agent's blind transcription of the new line matches the agent's.
+
+Action: `research/experiments/EXP-0014/checkpoints.py` reloads each kept state
+and screenshots it, then runs 480 frames from the quote-visible state and
+saves `after_quote.mcs`.
+
+Pitfall: `savestate` after `run` in the same command file is still refused
+("not allowed while halted"); separate exchanges work.
+
+Result: every checkpoint reloads to its screen. The quote-visible reload
+screenshot is byte-identical to the live session's. The after-quote state
+shows the post-quote transition and reloads to it.
+
+Checks: `./invenv.sh pytest -q` 89 passed; `ruff check`, `ruff format
+--check`, and `mypy` clean (`checkpoints.py` also `mypy --strict`).
+
+Conclusion: `DBG-004` is `DONE` (**CONFIRMED**). `DBG-005` is `READY`.

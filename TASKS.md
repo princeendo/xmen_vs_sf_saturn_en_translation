@@ -74,8 +74,10 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   and Gouki, first-fight win). 12 of 12 replays of four pre-quote states,
   the earliest before the K.O., show the same quote; it differs from the
   first session's (`DBG-003`). Checkpoints kept in `local/checkpoints/dbg003/`.
-- Next unblocked task: `DBG-004` (quote checkpoints; mostly available from
-  this session).
+- **2026-10-28** (`SESSION-0023`, `EXP-0014`): the user switched the M1
+  target to the `EXP-0013` session's Ryu quote (blind-checked). Six named
+  checkpoints bracket it (`DBG-004`).
+- Next unblocked task: `DBG-005` (find the quote renderer and its RAM text).
 - Nothing about XvSF's internals is confirmed yet.
 
 ## Milestones
@@ -394,6 +396,7 @@ prerequisites before English text goes on disc).
 - **Objective:** Pick one ordinary character and one win quote as the M1 target.
 - **Acceptance criteria:** The choice and the reason are recorded; the Japanese is captured on screen and transcribed.
 - **Notes:** Done 2026-10-28 (`EXP-0012`): Ryu; quote at session frame 11244, two lines, blind-checked. Speaker identity and arcade slot 9 are HYPOTHESIS. No pre-KO state yet.
+- **Target switched (user, 2026-10-28):** Ryu's quote from the `EXP-0013` session (frame 10336), which has checkpoints; the first line has none.
 
 ## Phase E: Checkpoints And Memory Analysis
 
@@ -409,19 +412,20 @@ prerequisites before English text goes on disc).
 
 ### DBG-004 - Capture quote checkpoints
 
-- **Status:** `READY`
+- **Status:** `DONE`
 - **Milestone:** M1
 - **Dependencies:** DBG-003.
 - **Blockers:** None.
 - **Objective:** States and screenshots before the fight end, after the KO, with the quote visible, and after it disappears.
 - **Acceptance criteria:** Each checkpoint is reproducible from its state and named in an experiment record.
+- **Notes:** Done 2026-10-28 (`EXP-0014`): `pre_ko`, `after_ko`, `win_banner`, `pre_quote`, `quote_visible`, `after_quote` in `local/checkpoints/dbg003/`.
 
 ### DBG-005 - Find the quote renderer and its RAM text
 
-- **Status:** `BLOCKED`
+- **Status:** `READY`
 - **Milestone:** M1
 - **Dependencies:** DBG-001, DBG-004.
-- **Blockers:** DBG-004.
+- **Blockers:** None.
 - **Objective:** Determine whether the quote is VDP1 sprites or VDP2 tiles, and find the code table that drives it.
 - **Acceptance criteria:** The renderer is identified by a controlled change; the RAM text table is located by plain-encoding search or by equality-pattern search.
 
