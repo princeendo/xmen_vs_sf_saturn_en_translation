@@ -636,3 +636,27 @@ Checks: `./invenv.sh pytest -q` 63 passed; `ruff check`, `ruff format
 Conclusion: `REF-006` is `DONE` (**CONFIRMED**, D-009).
 
 Next action: `REF-007` (names) or `REF-008` (first character and quote).
+
+## 2026-10-28 — SESSION-0019 / EXP-0011: character names
+
+Task: REF-007
+
+Result: the Saturn shows GOUKI and NASH (select labels; GOUKI also on VS
+screen and win banner). The arcade JP set shows GOUKI and the US set AKUMA on
+the same select label. The arcade English text names Charlie (2) and Bison
+(4), never Akuma or Gouki. No Saturn file holds any name as text. The arcade's
+16-bit name list has both conventions in every region, so it is not evidence
+of display.
+
+Failed attempt: a down-first cursor sweep in MAME showed no labels; labels
+appeared only during the partner-select phase of the first run.
+
+Not observed: the Saturn's name for Bison/Vega; arcade art for Charlie and
+Bison; voice. These go to `LOC-001`.
+
+Checks: `./invenv.sh pytest -q` 63 passed; `ruff check`, `ruff format
+--check`, and `mypy` clean.
+
+Conclusion: `REF-007` is `DONE` with options and costs in `docs/names.md`.
+
+Next action: `REF-008`.

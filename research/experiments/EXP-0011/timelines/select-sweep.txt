@@ -1,0 +1,67 @@
+# REF-007 select-screen sweep
+1000 repeat 4 30 8 Coin 1
+1200 repeat 6 60 8 1 Player Start
+1700 snap
+1730 press 6 P1 Right
+1750 snap
+1760 press 6 P1 Right
+1780 snap
+1790 press 6 P1 Right
+1810 snap
+1820 press 6 P1 Right
+1840 snap
+1850 press 6 P1 Right
+1870 snap
+1880 press 6 P1 Right
+1900 snap
+1910 press 6 P1 Down
+1930 snap
+1940 press 6 P1 Left
+1960 snap
+1970 press 6 P1 Left
+1990 snap
+2000 press 6 P1 Left
+2020 snap
+2030 press 6 P1 Left
+2050 snap
+2060 press 6 P1 Left
+2080 snap
+2090 press 6 P1 Left
+2110 snap
+2120 press 6 P1 Down
+2140 snap
+2150 press 6 P1 Right
+2170 snap
+2180 press 6 P1 Right
+2200 snap
+2210 press 6 P1 Right
+2230 snap
+2240 press 6 P1 Right
+2260 snap
+2270 press 6 P1 Right
+2290 snap
+2300 press 6 P1 Right
+2320 snap
+2330 press 6 P1 Down
+2350 snap
+2360 press 6 P1 Left
+2380 snap
+2390 press 6 P1 Left
+2410 snap
+2420 press 6 P1 Left
+2440 snap
+2450 press 6 P1 Left
+2470 snap
+2480 press 6 P1 Left
+2500 snap
+2510 press 6 P1 Left
+2530 snap
+2540 press 6 P1 Up
+2560 snap
+2570 press 6 P1 Up
+2590 snap
+2600 press 6 P1 Up
+2620 snap
+2630 press 6 P1 Up
+2650 snap
+2690 exit
