@@ -18,6 +18,9 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   official arcade English, opt-in grammar fixes, recorded new translations
   for gaps, two name variants (Saturn default), all special surfaces in
   eventual scope, xdelta and SSP released only after the open tasks.
+- **2026-10-28:** playbook re-copied from MSHvSF `69c666c` (through MSHvSF
+  release 0.1.0). Open question for the user: MSHvSF now defaults to American
+  names; does XvSF keep the Saturn default (`docs/localization_policy.md`)?
 - Next unblocked tasks: `EMU-001` (pin and build stock Mednafen), `REF-001`
   (arcade set intake), and `REF-002` (PS1 intake).
 - Nothing about XvSF's internals is confirmed yet.
@@ -122,7 +125,7 @@ prerequisites before English text goes on disc).
 - **Blockers:** None.
 - **Objective:** Give every session the MSHvSF method, pitfalls, and tools list without treating any of it as XvSF fact.
 - **Acceptance criteria:** `docs/playbook_from_mshvsf.md` is a copy of the current MSHvSF `docs/playbook_cross_game.md`, with the source commit recorded.
-- **Notes:** Copied 2026-10-27 from MSHvSF commit `e70e60b`, which brought the playbook up to date through MSHvSF `EXP-0088` first. Re-copy when the MSHvSF playbook changes; record the new commit.
+- **Notes:** Copied 2026-10-27 from MSHvSF commit `e70e60b`, which brought the playbook up to date through MSHvSF `EXP-0088` first. Re-copied 2026-10-28 from MSHvSF commit `69c666c` (through `EXP-0102` and MSHvSF release 0.1.0). Re-copy when the MSHvSF playbook changes; record the new commit.
 
 ### DOC-002 - Confirm the MSHvSF user decisions for XvSF
 
@@ -405,4 +408,4 @@ for each is in `docs/playbook_from_mshvsf.md`.
 | UI-002 | after M8, user request | Attract-mode captions: which layer draws them, which container and codecs hold them, arcade and PS1 oracles. |
 | UI-003 | after M8, user request | Other UI text (continue screen, hints): find the arcade English by tracing the arcade code, not only by data search. |
 | TXT-001 | after M8, user request | Rare, random, or region-gated text: trace every reader of every text table. |
-| LOC-001 | after M8 | Name variants (user decision 2026-10-27: both, Saturn names default): whether both conventions' art and voice are already on the disc. |
+| LOC-001 | after M8 | Name variants (user decision 2026-10-27: both, Saturn names default; reconfirm, since MSHvSF moved to American names by default on 2026-10-28): whether both conventions' art and voice are already on the disc. |

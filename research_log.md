@@ -112,3 +112,32 @@ notes the decision; `DOC-002` is `DONE`. Scope answers do not lift any gate:
 special surfaces still wait for M9 and their own tasks (rule 24).
 
 Next action: `EMU-001`, `REF-001`, `REF-002`.
+
+## 2026-10-28 — SESSION-0003: playbook re-copied after MSHvSF release 0.1.0
+
+Task: DOC-001 (re-copy)
+
+Goal: carry the MSHvSF work done after `e70e60b` into this repository.
+
+Action:
+
+- MSHvSF commit `69c666c` brought its playbook up to date through `26c54bc`
+  (`EXP-0089` to `EXP-0102`, release 0.1.0). `docs/playbook_from_mshvsf.md`
+  was re-copied from it; `diff` against the source, below the provenance
+  note, reports no difference.
+- `git diff --stat e70e60b 26c54bc` in MSHvSF over `AGENTS.md`,
+  `docs/research_protocol.md`, the experiment templates, `pyproject.toml`,
+  `setup_venv.sh`, `invenv.sh`, `.gitignore` and `tools/disc/hash_source.py`
+  (with its test) is empty, so this repository's copies stand.
+- `docs/localization_policy.md`: release timing now reads "done, or deferred
+  by the user by name", as MSHvSF 0.1.0 was handled. A note records that
+  MSHvSF moved to American names by default on 2026-10-28, after this
+  project's `DOC-002` answer ("Both variants, Saturn default"). The answer is
+  not changed; the user is asked.
+- `local_agent_guidance.md` (ignored): `gh` is the work account, so the user
+  publishes releases on github.com; real-Saturn boots.
+
+Result: documentation only; no experiment run.
+
+Next action: the user's answer on the default names; then `EMU-001`,
+`REF-001`, `REF-002`.
