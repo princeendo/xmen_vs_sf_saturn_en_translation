@@ -359,3 +359,41 @@ L/R were not tested (unbound on the pad, as in MSHvSF).
 
 Conclusion: `EMU-005` is `DONE` on the user's observation. Next: `EMU-006`
 (screenshots and save states) or `REF-003`.
+
+## 2026-10-28 — SESSION-0010 / EXP-0003: screenshots and states
+
+Task: EMU-006
+
+Goal: show that screenshots and save/load states work and stay ignored.
+
+Observation: stock 1.32.1 has these only as hotkeys (F9, F5, F7). Added
+`tools/mednafen/hotkeys.py` to press them through System Events at fixed
+times.
+
+Blocker and resolution:
+
+- First attempts: `osascript is not allowed to send keystrokes. (1002)`.
+  The user granted Accessibility to Claude ("I granted Accessibility to
+  Claude in System Settings"); still 1002.
+- Process chain: `/Applications/Claude.app` → `Helpers/disclaimer` → Claude
+  Code `~/Library/Application Support/Claude/claude-code/2.1.304/6bbba6adc37f/claude.app`
+  → zsh. The agent told the user the inner bundle is the responsible app.
+  The user then "flipped a switch"; the next pilot (F9 at 10 s) worked.
+- A zsh empty-glob error stopped the first real attempt before launch; the
+  rerun used `find -delete`.
+
+Result: run 1 screenshots show the title (71 s), the attract fight (86 s),
+and the title again 1.1 s after F7. Run 2 (fresh cold boot) shows black at
+21 s and the title 2.0 s after F7. State `.mc0` 3,508,722 bytes,
+`739ef207…2f2d`, unchanged by loading. Title shots differ in bytes
+(animated background; SSIM 0.82-0.90) but not in scene (title vs fight SSIM
+0.09). Source manifests identical. All outputs are git-ignored.
+
+Checks: `./invenv.sh pytest -q` 16 passed; `ruff check`, `ruff format
+--check`, and `mypy` clean. `hotkeys.py` has no unit test; it drives macOS
+and Mednafen, and this experiment exercised it end to end.
+
+Conclusion: `EMU-006` is `DONE` (**CONFIRMED**, D-003). `EMU-007` is `READY`.
+
+Next action: `EMU-007` (debugger dumps of WRAM-L and WRAM-H at a paused
+instant, one memory write, one write breakpoint), or `REF-003`.

@@ -248,3 +248,28 @@ which is out of date there; the configuration file is the source used.
   `Cart: 4MiB Extended RAM`; exit 0; configuration unchanged.
 - Not recorded: which physical button label gives which attack. L/R were
   not tested (no pad binding).
+
+## Screenshots and States by Hotkey (`EMU-006`, `EXP-0003`)
+
+Stock 1.32.1 offers screenshots and states only as hotkeys (defaults F9
+screenshot, F5 save, F7 load, F12 exit). `tools/mednafen/hotkeys.py` presses
+them at fixed times in an unattended run:
+
+```bash
+./invenv.sh python -m tools.mednafen.hotkeys IMAGE.cue local/RUN.log \
+  --at 70:F9 --at 71:F5 --at 85:F9 --at 86:F7 --at 87:F9
+```
+
+- It sends macOS key codes through System Events. Before each key it brings
+  Mednafen (by PID) to the front and checks it is frontmost; otherwise it
+  stops without sending. Afterwards it returns focus to the previous app.
+  Each key takes about 1.1 s.
+- Permission: macOS attributes the keystrokes to the Claude Code bundle
+  under `~/Library/Application Support/Claude/claude-code/<version>/…/claude.app`
+  (Claude.app starts it through a `disclaimer` helper), so Accessibility
+  must be on for that entry. Without it, osascript fails with error 1002.
+  The path contains the Claude Code version, so an update may need a new
+  grant.
+- Outputs: `snaps/<image>-NNNN.png` (352x240; 330x240 seen in a boot screen),
+  numbered by `snaps/<image>-counter.txt`; states
+  `mcs/<image>.<md5>.mc0` (slot 0), about 3.5 MB at the title.

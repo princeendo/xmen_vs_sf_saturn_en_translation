@@ -29,3 +29,13 @@ only a Japanese warning that the 4MB extended RAM cartridge is not inserted
 project setting.
 
 Reproduce: `research/experiments/EXP-0002/README.md`, "Procedure".
+
+## D-003: Screenshots and save/load states work by hotkey (`EMU-006`, `EXP-0003`)
+
+In stock 1.32.1, F9 writes a 352x240 PNG to the home's `snaps/` and F5 writes
+`mcs/<image>.<md5>.mc0` (3,508,722 bytes at the title). F7 restores the saved
+title screen later in the same session and in a fresh cold boot, about 45 s
+before a normal boot reaches the title. The state file is unchanged by
+loading. Both paths are git-ignored.
+
+Reproduce: `research/experiments/EXP-0003/README.md`, "Procedure".

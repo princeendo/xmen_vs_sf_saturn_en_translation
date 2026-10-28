@@ -35,8 +35,11 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   D-002).
 - **2026-10-28** (`SESSION-0009`): MSHvSF pad bindings copied to both
   homes; the user's in-game check passed (`EMU-005`).
-- Next unblocked tasks: `EMU-006`
-  (screenshots and save states), and `REF-003` (arcade English text).
+- **2026-10-28** (`SESSION-0010`, `EXP-0003`): screenshots and save/load
+  states work by hotkey, sent unattended through System Events (`EMU-006`,
+  D-003).
+- Next unblocked tasks: `EMU-007` (debugger access and memory dumps) and
+  `REF-003` (arcade English text).
 - Nothing about XvSF's internals is confirmed yet.
 
 ## Milestones
@@ -215,19 +218,20 @@ prerequisites before English text goes on disc).
 
 ### EMU-006 - Verify screenshots and save states
 
-- **Status:** `READY`
+- **Status:** `DONE`
 - **Milestone:** M0
 - **Dependencies:** EMU-003.
 - **Blockers:** None.
 - **Objective:** Screenshots and save/load states work and are stored under ignored paths.
 - **Acceptance criteria:** A state saved and reloaded reproduces the same screen; files are ignored by git.
+- **Notes:** Done 2026-10-28 (`EXP-0003`, D-003): hotkeys sent by `tools/mednafen/hotkeys.py` after the user granted Accessibility; F7 restored the title in the same session and after a cold boot.
 
 ### EMU-007 - Verify debugger access and memory dumps
 
-- **Status:** `BLOCKED`
+- **Status:** `READY`
 - **Milestone:** M0
 - **Dependencies:** EMU-006.
-- **Blockers:** EMU-006.
+- **Blockers:** None.
 - **Objective:** Dump WRAM-L and WRAM-H at a paused instant with the stock debugger.
 - **Acceptance criteria:** Dumps of `0x00200000-0x002FFFFF` and `0x06000000-0x060FFFFF` are saved with sizes and hashes recorded; a memory write and a write breakpoint are each observed once.
 
