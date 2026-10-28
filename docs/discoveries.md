@@ -87,3 +87,15 @@ them with no leftover codes outside the hints; punctuation falls in its
 expected context 88-100% of the time. MSHvSF's arcade map does not apply.
 
 Reproduce: `research/experiments/EXP-0008/README.md`, "Procedure".
+
+## D-008: The arcade draws the decoded records; `0xFF8BB4` selects the slot (`REF-004`, `EXP-0009`)
+
+On the US set (MAME 0.289, scripted route, no human input), the CPU's win
+quote reads record 109 (`0x189936`) and the speech bubble shows exactly the
+decoder's two lines; the continue screen then shows hint records 270 and 271
+as two pages, with code `0x0134` drawn as ↑. Work RAM `0xFF8BB4` holds the
+win-quote slot base (written at PC `0x04F3DA`). Forcing it to slot 0's base
+made the game read and draw slot 0's record at the same index, as predicted.
+`0xFF2490` only copies the printed record's address.
+
+Reproduce: `research/experiments/EXP-0009/README.md`, "Procedure".

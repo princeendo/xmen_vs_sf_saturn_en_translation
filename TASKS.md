@@ -55,9 +55,12 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   decoded: 161 win-quote, 109 ending and 23 hint records in the shared ROM,
   same in every held set (`REF-003`, D-007). MSHvSF's arcade map is
   disproven for XvSF.
-- Next unblocked tasks: `REF-004` (show a decoded entry on the arcade
-  screen), `REF-006` (PS1 US English vs arcade), `REF-008` (first character
-  and quote), and `DBG-002`.
+- **2026-10-28** (`SESSION-0017`, `EXP-0009`): the US arcade draws the
+  decoded win quote and hints exactly; work RAM `0xFF8BB4` selects the
+  win-quote slot (`REF-004`, D-008).
+- Next unblocked tasks: `REF-006` (PS1 US English vs arcade), `REF-007`
+  (character names across releases), `REF-008` (first character and
+  quote), and `DBG-002`.
 - Nothing about XvSF's internals is confirmed yet.
 
 ## Milestones
@@ -328,12 +331,13 @@ prerequisites before English text goes on disc).
 
 ### REF-004 - Confirm the decoded arcade text on screen
 
-- **Status:** `READY`
+- **Status:** `DONE`
 - **Milestone:** GATE-TRANSLATION
 - **Dependencies:** REF-003.
 - **Blockers:** None.
 - **Objective:** Show that the decoded table is what the arcade draws.
 - **Acceptance criteria:** A scripted MAME route shows a predicted entry on screen, with the RAM pointer that selects it.
+- **Notes:** Done 2026-10-28 (`EXP-0009`, D-008). Route needs four coins (2 coins per credit). `0xFF2490` was a copy, not the selector.
 
 ### REF-005 - Inventory the Saturn text surfaces
 
@@ -357,10 +361,10 @@ prerequisites before English text goes on disc).
 
 ### REF-007 - Inventory character names across releases
 
-- **Status:** `BLOCKED`
+- **Status:** `READY`
 - **Milestone:** GATE-TRANSLATION
 - **Dependencies:** REF-004, REF-005.
-- **Blockers:** REF-005.
+- **Blockers:** None.
 - **Objective:** List every name the Saturn shows as art or speaks, and where the arcade English differs.
 - **Acceptance criteria:** A name table with sources; options and costs presented to the user.
 

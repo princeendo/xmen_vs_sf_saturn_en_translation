@@ -579,3 +579,35 @@ Conclusion: `REF-003` is `DONE` (**CONFIRMED**, D-007). `REF-004` and
 
 Next action: `REF-004` (show a decoded win quote on the arcade screen in
 MAME, with the RAM pointer that selects it), `REF-006`, or `REF-008`.
+
+## 2026-10-28 — SESSION-0017 / EXP-0009: decoded arcade text on screen
+
+Task: REF-004
+
+Action: copied `tools/reference/mame_timeline.lua` (MSHvSF `69c666c`, body
+unchanged). Scripted routes on `xmvsfu` with a read tap on the English area.
+
+Results and failures, in order:
+
+- Runs 1-2 never left the title: the set's coinage is 2 coins per credit
+  ("CREDIT 0(1/2)"); one coin is not a credit. Run 3 used four coins and
+  repeated Start and button 1; the CPU won.
+- Run 3: the game read record 109 (`0x189936`, slot 12 record 2), then hint
+  records 270 and 271. The screen showed exactly the decoder's text for each,
+  and `0x0134` as ↑.
+- Run 4: identical replay; two-state search found `0xFF2490` (= `0x189936`)
+  and `0xFF8BB4` (= slot 12 base).
+- **REJECTED:** `0xFF2490` selects the record. Forcing its low word (run 5)
+  changed nothing; write logs (run 6) show it is written just before
+  printing, a copy of the address.
+- **CONFIRMED:** `0xFF8BB4` selects the slot. Forcing its low word to slot 0's
+  base (run 7) made the game read `0x186F6A` and draw slot 0 record 2, as
+  predicted.
+
+Checks: `./invenv.sh pytest -q` 58 passed; `ruff check`, `ruff format
+--check`, and `mypy` clean.
+
+Conclusion: `REF-004` is `DONE` (**CONFIRMED**, D-008). `REF-007` is
+`READY`.
+
+Next action: `REF-006`, `REF-007`, or `REF-008`.

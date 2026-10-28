@@ -1,0 +1,10 @@
+# REF-004 run 3: four coins (2 coins per credit), repeated Start, button 1 through select, then idle
+1 logreads 0x186EA2 0x18E179 local/ref004/run6/reads.txt
+1000 repeat 4 30 8 Coin 1
+1200 repeat 10 60 8 1 Player Start
+1900 repeat 40 30 8 P1 Button 1
+5000 logwrites 0xFF2490 local/ref004/run6/w-0xFF2490.txt
+5000 logwrites 0xFF2492 local/ref004/run6/w-0xFF2492.txt
+5000 logwrites 0xFF8BB4 local/ref004/run6/w-0xFF8BB4.txt
+5000 logwrites 0xFF8BB6 local/ref004/run6/w-0xFF8BB6.txt
+7000 exit

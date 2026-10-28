@@ -1,0 +1,15 @@
+# REF-004 run 3: four coins (2 coins per credit), repeated Start, button 1 through select, then idle
+1 logreads 0x186EA2 0x18E179 local/ref004/run4/reads.txt
+1000 repeat 4 30 8 Coin 1
+1200 repeat 10 60 8 1 Player Start
+1900 repeat 40 30 8 P1 Button 1
+6100 dump 0xFF0000 0xFFFFFF local/ref004/run4/wram-6100.bin
+6200 dump 0xFF0000 0xFFFFFF local/ref004/run4/wram-6200.bin
+6205 dump 0xFF0000 0xFFFFFF local/ref004/run4/wram-6205.bin
+6210 dump 0xFF0000 0xFFFFFF local/ref004/run4/wram-6210.bin
+6215 dump 0xFF0000 0xFFFFFF local/ref004/run4/wram-6215.bin
+6260 dump 0xFF0000 0xFFFFFF local/ref004/run4/wram-6260.bin
+6400 dump 0xFF0000 0xFFFFFF local/ref004/run4/wram-6400.bin
+6600 dump 0xFF0000 0xFFFFFF local/ref004/run4/wram-6600.bin
+6280 snap
+7000 exit

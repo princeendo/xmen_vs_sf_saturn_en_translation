@@ -107,3 +107,10 @@ ASCII (`0x0681` = `A`, `0x0691` = `a`, `0x0677` = `'`, space `0x0020`).
 Spanish and Portuguese twins use ASCII + `0x80`; the Japanese twins are not
 decoded. All 11 held sets carry identical text; Japan 960909 has it `0x4C`
 bytes earlier. Stage names and UI words are plain 8-bit ASCII near `0x4300`.
+
+## On-Screen Confirmation (`REF-004`, `EXP-0009`)
+
+The US set draws the decoded records exactly (win quote: slot 12 record 2;
+hints 270-271). Coinage is 2 coins per credit, so scripted routes insert four
+coins. Work RAM `0xFF8BB4` is the win-quote slot base; forcing it selects the
+slot shown. Timelines: `research/experiments/EXP-0009/timelines/`.
