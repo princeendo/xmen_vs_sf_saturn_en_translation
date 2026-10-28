@@ -1,0 +1,13 @@
+# EMU-007 run F: run E plus showing the debugger after the halt
+70 window=local/emu007/win/f0a-running.png
+72 window=local/emu007/win/f0b-running.png
+72 option+d
+72 shift+w
+72 type=06000000-060fffff 26000000-260fffff
+72 return
+72 option+d
+80 window=local/emu007/win/f1-after.png
+84 window=local/emu007/win/f2-after.png
+84 option+d
+86 window=local/emu007/win/f3-debugger.png
+88 window=local/emu007/win/f4-debugger.png

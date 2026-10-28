@@ -397,3 +397,52 @@ Conclusion: `EMU-006` is `DONE` (**CONFIRMED**, D-003). `EMU-007` is `READY`.
 
 Next action: `EMU-007` (debugger dumps of WRAM-L and WRAM-H at a paused
 instant, one memory write, one write breakpoint), or `REF-003`.
+
+## 2026-10-28 — SESSION-0011 / EXP-0004: stock debugger, unattended
+
+Task: EMU-007
+
+Goal: dump WRAM-L and WRAM-H at a paused instant; observe one memory write
+and one write breakpoint; all driven by the agent.
+
+Path to a working method (all recorded so later agents do not repeat it):
+
+- First pilots froze correctly (identical F9 screenshots) but every typed
+  dump path came back as "Error opening file "ocal/…" for writing". Tested
+  and rejected in turn: typing speed (0.05 s and 0.15 s per character),
+  Shift (lowercase hex), focus switching (`--keep-focus`), Mednafen's
+  `trio_sscanf` (compiled from our source in the scratchpad: parses the
+  strings correctly), and the prompt code (no special case for `l`).
+- A window capture showed the real cause: `option+3` never switched to the
+  memory editor. The CPU view's `l` key opened "Trace Log(filename end_pc)"
+  and the rest of the path became its filename. The view switch requires
+  SDL `KMOD_LALT`; System Events' option flag was not seen as left Alt.
+  Posting left-Option CGEvents (flag `0x80020`) through JXA fixed it.
+- Side finding: trio's `%08x` accepts `+00100000`, so the `+size` dump form
+  is parsed by the inclusive form first. That explains MSHvSF `EXP-0007`'s
+  1,048,577-byte dumps better than its "the `+` was omitted" inference. MSHvSF
+  is not edited here (rule 25).
+- macOS showed the user a dialog when the first window capture ran
+  ("Claude" requests to bypass the private window picker and access screen
+  and audio). The agent did not answer it; captures worked.
+- Privacy: run D used screen-area captures; when focus moved to another app,
+  four captures (and a strip in two others) showed that app's window. The
+  agent deleted them and switched to `screencapture -l <window id>`.
+- `option+r` with the debugger visible did not resume; hiding it first did.
+- A write breakpoint on the frame counter `0x06007058` (+60/s) never fired;
+  a whole-WRAM-H breakpoint halted the CPU at `06021B26 mov.b r0,@r9`
+  (R9 `060C9047`).
+
+Result: WRAM-L `e55529cf…bf94` and WRAM-H `a384c0ef…6702`, each 1,048,576
+bytes and identical when repeated in one freeze; write test exact; breakpoint
+halt confirmed by identical captures 2-4 s apart. Same-instant state
+`62837cf2…fc3f` (3,499,031 bytes) kept for `DBG-001`. Source unchanged.
+
+Checks: `./invenv.sh pytest -q` 33 passed; `ruff check`, `ruff format
+--check`, and `mypy` clean.
+
+Conclusion: `EMU-007` is `DONE` (**CONFIRMED**, D-004). `EMU-020` and
+`DBG-001` are `READY`.
+
+Next action: `EMU-020` (short record that stock Mednafen is insufficient,
+citing MSHvSF), then `DBG-001`; or `REF-003`.

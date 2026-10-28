@@ -1,0 +1,46 @@
+# EMU-007 run A: freeze at the title, save a state, dump, write test, running control
+70 option+a
+70 F5
+70 option+d
+70 option+3
+70 period
+70 window=local/emu007/win/a1-wraml.png
+70 d
+70 type=00000000 000fffff research/memory_dumps/emu007/wraml-1.bin
+70 return
+70 d
+70 type=00000000 000fffff research/memory_dumps/emu007/wraml-2.bin
+70 return
+70 period
+70 window=local/emu007/win/a2-wramh.png
+70 d
+70 type=00000000 000fffff research/memory_dumps/emu007/wramh-1.bin
+70 return
+70 d
+70 type=00000000 000fffff research/memory_dumps/emu007/wramh-2.bin
+70 return
+70 d
+70 type=000f0000 000f000f research/memory_dumps/emu007/w-before.bin
+70 return
+70 l
+70 type=000f0000 000f000f research/memory_dumps/emu007/w-pattern.bin
+70 return
+70 d
+70 type=000f0000 000f000f research/memory_dumps/emu007/w-after.bin
+70 return
+70 window=local/emu007/win/a3-written.png
+70 l
+70 type=000f0000 000f000f research/memory_dumps/emu007/w-before.bin
+70 return
+70 d
+70 type=000f0000 000f000f research/memory_dumps/emu007/w-revert.bin
+70 return
+70 window=local/emu007/win/a4-reverted.png
+70 option+r
+70 d
+70 type=00000000 000fffff research/memory_dumps/emu007/wramh-run-1.bin
+70 return
+70 d
+70 type=00000000 000fffff research/memory_dumps/emu007/wramh-run-2.bin
+70 return
+70 window=local/emu007/win/a5-running.png

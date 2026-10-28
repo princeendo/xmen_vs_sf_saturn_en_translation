@@ -273,3 +273,32 @@ them at fixed times in an unattended run:
 - Outputs: `snaps/<image>-NNNN.png` (352x240; 330x240 seen in a boot screen),
   numbered by `snaps/<image>-counter.txt`; states
   `mcs/<image>.<md5>.mc0` (slot 0), about 3.5 MB at the title.
+
+## Stock Debugger, Unattended (`EMU-007`, `EXP-0004`)
+
+`tools/mednafen/hotkeys.py --script FILE --keep-focus` drives the debugger;
+example step files are in `research/experiments/EXP-0004/steps/`.
+
+| Need | Steps | Notes |
+| --- | --- | --- |
+| Freeze | `option+a` | Frame advance; `F5` then saves this instant. |
+| Debugger | `option+d` | Opens on the CPU view; again to hide. |
+| Memory editor | `option+3`, then `period`/`comma` | Starts at "SH-2 External Bus (TODO)"; one `period` = Low Work RAM, two = High Work RAM. |
+| Dump | `d`, `type=00000000 000fffff PATH`, `return` | End is inclusive. |
+| Write | `l`, `type=START END PATH`, `return` | Freeze first; restore before running. |
+| Resume | `option+d` (hide), `option+r` | `option+r` with the debugger shown did not resume. |
+| Write breakpoint | CPU view: `shift+w`, `type=A-B C-D`, `return` | Checked only for the active CPU. |
+| See the screen | `window=PATH` | Window-ID capture; shows the overlay. |
+
+- Option chords must arrive as **left** Option: the debugger's view switch
+  tests SDL's `KMOD_LALT`. The tool posts left-Option CoreGraphics events.
+  With System Events' `using option down`, `option+3` was ignored and the CPU
+  view stayed active; there `l` opens "Trace Log(filename end_pc)", which
+  swallowed typed paths.
+- Prompt errors appear only on screen, so use `window=` to check prompts.
+- Mednafen's `%08x` parse accepts a leading `+`, so `00000000 +00100000 FILE`
+  is read by the inclusive-end form and dumps `0x100001` bytes. Use
+  `00000000 000fffff FILE`.
+- Window capture needs Screen Recording for the same Claude Code bundle.
+  macOS showed the user a dialog about bypassing the private window picker on
+  the first capture; captures worked.

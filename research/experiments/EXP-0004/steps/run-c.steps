@@ -1,0 +1,10 @@
+# EMU-007 run C: one write breakpoint on the WRAM-H frame counter
+70 window=local/emu007/win/c0-running.png
+70 option+d
+70 shift+w
+70 type=06007058-0600705b 26007058-2600705b
+70 window=local/emu007/win/c1-prompt.png
+70 return
+70 option+d
+72 window=local/emu007/win/c2-after-1.png
+75 window=local/emu007/win/c3-after-2.png

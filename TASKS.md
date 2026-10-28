@@ -38,8 +38,11 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
 - **2026-10-28** (`SESSION-0010`, `EXP-0003`): screenshots and save/load
   states work by hotkey, sent unattended through System Events (`EMU-006`,
   D-003).
-- Next unblocked tasks: `EMU-007` (debugger access and memory dumps) and
-  `REF-003` (arcade English text).
+- **2026-10-28** (`SESSION-0011`, `EXP-0004`): stock debugger dumps, a
+  memory write, and a write breakpoint, all unattended (`EMU-007`, D-004).
+- Next unblocked tasks: `EMU-020` (record why stock Mednafen is
+  insufficient), `DBG-001` (validate the state extractor; run A of
+  `EXP-0004` saved a state with same-instant dumps), and `REF-003`.
 - Nothing about XvSF's internals is confirmed yet.
 
 ## Milestones
@@ -228,19 +231,20 @@ prerequisites before English text goes on disc).
 
 ### EMU-007 - Verify debugger access and memory dumps
 
-- **Status:** `READY`
+- **Status:** `DONE`
 - **Milestone:** M0
 - **Dependencies:** EMU-006.
 - **Blockers:** None.
 - **Objective:** Dump WRAM-L and WRAM-H at a paused instant with the stock debugger.
 - **Acceptance criteria:** Dumps of `0x00200000-0x002FFFFF` and `0x06000000-0x060FFFFF` are saved with sizes and hashes recorded; a memory write and a write breakpoint are each observed once.
+- **Notes:** Done 2026-10-28 (`EXP-0004`, D-004), unattended. A breakpoint on the WRAM-H frame counter `0x06007058` did not fire (writer unknown; `docs/known_unknowns.md`).
 
 ### EMU-020 - Record why stock Mednafen is insufficient
 
-- **Status:** `BLOCKED`
+- **Status:** `READY`
 - **Milestone:** M0
 - **Dependencies:** EMU-007.
-- **Blockers:** EMU-007.
+- **Blockers:** None.
 - **Objective:** Satisfy `AGENTS.md` rule 16 before using the patched build.
 - **Acceptance criteria:** A short record cites MSHvSF `EMU-012`/`EMU-020` and confirms the same limits apply here (no scripted memory access, breakpoints, or states without manual debugger work).
 
@@ -255,10 +259,10 @@ prerequisites before English text goes on disc).
 
 ### DBG-001 - Copy and validate the save-state extractor
 
-- **Status:** `BLOCKED`
+- **Status:** `READY`
 - **Milestone:** M0
 - **Dependencies:** EMU-007.
-- **Blockers:** EMU-007.
+- **Blockers:** None.
 - **Objective:** Extract WRAM-L, WRAM-H, VDP1 and VDP2 VRAM from states, validated byte for byte against debugger dumps of the same instant on XvSF.
 - **Acceptance criteria:** Each region matches a stock debugger dump exactly; the result goes to `docs/discoveries.md`; cart RAM stays `HYPOTHESIS`.
 - **Notes:** MSHvSF found each stored 16-bit element byte-swapped (MSHvSF `DBG-012`, `EXP-0008`). Re-test, do not assume.

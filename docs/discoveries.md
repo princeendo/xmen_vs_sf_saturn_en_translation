@@ -39,3 +39,15 @@ before a normal boot reaches the title. The state file is unchanged by
 loading. Both paths are git-ignored.
 
 Reproduce: `research/experiments/EXP-0003/README.md`, "Procedure".
+
+## D-004: Stock debugger dumps, writes and write breakpoints work unattended (`EMU-007`, `EXP-0004`)
+
+Driven by `tools/mednafen/hotkeys.py` (Option chords posted as left-Option
+events), the stock 1.32.1 memory editor dumps "Low Work RAM" and "High Work
+RAM" (`00000000 000fffff FILE`, 1,048,576 bytes each), byte-identical when
+repeated during one frame-advance freeze; `l` writes a file into WRAM-H and a
+following dump reads it back exactly, and loading the saved original restores
+it. A CPU-view write breakpoint on `06000000-060fffff 26000000-260fffff` halts
+the game at a byte store into WRAM-H (`mov.b r0,@r9`, R9 `060C9047`).
+
+Reproduce: `research/experiments/EXP-0004/README.md`, "Procedure".

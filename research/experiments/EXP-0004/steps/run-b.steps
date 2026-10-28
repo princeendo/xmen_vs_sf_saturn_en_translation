@@ -1,0 +1,17 @@
+# EMU-007 run B: WRAM-H dumps while the game runs (control for the breakpoint)
+70 option+a
+70 option+d
+70 option+3
+70 period
+70 period
+70 option+d
+70 option+r
+70 option+d
+70 window=local/emu007/win/b1-running.png
+70 d
+70 type=00000000 000fffff research/memory_dumps/emu007/wramh-run-1.bin
+70 return
+70 d
+70 type=00000000 000fffff research/memory_dumps/emu007/wramh-run-2.bin
+70 return
+70 window=local/emu007/win/b2-running.png
