@@ -514,3 +514,32 @@ Conclusion: `EMU-021` is `DONE` (**CONFIRMED**, D-006). `REF-005` is
 
 Next action: `REF-005` needs one recorded user play session (MSHvSF's
 `session_recorder.py` would be copied first), or `REF-003` without the user.
+
+## 2026-10-28 — SESSION-0015 / EXP-0007: play session and text surfaces
+
+Task: REF-005
+
+Action: copied `tools/mednafen/session_recorder.py` and its test from MSHvSF
+`69c666c`; smoke-tested it unattended; launched the patched build in the
+interactive home with the recorder; the user played a 13-step route and
+reported "done, no surprises". Reviewed all 414 unique screenshots; ran the
+US and JP arcade attract loops headless in MAME for comparison.
+
+Result: Japanese text appears on attract captions, win quotes (player and
+CPU wins), and continue-screen hints. Menus, options, HUD, stage cards,
+names, game over and rankings are already English. The US arcade attract
+shows English captions where the Saturn and JP arcade show Japanese ones.
+Win quotes and continue hints were not reached in the arcade.
+
+Notes: ffmpeg 9.0.1 here lacks `drawtext`, so contact-sheet tiles were
+mapped to frames by position. Game text (including the arcade captions)
+is kept in ignored `local/ref005/notes.md`.
+
+Checks: `./invenv.sh pytest -q` 54 passed; `ruff check`, `ruff format
+--check`, and `mypy` clean.
+
+Conclusion: `REF-005` is `DONE`; `REF-008` is `READY`.
+
+Next action: `REF-008` (pick the M1 character and win quote; the session's
+Ryu/Gouki win at frame 11244 and its states are candidates, but the states
+kept are only the last 3 minutes), or `REF-003`.

@@ -47,9 +47,13 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
 - **2026-10-28** (`SESSION-0014`, `EXP-0006`): the MSHvSF agent interface is
   rebuilt and validated on XvSF, V1-V4 (`EMU-021`, D-006). The agent can now
   read, write, halt and log breakpoints without GUI automation.
-- Next unblocked tasks: `REF-005` (text-surface inventory; needs one user
-  play session), `REF-003` (arcade English text), and `DBG-002` (copy
-  analysis tools as needed).
+- **2026-10-28** (`SESSION-0015`, `EXP-0007`): one recorded play session;
+  Japanese text on attract captions, win quotes and continue hints
+  (`REF-005`, `docs/text_surfaces.md`). US arcade attract captions are
+  English.
+- Next unblocked tasks: `REF-008` (choose the first character and quote),
+  `REF-003` (arcade English text), and `DBG-002` (copy analysis tools as
+  needed).
 - Nothing about XvSF's internals is confirmed yet.
 
 ## Milestones
@@ -328,13 +332,14 @@ prerequisites before English text goes on disc).
 
 ### REF-005 - Inventory the Saturn text surfaces
 
-- **Status:** `READY`
+- **Status:** `DONE`
 - **Milestone:** GATE-TRANSLATION
 - **Dependencies:** EMU-021.
 - **Blockers:** None.
 - **Objective:** List every place the Saturn release shows Japanese text, from one recorded play session.
 - **Acceptance criteria:** A table of surfaces (screen, when shown, sample screenshot path, whether the arcade has English for it) recorded from screenshots the agent reviewed.
 - **Notes:** One user play session with `session_recorder.py` running: boot, attract, select, one fight won, one lost with continue, options.
+  Done 2026-10-28 (`EXP-0007`): `docs/text_surfaces.md`. Arcade English observed for attract captions; for win quotes and continue hints it is still UNKNOWN (`REF-003`, `REF-004`, `UI-003`).
 
 ### REF-006 - Compare the PS1 US English with the arcade
 
@@ -356,10 +361,10 @@ prerequisites before English text goes on disc).
 
 ### REF-008 - Choose the first character and quote
 
-- **Status:** `BLOCKED`
+- **Status:** `READY`
 - **Milestone:** M1
 - **Dependencies:** REF-005.
-- **Blockers:** REF-005.
+- **Blockers:** None.
 - **Objective:** Pick one ordinary character and one win quote as the M1 target.
 - **Acceptance criteria:** The choice and the reason are recorded; the Japanese is captured on screen and transcribed.
 
