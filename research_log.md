@@ -141,3 +141,17 @@ Result: documentation only; no experiment run.
 
 Next action: the user's answer on the default names; then `EMU-001`,
 `REF-001`, `REF-002`.
+
+## 2026-10-28 — SESSION-0004: American names by default
+
+Task: DOC-002 (amended)
+
+Decision (user, 2026-10-28, verbatim): "Make American names the XvSF default,
+like MSHvSF. Record it in the policy." This replaces the 2026-10-27 answer
+"Both variants, Saturn default". Both variants are still built; the American
+variant is the default and is listed first in a release.
+
+Action: `docs/localization_policy.md` (names row, note, deferred row) and
+`TASKS.md` (Current State, `LOC-001` outline) updated. Documentation only.
+
+Next action: `EMU-001`, `REF-001`, `REF-002`.

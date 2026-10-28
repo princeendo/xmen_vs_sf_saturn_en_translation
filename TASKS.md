@@ -16,11 +16,11 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
 - Reverse-engineering experiments in progress: none.
 - **2026-10-27: policy confirmed** (`DOC-002`, `docs/localization_policy.md`):
   official arcade English, opt-in grammar fixes, recorded new translations
-  for gaps, two name variants (Saturn default), all special surfaces in
+  for gaps, two name variants, all special surfaces in
   eventual scope, xdelta and SSP released only after the open tasks.
 - **2026-10-28:** playbook re-copied from MSHvSF `69c666c` (through MSHvSF
-  release 0.1.0). Open question for the user: MSHvSF now defaults to American
-  names; does XvSF keep the Saturn default (`docs/localization_policy.md`)?
+  release 0.1.0). The user made American names the XvSF default, like MSHvSF
+  (`docs/localization_policy.md`).
 - Next unblocked tasks: `EMU-001` (pin and build stock Mednafen), `REF-001`
   (arcade set intake), and `REF-002` (PS1 intake).
 - Nothing about XvSF's internals is confirmed yet.
@@ -408,4 +408,4 @@ for each is in `docs/playbook_from_mshvsf.md`.
 | UI-002 | after M8, user request | Attract-mode captions: which layer draws them, which container and codecs hold them, arcade and PS1 oracles. |
 | UI-003 | after M8, user request | Other UI text (continue screen, hints): find the arcade English by tracing the arcade code, not only by data search. |
 | TXT-001 | after M8, user request | Rare, random, or region-gated text: trace every reader of every text table. |
-| LOC-001 | after M8 | Name variants (user decision 2026-10-27: both, Saturn names default; reconfirm, since MSHvSF moved to American names by default on 2026-10-28): whether both conventions' art and voice are already on the disc. |
+| LOC-001 | after M8 | Name variants (user decisions: both variants, 2026-10-27; American names default, 2026-10-28): whether both conventions' art and voice are already on the disc. |
