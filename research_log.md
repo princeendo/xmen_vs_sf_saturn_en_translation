@@ -208,3 +208,40 @@ internals is confirmed by this work.
 
 Next action: `EMU-002` (project-local configuration and BIOS identity), then
 `EMU-003` (boot); `REF-003` (arcade English text) can run alongside.
+
+## 2026-10-28 — SESSION-0006: project-local Mednafen configuration
+
+Task: EMU-002
+
+Goal: run Mednafen only with configuration and BIOS inside this checkout, and
+record the BIOS identity.
+
+Action:
+
+- Copied `sega_101.bin` and `mpr-17933.bin` unchanged from MSHvSF's ignored
+  `local/mednafen/firmware/` (`cmp` clean). Their SHA-256 values equal the
+  ones Mednafen 1.32.1's `Documentation/ss.html` gives, read from this
+  checkout's verified source archive.
+- Added `tools/mednafen/home.py` (adapted from MSHvSF `replay_state.py`
+  `quiet_home()` at `69c666c`) with three unit tests. It pins 17 settings in
+  `local/mednafen/` and, for unattended runs, those plus three silent
+  settings in `local/mednafen_quiet/`, whose `firmware/` links to the
+  interactive home's.
+- `./invenv.sh python -m tools.mednafen.home`, run twice: the first run
+  changed only the quiet home's three settings (all 17 pinned values are
+  1.32.1 defaults); the second reported `no change` for both.
+- `-help` with each home: `Loaded 7904 valid settings and 0 unknown
+  settings`, base directory the chosen home; config SHA-256 unchanged after
+  the run (`48a7cf6b…28fc`, `ef897288…5019`).
+- Mednafen's `src/ss/db.cpp` lists `T-1226G` as `CART_EXTRAM_4M` ("Game
+  requirement"), so `ss.cart auto` is expected to select the 4 MiB cart. This
+  is a **HYPOTHESIS** until `EMU-004`.
+
+Checks: `./invenv.sh pytest -q` 15 passed; `ruff check`, `ruff format`, and
+`mypy` clean.
+
+Conclusion: `EMU-002` is `DONE`. No game was booted; boot, BIOS acceptance
+and cart selection are `EMU-003` and `EMU-004`.
+
+Next action: `EMU-003` (three cold boots of the untouched image to the title
+screen, in the quiet home, source hashes checked before and after).

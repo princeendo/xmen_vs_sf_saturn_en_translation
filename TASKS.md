@@ -25,8 +25,11 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   `docs/mednafen.md`); arcade sets identified and the US set booted in MAME
   0.289 (`REF-001`, `references/arcade/`); PS1 images recorded (`REF-002`,
   `references/ps1/`).
-- Next unblocked tasks: `EMU-002` (project-local Mednafen configuration) and
-  `REF-003` (locate and decode the arcade English text).
+- **2026-10-28** (`SESSION-0006`): project-local Mednafen homes (interactive
+  and silent) pinned by `tools/mednafen/home.py`; Saturn BIOS hashes match
+  Mednafen's documentation (`EMU-002`, `docs/mednafen.md`).
+- Next unblocked tasks: `EMU-003` (boot XvSF) and `REF-003` (locate and
+  decode the arcade English text).
 - Nothing about XvSF's internals is confirmed yet.
 
 ## Milestones
@@ -165,20 +168,20 @@ prerequisites before English text goes on disc).
 
 ### EMU-002 - Create the project-local Mednafen configuration
 
-- **Status:** `READY`
+- **Status:** `DONE`
 - **Milestone:** M0
 - **Dependencies:** EMU-001.
 - **Blockers:** None.
 - **Objective:** Run Mednafen with a configuration and BIOS path local to this checkout, never the user's global configuration.
 - **Acceptance criteria:** The launch command, base directory, BIOS identity (filename, size, SHA-256), and forced settings are recorded.
-- **Notes:** The Japanese Saturn BIOS used by MSHvSF can be reused; record its hash here.
+- **Notes:** The Japanese Saturn BIOS used by MSHvSF can be reused; record its hash here. Done 2026-10-28: `sega_101.bin` `dcfef4b9…deac` and `mpr-17933.bin` `96e106f7…266f` match Mednafen 1.32.1's documented hashes; 17 settings pinned in `local/mednafen/` and `local/mednafen_quiet/` by `./invenv.sh python -m tools.mednafen.home`; both load 7,904 settings, 0 unknown.
 
 ### EMU-003 - Boot XvSF
 
-- **Status:** `BLOCKED`
+- **Status:** `READY`
 - **Milestone:** M0
 - **Dependencies:** EMU-002, ENV-006.
-- **Blockers:** EMU-002.
+- **Blockers:** None.
 - **Objective:** Reach the title screen from a cold boot of the untouched image.
 - **Acceptance criteria:** Three cold boots reach a stable title screen; the boot log shows `T-1226G`; source hashes match before and after; screenshots kept locally.
 - **Notes:** Run unattended boots silently (MSHvSF `local/mednafen_quiet` approach) so they do not disturb the user.
