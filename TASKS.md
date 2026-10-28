@@ -44,8 +44,12 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   (`docs/mednafen_agent_interface.md`). `SESSION-0013` / `EXP-0005`: the
   state extractor matches debugger dumps for WRAM-L, WRAM-H, VDP1 and VDP2
   VRAM (`DBG-001`, D-005); cart RAM stays HYPOTHESIS.
-- Next unblocked tasks: `EMU-021` (reuse and validate the agent interface),
-  `DBG-002` (copy analysis tools as needed), and `REF-003`.
+- **2026-10-28** (`SESSION-0014`, `EXP-0006`): the MSHvSF agent interface is
+  rebuilt and validated on XvSF, V1-V4 (`EMU-021`, D-006). The agent can now
+  read, write, halt and log breakpoints without GUI automation.
+- Next unblocked tasks: `REF-005` (text-surface inventory; needs one user
+  play session), `REF-003` (arcade English text), and `DBG-002` (copy
+  analysis tools as needed).
 - Nothing about XvSF's internals is confirmed yet.
 
 ## Milestones
@@ -254,12 +258,13 @@ prerequisites before English text goes on disc).
 
 ### EMU-021 - Reuse and validate the agent interface
 
-- **Status:** `READY`
+- **Status:** `DONE`
 - **Milestone:** M0
 - **Dependencies:** EMU-020.
 - **Blockers:** None.
 - **Objective:** Drive Mednafen from Python so the user only plays.
 - **Acceptance criteria:** The MSHvSF patch applies to the pinned version and builds; validations V1-V4 (MSHvSF `docs/mednafen_agent_interface.md`) pass on XvSF states; `tools/mednafen/agent.py` and its tests are copied with provenance.
+- **Notes:** Done 2026-10-28 (`EXP-0006`, D-006). V4 target: the WRAM-H store found by the stock debugger in `EXP-0004`.
 
 ### DBG-001 - Copy and validate the save-state extractor
 
@@ -323,10 +328,10 @@ prerequisites before English text goes on disc).
 
 ### REF-005 - Inventory the Saturn text surfaces
 
-- **Status:** `BLOCKED`
+- **Status:** `READY`
 - **Milestone:** GATE-TRANSLATION
 - **Dependencies:** EMU-021.
-- **Blockers:** EMU-021.
+- **Blockers:** None.
 - **Objective:** List every place the Saturn release shows Japanese text, from one recorded play session.
 - **Acceptance criteria:** A table of surfaces (screen, when shown, sample screenshot path, whether the arcade has English for it) recorded from screenshots the agent reviewed.
 - **Notes:** One user play session with `session_recorder.py` running: boot, attract, select, one fight won, one lost with continue, options.

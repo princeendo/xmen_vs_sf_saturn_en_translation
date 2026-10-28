@@ -487,3 +487,30 @@ Conclusion: `DBG-001` is `DONE` (**CONFIRMED** for four regions, D-005).
 
 Next action: `EMU-021` (copy the MSHvSF agent patch and client, build,
 re-run V1-V4 on XvSF), or `REF-003`.
+
+## 2026-10-28 — SESSION-0014 / EXP-0006: agent interface reused and validated
+
+Task: EMU-021
+
+Action: copied the MSHvSF patch (`c30146ef…5244`), client and tests (two
+MSHvSF-only tests dropped) with provenance; applied the patch to a copy of
+the stock source (drivers equal MSHvSF's patched tree) and built
+`290d4717…f9f8`. V1 equivalence by `cold_boot` with the patched binary and no
+agent directory; V1 smoke and V2-V4 by `research/experiments/EXP-0006/validate.py`.
+
+Result: V1 89/89 frames equal stock; 13 spaces; registers returned. V2 four
+regions identical to same-poll extraction, two runs. V3 exact round trip;
+`frames 30` exact; `savestate` refused while halted. V4: a 120-frame window
+(run 1) had no hits on `060C9047`; a 1,800-frame window (run 2) logged 6,
+at PCs `06021B26` (the `EXP-0004` halt) and `06021B6A`, R9 `060C9047`,
+without halting. Halt mode on all of WRAM-H stopped at frame 6038 with
+registers as text. Stock binary and source unchanged.
+
+Checks: `./invenv.sh pytest -q` 52 passed; `ruff check`, `ruff format
+--check`, and `mypy` clean (validate.py also `mypy --strict`).
+
+Conclusion: `EMU-021` is `DONE` (**CONFIRMED**, D-006). `REF-005` is
+`READY`.
+
+Next action: `REF-005` needs one recorded user play session (MSHvSF's
+`session_recorder.py` would be copied first), or `REF-003` without the user.

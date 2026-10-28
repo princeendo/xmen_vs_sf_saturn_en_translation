@@ -62,3 +62,15 @@ from states are usable evidence. Cart RAM (4 MiB) is extracted but has no
 debugger space to compare against, so it stays **HYPOTHESIS**.
 
 Reproduce: `research/experiments/EXP-0005/README.md`, "Procedure".
+
+## D-006: The reused agent interface is valid on XvSF (`EMU-021`, `EXP-0006`)
+
+The MSHvSF frontend patch (`c30146ef…5244`) builds unchanged on 1.32.1. With
+`MEDNAFEN_AGENT_DIR` unset the binary boots XvSF frame-identically to stock.
+With it set: `read` of WRAM-L, WRAM-H, VDP1 and VDP2 VRAM equals validated
+extraction of a state saved in the same poll; writes round-trip; `pause`,
+`step`, `run` and `frames N` work; a log-mode write breakpoint on
+`060C9047` logs hits at `06021B26` (the store the stock debugger halted on in
+`EXP-0004`) and `06021B6A` without halting.
+
+Reproduce: `research/experiments/EXP-0006/README.md`, "Procedure".

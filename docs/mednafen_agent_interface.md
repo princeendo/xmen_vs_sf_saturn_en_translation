@@ -74,3 +74,11 @@ re-run validations V1-V4 on XvSF before using it as evidence.
   commands; `read` equals a validated extraction of a state saved in the same
   poll; write, read back and restore with halt control; a breakpoint log of a
   real transition. V4 needs an XvSF target of its own.
+
+## Result (`EMU-021`, `EXP-0006`)
+
+The patch was copied to `vendor/mednafen/patches/` and built in
+`vendor/mednafen/build-agent/` (binary `290d4717…f9f8`); the stock binary is
+unchanged. V1-V4 pass on XvSF (`docs/discoveries.md` D-006). Use
+`tools/mednafen/agent.py`; build and run commands are in
+`vendor/mednafen/README.md`.
