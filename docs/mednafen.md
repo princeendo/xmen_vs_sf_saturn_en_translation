@@ -240,4 +240,11 @@ which is out of date there; the configuration file is the source used.
   `local/mednafen/mednafen.cfg` `cb1c2d3b…a1e9`,
   `local/mednafen_quiet/mednafen.cfg` `aad9a7ef…57cf`.
 - Hotkeys (1.32.1 defaults): F9 screenshot, F12 exit.
-- Still open: observing each control in the game (`EMU-005` acceptance).
+- In-game check (2026-10-28): the user played the interactive home through
+  the steps in `research_log.md` `SESSION-0009` (menu, character select, a
+  fight with all six face buttons and the D-pad, Start to pause) and
+  reported "Everything worked as expected". The session log
+  (`local/emu005/session.log`) shows the bound pad ID, `SGID: T-1226G` and
+  `Cart: 4MiB Extended RAM`; exit 0; configuration unchanged.
+- Not recorded: which physical button label gives which attack. L/R were
+  not tested (no pad binding).

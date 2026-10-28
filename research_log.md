@@ -341,3 +341,21 @@ Conclusion: mapping configured and recorded. `EMU-005` stays `IN_PROGRESS`
 until the user observes each control in game.
 
 Next action: the user's in-game check (interactive home).
+
+### SESSION-0009 addendum: in-game check
+
+The agent launched the interactive home (`local/mednafen/`) and gave the user
+a step table: Start at the title, D-pad in the menu, first menu item,
+character select with the D-pad, a fight pressing each of the six face
+buttons and walking, Start to pause and resume, F12 to quit.
+
+User report (2026-10-28, verbatim): "Everything worked as expected".
+
+Session log `local/emu005/session.log` (5,593 bytes): pad ID
+`0xecccd365fc40db2f0006000c00010000`, `SGID: T-1226G`, `Cart: 4MiB Extended
+RAM`; exit 0. `local/mednafen/mednafen.cfg` unchanged (`cb1c2d3b…a1e9`). No
+screenshots were taken. Physical button labels per attack were not reported;
+L/R were not tested (unbound on the pad, as in MSHvSF).
+
+Conclusion: `EMU-005` is `DONE` on the user's observation. Next: `EMU-006`
+(screenshots and save states) or `REF-003`.
