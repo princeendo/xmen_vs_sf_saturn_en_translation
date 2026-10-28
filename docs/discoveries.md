@@ -110,3 +110,16 @@ less one record, and a PS1 variant with 7 rewritten records. The arcade's
 on the disc.
 
 Reproduce: `research/experiments/EXP-0010/README.md`, "Procedure".
+
+## D-010: The Saturn win quote is VDP1 glyph cells over a WRAM-L code table (`DBG-005`, `EXP-0015`)
+
+The quote is two rows of 19 VDP1 16×16 4 bpp sprites (color word `0x7020`),
+one 128-byte VRAM cell per distinct glyph; blanking one cell removed exactly
+that glyph (control unchanged). The text is a WRAM-L table at `0x0024F5D8`: 22
+records of 38 big-endian 16-bit codes (2 lines × 19 cells, blank `0x0020`),
+found by a 38-cell equality pattern (one hit). Records 0-15 are byte-identical
+to the arcade's Japanese win quotes for slot 9 (Ryu); 16-21 are his Japanese
+ending's first records. Hiragana codes are Unicode − `0x2661`. The table is
+resident from before the K.O. The M1 quote is record 10.
+
+Reproduce: `research/experiments/EXP-0015/README.md`, "Procedure".

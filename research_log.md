@@ -760,3 +760,30 @@ Checks: `./invenv.sh pytest -q` 89 passed; `ruff check`, `ruff format
 --check`, and `mypy` clean (`checkpoints.py` also `mypy --strict`).
 
 Conclusion: `DBG-004` is `DONE` (**CONFIRMED**). `DBG-005` is `READY`.
+
+## 2026-10-28 — SESSION-0024 / EXP-0015: quote renderer and RAM text
+
+Task: DBG-005
+
+Result:
+
+- VDP1 walk at `quote_visible`: the text is 2 rows × 19 16×16 4 bpp sprites
+  (`0x7020`), one cell per distinct glyph (line 2's う reuses line 1's).
+- Controlled change: zeroing glyph cell `0x4A800` removed only も; the control
+  screenshot equals the live capture. Renderer **CONFIRMED** as VDP1.
+- Plain Shift-JIS, EUC-JP and UTF-16BE: 0 hits in any region.
+- **REJECTED** as non-discriminating: a two-line search allowing any gap
+  (thousands of hits).
+- The full 38-cell equality pattern with blanks: 1 hit, WRAM-L `0x0024F8D0`,
+  16-bit, blank `0x0020`. A 22-record table of 38 codes at `0x0024F5D8`,
+  resident from `pre_ko` on. Hiragana = Unicode − `0x2661` (13/13).
+- Records 0-15 are byte-identical to the arcade Japanese win-quote slot 9;
+  16-21 to the first six records of the arcade Japanese endings' slot 9.
+  This also supports arcade slot 9 = Ryu.
+
+Checks: `./invenv.sh pytest -q` 89 passed; `ruff check`, `ruff format
+--check`, and `mypy` clean (experiment scripts also `mypy --strict`).
+
+Conclusion: `DBG-005` is `DONE` (**CONFIRMED**, D-010). Every `GATE-M0`
+dependency is `DONE`; the gate awaits the user's go/no-go before `RE-001`
+(the first live RAM mutation).

@@ -77,7 +77,12 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
 - **2026-10-28** (`SESSION-0023`, `EXP-0014`): the user switched the M1
   target to the `EXP-0013` session's Ryu quote (blind-checked). Six named
   checkpoints bracket it (`DBG-004`).
-- Next unblocked task: `DBG-005` (find the quote renderer and its RAM text).
+- **2026-10-28** (`SESSION-0024`, `EXP-0015`): the quote is VDP1 glyph cells
+  (controlled change); its text is a WRAM-L table at `0x0024F5D8` that equals
+  the arcade Japanese slot 9 (Ryu) byte for byte; the M1 quote is record 10
+  (`DBG-005`, D-010).
+- All `GATE-M0` dependencies are `DONE`. The gate needs an explicit go/no-go
+  before the first live RAM mutation (M1, `RE-001`).
 - Nothing about XvSF's internals is confirmed yet.
 
 ## Milestones
@@ -422,21 +427,22 @@ prerequisites before English text goes on disc).
 
 ### DBG-005 - Find the quote renderer and its RAM text
 
-- **Status:** `READY`
+- **Status:** `DONE`
 - **Milestone:** M1
 - **Dependencies:** DBG-001, DBG-004.
 - **Blockers:** None.
 - **Objective:** Determine whether the quote is VDP1 sprites or VDP2 tiles, and find the code table that drives it.
 - **Acceptance criteria:** The renderer is identified by a controlled change; the RAM text table is located by plain-encoding search or by equality-pattern search.
+- **Notes:** Done 2026-10-28 (`EXP-0015`, D-010).
 
 ## Gates
 
 ### GATE-M0 - Confirm environment and checkpoint prerequisites
 
-- **Status:** `BLOCKED`
+- **Status:** `READY`
 - **Milestone:** M0
 - **Dependencies:** ENV-001 to ENV-006, EMU-001 to EMU-007, EMU-020, EMU-021, DBG-001, DBG-003, DBG-004, DBG-005, REF-008.
-- **Blockers:** Dependencies not done.
+- **Blockers:** None; every dependency is `DONE` (2026-10-28). Needs the explicit go/no-go.
 - **Objective:** Make an explicit go/no-go decision before the first live RAM mutation.
 - **Acceptance criteria:** Every dependency is `DONE`; no unresolved workflow blocker can invalidate M1 evidence.
 
