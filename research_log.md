@@ -927,3 +927,31 @@ hashes unchanged (42 of 42).
 
 Conclusion: `FONT-001` is `DONE` (**CONFIRMED**, D-014). `FONT-002` is
 unblocked.
+
+## 2026-10-28 — SESSION-0029 / EXP-0020: Latin codes, line length and grid
+
+Task: FONT-002 ("Start FONT-002: Latin codes, line length and cell grid.")
+
+Actions and results:
+
+- **Atlas:** rendered all 3,584 font codes. There are five Latin sets; the
+  quote-style one is at `0x0660`-`0x06FF`.
+- **First reading:** a grid reading put its rows 0x10 lower than the arcade
+  map. That was **wrong**: labelled single-code renders showed the arcade map
+  exactly (`0x0681` = A, and so on).
+- **Coverage:** all 94 mapped codes are non-empty; `@ { | }` are not ASCII
+  glyphs.
+- **Live trials** (`latin_trial.py`, `pre_ko`, record 10): control plus three
+  38-code trials. Every drawn cell equals the decoded glyph (38/38 each); a
+  second run is byte-identical; the control equals the live capture.
+- **Grid:** 2 × 19 cells, all shown; 38 distinct cells allocated.
+- **Capacity:** 25 of 161 arcade English win quotes fit 2 × 19 as written,
+  59 after word re-wrap, 159 in 3 × 19.
+
+Checks: `./invenv.sh pytest -q` 134 passed; `ruff check`, `ruff format
+--check` and `mypy` clean (EXP-0020 scripts also `mypy --strict`). Source
+hashes unchanged (42 of 42).
+
+Conclusion: `FONT-002` is `DONE` (**CONFIRMED**, D-015). The M2 tasks are all
+done. Further translation work needs the user's `GATE-TRANSLATION` decision
+and new tasks for layout (fitting 102 quotes) and M3.

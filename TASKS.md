@@ -97,7 +97,12 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   loaded unchanged to WRAM-L `0x002C3EA0`. Its format is proven by a
   byte-identical repack and 22/22 drawn cells, and a one-byte disc change
   reaches the loaded font from a cold boot (`FONT-001`, D-014).
-- Next: `FONT-002` (Latin codes, line length, cell grid).
+- **2026-10-28** (`SESSION-0029`, `EXP-0020`): the quote font draws the
+  arcade English codes directly. A quote is 2 × 19 cells, all shown; only 59
+  of 161 arcade English win quotes fit after re-wrapping (`FONT-002`, D-015).
+- Next: all M2 tasks are done. M3 (all of Ryu's quotes) puts English on disc,
+  so it needs `GATE-TRANSLATION` and a layout task for the quotes that do not
+  fit. Those tasks are to be written with the user.
 
 ## Milestones
 
@@ -533,12 +538,18 @@ prerequisites before English text goes on disc).
 
 ### FONT-002 - Latin codes, line length and cell grid
 
-- **Status:** `READY`
+- **Status:** `DONE`
 - **Milestone:** M2
 - **Dependencies:** FONT-001 (done).
 - **Blockers:** None.
 - **Objective:** Find which Latin glyphs the quote font has and their codes, and measure how many cells a line and a record hold.
 - **Acceptance criteria:** A live display with a control shows the predicted Latin glyphs; the per-line cell count and any width limits are measured on screen; capacity against the arcade English records (2 × 25 codes) is stated.
+- **Evidence:** `EXP-0020`, D-015.
+  - Arcade English codes draw directly; the exceptions are `@ { | }`.
+  - Three live trials and a control: 38/38 exact cells each, and two runs are
+    byte-identical.
+  - The grid is 2 × 19 cells of 16 px, all shown.
+  - Capacity: 25 of 161 quotes fit as written, 59 after re-wrapping.
 
 ## Later Milestones (outline only)
 

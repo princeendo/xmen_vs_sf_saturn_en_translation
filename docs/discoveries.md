@@ -215,3 +215,24 @@ Compressed glyphs are a mask-selected column-run fill (`tools/text/font.py`).
   appears in the loaded font; the original image is the control.
 
 Reproduce: `research/experiments/EXP-0019/README.md`, "Procedure".
+
+## D-015 (M2): The quote font draws the arcade English codes; a quote is 2 × 19 cells (`FONT-002`, `EXP-0020`)
+
+**Codes.** The Saturn win-quote font (`FIX.PRS`) has quote-style 16×16 Latin
+glyphs at the arcade English codes. Printable ASCII row `0x2_`-`0x7_` starts
+at `0x0670`, `0x06D0`, `0x0680`, `0x06E0`, `0x0690` and `0x06F0`, and space is
+`0x0020` (`tools.reference.xvsf_text`). The exceptions are `@` (`0x0680`),
+which is ♥, and `{ | }` (`0x06FB`-`0x06FD`), which are two fractions and ∞.
+
+**Evidence.** Written into record 10 from `pre_ko`, three trials covering all
+94 codes drew exactly the decoded glyphs, 38/38 cells each, and two runs were
+byte-identical. The no-write control equals the live capture.
+
+**Grid.** A quote line is 19 sprites of 16 px (x = 26-314, y = 178 and 194).
+All 38 cells and 38 distinct glyphs display. Latin glyphs fill the cell
+(ink 6-15 px wide).
+
+**Capacity.** Of the 161 arcade English win quotes (2 × 25 codes), 25 fit
+2 × 19 as written and 59 after re-wrapping at word boundaries.
+
+Reproduce: `research/experiments/EXP-0020/README.md`, "Procedure".
