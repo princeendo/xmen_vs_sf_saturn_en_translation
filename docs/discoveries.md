@@ -525,3 +525,28 @@ clone with only the three inputs linked. A copy of the references with one
 hash changed was reported as a mismatch.
 
 Reproduce: `research/experiments/EXP-0033/README.md`, "Procedure".
+
+## D-029 (M6): Nash's ending follows the partner fight and replays deterministically (`END-001`, `EXP-0034`)
+
+On the untouched image, with Nash and Ryu, beating Apocalypse leads to a
+win-quote screen and then a fight between the two team members, marked by
+a `⚠乱入禁止` ("no challengers") warning at the top right. Winning it as Nash
+plays Nash's ending:
+
+- six timed pages (1, 2, 1, 2, 1 and 2 lines of Japanese);
+- a picture window at the top and a purple box at the bottom;
+- Latin speaker labels above the box on pages 3-6 (`Nash`, `Nazo no koe`,
+  `Nash`, `Nash's friend`);
+- then an English staff roll and `GAME OVER`.
+
+Losing that fight (no input) gives `CONTINUE?` and `GAME OVER`, with no
+ending.
+
+**Evidence.** Two no-input replays from `local/checkpoints/end001/f00220064.mcs`
+(after the last hit, before `K.O.`) were pixel-identical to each other at
+all six pages and the first credits screen. The six page screenshots were
+also identical to the session's own, whole image, text box and picture.
+Which team member an ending follows in general is not settled (SUPPORTED
+only; `docs/known_unknowns.md`).
+
+Reproduce: `research/experiments/EXP-0034/README.md`, "Procedure".

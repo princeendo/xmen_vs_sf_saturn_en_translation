@@ -1634,3 +1634,49 @@ Written in `TASKS.md` (Phase K):
 
 The outline row `END-001` was replaced. The M7 and M8 rows are now
 `END-005` and `END-006`. No experiment was run.
+
+## 2026-10-29 — SESSION-0050: Nash's ending reached and inventoried (END-001, EXP-0034)
+
+User request (verbatim): "Start END-001: choose an ending and reach it."
+The user's choice (verbatim): "Nash (Recommended)". Nash is slot 16
+(`MC10`): 6 arcade English ending records, 6 after-table records.
+
+- **Session.** Cold boot of the untouched image (Track 01 `c904a386…`
+  checked), user playing, `tools.mednafen.session_recorder --state-interval 3
+  --keep-states 0`. 18:30-19:38 UTC, frames 134-229,689, 3,935 screenshots,
+  1,345 states (6.5 GB, all kept). The game sat on the pause screen for most
+  of the session while the user was away; the recorder did not stall.
+- **Finding the ending.** ffmpeg contact sheets (every 30th shot, then every
+  2nd over the end) and region hashes of the text box and picture window
+  per shot. Every cited screenshot was checked by the agent, the speaker
+  labels at 6× zoom.
+- **Route.** Pre-boss story line, Apocalypse (K.O. ~216,444), a black
+  screen with Nash and `⚠乱入禁止`, a win quote, then **Nash against Ryu**
+  (his partner). K.O. at 220,117. Ending pages 220,539-222,930, staff roll,
+  `GAME OVER`, initials, attract.
+- **Ending.** Six timed pages; Latin labels `Nash`, `Nazo no koe`, `Nash`,
+  `Nash's friend` on pages 3-6. Text not copied (rule 21).
+- **Mid-session note from the user** (verbatim): "It looks like, in the
+  top right, there's some sort of message with a warning indicator." It is
+  `⚠乱入禁止` ("no challengers"), already in the inventory; added to the
+  `UI-001` row.
+- **Repeatability.** `replay_ending.py` from `f00220064` (after the last
+  hit), two processes with `MEDNAFEN_ALLOWMULTI=1`: r1 = r2 at all 7
+  targets; the 6 pages equal the session's screenshots (image, box,
+  picture). The credits frame differs from the session by a ~3 px scroll
+  (same names); attributed to screenshot timing, not checked further.
+- **Partner fight lost.** From `f00217852` with no input for 9,000 frames:
+  Ryu wins, `CONTINUE?`, `GAME OVER`; no ending.
+- **Kept.** 12 checkpoints copied to `local/checkpoints/end001/` (hashes in
+  `EXP-0034`). The full session states remain in `local/end001/session/states`
+  (6.5 GB; about 12 GB free on the disk).
+- **Team rule.** Not separable in one run (Nash was first pick, point and
+  partner-fight winner); SUPPORTED only, left to `END-004`.
+
+Docs: `EXP-0034`, D-029, `docs/text_surfaces.md` (new section),
+`docs/known_unknowns.md` (4 new rows), `TASKS.md` (`END-001` DONE; `END-002`
+and `END-004` READY).
+
+Checks: `pytest` 167 passed; `ruff check`, `ruff format --check` and `mypy --strict tools tests` are clean; `mypy` on `replay_ending.py` is clean.
+
+Conclusion: `END-001` is `DONE` (**CONFIRMED**, D-029). Next: `END-002` and `END-004`.

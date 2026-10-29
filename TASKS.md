@@ -184,9 +184,19 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   (choose and reach an ending, user choice), `END-002` (how it is drawn),
   `END-003` (where it lives), `END-004` (arcade English and indexing). The
   M7 and M8 outline rows are renumbered `END-005` and `END-006`.
-- Next: `END-001` (ready). The backlog also holds `UI-004` (cart warning),
-  `SPECIAL-001` (including Apocalypse's pre-fight line) and `REL-001`
-  (release patches).
+- **2026-10-29** (`SESSION-0050`, `EXP-0034`): the user chose Nash's
+  ending ("Nash (Recommended)") and reached it on the untouched image. After
+  Apocalypse the two team members fight; winning it as Nash gives six timed
+  Japanese pages with Latin speaker labels, then an English staff roll.
+  The ending replays pixel-identically from a checkpoint after the last hit
+  with no input; losing the partner fight gives no ending (`END-001`,
+  D-029). New surfaces: the pre-boss story line, the post-Apocalypse win
+  quote, the `⚠乱入禁止` ("no challengers") warning (the user spotted it),
+  the ending pages and labels, and one Japanese line in the QSound notice
+  (`docs/text_surfaces.md`).
+- Next: `END-002` and `END-004` (both ready, independent), then `END-003`.
+  The backlog also holds `UI-004` (cart warning), `SPECIAL-001` (including
+  Apocalypse's pre-fight line) and `REL-001` (release patches).
 
 ## Milestones
 
@@ -1346,16 +1356,19 @@ Known before M6 (each is at most SUPPORTED for the Saturn's endings):
   the endings is a HYPOTHESIS.
 - **`MCED.SHP`** (`EXP-0029`) holds no quote or ending record. Its name may
   suggest "ending", but that is not evidence.
-- **Reach:** no Saturn ending has been reached. The `RE-010` play session
-  kept states from the Apocalypse fight (`local/re010/session/states`,
-  frames 57999-63975, roster image).
+- **Reach** (`EXP-0034`, D-029): Nash's ending (chosen by the user: "Nash
+  (Recommended)") is reached by winning the fight between the two team
+  members after Apocalypse. It is six timed pages, with Latin speaker labels
+  on pages 3-6, and replays pixel-identically from
+  `local/checkpoints/end001/f00220064.mcs` with no input. Losing that
+  fight gives no ending. Whose ending plays in general is SUPPORTED only.
 
 ### END-001 - Choose an ending and reach it
 
-- **Status:** `READY`
+- **Status:** `DONE` (`EXP-0034`, D-029)
 - **Milestone:** M6
 - **Dependencies:** RE-011 (done).
-- **Blockers:** None; the choice is the user's.
+- **Blockers:** None.
 - **Objective:** With the user, choose one ordinary character's ending.
   Reach it in a recorded session, keep checkpoints before and during it,
   and inventory every text surface it shows.
@@ -1389,10 +1402,10 @@ Known before M6 (each is at most SUPPORTED for the Saturn's endings):
 
 ### END-002 - How the ending text is drawn
 
-- **Status:** `BLOCKED`
+- **Status:** `READY`
 - **Milestone:** M6
 - **Dependencies:** END-001.
-- **Blockers:** The checkpoints.
+- **Blockers:** None; checkpoints are in `local/checkpoints/end001/` (`EXP-0034`).
 - **Objective:** Find which code, font and grid draw each Japanese ending
   surface from `END-001`.
 - **Acceptance criteria:**
@@ -1443,10 +1456,10 @@ Known before M6 (each is at most SUPPORTED for the Saturn's endings):
 
 ### END-004 - Arcade English and indexing for the ending
 
-- **Status:** `BLOCKED`
+- **Status:** `READY`
 - **Milestone:** M6
 - **Dependencies:** END-001.
-- **Blockers:** The chosen ending and its inventory.
+- **Blockers:** None; Nash's ending and its inventory are in `EXP-0034` and `docs/text_surfaces.md`.
 - **Objective:** Find which official English exists for each surface of
   the chosen ending, and how the arcade picks its records, so that each
   Saturn ending record can be paired with its English one by game logic.
@@ -1484,7 +1497,7 @@ for each is in `docs/playbook_from_mshvsf.md`.
 | END-006 | M8 | All roster endings; combined image with win quotes; coverage register; regression references. |
 | REL-001 | after M5 | Release patches (xdelta3 and SSP of the changed files) with a rebuild README; may be GitHub Release assets, never committed. Splice rather than re-compress changed streams to keep patches small. |
 | SPECIAL-001 | M9, user approval | Secret characters and bosses: which slots have their own official English and which reuse another's (slot 18); boss pre-fight text (Apocalypse's pre-fight line is captured, `docs/text_surfaces.md`); save- or progress-gated unlocks. Gouki's and Apocalypse's ordinary win quotes are in M5 (`RE-008`). |
-| UI-001 | after M8, user request | UI art: inventory English art already in every font before drawing anything; caption colour and style. |
+| UI-001 | after M8, user request | UI art: inventory English art already in every font before drawing anything; caption colour and style. Includes the `⚠乱入禁止` ("no challengers") sprite shown before and during the partner fight (spotted by the user, `EXP-0034`). |
 | UI-002 | after M8, user request | Attract-mode captions: which layer draws them, which container and codecs hold them, arcade and PS1 oracles. |
 | UI-003 | after M8, user request | Other UI text (continue screen, hints): find the arcade English by tracing the arcade code, not only by data search. |
 | UI-004 | user request (2026-10-29); order not yet set | The 4 MB RAM cart warning shown when the game boots without the cart (seen in `EXP-0002`, Japanese): capture it, find where its text and art live (disc, BIOS or code) and how it is drawn, look for an official English source, and translate it. With no official English, the policy's recorded new translation applies, approved by the user. |

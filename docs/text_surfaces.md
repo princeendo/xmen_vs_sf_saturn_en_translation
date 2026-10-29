@@ -16,6 +16,27 @@ into this repository; short descriptions only.
 | Continue hints | `CONTINUE?` countdown (English art) with a boxed two-line Japanese gameplay tip below; tips include inline arrow icons | Continue screen after a lost match; the tip differed between the two continues | `f00016985.png` `a62c0cb9…19f0`; `f00024184.png` `3acb5a7f…1ad8` | **Yes, observed.** 23 English hint records (`EXP-0008`); the US arcade draws them as two-line pages (`EXP-0009`). Two match the Saturn hints seen here in content. |
 | Boss pre-fight line (Apocalypse) | Two-line Japanese box at the top of the screen, over the stage, before Apocalypse transforms | Start of the final stage, before the fight (`EXP-0032` play session) | `f00058252.png` `5a42fbbf…2fa8` (frames 58,191-58,366, `local/re010/session`) | **UNKNOWN**; not yet looked for (`SPECIAL-001`) |
 
+## Nash's Ending and the Run-Up to It (`END-001`, `EXP-0034`)
+
+From the `END-001` session (2026-10-29 18:30-19:38 UTC, untouched image,
+Nash and Ryu, `local/end001/session/shots/`). After Apocalypse, the two team
+members fight each other; Nash's ending follows the player's win in that
+fight. Every screenshot was checked by the agent.
+
+| Surface | Screen | Frames | Sample (frame, SHA-256) | Japanese? |
+| --- | --- | --- | --- | --- |
+| Pre-boss story line | Win-quote layout (team portraits, bubble), two lines | ~210,184 | `f00210184.png` `4cfcc72e…68cd` | Yes |
+| Post-Apocalypse win quote | Win-quote layout, two lines | ~217,028-217,265 | `f00217153.png` `f18a8c3c…919b` | Yes |
+| "No challengers" warning | `⚠乱入禁止` sprite at top right, from the black pre-fight screen through the partner fight and its continue screen | ~216,914 to the end of the partner fight | `f00216914.png` `67335bfd…a64f`; in the fight `f00219310.png` `2f7e6207…8da8` | Yes |
+| **Ending pages** | Six timed pages: picture window at top centre (black on pages 1, 2, 5), purple box at the bottom with 1-2 lines; full-width Japanese font | 220,539-222,930 | Page 1 `f00220654.png` `9d66b488…ddbd`; 2 `f00220887.png` `361438a2…48f6`; 3 `f00221112.png` `4c3ef8e4…3d8e`; 4 `f00221342.png` `388c0716…8dcc`; 5 `f00221690.png` `78a2207a…91df`; 6 `f00222037.png` `ab2f6006…fa94` | Yes |
+| Ending speaker labels | Small Latin label above the box on pages 3-6: `Nash`, `Nazo no koe`, `Nash`, `Nash's friend` | 221,112-222,930 | as pages 3-6 | Latin letters; `Nazo no koe` is romanized Japanese ("mysterious voice") |
+| QSound notice | Under `Presented by CAPCOM`: English notice plus one Japanese trademark line | ~226,838-226,953 | `f00226838.png` `fc75088a…b047` | One line |
+
+Already English here: the staff roll (~222,981-226,589), `THANK YOU FOR
+PLAYING / PRESENTED BY CAPCOM`, `GAME OVER`, initials entry and score
+ranking. Pages and line counts: 1, 2, 1, 2, 1, 2 lines. Arcade English for
+these surfaces is `END-004`.
+
 ## Surfaces Already In English (no Japanese seen)
 
 Saturn BIOS and SEGA licence screens; Capcom logo; `NOW LOADING`; attract demo
@@ -28,7 +49,7 @@ names; fight HUD and callouts (`FIGHT!`, `FIRST ATTACK`, hit counts, `K.O.`,
 
 ## Not Reached In This Session
 
-Endings and any story or pre-fight text; boss and secret-character text;
+Endings other than Nash's (reached in `EXP-0034`, above); boss and secret-character text;
 versus mode screens; options sub-screens (button config, sound test, other
 values); save/backup messages; the cart-missing warning (Japanese, seen in
 `EXP-0002`); rare or region-gated text. Each needs its own capture before it
