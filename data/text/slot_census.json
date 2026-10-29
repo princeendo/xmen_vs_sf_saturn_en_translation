@@ -1,0 +1,594 @@
+{
+ "program": {
+  "path": "local/ref003/xmvsfu-68k.bin",
+  "sha256": "1b1a5a26bb0dcd38ebfd8f3360b4824309e28c5e99441119d8dd9060ea0c2dd1"
+ },
+ "slots": [
+  {
+   "slot": 0,
+   "name_list": "Wolverine",
+   "japanese_pointer": "0x17e3fc",
+   "japanese_alias_of": null,
+   "english_pointer": "0x186ea2",
+   "english_alias_of": null,
+   "english_records": 9,
+   "saturn_file": [
+    "MC00.SHP;1"
+   ]
+  },
+  {
+   "slot": 1,
+   "name_list": "Cyclops",
+   "japanese_pointer": "0x17e8bc",
+   "japanese_alias_of": null,
+   "english_pointer": "0x187226",
+   "english_alias_of": null,
+   "english_records": 9,
+   "saturn_file": [
+    "MC01.SHP;1"
+   ]
+  },
+  {
+   "slot": 2,
+   "name_list": "Storm",
+   "japanese_pointer": "0x17ed7c",
+   "japanese_alias_of": null,
+   "english_pointer": "0x1875aa",
+   "english_alias_of": null,
+   "english_records": 9,
+   "saturn_file": [
+    "MC02.SHP;1"
+   ]
+  },
+  {
+   "slot": 3,
+   "name_list": "Rogue",
+   "japanese_pointer": "0x17f23c",
+   "japanese_alias_of": null,
+   "english_pointer": "0x18792e",
+   "english_alias_of": null,
+   "english_records": 9,
+   "saturn_file": [
+    "MC03.SHP;1"
+   ]
+  },
+  {
+   "slot": 4,
+   "name_list": "Gambit",
+   "japanese_pointer": "0x17f6fc",
+   "japanese_alias_of": null,
+   "english_pointer": "0x187cb2",
+   "english_alias_of": null,
+   "english_records": 9,
+   "saturn_file": [
+    "MC04.SHP;1"
+   ]
+  },
+  {
+   "slot": 5,
+   "name_list": "Sabretooth",
+   "japanese_pointer": "0x17fbbc",
+   "japanese_alias_of": null,
+   "english_pointer": "0x188036",
+   "english_alias_of": null,
+   "english_records": 9,
+   "saturn_file": [
+    "MC05.SHP;1"
+   ]
+  },
+  {
+   "slot": 6,
+   "name_list": "Juggernaut",
+   "japanese_pointer": "0x18007c",
+   "japanese_alias_of": null,
+   "english_pointer": "0x1883ba",
+   "english_alias_of": null,
+   "english_records": 9,
+   "saturn_file": [
+    "MC06.SHP;1"
+   ]
+  },
+  {
+   "slot": 7,
+   "name_list": "Magneto",
+   "japanese_pointer": "0x18053c",
+   "japanese_alias_of": null,
+   "english_pointer": "0x18873e",
+   "english_alias_of": null,
+   "english_records": 9,
+   "saturn_file": [
+    "MC07.SHP;1"
+   ]
+  },
+  {
+   "slot": 8,
+   "name_list": "Apocalypse",
+   "japanese_pointer": "0x1809fc",
+   "japanese_alias_of": null,
+   "english_pointer": "0x188ac2",
+   "english_alias_of": null,
+   "english_records": 8,
+   "saturn_file": [
+    "MC08.SHP;1"
+   ]
+  },
+  {
+   "slot": 9,
+   "name_list": "Ryu",
+   "japanese_pointer": "0x180ebc",
+   "japanese_alias_of": null,
+   "english_pointer": "0x188de2",
+   "english_alias_of": null,
+   "english_records": 9,
+   "saturn_file": [
+    "MC09.SHP;1"
+   ]
+  },
+  {
+   "slot": 10,
+   "name_list": "Ken",
+   "japanese_pointer": "0x18137c",
+   "japanese_alias_of": null,
+   "english_pointer": "0x189166",
+   "english_alias_of": null,
+   "english_records": 9,
+   "saturn_file": [
+    "MC0A.SHP;1"
+   ]
+  },
+  {
+   "slot": 11,
+   "name_list": "Chun-Li",
+   "japanese_pointer": "0x18183c",
+   "japanese_alias_of": null,
+   "english_pointer": "0x1894ea",
+   "english_alias_of": null,
+   "english_records": 9,
+   "saturn_file": [
+    "MC0B.SHP;1"
+   ]
+  },
+  {
+   "slot": 12,
+   "name_list": "Dhalsim",
+   "japanese_pointer": "0x181cfc",
+   "japanese_alias_of": null,
+   "english_pointer": "0x18986e",
+   "english_alias_of": null,
+   "english_records": 9,
+   "saturn_file": [
+    "MC0C.SHP;1"
+   ]
+  },
+  {
+   "slot": 13,
+   "name_list": "Zangief",
+   "japanese_pointer": "0x1821bc",
+   "japanese_alias_of": null,
+   "english_pointer": "0x189bf2",
+   "english_alias_of": null,
+   "english_records": 9,
+   "saturn_file": [
+    "MC0D.SHP;1"
+   ]
+  },
+  {
+   "slot": 14,
+   "name_list": "Vega",
+   "japanese_pointer": "0x18267c",
+   "japanese_alias_of": null,
+   "english_pointer": "0x189f76",
+   "english_alias_of": null,
+   "english_records": 9,
+   "saturn_file": [
+    "MC0E.SHP;1"
+   ]
+  },
+  {
+   "slot": 15,
+   "name_list": "Gouki",
+   "japanese_pointer": "0x182ffc",
+   "japanese_alias_of": null,
+   "english_pointer": "0x18a2fa",
+   "english_alias_of": null,
+   "english_records": 9,
+   "saturn_file": [
+    "MC0F.SHP;1"
+   ]
+  },
+  {
+   "slot": 16,
+   "name_list": "Nash",
+   "japanese_pointer": "0x182b3c",
+   "japanese_alias_of": null,
+   "english_pointer": "0x18a67e",
+   "english_alias_of": null,
+   "english_records": 9,
+   "saturn_file": [
+    "MC10.SHP;1"
+   ]
+  },
+  {
+   "slot": 17,
+   "name_list": "Cammy",
+   "japanese_pointer": "0x1834bc",
+   "japanese_alias_of": null,
+   "english_pointer": "0x18aa02",
+   "english_alias_of": null,
+   "english_records": 9,
+   "saturn_file": [
+    "MC11.SHP;1"
+   ]
+  },
+  {
+   "slot": 18,
+   "name_list": "Bison",
+   "japanese_pointer": "0x18183c",
+   "japanese_alias_of": 11,
+   "english_pointer": "0x1894ea",
+   "english_alias_of": 11,
+   "english_records": 9,
+   "saturn_file": [
+    "MC0B.SHP;1"
+   ]
+  }
+ ],
+ "files": [
+  {
+   "file": "MC00.SHP;1",
+   "size": 31838,
+   "sectors": 16,
+   "sha256": "ddb15a14f186818d5e9495ea7d7bbc630e8f1357350aa4f62a75cd9a9076ddd1",
+   "decodes": true,
+   "stream_bytes": 31838,
+   "ends_in_last_sector": true,
+   "decoded_size": 64736,
+   "decoded_sha256": "27e31389971b45a628ab2fedad06b40b4d18b752615dfda3ce98b182cfab2b94",
+   "quote_tables": [
+    {
+     "slot": 0,
+     "offset": "0x393c",
+     "ending_records_after": 7,
+     "bytes_after_endings": 48336
+    }
+   ]
+  },
+  {
+   "file": "MC01.SHP;1",
+   "size": 35411,
+   "sectors": 18,
+   "sha256": "9771d3caae8553c5d597b4e32329c67bcad51dda9318f3ceb70a1b76a3076f86",
+   "decodes": true,
+   "stream_bytes": 35411,
+   "ends_in_last_sector": true,
+   "decoded_size": 68924,
+   "decoded_sha256": "a9c9ce51ca74b2b862efe0bfc502c3031445e424f48c736c1da263e6c842066b",
+   "quote_tables": [
+    {
+     "slot": 1,
+     "offset": "0x3c60",
+     "ending_records_after": 7,
+     "bytes_after_endings": 51720
+    }
+   ]
+  },
+  {
+   "file": "MC02.SHP;1",
+   "size": 28822,
+   "sectors": 15,
+   "sha256": "8db32588b04eadb38b56f2abade9b9af1870bf81fad01bcfc411a9e42c1dbc3c",
+   "decodes": true,
+   "stream_bytes": 28822,
+   "ends_in_last_sector": true,
+   "decoded_size": 56656,
+   "decoded_sha256": "49a4db306c4f3e7c40ff36ff3abdaaac8c27ab1a0ef29a8edcde0ee0fccb0c6a",
+   "quote_tables": [
+    {
+     "slot": 2,
+     "offset": "0x40d4",
+     "ending_records_after": 7,
+     "bytes_after_endings": 38312
+    }
+   ]
+  },
+  {
+   "file": "MC03.SHP;1",
+   "size": 33591,
+   "sectors": 17,
+   "sha256": "00ec33f91d5d2bc408faa59e5b4d02b6744da71124047b512904865bc710281a",
+   "decodes": true,
+   "stream_bytes": 33591,
+   "ends_in_last_sector": true,
+   "decoded_size": 69136,
+   "decoded_sha256": "f9b163e847116dee5a83671ebb483c54990cd535fa1d2aa77605e8d85476a711",
+   "quote_tables": [
+    {
+     "slot": 3,
+     "offset": "0x3f94",
+     "ending_records_after": 8,
+     "bytes_after_endings": 51036
+    }
+   ]
+  },
+  {
+   "file": "MC04.SHP;1",
+   "size": 29086,
+   "sectors": 15,
+   "sha256": "92aaf5c838c28faf54acc5b9a3ccb6c4e8842c4a777d51c90fa47d7e9148fdd5",
+   "decodes": true,
+   "stream_bytes": 29086,
+   "ends_in_last_sector": true,
+   "decoded_size": 57384,
+   "decoded_sha256": "ed5aa60c507e955c662f7c5d6589e5f7a870dac27e0d94f2349682e5ec4eed3f",
+   "quote_tables": [
+    {
+     "slot": 4,
+     "offset": "0x34b4",
+     "ending_records_after": 6,
+     "bytes_after_endings": 42220
+    }
+   ]
+  },
+  {
+   "file": "MC05.SHP;1",
+   "size": 28746,
+   "sectors": 15,
+   "sha256": "037c77981bbadb896ee65064ae54c9d1afdbf63f87827a169be8bbc11fa5e6b1",
+   "decodes": true,
+   "stream_bytes": 28746,
+   "ends_in_last_sector": true,
+   "decoded_size": 58732,
+   "decoded_sha256": "3f2bef9ef556077c5a8173dd17b323f403cce0cb9aacb459de4facd0ff708077",
+   "quote_tables": [
+    {
+     "slot": 5,
+     "offset": "0x3460",
+     "ending_records_after": 4,
+     "bytes_after_endings": 43804
+    }
+   ]
+  },
+  {
+   "file": "MC06.SHP;1",
+   "size": 28820,
+   "sectors": 15,
+   "sha256": "d5b65a94167631532bb8af93a8c1dc2718587eaaffdd643624fcd3885ec88948",
+   "decodes": true,
+   "stream_bytes": 28820,
+   "ends_in_last_sector": true,
+   "decoded_size": 55276,
+   "decoded_sha256": "851479ed0490370530a35eec0a579e29c6fe2b96141f16d935bade97ab18018d",
+   "quote_tables": [
+    {
+     "slot": 6,
+     "offset": "0x3438",
+     "ending_records_after": 9,
+     "bytes_after_endings": 40008
+    }
+   ]
+  },
+  {
+   "file": "MC07.SHP;1",
+   "size": 34961,
+   "sectors": 18,
+   "sha256": "609d29dec21ede7730ea030382902e39aa2d4d6982591117cebb4a7900274d08",
+   "decodes": true,
+   "stream_bytes": 34961,
+   "ends_in_last_sector": true,
+   "decoded_size": 67556,
+   "decoded_sha256": "b26de1ece819876d34b85e9c063838c089f52fe78f58c8a7a6fbdb3294644162",
+   "quote_tables": [
+    {
+     "slot": 7,
+     "offset": "0x447c",
+     "ending_records_after": 4,
+     "bytes_after_endings": 48504
+    }
+   ]
+  },
+  {
+   "file": "MC08.SHP;1",
+   "size": 29667,
+   "sectors": 15,
+   "sha256": "4a5b6033eb77898cfa299caca6b9f3b2235a3ffc31521fa7d66b12f49fbe6f1f",
+   "decodes": true,
+   "stream_bytes": 29667,
+   "ends_in_last_sector": true,
+   "decoded_size": 61944,
+   "decoded_sha256": "18b3c5996fdb1be80eb2be43fccd7c2ae37dd3221d02fabc0f65374df1940b35",
+   "quote_tables": [
+    {
+     "slot": 8,
+     "offset": "0xaa0",
+     "ending_records_after": 4,
+     "bytes_after_endings": 57704
+    }
+   ]
+  },
+  {
+   "file": "MC09.SHP;1",
+   "size": 20686,
+   "sectors": 11,
+   "sha256": "e9a5605b333c0cc311458fe225a7812b30c3223237a6f4c69e1e65397de1641a",
+   "decodes": true,
+   "stream_bytes": 20686,
+   "ends_in_last_sector": true,
+   "decoded_size": 43064,
+   "decoded_sha256": "9af0c678816f34829524bd795f40adbe5f69e9cdf5502d0615be3c90dc0ef273",
+   "quote_tables": [
+    {
+     "slot": 9,
+     "offset": "0x25d8",
+     "ending_records_after": 6,
+     "bytes_after_endings": 31704
+    }
+   ]
+  },
+  {
+   "file": "MC0A.SHP;1",
+   "size": 23258,
+   "sectors": 12,
+   "sha256": "d85edd6a8a7705ce5b156cfc5315c462be37911a1d86d7df384f3a9612f3da88",
+   "decodes": true,
+   "stream_bytes": 23258,
+   "ends_in_last_sector": true,
+   "decoded_size": 48060,
+   "decoded_sha256": "82483f85fb77191c5182b34ee120e440759bb41677203f81cbd6f1ae20d27da6",
+   "quote_tables": [
+    {
+     "slot": 10,
+     "offset": "0x2a4c",
+     "ending_records_after": 5,
+     "bytes_after_endings": 35636
+    }
+   ]
+  },
+  {
+   "file": "MC0B.SHP;1",
+   "size": 33270,
+   "sectors": 17,
+   "sha256": "ad5c8e118697fce5cd184ef1c6976a8828f7578904dfb14420bbbae4b25b2b9c",
+   "decodes": true,
+   "stream_bytes": 33270,
+   "ends_in_last_sector": true,
+   "decoded_size": 66840,
+   "decoded_sha256": "0cb5233ec11eafc0fe7b1f5e1fefa613ce366172a1f0f8da57ba0c1976a007f0",
+   "quote_tables": [
+    {
+     "slot": 11,
+     "offset": "0x349c",
+     "ending_records_after": 7,
+     "bytes_after_endings": 51624
+    }
+   ]
+  },
+  {
+   "file": "MC0C.SHP;1",
+   "size": 27001,
+   "sectors": 14,
+   "sha256": "08c15429b8e84171489b887d73fb178beef86b0e88d0c9a45c5f4a686b90f086",
+   "decodes": true,
+   "stream_bytes": 27001,
+   "ends_in_last_sector": true,
+   "decoded_size": 54380,
+   "decoded_sha256": "3fcd1dd2e942a8bc3dcdec9241bdadd1b26c05bada04ffe696a1404040c27da7",
+   "quote_tables": [
+    {
+     "slot": 12,
+     "offset": "0x3048",
+     "ending_records_after": 4,
+     "bytes_after_endings": 40500
+    }
+   ]
+  },
+  {
+   "file": "MC0D.SHP;1",
+   "size": 28016,
+   "sectors": 14,
+   "sha256": "1a457e5660cdfc0fe6d145faa174c544a86d0b5a6be45580d534f16aa37ae23b",
+   "decodes": true,
+   "stream_bytes": 28016,
+   "ends_in_last_sector": true,
+   "decoded_size": 58644,
+   "decoded_sha256": "c76b8cdad4dda2a4b6f1749ab9edd27e8fcae26da1882cbc6edca39b92121295",
+   "quote_tables": [
+    {
+     "slot": 13,
+     "offset": "0x2d68",
+     "ending_records_after": 4,
+     "bytes_after_endings": 45500
+    }
+   ]
+  },
+  {
+   "file": "MC0E.SHP;1",
+   "size": 24759,
+   "sectors": 13,
+   "sha256": "00f92c417485e0fe035de8ce19d6dcb586fc2ab5aea4058c5cb60b609e75e28c",
+   "decodes": true,
+   "stream_bytes": 24759,
+   "ends_in_last_sector": true,
+   "decoded_size": 56628,
+   "decoded_sha256": "022948e231e714e166a843f727030f12e7e12ad44733743a2b16a5069954eec6",
+   "quote_tables": [
+    {
+     "slot": 14,
+     "offset": "0x221c",
+     "ending_records_after": 4,
+     "bytes_after_endings": 46376
+    }
+   ]
+  },
+  {
+   "file": "MC0F.SHP;1",
+   "size": 25139,
+   "sectors": 13,
+   "sha256": "58049458ad54082c8397fbcb5e59b61fa0d5a2315b6380a693455f4242ccf520",
+   "decodes": true,
+   "stream_bytes": 25139,
+   "ends_in_last_sector": true,
+   "decoded_size": 52272,
+   "decoded_sha256": "6dccd392f39461aa7eb1a8c077c1a06c37b4d77eb440d9dcbd8e0e169f4caedd",
+   "quote_tables": [
+    {
+     "slot": 15,
+     "offset": "0x2e0c",
+     "ending_records_after": 4,
+     "bytes_after_endings": 38964
+    }
+   ]
+  },
+  {
+   "file": "MC10.SHP;1",
+   "size": 23913,
+   "sectors": 12,
+   "sha256": "07bbfb41caef2c2b935a7cbdf2cc5e82bde3fdbf3e7082efaac4f1ac0b33cee6",
+   "decodes": true,
+   "stream_bytes": 23913,
+   "ends_in_last_sector": true,
+   "decoded_size": 49232,
+   "decoded_sha256": "c98cc30b22966bebf79639879135c0878a63f5c2d4976d8396de65a83b17a991",
+   "quote_tables": [
+    {
+     "slot": 16,
+     "offset": "0x2a00",
+     "ending_records_after": 6,
+     "bytes_after_endings": 36808
+    }
+   ]
+  },
+  {
+   "file": "MC11.SHP;1",
+   "size": 28494,
+   "sectors": 14,
+   "sha256": "63e635e1f9eff34923da1a0a0d72ae3adb9365884b582ad04caca27f32b99f64",
+   "decodes": true,
+   "stream_bytes": 28494,
+   "ends_in_last_sector": true,
+   "decoded_size": 59512,
+   "decoded_sha256": "520310212da9e2fdffba296ffb9c931c7f47df5ee3c024c610277bf4cc41a843",
+   "quote_tables": [
+    {
+     "slot": 17,
+     "offset": "0x2f1c",
+     "ending_records_after": 12,
+     "bytes_after_endings": 45324
+    }
+   ]
+  },
+  {
+   "file": "MCED.SHP;1",
+   "size": 21203,
+   "sectors": 11,
+   "sha256": "aa10db67b5eefaf63af2026fbc38d9fb9c546c8b4b937e6b1124840dbe0744c6",
+   "decodes": true,
+   "stream_bytes": 21203,
+   "ends_in_last_sector": true,
+   "decoded_size": 39064,
+   "decoded_sha256": "1cba5403b0960b41f6591e59cddd2ab127fde2d5fbd2c6584832c57356aaae1b",
+   "quote_tables": [],
+   "single_record_hits": {},
+   "ending_record_runs": {}
+  }
+ ]
+}

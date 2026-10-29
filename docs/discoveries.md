@@ -423,3 +423,24 @@ speakers and continue hints stay Japanese.
   the continue hint were Japanese.
 
 Reproduce: `research/experiments/EXP-0028/README.md`, "Procedure".
+
+## D-024 (M5): `MCxx` holds arcade win-quote slot `xx` for slots 0-17 (`RE-005`, `EXP-0029`)
+
+Each of the 18 files `MC00.SHP`-`MC11.SHP` holds exactly one 16-record
+Japanese win-quote table, equal byte for byte to arcade slot `xx` (table
+`0x17E19C`). The table is followed by 4-12 of that slot's Japanese ending
+records. Offsets, sizes and counts are in `data/text/slot_census.json`.
+Arcade slots 0-17 have 9 English records each, except slot 8 (Apocalypse),
+which has 8. Slot 18 aliases slot 11 in both languages and has no file of
+its own. `MCED.SHP` holds no arcade quote or ending record.
+
+**Evidence.**
+
+- **Static census** of every file from the untouched track. Every stream
+  decodes and ends in its last sector.
+- **Load traces:** slots 9 (`EXP-0017`), 10 (`EXP-0025`) and 1 (Cyclops as
+  the second member: a loader halt at `0x0600D124` with R5 = `0x8A53`,
+  which is `MC01` only, at base `0x060B0000`). The Cyclops trace was
+  repeated identically, and its no-input control had no event.
+
+Reproduce: `research/experiments/EXP-0029/README.md`, "Procedure".

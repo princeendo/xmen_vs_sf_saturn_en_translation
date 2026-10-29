@@ -1362,3 +1362,39 @@ Written in `TASKS.md` (Phase J):
 | `RE-011` (regression references) | `BLOCKED` |
 
 The `RE-005` outline row was replaced. No experiment was run.
+
+## 2026-10-29 — SESSION-0042 / EXP-0029: census of the quote files (`RE-005`)
+
+User request (verbatim): "Start RE-005: census the quote files against the
+arcade slots."
+
+- **Census** (`census.py` to `data/text/slot_census.json`; a rerun is
+  byte-identical):
+  - Each of `MC00`-`MC11` holds one 16-record table, equal to arcade
+    Japanese slot `xx`. Then come 4-12 Japanese ending records (counted
+    only).
+  - Every stream ends in its last sector.
+  - English: 9 records per slot for slots 0-17, 8 for slot 8 (Apocalypse).
+    Slot 18 aliases slot 11 in both languages.
+- **Pitfall.** The first run labelled slot `s` with name-list entry `s`. The
+  list's first 32-byte entry is blank, so slot `s` is entry `s + 1`. Fixed;
+  the names then agree with every slot seen in play.
+- **`MCED`.** It holds no quote or ending record of any slot. A scan for
+  runs of text-like words (`0x0020` or `0x09E0`-`0x0DFF`, at least 38)
+  found three runs of 40-50 codes at `0x654E`-`0x66A1`. For comparison,
+  `MC09` and `MC08` each have one long run at their table. Not decoded.
+- **Live** (`catch_pick.py`, state 3193, cursor on Cyclops as Ken's
+  partner; range `0x060B3C60`-`0x060B4333` and the mirror):
+  - Control: no event.
+  - Trial and repeat: halt at `0x0600D124` (frames 308 and 315) with
+    identical registers. R5 = `0x8A53` (only `MC01` has this size), base
+    `0x060B0000`, R12 = `0x060B3C60`.
+  - In both dumps WRAM-H `0x060B0000`-`0x060B3C5F` equals decoded `MC01`.
+    The dumps differ in 6,252 bytes, none in the file.
+- **Mypy pitfall:** reusing `endings` for an int and a dict in `census.py`
+  failed strict typing; renamed.
+
+Checks: `pytest` 162 passed; `ruff check`, `ruff format --check`, `mypy`, and `mypy --strict` on the EXP-0029 scripts are clean.
+
+Conclusion: `RE-005` is `DONE` (**CONFIRMED**, D-024). `RE-008` (the roster
+decision) is `READY`.

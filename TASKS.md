@@ -152,7 +152,11 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   `RE-008` (roster and exceptions, a user decision), `PAIR-003` (pairing),
   `RE-009` (sector fit), a `GATE-TRANSLATION` extension, `RE-010` (roster
   image) and `RE-011` (regression references).
-- Next: `RE-005` (ready).
+- **2026-10-29** (`SESSION-0042`, `EXP-0029`): census done. `MCxx` holds
+  arcade slot `xx` for all 18 files `MC00`-`MC11`. A third load trace
+  (Cyclops, `MC01`, as second member) agrees. `MCED` and slot 18 (an alias
+  of Chun-Li's slot 11) are irregular (`RE-005`, D-024).
+- Next: `RE-008` (ready): the user chooses the M5 roster.
 
 ## Milestones
 
@@ -1009,7 +1013,7 @@ Known before M5:
 
 ### RE-005 - Census the quote files against the arcade slots
 
-- **Status:** `READY`
+- **Status:** `DONE` (2026-10-29, `SESSION-0042`, `EXP-0029`, D-024)
 - **Milestone:** M5
 - **Dependencies:** RE-007 (done).
 - **Blockers:** None.
@@ -1042,13 +1046,24 @@ Known before M5:
     only, no text (rule 21).
 - **Notes:** method from MSHvSF `RE-041` (`docs/playbook_from_mshvsf.md`,
   Phase 3). Its findings (18 ordinary files, 5 irregular) are not XvSF facts.
+- **Result:** every criterion met (`EXP-0029`, `data/text/slot_census.json`).
+  - `MC00`-`MC11` each hold exactly one 16-record table, equal to arcade
+    Japanese slot `xx`, followed by 4-12 ending records. All streams end in
+    their last sector.
+  - Slots 0-17 have 9 English records each, except slot 8 (Apocalypse),
+    which has 8.
+  - Live: picking Cyclops (second member) halted in the loader with R5 =
+    `0x8A53` (`MC01` only) at base `0x060B0000`. A repeat was identical, and
+    the control had no event.
+  - Irregular: `MCED` holds no quote or ending record (role unknown), and
+    slot 18 aliases slot 11 with no file of its own.
 
 ### RE-008 - Choose the M5 roster and its exceptions
 
-- **Status:** `BLOCKED`
+- **Status:** `READY`
 - **Milestone:** M5
-- **Dependencies:** RE-005.
-- **Blockers:** The census; then the user's decision.
+- **Dependencies:** RE-005 (done).
+- **Blockers:** None; the decision is the user's.
 - **Objective:** With the user, fix which characters M5 localizes. Record
   every excluded slot or file with its reason and evidence.
 - **Acceptance criteria:**
