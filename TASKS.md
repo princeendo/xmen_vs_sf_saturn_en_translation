@@ -127,7 +127,12 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   `RE-004` (choose and map the second character), `RE-006` (an English-slot
   table instead of one slot), `PAIR-002` (its pairing), a
   `GATE-TRANSLATION` extension, and `RE-007` (build both characters).
-- Next: `RE-004` (ready; it starts with the user choosing the character).
+- **2026-10-29** (`SESSION-0036`, `EXP-0025`): the user chose Ken. His
+  quotes load from `MC0A.SHP` (table offset `0x2A4C`) to WRAM-L
+  `0x0024FA4C` when he is first and WRAM-H `0x060B2A4C` when he is second.
+  The selector sees slot 10 (`0x0014`), and the table is the arcade
+  Japanese slot 10 (`RE-004`, D-020).
+- Next: `RE-006` and `PAIR-002` (both ready, independent of each other).
 
 ## Milestones
 
@@ -788,7 +793,7 @@ Endings, special characters and the rest of the roster stay out of scope
 
 ### RE-004 - Choose the second character and map its quote file
 
-- **Status:** `READY`
+- **Status:** `DONE`
 - **Milestone:** M4
 - **Dependencies:** RE-003 (done).
 - **Blockers:** None.
@@ -810,19 +815,29 @@ Endings, special characters and the rest of the roster stay out of scope
   - **Identity:** the Saturn table equals the arcade Japanese records for
     that slot, or the differences are recorded.
   - **Load addresses:** where the table loads is recorded both when the
-    character is the first team member and when it is the second. A
-    partner's file was seen at WRAM-H `0x060D5F94` (`EXP-0023`).
+    character is the first team member and when it is the second.
 - **Notes:**
-  - The user needs a recorded session with this character winning, for
-    checkpoints like `DBG-003`'s.
-  - Each MC file has its own table offset; Ryu's is `0x25D8`.
+  - Done 2026-10-29 (`EXP-0025`, D-020). The user chose **Ken** (arcade
+    slot 10; their answer: "Ken (Recommended)").
+  - Trace: a write breakpoint on Ken's table halted in the loader at
+    `0x0600D124` with file size `0x5ADA` (`MC0A.SHP` only). The control had
+    no hit, and a repeat was identical.
+  - Ken's table is at decompressed offset `0x2A4C`. It loads at WRAM-L
+    `0x0024FA4C` when Ken is first and at WRAM-H `0x060B2A4C` when he is
+    second (file bases `0x0024D000` and `0x060B0000`).
+  - The selector sees `@(6,gbr)` = `0x0014` (Ryu `0x0012`).
+  - Records 0-15 equal arcade Japanese slot 10, and 16-20 are his 5 ending
+    records (21 records against Ryu's 22).
+  - Correction: the earlier note here placed a partner's file at
+    `0x060D5F94`. That is Rogue's table in an opponent's file (base
+    `0x060D2000`); the second member's base is `0x060B0000`.
 
 ### RE-006 - Let the English mode cover a set of characters
 
-- **Status:** `BLOCKED`
+- **Status:** `READY`
 - **Milestone:** M4
-- **Dependencies:** RE-004.
-- **Blockers:** RE-004.
+- **Dependencies:** RE-004 (done).
+- **Blockers:** None.
 - **Objective:** Replace the single-slot test in `tools/disc/english_mode.py`
   (`slot × 2 == 18`) with a table of English slots. Adding a character is
   then a data change.
@@ -841,10 +856,10 @@ Endings, special characters and the rest of the roster stay out of scope
 
 ### PAIR-002 - Pair the second character's records with the arcade English
 
-- **Status:** `BLOCKED`
+- **Status:** `READY`
 - **Milestone:** M4
-- **Dependencies:** RE-004, PAIR-001 (done).
-- **Blockers:** RE-004.
+- **Dependencies:** RE-004 (done), PAIR-001 (done).
+- **Blockers:** None.
 - **Objective:** Confirm that the second character follows the same rule as
   Ryu (Saturn draw `r` shows English record `r mod 8`) and record its
   pairing table.
@@ -869,8 +884,8 @@ under `GATE-TRANSLATION` and in `docs/localization_policy.md`.
 
 - **Status:** `BLOCKED`
 - **Milestone:** M4
-- **Dependencies:** RE-004, RE-006, PAIR-002, the gate extension above.
-- **Blockers:** RE-004, RE-006, PAIR-002, the gate extension.
+- **Dependencies:** RE-004 (done), RE-006, PAIR-002, the gate extension above.
+- **Blockers:** RE-006, PAIR-002, the gate extension.
 - **Objective:** Generalize `tools/disc/build_english.py` to build several
   characters from their specs, and produce one image with both characters'
   English win quotes.

@@ -1182,3 +1182,36 @@ Written in `TASKS.md` (Phase I):
 | `RE-007` (generalized build of both characters, with live and play checks) | `BLOCKED` |
 
 The `RE-004` outline row was replaced. No experiment was run.
+
+## 2026-10-29 — SESSION-0036 / EXP-0025: Ken's quote file mapped (`RE-004`)
+
+User request (verbatim): "Start RE-004: choose the second character and map
+its quote file."
+
+- **Choice.** The arcade's 16-bit name list (`0x503E4`) gives the slot order.
+  The user picked from Ken, Wolverine, Cyclops and Zangief: "Ken
+  (Recommended)". Ken is slot 10, file `MC0A`, with 9 English records.
+- **Static prediction.** Decoded `MC0A.SHP` holds arcade Japanese slot 10
+  records 0-15 at `0x2A4C`, then 5 ending records.
+- **Session.** One user session of 186 states (`local/re004/session/`): Ken
+  and Cammy won, a reset, then Gouki and Ken. The first contact sheets were
+  misaligned by mixed image widths (330 and 352 px); rebuilt from per-image
+  scaled copies.
+- **Trace.**
+  - Control from state 2973: no hit.
+  - Trial: halted at `0x0600D124`, R12 = `0x0024FA4C`, R5 = `0x5ADA`
+    (`MC0A.SHP`).
+  - Repeat: registers and WRAM-L identical.
+- **File to RAM.** The decoded file plus 302 relocation fields
+  (+ base + `0x40`, 123 only 2-byte aligned). Ken's file is at
+  `0x0024D000` when he is first and at `0x060B0000` when he is second. A
+  recount of Ryu's file gives the same 259 fields as `EXP-0017`.
+- **Slot.** At `0x06066668` (unpatched): Ken `@(6,gbr)` = `0x0014` with
+  draw 14 (pointer `0x0024FE74`, as at the quote screen); Ryu `0x0012`.
+- **Disproven note.** `TASKS.md` placed a partner's file at `0x060D5F94`.
+  That is Rogue's record 0 in an opponent's file (base `0x060D2000`).
+  Opponents' files were at `0x060C1000` and `0x060D2000`.
+- **Not explained.** 8 bytes of Rogue's resident file; not pursued.
+
+Conclusion: `RE-004` is `DONE` (**CONFIRMED**, D-020). `RE-006` and
+`PAIR-002` are now `READY`.

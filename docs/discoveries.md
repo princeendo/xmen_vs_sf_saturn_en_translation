@@ -327,3 +327,30 @@ English record `draw mod 8`, which is the user's pairing.
 - Two cold-boot Ryu wins showed English.
 
 Reproduce: `research/experiments/EXP-0024/README.md`, "Procedure".
+
+## D-020 (M4): Ken's quotes come from `MC0A.SHP`; the selector sees slot 10 (`RE-004`, `EXP-0025`)
+
+When Ken is picked, the loader at `0x0600D124` decodes `MC0A.SHP` (23,258
+bytes) to file base WRAM-L `0x0024D000`. Ken's quote table is at decompressed
+offset `0x2A4C` (WRAM-L `0x0024FA4C`). When Ken is the second team member,
+the same file loads at WRAM-H `0x060B0000`, so the table is at `0x060B2A4C`.
+The table's records 0-15 are the arcade's Japanese win quotes for slot 10,
+byte for byte, and records 16-20 are his first 5 ending records. At the
+English-mode test site `0x06066668`, `@(6,gbr)` holds `0x0014` (slot 10 × 2)
+when Ken speaks.
+
+**Evidence.**
+
+- From a state with the cursor on Ken, a write breakpoint on the table did
+  not fire with no input. Pressing the pick button halted at `0x0600D124`
+  with R12 = `0x0024FA4C` and file size `0x5ADA`, which only `MC0A.SHP` has.
+  A repeat gave identical registers and RAM.
+- RAM equals the decoded file plus 302 relocation fields (+ base + `0x40`)
+  at both bases.
+- Ken's draw 14 gives the pointer read at the quote screen, `0x0024FE74`.
+- Ryu's reference state gave `0x0012` at the same halt.
+- File base `0x060B0000` held the second member's file in both sessions
+  (Gouki behind Ryu, Ken behind Gouki). Opponents' files were at
+  `0x060C1000` and `0x060D2000`.
+
+Reproduce: `research/experiments/EXP-0025/README.md`, "Procedure".
