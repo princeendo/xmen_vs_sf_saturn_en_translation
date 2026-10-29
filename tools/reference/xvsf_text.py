@@ -3,7 +3,9 @@
 The 68000 program region is rebuilt in memory from the set's zips (clone, then
 parent) using the pinned MAME driver definition; each 16-bit word is swapped
 into 68000 byte order. Nothing is written except the requested report, which
-contains game text and must go to an ignored local path.
+contains game text and must go to an ignored local path, and, with
+``--program-out``, the program image itself (game data, also ignored; the
+English build reads it, `RE-011`).
 
 Empirical character map (`EXP-0008`): a code is ``row_base[ascii >> 4] +
 (ascii & 0xF)``, the ASCII table laid out as a tile sheet, plus space
@@ -186,16 +188,27 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument(
         "--rompath", type=Path, required=True, help="folder with <set>.zip"
     )
+    parser.add_argument("--out", type=Path, help="JSON report (ignored path)")
     parser.add_argument(
-        "--out", type=Path, required=True, help="JSON report (ignored path)"
+        "--program-out",
+        type=Path,
+        help="also write the 68000-order program image here (ignored path)",
     )
     args = parser.parse_args(argv)
+    if args.out is None and args.program_out is None:
+        parser.error("give --out, --program-out or both")
     sets = parse_driver(args.driver.read_text())
     romset = sets[args.set_name]
     archives = [args.rompath / f"{args.set_name}.zip"]
     if romset.parent:
         archives.append(args.rompath / f"{romset.parent}.zip")
     image = build_program(archives, romset)
+    if args.program_out is not None:
+        args.program_out.parent.mkdir(parents=True, exist_ok=True)
+        args.program_out.write_bytes(image)
+        print(args.program_out, hashlib.sha256(image).hexdigest())
+        if args.out is None:
+            return 0
     report: dict[str, object] = {"set": args.set_name}
     for name, (table, start, end) in TABLES.items():
         slots = read_table(image, table, start, end)

@@ -1,0 +1,88 @@
+{
+ "description": "Confirmed English builds (RE-011). Each is rebuilt from the untouched source by tools.disc.regression and must give these hashes.",
+ "source_track01_sha256": "c904a38644964e91e6dc0ee93ea41e921ca673efe708a8e2658207c736bfda70",
+ "program": {
+  "path": "local/ref003/xmvsfu-68k.bin",
+  "sha256": "1b1a5a26bb0dcd38ebfd8f3360b4824309e28c5e99441119d8dd9060ea0c2dd1"
+ },
+ "references": [
+  {
+   "name": "ryu_v2",
+   "experiment": "EXP-0024",
+   "task": "RE-003",
+   "specs": [
+    "data/translations/ryu_win_quotes.json"
+   ],
+   "patch_version": 2,
+   "files": {
+    "MC09.SHP;1": "507b1f46484583ffc18a2f5cf0dd8a34d897b2449480cd03710984da710cb8d4",
+    "MMPACK.PCA;1": "9a7ab3e7e42cdf9bd2daf926acbf4724b2e2f22951312b8f97cb1412c742aab0"
+   },
+   "track01_sha256": "1034b8d73a4466418487b82b25be4ec9e663ec07af374aa9648897ba804a3eec"
+  },
+  {
+   "name": "ryu_ken_v3",
+   "experiment": "EXP-0028",
+   "task": "RE-007",
+   "specs": [
+    "data/translations/ryu_win_quotes.json",
+    "data/translations/ken_win_quotes.json"
+   ],
+   "patch_version": 3,
+   "files": {
+    "MC09.SHP;1": "507b1f46484583ffc18a2f5cf0dd8a34d897b2449480cd03710984da710cb8d4",
+    "MC0A.SHP;1": "585f9e99fbfabbf035375ebf82a74ef10b99c2ee887e18250859b2003c697a00",
+    "MMPACK.PCA;1": "6d7e50a011e9a0957713b34dc96d1fba454b8a52f1b522aed63112545d6f7700"
+   },
+   "track01_sha256": "b5dd07c2101ca10313cbf25a38dbe34aa416055f4b8bbe76d1dff7fb4af98d4c"
+  },
+  {
+   "name": "roster_v3",
+   "experiment": "EXP-0032",
+   "task": "RE-010",
+   "specs": [
+    "data/translations/wolverine_win_quotes.json",
+    "data/translations/cyclops_win_quotes.json",
+    "data/translations/storm_win_quotes.json",
+    "data/translations/rogue_win_quotes.json",
+    "data/translations/gambit_win_quotes.json",
+    "data/translations/sabretooth_win_quotes.json",
+    "data/translations/juggernaut_win_quotes.json",
+    "data/translations/magneto_win_quotes.json",
+    "data/translations/apocalypse_win_quotes.json",
+    "data/translations/ryu_win_quotes.json",
+    "data/translations/ken_win_quotes.json",
+    "data/translations/chun_li_win_quotes.json",
+    "data/translations/dhalsim_win_quotes.json",
+    "data/translations/zangief_win_quotes.json",
+    "data/translations/vega_win_quotes.json",
+    "data/translations/gouki_win_quotes.json",
+    "data/translations/nash_win_quotes.json",
+    "data/translations/cammy_win_quotes.json"
+   ],
+   "patch_version": 3,
+   "files": {
+    "MC00.SHP;1": "4310e357e2b3f354961a053efe9b13e6c5b53145d75df6eb77fd3be87d53d1ff",
+    "MC01.SHP;1": "0a9f633bc13f50df56bc2468cc1499f57c4abbcc6d4c5a43035e708fd9344a26",
+    "MC02.SHP;1": "b08caf807ec6746e2fdd6a6519797d036dcec7a28764540186e014d1812bcebe",
+    "MC03.SHP;1": "7142fd5fb990781a7d707749ed3bd3c4f50bf1cbb3fac1be4a677551fb237fe4",
+    "MC04.SHP;1": "55c1f8cee4beb0433f09568378c69b6bf3f8932ee0dce719b95f3bce5ad5fbb0",
+    "MC05.SHP;1": "1ca63d0a8a468f6e9c4bd6632f691083166a062949102d63a050bbf18bc260ab",
+    "MC06.SHP;1": "df72d759e6e00ce8245d447ea54c4d7543f1e93375a0dc828faaaee700081a94",
+    "MC07.SHP;1": "093bdd6fe6e8d1c0e1ea17d700b8dc67f8b579c060f5ab288ebc3d10ad00ab0a",
+    "MC08.SHP;1": "7bb06fec18b3e5cf16c67de0ab110c7346816053cc108f9e4e169453cca7cfbc",
+    "MC09.SHP;1": "507b1f46484583ffc18a2f5cf0dd8a34d897b2449480cd03710984da710cb8d4",
+    "MC0A.SHP;1": "585f9e99fbfabbf035375ebf82a74ef10b99c2ee887e18250859b2003c697a00",
+    "MC0B.SHP;1": "82dd72d1755b3ca0b929ca662bf831dc937abe9e66dee0687283779a8e53e7b7",
+    "MC0C.SHP;1": "c8ba22eb7285b3101b994c94fb52d1da8585e2863d8c7bfb451fbe3a8b74e8ca",
+    "MC0D.SHP;1": "3c2b90a9dd4c712fe4836acb9f28505336bde3ed68c77cb7826aab25c9b54069",
+    "MC0E.SHP;1": "1f0037f94ee8d941951b75a1ae48986e28ac0fb68ba464ca7c1bac781529ceb2",
+    "MC0F.SHP;1": "68ab8736e4ad0da34e3871b3c80d876fd66a84ff14d879d271a44430ef1ef9bb",
+    "MC10.SHP;1": "26c448cb800df31887ba66b10736c383c0bef00d8a46021c5b3d4bfa1fa1da85",
+    "MC11.SHP;1": "e6d4cc64d11486f2f8716da85e0c19fa4138c442d3e83c787dd744e0d332b6e8",
+    "MMPACK.PCA;1": "4e81b64f701510595cfbc0ea5ab41d19bd1fcba251179f777c4c2595bfb31858"
+   },
+   "track01_sha256": "36672c5d43946eab9d284b6b4b2f7162a39bcf2b205c02af5d68b33e6af18c3f"
+  }
+ ]
+}

@@ -15,6 +15,7 @@ from tools.reference.xvsf_text import (
     build_program,
     code_contexts,
     decode_codes,
+    main,
     read_record,
     read_table,
     unmapped,
@@ -94,3 +95,26 @@ def test_build_program_swaps_words_and_finds_relabelled_members(tmp_path: Path) 
         ],
     )
     assert build_program([clone], romset) == bytes([1, 0, 3, 2, 5, 4, 7, 6])
+
+
+def test_program_out_writes_the_swapped_image(tmp_path: Path) -> None:
+    data = bytes(range(8))
+    with zipfile.ZipFile(tmp_path / "game.zip", "w") as bundle:
+        bundle.writestr("prog.bin", data)
+    sha1 = hashlib.sha1(data).hexdigest()
+    driver = tmp_path / "cps2.cpp"
+    driver.write_text(
+        "ROM_START( game )\n"
+        'ROM_REGION( 0x8, "maincpu", 0 )\n'
+        f'ROM_LOAD16_WORD_SWAP( "prog.bin", 0x0, 0x8, CRC(00000000) SHA1({sha1}) )\n'
+        "ROM_END\n"
+    )
+    out = tmp_path / "program.bin"
+    args = ["--driver", str(driver), "--set", "game", "--rompath", str(tmp_path)]
+    assert main([*args, "--program-out", str(out)]) == 0
+    assert out.read_bytes() == bytes([1, 0, 3, 2, 5, 4, 7, 6])
+
+
+def test_main_needs_an_output(tmp_path: Path) -> None:
+    with pytest.raises(SystemExit):
+        main(["--driver", "x", "--rompath", str(tmp_path)])
