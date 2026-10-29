@@ -65,6 +65,24 @@ pair glyphs and found the game's own English mode, the user chose: "Use route
 win quotes use the arcade's own 2 × 25 layout, through a per-character code
 patch, with no font changes.
 
+**Nash's ending layout (2026-10-29, `LAYOUT-002`, `EXP-0039`).** The user
+was shown all six pages of two RAM trials side by side:
+
+- (a) the Saturn's own English scene script (`EXP-0038`);
+- (b) English text in the Japanese script.
+
+Asked "Which layout should Nash's English ending use?", they answered "(a)
+English layout (Recommended)". Asked "Which speaker names should the English
+ending show?", they answered "Arcade names (Recommended)".
+
+| Topic | Decision | Evidence |
+| --- | --- | --- |
+| Layout | The Saturn's English scene script for the ending: the arcade's scene breaks, pictures, page lengths and labels, with the arcade English records in the 2 × 25 grid | `EXP-0038`, `EXP-0039`, D-033 |
+| Labels | `Charlie` and `Charlie's friend`, as in the arcade (already in `MCED`'s label list); the American-names default | `EXP-0039`, `docs/names.md` |
+
+This decides layout only. Putting the official English on disc for Nash's
+ending still needs the `GATE-TRANSLATION` extension.
+
 ## Deferred Until Evidence Exists
 
 These MSHvSF decisions depend on facts not yet known for XvSF. Each is put to
@@ -73,7 +91,7 @@ the user when its task produces the evidence, with options and costs.
 | Topic | Decide when | MSHvSF choice, for reference |
 | --- | --- | --- |
 | Roster and exclusions | The file census is done (`RE-005`) | 17 characters first; specials later |
-| Ending dialogue layout | An ending is reached and its records are known (`END-001`) | Each English line whole, one block per speaker (`EXP-0045`) |
+| Ending layout for other characters | Each ending's English script is checked (M8); Nash's is decided above (`LAYOUT-002`) | Each English line whole, one block per speaker (`EXP-0045`) |
 | Caption font, style and colour | The caption renderer and font are known | Credits-font pairs, gold (`FONT-010`, `FONT-011`) |
 | Attract-caption style | Attract captions are found (`UI-002`) | Saturn win-banner letters, arcade wording and layout (`UI-003`) |
 | Per-option defaults (unlocks and similar) | Each option exists | Boss unlock on by default (`OPT-001`) |

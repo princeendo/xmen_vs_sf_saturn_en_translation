@@ -237,8 +237,13 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   With only the ending's own language reads set to English and a pointer
   to the six arcade records in RAM, the Saturn shows the arcade English
   ending page for page (`END-005`, D-033).
-- Next: `LAYOUT-002` (ready; the user's choice, after option (b)'s trial).
-  Backlog: `UI-004`, `SPECIAL-001`, `REL-001`.
+- **2026-10-29** (`SESSION-0057`, `EXP-0039`): option (b) (English text
+  in the Japanese script) was trialled in RAM next to option (a). The user
+  chose (a), the Saturn's English script, with the arcade labels `Charlie`
+  and `Charlie's friend` (`LAYOUT-002`).
+- Next: the `GATE-TRANSLATION` extension for Nash's ending (the user's
+  decision), then `END-006` and `END-007`. Backlog: `UI-004`,
+  `SPECIAL-001`, `REL-001`.
   The backlog also holds `UI-004` (boot-time error messages, including the
   cart warning), `SPECIAL-001` (including
   Apocalypse's pre-fight line) and `REL-001` (release patches).
@@ -1625,10 +1630,10 @@ Known before M7:
 
 ### LAYOUT-002 - Choose how Nash's ending shows English
 
-- **Status:** `READY`
+- **Status:** `DONE` (`EXP-0039`)
 - **Milestone:** M7
 - **Dependencies:** END-005.
-- **Blockers:** None. `EXP-0038` found the Saturn's own English script; option (a) already has its six RAM-trial pages (`local/end005/trial1`). Option (b) still needs its trial.
+- **Blockers:** None.
 - **Objective:** The user chooses the layout of the English ending from
   measured options, each with RAM-trial screenshots of all six pages.
 - **Acceptance criteria:**
@@ -1648,6 +1653,10 @@ Known before M7:
     the cost is measured.
   - **Recorded:** the user's choice, in their words, here and in
     `docs/localization_policy.md`.
+- **Decision (2026-10-29):** option (a), the Saturn's English scene
+  script, with the arcade labels. In the user's words: "(a) English layout
+  (Recommended)" and "Arcade names (Recommended)". Recorded in
+  `docs/localization_policy.md`; trials and costs in `EXP-0039`.
 
 ### GATE-TRANSLATION extension for Nash's ending
 

@@ -1894,3 +1894,25 @@ Checks: see below.
 Checks: `pytest` 167 passed; `ruff check`, `ruff format --check` and `mypy --strict tools tests` clean; `mypy --strict` on each EXP-0038 script clean (`MYPYPATH=research/experiments/EXP-0035`).
 
 Conclusion: `END-005` is `DONE` (**CONFIRMED**, D-033). `LAYOUT-002` is ready: the user chooses, after option (b) has its own RAM trial.
+
+## 2026-10-29 — SESSION-0057: Layout for Nash's English ending (LAYOUT-002, EXP-0039)
+
+User request (verbatim): "Start LAYOUT-002: choose how Nash's ending shows
+English."
+
+- **Option (b) trial:** `english_trial.py` gained `japanese-script`, which
+  leaves the `MCED` script reader at its original byte; 10 writes. The
+  English records ran on the Japanese timing (~4.3 s per page) under the
+  Japanese pictures and labels. Pages 3-5 mismatch: the scream under `Nazo
+  no koe`, and the dog-tag line labelled `Nash` over a black picture.
+- **Shown to the user:** a 2 × 6 comparison image of options (a) and (b)
+  (sent to the user, not committed).
+- **User answers** (verbatim): "(a) English layout (Recommended)";
+  "Arcade names (Recommended)". Recorded in `docs/localization_policy.md`
+  and under `LAYOUT-002`.
+
+`ruff check` and `mypy --strict` (`MYPYPATH=research/experiments/EXP-0035`)
+on the changed `english_trial.py` are clean.
+
+Conclusion: `LAYOUT-002` is `DONE`. Next: the `GATE-TRANSLATION` extension
+for Nash's ending.

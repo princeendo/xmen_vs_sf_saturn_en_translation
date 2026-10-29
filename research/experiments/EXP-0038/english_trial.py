@@ -2,7 +2,8 @@
 
 Run from the repository root:
 
-    ./invenv.sh python research/experiments/EXP-0038/english_trial.py OUT
+    ./invenv.sh python research/experiments/EXP-0038/english_trial.py \\
+        OUT [japanese-script]
 
 From ``f00220064.mcs`` (`EXP-0034`, after the partner fight's last hit), on
 the untouched image with no input, two runs:
@@ -22,6 +23,10 @@ the untouched image with no input, two runs:
   (``0x18D0AE`` + 100k, from the program image) are written. ``LIST`` and
   ``RECORDS`` lie in WRAM-L ``0x00259050``-``0x0025E3DF``, which is zero at
   the checkpoint, at page 1 and after the credits (``dump_ram.py``).
+
+With ``japanese-script`` (`LAYOUT-002` option (b)), the scene-script reader
+``0x060D4738`` is left alone, so the Japanese script (scenes, page lengths,
+labels, pictures) runs with the English records in the English grid.
 
 Every original byte is checked before it is written. Each run screenshots
 every ``STEP`` frames from ``FIRST`` to ``LAST``, with the quote pointer, and
@@ -61,18 +66,19 @@ POINTER = 0x060F2490
 FIRST, LAST, STEP = 220500, 223200, 30
 
 
-def changes(program: bytes) -> list[tuple[int, bytes, bytes]]:
+def changes(program: bytes, script: bool = True) -> list[tuple[int, bytes, bytes]]:
     english = program[EN_RECORDS : EN_RECORDS + EN_SIZE * COUNT]
     table = bytearray(4 * 19)
     table[4 * SLOT : 4 * SLOT + 4] = RECORDS.to_bytes(4, "big")
-    edits = [(a, READ, TWO) for a in (SCRIPT_READ, SELECTOR_READ, *RENDERER)]
+    reads = [SCRIPT_READ] if script else []
+    edits = [(a, READ, TWO) for a in (*reads, SELECTOR_READ, *RENDERER)]
     edits.append((LIST_POINTER, OLD_LIST, LIST.to_bytes(4, "big")))
     edits.append((LIST, bytes(len(table)), bytes(table)))
     edits.append((RECORDS, bytes(len(english)), english))
     return edits
 
 
-def main(out: Path) -> int:
+def main(out: Path, script: bool = True) -> int:
     out.mkdir(parents=True, exist_ok=False)
     configure()
     program = PROGRAM.read_bytes()
@@ -83,7 +89,7 @@ def main(out: Path) -> int:
         "MEDNAFEN_HOME": str(QUIET_HOME.resolve()),
         "MEDNAFEN_AGENT_DIR": str(agent_dir),
     }
-    result: dict[str, object] = {"state": str(STATE)}
+    result: dict[str, object] = {"state": str(STATE), "english_script": script}
     with (out / "mednafen.log").open("wb") as log:
         process = subprocess.Popen(
             [str(BINARY), str(IMAGE)], env=env, stdout=log, stderr=subprocess.STDOUT
@@ -106,7 +112,7 @@ def main(out: Path) -> int:
                 agent.pause()
                 written = []
                 if run == "english":
-                    for address, old, new in changes(program):
+                    for address, old, new in changes(program, script):
                         found = agent.bus_read(address, len(old))
                         if found != old:
                             raise RuntimeError(f"{address:#x}: {found.hex()}")
@@ -155,4 +161,5 @@ def main(out: Path) -> int:
 
 
 if __name__ == "__main__":
-    raise SystemExit(main(Path(sys.argv[1])))
+    script = not (len(sys.argv) > 2 and sys.argv[2] == "japanese-script")
+    raise SystemExit(main(Path(sys.argv[1]), script))
