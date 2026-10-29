@@ -114,7 +114,12 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   checked in MAME, and English record 8 is never chosen (`PAIR-001`, D-017).
 - **2026-10-28:** the user passed `GATE-TRANSLATION` for Ryu's win quotes
   (GO; pairing `k mod 8`; official arcade English, no rewording).
-- Next: `LAYOUT-001` (ready), then `RE-003`.
+- **2026-10-28** (`SESSION-0033`, `EXP-0023`): the user chose the game's own
+  English mode. A per-task patch in `MMPACK.PCA` plus Ryu's English records
+  in `MC09.SHP` show his win quotes in English (2 × 25) from a cold boot,
+  with other characters and hints unchanged. The first version broke other
+  characters' quotes; it was found in play and fixed (`LAYOUT-001`, D-018).
+- Next: `RE-003` (compiler, provenance, all 8 English records verified).
 
 ## Milestones
 
@@ -637,7 +642,7 @@ text (`EXP-0015`) and stay out of scope (rule 23).
 
 ### LAYOUT-001 - Choose how English quotes fit the quote box
 
-- **Status:** `READY`
+- **Status:** `DONE`
 - **Milestone:** M3
 - **Dependencies:** FONT-001, FONT-002, DISC-002 (done).
 - **Blockers:** None.
@@ -675,6 +680,17 @@ text (`EXP-0015`) and stay out of scope (rule 23).
     (MSHvSF `LAYOUT-001`, `FONT-003`). That is a HYPOTHESIS here.
   - The font passes through cart RAM, and a replayed state keeps its own copy
     (`EXP-0019`), so font tests must start from a cold boot.
+- **Evidence:** `EXP-0023`, D-018.
+  - Routes measured: (a) pair glyphs offline (113 glyphs for Ryu, 430 for
+    the roster, 409 free kanji codes), and (d) the native English mode found
+    and shown live.
+  - The user chose (d).
+  - The image was rebuilt from the untouched source (`MMPACK.PCA` patch +
+    `MC09.SHP` records); every sector is valid.
+  - Live RAM: 50/50 cells.
+  - Two user cold-boot play checks. The first found and rejected version 1;
+    the second confirmed version 2 (Ryu English; Wolverine's quote and the
+    hint Japanese, 38/38).
 
 ### PAIR-001 - Pair Ryu's Saturn records with the arcade English
 
@@ -715,10 +731,10 @@ text (`EXP-0015`) and stay out of scope (rule 23).
 
 ### RE-003 - Build all of Ryu's win quotes in English from the source image
 
-- **Status:** `BLOCKED`
+- **Status:** `READY`
 - **Milestone:** M3
 - **Dependencies:** GATE-TRANSLATION, LAYOUT-001, RE-002, PAIR-001, DISC-002.
-- **Blockers:** LAYOUT-001.
+- **Blockers:** None.
 - **Objective:** Compile each of Ryu's 16 win-quote records from its paired
   official English (the gate's policy), through the chosen layout route, into
   `MC09.SHP` (and `FIX.PRS` if the route needs it). Build the image from the

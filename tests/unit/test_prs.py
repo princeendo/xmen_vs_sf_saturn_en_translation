@@ -10,8 +10,10 @@ from tools.disc.prs import (
     compress,
     compress_file,
     decompress,
+    decompress_entries,
     decompress_file,
     main,
+    split_header,
 )
 
 # Control 0x93 (LSB first): literal A, literal B, short copy (n = 2: 4 bytes from
@@ -89,3 +91,34 @@ def test_compress_file_pads_and_reaches_min_end() -> None:
 def test_compress_file_refuses_oversize() -> None:
     with pytest.raises(PrsError, match="limit"):
         compress_file(sample(), size=10)
+
+
+def test_lazy_compress_round_trips() -> None:
+    data = sample()
+    stream = compress(data, lazy=True)
+    assert decompress(stream) == (data, len(stream))
+
+
+def test_multi_entry_header_round_trip() -> None:
+    data = sample()[:4000]
+    header = (
+        (2).to_bytes(4, "big")
+        + (0x06014000).to_bytes(4, "big")
+        + (1000 // 4).to_bytes(4, "big")
+        + (0x0601F000).to_bytes(4, "big")
+        + (3000 // 4).to_bytes(4, "big")
+    )
+    packed = compress_file(data, header=header, lazy=True)
+    assert split_header(packed) == (header, [(0x06014000, 1000), (0x0601F000, 3000)])
+    assert decompress_entries(packed) == (header, data, len(packed))
+
+
+def test_multi_entry_size_mismatch() -> None:
+    header = (1).to_bytes(4, "big") + bytes(4) + (8).to_bytes(4, "big")
+    with pytest.raises(PrsError, match="entries need"):
+        decompress_entries(header + STREAM)
+
+
+def test_implausible_count() -> None:
+    with pytest.raises(PrsError, match="implausible"):
+        split_header((1000).to_bytes(4, "big"))

@@ -1067,3 +1067,53 @@ wording) and `docs/localization_policy.md`.
 - **RE-003:** now blocked only by `LAYOUT-001`.
 
 No experiment was run and no files other than documentation changed.
+
+## 2026-10-28 — SESSION-0033 / EXP-0023: LAYOUT-001, the game's own English mode
+
+Task: LAYOUT-001 ("Start LAYOUT-001: choose how English quotes fit the quote box.")
+
+Actions and results:
+
+- **Renderer constants:** a nonzero language word gives a 12 px pitch and
+  25 cells. Setting both global words from `pre_ko` drew a 2 × 25 English
+  grid (`english_mode.py`).
+- **Readers:**
+  - The language word is read only by the quote code (14 sites).
+  - The size word is a mode word with 45 readers, some every frame.
+  - The code lives in `MMPACK.PCA`. The first catch attempt found
+    `OPENPACK.PCA` overwriting the region, not the code's own load.
+  - A raw and decoded search of every file found `MMPACK.PCA`.
+- **Route (a) measured offline:** a census found 409 unused kanji codes;
+  Ryu needs 113 pairs and the roster 430; a mock-up was rendered.
+- **User decision:** "Use route (d), the game's native English mode. Build
+  and test it from disc."
+- **Patch version 1:**
+  - A per-task flag (`+0x5C`) and renderer reads retargeted.
+  - **Mistake:** I first assumed the word at `0x06066A72` was padding; it is
+    a literal, caught by the originals check.
+  - Live RAM: 50/50 cells.
+  - Build: `prs.py` gained lazy matching and multi-entry support (greedy
+    `MMPACK.PCA` was 5 bytes too large).
+  - Image, cold-boot and pick checks passed.
+- **Play check 1 (user):** Ryu's quotes were English and the hint was
+  Japanese, but **Storm's quote was broken** (Japanese in the English grid).
+  Cause: version 1 switched every speaker. **DISPROVEN:** that the selector
+  change was safe for all characters.
+- **Version 2:** a slot test (Ryu only) in the same block, plus the unused
+  remap-table pointer.
+  - A forced slot by PC-breakpoint `onhit` did not take effect.
+  - The control instead came from the play session's Storm state: version 2
+    equals the unpatched code byte for byte, and version 1 reproduces the
+    defect.
+  - Rebuilt image `1034b8d7…`; cold-boot and pick checks passed.
+- **Play check 2 (user, version 2):** Ryu English; Wolverine's quote and the
+  continue hint Japanese, 38/38 cells from session states.
+- The version-1 image (`build/layout001_english`) was deleted, as announced.
+
+Checks: `./invenv.sh pytest -q` 138 passed; `ruff check`, `ruff format
+--check` and `mypy` clean (EXP-0023 scripts also `mypy --strict`). Source
+hashes unchanged.
+
+Conclusion: `LAYOUT-001` is `DONE` (**CONFIRMED**, D-018). `RE-003`'s
+blockers are cleared. Its core (Ryu's 8 English records from disc) already
+works; what remains is the compiler, provenance and full verification.

@@ -278,3 +278,34 @@ English record 2 and Japanese record 10, for r = 10. The table is in
 `data/translations/ryu_pairing.json`.
 
 Reproduce: `research/experiments/EXP-0022/README.md`, "Procedure".
+
+## D-018 (M3): The Saturn keeps the arcade's English quote mode; a patch enables it for Ryu (`LAYOUT-001`, `EXP-0023`)
+
+**The mode.** The Saturn quote renderer (`0x06066948`, in `MMPACK.PCA`) still
+has the arcade's English mode: 100-byte records drawn 2 × 25 at a 12 px pitch
+(color word `0x7000`). A nonzero language word selects it, but that word
+cannot be set globally: hints and endings share the renderer, and the
+neighbouring size word is a mode word read every frame.
+
+**The patch** (version 2), same-size changes in `MMPACK.PCA`:
+
+- When the speaker is Ryu, the win-quote selector sets task byte `+0x5C` and
+  uses index `r & 7`.
+- The renderer reads that byte instead of the global words.
+- Ryu's 8 official English records replace the start of his table in
+  `MC09.SHP`.
+
+The full table is in `research/experiments/EXP-0023/README.md`.
+
+**Evidence.**
+
+- From a cold boot of the rebuilt image, Ryu's win quotes showed in English
+  (two play checks).
+- Wolverine's quote and the continue hint drew in Japanese, 38/38 cells
+  each.
+- From one state, Storm's quote with version 2 was byte-identical to the
+  unpatched game.
+- Version 1, which had no slot test, drew other characters' Japanese in the
+  English grid. It was rejected.
+
+Reproduce: `research/experiments/EXP-0023/README.md`, "Procedure".

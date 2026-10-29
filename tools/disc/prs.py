@@ -15,11 +15,15 @@ The format is the one executed by the game's streaming decompressor at WRAM-H
 
 Copies may overlap their own output (run-length repeats). A file starts with a
 big-endian 32-bit entry count; for a count of 0 the single stream follows at
-offset 4 (`EXP-0017`). Files with a nonzero count are not handled.
+offset 4 (`EXP-0017`). A count n > 0 is followed by n (destination, size in
+longwords) pairs and then one stream holding all entries in order
+(``MMPACK.PCA``, `EXP-0023`); `decompress_entries` reads those.
 
-`compress` writes such a stream (greedy matching, offsets up to 0x1FFF back);
-`compress_file` adds the header and can pad the file to a fixed size, with
-leading literals added until the stream ends at or after ``min_end`` (`DISC-002`).
+`compress` writes such a stream (greedy matching, offsets up to 0x1FFF back;
+``lazy`` defers a match by one byte when the next position matches longer).
+`compress_file` adds the header (count 0, or a given multi-entry header) and
+can pad the file to a fixed size. Leading literals are added until the stream
+ends at or after ``min_end`` (`DISC-002`).
 """
 
 from __future__ import annotations
@@ -84,6 +88,30 @@ def decompress(data: bytes) -> tuple[bytes, int]:
             out.append(out[start + i])
 
 
+def split_header(data: bytes) -> tuple[bytes, list[tuple[int, int]]]:
+    """Return the header bytes and its (destination, size in bytes) entries."""
+    count = int.from_bytes(data[:4], "big")
+    if count > 64:
+        raise PrsError(f"entry count {count} is implausible")
+    entries = [
+        (
+            int.from_bytes(data[4 + 8 * i : 8 + 8 * i], "big"),
+            4 * int.from_bytes(data[8 + 8 * i : 12 + 8 * i], "big"),
+        )
+        for i in range(count)
+    ]
+    return data[: 4 + 8 * count], entries
+
+
+def decompress_entries(data: bytes) -> tuple[bytes, bytes, int]:
+    """Return (header, decoded stream, input bytes consumed) for any count."""
+    header, entries = split_header(data)
+    out, used = decompress(data[len(header) :])
+    if entries and len(out) != sum(size for _, size in entries):
+        raise PrsError(f"stream is {len(out)} bytes; the entries need another size")
+    return header, out, used + len(header)
+
+
 def decompress_file(data: bytes) -> tuple[bytes, int]:
     """Decompress a whole single-stream file (entry count 0)."""
     count = int.from_bytes(data[:4], "big")
@@ -128,7 +156,7 @@ def _longest(data: bytes, pos: int, chains: dict[bytes, list[int]]) -> tuple[int
     return best_size, best_offset
 
 
-def compress(data: bytes, literals: int = 0) -> bytes:
+def compress(data: bytes, literals: int = 0, lazy: bool = False) -> bytes:
     """Return a stream that `decompress` turns back into ``data``.
 
     The first ``literals`` bytes are always written as literals.
@@ -147,6 +175,10 @@ def compress(data: bytes, literals: int = 0) -> bytes:
 
     while pos < len(data):
         size, offset = (0, 0) if pos < literals else _longest(data, pos, chains)
+        if lazy and 2 <= size < MAX_LENGTH and pos + 1 < len(data):
+            index(pos + 1)
+            if _longest(data, pos + 1, chains)[0] > size:
+                size = 0
         short = size >= 2 and offset >= -0x100 and size <= 5
         if size < 2 or (size == 2 and not short):
             writer.bit(1)
@@ -175,15 +207,21 @@ def compress(data: bytes, literals: int = 0) -> bytes:
     return bytes(out)
 
 
-def compress_file(data: bytes, size: int | None = None, min_end: int = 0) -> bytes:
-    """Return a whole file (count 0 + stream), zero-padded to ``size`` if given.
+def compress_file(
+    data: bytes,
+    size: int | None = None,
+    min_end: int = 0,
+    header: bytes = bytes(4),
+    lazy: bool = False,
+) -> bytes:
+    """Return a whole file (header + stream), zero-padded to ``size`` if given.
 
     Leading literals are added until the stream (with its header) ends at or
     after ``min_end`` bytes.
     """
     literals = 0
     while True:
-        body = bytes(4) + compress(data, literals)
+        body = header + compress(data, literals, lazy)
         if len(body) >= min_end or literals >= len(data):
             break
         literals += max(1, (min_end - len(body)) * 8 // 9)

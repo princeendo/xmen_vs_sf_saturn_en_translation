@@ -36,6 +36,12 @@ user passed `GATE-TRANSLATION`: "GATE-TRANSLATION: go for Ryu's win quotes. Use 
 | Pairing | Saturn record `k` shows official arcade English record `k mod 8`; records `k` and `k + 8` repeat one English quote; English record 8 is unused | arcade selector `0x04F396` (`EXP-0022`, D-017); `data/translations/ryu_pairing.json` |
 | Wording | Official arcade English, no rewording; grammar fixes opt-in only | the 2026-10-27 policy above |
 
+**Capacity route (2026-10-28).** After `LAYOUT-001` (`EXP-0023`) measured
+pair glyphs and found the game's own English mode, the user chose: "Use route
+(d), the game's native English mode. Build and test it from disc." So English
+win quotes use the arcade's own 2 × 25 layout, through a per-character code
+patch, with no font changes.
+
 ## Deferred Until Evidence Exists
 
 These MSHvSF decisions depend on facts not yet known for XvSF. Each is put to
@@ -43,7 +49,6 @@ the user when its task produces the evidence, with options and costs.
 
 | Topic | Decide when | MSHvSF choice, for reference |
 | --- | --- | --- |
-| Capacity route (pair glyphs, reused codes, other) | Font and line capacity are measured (`FONT-002`, `LAYOUT-001`) | Reuse unseen-kanji codes in place, plus per-line alignment (`RE-044`) |
 | Roster and exclusions | The file census is done (`RE-005`) | 17 characters first; specials later |
 | Ending dialogue layout | An ending is reached and its records are known (`END-001`) | Each English line whole, one block per speaker (`EXP-0045`) |
 | Caption font, style and colour | The caption renderer and font are known | Credits-font pairs, gold (`FONT-010`, `FONT-011`) |
