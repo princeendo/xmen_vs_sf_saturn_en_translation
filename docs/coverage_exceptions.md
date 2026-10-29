@@ -25,10 +25,13 @@ must leave the items below byte-identical to the source image.
 Rule 24 keeps secret characters and bosses out until a task permits them.
 `RE-008` permits two, for their ordinary win quotes only:
 
-- **Gouki** (slot 15, `MC0F`): not on the 16-portrait select grid.
+- **Gouki** (slot 15, `MC0F`): not one of the 16 grid portraits. His cell
+  above the grid appears only in some states (`EXP-0025`, `EXP-0032`).
 - **Apocalypse** (slot 8, `MC08`): the boss, not on the grid; 8 English
   records, which cover every draw under `r mod 8`. His quote shows only when
   he beats the player.
 
 Their other text (boss pre-fight exchanges, unlock conditions, endings)
-stays with `SPECIAL-001` and the ending tasks.
+stays with `SPECIAL-001` and the ending tasks. Apocalypse's pre-fight line,
+a Japanese box at the top of the screen, was seen in the `EXP-0032` play
+check and is unchanged (`docs/text_surfaces.md`).

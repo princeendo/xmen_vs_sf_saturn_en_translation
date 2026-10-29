@@ -1,0 +1,129 @@
+{
+ "description": "Apocalypse's win quotes in English: the official arcade English, paired by GATE-TRANSLATION (user decision 2026-10-29, SESSION-0046; Saturn record k shows English record k mod 8), drawn in the game's own English mode (LAYOUT-001).",
+ "character": "Apocalypse",
+ "arcade_slot": 8,
+ "mc_file": "MC08.SHP;1",
+ "table_offset": "0xaa0",
+ "source": {
+  "set": "xmvsfu (MAME 0.289, references/arcade/)",
+  "program_order": "68000 (EXP-0008)",
+  "english_table": "0x17e1e8",
+  "slot_base": "0x188ac2"
+ },
+ "pairing": "data/translations/apocalypse_pairing.json",
+ "records": [
+  {
+   "english_record": 0,
+   "saturn_records": [
+    0,
+    8
+   ],
+   "source_address": "0x188ac2",
+   "sha256": "81a92b156f4c084179c5afd274decebbaac0e0d058df1ac8d0e660a4a804ec7e",
+   "line_lengths": [
+    22,
+    13
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 1,
+   "saturn_records": [
+    1,
+    9
+   ],
+   "source_address": "0x188b26",
+   "sha256": "6a6b2eb40ec52874a4fd1d05a3cd73ae22d154fc0ba583acad7a981a3acaa37a",
+   "line_lengths": [
+    21,
+    17
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 2,
+   "saturn_records": [
+    2,
+    10
+   ],
+   "source_address": "0x188b8a",
+   "sha256": "c429bdf4b06dadbe32bd314130c9cab38538c18e67178f43912aa4eeb89e69c0",
+   "line_lengths": [
+    24,
+    24
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 3,
+   "saturn_records": [
+    3,
+    11
+   ],
+   "source_address": "0x188bee",
+   "sha256": "de36b77db95c83313c2e0772237c43a0e17d4a6a64b62fc9583962c97ce97197",
+   "line_lengths": [
+    18,
+    19
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 4,
+   "saturn_records": [
+    4,
+    12
+   ],
+   "source_address": "0x188c52",
+   "sha256": "4a93b0c1f0c9c3a6afc4f71e4fddf5f6ee45c3828d9e96ebe9bf7c85caf932e9",
+   "line_lengths": [
+    24,
+    25
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 5,
+   "saturn_records": [
+    5,
+    13
+   ],
+   "source_address": "0x188cb6",
+   "sha256": "3aca8d15a7da77eea15288e525174cce4da8512773a8d739d9da5a1ff94b0374",
+   "line_lengths": [
+    22,
+    21
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 6,
+   "saturn_records": [
+    6,
+    14
+   ],
+   "source_address": "0x188d1a",
+   "sha256": "b57618cdb0851679b346a7cae85e54904825375d97b4fbe76bddbd152de4be33",
+   "line_lengths": [
+    21,
+    11
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 7,
+   "saturn_records": [
+    7,
+    15
+   ],
+   "source_address": "0x188d7e",
+   "sha256": "2c5821bbd6fe9f040f67ebb56767a616293aa0555a138f887fe3bfbccc741ff6",
+   "line_lengths": [
+    18,
+    22
+   ],
+   "grammar_fix": null
+  }
+ ],
+ "unused_english_records": []
+}

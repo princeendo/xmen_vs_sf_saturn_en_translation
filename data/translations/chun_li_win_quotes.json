@@ -1,0 +1,136 @@
+{
+ "description": "Chun-Li's win quotes in English: the official arcade English, paired by GATE-TRANSLATION (user decision 2026-10-29, SESSION-0046; Saturn record k shows English record k mod 8), drawn in the game's own English mode (LAYOUT-001).",
+ "character": "Chun-Li",
+ "arcade_slot": 11,
+ "mc_file": "MC0B.SHP;1",
+ "table_offset": "0x349c",
+ "source": {
+  "set": "xmvsfu (MAME 0.289, references/arcade/)",
+  "program_order": "68000 (EXP-0008)",
+  "english_table": "0x17e1e8",
+  "slot_base": "0x1894ea"
+ },
+ "pairing": "data/translations/chun_li_pairing.json",
+ "records": [
+  {
+   "english_record": 0,
+   "saturn_records": [
+    0,
+    8
+   ],
+   "source_address": "0x1894ea",
+   "sha256": "24ec7177766376e202c70efc7f741984cddbc0ce7fb56a708bc5125deb0590d9",
+   "line_lengths": [
+    23,
+    24
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 1,
+   "saturn_records": [
+    1,
+    9
+   ],
+   "source_address": "0x18954e",
+   "sha256": "327000b367648481ebd8a203d5d529a54052dc90033b590c2d877231b55503cf",
+   "line_lengths": [
+    14,
+    15
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 2,
+   "saturn_records": [
+    2,
+    10
+   ],
+   "source_address": "0x1895b2",
+   "sha256": "b879a2d93fcd52ba84fbfa72d8e0ed023fceb07046521e43f1c5878e17da2baa",
+   "line_lengths": [
+    18,
+    24
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 3,
+   "saturn_records": [
+    3,
+    11
+   ],
+   "source_address": "0x189616",
+   "sha256": "9e76461eedb4e27dffb5c402a1a17d1da8060d66bb4c6899f012a5bfaf2171a2",
+   "line_lengths": [
+    24,
+    0
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 4,
+   "saturn_records": [
+    4,
+    12
+   ],
+   "source_address": "0x18967a",
+   "sha256": "ad20f5ff13d7c1813dba4d2c9cb7397e068ecf54d8417b801a6176bd57483a95",
+   "line_lengths": [
+    22,
+    17
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 5,
+   "saturn_records": [
+    5,
+    13
+   ],
+   "source_address": "0x1896de",
+   "sha256": "f1a6097e76ddce163c1dd5829b710199fc1a66a2ba8c802dcad2e438464d0030",
+   "line_lengths": [
+    24,
+    21
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 6,
+   "saturn_records": [
+    6,
+    14
+   ],
+   "source_address": "0x189742",
+   "sha256": "a03024f6d0210cd3646e7556693258b32b3d1a85c8a5ca25ff5a3e416afb70f2",
+   "line_lengths": [
+    22,
+    23
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 7,
+   "saturn_records": [
+    7,
+    15
+   ],
+   "source_address": "0x1897a6",
+   "sha256": "61e2d41dd528a78ef4fa52f3aed36e44f92395b477a1944635d958b5e3ca52ab",
+   "line_lengths": [
+    21,
+    24
+   ],
+   "grammar_fix": null
+  }
+ ],
+ "unused_english_records": [
+  {
+   "english_record": 8,
+   "source_address": "0x18980a",
+   "sha256": "f3a1f00ba20c88c9786f174e599d31bea6820c3843f8f8e1a56209ca040c1649",
+   "reason": "never chosen by the win-quote selector (EXP-0022)"
+  }
+ ]
+}

@@ -170,7 +170,11 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
 - **2026-10-29** (`SESSION-0046`): the user extended `GATE-TRANSLATION` to
   all 18 roster characters' ordinary win quotes (GO; `k mod 8`; official
   arcade English; "Bison" kept in Cammy's two records).
-- Next: `RE-010` (ready): build the roster image and verify it.
+- **2026-10-29** (`SESSION-0047`, `EXP-0032`): the roster image is built
+  and verified. All 18 roster characters show their official English win
+  quotes, as first member, second member or CPU (`RE-010`, D-027). The user
+  also added `UI-004` (the 4 MB cart warning) to the backlog.
+- Next: `RE-011` (ready): regression references. M5 closes with it.
 
 ## Milestones
 
@@ -1206,7 +1210,7 @@ It is recorded under `GATE-TRANSLATION` and in `docs/localization_policy.md`.
 
 ### RE-010 - Build the roster image and verify it
 
-- **Status:** `READY`
+- **Status:** `DONE` (2026-10-29, `SESSION-0047`, `EXP-0032`, D-027)
 - **Milestone:** M5
 - **Dependencies:** PAIR-003 (done), RE-009 (done), the gate extension above
   (done).
@@ -1242,13 +1246,30 @@ It is recorded under `GATE-TRANSLATION` and in `docs/localization_policy.md`.
   - **Ryu and Ken:** their forced draws stay byte-identical to `EXP-0028`.
 - **Outputs:** an experiment record, the roster build and its tests, the
   specs, and the play-check evidence.
+- **Result:** every criterion met (`EXP-0032`).
+  - **Image:** `build/re010_roster_english`, Track 01 `36672c5d…`, built in
+    one command. Only `MC00`-`MC11` and `MMPACK.PCA` change. All sectors
+    are valid, the layout is unchanged, `b1` = `b2`, and the 58 code bytes
+    are all at `patches_v3(0-17)` sites.
+  - **Records:** 144/144 drawn 50/50 at 12 px.
+  - **Ryu and Ken:** 34 runs byte-identical to `EXP-0028`.
+  - **Loads:** 16 grid characters picked from the built disc load as built.
+    Gouki's and Apocalypse's files loaded from the disc in play.
+  - **Play:** English for a first-member win (Gouki), second-member wins
+    (Cyclops; Ken from WRAM-H) and CPU wins (Storm; Apocalypse). The
+    continue hint stayed Japanese.
+  - **Not applicable:** no Japanese win quote remains in ordinary play,
+    because every ordinary speaker is in the roster. Only slot 18, whose
+    user is unknown, could show one.
+  - **Observed in passing:** Apocalypse's pre-fight line, a Japanese box
+    at the top of the screen (`docs/text_surfaces.md`, `SPECIAL-001`).
 
 ### RE-011 - Regression references for the confirmed builds
 
-- **Status:** `BLOCKED`
+- **Status:** `READY`
 - **Milestone:** M5
-- **Dependencies:** RE-010.
-- **Blockers:** The roster build.
+- **Dependencies:** RE-010 (done).
+- **Blockers:** None.
 - **Objective:** Every confirmed build can be rebuilt from the untouched
   source, with its hashes compared, by one script.
 - **Acceptance criteria:**
@@ -1260,7 +1281,14 @@ It is recorded under `GATE-TRANSLATION` and in `docs/localization_policy.md`.
     every reference.
   - **Report:** `docs/regression_report.md` lists the references and the
     last run.
-- **Notes:** method from MSHvSF `RE-047` (`docs/playbook_from_mshvsf.md`).
+- **Notes:**
+  - Method from MSHvSF `RE-047` (`docs/playbook_from_mshvsf.md`).
+  - Gap found while writing the README (`SESSION-0047`): every build reads
+    the US program in 68000 byte order at `local/ref003/xmvsfu-68k.bin`. It
+    was assembled by `tools.reference.xvsf_text.build_program`, but no
+    command writes that file. A clean-checkout run needs one, checked
+    against the image's SHA-256 (`1b1a5a26…`,
+    `data/text/slot_census.json`).
 
 ## Later Milestones (outline only)
 
@@ -1274,9 +1302,10 @@ for each is in `docs/playbook_from_mshvsf.md`.
 | END-002 | M7 | One ending localized. |
 | END-003 | M8 | All roster endings; combined image with win quotes; coverage register. |
 | REL-001 | after M5 | Release patches (xdelta3 and SSP of the changed files) with a rebuild README; may be GitHub Release assets, never committed. Splice rather than re-compress changed streams to keep patches small. |
-| SPECIAL-001 | M9, user approval | Secret characters and bosses: which slots have their own official English and which reuse another's (slot 18); boss pre-fight text; save- or progress-gated unlocks. Gouki's and Apocalypse's ordinary win quotes are in M5 (`RE-008`). |
+| SPECIAL-001 | M9, user approval | Secret characters and bosses: which slots have their own official English and which reuse another's (slot 18); boss pre-fight text (Apocalypse's pre-fight line is captured, `docs/text_surfaces.md`); save- or progress-gated unlocks. Gouki's and Apocalypse's ordinary win quotes are in M5 (`RE-008`). |
 | UI-001 | after M8, user request | UI art: inventory English art already in every font before drawing anything; caption colour and style. |
 | UI-002 | after M8, user request | Attract-mode captions: which layer draws them, which container and codecs hold them, arcade and PS1 oracles. |
 | UI-003 | after M8, user request | Other UI text (continue screen, hints): find the arcade English by tracing the arcade code, not only by data search. |
+| UI-004 | user request (2026-10-29); order not yet set | The 4 MB RAM cart warning shown when the game boots without the cart (seen in `EXP-0002`, Japanese): capture it, find where its text and art live (disc, BIOS or code) and how it is drawn, look for an official English source, and translate it. With no official English, the policy's recorded new translation applies, approved by the user. |
 | TXT-001 | after M8, user request | Rare, random, or region-gated text: trace every reader of every text table. |
 | LOC-001 | after M8 | Name variants (user decisions: both variants, 2026-10-27; American names default, 2026-10-28): whether both conventions' art and voice are already on the disc. |

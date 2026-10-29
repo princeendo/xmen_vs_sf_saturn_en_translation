@@ -1503,3 +1503,63 @@ M5 roster."
   `docs/localization_policy.md`. `RE-010` is `READY`.
 
 No experiment was run.
+
+## 2026-10-29 — SESSION-0047 / EXP-0032: the roster image (`RE-010`)
+
+User request (verbatim): "Start RE-010: build the roster image and verify
+it." Mid-session the user added: "we need to translate the 4MB cart
+message that pops up when you try to load the game without the ram cart"
+(added as `UI-004`, backlog, order not yet set). They also asked: "update
+the repo-level README.md because it looks really stale" (done). After the
+play check they noted "some dialogue right as Apocalypse appears that needs
+translation" (captured; `SPECIAL-001` boss pre-fight text).
+
+- **Specs.** `EXP-0028`'s `make_spec.py` gave Cammy (slot 17) no unused
+  record, because slot 18 aliases slot 11. The copy
+  `EXP-0032/make_spec.py` uses the census's count. Ryu's and Ken's specs
+  reproduce; Ken's byte for byte.
+- **Build.** Two builds with 18 specs, one with `--image`.
+  `image_checks.py` passed:
+  - only Track 01 differs (`36672c5d…`); the source matches the manifest;
+  - 0 invalid sectors; the layout is the same;
+  - the changed files are exactly `MC00`-`MC11` and `MMPACK.PCA`
+    (`4e81b64f…`);
+  - `b1` = `b2`;
+  - 58 code bytes, all at `patches_v3(0-17)` sites;
+  - the MC files equal `EXP-0031`'s rebuilds.
+- **Records.** `force_records.py` writes each character's 800 English bytes
+  into Ryu's table at `pre_ko` with the roster code.
+  - Pitfall: five of six parallel groups died at start. Mednafen's lockfile
+    refuses a second instance on one home unless `MEDNAFEN_ALLOWMULTI=1`.
+    They were rerun with it.
+  - Result: 144/144 at 50/50 (12 px). The 6 controls are 38/38 and
+    identical.
+- **Ryu and Ken.** `EXP-0032/force_draws.py` (roster slot table): 17 + 17
+  runs byte-identical to `EXP-0028`.
+- **Picks.** `pick_roster.py` (scratch home `local/mednafen_pick`, pad
+  directions on I/M/J/L) from state 2973. 14 of 16 passed first time.
+  - Storm: A was not registered.
+  - Juggernaut: the lefts were dropped, so Vega was picked.
+  - Both retries passed.
+  - Gouki: "uuuuu" from state 9348 stopped on Juggernaut; the cell's
+    entry move is unknown (`docs/known_unknowns.md`).
+- **Play check** (`local/re010/session`, 1,074 shots, the newest 200
+  states): no recorder stall. Quote screens were found by the bubble
+  colour; 42 hits, two of them false (ranking, super flash).
+  - English: Gouki first member (record 1), Cyclops second member (0),
+    Storm CPU (4), Nash (5, 4), Ken second member from WRAM-H (4, 5), and
+    Apocalypse CPU from `0x060C1000` (0).
+  - Records were named by pointer where a state survived. Otherwise the text
+    was matched locally against the roster's English, one record each.
+  - The continue hint is Japanese and normal (frames 29244 on).
+  - Apocalypse's pre-fight line, a Japanese top-screen box at frames
+    58,191-58,366, was added to `docs/text_surfaces.md`.
+- **README.** Rewritten: the status, what is still Japanese, the build
+  command and its inputs.
+  - Gap: no command writes `local/ref003/xmvsfu-68k.bin`. It is noted under
+    `RE-011`, where a clean-checkout run needs it.
+
+Checks: `pytest` 162 passed; `ruff check`, `ruff format --check`, `mypy`, and `mypy --strict` on the EXP-0032 scripts (`MYPYPATH=research/experiments/EXP-0025`) are clean.
+
+Conclusion: `RE-010` is `DONE` (**CONFIRMED**, D-027). `RE-011` is `READY`;
+M5 closes with it.

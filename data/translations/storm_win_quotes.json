@@ -1,0 +1,136 @@
+{
+ "description": "Storm's win quotes in English: the official arcade English, paired by GATE-TRANSLATION (user decision 2026-10-29, SESSION-0046; Saturn record k shows English record k mod 8), drawn in the game's own English mode (LAYOUT-001).",
+ "character": "Storm",
+ "arcade_slot": 2,
+ "mc_file": "MC02.SHP;1",
+ "table_offset": "0x40d4",
+ "source": {
+  "set": "xmvsfu (MAME 0.289, references/arcade/)",
+  "program_order": "68000 (EXP-0008)",
+  "english_table": "0x17e1e8",
+  "slot_base": "0x1875aa"
+ },
+ "pairing": "data/translations/storm_pairing.json",
+ "records": [
+  {
+   "english_record": 0,
+   "saturn_records": [
+    0,
+    8
+   ],
+   "source_address": "0x1875aa",
+   "sha256": "d525bcaca31b6db4222f7ba449a1f2eb412e81e05ff50d1f5166d0d73bd641dd",
+   "line_lengths": [
+    21,
+    0
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 1,
+   "saturn_records": [
+    1,
+    9
+   ],
+   "source_address": "0x18760e",
+   "sha256": "e00b044f1a233e91dd2689036b72aa622c87fddd31f9022a230cf2543af54eb5",
+   "line_lengths": [
+    21,
+    9
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 2,
+   "saturn_records": [
+    2,
+    10
+   ],
+   "source_address": "0x187672",
+   "sha256": "000d658145687664ea72cd934dc514601f1766f12ebf262f78eea2baebf0ad25",
+   "line_lengths": [
+    19,
+    20
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 3,
+   "saturn_records": [
+    3,
+    11
+   ],
+   "source_address": "0x1876d6",
+   "sha256": "4098e1cf80c8a3f9142bdc03402cae92165d48953fccdbf95a98401859235db3",
+   "line_lengths": [
+    23,
+    23
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 4,
+   "saturn_records": [
+    4,
+    12
+   ],
+   "source_address": "0x18773a",
+   "sha256": "719952ce2db69c5d7bd6fcb54b075e374d47966dc972e2568c259883a414f5e7",
+   "line_lengths": [
+    23,
+    22
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 5,
+   "saturn_records": [
+    5,
+    13
+   ],
+   "source_address": "0x18779e",
+   "sha256": "74a22be6d1090ec749f2ba3f8da46daa09a1ad3cee94dede8e7f3f8894591cb0",
+   "line_lengths": [
+    19,
+    17
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 6,
+   "saturn_records": [
+    6,
+    14
+   ],
+   "source_address": "0x187802",
+   "sha256": "d80ad0e474e5ce624af65a2245ca5da5313ef489b95c83bbd1640c1ba1a89674",
+   "line_lengths": [
+    25,
+    10
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 7,
+   "saturn_records": [
+    7,
+    15
+   ],
+   "source_address": "0x187866",
+   "sha256": "ab075f5957f56c6479ff17030096dd887b976064a19758ee987912c1939c135c",
+   "line_lengths": [
+    22,
+    23
+   ],
+   "grammar_fix": null
+  }
+ ],
+ "unused_english_records": [
+  {
+   "english_record": 8,
+   "source_address": "0x1878ca",
+   "sha256": "55c9bbd363147d14fb778a246970b7b2396aa5ebee90e784f66b3985aebe9821",
+   "reason": "never chosen by the win-quote selector (EXP-0022)"
+  }
+ ]
+}

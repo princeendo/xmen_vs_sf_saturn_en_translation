@@ -481,3 +481,27 @@ Ryu's and Ken's rebuilt files equal the play-checked `EXP-0028` build. A
 second run was byte-identical.
 
 Reproduce: `research/experiments/EXP-0031/README.md`, "Procedure".
+
+## D-027 (M5): All 18 roster characters in English from the source image (`RE-010`, `EXP-0032`)
+
+One command builds the image from the untouched source:
+`tools.disc.build_english` with the 18 specs in `data/translations/` and
+`--image`. Only `MMPACK.PCA` (version 3, slots 0-17) and `MC00`-`MC11`
+change, each at its own size. The result is Track 01 `36672c5d…`. For every
+draw, each roster character shows its official arcade English record
+`draw mod 8`. This holds as the first member, as the second member (the
+WRAM-H copy) and as a CPU opponent. The continue hint stays Japanese.
+
+**Evidence.**
+
+- **Build:** all sectors are valid, the layout is unchanged, two builds are
+  identical, and the code differs only at version-3 sites.
+- **Records:** all 144 English records were drawn live, 50/50 cells as
+  compiled.
+- **Ryu and Ken:** byte-identical to `EXP-0028`.
+- **Loads:** 16 grid characters picked from the built disc loaded as built.
+- **Play:** in the user's cold-boot play check, Gouki, Cyclops (second
+  member), Storm (CPU), Nash, Ken (second member, `0x060B2BDC`) and
+  Apocalypse (CPU boss, `0x060C1AA0`) all showed English.
+
+Reproduce: `research/experiments/EXP-0032/README.md`, "Procedure".
