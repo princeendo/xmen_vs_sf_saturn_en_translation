@@ -136,8 +136,9 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   pairs with English slot 10 record `k mod 8`, as Ryu's does. All 16 are
   confirmed in MAME, and all 9 English records fit 2 × 25 (`PAIR-002`,
   D-021).
-- Next: `RE-006` (ready). The `GATE-TRANSLATION` extension for Ken is the
-  user's decision; `RE-007` waits on both.
+- **2026-10-29:** the user extended `GATE-TRANSLATION` to Ken's win quotes
+  (GO; pairing `k mod 8`; official arcade English, no rewording).
+- Next: `RE-006` (ready); `RE-007` waits on it.
 
 ## Milestones
 
@@ -541,6 +542,20 @@ prerequisites before English text goes on disc).
     English record 8 is not used.
   - **Wording:** the official arcade English, with no rewording. Grammar
     fixes stay opt-in only (policy).
+- **Gate extension, Ken (2026-10-29):**
+  - The user's decision is **GO**, in their words: "GATE-TRANSLATION: go for Ken's win quotes. Use the k mod 8 pairing (Saturn records k and k+8 both show English record k), official arcade English, no rewording. Record it."
+  - Checked at acceptance: `RE-004` and `PAIR-002` are `DONE` (`EXP-0025`,
+    `EXP-0026`).
+  - **Scope:** Ken's ordinary win quotes only (Saturn records 0-15 of
+    `MC0A.SHP`'s table), added to Ryu's. Records 16-20 (ending text),
+    endings, other characters and special cases remain gated (rules 23 and
+    24).
+  - **Pairing policy:** Saturn record `k` shows Ken's official arcade
+    English record `k mod 8` (slot 10; `data/translations/ken_pairing.json`).
+    Records `k` and `k + 8` show the same English quote, and English record
+    8 is not used.
+  - **Wording:** the official arcade English, with no rewording. Grammar
+    fixes stay opt-in only (policy).
 
 ## Phase F: M1
 
@@ -892,12 +907,16 @@ Before `RE-007`, the user extends `GATE-TRANSLATION` to the second character
 in their own words (the scope is Ryu only today). The extension is recorded
 under `GATE-TRANSLATION` and in `docs/localization_policy.md`.
 
+Done 2026-10-29: the user extended the gate to Ken (GO; pairing `k mod 8`;
+official arcade English, no rewording). It is recorded under
+`GATE-TRANSLATION` and in `docs/localization_policy.md`.
+
 ### RE-007 - Build Ryu and the second character from the source image
 
 - **Status:** `BLOCKED`
 - **Milestone:** M4
-- **Dependencies:** RE-004 (done), RE-006, PAIR-002 (done), the gate extension above.
-- **Blockers:** RE-006, the gate extension.
+- **Dependencies:** RE-004 (done), RE-006, PAIR-002 (done), the gate extension above (done).
+- **Blockers:** RE-006.
 - **Objective:** Generalize `tools/disc/build_english.py` to build several
   characters from their specs, and produce one image with both characters'
   English win quotes.

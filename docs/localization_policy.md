@@ -36,6 +36,15 @@ user passed `GATE-TRANSLATION`: "GATE-TRANSLATION: go for Ryu's win quotes. Use 
 | Pairing | Saturn record `k` shows official arcade English record `k mod 8`; records `k` and `k + 8` repeat one English quote; English record 8 is unused | arcade selector `0x04F396` (`EXP-0022`, D-017); `data/translations/ryu_pairing.json` |
 | Wording | Official arcade English, no rewording; grammar fixes opt-in only | the 2026-10-27 policy above |
 
+**Translation gate, Ken (2026-10-29).** After `PAIR-002` (`EXP-0026`), the
+user extended `GATE-TRANSLATION` to Ken: "GATE-TRANSLATION: go for Ken's win quotes. Use the k mod 8 pairing (Saturn records k and k+8 both show English record k), official arcade English, no rewording. Record it."
+
+| Topic | Decision | Evidence |
+| --- | --- | --- |
+| Scope | Ken's ordinary win quotes (Saturn records 0-15 of `MC0A.SHP`'s table) added to Ryu's; his ending records 16-20, endings, other characters and specials stay gated | `TASKS.md` `GATE-TRANSLATION` |
+| Pairing | Saturn record `k` shows Ken's official arcade English record `k mod 8` (slot 10); records `k` and `k + 8` repeat one English quote; English record 8 is unused | `EXP-0026`, D-021; `data/translations/ken_pairing.json` |
+| Wording | Official arcade English, no rewording; grammar fixes opt-in only | the 2026-10-27 policy above |
+
 **Capacity route (2026-10-28).** After `LAYOUT-001` (`EXP-0023`) measured
 pair glyphs and found the game's own English mode, the user chose: "Use route
 (d), the game's native English mode. Build and test it from disc." So English

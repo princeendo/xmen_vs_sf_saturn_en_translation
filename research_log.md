@@ -1239,3 +1239,16 @@ English."
 
 Conclusion: `PAIR-002` is `DONE` (**CONFIRMED**, D-021). Next are `RE-006`
 and the user's `GATE-TRANSLATION` extension for Ken.
+
+## 2026-10-29 — SESSION-0038: `GATE-TRANSLATION` extended to Ken
+
+User decision (verbatim): "GATE-TRANSLATION: go for Ken's win quotes. Use
+the k mod 8 pairing (Saturn records k and k+8 both show English record k),
+official arcade English, no rewording. Record it."
+
+- Checked: `RE-004` and `PAIR-002` are `DONE` (`EXP-0025`, `EXP-0026`).
+- Recorded under `GATE-TRANSLATION` in `TASKS.md` and in
+  `docs/localization_policy.md`. Scope: Ken's Saturn records 0-15 of
+  `MC0A.SHP`'s table, added to Ryu's. His ending records 16-20 and everything
+  else stay gated.
+- `RE-007` now waits only on `RE-006`. No experiment was run.
