@@ -309,3 +309,21 @@ The full table is in `research/experiments/EXP-0023/README.md`.
   English grid. It was rejected.
 
 Reproduce: `research/experiments/EXP-0023/README.md`, "Procedure".
+
+## D-019 (M3): All of Ryu's win quotes in English from the source image (`RE-003`, `EXP-0024`)
+
+`tools.disc.build_english` builds `MMPACK.PCA` and `MC09.SHP` from the
+untouched source. It reads `data/translations/ryu_win_quotes.json` (source
+addresses and hashes; the English text comes from the user's arcade ROM) and
+compiles the text with `tools.text.caption`. The resulting image (Track 01
+`1034b8d7…`) shows, for each of Ryu's 16 Saturn draws, his official arcade
+English record `draw mod 8`, which is the user's pairing.
+
+**Evidence.**
+
+- Every draw was steered live through the RNG seed and drew all 50 cells as
+  compiled.
+- The unpatched control drew 38/38.
+- Two cold-boot Ryu wins showed English.
+
+Reproduce: `research/experiments/EXP-0024/README.md`, "Procedure".

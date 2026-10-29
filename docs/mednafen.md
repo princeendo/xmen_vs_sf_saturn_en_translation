@@ -341,3 +341,11 @@ the quote starts (for example `pre_ko`), with the patched build:
 this and saves the screenshot, VDP1 VRAM and record per run. Check that the
 setter's R6 in the events is `0x060F8AC0`. If the task is elsewhere, the
 index byte is R6 + 38.
+
+**Caveat (`EXP-0024`).** An `onhit` write lands at the start of the next
+instruction, but a read soon after can still see the old value; the SH-2 data
+cache is the likely cause. Force values the game reads much later, as the
+index byte above is, or steer an input instead. For example, set the RNG seed
+word `0x060F545A` at `pre_ko` with the machine paused at a fixed point (reload
+until the seed reads 8520). `research/experiments/EXP-0024/seed_scan.py` maps
+seeds to draws.

@@ -119,7 +119,13 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   in `MC09.SHP` show his win quotes in English (2 × 25) from a cold boot,
   with other characters and hints unchanged. The first version broke other
   characters' quotes; it was found in play and fixed (`LAYOUT-001`, D-018).
-- Next: `RE-003` (compiler, provenance, all 8 English records verified).
+- **2026-10-28** (`SESSION-0034`, `EXP-0024`): **M3 reached.** A caption
+  compiler and a spec-driven build make Ryu's English image from the
+  untouched source. All 16 draws show their paired English, cell for cell,
+  and two cold-boot wins showed English (`RE-003`, D-019).
+- Next: M4, a second character through the same mechanism (`RE-004`, outline
+  only). Its tasks need writing first; the slot test in
+  `tools/disc/english_mode.py` covers one character.
 
 ## Milestones
 
@@ -731,7 +737,7 @@ text (`EXP-0015`) and stay out of scope (rule 23).
 
 ### RE-003 - Build all of Ryu's win quotes in English from the source image
 
-- **Status:** `READY`
+- **Status:** `DONE`
 - **Milestone:** M3
 - **Dependencies:** GATE-TRANSLATION, LAYOUT-001, RE-002, PAIR-001, DISC-002.
 - **Blockers:** None.
@@ -760,6 +766,15 @@ text (`EXP-0015`) and stay out of scope (rule 23).
   record, and a regression reference.
 - **Notes:** Records 16-21 (ending text) are untouched. Other characters are
   M4.
+- **Evidence:** `EXP-0024`, D-019, and `data/translations/ryu_win_quotes.json`.
+  - **Tools:** `tools/text/caption.py` (the compiler, with tests) and
+    `tools/disc/build_english.py`, which rebuilds the play-checked image
+    exactly.
+  - **Image:** `build/re003_ryu_english`; 138 changed sectors, all valid.
+  - **All 16 draws, live:** 50/50 cells as compiled; the control 38/38.
+  - **Play check:** two cold-boot Ryu wins in English.
+  - **Provenance:** source addresses and hashes in the spec; the text is
+    read from the ROM (rule 21).
 
 ## Later Milestones (outline only)
 

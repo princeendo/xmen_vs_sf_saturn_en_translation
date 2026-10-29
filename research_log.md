@@ -1117,3 +1117,42 @@ hashes unchanged.
 Conclusion: `LAYOUT-001` is `DONE` (**CONFIRMED**, D-018). `RE-003`'s
 blockers are cleared. Its core (Ryu's 8 English records from disc) already
 works; what remains is the compiler, provenance and full verification.
+
+## 2026-10-28 — SESSION-0034 / EXP-0024: M3, all of Ryu's win quotes in English
+
+Task: RE-003 ("Start RE-003: build all of Ryu's win quotes in English from the source image.")
+
+Actions and results:
+
+- **Round trip:** all 9 of Ryu's English records decode and re-encode
+  exactly.
+- **Compiler:** `tools/text/caption.py` with 7 tests.
+- **Patch:** `tools/disc/english_mode.py`, promoted from the `EXP-0023`
+  version-2 patch.
+- **Build tool:** `tools/disc/build_english.py`, with 5 tests.
+- **Spec:** `data/translations/ryu_win_quotes.json` holds addresses, hashes,
+  pairing and line lengths, but no text (rule 21).
+- **Build:** two builds are identical, and both equal the `EXP-0023`
+  version-2 files. The image `build/re003_ryu_english` is identical to the
+  play-checked image (all 42 components), so the duplicate was deleted. 138
+  sectors changed, all valid.
+- **Forcing the draw:**
+  - **Failed:** an `onhit` write after the draw store (`0x06066666`) was
+    applied but not seen by the read two instructions later (likely the SH-2
+    cache).
+  - **Worked:** steering through the RNG seed. A first scan read two
+    different "original" seeds, a race between `loadstate` and `pause`;
+    fixed by reloading until the paused seed is 8520.
+  - Seeds 1-40 scanned twice, identically; 41-60 and a spread of 24 more
+    found draw 7 (seed 27,029).
+- **All 16 draws:** the predicted pointer, the record equal to the compiled
+  bytes, and 50/50 cells; the control 38/38.
+- **User play check** (cold boot): two Ryu wins in English (records 0 and 1).
+
+Checks: `./invenv.sh pytest -q` 150 passed; `ruff check`, `ruff format
+--check` and `mypy` clean (EXP-0024 scripts also `mypy --strict`). Source
+hashes unchanged.
+
+Conclusion: `RE-003` is `DONE` (**CONFIRMED**, D-019). **M3 reached.** Next
+is M4 (a second character through the same mechanism), whose tasks are to be
+written first.

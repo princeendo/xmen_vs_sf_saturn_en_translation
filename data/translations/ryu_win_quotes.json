@@ -1,0 +1,136 @@
+{
+ "description": "Ryu's win quotes in English (RE-003): the official arcade English, paired by GATE-TRANSLATION (Saturn record k shows English record k mod 8), drawn in the game's own English mode (LAYOUT-001).",
+ "character": "Ryu",
+ "arcade_slot": 9,
+ "mc_file": "MC09.SHP;1",
+ "table_offset": "0x25d8",
+ "source": {
+  "set": "xmvsfu (MAME 0.289, references/arcade/)",
+  "program_order": "68000 (EXP-0008)",
+  "english_table": "0x17e1e8",
+  "slot_base": "0x188de2"
+ },
+ "pairing": "data/translations/ryu_pairing.json",
+ "records": [
+  {
+   "english_record": 0,
+   "saturn_records": [
+    0,
+    8
+   ],
+   "source_address": "0x188de2",
+   "sha256": "01f469fccb0dd3b973595ab649abd4c2ed87781cc2a1e176f2bed7a14e93f599",
+   "line_lengths": [
+    25,
+    21
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 1,
+   "saturn_records": [
+    1,
+    9
+   ],
+   "source_address": "0x188e46",
+   "sha256": "6dfc13737dd5674f50081affc6ffd22edf07539c15472ec026862e178935b7ca",
+   "line_lengths": [
+    22,
+    24
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 2,
+   "saturn_records": [
+    2,
+    10
+   ],
+   "source_address": "0x188eaa",
+   "sha256": "8fd645e8d4ec72c1fcfd942aa16759df5ab6e7fcdd4c1acb6096ee41a22dab4d",
+   "line_lengths": [
+    25,
+    23
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 3,
+   "saturn_records": [
+    3,
+    11
+   ],
+   "source_address": "0x188f0e",
+   "sha256": "0aec0803b6c1442b858108be53c736e9b9ddb47f5d7c7f800321f88443089000",
+   "line_lengths": [
+    23,
+    22
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 4,
+   "saturn_records": [
+    4,
+    12
+   ],
+   "source_address": "0x188f72",
+   "sha256": "09679562af8ce8f20b3211d505eb74577cbb120229dfb8599f673566fddf8e25",
+   "line_lengths": [
+    23,
+    19
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 5,
+   "saturn_records": [
+    5,
+    13
+   ],
+   "source_address": "0x188fd6",
+   "sha256": "7b65caf55c91ef3e162a0730bbd2041c491c6686e45ffab9e52f7112bf8daf10",
+   "line_lengths": [
+    24,
+    25
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 6,
+   "saturn_records": [
+    6,
+    14
+   ],
+   "source_address": "0x18903a",
+   "sha256": "6e3a70b986b789d2f7b6e2dd297b7b0b67f7f2f53eb377b5299c1b3a34f36d37",
+   "line_lengths": [
+    25,
+    21
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 7,
+   "saturn_records": [
+    7,
+    15
+   ],
+   "source_address": "0x18909e",
+   "sha256": "2e3e50e6b421a2122718a65a9201215d017eafa8c0d42a61061c4be9fd95872b",
+   "line_lengths": [
+    24,
+    24
+   ],
+   "grammar_fix": null
+  }
+ ],
+ "unused_english_records": [
+  {
+   "english_record": 8,
+   "source_address": "0x189102",
+   "sha256": "24ff65e7752c93980000fe9c6929e9e3c82feae8e0d71fa5b0a14a2cce0abec6",
+   "reason": "never chosen by the win-quote selector (EXP-0022)"
+  }
+ ]
+}
