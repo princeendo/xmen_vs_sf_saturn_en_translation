@@ -1834,3 +1834,25 @@ Docs: `EXP-0037`, D-032, `TASKS.md` (`END-004` DONE, M6 complete),
 Checks: `pytest` 167 passed; `ruff check` and `ruff format --check` clean; `mypy --strict tools tests` and each EXP-0037 script clean. Regenerating a timeline and the pairing file gave byte-identical outputs.
 
 Conclusion: `END-004` is `DONE` (**CONFIRMED**, D-032). **M6 is complete.** Next: write the M7 tasks (not started).
+
+## 2026-10-29 — SESSION-0055: M7 tasks written (not started)
+
+User request (verbatim): "Write up the M7 tasks for localizing Nash's
+ending. Don't start them yet."
+
+Written in `TASKS.md` (Phase L), from D-029 to D-032 and `EXP-0031`'s
+`MC10` margin (671 bytes):
+
+| Task | Status |
+| --- | --- |
+| `END-005` (the Saturn's English ending script: language reads, a clean per-ending RAM trial against the arcade snapshots, label storage) | `READY` |
+| `LAYOUT-002` (the user chooses: English script, or Japanese script with English text, or another option `END-005` finds; labels) | `BLOCKED` |
+| `GATE-TRANSLATION` extension for Nash's ending (scope, pairing, wording, "Charlie") | waits on `LAYOUT-002` |
+| `END-006` (version-4 code, per slot) | `BLOCKED` |
+| `END-007` (English records in `MC10`, fit, spec) | `BLOCKED` |
+| `END-008` (build from the untouched source and a user play check) | `BLOCKED` |
+| `END-009` (regression reference) | `BLOCKED` |
+
+The outline row `END-005` (M7) was replaced. The M8 row is now `END-010`,
+and `docs/known_unknowns.md`'s reference to it was updated. No experiment
+was run.

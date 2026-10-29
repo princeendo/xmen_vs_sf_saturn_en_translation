@@ -219,9 +219,18 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   English scene script differs: other scene breaks, pictures and labels
   (`Charlie`, `Charlie's friend`). English records 1 and 4 say "Charlie"
   (`END-004`, D-032). **M6 is complete.**
-- Next: M7 (`END-005`) needs its tasks written and a `GATE-TRANSLATION`
-  extension for the ending. The language-dependent scene script and the
-  labels are its main open design questions. Nothing in M7 has started.
+- **2026-10-29:** M7 tasks written at the user's request ("Write up the M7
+  tasks for localizing Nash's ending. Don't start them yet."), none
+  started:
+  - `END-005`: the Saturn's English ending script, RAM only (ready);
+  - `LAYOUT-002`: the user's layout choice;
+  - the `GATE-TRANSLATION` extension for Nash's ending;
+  - `END-006` (code) and `END-007` (data);
+  - `END-008` (build and play check);
+  - `END-009` (regression).
+
+  The M8 outline row is renumbered `END-010`.
+- Next: `END-005` (ready). Backlog: `UI-004`, `SPECIAL-001`, `REL-001`.
   The backlog also holds `UI-004` (boot-time error messages, including the
   cart warning), `SPECIAL-001` (including
   Apocalypse's pre-fight line) and `REL-001` (release patches).
@@ -1513,6 +1522,229 @@ Known before M6 (each is at most SUPPORTED for the Saturn's endings):
   arcade English (see above). The pairing must explain the difference, not
   assume `k mod n`.
 
+## Phase L: M7 (Nash's Ending In English)
+
+M7: Nash's ending shows the official arcade English on the Saturn, built
+from the untouched source image and confirmed in play. M6 is complete
+(D-029 to D-032). Assume nothing from win quotes or from MSHvSF: every step
+below needs its own XvSF evidence.
+
+Only Nash's ending is in scope, with Nash as the first pick. These are out
+of scope:
+
+- other characters' endings (M8);
+- Nash's ending when he is the second pick;
+- Apocalypse's lines, the pre-boss story line and the post-boss win quote
+  (`SPECIAL-001`);
+- the `⚠乱入禁止` warning (`UI-001`);
+- the QSound notice.
+
+The order:
+
+1. `END-005` (investigation, ready);
+2. `LAYOUT-002` (the user's layout choice);
+3. the `GATE-TRANSLATION` extension (the user's decision);
+4. `END-006` (code) and `END-007` (data), which are independent;
+5. `END-008` (build and play check);
+6. `END-009` (regression).
+
+Known before M7:
+
+- **Records and pairing** (D-031, D-032): the six pages are decoded
+  `MC10.SHP` records 16-21 (`0x2EC0` + 76k), loaded at the pick by
+  `0x0600D124` into `0x0024D000`. Page k pairs with arcade English slot 16
+  record k (`0x18D0AE` + 100k), CONFIRMED for both partners
+  (`data/translations/nash_ending_pairing.json`). English records 1 and 4
+  say "Charlie".
+- **Drawing** (D-030):
+  - The type-4 selector `0x060668A2` (once per scene) and the renderer
+    `0x06066948` (once per page) draw the pages in the 2 × 19 quote grid.
+  - The renderer's English grid (2 × 25 at 12 px) is reachable. The
+    selector has a language-2 branch whose list `0x06085544` is not filled
+    on the Saturn.
+  - The version-3 patch makes the selector's language read a constant 0.
+- **The scene script depends on the language** (D-032). The arcade English
+  ending:
+  - starts scenes at pages 1, 2, 4 and 5 (Japanese: 1, 3, 5, 6);
+  - shows other pictures;
+  - labels pages 4 and 5 `Charlie` and `Charlie's friend` (Japanese: `Nash`,
+    `Nazo no koe`, `Nash`, `Nash's friend` on pages 3-6).
+
+  With the global words set to 2, the Saturn showed a `Charlie` label and
+  a picture change (`EXP-0035`). So it may hold an English script, but
+  the global size word has other readers, so that trial is not clean.
+- **Space:** `MC10.SHP` is 12 sectors. With its English win quotes, it
+  compresses with 671 bytes to spare (`EXP-0031`). Six English records are
+  600 bytes, against 456 for the Japanese.
+
+### END-005 - The Saturn's English ending script
+
+- **Status:** `READY`
+- **Milestone:** M7
+- **Dependencies:** END-004 (done).
+- **Blockers:** None.
+- **Objective:** Find out whether the Saturn can show Nash's ending with
+  the arcade's English scene script, and what that takes, using RAM
+  changes only.
+- **Acceptance criteria:**
+  - **Language reads:** every read of the language word (and of anything
+    else that tells the ending's script which language to use) during
+    Nash's ending is listed by PC, from a read or PC log over
+    `local/checkpoints/end001/f00220064.mcs`. For each, say whether it
+    picks text, pictures, labels or scene breaks. Use the arcade's ending
+    readers (`0x04F530`-`0x04F5F2`, `0x06F904`; `EXP-0037`) as hints, not
+    as facts.
+  - **Clean trial:** the English path is turned on for this ending only:
+    - no global size word;
+    - one change, for example the task flag that version 3 uses for win
+      quotes, or a single per-ending value found above;
+    - a valid pointer to the six arcade English records written into free
+      RAM.
+
+    The six pages are compared with `EXP-0037`'s arcade English snapshots:
+    scene breaks, picture per page, label per page, text per page, line
+    count, page timing.
+  - **Labels:** where the Saturn's labels (`Nash`, `Nazo no koe`, `Nash's
+    friend`, `Charlie`) live in RAM and on disc is found, with a one-cell
+    RAM edit that changes exactly one label letter on screen. Say whether a
+    `Charlie's friend` label exists.
+  - **Result:** one of these, with evidence:
+    - the Saturn's English script matches the arcade's;
+    - it differs (each difference listed);
+    - no usable English script exists.
+- **Notes:** if the English script does not exist or differs, `LAYOUT-002`
+  offers the alternatives. No disc change in this task.
+
+### LAYOUT-002 - Choose how Nash's ending shows English
+
+- **Status:** `BLOCKED`
+- **Milestone:** M7
+- **Dependencies:** END-005.
+- **Blockers:** The evidence from `END-005`.
+- **Objective:** The user chooses the layout of the English ending from
+  measured options, each with RAM-trial screenshots of all six pages.
+- **Acceptance criteria:**
+  - **Options:** each is shown with its six pages and its costs (code
+    patch, data size, what differs from the arcade). At least these,
+    where `END-005` shows them possible:
+    - **(a) English script:** the Saturn's English script with the arcade
+      English records, as in the arcade.
+    - **(b) Japanese script, English text:** the Japanese scene breaks,
+      pictures and labels, with English text in the 2 × 25 grid. The
+      mismatches are listed page by page. For example, the scream would
+      appear under `Nazo no koe` with the captive picture.
+    - **(c) Something else** `END-005` turns up.
+  - **Labels:** the user's choice for labels, in the American-names
+    default: the arcade's `Charlie` / `Charlie's friend`, or the
+    Japanese-script labels rewritten. If a label must be new or changed,
+    the cost is measured.
+  - **Recorded:** the user's choice, in their words, here and in
+    `docs/localization_policy.md`.
+
+### GATE-TRANSLATION extension for Nash's ending
+
+Before `END-008`, the user extends `GATE-TRANSLATION` to Nash's ending: GO
+or NO-GO in their own words, recorded under `GATE-TRANSLATION` and in
+`docs/localization_policy.md`. The question covers:
+
+- **Scope:** `MC10` ending records 16-21, plus any labels or script data
+  that `LAYOUT-002` requires.
+- **Pairing:** page k = English record k (D-032).
+- **Wording:** the official arcade English, with no rewording.
+- **Names:** English records 1 and 4 say "Charlie", and the labels are
+  `Charlie` and `Charlie's friend`. This is the American-names default.
+  The user is asked to confirm it.
+
+Dependencies: `LAYOUT-002`.
+
+### END-006 - Code: turn the English ending on for Nash only
+
+- **Status:** `BLOCKED`
+- **Milestone:** M7
+- **Dependencies:** END-005, LAYOUT-002.
+- **Blockers:** The chosen layout.
+- **Objective:** A same-size code change in `MMPACK.PCA` (version 4 of the
+  patch, building on version 3) that shows the chosen layout for Nash's
+  ending, with every other ending, win quote and hint unchanged.
+- **Acceptance criteria:**
+  - **Design:** the patch sites, original and new bytes, and purpose are
+    recorded (rule 12). It is turned on per slot, as version 3 is for win
+    quotes, and reads no global word the size-word readers depend on.
+  - **Pointer:** the source of the English records' pointer for slot 16
+    is documented. It must work when Nash is the first pick; say what
+    happens if he is the second.
+  - **RAM trial:**
+    - with the version-4 code in RAM and the English records in RAM, Nash's
+      ending shows the chosen layout on all six pages;
+    - with no English records for a slot, that slot's ending is unchanged
+      (checked on at least one other ending checkpoint, or by code
+      argument if none exists);
+    - win quotes are unchanged: the `EXP-0032` forced-draw checks pass.
+  - **Code location:** the patch fits the code already decoded from
+    `MMPACK.PCA`, and the file still fits its sectors.
+
+### END-007 - Data: place Nash's English ending records
+
+- **Status:** `BLOCKED`
+- **Milestone:** M7
+- **Dependencies:** LAYOUT-002.
+- **Blockers:** The chosen layout (record format and size).
+- **Objective:** Put the six English records (and any label or script
+  data the layout needs) into `MC10.SHP`, or another loaded file, so that
+  the `END-006` pointer finds them.
+- **Acceptance criteria:**
+  - **Offset:** the chosen offset is justified: either free space proven
+    unused (a read log over the whole ending and the fights), or a
+    replacement of data shown not to be needed. The 456 bytes of
+    Japanese records are smaller than the 600 bytes of English.
+  - **Fit:** `MC10.SHP` with English win quotes and English ending fits
+    its 12 sectors (the `EXP-0031` method). Otherwise the alternative is
+    measured.
+  - **Spec:** a data spec with addresses and hashes only (rule 21), such
+    as `data/translations/nash_ending.json`. It compiles the arcade
+    records from the program image at build time, as `build_english.py`
+    does for win quotes.
+  - **Load check:** after a pick on a build, the buffer equals the built
+    file plus fix-ups (the `EXP-0036` `pick_writer.py` method).
+
+### END-008 - Build Nash's English ending and play-check it
+
+- **Status:** `BLOCKED`
+- **Milestone:** M7
+- **Dependencies:** GATE-TRANSLATION extension for Nash's ending, END-006,
+  END-007.
+- **Blockers:** The gate.
+- **Objective:** One image, built from the untouched source, with all 18
+  roster characters' English win quotes and Nash's English ending, shown
+  in play.
+- **Acceptance criteria:**
+  - **Build:** `tools.disc.build_english` (extended for ending specs) builds
+    the image under `build/`. The changed files and sectors are recorded,
+    and all sectors pass EDC/ECC.
+  - **Fast check:** before play, the agent replays the ending pages from a
+    pick on the build plus RAM checkpoints, where possible, to catch faults
+    early.
+  - **Play check:** the user plays from a cold boot with Nash first to his
+    ending. The agent checks every page against the chosen layout and the
+    arcade English (`EXP-0037` snapshots): text, labels, pictures, scene
+    breaks, no Japanese left.
+  - **Win quotes:** the session's win quotes are still English.
+  - **Recorded:** before and after screenshots, by hash (rule 11).
+
+### END-009 - Regression reference for the ending build
+
+- **Status:** `BLOCKED`
+- **Milestone:** M7
+- **Dependencies:** END-008.
+- **Blockers:** The confirmed build.
+- **Objective:** Add the M7 build to `data/regression/references.json`, and
+  show that every reference still rebuilds byte for byte.
+- **Acceptance criteria:**
+  - The new reference records the specs, the patch version and the expected
+    hashes. `tools.disc.regression` matches all references, including the
+    earlier three.
+  - The README's status and build section mention Nash's ending.
+
 ## Later Milestones (outline only)
 
 These are placeholders so the order is visible. Each becomes a full task, with
@@ -1521,8 +1753,7 @@ for each is in `docs/playbook_from_mshvsf.md`.
 
 | ID | Milestone | Outline |
 | --- | --- | --- |
-| END-005 | M7 | One ending localized: the `GATE-TRANSLATION` extension for that ending, the layout, names in the text, a build from the untouched source and a play check. |
-| END-006 | M8 | All roster endings; combined image with win quotes; coverage register; regression references. |
+| END-010 | M8 | All roster endings, including second-member endings; combined image with win quotes; coverage register; regression references. |
 | REL-001 | after M5 | Release patches (xdelta3 and SSP of the changed files) with a rebuild README; may be GitHub Release assets, never committed. Splice rather than re-compress changed streams to keep patches small. |
 | SPECIAL-001 | M9, user approval | Secret characters and bosses: which slots have their own official English and which reuse another's (slot 18); boss pre-fight text (Apocalypse's pre-fight line is captured, `docs/text_surfaces.md`); save- or progress-gated unlocks. Gouki's and Apocalypse's ordinary win quotes are in M5 (`RE-008`). |
 | UI-001 | after M8, user request | UI art: inventory English art already in every font before drawing anything; caption colour and style. Includes the `⚠乱入禁止` ("no challengers") sprite shown before and during the partner fight (spotted by the user, `EXP-0034`). |
