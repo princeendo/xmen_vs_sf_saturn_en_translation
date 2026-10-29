@@ -138,7 +138,11 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   D-021).
 - **2026-10-29:** the user extended `GATE-TRANSLATION` to Ken's win quotes
   (GO; pairing `k mod 8`; official arcade English, no rewording).
-- Next: `RE-006` (ready); `RE-007` waits on it.
+- **2026-10-29** (`SESSION-0039`, `EXP-0027`): version 3 of the English
+  mode keeps the English slots in data. Each slot's fixed-index word's spare
+  high byte (2 = English) selects it. Ken switches with his byte alone, Ryu's
+  16 draws are unchanged, and Storm is untouched (`RE-006`, D-022).
+- Next: `RE-007` (ready): build Ryu and Ken from the source image.
 
 ## Milestones
 
@@ -854,7 +858,7 @@ Endings, special characters and the rest of the roster stay out of scope
 
 ### RE-006 - Let the English mode cover a set of characters
 
-- **Status:** `READY`
+- **Status:** `DONE`
 - **Milestone:** M4
 - **Dependencies:** RE-004 (done).
 - **Blockers:** None.
@@ -871,8 +875,23 @@ Endings, special characters and the rest of the roster stay out of scope
     byte-identical to the unpatched game (the `EXP-0023` Storm control).
   - **Regression:** Ryu's 16 draws still show the same cells as `EXP-0024`.
   - **Tests:** unit tests for the patch table and for the slot-table data.
-- **Notes:** The fixed-index mode, endings and type-6 text are still not
-  reached. Note any change in the selector paths they share.
+- **Notes:**
+  - The fixed-index mode, endings and type-6 text are still not reached.
+    Note any change in the selector paths they share.
+  - Done 2026-10-29 (`EXP-0027`, D-022). The remap table holds 16 bytes,
+    too few for 19 slots, so version 3 uses the spare high byte of each
+    slot's fixed-index word (`0x060666E0` + 2 × slot; 2 = English) instead.
+    It was shown unused (static scan, read-breakpoint logs with a positive
+    control).
+  - Live checks:
+    - Ken's byte alone switched his quote (English record 6, 50/50). Without
+      it, the screen was byte-identical to the unpatched game.
+    - Ryu's 16 draws were byte-identical to `EXP-0024`.
+    - Storm was byte-identical to the unpatched game.
+  - The fixed-index path changes only in reading the marked word: an
+    English slot keeps its fixed index through `and #7`. The remap table at
+    `0x06066718` is untouched. `tools.disc.build_english` still uses
+    version 2 until `RE-007`.
 
 ### PAIR-002 - Pair the second character's records with the arcade English
 
@@ -913,10 +932,10 @@ official arcade English, no rewording). It is recorded under
 
 ### RE-007 - Build Ryu and the second character from the source image
 
-- **Status:** `BLOCKED`
+- **Status:** `READY`
 - **Milestone:** M4
-- **Dependencies:** RE-004 (done), RE-006, PAIR-002 (done), the gate extension above (done).
-- **Blockers:** RE-006.
+- **Dependencies:** RE-004 (done), RE-006 (done), PAIR-002 (done), the gate extension above (done).
+- **Blockers:** None.
 - **Objective:** Generalize `tools/disc/build_english.py` to build several
   characters from their specs, and produce one image with both characters'
   English win quotes.

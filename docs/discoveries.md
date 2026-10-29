@@ -370,3 +370,29 @@ English record 1 and the Japanese bubble showed Japanese record 9. The table
 is `data/translations/ken_pairing.json` (addresses only).
 
 Reproduce: `research/experiments/EXP-0026/README.md`, "Procedure".
+
+## D-022 (M4): A per-slot byte in the fixed-index table selects English (`RE-006`, `EXP-0027`)
+
+The win-quote selector's fixed-index table at WRAM-H `0x060666E0` holds one
+big-endian word per slot (19 slots), with values 0-7. Only the fixed-index
+path reads it (`0x06066688`, through the literal at `0x060666D8`), and arcade
+play never took that path. Version 3 of the English-mode patch
+(`tools.disc.english_mode.patches_v3`) uses each word's high byte as the
+slot's quote language. It reads that byte in the same 11-word selector block
+as version 2. Setting `0x060666E0` + 2 × slot to 2 turns English on for that
+speaker; 0 leaves it Japanese.
+
+**Evidence.**
+
+- **Static:** in four RAM dumps, the only reference to the table is the
+  literal at `0x060666D8`, loaded only at `0x06066688`.
+- **Live:** a read breakpoint on the table logged nothing over 5 replays (K.O.,
+  quote, select screens, fights). The same breakpoint on the neighbouring
+  language table caught its reads.
+- **Ken:** with v3 and Ken's English records in RAM, his table byte alone
+  switched his quote. Byte 0 gave a screen identical to the unpatched game;
+  byte 2 gave English record 6 at 50/50 cells.
+- **Ryu:** all 16 draws were byte-identical to version 2 (`EXP-0024`).
+- **Storm** (unmarked) was byte-identical to the unpatched game.
+
+Reproduce: `research/experiments/EXP-0027/README.md`, "Procedure".

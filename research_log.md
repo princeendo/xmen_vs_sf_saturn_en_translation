@@ -1252,3 +1252,39 @@ official arcade English, no rewording. Record it."
   `MC0A.SHP`'s table, added to Ryu's. His ending records 16-20 and everything
   else stay gated.
 - `RE-007` now waits only on `RE-006`. No experiment was run.
+
+## 2026-10-29 — SESSION-0039 / EXP-0027: version 3, an English-slot table (`RE-006`)
+
+User request (verbatim): "Start RE-006: let the English mode cover a set of
+characters."
+
+- **Location.** The suggested remap table (`0x06066718`) has 16 bytes, too
+  few for 19 slots, and a bitmask needs a shift loop that does not fit. The
+  fixed-index table at `0x060666E0` has one word per slot with values 0-7, so
+  its high bytes are spare. The type-6 routine (`0x06066728`) has its own
+  remap at `0x060667A8`.
+- **Unused check.**
+  - Static (`table_refs.py`): only the literal `0x060666D8`, loaded only by
+    the fixed path at `0x06066688`.
+  - Live (read breakpoint, log mode): 0 reads in 5 replays. The positive
+    control on the language table logged `0x060666AE`/`0x060666B2`.
+  - The "ken_fight" replay from 3302 stayed on select screens (its
+    screenshots), so fights are covered by the other two fight replays.
+- **Version 3** (`tools/disc/english_mode.py`: `SELECTOR_V3`,
+  `slot_patches`, `patches_v3`; `check`/`apply` take a patch list). The new
+  11-word block is disassembled in a unit test.
+- **Seeds:** Ken's `pre_ko` pauses at seed 9501 (or 1977, one frame later);
+  Ryu's at 8520.
+- **Live:**
+  - Ken: slot table {9} gave a screen byte-identical to the unpatched game;
+    {9, 10} gave English record 6, 50/50 cells.
+  - Ryu: 17 runs byte-identical to `EXP-0024` (screenshot and VDP1).
+  - Storm: identical to the unpatched game, twice.
+- **Observation.** Storm's quote was a CPU win, read from her file in WRAM-H
+  (base `0x060C1000`, record 12). So the quote task is not always at
+  `0x060F8AC0`; the patch uses r6 and does not depend on it.
+
+Checks: `pytest` 157 passed; `ruff check`, `ruff format --check`, `mypy` and
+`mypy --strict` on the EXP-0027 scripts are clean.
+
+Conclusion: `RE-006` is `DONE` (**CONFIRMED**, D-022). `RE-007` is `READY`.

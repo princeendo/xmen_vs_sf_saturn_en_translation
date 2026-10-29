@@ -37,6 +37,10 @@ the win-quote task only:
 Hint, ending and other tasks are cleared before setup, so their flag byte is
 0 and they render as before. Each entry is (WRAM-H address, original bytes,
 new bytes); the originals are checked before any write.
+
+``PATCHES`` is version 2 (one English slot in code), still used by
+`tools.disc.build_english`. Version 3 (``patches_v3``, below; `RE-006`,
+`EXP-0027`) keeps the English slots in a table instead.
 """
 
 from __future__ import annotations
@@ -71,14 +75,68 @@ PATCHES: list[tuple[int, str, str]] = [
 ]
 
 
+# Version 3 (`RE-006`, `EXP-0027`): the English slots are data, not code.
+#
+# The fixed-index table (``FIXED_TABLE``, one big-endian word per slot, 19
+# slots) holds values 0-7, so each word's high byte is spare. Only the
+# fixed-index path reads the table (``0x06066688``, through the literal at
+# ``0x060666D8``); arcade play never takes it (`EXP-0027`). Version 3 stores
+# the slot's quote language in that high byte: 0 for Japanese, ``ENGLISH`` (the
+# arcade's language-word value) for English. The selector test reads it with
+# ``mov.b @(r0,r1),r2`` and, for English, stores it as the task flag. The
+# fixed path keeps the whole word, and ``and #7`` drops the high byte.
+#
+#   06066668 D11B  mov.l @(0x060666D8),r1   ; FIXED_TABLE
+#   0606666A C503  mov.w @(6,gbr),r0       ; slot x 2
+#   0606666C 021C  mov.b @(r0,r1),r2       ; high byte: language
+#   0606666E 2228  tst r2,r2
+#   06066670 C501  mov.w @(2,gbr),r0       ; r, or the fixed word
+#   06066672 8906  bt 0x06066682           ; Japanese: index unchanged
+#   06066674 C907  and #7,r0               ; English: r & 7 (the remap)
+#   06066676 E15C  mov #FLAG,r1
+#   06066678 316C  add r6,r1               ; r6 = task
+#   0606667A A002  bra 0x06066682
+#   0606667C 2120  mov.b r2,@r1            ; task + FLAG = ENGLISH
+#
+# The rest of version 2 is unchanged, and the remap table at ``0x06066718``
+# is not used. Adding a character is one byte: ``slot_patches``.
+FIXED_TABLE = 0x060666E0
+SLOTS = 19  # win-quote slots 0-18 (EXP-0008)
+ENGLISH = 2  # the arcade's language word for English (EXP-0022)
+
+SELECTOR_V3 = (
+    0x06066668,
+    "90E2 00BD 2008 3EEA 890E D104 C501 001C C003 A009 0009",
+    f"D11B C503 021C 2228 C501 8906 C907 E1{FLAG:02X} 316C A002 2120",
+)
+
+
+def slot_patches(slots: list[int]) -> list[tuple[int, str, str]]:
+    """The table bytes that make each slot in ``slots`` English (high byte 0 -> 2)."""
+    for slot in slots:
+        if not 0 <= slot < SLOTS:
+            raise ValueError(f"slot {slot} is outside 0-{SLOTS - 1}")
+    return [(FIXED_TABLE + 2 * slot, "00", f"{ENGLISH:02X}") for slot in sorted(slots)]
+
+
+def patches_v3(slots: list[int]) -> list[tuple[int, str, str]]:
+    """Version 3 code plus the slot table for ``slots``."""
+    return [SELECTOR_V3, *PATCHES[1:], *slot_patches(slots)]
+
+
 def as_bytes(text: str) -> bytes:
     return bytes.fromhex(text.replace(" ", ""))
 
 
-def check(memory: bytes, base: int, new: bool = False) -> list[str]:
+def check(
+    memory: bytes,
+    base: int,
+    new: bool = False,
+    patches: list[tuple[int, str, str]] | None = None,
+) -> list[str]:
     """Return a mismatch line for every patch whose bytes differ from the expected."""
     problems = []
-    for address, old, replacement in PATCHES:
+    for address, old, replacement in PATCHES if patches is None else patches:
         expected = as_bytes(replacement if new else old)
         offset = address - base
         found = memory[offset : offset + len(expected)]
@@ -89,10 +147,13 @@ def check(memory: bytes, base: int, new: bool = False) -> list[str]:
     return problems
 
 
-def apply(memory: bytearray, base: int) -> None:
-    problems = check(bytes(memory), base)
+def apply(
+    memory: bytearray, base: int, patches: list[tuple[int, str, str]] | None = None
+) -> None:
+    chosen = PATCHES if patches is None else patches
+    problems = check(bytes(memory), base, patches=chosen)
     if problems:
         raise ValueError("original bytes differ: " + "; ".join(problems))
-    for address, _, replacement in PATCHES:
+    for address, _, replacement in chosen:
         data = as_bytes(replacement)
         memory[address - base : address - base + len(data)] = data
