@@ -108,7 +108,11 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   `RNG() & 0x0F`, chosen when the quote starts; pointer `0x060F2490`. Any
   record can be forced from `pre_ko`: 5 indices, 38/38 cells, with a control
   (`RE-002`, D-016).
-- Next: `LAYOUT-001` or `PAIR-001` (both ready; neither puts English on disc).
+- **2026-10-28** (`SESSION-0032`, `EXP-0022`): in the arcade, the same
+  random draw shows Japanese record `r` and English record `r mod 8`. So
+  Saturn record `k` pairs with Ryu's English record `k mod 8`; all 16 were
+  checked in MAME, and English record 8 is never chosen (`PAIR-001`, D-017).
+- Next: `GATE-TRANSLATION` (the user's decision) and `LAYOUT-001` (ready).
 
 ## Milestones
 
@@ -474,10 +478,10 @@ prerequisites before English text goes on disc).
 
 ### GATE-TRANSLATION - Confirm reference and translation prerequisites
 
-- **Status:** `BLOCKED`
+- **Status:** `READY` (waiting for the user's decision)
 - **Milestone:** M3 (entry gate)
-- **Dependencies:** DOC-002, REF-001 to REF-008 (all done), PAIR-001.
-- **Blockers:** PAIR-001.
+- **Dependencies:** DOC-002, REF-001 to REF-008, PAIR-001 (all done).
+- **Blockers:** None.
 - **Objective:** Make an explicit go/no-go decision before any official or
   translated English text goes into a disc build. The oracle, the pairing
   method and the user's policy must be settled first.
@@ -659,7 +663,7 @@ text (`EXP-0015`) and stay out of scope (rule 23).
 
 ### PAIR-001 - Pair Ryu's Saturn records with the arcade English
 
-- **Status:** `READY`
+- **Status:** `DONE`
 - **Milestone:** M3
 - **Dependencies:** REF-003, REF-004, RE-002 (done).
 - **Blockers:** None.
@@ -684,6 +688,15 @@ text (`EXP-0015`) and stay out of scope (rule 23).
   documented).
 - **Notes:** This reads English but writes none to disc, so it runs before the
   gate.
+- **Evidence:** `EXP-0022`, D-017, and `data/translations/ryu_pairing.json`.
+  - The arcade selector `0x04F396`, a twin of the Saturn's, draws `r =
+    rand() & 0xF`. Japanese shows record `r`; English shows `remap[r] = r
+    mod 8`.
+  - With the draw forced in MAME, all 16 English draws and 4 Japanese draws
+    read the predicted record.
+  - A natural draw in both languages from one state (r = 10) gave English
+    record 2 and Japanese record 10.
+  - Ryu's English record 8 is unreachable through this selector.
 
 ### RE-003 - Build all of Ryu's win quotes in English from the source image
 

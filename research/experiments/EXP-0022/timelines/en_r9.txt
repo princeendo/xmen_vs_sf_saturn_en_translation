@@ -1,0 +1,11 @@
+# English (xmvsfu as is), Ryu's slot forced, random draw forced to 9.
+1000 repeat 4 30 8 Coin 1
+1200 repeat 10 60 8 1 Player Start
+1900 repeat 40 30 8 P1 Button 1
+6100 dump 0xFFD470 0xFFD47F local/pair001/en_r9/lang.bin
+6100 force16 0xFF8BB6 0x8DE2
+6100 debug bpset 4f3b2,1,{d0=9;printf "draw r forced, slot base %08x",d@ff8bb4;g}
+6100 logreads 0x180000 0x18E179 local/pair001/en_r9/reads.txt
+6280 snap
+6300 unforce 0xFF8BB6
+6400 exit

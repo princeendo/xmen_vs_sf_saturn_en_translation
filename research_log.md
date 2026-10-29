@@ -1014,3 +1014,40 @@ passed) clean; `force_record.py` also `mypy --strict`. No disc change.
 
 Conclusion: `RE-002` is `DONE` (**CONFIRMED**, D-016). `PAIR-001` is
 unblocked.
+
+## 2026-10-28 — SESSION-0032 / EXP-0022: Ryu's English pairing
+
+Task: PAIR-001 ("Start PAIR-001: pair Ryu's Saturn records with the arcade English.")
+
+Actions and results:
+
+- **Saturn lead:** the selector's unused mode has 100-byte records and a
+  remap table `[0..7, 0..7]` (`0x06066718`). Its two per-language base lists
+  point Ryu's slot at records 0 and 16 of the loaded table.
+- **Arcade search:** a raw search of `xmvsfu-68k.bin` found no copy of the
+  remap table. The PC-relative tables are encrypted in ROM.
+- **Disassembly:** MAME (`-debug -debugger none`, the timeline `debug` event)
+  disassembled `0x04F000`-`0x04F800` from the decrypted opcodes. The selector
+  `0x04F396` is the same routine as the Saturn's, with identical tables.
+- **First runtime attempts:**
+  - `en_r9`: a fresh NVRAM diverged from the route, so the force came too
+    late. **Mistake**, fixed by copying `EXP-0009`'s NVRAM.
+  - `probe`: read the language word at `0xFFD47A` (0). **Wrong address**:
+    A5 − `0x2B86` = `0xFF547A`.
+  - `probe2`: the right registers. Language word 2, r = 10, index 2,
+    English base `0x18986E`.
+- **Controlled runs** (`run_pair.py`):
+  - The natural draw r = 10 gives English record 2 and Japanese record 10.
+  - With Ryu's slot forced: English draws 0-15 all read record `r mod 8`;
+    Japanese draws 3, 8, 9 and 15 read record `r`.
+  - The draw-9 snapshots show English record 1 and Japanese record 9.
+- **Pairing table:** `make_pairing.py` wrote
+  `data/translations/ryu_pairing.json`, 16 entries, all CONFIRMED.
+
+Checks: `ruff check`, `ruff format --check`, `mypy` and `pytest` clean; the
+EXP-0022 scripts also pass `mypy --strict`. A stray MAME `debug.log` written
+to the repository root was moved under `local/`. No disc change.
+
+Conclusion: `PAIR-001` is `DONE` (**CONFIRMED**, D-017).
+`GATE-TRANSLATION`'s dependencies are all done; it waits for the user's
+decision.

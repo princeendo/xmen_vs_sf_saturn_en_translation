@@ -254,3 +254,27 @@ shows record `k`. Indices 0, 1, 5, 8 and 15 drew all 38 cells exactly, over
 two sessions. The no-write control equals the live capture.
 
 Reproduce: `research/experiments/EXP-0021/README.md`, "Procedure".
+
+## D-017 (M3): Saturn record k pairs with arcade English record k mod 8 (`PAIR-001`, `EXP-0022`)
+
+The arcade win-quote selector at `0x04F396` (`xmvsfu`) works as follows:
+
+- It draws `r = rand() & 0x0F`.
+- When the language word `0xFF547A` is nonzero (English is 2), it shows
+  record `remap[r]`, where `remap = [0..7, 0..7]`, with 100-byte records from
+  the English table `0x17E1E8`.
+- Otherwise it shows record `r`, with 76-byte records from the Japanese table
+  `0x17E19C`.
+
+The Saturn runs a port of the same routine with the language word 0
+(`EXP-0021`), so Saturn record `k` (arcade Japanese slot 9 record `k`) pairs
+with English slot 9 record `k mod 8`. Ryu's English record 8 is never chosen
+by this selector.
+
+**Evidence.** In MAME, forcing the draw with Ryu's slot forced read exactly
+the predicted English record for all 16 draws, and the predicted Japanese
+record for 4 draws. A natural draw in both languages from one state gave
+English record 2 and Japanese record 10, for r = 10. The table is in
+`data/translations/ryu_pairing.json`.
+
+Reproduce: `research/experiments/EXP-0022/README.md`, "Procedure".

@@ -1,0 +1,11 @@
+# English (xmvsfu), no forcing: log the selector's path, D0/D1 and the language words.
+1000 repeat 4 30 8 Coin 1
+1200 repeat 10 60 8 1 Player Start
+1900 repeat 40 30 8 P1 Button 1
+5000 debug bpset 4f396,1,{printf "entry f%d d47a=%04x d478=%04x d083=%02x",frame,w@ffd47a,w@ffd478,b@ffd083;g}
+5000 debug bpset 4f3c6,1,{printf "store d0=%08x d1=%08x a0=%08x",d0,d1,a0;g}
+5000 logwrites 0xFF8BB6 local/pair001/probe/slotwrites.txt
+5000 logreads 0x180000 0x18E179 local/pair001/probe/reads.txt
+6100 dump 0xFFD470 0xFFD47F local/pair001/probe/lang6100.bin
+6280 snap
+6400 exit

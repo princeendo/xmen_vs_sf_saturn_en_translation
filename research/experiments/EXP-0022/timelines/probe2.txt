@@ -1,0 +1,10 @@
+# English (xmvsfu), no forcing: registers at each step of the win-quote selector.
+1000 repeat 4 30 8 Coin 1
+1200 repeat 10 60 8 1 Player Start
+1900 repeat 40 30 8 P1 Button 1
+5000 debug bpset 4f396,1,{printf "entry a5=%08x a0=%08x d1=%08x",a5,a0,d1;g}
+5000 debug bpset 4f3b2,1,{printf "rand d0=%08x",d0;g}
+5000 debug bpset 4f3c6,1,{printf "index d0=%08x",d0;g}
+5000 debug bpset 4f3d2,1,{printf "lang d0=%08x (from a5-2b86=%08x)",d0,a5-2b86;g}
+5000 debug bpset 4f3da,1,{printf "base a1=%08x d1=%08x long=%08x",a1,d1,d@(a1+d1);g}
+6400 exit
