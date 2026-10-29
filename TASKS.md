@@ -112,7 +112,9 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   random draw shows Japanese record `r` and English record `r mod 8`. So
   Saturn record `k` pairs with Ryu's English record `k mod 8`; all 16 were
   checked in MAME, and English record 8 is never chosen (`PAIR-001`, D-017).
-- Next: `GATE-TRANSLATION` (the user's decision) and `LAYOUT-001` (ready).
+- **2026-10-28:** the user passed `GATE-TRANSLATION` for Ryu's win quotes
+  (GO; pairing `k mod 8`; official arcade English, no rewording).
+- Next: `LAYOUT-001` (ready), then `RE-003`.
 
 ## Milestones
 
@@ -478,7 +480,7 @@ prerequisites before English text goes on disc).
 
 ### GATE-TRANSLATION - Confirm reference and translation prerequisites
 
-- **Status:** `READY` (waiting for the user's decision)
+- **Status:** `DONE`
 - **Milestone:** M3 (entry gate)
 - **Dependencies:** DOC-002, REF-001 to REF-008, PAIR-001 (all done).
 - **Blockers:** None.
@@ -503,6 +505,19 @@ prerequisites before English text goes on disc).
   - Endings, special cases and other characters stay gated (rules 23 and 24).
   - The arcade has 9 English records for Ryu (slot 9) but 16 Japanese, and
     the Saturn copies the 16 (`EXP-0015`), so pairing is not one-to-one.
+- **Gate acceptance (2026-10-28):**
+  - The user's decision is **GO**, in their words: "GATE-TRANSLATION: go for Ryu's win quotes. Use the k mod 8 pairing (Saturn records k and k+8 both show English record k), official arcade English, no rewording. Record it."
+  - Checked at acceptance: DOC-002, REF-001 to REF-008 and PAIR-001 are all
+    `DONE`.
+  - **Scope:** Ryu's ordinary win quotes only (Saturn records 0-15 of
+    `MC09.SHP`'s table). Records 16-21 (ending text), endings, other
+    characters and special cases remain gated (rules 23 and 24).
+  - **Pairing policy:** Saturn record `k` shows Ryu's official arcade English
+    record `k mod 8` (`EXP-0022`, `data/translations/ryu_pairing.json`).
+    Records `k` and `k + 8` therefore show the same English quote, and
+    English record 8 is not used.
+  - **Wording:** the official arcade English, with no rewording. Grammar
+    fixes stay opt-in only (policy).
 
 ## Phase F: M1
 
@@ -703,7 +718,7 @@ text (`EXP-0015`) and stay out of scope (rule 23).
 - **Status:** `BLOCKED`
 - **Milestone:** M3
 - **Dependencies:** GATE-TRANSLATION, LAYOUT-001, RE-002, PAIR-001, DISC-002.
-- **Blockers:** GATE-TRANSLATION, LAYOUT-001, RE-002, PAIR-001.
+- **Blockers:** LAYOUT-001.
 - **Objective:** Compile each of Ryu's 16 win-quote records from its paired
   official English (the gate's policy), through the chosen layout route, into
   `MC09.SHP` (and `FIX.PRS` if the route needs it). Build the image from the

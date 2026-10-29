@@ -1051,3 +1051,19 @@ to the repository root was moved under `local/`. No disc change.
 Conclusion: `PAIR-001` is `DONE` (**CONFIRMED**, D-017).
 `GATE-TRANSLATION`'s dependencies are all done; it waits for the user's
 decision.
+
+## 2026-10-28 — GATE-TRANSLATION passed for Ryu's win quotes
+
+User decision (verbatim): "GATE-TRANSLATION: go for Ryu's win quotes. Use the
+k mod 8 pairing (Saturn records k and k+8 both show English record k),
+official arcade English, no rewording. Record it."
+
+Recorded in `TASKS.md` (`GATE-TRANSLATION` `DONE`, with scope, pairing and
+wording) and `docs/localization_policy.md`.
+
+- **Checked:** DOC-002, REF-001 to REF-008 and PAIR-001 are all `DONE`.
+- **Scope:** Ryu's records 0-15 only; endings, other characters and specials
+  stay gated.
+- **RE-003:** now blocked only by `LAYOUT-001`.
+
+No experiment was run and no files other than documentation changed.

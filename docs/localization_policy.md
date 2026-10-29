@@ -27,6 +27,15 @@ names are the XvSF default, both variants are still built, and a release lists
 the American variant first, as MSHvSF 0.1.0 did. Whether XvSF's disc holds the
 American convention's art and voice is not yet known (`REF-007`, `LOC-001`).
 
+**Translation gate, Ryu (2026-10-28).** After `PAIR-001` (`EXP-0022`), the
+user passed `GATE-TRANSLATION`: "GATE-TRANSLATION: go for Ryu's win quotes. Use the k mod 8 pairing (Saturn records k and k+8 both show English record k), official arcade English, no rewording. Record it."
+
+| Topic | Decision | Evidence |
+| --- | --- | --- |
+| Scope | Ryu's ordinary win quotes (Saturn records 0-15) only; endings, other characters and specials stay gated | `TASKS.md` `GATE-TRANSLATION` |
+| Pairing | Saturn record `k` shows official arcade English record `k mod 8`; records `k` and `k + 8` repeat one English quote; English record 8 is unused | arcade selector `0x04F396` (`EXP-0022`, D-017); `data/translations/ryu_pairing.json` |
+| Wording | Official arcade English, no rewording; grammar fixes opt-in only | the 2026-10-27 policy above |
+
 ## Deferred Until Evidence Exists
 
 These MSHvSF decisions depend on facts not yet known for XvSF. Each is put to
