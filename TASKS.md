@@ -142,7 +142,13 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   mode keeps the English slots in data. Each slot's fixed-index word's spare
   high byte (2 = English) selects it. Ken switches with his byte alone, Ryu's
   16 draws are unchanged, and Storm is untouched (`RE-006`, D-022).
-- Next: `RE-007` (ready): build Ryu and Ken from the source image.
+- **2026-10-29** (`SESSION-0040`, `EXP-0028`): **M4 reached.** One
+  command builds an image from the untouched source in which Ryu and Ken
+  speak their official arcade English win quotes (Track 01 `b5dd07c2…`).
+  All 16 draws of each were checked, and the user's cold-boot play check
+  passed (`RE-007`, D-023).
+- Next: M5 (`RE-005`) is outlined only. Its full task needs writing, and the
+  roster and exceptions need a user decision before it starts.
 
 ## Milestones
 
@@ -932,7 +938,7 @@ official arcade English, no rewording). It is recorded under
 
 ### RE-007 - Build Ryu and the second character from the source image
 
-- **Status:** `READY`
+- **Status:** `DONE` (2026-10-29, `SESSION-0040`, `EXP-0028`, D-023)
 - **Milestone:** M4
 - **Dependencies:** RE-004 (done), RE-006 (done), PAIR-002 (done), the gate extension above (done).
 - **Blockers:** None.
@@ -957,6 +963,18 @@ official arcade English, no rewording). It is recorded under
     quote and a Japanese continue hint.
 - **Outputs:** an experiment record, the generalized build tool and its tests,
   the specs, and a regression reference.
+- **Result:** every criterion met (`EXP-0028`).
+  - `tools.disc.build_english` takes several specs, applies version 3 with
+    their slots, and with `--image` builds the image in one command.
+  - Track 01 is `b5dd07c2…`. Only the three files change, at their own
+    sizes. All sectors are valid, the layout is unchanged, three builds are
+    identical, and the source is unchanged.
+  - Ken's 16 forced draws and Ryu's 16 are at 50/50 cells. Ryu's runs are
+    byte-identical to `EXP-0024`, which is the regression reference.
+  - Play: Ryu and Ken won in English. Rogue's CPU quote and the continue hint
+    were Japanese.
+  - A win finished by the second member, or a CPU win by Ryu or Ken, was not
+    observed (`docs/known_unknowns.md`).
 
 ## Later Milestones (outline only)
 

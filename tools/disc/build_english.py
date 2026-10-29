@@ -1,30 +1,37 @@
-"""Build ``MMPACK.PCA`` and a character's MC file with English win quotes.
+"""Build ``MMPACK.PCA`` and characters' MC files with English win quotes.
 
 Run from the repository root:
 
-    ./invenv.sh python -m tools.disc.build_english SPEC OUT [--program PATH]
+    ./invenv.sh python -m tools.disc.build_english SPEC [SPEC ...] OUT
+        [--program PATH] [--fix-grammar] [--patch-version {2,3}] [--image DIR]
 
-SPEC is a translation record such as `data/translations/ryu_win_quotes.json`.
-For each English record it names the source address in the US arcade program
-and its SHA-256. The English text itself is not stored in the repository
-(AGENTS.md rule 21); it is read from PATH, the ignored ``xmvsfu`` program
-image (`EXP-0008`). The build has these steps:
+Each SPEC is a translation record such as
+`data/translations/ryu_win_quotes.json`. For each English record it names the
+source address in the US arcade program and its SHA-256. The English text
+itself is not stored in the repository (AGENTS.md rule 21); it is read from
+PATH, the ignored ``xmvsfu`` program image (`EXP-0008`). The build has these
+steps:
 
 1. Read every source record, check its hash, decode it to text, and recompile
    it with `tools.text.caption`. The recompiled bytes must equal the source
    bytes, unless the spec gives an opt-in ``grammar_fix`` and ``--fix-grammar``
    is set (none exist yet).
-2. Write the compiled records over the start of the character's quote table
-   in the MC file (100 bytes each, in English record order) and re-encode the
-   file at its original size.
-3. Apply `tools.disc.english_mode.PATCHES` to ``MMPACK.PCA`` and re-encode it
-   at its original size.
+2. For each SPEC, write the compiled records over the start of the
+   character's quote table in its MC file (100 bytes each, in English record
+   order) and re-encode the file at its original size.
+3. Patch ``MMPACK.PCA`` and re-encode it at its original size. Version 3
+   (the default; `RE-006`, `EXP-0027`) is
+   `tools.disc.english_mode.patches_v3` with every SPEC's ``arcade_slot``.
+   Version 2 (`EXP-0023`) is the code-only Ryu patch; it takes exactly one
+   SPEC, Ryu's, and reproduces `EXP-0024`'s files.
 
 Both files are read from the untouched data track and checked against
 `references/saturn_jp/iso_listing.json`. Each stream must still end in its
 file's last sector. ``OUT/changes.json`` records every changed range, with
-original and new bytes (rule 12); OUT is an ignored path. Then
-`tools.disc.patch_image` builds the image.
+original and new bytes (rule 12); OUT is an ignored path. With ``--image
+DIR`` (under ``build/``), `tools.disc.patch_image` then builds the image from
+the untouched source with the files written to OUT; otherwise run it
+separately.
 """
 
 from __future__ import annotations
@@ -35,9 +42,10 @@ import json
 from collections.abc import Sequence
 from pathlib import Path
 
-from tools.disc.english_mode import PATCHES, as_bytes
+from tools.disc.english_mode import ENGLISH_SLOT2, PATCHES, as_bytes, patches_v3
 from tools.disc.iso9660 import RAW_SECTOR, USER_DATA
 from tools.disc.patch_image import find_entry
+from tools.disc.patch_image import main as patch_image
 from tools.disc.prs import (
     compress_file,
     decompress_entries,
@@ -51,6 +59,7 @@ TRACK = Path(
     "X-Men vs. Street Fighter (Japan) (3M) (Track 01).bin"
 )
 LISTING = Path("references/saturn_jp/iso_listing.json")
+MANIFEST = Path("references/saturn_jp/README.md")
 PROGRAM = Path("local/ref003/xmvsfu-68k.bin")
 RECORD = 100
 
@@ -122,13 +131,35 @@ def build_mc(
     return rebuilt
 
 
-def build_mmpack(raw: bytes, changes: list[dict[str, object]]) -> bytes:
+def mmpack_patches(
+    specs: list[dict[str, object]], version: int
+) -> list[tuple[int, str, str]]:
+    slots = [int(str(spec["arcade_slot"])) for spec in specs]
+    if len(set(slots)) != len(slots):
+        raise ValueError(f"a slot appears twice: {slots}")
+    files = [str(spec["mc_file"]) for spec in specs]
+    if len(set(files)) != len(files):
+        raise ValueError(f"an MC file appears twice: {files}")
+    if version == 2:
+        if slots != [ENGLISH_SLOT2 // 2]:
+            raise ValueError("version 2 builds Ryu (slot 9) alone")
+        return PATCHES
+    if version == 3:
+        return patches_v3(slots)
+    raise ValueError(f"unknown patch version {version}")
+
+
+def build_mmpack(
+    raw: bytes,
+    changes: list[dict[str, object]],
+    patches: list[tuple[int, str, str]] = PATCHES,
+) -> bytes:
     header, entries = split_header(raw)
     _, decoded, _ = decompress_entries(raw)
     code = bytearray(decoded)
     (_, first_size), (second_dest, _) = entries
     base = second_dest - first_size  # address of decoded offset 0, for entry 1
-    for address, old, new in PATCHES:
+    for address, old, new in patches:
         offset = address - base
         original = bytes(code[offset : offset + len(as_bytes(old))])
         if original != as_bytes(old):
@@ -155,38 +186,59 @@ def build_mmpack(raw: bytes, changes: list[dict[str, object]]) -> bytes:
     return rebuilt
 
 
+def file_summary(raw: bytes, rebuilt: bytes) -> dict[str, object]:
+    return {
+        "size": len(raw),
+        "original_sha256": hashlib.sha256(raw).hexdigest(),
+        "rebuilt_sha256": hashlib.sha256(rebuilt).hexdigest(),
+    }
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("spec", type=Path)
-    parser.add_argument("out", type=Path)
+    parser.add_argument("paths", type=Path, nargs="+", help="SPEC [SPEC ...] OUT")
     parser.add_argument("--program", type=Path, default=PROGRAM)
     parser.add_argument("--fix-grammar", action="store_true")
+    parser.add_argument("--patch-version", type=int, choices=(2, 3), default=3)
+    parser.add_argument("--image", type=Path, help="also build the image here")
     args = parser.parse_args(argv)
-    spec = json.loads(args.spec.read_text())
-    args.out.mkdir(parents=True, exist_ok=False)
-    english = compile_records(spec, args.program.read_bytes(), args.fix_grammar)
+    if len(args.paths) < 2:
+        parser.error("give at least one SPEC and OUT")
+    *spec_paths, out = args.paths
+    specs = [json.loads(path.read_text()) for path in spec_paths]
+    patches = mmpack_patches(specs, args.patch_version)
+    out.mkdir(parents=True, exist_ok=False)
+    program = args.program.read_bytes()
     changes: list[dict[str, object]] = []
-    summary: dict[str, object] = {}
-    mc_name = str(spec["mc_file"])
-    table = int(str(spec["table_offset"]), 16)
-    for name in (mc_name, "MMPACK.PCA;1"):
+    summary: dict[str, object] = {"patch_version": args.patch_version}
+    for spec in specs:
+        english = compile_records(spec, program, args.fix_grammar)
+        name = str(spec["mc_file"])
         raw = read_file(name)
-        if name == mc_name:
-            rebuilt = build_mc(raw, english, table, mc_name, changes)
-        else:
-            rebuilt = build_mmpack(raw, changes)
-        (args.out / name.split(";")[0]).write_bytes(rebuilt)
-        summary[name] = {
-            "size": len(raw),
-            "original_sha256": hashlib.sha256(raw).hexdigest(),
-            "rebuilt_sha256": hashlib.sha256(rebuilt).hexdigest(),
-        }
-    summary["english_sha256"] = hashlib.sha256(english).hexdigest()
-    (args.out / "changes.json").write_text(
+        table = int(str(spec["table_offset"]), 16)
+        rebuilt = build_mc(raw, english, table, name, changes)
+        summary[name] = file_summary(raw, rebuilt)
+        summary[f"{name} english_sha256"] = hashlib.sha256(english).hexdigest()
+        (out / name.split(";")[0]).write_bytes(rebuilt)
+    raw = read_file("MMPACK.PCA;1")
+    rebuilt = build_mmpack(raw, changes, patches)
+    summary["MMPACK.PCA;1"] = file_summary(raw, rebuilt)
+    (out / "MMPACK.PCA").write_bytes(rebuilt)
+    (out / "changes.json").write_text(
         json.dumps({"files": summary, "changes": changes}, indent=1) + "\n"
     )
     print(json.dumps(summary, indent=1))
-    return 0
+    if args.image is None:
+        return 0
+    files = []
+    for name in [*(str(spec["mc_file"]) for spec in specs), "MMPACK.PCA;1"]:
+        files += ["--file", name, "--data", str(out / name.split(";")[0])]
+    return patch_image(
+        [
+            *("--source-dir", str(TRACK.parent), "--manifest", str(MANIFEST)),
+            *("--track", TRACK.name, *files, "--out-dir", str(args.image)),
+        ]
+    )
 
 
 if __name__ == "__main__":

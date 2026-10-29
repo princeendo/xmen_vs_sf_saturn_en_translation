@@ -1288,3 +1288,53 @@ Checks: `pytest` 157 passed; `ruff check`, `ruff format --check`, `mypy` and
 `mypy --strict` on the EXP-0027 scripts are clean.
 
 Conclusion: `RE-006` is `DONE` (**CONFIRMED**, D-022). `RE-007` is `READY`.
+
+## 2026-10-29 — SESSION-0040 / EXP-0028: Ryu and Ken from the source image (`RE-007`)
+
+User request (verbatim): "Start RE-007: build Ryu and Ken from the source
+image."
+
+- **Specs.** `make_spec.py` is generalized from `EXP-0024`. With Ryu's
+  arguments it reproduces `ryu_win_quotes.json`, apart from the description.
+  It wrote `ken_win_quotes.json` (slot 10, `MC0A.SHP;1`, `0x2a4c`), and a
+  rerun reproduces that file byte for byte.
+- **Build tool.** `tools.disc.build_english` now:
+  - takes several specs and applies version 3 with their slots;
+  - rejects a repeated slot or file;
+  - keeps version 2 behind `--patch-version 2`;
+  - builds the image in one command with `--image DIR`.
+
+  The version-2 Ryu build still gives `EXP-0024`'s `MC09`.
+- **Image** `build/re007_ryu_ken_english`, Track 01 `b5dd07c2…`:
+  - `MC09` `507b1f46…`, `MC0A` `585f9e99…`, `MMPACK` `6d7e50a0…`;
+  - 71,908 sectors valid, layout unchanged, builds b1 = b2 = b3;
+  - the decoded code differs in 42 bytes, all at the version-3 sites;
+  - source Track 01 still `c904a386…`.
+- **Seeds (Ken).** Seeds 1-60 cover all 16 draws, and a repeat agreed.
+  Chosen seeds: `[15,20,25,2,35,24,4,9,7,12,1,3,8,13,5,10]`.
+- **Forced draws** (built files):
+  - Ken: 17/17 as predicted. The control is 38/38 at 16 px; the draws are
+    50/50 at 12 px.
+  - Ryu: 17/17, byte-identical to `EXP-0024`.
+- **Disc.** Pick loads equal the built file plus fix-ups: Ryu 259 (106),
+  Ken 302 (123). The cold boot has the v3 bytes, and only slots 9 and 10
+  are marked.
+- **Play check.**
+  - The first recorder stopped at frame 4,685: no agent reply within 10 s
+    in the attract demo. Mednafen ran on at full CPU, and requests with 10 s
+    and 30 s timeouts got no reply. When the user returned (they had been
+    away), it answered at frame 206,743. Recording restarted in
+    `local/re007/session2`. Cause unknown (`docs/known_unknowns.md`).
+  - The user played: Ryu (with Cammy) won in English, Rogue's CPU win quote
+    and the continue hint were Japanese, and Ken (with Gouki) won in English.
+  - `play_pointers.py`: Ryu `0x0024F704` (`MC09` English 3), Ken
+    `0x0024FD08` (`MC0A` English 7), continue `0x0608583C`.
+  - Contact sheets came from per-image scaled copies with ffmpeg (no
+    Pillow in the venv).
+- **Not observed:** a win finished by the second member, and a CPU win by
+  Ryu or Ken.
+
+Checks: `pytest` 162 passed; `ruff check`, `ruff format --check`, `mypy`, and `mypy --strict` on the EXP-0028 scripts (`MYPYPATH=research/experiments/EXP-0025`) are clean.
+
+Conclusion: `RE-007` is `DONE` (**CONFIRMED**, D-023). M4 is reached. M5
+(`RE-005`) is outline only and needs a full task and a user decision.

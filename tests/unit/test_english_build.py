@@ -4,8 +4,8 @@ import hashlib
 
 import pytest
 
-from tools.disc.build_english import compile_records
-from tools.disc.english_mode import PATCHES, apply, as_bytes, check
+from tools.disc.build_english import compile_records, mmpack_patches
+from tools.disc.english_mode import PATCHES, apply, as_bytes, check, patches_v3
 from tools.text.caption import compile_record
 
 BASE = 0x06066000
@@ -74,3 +74,37 @@ def test_grammar_fix_is_opt_in() -> None:
     assert compile_records(spec, program, fix_grammar=False) == record
     fixed = compile_records(spec, program, fix_grammar=True)
     assert fixed == compile_record(["You're a fool.", ""])
+
+
+def character(slot: int, mc_file: str) -> dict[str, object]:
+    return {"arcade_slot": slot, "mc_file": mc_file}
+
+
+def test_version_3_marks_every_spec_slot() -> None:
+    specs = [character(9, "MC09.SHP;1"), character(10, "MC0A.SHP;1")]
+    assert mmpack_patches(specs, 3) == patches_v3([9, 10])
+
+
+def test_version_2_builds_ryu_alone() -> None:
+    assert mmpack_patches([character(9, "MC09.SHP;1")], 2) == PATCHES
+    with pytest.raises(ValueError, match="Ryu"):
+        mmpack_patches([character(10, "MC0A.SHP;1")], 2)
+    with pytest.raises(ValueError, match="Ryu"):
+        mmpack_patches([character(9, "MC09.SHP;1"), character(10, "MC0A.SHP;1")], 2)
+
+
+@pytest.mark.parametrize(
+    "specs",
+    [
+        [character(9, "MC09.SHP;1"), character(9, "MC0A.SHP;1")],
+        [character(9, "MC09.SHP;1"), character(10, "MC09.SHP;1")],
+    ],
+)
+def test_rejects_repeated_slot_or_file(specs: list[dict[str, object]]) -> None:
+    with pytest.raises(ValueError, match="appears twice"):
+        mmpack_patches(specs, 3)
+
+
+def test_rejects_unknown_patch_version() -> None:
+    with pytest.raises(ValueError, match="unknown patch version"):
+        mmpack_patches([character(9, "MC09.SHP;1")], 4)

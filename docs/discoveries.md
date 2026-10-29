@@ -396,3 +396,30 @@ speaker; 0 leaves it Japanese.
 - **Storm** (unmarked) was byte-identical to the unpatched game.
 
 Reproduce: `research/experiments/EXP-0027/README.md`, "Procedure".
+
+## D-023 (M4): Ryu and Ken in English from the source image (`RE-007`, `EXP-0028`)
+
+One command builds the image from the untouched source:
+`tools.disc.build_english SPEC... OUT --image DIR`, with
+`data/translations/ryu_win_quotes.json` and
+`data/translations/ken_win_quotes.json`. Only `MMPACK.PCA` (version 3,
+slots 9 and 10), `MC09.SHP` and `MC0A.SHP` change, each at its own size.
+The result is Track 01 `b5dd07c2…`. For each of their 16 Saturn draws, Ryu
+and Ken show their official arcade English record `draw mod 8`. Unmarked
+speakers and continue hints stay Japanese.
+
+**Evidence.**
+
+- **Build:** all sectors pass EDC/ECC, the layout is unchanged, and three
+  builds are identical. The decoded code differs from the original only
+  inside `patches_v3([9, 10])`.
+- **Forced draws:** all 16 of each character's draws were steered by seed
+  with the built files. Each showed the predicted record at 50/50 cells.
+  Ryu's runs were byte-identical to `EXP-0024`.
+- **Disc and cold boot:** picking either character from the built disc loads
+  the built file. A cold boot has only slots 9 and 10 marked.
+- **Play:** in the user's cold-boot play check, Ryu showed `MC09` English
+  record 3 and Ken showed `MC0A` English record 7. Rogue's CPU win quote and
+  the continue hint were Japanese.
+
+Reproduce: `research/experiments/EXP-0028/README.md`, "Procedure".
