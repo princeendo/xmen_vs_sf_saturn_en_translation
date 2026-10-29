@@ -550,3 +550,29 @@ Which team member an ending follows in general is not settled (SUPPORTED
 only; `docs/known_unknowns.md`).
 
 Reproduce: `research/experiments/EXP-0034/README.md`, "Procedure".
+
+## D-030 (M6): Nash's ending pages are `MC10` records 16-21, drawn by the type-4 selector and the quote renderer (`END-002`, `EXP-0035`)
+
+- **Code:** during Nash's ending, the type-4 selector `0x060668A2` runs once
+  per scene (pages 1, 3, 5, 6), and the shared renderer `0x06066948` runs
+  once per page. The win, hint and type-6 selectors do not run.
+- **Selector:** it reads the language word and picks a run-time list
+  (language 0: `0x060854F8`; language 2: `0x06085544`). It takes the
+  speaker slot's entry and keeps it at task + `0x34`.
+- **Language-0 list:** holds one ending base per loaded character (Nash
+  `0x0024FEC0`). The quote pointer `0x060F2490` steps 76 bytes per page.
+- **Records:** the six records equal decoded `MC10.SHP` at `0x2EC0` + 76k
+  (records 16-21, after the 16 win quotes).
+- **Font and grid:** every drawn cell equals the `FIX.PRS` quote-font glyph
+  for its code, 2 × 19 at a 16 px pitch (VDP1 x 26-314, rows 178 and 194,
+  colour word `0x7020`). Zeroing one glyph's 128 bytes in VDP1 removed
+  exactly that glyph.
+- **The version-3 patch:** written over the code in RAM, it leaves all six
+  pages pixel-identical.
+- **English grid:** setting the global size and language words to 2 draws
+  the ending box as 2 × 25 at 12 px. But the language-2 list is not filled
+  on the Saturn (its slot-16 value `0x09EC0B8E` is not work RAM), and the
+  speaker labels and pictures change too (a Latin `Charlie` label
+  appeared).
+
+Reproduce: `research/experiments/EXP-0035/README.md`, "Procedure".

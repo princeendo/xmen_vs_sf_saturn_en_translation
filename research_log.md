@@ -1696,3 +1696,41 @@ related to not having a 4M RAM cart, etc.)"
   loads, not only the cart warning. Its first step is to list them; the
   Saturn BIOS's own messages are out of scope. The README's "Still
   Japanese" list now names these and the "no challengers" warning.
+
+## 2026-10-29 — SESSION-0051: How Nash's ending is drawn (END-002, EXP-0035)
+
+User request (verbatim): "Let's continue on with END-002. Do we have plans
+to see if Akuma, Bison, and Charlie are currently present as text that can
+be substituted in for Gouki, Vega, and Nash?"
+
+- **Names question:** answered from `docs/names.md` and `LOC-001` (after
+  M8). The select labels are art, and no name is plain text on the disc
+  (`EXP-0011`). During this experiment a Latin `Charlie` speaker label
+  appeared in English mode; it was added to `docs/names.md`.
+- **Code** (`trace_pages.py`, runs `trace1` and `trace2`): the type-4
+  selector hit at pages 1, 3, 5 and 6 (scene starts) and the renderer once
+  per page. No other selector hit. Quote pointer `0x0024FEC0` + 76k for
+  pages 1-6, equal to decoded `MC10` records 16-21.
+- **Disassembly:** the first attempt used base `0x06014000` and gave
+  garbage. The decoded `MMPACK.PCA` starts at `0x06014BA0` (second entry
+  `0x0601F000` minus the first entry's 42,080 bytes).
+- **Font:** `cell_check_en.py` (EXP-0023) on the six pages: 38/38 or 76/76
+  exact. Zero test (`zero_cell.py`, page 3): 139 pixels in one cell; the
+  first glyph vanished (checked at zoom).
+- **Modes** (`ending_modes.py`):
+  - The first run (`modes1`) crashed reading the English pointer
+    `0x09EC0B8E` (not work RAM); the script now records that.
+  - In `modes2`, v3 equals control at all six pages.
+  - English: 2 × 25 at 12 px, empty or meaningless text, a black picture
+    and a `Charlie` label at 222,037.
+- **Lists at run time:** language 0 holds Nash, Ryu and Apocalypse bases
+  and placeholders elsewhere. Language 2 holds no addresses.
+
+Docs: `EXP-0035`, D-030, `TASKS.md` (`END-002` DONE; `END-003` READY),
+`docs/known_unknowns.md`, `docs/names.md`.
+
+After the runs, `ruff format` reflowed the three scripts, one docstring line was shortened and the list read in `ending_modes.py` became a hex string of the same 4 bytes. None of these changes what is run or read; the scripts were not re-run.
+
+Checks: `pytest` 167 passed; `ruff check`, `ruff format --check` and `mypy --strict tools tests` are clean; `mypy` on each EXP-0035 script is clean.
+
+Conclusion: `END-002` is `DONE` (**CONFIRMED**, D-030). Next: `END-003` and `END-004`.

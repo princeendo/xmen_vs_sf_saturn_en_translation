@@ -26,6 +26,16 @@ ROGUE and CHUN-LI (VS screen, win banner) as in the arcade name lists. Not yet
 observed on any screen: Juggernaut, Dhalsim's label, Zangief, Cammy and
 Apocalypse. Dhalsim and Sabretooth appear in the US win banner (`EXP-0009`).
 
+## Latin Names Found In Game Data
+
+- **Ending speaker labels** (`EXP-0034`, `EXP-0035`): Nash's ending shows
+  Latin labels above the text box: `Nash`, `Nazo no koe` (romanized
+  Japanese) and `Nash's friend`. With the global language word set to 2 in
+  RAM, a `Charlie` label appeared on one page. So the Saturn game holds at
+  least one American-name label, chosen by language. Where those labels
+  are stored, and whether `Akuma` and `Bison` labels exist too, is not yet
+  traced (`END-003`, `LOC-001`).
+
 ## Not Examined
 
 - **Voice.** Whether the Saturn announcer or victory voices speak these names,

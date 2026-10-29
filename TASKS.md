@@ -194,7 +194,14 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   quote, the `⚠乱入禁止` ("no challengers") warning (the user spotted it),
   the ending pages and labels, and one Japanese line in the QSound notice
   (`docs/text_surfaces.md`).
-- Next: `END-002` and `END-004` (both ready, independent), then `END-003`.
+- **2026-10-29** (`SESSION-0051`, `EXP-0035`): Nash's ending is drawn
+  by the type-4 selector (once per scene) and the quote renderer (once per
+  page). It uses the `FIX.PRS` quote font in the 2 × 19 grid, and its six
+  pages are `MC10` records 16-21. The version-3 patch leaves the ending
+  pixel-identical. The English grid is reachable, but the selector's English
+  list is empty on the Saturn, and English mode also changes the labels and
+  pictures (a Latin `Charlie` label appeared; `END-002`, D-030).
+- Next: `END-003` and `END-004` (both ready).
   The backlog also holds `UI-004` (boot-time error messages, including the
   cart warning), `SPECIAL-001` (including
   Apocalypse's pre-fight line) and `REL-001` (release patches).
@@ -1351,10 +1358,10 @@ Known before M6 (each is at most SUPPORTED for the Saturn's endings):
   (counted, not read). The counts differ from the arcade English counts:
   Cyclops 7 against 9, Juggernaut 9 against 6, Cammy 12 against 13. So
   endings cannot be assumed to pair like win quotes.
-- **Saturn code** (`EXP-0023`): a type-4 selector at `0x060668A2` (the twin
-  of the arcade's ending selector) shares the quote renderer `0x06066948`.
-  Since version 2, its language read is the constant 0. Whether it draws
-  the endings is a HYPOTHESIS.
+- **Saturn code** (`EXP-0023`; `EXP-0035`, D-030): the type-4 selector
+  `0x060668A2` and the quote renderer `0x06066948` draw Nash's ending
+  (confirmed). Since version 2, the selector's language read is the
+  constant 0, and the version-3 patch leaves the ending unchanged.
 - **`MCED.SHP`** (`EXP-0029`) holds no quote or ending record. Its name may
   suggest "ending", but that is not evidence.
 - **Reach** (`EXP-0034`, D-029): Nash's ending (chosen by the user: "Nash
@@ -1403,7 +1410,7 @@ Known before M6 (each is at most SUPPORTED for the Saturn's endings):
 
 ### END-002 - How the ending text is drawn
 
-- **Status:** `READY`
+- **Status:** `DONE` (`EXP-0035`, D-030)
 - **Milestone:** M6
 - **Dependencies:** END-001.
 - **Blockers:** None; checkpoints are in `local/checkpoints/end001/` (`EXP-0034`).
@@ -1431,10 +1438,10 @@ Known before M6 (each is at most SUPPORTED for the Saturn's endings):
 
 ### END-003 - Where the ending text lives
 
-- **Status:** `BLOCKED`
+- **Status:** `READY`
 - **Milestone:** M6
 - **Dependencies:** END-002.
-- **Blockers:** The renderer and font.
+- **Blockers:** None. `EXP-0035` found the RAM records (`MC10` records 16-21 at `0x0024FEC0` + 76k, matching the decoded file); the writer, marker and census criteria remain.
 - **Objective:** Find the chosen ending's records in RAM, trace them to
   their disc file, and prove a disc edit reaches the screen.
 - **Acceptance criteria:**
