@@ -1856,3 +1856,41 @@ Written in `TASKS.md` (Phase L), from D-029 to D-032 and `EXP-0031`'s
 The outline row `END-005` (M7) was replaced. The M8 row is now `END-010`,
 and `docs/known_unknowns.md`'s reference to it was updated. No experiment
 was run.
+
+## 2026-10-29 — SESSION-0056: The Saturn's English ending script (END-005, EXP-0038)
+
+User request (verbatim): "Start END-005: the Saturn's English ending
+script."
+
+- **Read log** on `0x060F5478`-`0x060F547B` over the ending. The agent's
+  hit lines have no address, so readers were identified from their code:
+  - four size-word mode checks every frame;
+  - per scene: `0x060D4738` (new) and the selector;
+  - per page: the six renderer sites;
+  - ten others before page 1.
+- **`MCED.SHP`** = the ending overlay at `0x060D2000`: decoded file + 317
+  relocations, 18 bytes of variables. The routine at `0x060D4710` picks the
+  slot's script and the language's script from header words. Nash's two
+  scripts were parsed:
+  - JP: scenes 0-1 | 2-3 | 4 | 5;
+  - EN: scenes 0 | 1-2 | 3 | 4-5.
+
+  Label bytes index a 40-entry name list (decoded `0x3DA8`).
+- **Free RAM:** `0x00259050`-`0x0025E3DF` stays zero at the K.O., at page
+  1 and after the credits (three debugger dumps).
+- **Trial** (`english_trial.py`): eight `00BD` → `E002` reads, the
+  language-2 list repointed to a one-entry list, and six arcade English
+  records in free RAM. The pointer stepped through `0x00259200` + 100k
+  about every 390 frames. The screens match the arcade English snapshots
+  page for page, and the cells match 50/50 or 100/100. Global words 0;
+  scratch otherwise untouched.
+- **Label edit** (`label_write.py`): `Nash` → `Xash` on page 3, 27 px in
+  one letter cell.
+
+Checks: see below.
+
+`ruff format` reflowed `word_reads.py` after its run; nothing it runs or reads changed.
+
+Checks: `pytest` 167 passed; `ruff check`, `ruff format --check` and `mypy --strict tools tests` clean; `mypy --strict` on each EXP-0038 script clean (`MYPYPATH=research/experiments/EXP-0035`).
+
+Conclusion: `END-005` is `DONE` (**CONFIRMED**, D-033). `LAYOUT-002` is ready: the user chooses, after option (b) has its own RAM trial.

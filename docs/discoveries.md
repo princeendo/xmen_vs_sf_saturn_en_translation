@@ -626,3 +626,31 @@ play-through of the marker image with Nash first.
     pictures, and labels page 4 `Charlie` and page 5 `Charlie's friend`.
 
 Reproduce: `research/experiments/EXP-0037/README.md`, "Procedure".
+
+## D-033 (M7): The Saturn has the arcade's English ending script for Nash (`END-005`, `EXP-0038`)
+
+- **Where:** `MCED.SHP` is the ending overlay, at `0x060D2000` with
+  `+0x060D2040` relocations.
+- **The routine** `0x060D4710`:
+  - takes the ending slot's script from a 19-entry table (`0x060D46C4`);
+  - reads the language word to pick the Japanese (header word 0) or
+    English (header word 2) script;
+  - reads each scene's entries: page length, record index and label index.
+- **Labels:** a label index points into a 40-entry, 16-bit ASCII list at
+  decoded `MCED` `0x3DA8`. It holds the roster names, `Bison`, `Akuma`,
+  `Charlie`, `Nazo no koe`, `Nash's friend`, `Charlie's friend` and others.
+  The labels are read from it when drawn: a one-letter RAM edit (`Nash` →
+  `Xash`) changed only that letter on screen.
+- **Nash's two scripts:**
+  - Japanese: scenes of records 0-1, 2-3, 4, 5; labels `Nash`, `Nazo no
+    koe`, `Nash`, `Nash's friend`.
+  - English: scenes of records 0, 1-2, 3, 4-5; `0x180`-frame pages; labels
+    `Charlie` and `Charlie's friend`.
+- **Trial** (RAM only, global words left at 0): the script reader, the
+  type-4 selector and the renderer's grid reads return 2, and the
+  selector's language-2 list points at the six arcade English records in
+  free RAM. The Saturn then shows the arcade English ending, matching
+  `EXP-0037`'s arcade snapshots in pictures, labels and text, page for page.
+  Every drawn cell equals its `FIX.PRS` glyph in the 2 × 25 grid.
+
+Reproduce: `research/experiments/EXP-0038/README.md`, "Procedure".

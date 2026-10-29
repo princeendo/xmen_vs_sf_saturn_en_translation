@@ -230,7 +230,15 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   - `END-009` (regression).
 
   The M8 outline row is renumbered `END-010`.
-- Next: `END-005` (ready). Backlog: `UI-004`, `SPECIAL-001`, `REL-001`.
+- **2026-10-29** (`SESSION-0056`, `EXP-0038`): the Saturn holds the
+  arcade's English ending script for Nash, in `MCED.SHP` (the ending
+  overlay). It has its own scenes, page lengths and labels; the labels
+  `Charlie` and `Charlie's friend` come from a 16-bit ASCII list in `MCED`.
+  With only the ending's own language reads set to English and a pointer
+  to the six arcade records in RAM, the Saturn shows the arcade English
+  ending page for page (`END-005`, D-033).
+- Next: `LAYOUT-002` (ready; the user's choice, after option (b)'s trial).
+  Backlog: `UI-004`, `SPECIAL-001`, `REL-001`.
   The backlog also holds `UI-004` (boot-time error messages, including the
   cart warning), `SPECIAL-001` (including
   Apocalypse's pre-fight line) and `REL-001` (release patches).
@@ -1579,7 +1587,7 @@ Known before M7:
 
 ### END-005 - The Saturn's English ending script
 
-- **Status:** `READY`
+- **Status:** `DONE` (`EXP-0038`, D-033)
 - **Milestone:** M7
 - **Dependencies:** END-004 (done).
 - **Blockers:** None.
@@ -1617,10 +1625,10 @@ Known before M7:
 
 ### LAYOUT-002 - Choose how Nash's ending shows English
 
-- **Status:** `BLOCKED`
+- **Status:** `READY`
 - **Milestone:** M7
 - **Dependencies:** END-005.
-- **Blockers:** The evidence from `END-005`.
+- **Blockers:** None. `EXP-0038` found the Saturn's own English script; option (a) already has its six RAM-trial pages (`local/end005/trial1`). Option (b) still needs its trial.
 - **Objective:** The user chooses the layout of the English ending from
   measured options, each with RAM-trial screenshots of all six pages.
 - **Acceptance criteria:**

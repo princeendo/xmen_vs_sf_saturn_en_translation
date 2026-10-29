@@ -41,6 +41,14 @@ Apocalypse. Dhalsim and Sabretooth appear in the US win banner (`EXP-0009`).
   friend`. The Japanese script's labels are `Nash`, `Nazo no koe` and
   `Nash's friend`, on the Saturn and in the arcade alike.
 
+- **Saturn speaker-label list** (`EXP-0038`): `MCED.SHP` (decoded
+  `0x3DA8`) holds 40 Latin labels in 16-bit ASCII. These are the roster
+  names in the Saturn convention (`Vega`, `Gouki`, `Nash`), then `Bison`,
+  `Akuma` and `Charlie`, then other speakers (`Charlie's friend`, `Nash's
+  friend`, `Nazo no koe` and more). The English ending script uses
+  `Charlie`. So American-name labels are on the disc as text for the
+  endings. The select, versus and banner names are still art (`LOC-001`).
+
 ## Not Examined
 
 - **Voice.** Whether the Saturn announcer or victory voices speak these names,
