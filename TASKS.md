@@ -164,8 +164,11 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   follows `r mod 8` in MAME (360 forced runs). Pairing files exist for all
   18. One name needs the gate: "Bison" in two of Cammy's records
   (`PAIR-003`, D-025).
-- Next: `RE-009` (ready). The `GATE-TRANSLATION` extension for the roster
-  waits on the user, who can decide it now or after `RE-009`.
+- **2026-10-29** (`SESSION-0045`, `EXP-0031`): every roster file fits its
+  sectors with its English records (margins 175-1,176 bytes; `RE-009`,
+  D-026).
+- Next: the user's `GATE-TRANSLATION` extension for the roster (including
+  "Bison" in two of Cammy's records). After that comes `RE-010`.
 
 ## Milestones
 
@@ -1143,7 +1146,7 @@ Known before M5:
 
 ### RE-009 - Check that every roster file fits its sectors
 
-- **Status:** `READY`
+- **Status:** `DONE` (2026-10-29, `SESSION-0045`, `EXP-0031`, D-026)
 - **Milestone:** M5
 - **Dependencies:** RE-008 (done).
 - **Blockers:** None.
@@ -1161,6 +1164,13 @@ Known before M5:
 - **Notes:** `MC09` and `MC0A` fit (`EXP-0024`, `EXP-0028`). The open
   question "Will longer (English) quote files fit 11 sectors?"
   (`docs/known_unknowns.md`) is answered here for the roster.
+- **Result:** every criterion met (`EXP-0031`, `data/text/m5_sector_fit.json`).
+  - All 18 files fit, with margins from 175 bytes (Apocalypse, `MC08`) to
+    1,176 bytes (Chun-Li, `MC0B`).
+  - Each rebuilt file keeps its size, ends its stream in its last sector,
+    and is unchanged outside the 800 English bytes.
+  - Ryu's and Ken's rebuilt files equal `EXP-0028`'s. No option needs the
+    user.
 
 ### GATE-TRANSLATION extension for the M5 roster
 

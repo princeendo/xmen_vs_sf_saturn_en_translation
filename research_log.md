@@ -1460,3 +1460,29 @@ Checks: `pytest` 162 passed; `ruff check`, `ruff format --check`, `mypy`, and `m
 
 Conclusion: `PAIR-003` is `DONE` (**CONFIRMED**, D-025). Next: `RE-009`;
 the gate extension is the user's.
+
+## 2026-10-29 — SESSION-0045 / EXP-0031: sector fit for the roster (`RE-009`)
+
+User request (verbatim): "Start RE-009: check that every roster file fits
+its sectors."
+
+- **Method.** `fit_sectors.py` takes each slot's English records 0-7 from
+  the US program, with a recompile check, and writes them over the
+  census's table. It then rebuilds with `build_mc`, the build's own path,
+  and compares the decode with the original outside the English area. It
+  runs in about 2.5 minutes.
+- **Result.** 18/18 fit. Margins run from 175 bytes (`MC08`) to 1,176
+  (`MC0B`).
+  - Every rebuilt file has its original size, ends its stream in its last
+    sector, and is unchanged outside the English bytes.
+  - The project encoder beats every original file by 0.7-3.7 %. The English
+    edit grows the stream for 7 files (28-82 bytes) and shrinks it for 11.
+- **Cross-check.** Ryu's and Ken's rebuilt hashes equal `EXP-0028`'s
+  (`507b1f46…`, `585f9e99…`). A second run was byte-identical.
+- **Answered:** the known unknown "Will longer (English) quote files fit 11
+  sectors?".
+
+Checks: `pytest` 162 passed; `ruff check`, `ruff format --check`, `mypy`, and `mypy --strict` on the EXP-0031 script are clean.
+
+Conclusion: `RE-009` is `DONE` (**CONFIRMED**, D-026). `RE-010` waits on the
+user's gate extension for the roster.

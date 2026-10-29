@@ -465,3 +465,19 @@ matching: 288 English (16 draws per slot) and 72 Japanese (draws 3, 8, 9 and
 their earlier tables.
 
 Reproduce: `research/experiments/EXP-0030/README.md`, "Procedure".
+
+## D-026 (M5): Every roster file fits its original size with its English records (`RE-009`, `EXP-0031`)
+
+For each of the 18 M5 roster files (`MC00`-`MC11`), the slot's 8 official
+English records are written over the start of its quote table. Re-encoded
+by the build's own path (`tools.disc.build_english.build_mc`), the file
+keeps its original size, its stream ends in its last sector, and it decodes
+unchanged outside the 800 English bytes. The margins run from 175 bytes
+(`MC08`, Apocalypse) to 1,176 bytes (`MC0B`, Chun-Li). Sizes are in
+`data/text/m5_sector_fit.json`.
+
+**Evidence.** All 18 rebuilds succeeded, and the round-trip decode matched.
+Ryu's and Ken's rebuilt files equal the play-checked `EXP-0028` build. A
+second run was byte-identical.
+
+Reproduce: `research/experiments/EXP-0031/README.md`, "Procedure".
