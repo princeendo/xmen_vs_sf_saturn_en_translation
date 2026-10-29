@@ -1,0 +1,92 @@
+# EXP-0037 discovery 1: pick Charlie first (up, right, right from Cyclops), then button 1 for the partner; idle fight; dumps
+1000 repeat 4 30 8 Coin 1
+1200 repeat 10 60 8 1 Player Start
+1700 press 8 P1 Up
+1740 press 8 P1 Right
+1780 press 8 P1 Right
+1820 press 8 P1 Button 1
+1900 repeat 20 30 8 P1 Button 1
+1600 snap
+1660 snap
+1720 snap
+1780 snap
+1840 snap
+1900 snap
+1960 snap
+2020 snap
+2080 snap
+2140 snap
+2200 snap
+2260 snap
+2320 snap
+2380 snap
+2440 snap
+2500 snap
+2560 snap
+2620 snap
+2680 snap
+2740 snap
+2800 snap
+2860 snap
+2920 snap
+2980 snap
+3040 snap
+3100 snap
+3160 snap
+3220 snap
+3280 snap
+3340 snap
+3400 snap
+3460 snap
+3520 snap
+3580 snap
+3640 snap
+3700 snap
+3760 snap
+3820 snap
+3880 snap
+3940 snap
+4000 snap
+4060 snap
+4120 snap
+4180 snap
+4240 snap
+4300 snap
+4360 snap
+4420 snap
+4480 snap
+4540 snap
+4600 snap
+4660 snap
+4720 snap
+4780 snap
+4840 snap
+4900 snap
+4960 snap
+5020 snap
+5080 snap
+5140 snap
+5200 snap
+5260 snap
+5320 snap
+5380 snap
+5440 snap
+5500 snap
+5560 snap
+5620 snap
+5680 snap
+5740 snap
+5800 snap
+5860 snap
+5920 snap
+5980 snap
+3600 dump 0xFF0000 0xFFFFFF {run}/wram-3600.bin
+3900 dump 0xFF0000 0xFFFFFF {run}/wram-3900.bin
+4200 dump 0xFF0000 0xFFFFFF {run}/wram-4200.bin
+4500 dump 0xFF0000 0xFFFFFF {run}/wram-4500.bin
+4800 dump 0xFF0000 0xFFFFFF {run}/wram-4800.bin
+5100 dump 0xFF0000 0xFFFFFF {run}/wram-5100.bin
+5400 dump 0xFF0000 0xFFFFFF {run}/wram-5400.bin
+5700 dump 0xFF0000 0xFFFFFF {run}/wram-5700.bin
+6000 dump 0xFF0000 0xFFFFFF {run}/wram-6000.bin
+6100 exit
