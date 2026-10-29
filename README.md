@@ -32,7 +32,8 @@ and Cammy.
 - continue-screen hints;
 - attract-mode captions;
 - Apocalypse's pre-fight line;
-- the 4 MB RAM cart warning;
+- the 4 MB RAM cart warning, and any other error message shown at boot;
+- the "no challengers" (乱入禁止) warning before the final partner fight;
 - the ending text stored in each quote file.
 
 Character names on screen still follow the Saturn (Japanese) convention, for

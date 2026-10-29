@@ -195,7 +195,8 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   the ending pages and labels, and one Japanese line in the QSound notice
   (`docs/text_surfaces.md`).
 - Next: `END-002` and `END-004` (both ready, independent), then `END-003`.
-  The backlog also holds `UI-004` (cart warning), `SPECIAL-001` (including
+  The backlog also holds `UI-004` (boot-time error messages, including the
+  cart warning), `SPECIAL-001` (including
   Apocalypse's pre-fight line) and `REL-001` (release patches).
 
 ## Milestones
@@ -1500,6 +1501,6 @@ for each is in `docs/playbook_from_mshvsf.md`.
 | UI-001 | after M8, user request | UI art: inventory English art already in every font before drawing anything; caption colour and style. Includes the `⚠乱入禁止` ("no challengers") sprite shown before and during the partner fight (spotted by the user, `EXP-0034`). |
 | UI-002 | after M8, user request | Attract-mode captions: which layer draws them, which container and codecs hold them, arcade and PS1 oracles. |
 | UI-003 | after M8, user request | Other UI text (continue screen, hints): find the arcade English by tracing the arcade code, not only by data search. |
-| UI-004 | user request (2026-10-29); order not yet set | The 4 MB RAM cart warning shown when the game boots without the cart (seen in `EXP-0002`, Japanese): capture it, find where its text and art live (disc, BIOS or code) and how it is drawn, look for an official English source, and translate it. With no official English, the policy's recorded new translation applies, approved by the user. |
+| UI-004 | user requests (2026-10-29); order not yet set | Every error or warning message the game can show when it first loads, not only the 4 MB RAM cart warning (seen in `EXP-0002`, Japanese). First list them: boot with no cart, with the wrong cart, and with other startup faults the game checks for (for example save-memory messages, if any), and record each screen. Count only the game's own messages; the Saturn BIOS's are not the game's. Then, per message, find where its text and art live (disc, BIOS or code) and how it is drawn, look for an official English source, and translate it. With no official English, the policy's recorded new translation applies, approved by the user. User request (verbatim, 2026-10-29): "make sure you add to the backlog to translate any error messages that come up when you first load the game (like ones that are related to not having a 4M RAM cart, etc.)" |
 | TXT-001 | after M8, user request | Rare, random, or region-gated text: trace every reader of every text table. |
 | LOC-001 | after M8 | Name variants (user decisions: both variants, 2026-10-27; American names default, 2026-10-28): whether both conventions' art and voice are already on the disc. |

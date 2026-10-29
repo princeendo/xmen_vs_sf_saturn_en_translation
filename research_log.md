@@ -1680,3 +1680,19 @@ and `END-004` READY).
 Checks: `pytest` 167 passed; `ruff check`, `ruff format --check` and `mypy --strict tools tests` are clean; `mypy` on `replay_ending.py` is clean.
 
 Conclusion: `END-001` is `DONE` (**CONFIRMED**, D-029). Next: `END-002` and `END-004`.
+
+### SESSION-0050 follow-up: checkpoints pruned; UI-004 widened
+
+User request (verbatim): "Yes, let's delete the checkpoints you didn't keep.
+Additionally, make sure you add to the backlog to translate any error
+messages that come up when you first load the game (like ones that are
+related to not having a 4M RAM cart, etc.)"
+
+- The 12 kept checkpoints in `local/checkpoints/end001/` were compared
+  byte for byte (`cmp`) with their session originals (all equal). Then
+  `local/end001/session/states` (1,345 states, 6.5 GB) was deleted. The
+  session's screenshots and index remain. Free disk space: 18 GB.
+- `UI-004` now covers every error or warning the game shows when it first
+  loads, not only the cart warning. Its first step is to list them; the
+  Saturn BIOS's own messages are out of scope. The README's "Still
+  Japanese" list now names these and the "no challengers" warning.
