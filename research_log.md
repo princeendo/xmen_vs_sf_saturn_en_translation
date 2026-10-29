@@ -1930,3 +1930,37 @@ in the text and the labels Charlie and Charlie's friend. Record it."
   M7 gate subsection and in `docs/localization_policy.md`.
 - `END-006` and `END-007` are now `READY`; `END-008` waits on them only.
 - No experiment was run.
+
+## 2026-10-29 — SESSION-0059: Version 4, English endings per slot (END-006, EXP-0040)
+
+User request (verbatim): "Start END-006: code to turn the English ending on
+for Nash only."
+
+- **Design:**
+  - Every PC-relative load and absolute long in the decoded `MMPACK.PCA`
+    was searched. Only the type-4 selector reads `0x0606690C`-`0x0606691F`,
+    so that space holds the new literals.
+  - The selector was rewritten in place (23 words) to use the language-0
+    list always and, for marked slots, pointer − `0x1A0` (quote table +
+    800) and task flag 2.
+  - Marking is bit 7 of the fixed-table low byte.
+  - The `MCED` script switch is a data change (header word 0 = word 1),
+    found while reading the header format: no `MCED` code change is needed.
+- **Encoding:** checked by disassembling the patched decoded code.
+- **`v4_trial.py`:** v4_off = control at 91/91 frames. v4_on =
+  `EXP-0038` English at 90/91; the exception is the picture window during
+  page 5's fade-in, identical one sample later.
+- **`win_regression.py`:** 8 draws × {v3, v4, v4 with Ryu's slot marked}:
+  no difference.
+- **`fit_check.py`:** `MMPACK.PCA` rebuilds to size (`276d534c…`).
+  `MCED.SHP` has a 204-byte margin (`cca9332d…`).
+- **Promoted** to `tools/disc/english_mode.py`: `patches_v4`,
+  `ending_slot_patches`, `mced_english_scripts` (shared scripts refused).
+  10 new unit tests. The tools' bytes equal the trial's.
+
+Checks: `pytest` 177 passed; `ruff check`, `ruff format --check` and
+`mypy --strict tools tests` clean; `mypy --strict` on the EXP-0040 scripts
+(`MYPYPATH=research/experiments/EXP-0040`) clean. `ruff format` reflowed
+the experiment scripts after their runs; behaviour unchanged.
+
+Conclusion: `END-006` is `DONE` (**CONFIRMED**, D-034). Next: `END-007`.

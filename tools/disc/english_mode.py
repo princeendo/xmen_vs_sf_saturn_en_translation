@@ -157,3 +157,121 @@ def apply(
     for address, _, replacement in chosen:
         data = as_bytes(replacement)
         memory[address - base : address - base + len(data)] = data
+
+
+# Version 4 (`END-006`, `EXP-0040`): English endings, per slot.
+#
+# The ending's English path needs three things (`EXP-0038`): the ending
+# script in ``MCED.SHP`` must be the slot's English one, the type-4 (ending)
+# selector must point at English records, and the renderer must use the
+# English grid. Version 4 does the last two in ``MMPACK.PCA``. The first is a
+# data change in ``MCED.SHP`` (``mced_english_scripts``).
+#
+# The selector no longer reads a language. It always takes the slot's
+# pointer from the language-0 list (filled when the character loads, at quote
+# table + 0x4C0). If bit 7 of the slot's fixed-table low byte
+# (``ENDING_BIT``) is set, it subtracts ``0x1A0``, so the pointer lands at
+# quote table + 800, right after the 8 English win quotes, where the English
+# ending records go. It also sets the task's English flag, which the version-3
+# renderer reads.
+#
+#   060668C2 D712  mov.l @(0x0606690C),r7   ; language-0 list 0x060854F8
+#   060668C4 D112  mov.l @(0x06066910),r1   ; FIXED_TABLE + 1 (low bytes)
+#   060668C6 C503  mov.w @(6,gbr),r0       ; slot x 2
+#   060668C8 021C  mov.b @(r0,r1),r2       ; low byte, sign-extended
+#   060668CA 300C  add r0,r0               ; slot x 4
+#   060668CC 007E  mov.l @(r0,r7),r0       ; the slot's ending pointer
+#   060668CE 4211  cmp/pz r2               ; bit 7 clear: Japanese ending
+#   060668D0 8905  bt 0x060668DE
+#   060668D2 911F  mov.w @(0x06066914),r1  ; -0x1A0
+#   060668D4 301C  add r1,r0               ; quote table + 800
+#   060668D6 E15C  mov #FLAG,r1
+#   060668D8 316C  add r6,r1               ; r6 = task
+#   060668DA E202  mov #2,r2
+#   060668DC 2120  mov.b r2,@r1            ; task + FLAG = 2
+#   060668DE-EE    nop x 9
+#
+# The old literal (0x0606690C) and the language table (0x06066910-0x0606691F)
+# were read only by this selector, so they hold the new literals. The bit
+# shares the low byte with the fixed index (0-7). Only the fixed-index path
+# reads that byte, and for English win-quote slots it keeps ``index & 7``.
+# So an English ending is allowed only for a slot whose win quotes are English
+# (``patches_v4`` checks this). The records' place depends on it too.
+FIXED_LOW = [5, 2, 3, 0, 7, 1, 0, 1, 0, 1, 7, 5, 4, 0, 7, 0, 0, 6, 5]  # EXP-0027
+ENDING_BIT = 0x80
+ENDING_RECORDS = 800  # English ending records start at quote table + 800
+SELECTOR_READ_V2 = (0x060668C4, "00BD", "E000")  # replaced by SELECTOR_V4
+
+SELECTOR_V4 = (
+    0x060668C2,
+    "90D7 00BD C101 C501 300C C101 D10F C501 021D 70FE 011D 6029 201D 6703"
+    " C503 300C C103 C503 017D 7002 027D 6029 201D",
+    "D712 D112 C503 021C 300C 007E 4211 8905 911F 301C E15C 316C E202 2120"
+    " 0009 0009 0009 0009 0009 0009 0009 0009 0009",
+)
+LITERALS_V4 = (
+    0x0606690C,
+    "06066912 060854F8 06085544",
+    f"060854F8 {FIXED_TABLE + 1:08X} FE600000",
+)
+
+# MCED.SHP (`EXP-0038`): a table of 19 longs at decoded offset ``MCED_SCRIPTS``
+# holds each slot's script (value + ``MCED_RELOCATION`` = decoded offset). A
+# script starts with header words indexed by the language word: word 0 is the
+# Japanese script's offset, word 1 (language 2) the English one's.
+MCED_SCRIPTS = 0x26C4
+MCED_RELOCATION = 0x40
+
+
+def ending_slot_patches(slots: list[int]) -> list[tuple[int, str, str]]:
+    """The table bytes that mark each slot in ``slots`` for an English ending."""
+    for slot in slots:
+        if not 0 <= slot < SLOTS:
+            raise ValueError(f"slot {slot} is outside 0-{SLOTS - 1}")
+    return [
+        (
+            FIXED_TABLE + 2 * slot + 1,
+            f"{FIXED_LOW[slot]:02X}",
+            f"{FIXED_LOW[slot] | ENDING_BIT:02X}",
+        )
+        for slot in sorted(slots)
+    ]
+
+
+def patches_v4(slots: list[int], ending_slots: list[int]) -> list[tuple[int, str, str]]:
+    """Version 3 for ``slots``, plus English endings for ``ending_slots``."""
+    missing = sorted(set(ending_slots) - set(slots))
+    if missing:
+        raise ValueError(f"English endings need English win quotes: {missing}")
+    v3 = [p for p in patches_v3(slots) if p != SELECTOR_READ_V2]
+    return [*v3, SELECTOR_V4, LITERALS_V4, *ending_slot_patches(ending_slots)]
+
+
+def mced_english_scripts(
+    decoded: bytes, slots: list[int]
+) -> list[tuple[int, bytes, bytes]]:
+    """Edits to decoded ``MCED.SHP`` that make ``slots`` run their English script.
+
+    Each edit is (decoded offset, old bytes, new bytes): the script's
+    language-0 header word becomes its language-2 word. A script shared with a
+    slot outside ``slots`` (slots 8 and 9, and 11 and 18, share one) is refused,
+    as the change would switch that slot too.
+    """
+    bases = [
+        int.from_bytes(decoded[MCED_SCRIPTS + 4 * s : MCED_SCRIPTS + 4 * s + 4], "big")
+        for s in range(SLOTS)
+    ]
+    edits = []
+    for slot in sorted(slots):
+        if not 0 <= slot < SLOTS:
+            raise ValueError(f"slot {slot} is outside 0-{SLOTS - 1}")
+        sharing = [s for s, base in enumerate(bases) if base == bases[slot]]
+        outside = [s for s in sharing if s not in slots]
+        if outside:
+            raise ValueError(f"slot {slot} shares its script with {outside}")
+        header = bases[slot] + MCED_RELOCATION
+        old = decoded[header : header + 2]
+        new = decoded[header + 2 : header + 4]
+        if (header, old, new) not in edits and old != new:
+            edits.append((header, old, new))
+    return edits

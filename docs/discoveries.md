@@ -654,3 +654,25 @@ Reproduce: `research/experiments/EXP-0037/README.md`, "Procedure".
   Every drawn cell equals its `FIX.PRS` glyph in the 2 × 25 grid.
 
 Reproduce: `research/experiments/EXP-0038/README.md`, "Procedure".
+
+## D-034 (M7): Version 4 turns on English endings per slot (`END-006`, `EXP-0040`)
+
+- **The selector rewrite:** a same-size rewrite of the type-4 selector
+  (`0x060668C2`-`0x060668EF`, literals at `0x0606690C`). The selector always
+  takes the slot's language-0 ending pointer. If bit 7 of the slot's
+  fixed-table low byte is set, it subtracts `0x1A0`, landing at quote table
+  + 800, after the 8 English win quotes, and sets the task's English flag.
+- **The data change:** Nash's `MCED` script header word (`0x2CF0`) set to
+  his English script's offset.
+- **Results** (RAM trials from Nash's pre-K.O. checkpoint):
+  - unmarked: pixel-identical to the untouched game at all 91 frames;
+  - marked, with the records at table + 800: identical to the `EXP-0038`
+    English ending at 90 of 91 frames (one fade frame differs in the
+    picture window only).
+- **Win quotes:** Ryu's 8 English draws are unchanged, even with his own
+  slot marked.
+- **Fit:** `MMPACK.PCA` and `MCED.SHP` fit their sectors.
+- **Tools:** `patches_v4`, `ending_slot_patches` and `mced_english_scripts`
+  in `tools/disc/english_mode.py`.
+
+Reproduce: `research/experiments/EXP-0040/README.md`, "Procedure".

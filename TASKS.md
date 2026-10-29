@@ -245,8 +245,15 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   Nash's ending (GO). It covers `MC10` records 16-21 plus what the English
   script needs, page k = English record k, official English unchanged, and
   "Charlie" kept in the text and labels.
-- Next: `END-006` (code) and `END-007` (data), both ready and independent.
-  Backlog: `UI-004`, `SPECIAL-001`, `REL-001`.
+- **2026-10-29** (`SESSION-0059`, `EXP-0040`): version 4 of the patch, a
+  same-size type-4 selector rewrite, turns on English endings per slot
+  (one bit in the fixed-index table). The records are read at quote table +
+  800, and the slot's `MCED` script header selects its English script. In
+  RAM: the unmarked ending is pixel-identical to the original, the marked
+  one shows `EXP-0038`'s English ending, and Ryu's win quotes are unchanged.
+  Both files fit (`END-006`, D-034; `tools/disc/english_mode.patches_v4`).
+- Next: `END-007` (data, ready), then `END-008`. Backlog: `UI-004`,
+  `SPECIAL-001`, `REL-001`.
   The backlog also holds `UI-004` (boot-time error messages, including the
   cart warning), `SPECIAL-001` (including
   Apocalypse's pre-fight line) and `REL-001` (release patches).
@@ -1702,7 +1709,7 @@ recorded under `GATE-TRANSLATION` above and in
 
 ### END-006 - Code: turn the English ending on for Nash only
 
-- **Status:** `READY`
+- **Status:** `DONE` (`EXP-0040`, D-034)
 - **Milestone:** M7
 - **Dependencies:** END-005, LAYOUT-002.
 - **Blockers:** None; `LAYOUT-002` chose option (a) (`EXP-0039`).
@@ -1732,6 +1739,11 @@ recorded under `GATE-TRANSLATION` above and in
 - **Milestone:** M7
 - **Dependencies:** LAYOUT-002.
 - **Blockers:** None; `LAYOUT-002` chose option (a) (`EXP-0039`).
+- **Fixed by `END-006`:** version 4 reads the English records at quote
+  table + 800 (`MC10` decoded `0x2D20`), and Nash's `MCED` script header
+  changes (`0x2CF0`: `0008` → `0038`). The offset criterion below becomes:
+  show that `MC10`'s bytes from table + 800 to table + `0x578` are unread in
+  play once both are English.
 - **Objective:** Put the six English records (and any label or script
   data the layout needs) into `MC10.SHP`, or another loaded file, so that
   the `END-006` pointer finds them.
