@@ -241,9 +241,12 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   in the Japanese script) was trialled in RAM next to option (a). The user
   chose (a), the Saturn's English script, with the arcade labels `Charlie`
   and `Charlie's friend` (`LAYOUT-002`).
-- Next: the `GATE-TRANSLATION` extension for Nash's ending (the user's
-  decision), then `END-006` and `END-007`. Backlog: `UI-004`,
-  `SPECIAL-001`, `REL-001`.
+- **2026-10-29** (`SESSION-0058`): the user extended `GATE-TRANSLATION` to
+  Nash's ending (GO). It covers `MC10` records 16-21 plus what the English
+  script needs, page k = English record k, official English unchanged, and
+  "Charlie" kept in the text and labels.
+- Next: `END-006` (code) and `END-007` (data), both ready and independent.
+  Backlog: `UI-004`, `SPECIAL-001`, `REL-001`.
   The backlog also holds `UI-004` (boot-time error messages, including the
   cart warning), `SPECIAL-001` (including
   Apocalypse's pre-fight line) and `REL-001` (release patches).
@@ -683,6 +686,25 @@ prerequisites before English text goes on disc).
     official text stays as written, which matches the American-names
     default. A Saturn-names variant decides its own wording under
     `LOC-001`.
+- **Gate extension, Nash's ending (2026-10-29, `SESSION-0058`):**
+  - The user's decision is **GO**, in their words: "GATE-TRANSLATION: go for Nash's ending. MC10 ending records 16-21 plus whatever the English script needs; page k shows English record k; official arcade English with no rewording; keep "Charlie" in the text and the labels Charlie and Charlie's friend. Record it."
+  - Checked at acceptance: `END-001` to `END-005` and `LAYOUT-002` are
+    `DONE` (`EXP-0034`-`EXP-0039`).
+  - **Scope:**
+    - `MC10.SHP` ending records 16-21 (decoded `0x2EC0` + 76k);
+    - whatever the Saturn's English ending script needs to show them
+      (`LAYOUT-002` option (a)): the code that switches Nash's ending to
+      the English script, the English records' pointer, and the records
+      wherever `END-007` places them.
+
+    Only Nash's ending with Nash as the first pick is covered. Other
+    endings, Nash as second pick, Apocalypse's lines, the pre-boss line,
+    the post-boss quote and the warning stay gated.
+  - **Pairing:** page k (k = 0-5) shows arcade English slot 16 record k
+    (`0x18D0AE` + 100k; D-032, `data/translations/nash_ending_pairing.json`).
+  - **Wording:** the official arcade English, with no rewording.
+  - **Names:** "Charlie" stays in English records 1 and 4. The labels are
+    `Charlie` and `Charlie's friend`, as in the arcade (already in `MCED`).
 
 ## Phase F: M1
 
@@ -1674,12 +1696,16 @@ or NO-GO in their own words, recorded under `GATE-TRANSLATION` and in
 
 Dependencies: `LAYOUT-002`.
 
+**Status: `DONE` (2026-10-29).** The user said GO; the decision is
+recorded under `GATE-TRANSLATION` above and in
+`docs/localization_policy.md`.
+
 ### END-006 - Code: turn the English ending on for Nash only
 
-- **Status:** `BLOCKED`
+- **Status:** `READY`
 - **Milestone:** M7
 - **Dependencies:** END-005, LAYOUT-002.
-- **Blockers:** The chosen layout.
+- **Blockers:** None; `LAYOUT-002` chose option (a) (`EXP-0039`).
 - **Objective:** A same-size code change in `MMPACK.PCA` (version 4 of the
   patch, building on version 3) that shows the chosen layout for Nash's
   ending, with every other ending, win quote and hint unchanged.
@@ -1702,10 +1728,10 @@ Dependencies: `LAYOUT-002`.
 
 ### END-007 - Data: place Nash's English ending records
 
-- **Status:** `BLOCKED`
+- **Status:** `READY`
 - **Milestone:** M7
 - **Dependencies:** LAYOUT-002.
-- **Blockers:** The chosen layout (record format and size).
+- **Blockers:** None; `LAYOUT-002` chose option (a) (`EXP-0039`).
 - **Objective:** Put the six English records (and any label or script
   data the layout needs) into `MC10.SHP`, or another loaded file, so that
   the `END-006` pointer finds them.
@@ -1730,7 +1756,7 @@ Dependencies: `LAYOUT-002`.
 - **Milestone:** M7
 - **Dependencies:** GATE-TRANSLATION extension for Nash's ending, END-006,
   END-007.
-- **Blockers:** The gate.
+- **Blockers:** `END-006` and `END-007`. The gate is done.
 - **Objective:** One image, built from the untouched source, with all 18
   roster characters' English win quotes and Nash's English ending, shown
   in play.

@@ -1916,3 +1916,17 @@ on the changed `english_trial.py` are clean.
 
 Conclusion: `LAYOUT-002` is `DONE`. Next: the `GATE-TRANSLATION` extension
 for Nash's ending.
+
+## 2026-10-29 — SESSION-0058: GATE-TRANSLATION extended to Nash's ending
+
+User decision (verbatim): "GATE-TRANSLATION: go for Nash's ending. MC10
+ending records 16-21 plus whatever the English script needs; page k shows
+English record k; official arcade English with no rewording; keep "Charlie"
+in the text and the labels Charlie and Charlie's friend. Record it."
+
+- Checked at acceptance: `END-001` to `END-005` and `LAYOUT-002` are
+  `DONE`.
+- Recorded under `GATE-TRANSLATION` (gate extension, Nash's ending), in the
+  M7 gate subsection and in `docs/localization_policy.md`.
+- `END-006` and `END-007` are now `READY`; `END-008` waits on them only.
+- No experiment was run.

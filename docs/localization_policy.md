@@ -80,8 +80,17 @@ ending show?", they answered "Arcade names (Recommended)".
 | Layout | The Saturn's English scene script for the ending: the arcade's scene breaks, pictures, page lengths and labels, with the arcade English records in the 2 × 25 grid | `EXP-0038`, `EXP-0039`, D-033 |
 | Labels | `Charlie` and `Charlie's friend`, as in the arcade (already in `MCED`'s label list); the American-names default | `EXP-0039`, `docs/names.md` |
 
-This decides layout only. Putting the official English on disc for Nash's
-ending still needs the `GATE-TRANSLATION` extension.
+**Gate extension, Nash's ending (2026-10-29).** The user said GO, in their
+words: "GATE-TRANSLATION: go for Nash's ending. MC10 ending records 16-21 plus whatever the English script needs; page k shows English record k; official arcade English with no rewording; keep "Charlie" in the text and the labels Charlie and Charlie's friend. Record it."
+
+| Topic | Decision | Evidence |
+| --- | --- | --- |
+| Scope | `MC10.SHP` ending records 16-21, plus what the English script needs (the switch to it, the records' pointer, the records' placement); Nash first-pick only | `TASKS.md` `GATE-TRANSLATION`, `EXP-0038` |
+| Pairing | Page k shows arcade English slot 16 record k (k = 0-5) | D-032, `data/translations/nash_ending_pairing.json` |
+| Wording | Official arcade English, no rewording | the 2026-10-27 policy |
+| Names | "Charlie" kept in English records 1 and 4; labels `Charlie` and `Charlie's friend` | `EXP-0037`, `EXP-0039` |
+
+Every other ending and surface stays gated.
 
 ## Deferred Until Evidence Exists
 
