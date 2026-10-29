@@ -36,6 +36,11 @@ Apocalypse. Dhalsim and Sabretooth appear in the US win banner (`EXP-0009`).
   are stored, and whether `Akuma` and `Bison` labels exist too, is not yet
   traced (`END-003`, `LOC-001`).
 
+- **Arcade English ending** (`EXP-0037`): Charlie's English ending records
+  1 and 4 say "Charlie", and its labels are `Charlie` and `Charlie's
+  friend`. The Japanese script's labels are `Nash`, `Nazo no koe` and
+  `Nash's friend`, on the Saturn and in the arcade alike.
+
 ## Not Examined
 
 - **Voice.** Whether the Saturn announcer or victory voices speak these names,

@@ -1798,3 +1798,39 @@ The user played the marker image from a cold boot to Nash's ending and said
   after Apocalypse's records.
 
 Conclusion: `END-003` is `DONE` (**CONFIRMED**, D-031). Next: `END-004`.
+
+## 2026-10-29 — SESSION-0054: Arcade English and indexing for Nash's ending (END-004, EXP-0037)
+
+User request (verbatim): "Start END-004: arcade English and indexing for
+Nash's ending."
+
+- **Route discovery** (`discover1`, `discover2`):
+  - The arcade select cursor starts on Cyclops; Up, Right, Right reach
+    Charlie.
+  - Work-RAM dumps of an idle fight gave the fighter blocks at `0xFF4200`
+    + 0x400·n, with vitality at +`0x10`.
+  - Zeroing `0xFF4610` and `0xFF4E10` every 20 frames won every fight,
+    through Apocalypse and the partner fight, to Charlie's English ending
+    (34 s run).
+- **Predictions** were committed (`91be3e3`) before any read-logged run.
+- **Partner mistake:** the first "Ryu" run pressed Right too early and
+  picked Cyclops again. This was caught by checking its snapshots, not its
+  reads. The timing was fixed, all four runs regenerated and rerun, and
+  the Ryu pick was checked on the select snapshot and in the partner
+  fight.
+- **Reads:** English `0x18D0AE` + 100k and Japanese `0x1856E0` + 76k,
+  k = 0-5, identical across partners. The table is re-read at pages 1, 2,
+  4, 5 (English) and 1, 3, 5, 6 (Japanese).
+- **Screens:** the arcade Japanese ending equals the Saturn's. The English
+  ending has other scene breaks and pictures, and the labels `Charlie` and
+  `Charlie's friend`, so prediction 4 (no labels) is refuted. `NO
+  CHALLENGERS` replaces the warning.
+- **Pairing:** `make_pairing.py` → `data/translations/nash_ending_pairing.json`,
+  6/6 CONFIRMED (24/24 reads). Names flagged: records 1 and 4 ("Charlie").
+
+Docs: `EXP-0037`, D-032, `TASKS.md` (`END-004` DONE, M6 complete),
+`docs/known_unknowns.md`, `docs/names.md`, `docs/text_surfaces.md`.
+
+Checks: `pytest` 167 passed; `ruff check` and `ruff format --check` clean; `mypy --strict tools tests` and each EXP-0037 script clean. Regenerating a timeline and the pairing file gave byte-identical outputs.
+
+Conclusion: `END-004` is `DONE` (**CONFIRMED**, D-032). **M6 is complete.** Next: write the M7 tasks (not started).

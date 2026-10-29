@@ -599,3 +599,30 @@ Reproduce: `research/experiments/EXP-0035/README.md`, "Procedure".
 
 Reproduce: `research/experiments/EXP-0036/README.md`, "Procedure", and a
 play-through of the marker image with Nash first.
+
+## D-032 (M6): Arcade English for Nash's ending, and how ending records are picked (`END-004`, `EXP-0037`)
+
+- **Route:** on `xmvsfu` (MAME 0.289), Charlie picked first reaches his
+  ending with no play when the CPU side's vitality words `0xFF4610` and
+  `0xFF4E10` are set to 0 every 20 frames. With `0xFF547A` and `0xFF5478`
+  also set to 0 before the ending, the ending runs in Japanese.
+- **Indexing:** the ending selector (PC `0x04F53C`) reads the point
+  character's pointer from the English table `0x17E318` or the Japanese
+  table `0x17E2CC`. Page k then reads record k (PC `0x04F612`; 100-byte or
+  76-byte records). This was predicted before the logged runs. With
+  partner Cyclops and with partner Ryu, the reads were identical in each
+  language.
+- **Pairing:** Saturn `MC10.SHP` record 16 + k (decoded `0x2EC0` + 76k)
+  equals arcade Japanese slot 16 record k byte for byte. It pairs with
+  arcade English slot 16 record k (`0x18D0AE` + 100k), k = 0-5. All six
+  pairs were confirmed by four reads each
+  (`data/translations/nash_ending_pairing.json`). English records 1 and 4
+  say "Charlie".
+- **The scene script depends on the language:**
+  - The arcade Japanese ending matches the Saturn's: scenes start at pages
+    1, 3, 5 and 6, with the labels `Nash`, `Nazo no koe`, `Nash` and
+    `Nash's friend`.
+  - The English ending starts scenes at pages 1, 2, 4 and 5, shows other
+    pictures, and labels page 4 `Charlie` and page 5 `Charlie's friend`.
+
+Reproduce: `research/experiments/EXP-0037/README.md`, "Procedure".

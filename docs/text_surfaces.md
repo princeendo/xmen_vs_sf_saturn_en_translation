@@ -35,7 +35,14 @@ fight. Every screenshot was checked by the agent.
 Already English here: the staff roll (~222,981-226,589), `THANK YOU FOR
 PLAYING / PRESENTED BY CAPCOM`, `GAME OVER`, initials entry and score
 ranking. Pages and line counts: 1, 2, 1, 2, 1, 2 lines. Arcade English for
-these surfaces is `END-004`.
+these surfaces (`EXP-0037`, `xmvsfu` in MAME):
+
+- **Ending pages:** six English records, the same record per page.
+- **Labels:** `Charlie` on page 4 and `Charlie's friend` on page 5, under
+  English scene breaks and pictures.
+- **Warning:** `NO CHALLENGERS` in place of the warning.
+- **Post-Apocalypse quote:** Charlie's English win-quote record 0.
+- **Not checked:** the pre-boss line and the QSound notice.
 
 ## Surfaces Already In English (no Japanese seen)
 

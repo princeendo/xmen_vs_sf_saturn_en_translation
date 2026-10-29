@@ -1,0 +1,287 @@
+{
+ "description": "Nash (arcade slot 16) ending: the Saturn page k shows MC10 record 16 + k; the arcade shows Japanese and English ending record k on page k, whatever the partner (EXP-0037).",
+ "rule": "page k (k = 0-5) reads ending record k of the point character's slot, in either language; the partner does not change the records",
+ "program": "local/ref003/xmvsfu-68k.bin",
+ "reads_per_run": {
+  "en_cyclops": 6,
+  "en_ryu": 6,
+  "jp_cyclops": 6,
+  "jp_ryu": 6
+ },
+ "pairs": [
+  {
+   "page": 1,
+   "saturn_record": 16,
+   "saturn_file": "MC10.SHP;1",
+   "saturn_file_offset": "0x2ec0",
+   "saturn_sha256": "2d88f1bab0f5878331d524871fa1cccd038ab3abf411344184a60510472a5dd3",
+   "arcade_jp_record": 0,
+   "arcade_jp_address": "0x1856e0",
+   "saturn_equals_arcade_jp": true,
+   "arcade_en_record": 0,
+   "arcade_en_address": "0x18d0ae",
+   "arcade_en_sha256": "7e369dbad8037d5ce0946d7a6a6c121e80b057a8433a4cc257d7f36a41d41e2f",
+   "en_names": [],
+   "runs": [
+    {
+     "run": "en_cyclops",
+     "language": "en",
+     "read": "0x18d0ae",
+     "expected": "0x18d0ae",
+     "match": true
+    },
+    {
+     "run": "en_ryu",
+     "language": "en",
+     "read": "0x18d0ae",
+     "expected": "0x18d0ae",
+     "match": true
+    },
+    {
+     "run": "jp_cyclops",
+     "language": "jp",
+     "read": "0x1856e0",
+     "expected": "0x1856e0",
+     "match": true
+    },
+    {
+     "run": "jp_ryu",
+     "language": "jp",
+     "read": "0x1856e0",
+     "expected": "0x1856e0",
+     "match": true
+    }
+   ],
+   "confidence": "CONFIRMED"
+  },
+  {
+   "page": 2,
+   "saturn_record": 17,
+   "saturn_file": "MC10.SHP;1",
+   "saturn_file_offset": "0x2f0c",
+   "saturn_sha256": "289365a679c3f3e14bb4acc29050ea2c52e0bebe1eb08966e1e8d3e1d9ad641b",
+   "arcade_jp_record": 1,
+   "arcade_jp_address": "0x18572c",
+   "saturn_equals_arcade_jp": true,
+   "arcade_en_record": 1,
+   "arcade_en_address": "0x18d112",
+   "arcade_en_sha256": "6030a4ad74ac486d1f9b556bec68db04c9a1f8b41cf028c760478610ea4f10ab",
+   "en_names": [
+    "Charlie"
+   ],
+   "runs": [
+    {
+     "run": "en_cyclops",
+     "language": "en",
+     "read": "0x18d112",
+     "expected": "0x18d112",
+     "match": true
+    },
+    {
+     "run": "en_ryu",
+     "language": "en",
+     "read": "0x18d112",
+     "expected": "0x18d112",
+     "match": true
+    },
+    {
+     "run": "jp_cyclops",
+     "language": "jp",
+     "read": "0x18572c",
+     "expected": "0x18572c",
+     "match": true
+    },
+    {
+     "run": "jp_ryu",
+     "language": "jp",
+     "read": "0x18572c",
+     "expected": "0x18572c",
+     "match": true
+    }
+   ],
+   "confidence": "CONFIRMED"
+  },
+  {
+   "page": 3,
+   "saturn_record": 18,
+   "saturn_file": "MC10.SHP;1",
+   "saturn_file_offset": "0x2f58",
+   "saturn_sha256": "44a47434ce39281ad535eaf9baf699cc375136c4cf2b924bfad82007c5f9369b",
+   "arcade_jp_record": 2,
+   "arcade_jp_address": "0x185778",
+   "saturn_equals_arcade_jp": true,
+   "arcade_en_record": 2,
+   "arcade_en_address": "0x18d176",
+   "arcade_en_sha256": "6bcfde4f2d7995ca3e4dece55c3fed2a92a47820a0756cf60949c0552b221ef1",
+   "en_names": [],
+   "runs": [
+    {
+     "run": "en_cyclops",
+     "language": "en",
+     "read": "0x18d176",
+     "expected": "0x18d176",
+     "match": true
+    },
+    {
+     "run": "en_ryu",
+     "language": "en",
+     "read": "0x18d176",
+     "expected": "0x18d176",
+     "match": true
+    },
+    {
+     "run": "jp_cyclops",
+     "language": "jp",
+     "read": "0x185778",
+     "expected": "0x185778",
+     "match": true
+    },
+    {
+     "run": "jp_ryu",
+     "language": "jp",
+     "read": "0x185778",
+     "expected": "0x185778",
+     "match": true
+    }
+   ],
+   "confidence": "CONFIRMED"
+  },
+  {
+   "page": 4,
+   "saturn_record": 19,
+   "saturn_file": "MC10.SHP;1",
+   "saturn_file_offset": "0x2fa4",
+   "saturn_sha256": "953cd275811ca0f7538e1056aeab5ea1a95f1d95a1c0580d7bf91c63f74fb146",
+   "arcade_jp_record": 3,
+   "arcade_jp_address": "0x1857c4",
+   "saturn_equals_arcade_jp": true,
+   "arcade_en_record": 3,
+   "arcade_en_address": "0x18d1da",
+   "arcade_en_sha256": "45cd891362c584f5fe545dfc2ce283615aeec1479d88ebc927b6722f5461a469",
+   "en_names": [],
+   "runs": [
+    {
+     "run": "en_cyclops",
+     "language": "en",
+     "read": "0x18d1da",
+     "expected": "0x18d1da",
+     "match": true
+    },
+    {
+     "run": "en_ryu",
+     "language": "en",
+     "read": "0x18d1da",
+     "expected": "0x18d1da",
+     "match": true
+    },
+    {
+     "run": "jp_cyclops",
+     "language": "jp",
+     "read": "0x1857c4",
+     "expected": "0x1857c4",
+     "match": true
+    },
+    {
+     "run": "jp_ryu",
+     "language": "jp",
+     "read": "0x1857c4",
+     "expected": "0x1857c4",
+     "match": true
+    }
+   ],
+   "confidence": "CONFIRMED"
+  },
+  {
+   "page": 5,
+   "saturn_record": 20,
+   "saturn_file": "MC10.SHP;1",
+   "saturn_file_offset": "0x2ff0",
+   "saturn_sha256": "5a4b436fb0f87250411c7ef4d193bd6b7a844ff6c3f842ca243e5181d8b69bed",
+   "arcade_jp_record": 4,
+   "arcade_jp_address": "0x185810",
+   "saturn_equals_arcade_jp": true,
+   "arcade_en_record": 4,
+   "arcade_en_address": "0x18d23e",
+   "arcade_en_sha256": "bef07159289c9c0f561c66f798050d9647f0f9bb9efde8a625ec13f4a34e8029",
+   "en_names": [
+    "Charlie"
+   ],
+   "runs": [
+    {
+     "run": "en_cyclops",
+     "language": "en",
+     "read": "0x18d23e",
+     "expected": "0x18d23e",
+     "match": true
+    },
+    {
+     "run": "en_ryu",
+     "language": "en",
+     "read": "0x18d23e",
+     "expected": "0x18d23e",
+     "match": true
+    },
+    {
+     "run": "jp_cyclops",
+     "language": "jp",
+     "read": "0x185810",
+     "expected": "0x185810",
+     "match": true
+    },
+    {
+     "run": "jp_ryu",
+     "language": "jp",
+     "read": "0x185810",
+     "expected": "0x185810",
+     "match": true
+    }
+   ],
+   "confidence": "CONFIRMED"
+  },
+  {
+   "page": 6,
+   "saturn_record": 21,
+   "saturn_file": "MC10.SHP;1",
+   "saturn_file_offset": "0x303c",
+   "saturn_sha256": "0ae346b856ef7426200bac29f31202e17bacaad4f8fb9e741dfe039b40d120af",
+   "arcade_jp_record": 5,
+   "arcade_jp_address": "0x18585c",
+   "saturn_equals_arcade_jp": true,
+   "arcade_en_record": 5,
+   "arcade_en_address": "0x18d2a2",
+   "arcade_en_sha256": "fdb040018167f7538c49cf8ea03454445f1394d4aeb1906fac15dc400e885706",
+   "en_names": [],
+   "runs": [
+    {
+     "run": "en_cyclops",
+     "language": "en",
+     "read": "0x18d2a2",
+     "expected": "0x18d2a2",
+     "match": true
+    },
+    {
+     "run": "en_ryu",
+     "language": "en",
+     "read": "0x18d2a2",
+     "expected": "0x18d2a2",
+     "match": true
+    },
+    {
+     "run": "jp_cyclops",
+     "language": "jp",
+     "read": "0x18585c",
+     "expected": "0x18585c",
+     "match": true
+    },
+    {
+     "run": "jp_ryu",
+     "language": "jp",
+     "read": "0x18585c",
+     "expected": "0x18585c",
+     "match": true
+    }
+   ],
+   "confidence": "CONFIRMED"
+  }
+ ]
+}

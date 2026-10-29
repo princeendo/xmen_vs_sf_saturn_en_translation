@@ -210,7 +210,18 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   (`data/text/ending_census.json`). In the user's play check on the
   marker image, page 1 showed the marker in exactly its four cells, and
   pages 2-6 were unchanged (`END-003`, D-031).
-- Next: `END-004` (ready), the last M6 task.
+- **2026-10-29** (`SESSION-0053`, `EXP-0037`): Charlie's arcade ending is
+  reached in MAME with no play, by zeroing the CPU side's vitality, in
+  English and in Japanese. Page k reads the point character's ending record
+  k, in either language and with either partner. Saturn `MC10` record
+  16 + k pairs with arcade English slot 16 record k
+  (`data/translations/nash_ending_pairing.json`, all six CONFIRMED). The
+  English scene script differs: other scene breaks, pictures and labels
+  (`Charlie`, `Charlie's friend`). English records 1 and 4 say "Charlie"
+  (`END-004`, D-032). **M6 is complete.**
+- Next: M7 (`END-005`) needs its tasks written and a `GATE-TRANSLATION`
+  extension for the ending. The language-dependent scene script and the
+  labels are its main open design questions. Nothing in M7 has started.
   The backlog also holds `UI-004` (boot-time error messages, including the
   cart warning), `SPECIAL-001` (including
   Apocalypse's pre-fight line) and `REL-001` (release patches).
@@ -1473,7 +1484,7 @@ Known before M6 (each is at most SUPPORTED for the Saturn's endings):
 
 ### END-004 - Arcade English and indexing for the ending
 
-- **Status:** `READY`
+- **Status:** `DONE` (`EXP-0037`, D-032)
 - **Milestone:** M6
 - **Dependencies:** END-001.
 - **Blockers:** None; Nash's ending and its inventory are in `EXP-0034` and `docs/text_surfaces.md`.
