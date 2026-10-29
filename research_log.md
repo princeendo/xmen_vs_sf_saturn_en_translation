@@ -1734,3 +1734,46 @@ After the runs, `ruff format` reflowed the three scripts, one docstring line was
 Checks: `pytest` 167 passed; `ruff check`, `ruff format --check` and `mypy --strict tools tests` are clean; `mypy` on each EXP-0035 script is clean.
 
 Conclusion: `END-002` is `DONE` (**CONFIRMED**, D-030). Next: `END-003` and `END-004`.
+
+## 2026-10-29 — SESSION-0052: Where Nash's ending text lives (END-003, EXP-0036, in progress)
+
+User request (verbatim): "Keep LOC-001 after M8; continue with END-003 or
+END-004 next." The agent chose `END-003`, which follows directly from
+`EXP-0035`'s RAM records.
+
+- **Write logs on the six records** (`write_log.py`):
+  - untouched image, frames 210,163-222,100: 0 writes;
+  - marker image, frames 210,163-220,700: 0 writes, original bytes kept.
+
+  So `MC10` is not reloaded from the boss stage on, and the screen check
+  needs a run from the pick.
+- **RAM write** (`ram_write.py`): `0x0AF4` → `0x09F2` in record 18 before
+  page 3. One cell changed (139 px, x 27-40, y 187-200; 何 → こ at zoom),
+  and its VDP1 data is the new glyph.
+- **Marker build:**
+  - `make_marker.py`: 8 bytes at decoded `0x2EC0`; re-encoded
+    `026ab640…`, same size (23,913).
+  - Image `build/end003_marker`: Track 01 `547359de…`, 12 sectors changed
+    (LSN 53,813-53,824), all sectors valid.
+- **Pick** (`pick_writer.py`, from `re004/f00002973`, key `u`):
+  - The first try failed: Mednafen was not frontmost, so no key was sent.
+    A retry loop was added.
+  - Untouched image: 114 writes, all from `0x0600D124` (R5 `0x5D69`, R6
+    `0x0024D000`). The buffer equals MC10 plus 263 fix-ups.
+  - Marker image: the same writer. The records hold the marker, and the
+    buffer equals the marker file plus fix-ups.
+- **Census** (`census_endings.py` → `data/text/ending_census.json`):
+  - Slots 0-16 hold the whole arcade Japanese ending block at table +
+    `0x4C0`.
+  - Cammy (17): 12 records; the arcade block is unbounded.
+  - Apocalypse's file has text-like data after his 4 records.
+  - The English counts reproduce `SESSION-0049`'s list.
+  - The first run crashed: the English blocks run past `ENGLISH_END`, so
+    the bound became `0x18D81A`, where the hints start.
+
+Checks: `ruff check` clean; `mypy --strict` on each EXP-0036 script, with
+`MYPYPATH` set to the EXP-0025, EXP-0029, EXP-0032 and EXP-0035 folders, is
+clean.
+
+Status: `END-003` stays `IN_PROGRESS` until the user's play check on the
+marker image shows the marker on screen.

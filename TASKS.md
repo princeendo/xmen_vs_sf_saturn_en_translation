@@ -201,7 +201,15 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   pixel-identical. The English grid is reachable, but the selector's English
   list is empty on the Saturn, and English mode also changes the labels and
   pictures (a Latin `Charlie` label appeared; `END-002`, D-030).
-- Next: `END-003` and `END-004` (both ready).
+- **2026-10-29** (`SESSION-0052`, `EXP-0036`, in progress): Nash's
+  ending records are loaded once, at the pick, by the file loader
+  `0x0600D124` from `MC10.SHP`. Nothing rewrites them before the ending,
+  and a RAM edit changes exactly the predicted cell. A same-size marker in
+  `MC10.SHP` (image `build/end003_marker`) reaches RAM at the pick. Every
+  roster file keeps its arcade Japanese ending block at table + `0x4C0`
+  (`data/text/ending_census.json`). Pending: the user's play check of the
+  marker on screen.
+- Next: finish `END-003` (the marker play check); `END-004` is ready.
   The backlog also holds `UI-004` (boot-time error messages, including the
   cart warning), `SPECIAL-001` (including
   Apocalypse's pre-fight line) and `REL-001` (release patches).
@@ -1438,7 +1446,7 @@ Known before M6 (each is at most SUPPORTED for the Saturn's endings):
 
 ### END-003 - Where the ending text lives
 
-- **Status:** `READY`
+- **Status:** `IN_PROGRESS` (`EXP-0036`; marker play check pending)
 - **Milestone:** M6
 - **Dependencies:** END-002.
 - **Blockers:** None. `EXP-0035` found the RAM records (`MC10` records 16-21 at `0x0024FEC0` + 76k, matching the decoded file); the writer, marker and census criteria remain.
