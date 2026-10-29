@@ -444,3 +444,24 @@ its own. `MCED.SHP` holds no arcade quote or ending record.
   repeated identically, and its no-input control had no event.
 
 Reproduce: `research/experiments/EXP-0029/README.md`, "Procedure".
+
+## D-025 (M5): Every roster slot pairs Saturn record `k` with English record `k mod 8` (`PAIR-003`, `EXP-0030`)
+
+For all 18 slots of the M5 roster (0-17), the arcade selector shows English
+record `r mod 8` and Japanese record `r` for draw `r`, from the slot's own
+pointers. This holds for Apocalypse's 8-record slot too. So Saturn record `k`
+of slot `s` (the census's table in `MCxx`) pairs with slot `s`'s English
+record `k mod 8`, and English record 8 is never shown. The tables are in
+`data/translations/<name>_pairing.json`.
+
+All 144 shown English records recompile exactly as 2 × 25 codes, and none
+uses a code with an unexpected Saturn glyph
+(`data/translations/m5_english_fit.json`). Only Cammy's English records 0
+and 4 name a character whose names differ between versions ("Bison").
+
+**Evidence.** There were 360 forced MAME runs (`xmvsfu`, MAME 0.289), all
+matching: 288 English (16 draws per slot) and 72 Japanese (draws 3, 8, 9 and
+15). The unforced controls equal `EXP-0026`'s. Ryu's and Ken's results equal
+their earlier tables.
+
+Reproduce: `research/experiments/EXP-0030/README.md`, "Procedure".

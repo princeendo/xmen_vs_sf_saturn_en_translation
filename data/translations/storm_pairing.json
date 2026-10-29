@@ -1,0 +1,342 @@
+{
+ "description": "Storm (arcade slot 2) win quotes: Saturn record k pairs with the arcade English record shown for the same random draw (EXP-0030).",
+ "rule": "draw r = rand() & 0x0F; Japanese record r; English record r mod 8",
+ "saturn_table": {
+  "file": "MC02.SHP;1",
+  "offset": "0x40d4"
+ },
+ "english_records": 9,
+ "unreachable_english_records": [
+  8
+ ],
+ "pairs": [
+  {
+   "saturn_record": 0,
+   "saturn_file": "MC02.SHP;1",
+   "saturn_file_offset": "0x40d4",
+   "arcade_draw": 0,
+   "arcade_jp_record": 0,
+   "arcade_jp_address": "0x17ed7c",
+   "arcade_en_record": 0,
+   "arcade_en_address": "0x1875aa",
+   "runs": [
+    {
+     "language": "en",
+     "read": "0x1875aa",
+     "expected": "0x1875aa",
+     "match": true
+    }
+   ],
+   "confidence": "CONFIRMED"
+  },
+  {
+   "saturn_record": 1,
+   "saturn_file": "MC02.SHP;1",
+   "saturn_file_offset": "0x4120",
+   "arcade_draw": 1,
+   "arcade_jp_record": 1,
+   "arcade_jp_address": "0x17edc8",
+   "arcade_en_record": 1,
+   "arcade_en_address": "0x18760e",
+   "runs": [
+    {
+     "language": "en",
+     "read": "0x18760e",
+     "expected": "0x18760e",
+     "match": true
+    }
+   ],
+   "confidence": "CONFIRMED"
+  },
+  {
+   "saturn_record": 2,
+   "saturn_file": "MC02.SHP;1",
+   "saturn_file_offset": "0x416c",
+   "arcade_draw": 2,
+   "arcade_jp_record": 2,
+   "arcade_jp_address": "0x17ee14",
+   "arcade_en_record": 2,
+   "arcade_en_address": "0x187672",
+   "runs": [
+    {
+     "language": "en",
+     "read": "0x187672",
+     "expected": "0x187672",
+     "match": true
+    }
+   ],
+   "confidence": "CONFIRMED"
+  },
+  {
+   "saturn_record": 3,
+   "saturn_file": "MC02.SHP;1",
+   "saturn_file_offset": "0x41b8",
+   "arcade_draw": 3,
+   "arcade_jp_record": 3,
+   "arcade_jp_address": "0x17ee60",
+   "arcade_en_record": 3,
+   "arcade_en_address": "0x1876d6",
+   "runs": [
+    {
+     "language": "en",
+     "read": "0x1876d6",
+     "expected": "0x1876d6",
+     "match": true
+    },
+    {
+     "language": "jp",
+     "read": "0x17ee60",
+     "expected": "0x17ee60",
+     "match": true
+    }
+   ],
+   "confidence": "CONFIRMED"
+  },
+  {
+   "saturn_record": 4,
+   "saturn_file": "MC02.SHP;1",
+   "saturn_file_offset": "0x4204",
+   "arcade_draw": 4,
+   "arcade_jp_record": 4,
+   "arcade_jp_address": "0x17eeac",
+   "arcade_en_record": 4,
+   "arcade_en_address": "0x18773a",
+   "runs": [
+    {
+     "language": "en",
+     "read": "0x18773a",
+     "expected": "0x18773a",
+     "match": true
+    }
+   ],
+   "confidence": "CONFIRMED"
+  },
+  {
+   "saturn_record": 5,
+   "saturn_file": "MC02.SHP;1",
+   "saturn_file_offset": "0x4250",
+   "arcade_draw": 5,
+   "arcade_jp_record": 5,
+   "arcade_jp_address": "0x17eef8",
+   "arcade_en_record": 5,
+   "arcade_en_address": "0x18779e",
+   "runs": [
+    {
+     "language": "en",
+     "read": "0x18779e",
+     "expected": "0x18779e",
+     "match": true
+    }
+   ],
+   "confidence": "CONFIRMED"
+  },
+  {
+   "saturn_record": 6,
+   "saturn_file": "MC02.SHP;1",
+   "saturn_file_offset": "0x429c",
+   "arcade_draw": 6,
+   "arcade_jp_record": 6,
+   "arcade_jp_address": "0x17ef44",
+   "arcade_en_record": 6,
+   "arcade_en_address": "0x187802",
+   "runs": [
+    {
+     "language": "en",
+     "read": "0x187802",
+     "expected": "0x187802",
+     "match": true
+    }
+   ],
+   "confidence": "CONFIRMED"
+  },
+  {
+   "saturn_record": 7,
+   "saturn_file": "MC02.SHP;1",
+   "saturn_file_offset": "0x42e8",
+   "arcade_draw": 7,
+   "arcade_jp_record": 7,
+   "arcade_jp_address": "0x17ef90",
+   "arcade_en_record": 7,
+   "arcade_en_address": "0x187866",
+   "runs": [
+    {
+     "language": "en",
+     "read": "0x187866",
+     "expected": "0x187866",
+     "match": true
+    }
+   ],
+   "confidence": "CONFIRMED"
+  },
+  {
+   "saturn_record": 8,
+   "saturn_file": "MC02.SHP;1",
+   "saturn_file_offset": "0x4334",
+   "arcade_draw": 8,
+   "arcade_jp_record": 8,
+   "arcade_jp_address": "0x17efdc",
+   "arcade_en_record": 0,
+   "arcade_en_address": "0x1875aa",
+   "runs": [
+    {
+     "language": "en",
+     "read": "0x1875aa",
+     "expected": "0x1875aa",
+     "match": true
+    },
+    {
+     "language": "jp",
+     "read": "0x17efdc",
+     "expected": "0x17efdc",
+     "match": true
+    }
+   ],
+   "confidence": "CONFIRMED"
+  },
+  {
+   "saturn_record": 9,
+   "saturn_file": "MC02.SHP;1",
+   "saturn_file_offset": "0x4380",
+   "arcade_draw": 9,
+   "arcade_jp_record": 9,
+   "arcade_jp_address": "0x17f028",
+   "arcade_en_record": 1,
+   "arcade_en_address": "0x18760e",
+   "runs": [
+    {
+     "language": "en",
+     "read": "0x18760e",
+     "expected": "0x18760e",
+     "match": true
+    },
+    {
+     "language": "jp",
+     "read": "0x17f028",
+     "expected": "0x17f028",
+     "match": true
+    }
+   ],
+   "confidence": "CONFIRMED"
+  },
+  {
+   "saturn_record": 10,
+   "saturn_file": "MC02.SHP;1",
+   "saturn_file_offset": "0x43cc",
+   "arcade_draw": 10,
+   "arcade_jp_record": 10,
+   "arcade_jp_address": "0x17f074",
+   "arcade_en_record": 2,
+   "arcade_en_address": "0x187672",
+   "runs": [
+    {
+     "language": "en",
+     "read": "0x187672",
+     "expected": "0x187672",
+     "match": true
+    }
+   ],
+   "confidence": "CONFIRMED"
+  },
+  {
+   "saturn_record": 11,
+   "saturn_file": "MC02.SHP;1",
+   "saturn_file_offset": "0x4418",
+   "arcade_draw": 11,
+   "arcade_jp_record": 11,
+   "arcade_jp_address": "0x17f0c0",
+   "arcade_en_record": 3,
+   "arcade_en_address": "0x1876d6",
+   "runs": [
+    {
+     "language": "en",
+     "read": "0x1876d6",
+     "expected": "0x1876d6",
+     "match": true
+    }
+   ],
+   "confidence": "CONFIRMED"
+  },
+  {
+   "saturn_record": 12,
+   "saturn_file": "MC02.SHP;1",
+   "saturn_file_offset": "0x4464",
+   "arcade_draw": 12,
+   "arcade_jp_record": 12,
+   "arcade_jp_address": "0x17f10c",
+   "arcade_en_record": 4,
+   "arcade_en_address": "0x18773a",
+   "runs": [
+    {
+     "language": "en",
+     "read": "0x18773a",
+     "expected": "0x18773a",
+     "match": true
+    }
+   ],
+   "confidence": "CONFIRMED"
+  },
+  {
+   "saturn_record": 13,
+   "saturn_file": "MC02.SHP;1",
+   "saturn_file_offset": "0x44b0",
+   "arcade_draw": 13,
+   "arcade_jp_record": 13,
+   "arcade_jp_address": "0x17f158",
+   "arcade_en_record": 5,
+   "arcade_en_address": "0x18779e",
+   "runs": [
+    {
+     "language": "en",
+     "read": "0x18779e",
+     "expected": "0x18779e",
+     "match": true
+    }
+   ],
+   "confidence": "CONFIRMED"
+  },
+  {
+   "saturn_record": 14,
+   "saturn_file": "MC02.SHP;1",
+   "saturn_file_offset": "0x44fc",
+   "arcade_draw": 14,
+   "arcade_jp_record": 14,
+   "arcade_jp_address": "0x17f1a4",
+   "arcade_en_record": 6,
+   "arcade_en_address": "0x187802",
+   "runs": [
+    {
+     "language": "en",
+     "read": "0x187802",
+     "expected": "0x187802",
+     "match": true
+    }
+   ],
+   "confidence": "CONFIRMED"
+  },
+  {
+   "saturn_record": 15,
+   "saturn_file": "MC02.SHP;1",
+   "saturn_file_offset": "0x4548",
+   "arcade_draw": 15,
+   "arcade_jp_record": 15,
+   "arcade_jp_address": "0x17f1f0",
+   "arcade_en_record": 7,
+   "arcade_en_address": "0x187866",
+   "runs": [
+    {
+     "language": "en",
+     "read": "0x187866",
+     "expected": "0x187866",
+     "match": true
+    },
+    {
+     "language": "jp",
+     "read": "0x17f1f0",
+     "expected": "0x17f1f0",
+     "match": true
+    }
+   ],
+   "confidence": "CONFIRMED"
+  }
+ ]
+}

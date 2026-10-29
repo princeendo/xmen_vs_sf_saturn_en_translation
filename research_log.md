@@ -1428,3 +1428,35 @@ exceptions."
   `RE-010` gained a fallback for Apocalypse's play check.
 
 No experiment was run.
+
+## 2026-10-29 — SESSION-0044 / EXP-0030: pairing for the whole roster (`PAIR-003`)
+
+User request (verbatim): "Start PAIR-003: confirm the pairing for every
+roster character."
+
+- **Timing.** One `run_pair.py` run takes about 8 s. Batches of 20 runs per
+  slot ran 6 at a time, about 7 minutes per full set.
+- **First batch** (`local/pair003`, `EXP-0022/run_pair.py` unchanged):
+  - English 288/288 as predicted.
+  - On slots 0-5, 23 of 24 Japanese runs logged no text read. The script
+    logs reads only from `0x180000`, and those records sit at
+    `0x17E3FC`-`0x17FFFF`. Sabretooth's draw 15 (`0x180030`) was logged.
+  - The steps (D1 and index) were right in all runs.
+  - The first pairing files, written despite the failures, were deleted.
+    `make_pairing.py` now writes nothing for a slot with a failed run.
+- **Fix:** `EXP-0030/run_pair.py` is a copy with `READ_START = 0x17E000`.
+- **Rerun** (`local/pair003b`): 360/360 as predicted. English reads are
+  identical to the first batch, and the controls repeat (`0x189936`,
+  `0x181FF4`). Ryu's and Ken's English addresses agree with their files.
+- **Fit check:** 161 records (144 shown) recompile exactly; the longest
+  line is 25 codes, and no `@ { | }` codes are used. Names: "Bison" in
+  Cammy's English records 0 and 4 only. `docs/names.md` counts 4 "Bison"
+  mentions across all English text, so the other 2 are in endings or
+  hints.
+- **Reproduction:** the pairing files and `m5_english_fit.json` regenerate
+  byte for byte.
+
+Checks: `pytest` 162 passed; `ruff check`, `ruff format --check`, `mypy`, and `mypy --strict` on the EXP-0030 scripts are clean.
+
+Conclusion: `PAIR-003` is `DONE` (**CONFIRMED**, D-025). Next: `RE-009`;
+the gate extension is the user's.

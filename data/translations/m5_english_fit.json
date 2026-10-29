@@ -1,0 +1,2421 @@
+[
+ {
+  "slot": 0,
+  "character": "Wolverine",
+  "english_record": 0,
+  "shown": true,
+  "address": "0x186ea2",
+  "sha256": "4b287e98a8aa379a199de39a621d8b99c2f8a9323b48bdbece3c09c999fdd8a9",
+  "line_lengths": [
+   21,
+   13
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 0,
+  "character": "Wolverine",
+  "english_record": 1,
+  "shown": true,
+  "address": "0x186f06",
+  "sha256": "1d57d49acdf5432bd0b36fbc6e53e6a75beeb89ba4ed08319ccb66b43a14237e",
+  "line_lengths": [
+   24,
+   0
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 0,
+  "character": "Wolverine",
+  "english_record": 2,
+  "shown": true,
+  "address": "0x186f6a",
+  "sha256": "64ad2c5d66c96f7640a609b3d6d3f027bf3a43b49a452f69176268b5b1d17d0c",
+  "line_lengths": [
+   17,
+   12
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 0,
+  "character": "Wolverine",
+  "english_record": 3,
+  "shown": true,
+  "address": "0x186fce",
+  "sha256": "01a2f8d100887445e8fbbc84e3ddaaf96b740f0f08091d7745c54633c23d6940",
+  "line_lengths": [
+   23,
+   15
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 0,
+  "character": "Wolverine",
+  "english_record": 4,
+  "shown": true,
+  "address": "0x187032",
+  "sha256": "aa187fdb5ca2eabae8420b5374d2b5216294e6cdb2b302d2661279034a2cabfd",
+  "line_lengths": [
+   7,
+   0
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 0,
+  "character": "Wolverine",
+  "english_record": 5,
+  "shown": true,
+  "address": "0x187096",
+  "sha256": "c492733a1427de8dbd3d0cc6433635a44c6b8bba6d4ebdaaa7a17378bc5860ca",
+  "line_lengths": [
+   21,
+   24
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 0,
+  "character": "Wolverine",
+  "english_record": 6,
+  "shown": true,
+  "address": "0x1870fa",
+  "sha256": "0992d6b57c035eb784210dc585c1033ca5da54d0b07fa12dd2c49d4089dc371e",
+  "line_lengths": [
+   23,
+   13
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 0,
+  "character": "Wolverine",
+  "english_record": 7,
+  "shown": true,
+  "address": "0x18715e",
+  "sha256": "19c9d6eb309bdad6f7ddb6847005dd05dd457a955b3753b9d292f1a58b7ddfc8",
+  "line_lengths": [
+   20,
+   15
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 0,
+  "character": "Wolverine",
+  "english_record": 8,
+  "shown": false,
+  "address": "0x1871c2",
+  "sha256": "b06e494ef33af8a25d1181095b196dd107d4f3ee93aff68d54f93c499ba60977",
+  "line_lengths": [
+   24,
+   19
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 1,
+  "character": "Cyclops",
+  "english_record": 0,
+  "shown": true,
+  "address": "0x187226",
+  "sha256": "b0dffa10d3fe51034ce01532dddb3bb05fbfcff4acbe5b13c0d2cda4f74d0793",
+  "line_lengths": [
+   20,
+   20
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 1,
+  "character": "Cyclops",
+  "english_record": 1,
+  "shown": true,
+  "address": "0x18728a",
+  "sha256": "7a5eb21beee86609b664ee7f98e93d2a5dcc3580523b15bfadae3ce6e74e4d14",
+  "line_lengths": [
+   24,
+   19
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 1,
+  "character": "Cyclops",
+  "english_record": 2,
+  "shown": true,
+  "address": "0x1872ee",
+  "sha256": "d157db3515cb0f2cef74a32b10002fde445df8ec3ebb8b8da40deaa1d0468ac8",
+  "line_lengths": [
+   23,
+   21
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 1,
+  "character": "Cyclops",
+  "english_record": 3,
+  "shown": true,
+  "address": "0x187352",
+  "sha256": "e2990d6a277191178a85172dae5210f3daf733a5764348f0925cbef391cbccc4",
+  "line_lengths": [
+   24,
+   24
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 1,
+  "character": "Cyclops",
+  "english_record": 4,
+  "shown": true,
+  "address": "0x1873b6",
+  "sha256": "3dc032c011751e9f8ba375a7137cf6a587ee1f289d3d62ff8d5f6c5f3c1173c4",
+  "line_lengths": [
+   19,
+   25
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 1,
+  "character": "Cyclops",
+  "english_record": 5,
+  "shown": true,
+  "address": "0x18741a",
+  "sha256": "fae437325467a27c0bcc863e2414ee379261b4ad570d9ccaf2f957de6a695363",
+  "line_lengths": [
+   24,
+   6
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 1,
+  "character": "Cyclops",
+  "english_record": 6,
+  "shown": true,
+  "address": "0x18747e",
+  "sha256": "8b6ed613d33b4f2cda79fe14e17485be2166f0f09998e45137df95058f907603",
+  "line_lengths": [
+   24,
+   10
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 1,
+  "character": "Cyclops",
+  "english_record": 7,
+  "shown": true,
+  "address": "0x1874e2",
+  "sha256": "cb930d4317cf82030bdd50d2747fa2cec8891b39abef567d894590d8351ab65c",
+  "line_lengths": [
+   18,
+   10
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 1,
+  "character": "Cyclops",
+  "english_record": 8,
+  "shown": false,
+  "address": "0x187546",
+  "sha256": "79720328459e74e55497c17adda7ea28ce31323acc8bca010270f7cceaa398c2",
+  "line_lengths": [
+   21,
+   15
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 2,
+  "character": "Storm",
+  "english_record": 0,
+  "shown": true,
+  "address": "0x1875aa",
+  "sha256": "d525bcaca31b6db4222f7ba449a1f2eb412e81e05ff50d1f5166d0d73bd641dd",
+  "line_lengths": [
+   21,
+   0
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 2,
+  "character": "Storm",
+  "english_record": 1,
+  "shown": true,
+  "address": "0x18760e",
+  "sha256": "e00b044f1a233e91dd2689036b72aa622c87fddd31f9022a230cf2543af54eb5",
+  "line_lengths": [
+   21,
+   9
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 2,
+  "character": "Storm",
+  "english_record": 2,
+  "shown": true,
+  "address": "0x187672",
+  "sha256": "000d658145687664ea72cd934dc514601f1766f12ebf262f78eea2baebf0ad25",
+  "line_lengths": [
+   19,
+   20
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 2,
+  "character": "Storm",
+  "english_record": 3,
+  "shown": true,
+  "address": "0x1876d6",
+  "sha256": "4098e1cf80c8a3f9142bdc03402cae92165d48953fccdbf95a98401859235db3",
+  "line_lengths": [
+   23,
+   23
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 2,
+  "character": "Storm",
+  "english_record": 4,
+  "shown": true,
+  "address": "0x18773a",
+  "sha256": "719952ce2db69c5d7bd6fcb54b075e374d47966dc972e2568c259883a414f5e7",
+  "line_lengths": [
+   23,
+   22
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 2,
+  "character": "Storm",
+  "english_record": 5,
+  "shown": true,
+  "address": "0x18779e",
+  "sha256": "74a22be6d1090ec749f2ba3f8da46daa09a1ad3cee94dede8e7f3f8894591cb0",
+  "line_lengths": [
+   19,
+   17
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 2,
+  "character": "Storm",
+  "english_record": 6,
+  "shown": true,
+  "address": "0x187802",
+  "sha256": "d80ad0e474e5ce624af65a2245ca5da5313ef489b95c83bbd1640c1ba1a89674",
+  "line_lengths": [
+   25,
+   10
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 2,
+  "character": "Storm",
+  "english_record": 7,
+  "shown": true,
+  "address": "0x187866",
+  "sha256": "ab075f5957f56c6479ff17030096dd887b976064a19758ee987912c1939c135c",
+  "line_lengths": [
+   22,
+   23
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 2,
+  "character": "Storm",
+  "english_record": 8,
+  "shown": false,
+  "address": "0x1878ca",
+  "sha256": "55c9bbd363147d14fb778a246970b7b2396aa5ebee90e784f66b3985aebe9821",
+  "line_lengths": [
+   17,
+   22
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 3,
+  "character": "Rogue",
+  "english_record": 0,
+  "shown": true,
+  "address": "0x18792e",
+  "sha256": "cb655fb373f2ce333b44216b44944bdb811ea0709fecaf9307634e9725255a77",
+  "line_lengths": [
+   20,
+   6
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 3,
+  "character": "Rogue",
+  "english_record": 1,
+  "shown": true,
+  "address": "0x187992",
+  "sha256": "8c485b259060e6e3edf3e98d1bae796d9776d9ed980604473d597d08779f7e63",
+  "line_lengths": [
+   22,
+   8
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 3,
+  "character": "Rogue",
+  "english_record": 2,
+  "shown": true,
+  "address": "0x1879f6",
+  "sha256": "4819ad916254076c9f71d61ff775570507122c332821d68baabfe70e1997c9e4",
+  "line_lengths": [
+   23,
+   20
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 3,
+  "character": "Rogue",
+  "english_record": 3,
+  "shown": true,
+  "address": "0x187a5a",
+  "sha256": "50bffefaf1c44c590ad42f8d5a38f4b093a5bb21399557f75d4cc36c5242884e",
+  "line_lengths": [
+   25,
+   23
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 3,
+  "character": "Rogue",
+  "english_record": 4,
+  "shown": true,
+  "address": "0x187abe",
+  "sha256": "b5014adeb2b69aca5f94925abed99133dbde214fa3a285fa0bf399d5ed2489e7",
+  "line_lengths": [
+   23,
+   18
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 3,
+  "character": "Rogue",
+  "english_record": 5,
+  "shown": true,
+  "address": "0x187b22",
+  "sha256": "57ea92f16a265ba04f8b285e7856194258fd959ca282ac6069fb1251adcaec85",
+  "line_lengths": [
+   20,
+   24
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 3,
+  "character": "Rogue",
+  "english_record": 6,
+  "shown": true,
+  "address": "0x187b86",
+  "sha256": "4b73817b99d5e301fa6026ed6a0a160e8795b45d02ec553100d2cc01b9b88063",
+  "line_lengths": [
+   17,
+   15
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 3,
+  "character": "Rogue",
+  "english_record": 7,
+  "shown": true,
+  "address": "0x187bea",
+  "sha256": "2ae99e5b09caa487e84ba7fb7db716b042628a7553ebc08b42af954587f09532",
+  "line_lengths": [
+   14,
+   19
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 3,
+  "character": "Rogue",
+  "english_record": 8,
+  "shown": false,
+  "address": "0x187c4e",
+  "sha256": "5c87a9e82b337193197ebd1e3b114860f8fc41425b617a6816de2bc6b7920e0d",
+  "line_lengths": [
+   18,
+   23
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 4,
+  "character": "Gambit",
+  "english_record": 0,
+  "shown": true,
+  "address": "0x187cb2",
+  "sha256": "98920642b14b503ec5e37c3df561e43b00596dd5561e7e78ad9d1e07988ff0c4",
+  "line_lengths": [
+   20,
+   0
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 4,
+  "character": "Gambit",
+  "english_record": 1,
+  "shown": true,
+  "address": "0x187d16",
+  "sha256": "b687d0898cd407dcbd49a27cbe9be6387d226b0147c81bbd484540795cde5d64",
+  "line_lengths": [
+   22,
+   15
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 4,
+  "character": "Gambit",
+  "english_record": 2,
+  "shown": true,
+  "address": "0x187d7a",
+  "sha256": "186603e1d0176513432aa40e886d97904dc1fee38dd8162ed48a1415b32219c6",
+  "line_lengths": [
+   23,
+   13
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 4,
+  "character": "Gambit",
+  "english_record": 3,
+  "shown": true,
+  "address": "0x187dde",
+  "sha256": "22c0bd9aa73f63d15ecb21e72a9fe0e6460cc75c5fc5f18b4144b81c74306ec3",
+  "line_lengths": [
+   25,
+   0
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 4,
+  "character": "Gambit",
+  "english_record": 4,
+  "shown": true,
+  "address": "0x187e42",
+  "sha256": "a78c6ccca0423a67a88ff4dfcfd34535d38b271dee54feabc63b4340a541b34a",
+  "line_lengths": [
+   24,
+   12
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 4,
+  "character": "Gambit",
+  "english_record": 5,
+  "shown": true,
+  "address": "0x187ea6",
+  "sha256": "766e1dc1bb41b0837b05360d3c14a159563925186a9293e97f78114786e16d65",
+  "line_lengths": [
+   20,
+   10
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 4,
+  "character": "Gambit",
+  "english_record": 6,
+  "shown": true,
+  "address": "0x187f0a",
+  "sha256": "4b953d2546efdb58bc98dd659830685776f72d0640aa35cee8f50b0085545839",
+  "line_lengths": [
+   20,
+   8
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 4,
+  "character": "Gambit",
+  "english_record": 7,
+  "shown": true,
+  "address": "0x187f6e",
+  "sha256": "f9bef375fc984e8d18c2db75d4aead6dd4e5d3754389179791a3da86a303a5c8",
+  "line_lengths": [
+   19,
+   0
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 4,
+  "character": "Gambit",
+  "english_record": 8,
+  "shown": false,
+  "address": "0x187fd2",
+  "sha256": "2f5f269240ae4d1e9e5b60bd5dc8052c7a6eeb6a53e471124925c82055742a66",
+  "line_lengths": [
+   25,
+   25
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 5,
+  "character": "Sabretooth",
+  "english_record": 0,
+  "shown": true,
+  "address": "0x188036",
+  "sha256": "ca1f8bba99bc115c1bac870e7ab1ef384313cea5155cc12e90d3d0509e384100",
+  "line_lengths": [
+   19,
+   16
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 5,
+  "character": "Sabretooth",
+  "english_record": 1,
+  "shown": true,
+  "address": "0x18809a",
+  "sha256": "94fc343fd090655390fa66c213213857095b9461e1789cd5692bf7626a347016",
+  "line_lengths": [
+   22,
+   22
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 5,
+  "character": "Sabretooth",
+  "english_record": 2,
+  "shown": true,
+  "address": "0x1880fe",
+  "sha256": "c99272f2c36db9082539bc3f7784dcc6d0230fda41a0ec9bfe43796c6cde882b",
+  "line_lengths": [
+   20,
+   17
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 5,
+  "character": "Sabretooth",
+  "english_record": 3,
+  "shown": true,
+  "address": "0x188162",
+  "sha256": "de7632872a650f3dd1ab95ed7e0faf964df714ff915d7306de890d38e5fac665",
+  "line_lengths": [
+   21,
+   13
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 5,
+  "character": "Sabretooth",
+  "english_record": 4,
+  "shown": true,
+  "address": "0x1881c6",
+  "sha256": "1a4818e150fd81ed361b948213850f5a908be22b041915fa7e7a0ab902c97031",
+  "line_lengths": [
+   20,
+   15
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 5,
+  "character": "Sabretooth",
+  "english_record": 5,
+  "shown": true,
+  "address": "0x18822a",
+  "sha256": "8daef038034414c0a10ed34bc4c4cae0bb04c8c86f98d1cb51c8c01d8932665c",
+  "line_lengths": [
+   21,
+   11
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 5,
+  "character": "Sabretooth",
+  "english_record": 6,
+  "shown": true,
+  "address": "0x18828e",
+  "sha256": "d1ff4bcda7e2c138848f9cfa081db3988fd782fbc3ec59d66780b20cb63ea351",
+  "line_lengths": [
+   21,
+   0
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 5,
+  "character": "Sabretooth",
+  "english_record": 7,
+  "shown": true,
+  "address": "0x1882f2",
+  "sha256": "e39ae50575182b52bb5210f6a016b686c767506592dcbd0c905817aeceacfd78",
+  "line_lengths": [
+   21,
+   17
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 5,
+  "character": "Sabretooth",
+  "english_record": 8,
+  "shown": false,
+  "address": "0x188356",
+  "sha256": "7b49d7bbd67feba6214711dbd43b0767b64c448e92c96a7851601cbe84ed7c54",
+  "line_lengths": [
+   22,
+   11
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 6,
+  "character": "Juggernaut",
+  "english_record": 0,
+  "shown": true,
+  "address": "0x1883ba",
+  "sha256": "f55bbd875c9c67156b948298bd4d72d7ee37657494e8b25808043424f1ee4d10",
+  "line_lengths": [
+   19,
+   23
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 6,
+  "character": "Juggernaut",
+  "english_record": 1,
+  "shown": true,
+  "address": "0x18841e",
+  "sha256": "e591c68ce9744020cd7751fbe7282e29bfe1fcf6a312e8403543f16cafbfb617",
+  "line_lengths": [
+   20,
+   0
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 6,
+  "character": "Juggernaut",
+  "english_record": 2,
+  "shown": true,
+  "address": "0x188482",
+  "sha256": "ef73f01782d0b9583debbfa7e29b01342f89e2e71db0b65b41c6add1f57b3c1e",
+  "line_lengths": [
+   22,
+   0
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 6,
+  "character": "Juggernaut",
+  "english_record": 3,
+  "shown": true,
+  "address": "0x1884e6",
+  "sha256": "90eb6382e4ce73388464de01a6533c4e4709a65bd62d38de128523344899dbe3",
+  "line_lengths": [
+   20,
+   22
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 6,
+  "character": "Juggernaut",
+  "english_record": 4,
+  "shown": true,
+  "address": "0x18854a",
+  "sha256": "6bb19fd7a8ef9a129b292c6242f4bf3f41f5367e5775414d67c335e52d726ec7",
+  "line_lengths": [
+   23,
+   24
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 6,
+  "character": "Juggernaut",
+  "english_record": 5,
+  "shown": true,
+  "address": "0x1885ae",
+  "sha256": "db02e3b4ac9075a5cba1b9bc2a024e114d765265fd70ed1ea16d93357ace9bc5",
+  "line_lengths": [
+   19,
+   6
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 6,
+  "character": "Juggernaut",
+  "english_record": 6,
+  "shown": true,
+  "address": "0x188612",
+  "sha256": "d3797d5c4bdc5b614ac208054850caa4c03cc7d8bf599868e06adc8b0fbfdec2",
+  "line_lengths": [
+   23,
+   19
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 6,
+  "character": "Juggernaut",
+  "english_record": 7,
+  "shown": true,
+  "address": "0x188676",
+  "sha256": "6990364d4297668036cc5a8bebaa46ae29b5224510d4c1b3ec35f899dc43fe2b",
+  "line_lengths": [
+   18,
+   0
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 6,
+  "character": "Juggernaut",
+  "english_record": 8,
+  "shown": false,
+  "address": "0x1886da",
+  "sha256": "64d4fea61dc0ff894a6be21d66878b6df2ff38d3c6a4d1e18e28d342417eb0d4",
+  "line_lengths": [
+   24,
+   24
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 7,
+  "character": "Magneto",
+  "english_record": 0,
+  "shown": true,
+  "address": "0x18873e",
+  "sha256": "a15059fe2ef2ce48c2607f315c178af598b86667967f3caee69ec7682c8289b9",
+  "line_lengths": [
+   18,
+   10
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 7,
+  "character": "Magneto",
+  "english_record": 1,
+  "shown": true,
+  "address": "0x1887a2",
+  "sha256": "4a22be60f9ff03a5cf0ec5d132d6e8bc7a52b937129b607dfb085dadeeec7c97",
+  "line_lengths": [
+   19,
+   20
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 7,
+  "character": "Magneto",
+  "english_record": 2,
+  "shown": true,
+  "address": "0x188806",
+  "sha256": "892163f82d979cf143314b69b49066fa80aca444e97be52eba393d44a9bfcf7e",
+  "line_lengths": [
+   18,
+   19
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 7,
+  "character": "Magneto",
+  "english_record": 3,
+  "shown": true,
+  "address": "0x18886a",
+  "sha256": "21c02d11c3e97354517b8eeadb0c990a230e9c91bc97768964a603c4c349b1f9",
+  "line_lengths": [
+   19,
+   16
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 7,
+  "character": "Magneto",
+  "english_record": 4,
+  "shown": true,
+  "address": "0x1888ce",
+  "sha256": "c2532a73908407f96b3a358f8bc22f62fbef6e5e29ae4d654b16a5e7dc8a63db",
+  "line_lengths": [
+   21,
+   15
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 7,
+  "character": "Magneto",
+  "english_record": 5,
+  "shown": true,
+  "address": "0x188932",
+  "sha256": "0e2a8f03c0190fe09ee5adbef2001e818b8d9fb8763324830c4c4c440bc4e06f",
+  "line_lengths": [
+   21,
+   19
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 7,
+  "character": "Magneto",
+  "english_record": 6,
+  "shown": true,
+  "address": "0x188996",
+  "sha256": "c554480eb8e779f9c956c23d6dc1c68062b5c79f878aa75a91a22ae00d52b453",
+  "line_lengths": [
+   22,
+   11
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 7,
+  "character": "Magneto",
+  "english_record": 7,
+  "shown": true,
+  "address": "0x1889fa",
+  "sha256": "5f388fa7292335d7dc31bc7339a193a14e611298a835413e1f8b78025d461243",
+  "line_lengths": [
+   20,
+   23
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 7,
+  "character": "Magneto",
+  "english_record": 8,
+  "shown": false,
+  "address": "0x188a5e",
+  "sha256": "041073def9dfa529a2eb2be6fd74a22bdfb4e4299b5914764e642d64c405682e",
+  "line_lengths": [
+   20,
+   12
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 8,
+  "character": "Apocalypse",
+  "english_record": 0,
+  "shown": true,
+  "address": "0x188ac2",
+  "sha256": "81a92b156f4c084179c5afd274decebbaac0e0d058df1ac8d0e660a4a804ec7e",
+  "line_lengths": [
+   22,
+   13
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 8,
+  "character": "Apocalypse",
+  "english_record": 1,
+  "shown": true,
+  "address": "0x188b26",
+  "sha256": "6a6b2eb40ec52874a4fd1d05a3cd73ae22d154fc0ba583acad7a981a3acaa37a",
+  "line_lengths": [
+   21,
+   17
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 8,
+  "character": "Apocalypse",
+  "english_record": 2,
+  "shown": true,
+  "address": "0x188b8a",
+  "sha256": "c429bdf4b06dadbe32bd314130c9cab38538c18e67178f43912aa4eeb89e69c0",
+  "line_lengths": [
+   24,
+   24
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 8,
+  "character": "Apocalypse",
+  "english_record": 3,
+  "shown": true,
+  "address": "0x188bee",
+  "sha256": "de36b77db95c83313c2e0772237c43a0e17d4a6a64b62fc9583962c97ce97197",
+  "line_lengths": [
+   18,
+   19
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 8,
+  "character": "Apocalypse",
+  "english_record": 4,
+  "shown": true,
+  "address": "0x188c52",
+  "sha256": "4a93b0c1f0c9c3a6afc4f71e4fddf5f6ee45c3828d9e96ebe9bf7c85caf932e9",
+  "line_lengths": [
+   24,
+   25
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 8,
+  "character": "Apocalypse",
+  "english_record": 5,
+  "shown": true,
+  "address": "0x188cb6",
+  "sha256": "3aca8d15a7da77eea15288e525174cce4da8512773a8d739d9da5a1ff94b0374",
+  "line_lengths": [
+   22,
+   21
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 8,
+  "character": "Apocalypse",
+  "english_record": 6,
+  "shown": true,
+  "address": "0x188d1a",
+  "sha256": "b57618cdb0851679b346a7cae85e54904825375d97b4fbe76bddbd152de4be33",
+  "line_lengths": [
+   21,
+   11
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 8,
+  "character": "Apocalypse",
+  "english_record": 7,
+  "shown": true,
+  "address": "0x188d7e",
+  "sha256": "2c5821bbd6fe9f040f67ebb56767a616293aa0555a138f887fe3bfbccc741ff6",
+  "line_lengths": [
+   18,
+   22
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 9,
+  "character": "Ryu",
+  "english_record": 0,
+  "shown": true,
+  "address": "0x188de2",
+  "sha256": "01f469fccb0dd3b973595ab649abd4c2ed87781cc2a1e176f2bed7a14e93f599",
+  "line_lengths": [
+   25,
+   21
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 9,
+  "character": "Ryu",
+  "english_record": 1,
+  "shown": true,
+  "address": "0x188e46",
+  "sha256": "6dfc13737dd5674f50081affc6ffd22edf07539c15472ec026862e178935b7ca",
+  "line_lengths": [
+   22,
+   24
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 9,
+  "character": "Ryu",
+  "english_record": 2,
+  "shown": true,
+  "address": "0x188eaa",
+  "sha256": "8fd645e8d4ec72c1fcfd942aa16759df5ab6e7fcdd4c1acb6096ee41a22dab4d",
+  "line_lengths": [
+   25,
+   23
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 9,
+  "character": "Ryu",
+  "english_record": 3,
+  "shown": true,
+  "address": "0x188f0e",
+  "sha256": "0aec0803b6c1442b858108be53c736e9b9ddb47f5d7c7f800321f88443089000",
+  "line_lengths": [
+   23,
+   22
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 9,
+  "character": "Ryu",
+  "english_record": 4,
+  "shown": true,
+  "address": "0x188f72",
+  "sha256": "09679562af8ce8f20b3211d505eb74577cbb120229dfb8599f673566fddf8e25",
+  "line_lengths": [
+   23,
+   19
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 9,
+  "character": "Ryu",
+  "english_record": 5,
+  "shown": true,
+  "address": "0x188fd6",
+  "sha256": "7b65caf55c91ef3e162a0730bbd2041c491c6686e45ffab9e52f7112bf8daf10",
+  "line_lengths": [
+   24,
+   25
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 9,
+  "character": "Ryu",
+  "english_record": 6,
+  "shown": true,
+  "address": "0x18903a",
+  "sha256": "6e3a70b986b789d2f7b6e2dd297b7b0b67f7f2f53eb377b5299c1b3a34f36d37",
+  "line_lengths": [
+   25,
+   21
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 9,
+  "character": "Ryu",
+  "english_record": 7,
+  "shown": true,
+  "address": "0x18909e",
+  "sha256": "2e3e50e6b421a2122718a65a9201215d017eafa8c0d42a61061c4be9fd95872b",
+  "line_lengths": [
+   24,
+   24
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 9,
+  "character": "Ryu",
+  "english_record": 8,
+  "shown": false,
+  "address": "0x189102",
+  "sha256": "24ff65e7752c93980000fe9c6929e9e3c82feae8e0d71fa5b0a14a2cce0abec6",
+  "line_lengths": [
+   25,
+   23
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 10,
+  "character": "Ken",
+  "english_record": 0,
+  "shown": true,
+  "address": "0x189166",
+  "sha256": "48f988f16e19650fcdb4217b8a55ba634f9846448db1c9631f53a01b04d50812",
+  "line_lengths": [
+   25,
+   21
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 10,
+  "character": "Ken",
+  "english_record": 1,
+  "shown": true,
+  "address": "0x1891ca",
+  "sha256": "e606ad965f446007177d7dc0f9ef765dcf6a0bbf13286f3447f9ca42dd664ff8",
+  "line_lengths": [
+   19,
+   23
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 10,
+  "character": "Ken",
+  "english_record": 2,
+  "shown": true,
+  "address": "0x18922e",
+  "sha256": "a9a55ddf4b60efd513b82e595d8169320aee53b98c4e7e6cda6ab8826e4b6c73",
+  "line_lengths": [
+   20,
+   20
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 10,
+  "character": "Ken",
+  "english_record": 3,
+  "shown": true,
+  "address": "0x189292",
+  "sha256": "a8528483a9fd56adf0bf214a00449f184ed614529bb18cc49b359b8ea410a4f1",
+  "line_lengths": [
+   22,
+   24
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 10,
+  "character": "Ken",
+  "english_record": 4,
+  "shown": true,
+  "address": "0x1892f6",
+  "sha256": "3b13846f3a33731314aab967f4804581c97c9d77471cf9e8a8716929ebaa0794",
+  "line_lengths": [
+   23,
+   22
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 10,
+  "character": "Ken",
+  "english_record": 5,
+  "shown": true,
+  "address": "0x18935a",
+  "sha256": "4dff1bb704eb65244a6108107cbba6ffb5129f46e7dd84ff841696126d6cc73e",
+  "line_lengths": [
+   20,
+   8
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 10,
+  "character": "Ken",
+  "english_record": 6,
+  "shown": true,
+  "address": "0x1893be",
+  "sha256": "a76a2b6368689874c35a2d7fd8d8f5500ae848ba15b3295acb1f1dcbcb6bed28",
+  "line_lengths": [
+   20,
+   0
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 10,
+  "character": "Ken",
+  "english_record": 7,
+  "shown": true,
+  "address": "0x189422",
+  "sha256": "a2efc238327d421ad0454f255d3ce3c94ee4460950a62ad65081d9007f42f99d",
+  "line_lengths": [
+   22,
+   23
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 10,
+  "character": "Ken",
+  "english_record": 8,
+  "shown": false,
+  "address": "0x189486",
+  "sha256": "8dd8924cc60ae8834fb615d41c4d2bcdf627cdf436529d807d905a1aaf26a249",
+  "line_lengths": [
+   22,
+   13
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 11,
+  "character": "Chun-Li",
+  "english_record": 0,
+  "shown": true,
+  "address": "0x1894ea",
+  "sha256": "24ec7177766376e202c70efc7f741984cddbc0ce7fb56a708bc5125deb0590d9",
+  "line_lengths": [
+   23,
+   24
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 11,
+  "character": "Chun-Li",
+  "english_record": 1,
+  "shown": true,
+  "address": "0x18954e",
+  "sha256": "327000b367648481ebd8a203d5d529a54052dc90033b590c2d877231b55503cf",
+  "line_lengths": [
+   14,
+   15
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 11,
+  "character": "Chun-Li",
+  "english_record": 2,
+  "shown": true,
+  "address": "0x1895b2",
+  "sha256": "b879a2d93fcd52ba84fbfa72d8e0ed023fceb07046521e43f1c5878e17da2baa",
+  "line_lengths": [
+   18,
+   24
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 11,
+  "character": "Chun-Li",
+  "english_record": 3,
+  "shown": true,
+  "address": "0x189616",
+  "sha256": "9e76461eedb4e27dffb5c402a1a17d1da8060d66bb4c6899f012a5bfaf2171a2",
+  "line_lengths": [
+   24,
+   0
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 11,
+  "character": "Chun-Li",
+  "english_record": 4,
+  "shown": true,
+  "address": "0x18967a",
+  "sha256": "ad20f5ff13d7c1813dba4d2c9cb7397e068ecf54d8417b801a6176bd57483a95",
+  "line_lengths": [
+   22,
+   17
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 11,
+  "character": "Chun-Li",
+  "english_record": 5,
+  "shown": true,
+  "address": "0x1896de",
+  "sha256": "f1a6097e76ddce163c1dd5829b710199fc1a66a2ba8c802dcad2e438464d0030",
+  "line_lengths": [
+   24,
+   21
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 11,
+  "character": "Chun-Li",
+  "english_record": 6,
+  "shown": true,
+  "address": "0x189742",
+  "sha256": "a03024f6d0210cd3646e7556693258b32b3d1a85c8a5ca25ff5a3e416afb70f2",
+  "line_lengths": [
+   22,
+   23
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 11,
+  "character": "Chun-Li",
+  "english_record": 7,
+  "shown": true,
+  "address": "0x1897a6",
+  "sha256": "61e2d41dd528a78ef4fa52f3aed36e44f92395b477a1944635d958b5e3ca52ab",
+  "line_lengths": [
+   21,
+   24
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 11,
+  "character": "Chun-Li",
+  "english_record": 8,
+  "shown": false,
+  "address": "0x18980a",
+  "sha256": "f3a1f00ba20c88c9786f174e599d31bea6820c3843f8f8e1a56209ca040c1649",
+  "line_lengths": [
+   21,
+   10
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 12,
+  "character": "Dhalsim",
+  "english_record": 0,
+  "shown": true,
+  "address": "0x18986e",
+  "sha256": "bd2a8e64dafa5dfbd1f427094067e4daa19dfbfa8680f7756014730e5c618626",
+  "line_lengths": [
+   24,
+   15
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 12,
+  "character": "Dhalsim",
+  "english_record": 1,
+  "shown": true,
+  "address": "0x1898d2",
+  "sha256": "7181b586dea3c7dc2fcecb7a5384e414dfdd92566c6730e78ad1f29c3386c573",
+  "line_lengths": [
+   15,
+   23
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 12,
+  "character": "Dhalsim",
+  "english_record": 2,
+  "shown": true,
+  "address": "0x189936",
+  "sha256": "633ff5d3c001d081d245edae9066e55facaa2497f92aa4456aab11441b1f5321",
+  "line_lengths": [
+   20,
+   25
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 12,
+  "character": "Dhalsim",
+  "english_record": 3,
+  "shown": true,
+  "address": "0x18999a",
+  "sha256": "9f1f9008a555f3a14a3262d30dd350c38fe750872d02b8be9cfdb9394a782320",
+  "line_lengths": [
+   23,
+   16
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 12,
+  "character": "Dhalsim",
+  "english_record": 4,
+  "shown": true,
+  "address": "0x1899fe",
+  "sha256": "4a5ddc14b609ed7c70fbb9e472969346813bda4d48829e455233f9a45a1a031d",
+  "line_lengths": [
+   22,
+   21
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 12,
+  "character": "Dhalsim",
+  "english_record": 5,
+  "shown": true,
+  "address": "0x189a62",
+  "sha256": "934d32a556cb771850ef2b1cf51640b93d5bff449f35b790b2bef5bdf68994e4",
+  "line_lengths": [
+   21,
+   11
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 12,
+  "character": "Dhalsim",
+  "english_record": 6,
+  "shown": true,
+  "address": "0x189ac6",
+  "sha256": "215666d2b41dc07319d7d1152348218a254038e58df0983fc250d33e77ff1f90",
+  "line_lengths": [
+   25,
+   24
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 12,
+  "character": "Dhalsim",
+  "english_record": 7,
+  "shown": true,
+  "address": "0x189b2a",
+  "sha256": "8b7957ebb20eae60a870a59764201f856df2650c46446d6aca805ba29f5c2687",
+  "line_lengths": [
+   20,
+   25
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 12,
+  "character": "Dhalsim",
+  "english_record": 8,
+  "shown": false,
+  "address": "0x189b8e",
+  "sha256": "fb59a03b8813359f83b1dd8f03827ac048d4b829b11f378f0595ed84af25cfb2",
+  "line_lengths": [
+   16,
+   22
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 13,
+  "character": "Zangief",
+  "english_record": 0,
+  "shown": true,
+  "address": "0x189bf2",
+  "sha256": "192a63ad069e746e447c1bf9d61434160beb421c9985ab71c439cbc0d6de2900",
+  "line_lengths": [
+   17,
+   21
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 13,
+  "character": "Zangief",
+  "english_record": 1,
+  "shown": true,
+  "address": "0x189c56",
+  "sha256": "83c477dc63a2094b29421f990727911b63326122bc9d0ce4f4f2644c274b16ec",
+  "line_lengths": [
+   20,
+   23
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 13,
+  "character": "Zangief",
+  "english_record": 2,
+  "shown": true,
+  "address": "0x189cba",
+  "sha256": "6c65497f56949f39ffefa2616f52ef4dde5a372959a2ac7af70dbac12bf542f7",
+  "line_lengths": [
+   18,
+   25
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 13,
+  "character": "Zangief",
+  "english_record": 3,
+  "shown": true,
+  "address": "0x189d1e",
+  "sha256": "875d6fae6e5c6ed466beff49908ae883ed375f1e9ab8ce48b24ee459fc0aa5e8",
+  "line_lengths": [
+   22,
+   12
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 13,
+  "character": "Zangief",
+  "english_record": 4,
+  "shown": true,
+  "address": "0x189d82",
+  "sha256": "c863be909507053eb994a7a252a45deaea42b6645d477aa28c89add074e8a429",
+  "line_lengths": [
+   20,
+   14
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 13,
+  "character": "Zangief",
+  "english_record": 5,
+  "shown": true,
+  "address": "0x189de6",
+  "sha256": "3925455cdd35b797e77d31beaaf3572b40cd96aca7265c326f3a08d958a009ed",
+  "line_lengths": [
+   24,
+   18
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 13,
+  "character": "Zangief",
+  "english_record": 6,
+  "shown": true,
+  "address": "0x189e4a",
+  "sha256": "479a2ff88c4caec7003c7c744a3d52da60885d40f571f9b793ab740d541e2e7d",
+  "line_lengths": [
+   25,
+   13
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 13,
+  "character": "Zangief",
+  "english_record": 7,
+  "shown": true,
+  "address": "0x189eae",
+  "sha256": "eb52a2381fc12a3504639af6cb695a183160f231968ccdff60de6d4f9acd64ad",
+  "line_lengths": [
+   16,
+   16
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 13,
+  "character": "Zangief",
+  "english_record": 8,
+  "shown": false,
+  "address": "0x189f12",
+  "sha256": "2b46ea7ea4fb1809e03c0b11016cd68ab3e67e983b3cde15b574394052484701",
+  "line_lengths": [
+   21,
+   7
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 14,
+  "character": "Vega",
+  "english_record": 0,
+  "shown": true,
+  "address": "0x189f76",
+  "sha256": "b956aa93eb0293e66f2eb4ec14c0281091d988d8e4c737a1a4d379757d7d1258",
+  "line_lengths": [
+   15,
+   24
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 14,
+  "character": "Vega",
+  "english_record": 1,
+  "shown": true,
+  "address": "0x189fda",
+  "sha256": "d02b4dc3937962d34c0aecddf910753ceb095975a87a4e07c042a48df4f4ea42",
+  "line_lengths": [
+   23,
+   17
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 14,
+  "character": "Vega",
+  "english_record": 2,
+  "shown": true,
+  "address": "0x18a03e",
+  "sha256": "782349fb0a58828c0119aa8c457605da87b44fa142f157d53f3408906a05f671",
+  "line_lengths": [
+   25,
+   18
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 14,
+  "character": "Vega",
+  "english_record": 3,
+  "shown": true,
+  "address": "0x18a0a2",
+  "sha256": "451f64faccb42c68b615c090a412120da334b886db5ffa989e5b82035f7d2c21",
+  "line_lengths": [
+   23,
+   25
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 14,
+  "character": "Vega",
+  "english_record": 4,
+  "shown": true,
+  "address": "0x18a106",
+  "sha256": "234f3551c819259683579eeb3d72de340a5e07e5b3b78679128142bcbfa2c861",
+  "line_lengths": [
+   22,
+   17
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 14,
+  "character": "Vega",
+  "english_record": 5,
+  "shown": true,
+  "address": "0x18a16a",
+  "sha256": "0ada347b98834f45c6c1ec24c7e7a1adb45cafa57b946fcfce3f0c649848e845",
+  "line_lengths": [
+   20,
+   21
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 14,
+  "character": "Vega",
+  "english_record": 6,
+  "shown": true,
+  "address": "0x18a1ce",
+  "sha256": "8afaacb58475b21491edf26ff151cb88dcf280e48bcfade49caabd81d9252d1b",
+  "line_lengths": [
+   24,
+   23
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 14,
+  "character": "Vega",
+  "english_record": 7,
+  "shown": true,
+  "address": "0x18a232",
+  "sha256": "594e7a5c209283d21644354874edf642ca77b3a70c7ce426204dcaa2d2777c1d",
+  "line_lengths": [
+   19,
+   13
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 14,
+  "character": "Vega",
+  "english_record": 8,
+  "shown": false,
+  "address": "0x18a296",
+  "sha256": "b5226f1073aa6116a46eee743844fdc215ee659c55e590903fba932e191b82c0",
+  "line_lengths": [
+   21,
+   23
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 15,
+  "character": "Gouki",
+  "english_record": 0,
+  "shown": true,
+  "address": "0x18a2fa",
+  "sha256": "59d3c5ba6dc4653cfea834105184a1836e2500c2f4d1aad75109ffb3fa53188e",
+  "line_lengths": [
+   23,
+   24
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 15,
+  "character": "Gouki",
+  "english_record": 1,
+  "shown": true,
+  "address": "0x18a35e",
+  "sha256": "5bc688175e7d0bc8049b0047ff83549e59babe35e71e87434057ad84331caef5",
+  "line_lengths": [
+   23,
+   0
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 15,
+  "character": "Gouki",
+  "english_record": 2,
+  "shown": true,
+  "address": "0x18a3c2",
+  "sha256": "1c641057b07d1593bf69ad9213226d78cff94d41df9d68799acbe7737207e43e",
+  "line_lengths": [
+   11,
+   17
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 15,
+  "character": "Gouki",
+  "english_record": 3,
+  "shown": true,
+  "address": "0x18a426",
+  "sha256": "3dcaf3404635758c7bd7a95491587e56633255007a3912297097a8f4495d0014",
+  "line_lengths": [
+   22,
+   25
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 15,
+  "character": "Gouki",
+  "english_record": 4,
+  "shown": true,
+  "address": "0x18a48a",
+  "sha256": "546af3ad9abbf5b3519aff2c742bb45a15961be76a1115e8bd79a9f10ce72732",
+  "line_lengths": [
+   19,
+   12
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 15,
+  "character": "Gouki",
+  "english_record": 5,
+  "shown": true,
+  "address": "0x18a4ee",
+  "sha256": "71d391deb72770ae4c2dcb86857f45926146bdb7b2bfeef3732d667e8a4f0d6b",
+  "line_lengths": [
+   21,
+   0
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 15,
+  "character": "Gouki",
+  "english_record": 6,
+  "shown": true,
+  "address": "0x18a552",
+  "sha256": "1dcb51d31d05ecfc4cd201abeb4e9b8db445510f92987b70fbd38775edb04792",
+  "line_lengths": [
+   16,
+   24
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 15,
+  "character": "Gouki",
+  "english_record": 7,
+  "shown": true,
+  "address": "0x18a5b6",
+  "sha256": "54fcb9c4c0576b006c975bbb2e246aa36d4982e57ea1abac087d56e1e8d4dc97",
+  "line_lengths": [
+   23,
+   17
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 15,
+  "character": "Gouki",
+  "english_record": 8,
+  "shown": false,
+  "address": "0x18a61a",
+  "sha256": "0549806d2245ba96d96a8ee9bdc8f3a6e712ca851d6af345aedd52993953fd1a",
+  "line_lengths": [
+   17,
+   24
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 16,
+  "character": "Nash",
+  "english_record": 0,
+  "shown": true,
+  "address": "0x18a67e",
+  "sha256": "4c43507317811af319444af6afbecee972ff721bbd37d3b28eea7734f3074f59",
+  "line_lengths": [
+   18,
+   23
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 16,
+  "character": "Nash",
+  "english_record": 1,
+  "shown": true,
+  "address": "0x18a6e2",
+  "sha256": "cb07b6e07d9ee86e031c43a27d94f42342bdeaa4397a2acb8ec87449a2a928b5",
+  "line_lengths": [
+   18,
+   14
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 16,
+  "character": "Nash",
+  "english_record": 2,
+  "shown": true,
+  "address": "0x18a746",
+  "sha256": "8c6ca39cba3d5e5f202966a4269536c3c3e9bf5584b99007649600cda4aa6599",
+  "line_lengths": [
+   18,
+   20
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 16,
+  "character": "Nash",
+  "english_record": 3,
+  "shown": true,
+  "address": "0x18a7aa",
+  "sha256": "c3874c7d94227f8a01d2e00610a6b924d2645b991bad9507f9434b3ea78d2bff",
+  "line_lengths": [
+   18,
+   7
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 16,
+  "character": "Nash",
+  "english_record": 4,
+  "shown": true,
+  "address": "0x18a80e",
+  "sha256": "d970b8c2c58c360e1490b9f8915adcae0b7dbfb02a565613ba54a78062833bb3",
+  "line_lengths": [
+   25,
+   17
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 16,
+  "character": "Nash",
+  "english_record": 5,
+  "shown": true,
+  "address": "0x18a872",
+  "sha256": "f29c8e6194b67052b6c7d51329defacc21c9aff5c87a96e44bcf5317ca2d805d",
+  "line_lengths": [
+   16,
+   11
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 16,
+  "character": "Nash",
+  "english_record": 6,
+  "shown": true,
+  "address": "0x18a8d6",
+  "sha256": "a48a456a48c3516a3f8973177a4c420a498cc4ead04af223d7cfc73cd64792f1",
+  "line_lengths": [
+   23,
+   0
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 16,
+  "character": "Nash",
+  "english_record": 7,
+  "shown": true,
+  "address": "0x18a93a",
+  "sha256": "d7fcc4eb04b609d5feecb0d80ff9a1bbcded249b411483aaaee72d1f7e7ec963",
+  "line_lengths": [
+   19,
+   8
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 16,
+  "character": "Nash",
+  "english_record": 8,
+  "shown": false,
+  "address": "0x18a99e",
+  "sha256": "d2d4ca55b09a4db8794b8844e42ccf501739db4cd442b0f2cb940051b69de2bf",
+  "line_lengths": [
+   24,
+   20
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 17,
+  "character": "Cammy",
+  "english_record": 0,
+  "shown": true,
+  "address": "0x18aa02",
+  "sha256": "ef65f2070d7eb4c9931e8ff9e329c212d3b3728a9300263fe6955f45bc8f60c5",
+  "line_lengths": [
+   15,
+   13
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": [
+   "Bison"
+  ]
+ },
+ {
+  "slot": 17,
+  "character": "Cammy",
+  "english_record": 1,
+  "shown": true,
+  "address": "0x18aa66",
+  "sha256": "ec87c4b1364d3d490c7d27ec874ad7dc67f76d6206fe23c2e2c3b2ebf41b1cb3",
+  "line_lengths": [
+   16,
+   16
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 17,
+  "character": "Cammy",
+  "english_record": 2,
+  "shown": true,
+  "address": "0x18aaca",
+  "sha256": "98f4685975f766da1103e3b0475fbbe4eb0822ab980de09a7deb3f285f9cd489",
+  "line_lengths": [
+   21,
+   25
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 17,
+  "character": "Cammy",
+  "english_record": 3,
+  "shown": true,
+  "address": "0x18ab2e",
+  "sha256": "e5fb709be6271b3e050cd24ae96aa2579a7de8188a558239a2db9ad6518af026",
+  "line_lengths": [
+   20,
+   9
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 17,
+  "character": "Cammy",
+  "english_record": 4,
+  "shown": true,
+  "address": "0x18ab92",
+  "sha256": "20a82ded216f0ce2e40a4d6edaf6e69ab036e05810c5b13198c9fe50007793f6",
+  "line_lengths": [
+   22,
+   21
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": [
+   "Bison"
+  ]
+ },
+ {
+  "slot": 17,
+  "character": "Cammy",
+  "english_record": 5,
+  "shown": true,
+  "address": "0x18abf6",
+  "sha256": "57fd0275f9eb205c5204b8c0b6feb8b91a532423ba8b6e9a8b8d06b6dc77371c",
+  "line_lengths": [
+   23,
+   21
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 17,
+  "character": "Cammy",
+  "english_record": 6,
+  "shown": true,
+  "address": "0x18ac5a",
+  "sha256": "725f7804b4eb8ef3b716f7a6d8e4bcd0d2c6da758f197b44c2c936e4bd9c9b63",
+  "line_lengths": [
+   23,
+   24
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 17,
+  "character": "Cammy",
+  "english_record": 7,
+  "shown": true,
+  "address": "0x18acbe",
+  "sha256": "ffd3bc319614c657cbb8a0063ae9b7cc6487a0e40f4c89217a26832f3107b4fa",
+  "line_lengths": [
+   18,
+   23
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ },
+ {
+  "slot": 17,
+  "character": "Cammy",
+  "english_record": 8,
+  "shown": false,
+  "address": "0x18ad22",
+  "sha256": "396606a6921508df3f2a48aab1e903cc49fec3138bc6a383dd87c15bd2ddd1f5",
+  "line_lengths": [
+   23,
+   22
+  ],
+  "recompiles_exactly": true,
+  "other_glyphs": [],
+  "names": []
+ }
+]

@@ -160,7 +160,12 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   characters of slots 0-17, including Gouki and Apocalypse ("All 18, with
   Apocalypse"; `data/text/m5_roster.json`, `docs/coverage_exceptions.md`;
   `RE-008`).
-- Next: `PAIR-003` and `RE-009` (both ready, independent).
+- **2026-10-29** (`SESSION-0044`, `EXP-0030`): every roster character
+  follows `r mod 8` in MAME (360 forced runs). Pairing files exist for all
+  18. One name needs the gate: "Bison" in two of Cammy's records
+  (`PAIR-003`, D-025).
+- Next: `RE-009` (ready). The `GATE-TRANSLATION` extension for the roster
+  waits on the user, who can decide it now or after `RE-009`.
 
 ## Milestones
 
@@ -1100,7 +1105,7 @@ Known before M5:
 
 ### PAIR-003 - Confirm the pairing for every roster character
 
-- **Status:** `READY`
+- **Status:** `DONE` (2026-10-29, `SESSION-0044`, `EXP-0030`, D-025)
 - **Milestone:** M5
 - **Dependencies:** RE-008 (done).
 - **Blockers:** None.
@@ -1122,6 +1127,19 @@ Known before M5:
 - **Notes:** the selector and its remap are shared by all slots, so the rule
   is expected to hold everywhere, but that is a HYPOTHESIS (rule 3). An
   aliased or 8-record slot may break it.
+- **Result:** every criterion met (`EXP-0030`).
+  - 360 forced MAME runs, all as predicted: 16 English draws and 4
+    Japanese draws (3, 8, 9, 15) for each of the 18 slots, including
+    Apocalypse's 8-record slot.
+  - 16 new pairing files (Ryu's and Ken's agree and are unchanged).
+  - Fit: all 144 shown English records recompile exactly, with no
+    unexpected glyph (`data/translations/m5_english_fit.json`).
+  - Names for the gate: Cammy's English records 0 and 4 (Saturn records 0,
+    8, 4, 12) say "Bison", the US name of the Saturn's Vega. No other shown
+    record names a character whose names differ.
+  - The first batch used `EXP-0022`'s script unchanged. Its read log
+    started above slots 0-5's Japanese records, so the script was copied
+    with a wider log and everything was rerun.
 
 ### RE-009 - Check that every roster file fits its sectors
 
