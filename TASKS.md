@@ -179,10 +179,14 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   byte from the untouched source, including from a fresh clone
   (`tools.disc.regression`, `docs/regression_report.md`; `RE-011`, D-028).
   **M5 is complete.**
-- Next: M6 (endings, `END-001`) is outlined only. Its full tasks need
-  writing before it starts (rule 23 is now satisfied). The backlog also
-  holds `UI-004` (cart warning), `SPECIAL-001` (including Apocalypse's
-  pre-fight line) and `REL-001` (release patches).
+- **2026-10-29:** M6 tasks written at the user's request ("Write up the M6
+  tasks for the endings. Don't start them yet."), none started: `END-001`
+  (choose and reach an ending, user choice), `END-002` (how it is drawn),
+  `END-003` (where it lives), `END-004` (arcade English and indexing). The
+  M7 and M8 outline rows are renumbered `END-005` and `END-006`.
+- Next: `END-001` (ready). The backlog also holds `UI-004` (cart warning),
+  `SPECIAL-001` (including Apocalypse's pre-fight line) and `REL-001`
+  (release patches).
 
 ## Milestones
 
@@ -1306,6 +1310,168 @@ It is recorded under `GATE-TRANSLATION` and in `docs/localization_policy.md`.
     27 hashes). An altered hash is caught (exit 1).
   - `docs/regression_report.md` is the clean run's report.
 
+## Phase K: M6 (Ending Investigation)
+
+M6: one ordinary character's ending is understood well enough to localize
+it. That means how to reach it, which text it shows, how that text is drawn,
+where it lives in RAM and on disc, and which official English exists for it.
+Nothing is changed on disc for English in M6. That is M7, after a
+`GATE-TRANSLATION` extension for endings.
+
+Rule 23 is satisfied: win quotes are proven and generalized (M5, D-027,
+D-028). Assume **nothing** about endings from win quotes (playbook
+Phase 4). The order is `END-001` (user choice and session), then `END-002`
+and `END-004` (independent), then `END-003`. Special cases stay out (rule
+24): Apocalypse's own pre-fight and post-fight lines belong to
+`SPECIAL-001`, even where an ordinary ending begins after his fight.
+
+Known before M6 (each is at most SUPPORTED for the Saturn's endings):
+
+- **Arcade English** (`EXP-0008`): the ending table is `0x17E318`, with 19
+  pointers to 2 × 25-code records, 109 unique records, 4-13 per slot.
+  Japanese twin table: `0x17E2CC`, 76-byte records. Pointer equalities:
+  - English: slot 9 (Ryu) equals slot 8 (Apocalypse), and slot 18 equals
+    slot 11 (Chun-Li);
+  - Japanese: slot 8 equals slot 7 (Magneto), and slot 18 equals slot 11.
+
+  What these equalities mean is UNKNOWN.
+- **Saturn files** (`EXP-0029`): each `MCxx` holds, after its 16 quotes,
+  4-12 records equal to arcade slot `xx`'s first Japanese ending records
+  (counted, not read). The counts differ from the arcade English counts:
+  Cyclops 7 against 9, Juggernaut 9 against 6, Cammy 12 against 13. So
+  endings cannot be assumed to pair like win quotes.
+- **Saturn code** (`EXP-0023`): a type-4 selector at `0x060668A2` (the twin
+  of the arcade's ending selector) shares the quote renderer `0x06066948`.
+  Since version 2, its language read is the constant 0. Whether it draws
+  the endings is a HYPOTHESIS.
+- **`MCED.SHP`** (`EXP-0029`) holds no quote or ending record. Its name may
+  suggest "ending", but that is not evidence.
+- **Reach:** no Saturn ending has been reached. The `RE-010` play session
+  kept states from the Apocalypse fight (`local/re010/session/states`,
+  frames 57999-63975, roster image).
+
+### END-001 - Choose an ending and reach it
+
+- **Status:** `READY`
+- **Milestone:** M6
+- **Dependencies:** RE-011 (done).
+- **Blockers:** None; the choice is the user's.
+- **Objective:** With the user, choose one ordinary character's ending.
+  Reach it in a recorded session, keep checkpoints before and during it,
+  and inventory every text surface it shows.
+- **Acceptance criteria:**
+  - **Choice:** the candidates are offered with:
+    - their arcade English ending record count;
+    - their Saturn after-table record count;
+    - whether the user can beat Apocalypse with them.
+
+    The user's choice is recorded in their words.
+  - **Session:** a recorded cold-boot session (untouched source image)
+    reaches the chosen ending. It keeps checkpoints just before the final
+    K.O., at the first ending text, and at each later text page. Use
+    `--keep-states` large enough, or keep the cited states, so none is
+    pruned.
+  - **Inventory:** every text surface between the final K.O. and the credits
+    or attract is listed in `docs/text_surfaces.md`, with screenshots
+    verified by the agent. Examples are post-fight lines, ending pages,
+    speaker boxes and credits. For each surface, note its frame range, its
+    look (box, font size, position) and whether it is Japanese.
+  - **Repeatability:** the ending replays from the checkpoint before the
+    K.O. with no input, twice, giving the same screens. If not, record what
+    differs.
+  - **Team:** record which team member the ending follows: the point
+    character, the K.O. scorer or the first pick. This is a HYPOTHESIS
+    to test in `END-004`.
+- **Notes:** method from MSHvSF `END-001` (playbook Phase 4, step 1). A
+  no-play route on the Saturn (forcing the boss's vitality or the stage
+  word in RAM) is welcome but not required. Any such address must be
+  found by experiment, not borrowed.
+
+### END-002 - How the ending text is drawn
+
+- **Status:** `BLOCKED`
+- **Milestone:** M6
+- **Dependencies:** END-001.
+- **Blockers:** The checkpoints.
+- **Objective:** Find which code, font and grid draw each Japanese ending
+  surface from `END-001`.
+- **Acceptance criteria:**
+  - **Font:** the drawn cells of one ending page match a decoded font. That
+    is the quote font in `FIX.PRS` (`EXP-0020`) or another one, to be found.
+    One VDP1 or VDP2 cell is zeroed, and exactly that glyph disappears
+    (the MSHvSF `EXP-0038` method, re-run on XvSF).
+  - **Code:** a halt or read breakpoint shows whether the type-4 selector
+    `0x060668A2` and the renderer `0x06066948` run for the ending. If they
+    do not, the code that does is identified.
+  - **Grid:** cells per line, lines per box and the pixel pitch are
+    measured.
+  - **English mode:** say whether the arcade's English mode (2 × 25 at
+    12 px, `EXP-0023`) is reachable for this surface, from code and from a
+    RAM trial on a checkpoint. No disc change.
+  - **Patch regression:** the ending on the roster image matches the
+    unpatched game. Test it by replaying an ending checkpoint twice, once
+    with the version-3 patch sites set back to their original bytes in RAM
+    and once without, so that the only change is the patch. This answers
+    the open question of whether the English-mode patch leaves endings
+    unchanged (`docs/known_unknowns.md`).
+
+### END-003 - Where the ending text lives
+
+- **Status:** `BLOCKED`
+- **Milestone:** M6
+- **Dependencies:** END-002.
+- **Blockers:** The renderer and font.
+- **Objective:** Find the chosen ending's records in RAM, trace them to
+  their disc file, and prove a disc edit reaches the screen.
+- **Acceptance criteria:**
+  - **RAM:** the records shown are found live with their address and
+    record size. A single RAM write before the page changes exactly the
+    predicted cells.
+  - **Disc:** a write breakpoint from a before-load checkpoint catches each
+    writer. The source file and offset are identified, and the decoded file
+    matches RAM, allowing for relocation fields if any. Check the
+    after-table records in `MCxx` and `MCED.SHP` first, but neither is
+    assumed.
+  - **Marker:** a same-size marker edit in that file, built into an image
+    under `build/` from the untouched source, shows on screen at the
+    predicted cells.
+  - **Census:** say whether the other characters' endings use the same file
+    pattern. This is a static check against the arcade's Japanese ending
+    blocks, and it records each file's ending record count.
+- **Notes:** where the dialogue lives may differ from where the pages live
+  (MSHvSF found them in different files; HYPOTHESIS here).
+
+### END-004 - Arcade English and indexing for the ending
+
+- **Status:** `BLOCKED`
+- **Milestone:** M6
+- **Dependencies:** END-001.
+- **Blockers:** The chosen ending and its inventory.
+- **Objective:** Find which official English exists for each surface of
+  the chosen ending, and how the arcade picks its records, so that each
+  Saturn ending record can be paired with its English one by game logic.
+- **Acceptance criteria:**
+  - **Route:** a scripted MAME run (`xmvsfu`) reaches the chosen ending
+    with no play, by forcing documented RAM words found by experiment. It
+    also reaches it in Japanese (the `EXP-0022` language-word method). Each
+    forced word is recorded with its evidence.
+  - **Records:** for each ending surface, the arcade English records read,
+    from the read log, are mapped to the Saturn's surfaces from `END-001`.
+    Surfaces with no arcade English are listed.
+  - **Indexing:** before running, record predictions for two team
+    combinations (the same point character with two different partners),
+    then check them in MAME. Then record the rule: the records shown as a
+    function of point, partner and language.
+  - **Pairing:** a pairing table from Saturn ending record to arcade
+    English record for the chosen character, with addresses only
+    (`data/translations/<character>_ending_pairing.json`). Each entry is
+    CONFIRMED by a MAME read or marked as rule only.
+  - **Names:** list each English record that names a character whose names
+    differ (`docs/names.md`), for the gate.
+- **Notes:** the record counts differ between the Saturn files and the
+  arcade English (see above). The pairing must explain the difference, not
+  assume `k mod n`.
+
 ## Later Milestones (outline only)
 
 These are placeholders so the order is visible. Each becomes a full task, with
@@ -1314,9 +1480,8 @@ for each is in `docs/playbook_from_mshvsf.md`.
 
 | ID | Milestone | Outline |
 | --- | --- | --- |
-| END-001 | M6 | Reach, renderer, RAM, disc source, arcade English, and indexing of one ending. |
-| END-002 | M7 | One ending localized. |
-| END-003 | M8 | All roster endings; combined image with win quotes; coverage register. |
+| END-005 | M7 | One ending localized: the `GATE-TRANSLATION` extension for that ending, the layout, names in the text, a build from the untouched source and a play check. |
+| END-006 | M8 | All roster endings; combined image with win quotes; coverage register; regression references. |
 | REL-001 | after M5 | Release patches (xdelta3 and SSP of the changed files) with a rebuild README; may be GitHub Release assets, never committed. Splice rather than re-compress changed streams to keep patches small. |
 | SPECIAL-001 | M9, user approval | Secret characters and bosses: which slots have their own official English and which reuse another's (slot 18); boss pre-fight text (Apocalypse's pre-fight line is captured, `docs/text_surfaces.md`); save- or progress-gated unlocks. Gouki's and Apocalypse's ordinary win quotes are in M5 (`RE-008`). |
 | UI-001 | after M8, user request | UI art: inventory English art already in every font before drawing anything; caption colour and style. |

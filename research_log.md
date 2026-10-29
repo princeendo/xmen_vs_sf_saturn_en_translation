@@ -1602,3 +1602,35 @@ Checks: `pytest` 167 passed; `ruff check`, `ruff format --check` and `mypy` are 
 
 Conclusion: `RE-011` is `DONE` (**CONFIRMED**, D-028). **M5 is complete.**
 Next: M6 (endings) needs its tasks written; nothing in it has started.
+
+## 2026-10-29 — SESSION-0049: M6 tasks written (not started)
+
+User request (verbatim): "Write up the M6 tasks for the endings. Don't start
+them yet."
+
+M5 is complete (D-027, D-028), so rule 23 allows ending investigation.
+Facts gathered for the task text (read-only):
+
+- **Arcade English ending table** (`0x17E318`): per-slot record counts
+  are 6, 9, 6, 6, 5, 6, 6, 7, 7, 7, 4, 6, 6, 5, 5, 6, 6, 13, 6 (slots
+  0-18).
+  - English pointers: slot 9 equals slot 8, and slot 18 equals slot 11.
+  - Japanese table (`0x17E2CC`): slot 8 equals slot 7, and slot 18 equals
+    slot 11.
+- **Saturn after-table counts** (`data/text/slot_census.json`) differ from
+  these, for example Cyclops 7 against 9 and Juggernaut 9 against 6.
+- `EXP-0023`: the type-4 selector `0x060668A2` shares the renderer
+  `0x06066948`. Its language read has been 0 since version 2.
+- The `RE-010` session kept states from the Apocalypse fight (57999-63975).
+
+Written in `TASKS.md` (Phase K):
+
+| Task | Status |
+| --- | --- |
+| `END-001` (choose an ending, reach it, inventory its surfaces) | `READY` |
+| `END-002` (font, code, grid; English-mode reachability; patch regression) | `BLOCKED` |
+| `END-003` (RAM records, disc writers, marker edit, file census) | `BLOCKED` |
+| `END-004` (MAME no-play route, English per surface, indexing, pairing) | `BLOCKED` |
+
+The outline row `END-001` was replaced. The M7 and M8 rows are now
+`END-005` and `END-006`. No experiment was run.
