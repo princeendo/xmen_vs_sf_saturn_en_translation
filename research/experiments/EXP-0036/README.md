@@ -1,9 +1,8 @@
 # EXP-0036 (M6): Where Nash's Ending Text Lives
 
 Task: END-003
-Status: IN_PROGRESS (the marker play check is pending)
-Confidence: CONFIRMED for RAM, writer and file; the on-screen marker from
-disc is not yet observed
+Status: DONE
+Confidence: CONFIRMED
 
 ## Observation
 
@@ -153,12 +152,36 @@ The ending offset is the quote table + `0x4C0` in every roster file.
   - Ryu `0x060B2A98` = `0x060B0000` + `0x25D8` + `0x4C0`;
   - Apocalypse `0x060C1F60` = `0x060C1000` + `0xAA0` + `0x4C0`.
 
-### Marker on screen
+### Marker on screen (user play check)
 
-Pending: a user play session on the marker image, Nash first, to his
-ending.
+**Session.** The user played the marker image from a cold boot:
+2026-10-29 21:49-22:05 UTC, frames 258-53,202, 901 screenshots. Nash and
+Ryu beat Apocalypse, then Nash won the partner fight. The recorder kept the
+last 150 states. Two of them are copied to `local/checkpoints/end003/`:
 
-## Conclusion (so far)
+- `f00050471.mcs` `a8d427ce…`, the fade into page 1;
+- `f00050643.mcs` `a48c279b…`, page 1.
+
+**Text boxes, against `EXP-0034`'s original screenshots** (`crop=300:44:30:180`):
+
+| Page | Original box | Marker run box | First marker shot |
+| --- | --- | --- | --- |
+| 1 | `ffca3630c5d4` | `703a2d4d1ed7` (differs) | `f00050488` |
+| 2 | `89543619d7f6` | `89543619d7f6` | `f00050724` |
+| 3 | `7e84725417ea` | `7e84725417ea` | `f00050962` |
+| 4 | `a84d8842688a` | `a84d8842688a` | `f00051251` |
+| 5 | `c546bb8add47` | `c546bb8add47` | `f00051490` |
+| 6 | `26726477d71b` | `26726477d71b` | `f00051842` |
+
+**Page 1, whole screen.** `f00050550.png` (`318706ce…0bad0`) against the
+original `f00220654.png`:
+
+- 550 pixels differ, all inside x 27-88, y 187-200. That is the first four
+  16 px cells of the top row.
+- At zoom, the line begins これは！ (page 6's first four glyphs) in place of
+  its original first four. The rest of the line is unchanged.
+
+## Conclusion
 
 **CONFIRMED:**
 
@@ -171,13 +194,17 @@ ending.
 Every roster file keeps its slot's arcade Japanese ending block at table +
 `0x4C0`. For slots 0-16 the whole block is there.
 
-**Open:** the marker shown on screen from disc (the play check), and
-Cammy's block end.
+A same-size edit of `MC10.SHP` records 16-21, built into an image from
+the untouched source, appears on screen at exactly the predicted cells,
+with every other page unchanged. **`END-003` is done.**
+
+**Open:** Cammy's arcade block end; the text-like data after
+Apocalypse's 4 records (`docs/known_unknowns.md`).
 
 ## Uncertainty and Alternatives
 
 - **Pick to boss:** stages 1-7 were not watched with a write log. The play
-  check on the marker image covers that span.
+  check covers that span: the marker survived to the ending.
 - **Second members and CPU:** they load into other buffers (WRAM-H
   `0x060B0000`, opponents `0x060C1000`). Only Nash first was tested for the
   ending.

@@ -1777,3 +1777,24 @@ clean.
 
 Status: `END-003` stays `IN_PROGRESS` until the user's play check on the
 marker image shows the marker on screen.
+
+### SESSION-0052 follow-up: the marker play check (END-003 done)
+
+The user played the marker image from a cold boot to Nash's ending and said
+"done".
+
+- **Session:** `local/end003/session`, 21:49-22:05 UTC, frames 258-53,202,
+  901 screenshots, the last 150 states kept. Nash and Ryu again; Nash won
+  the partner fight.
+- **Found:** from contact sheets of the last 300 shots (every 5th), page 1
+  starts これは！.
+- **Text-box hashes** against `EXP-0034`: page 1 differs; pages 2-6 are
+  identical.
+- **Page 1 whole-screen diff** (`f00050550` against `f00220654`): 550
+  pixels in x 27-88, y 187-200 (four cells). Checked at zoom.
+- **Kept:** `local/checkpoints/end003/f00050471.mcs` and
+  `f00050643.mcs`.
+- Two new rows in `docs/known_unknowns.md`: Cammy's block end, and the text
+  after Apocalypse's records.
+
+Conclusion: `END-003` is `DONE` (**CONFIRMED**, D-031). Next: `END-004`.

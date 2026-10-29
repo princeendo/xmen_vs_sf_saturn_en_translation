@@ -576,3 +576,26 @@ Reproduce: `research/experiments/EXP-0034/README.md`, "Procedure".
   appeared).
 
 Reproduce: `research/experiments/EXP-0035/README.md`, "Procedure".
+
+## D-031 (M6): A disc edit of `MC10.SHP` reaches Nash's ending (`END-003`, `EXP-0036`)
+
+- **Loading:** when Nash is picked first, the file loader `0x0600D124`
+  (R5 = `0x5D69`, R6 = `0x0024D000`) writes all six ending records. The
+  buffer equals decoded `MC10.SHP` plus the 263 `EXP-0025` fix-ups.
+- **No rewrite:** from the pre-boss checkpoint through the last page,
+  nothing writes to the records again (write log, 0 hits).
+- **RAM edit:** one code changed in RAM before page 3 changed exactly that
+  page's first cell, to the new code's `FIX.PRS` glyph.
+- **Disc edit:** an 8-byte, same-size edit at decoded `0x2EC0` (record 16)
+  was built from the untouched source (`build/end003_marker`, Track 01
+  `547359de…`; only `MC10`'s 12 sectors differ). In a user play-through
+  to Nash's ending:
+  - page 1 showed the four marker glyphs in exactly its first four cells
+    (x 27-88, y 187-200);
+  - pages 2-6 had text boxes byte-identical to the original game's.
+- **Census:** every roster file keeps its slot's arcade Japanese ending
+  block at quote table + `0x4C0`. For slots 0-16 the whole block is there
+  (`data/text/ending_census.json`).
+
+Reproduce: `research/experiments/EXP-0036/README.md`, "Procedure", and a
+play-through of the marker image with Nash first.
