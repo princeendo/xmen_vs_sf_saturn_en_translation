@@ -1215,3 +1215,27 @@ its quote file."
 
 Conclusion: `RE-004` is `DONE` (**CONFIRMED**, D-020). `RE-006` and
 `PAIR-002` are now `READY`.
+
+## 2026-10-29 — SESSION-0037 / EXP-0026: Ken's pairing (`PAIR-002`)
+
+User request (verbatim): "Start PAIR-002: pair Ken's records with the arcade
+English."
+
+- **Arcade bases** (ROM pointer tables): Japanese slot 10 `0x18137C`,
+  English slot 10 `0x189166`, 9 English records.
+- **MAME runs** (`EXP-0022`'s `run_pair.py`, unchanged; three batches in
+  parallel, `local/pair002/r1`-`r3`):
+  - the unforced control matched `EXP-0022` (r = 10, slot 12, English 2,
+    Japanese 10);
+  - 16 English and 4 Japanese forced draws with slot 10, all 20 at the
+    predicted address.
+- **On screen:** at draw 9, English record 1 and Japanese record 9
+  (agent-checked against the decoder and Ken's `MC0A` record 9).
+- **Fit:** 9 of 9 English records recompile exactly, and no line exceeds
+  25. No policy-sensitive name appears.
+- **Pairing:** `make_pairing.py` was generalized from `EXP-0022`
+  (slot argument, bases from ROM). `data/translations/ken_pairing.json` has
+  16 CONFIRMED entries, and English record 8 is unreachable.
+
+Conclusion: `PAIR-002` is `DONE` (**CONFIRMED**, D-021). Next are `RE-006`
+and the user's `GATE-TRANSLATION` extension for Ken.

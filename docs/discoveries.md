@@ -354,3 +354,19 @@ when Ken speaks.
   `0x060C1000` and `0x060D2000`.
 
 Reproduce: `research/experiments/EXP-0025/README.md`, "Procedure".
+
+## D-021 (M4): Ken's Saturn record `k` pairs with English slot 10 record `k mod 8` (`PAIR-002`, `EXP-0026`)
+
+The arcade's win-quote selector treats Ken (slot 10) as it treats Ryu: for
+the same draw `r`, it shows Japanese record `r` and English record `r mod 8`.
+Ken's Saturn records `k` and `k + 8` therefore both pair with English record
+`k`. English record 8 is never chosen. All 9 English records fit 2 × 25 and
+recompile byte for byte with `tools.text.caption`.
+
+**Evidence.** In MAME, with the slot forced to 10, all 16 English draws and
+4 Japanese draws (3, 8, 9 and 15) read exactly the predicted records. The
+unforced control matched `EXP-0022`. At draw 9 the English bubble showed
+English record 1 and the Japanese bubble showed Japanese record 9. The table
+is `data/translations/ken_pairing.json` (addresses only).
+
+Reproduce: `research/experiments/EXP-0026/README.md`, "Procedure".

@@ -132,7 +132,12 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   `0x0024FA4C` when he is first and WRAM-H `0x060B2A4C` when he is second.
   The selector sees slot 10 (`0x0014`), and the table is the arcade
   Japanese slot 10 (`RE-004`, D-020).
-- Next: `RE-006` and `PAIR-002` (both ready, independent of each other).
+- **2026-10-29** (`SESSION-0037`, `EXP-0026`): Ken's Saturn record `k`
+  pairs with English slot 10 record `k mod 8`, as Ryu's does. All 16 are
+  confirmed in MAME, and all 9 English records fit 2 × 25 (`PAIR-002`,
+  D-021).
+- Next: `RE-006` (ready). The `GATE-TRANSLATION` extension for Ken is the
+  user's decision; `RE-007` waits on both.
 
 ## Milestones
 
@@ -856,7 +861,7 @@ Endings, special characters and the rest of the roster stay out of scope
 
 ### PAIR-002 - Pair the second character's records with the arcade English
 
-- **Status:** `READY`
+- **Status:** `DONE`
 - **Milestone:** M4
 - **Dependencies:** RE-004 (done), PAIR-001 (done).
 - **Blockers:** None.
@@ -871,8 +876,15 @@ Endings, special characters and the rest of the roster stay out of scope
     and record numbers only.
   - **Fit:** the character's English records 0-7 all fit 2 × 25 and use only
     mapped characters (checked by `tools/text/caption.py`).
-- **Notes:** All arcade slots hold 9 English records except slot 8, which
-  holds 8 (`EXP-0022`), so English record 8 is unused for all of them.
+- **Notes:**
+  - All arcade slots hold 9 English records except slot 8, which holds 8
+    (`EXP-0022`), so English record 8 is unused for all of them.
+  - Done 2026-10-29 (`EXP-0026`, D-021). Ken follows `r mod 8`: 16 English
+    and 4 Japanese forced draws (3, 8, 9, 15) read the predicted records, and
+    the control matched `EXP-0022`.
+  - `data/translations/ken_pairing.json`: 16 CONFIRMED entries.
+  - All 9 English records fit 2 × 25 and recompile exactly. None uses a
+    policy-sensitive name.
 
 ### GATE-TRANSLATION extension for the second character
 
@@ -884,8 +896,8 @@ under `GATE-TRANSLATION` and in `docs/localization_policy.md`.
 
 - **Status:** `BLOCKED`
 - **Milestone:** M4
-- **Dependencies:** RE-004 (done), RE-006, PAIR-002, the gate extension above.
-- **Blockers:** RE-006, PAIR-002, the gate extension.
+- **Dependencies:** RE-004 (done), RE-006, PAIR-002 (done), the gate extension above.
+- **Blockers:** RE-006, the gate extension.
 - **Objective:** Generalize `tools/disc/build_english.py` to build several
   characters from their specs, and produce one image with both characters'
   English win quotes.
