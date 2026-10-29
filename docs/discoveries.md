@@ -184,3 +184,34 @@ re-encoded (`tools/disc/prs.py` `compress_file`):
 - Re-encoding the original decoded file reproduces `MC09.SHP` byte for byte.
 
 Reproduce: `research/experiments/EXP-0018/README.md`, "Procedure".
+
+## D-014 (M2): The quote font is `FIX.PRS`, and its format is proven (`FONT-001`, `EXP-0019`)
+
+The win-quote font is the data-track file `FIX.PRS` (LSN 46,715, 209,285
+bytes, SHA-256 `68032831c08fb1304d1becd5d5a68fc904b2adeedfb70d76cb2b0e42c8b90bab`),
+stored uncompressed.
+
+**In RAM.** It is loaded unchanged to WRAM-L `0x002C3EA0` (the pointer is at
+WRAM-H `0x0602586C`). The routine at `0x06024CF0` (code in R3) builds each
+glyph into the staging cell `0x06024DDC`.
+
+**Layout.**
+
+| Offset | Content |
+| --- | --- |
+| 0x000 | 16-byte header; the last word is the code count `0x0E00` |
+| 0x010 | block table: one long per 16 codes |
+| 0x390 | size table: one byte per code (0 empty, negative raw 128 bytes, else compressed length) |
+| after | glyph data |
+
+Compressed glyphs are a mask-selected column-run fill (`tools/text/font.py`).
+
+**Evidence.**
+
+- `tools/text/font_pack.py` repacks `FIX.PRS` byte for byte.
+- Decoding reproduces all 22 distinct codes of the M1 quote as drawn VDP1
+  cells.
+- From a cold boot, a one-byte change to `FIX.PRS` on a rebuilt image
+  appears in the loaded font; the original image is the control.
+
+Reproduce: `research/experiments/EXP-0019/README.md`, "Procedure".

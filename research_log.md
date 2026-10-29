@@ -888,3 +888,42 @@ hashes unchanged (all 42 match `references/saturn_jp/README.md`).
 
 Conclusion: `DISC-002` is `DONE` (**CONFIRMED**, D-013). **M2 reached.**
 Next unblocked: `FONT-001`.
+
+## 2026-10-28 — SESSION-0028 / EXP-0019: quote font found and proven
+
+Task: FONT-001 ("Start FONT-001: find the quote font and prove its format.")
+
+Actions and results:
+
+- **REJECTED** as the cell writer: a CPU write to VDP1 cell `0x4A800`. A
+  write log from `pre_quote` had 0 hits, though the cell changed.
+- **Glyph in RAM:** absent in every layout tried. The last glyph's cell is
+  also at WRAM-H `0x06024DDC`.
+- **Staging-cell write log:** the writes come from `0x06024D28`-`0x06024DC0`.
+  Disassembly shows the routine `0x06024CF0` and the font pointer
+  `0x0602586C` (`0x002C3EA0`).
+- **Decoder:** copied MSHvSF `font.py`/`font_pack.py`; only docstrings and
+  CLIs changed. They decode 22/22 of the M1 quote's codes to the drawn cells.
+- **Font file:** the font image equals `FIX.PRS` (209,285 bytes, uncompressed)
+  and repacks byte-identically.
+- **First tries at a load trace:**
+  - The cold-boot header-word log over 30 s had only the BIOS clear.
+  - Bisection of the `EXP-0013` states: the font loads after the Start
+    press (5116 to 5169).
+  - **DISPROVEN** as a disc test: a Start replay from 5116 on a probe image.
+    It loads the original font, from a copy already in cart RAM in the state.
+  - A halt from 5116 caught the CD-port copy loop at `0x06013120` writing
+    other data into the shared buffer.
+- **Controlled test:** `FIX.PRS` with one byte changed (`0x1E0B7`: `07` →
+  `F8`, glyph あ). Cold boot and Start: the original image loads the original
+  font (1 run); the probe image loads the probe font in 2 valid runs (a third
+  could not focus the window).
+- **Cart copy:** the cart copy at `0x346490` matches only up to `0xB2C0` in
+  those states (cart extraction is unvalidated).
+
+Checks: `./invenv.sh pytest -q` 134 passed; `ruff check`, `ruff format
+--check` and `mypy` clean (EXP-0019 scripts also `mypy --strict`). Source
+hashes unchanged (42 of 42).
+
+Conclusion: `FONT-001` is `DONE` (**CONFIRMED**, D-014). `FONT-002` is
+unblocked.

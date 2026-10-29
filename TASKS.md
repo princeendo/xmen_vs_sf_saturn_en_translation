@@ -93,7 +93,11 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   rebuilt from the untouched source, with only `MC09.SHP` re-encoded
   (あいう in all 16 Ryu win-quote records), showed the change in two
   cold-boot Ryu wins (`DISC-002`, D-013).
-- Next: `FONT-001` (M2 font work, before any English goes on disc).
+- **2026-10-28** (`SESSION-0028`, `EXP-0019`): the quote font is `FIX.PRS`,
+  loaded unchanged to WRAM-L `0x002C3EA0`. Its format is proven by a
+  byte-identical repack and 22/22 drawn cells, and a one-byte disc change
+  reaches the loaded font from a cold boot (`FONT-001`, D-014).
+- Next: `FONT-002` (Latin codes, line length, cell grid).
 
 ## Milestones
 
@@ -512,20 +516,27 @@ prerequisites before English text goes on disc).
 
 ### FONT-001 - Find the quote font and prove its format
 
-- **Status:** `READY`
+- **Status:** `DONE`
 - **Milestone:** M2
 - **Dependencies:** DISC-001 (done).
 - **Blockers:** None.
 - **Objective:** Locate the glyph data behind the quote codes (in RAM and on disc) and the routine that copies glyphs into the VDP1 cells.
 - **Acceptance criteria:** The font's RAM location and disc source are found by a controlled trace; its format is proven by a byte-identical repack of the original; the code-to-glyph mapping is tested against the rendered cells.
 - **Notes:** MSHvSF's font was compressed and loaded once (a HYPOTHESIS here).
+- **Evidence:** `EXP-0019`, D-014.
+  - **RAM:** glyph routine `0x06024CF0` and font pointer `0x0602586C` (font at
+    `0x002C3EA0`), found from a write log on the staging cell.
+  - **Disc:** `FIX.PRS`. A one-byte probe image loads the probe font from a
+    cold boot, and the original image is the control.
+  - **Format:** byte-identical repack.
+  - **Mapping:** 22/22 drawn cells.
 
 ### FONT-002 - Latin codes, line length and cell grid
 
-- **Status:** `BLOCKED`
+- **Status:** `READY`
 - **Milestone:** M2
-- **Dependencies:** FONT-001.
-- **Blockers:** FONT-001.
+- **Dependencies:** FONT-001 (done).
+- **Blockers:** None.
 - **Objective:** Find which Latin glyphs the quote font has and their codes, and measure how many cells a line and a record hold.
 - **Acceptance criteria:** A live display with a control shows the predicted Latin glyphs; the per-line cell count and any width limits are measured on screen; capacity against the arcade English records (2 × 25 codes) is stated.
 
