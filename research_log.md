@@ -1156,3 +1156,29 @@ hashes unchanged.
 Conclusion: `RE-003` is `DONE` (**CONFIRMED**, D-019). **M3 reached.** Next
 is M4 (a second character through the same mechanism), whose tasks are to be
 written first.
+
+## 2026-10-28 — SESSION-0035: M4 tasks written (not started)
+
+User request (verbatim): "Write up the M4 tasks (a second character through
+the same mechanism). Don't start them yet."
+
+Facts gathered for the task text (read-only):
+
+- The data track has `MC00`-`MC11.SHP` (18 files) and `MCED.SHP`.
+- English win-quote slots 0-17 hold 9 records each, except slot 8 (8);
+  slot 18 aliases 11.
+- The original remap table at `0x06066718` is loaded only by the code the
+  English-mode patch replaced (`0x06066672`), so it is a candidate for a
+  slot table.
+
+Written in `TASKS.md` (Phase I):
+
+| Task | Status |
+| --- | --- |
+| `RE-004` (choose and map the second character) | `READY` |
+| `RE-006` (a version-3 patch with an English-slot table) | `BLOCKED` |
+| `PAIR-002` (pairing in MAME) | `BLOCKED` |
+| A `GATE-TRANSLATION` extension for the new character | user decision |
+| `RE-007` (generalized build of both characters, with live and play checks) | `BLOCKED` |
+
+The `RE-004` outline row was replaced. No experiment was run.

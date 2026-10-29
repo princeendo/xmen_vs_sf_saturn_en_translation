@@ -123,9 +123,11 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   compiler and a spec-driven build make Ryu's English image from the
   untouched source. All 16 draws show their paired English, cell for cell,
   and two cold-boot wins showed English (`RE-003`, D-019).
-- Next: M4, a second character through the same mechanism (`RE-004`, outline
-  only). Its tasks need writing first; the slot test in
-  `tools/disc/english_mode.py` covers one character.
+- **2026-10-28:** M4 tasks written at the user's request (not started):
+  `RE-004` (choose and map the second character), `RE-006` (an English-slot
+  table instead of one slot), `PAIR-002` (its pairing), a
+  `GATE-TRANSLATION` extension, and `RE-007` (build both characters).
+- Next: `RE-004` (ready; it starts with the user choosing the character).
 
 ## Milestones
 
@@ -776,6 +778,121 @@ text (`EXP-0015`) and stay out of scope (rule 23).
   - **Provenance:** source addresses and hashes in the spec; the text is
     read from the ROM (rule 21).
 
+## Phase I: M4 (A Second Character)
+
+M4: a second character's win quotes work through the same mechanism as
+Ryu's, without changing Ryu's. The order is `RE-004`, then `RE-006` and
+`PAIR-002` (independent), then the user's gate extension, then `RE-007`.
+Endings, special characters and the rest of the roster stay out of scope
+(rules 23 and 24; `RE-005` is M5).
+
+### RE-004 - Choose the second character and map its quote file
+
+- **Status:** `READY`
+- **Milestone:** M4
+- **Dependencies:** RE-003 (done).
+- **Blockers:** None.
+- **Objective:** With the user, choose the second character. Find its Saturn
+  quote file, the table offset inside it, and the slot number the selector
+  sees.
+- **Acceptance criteria:**
+  - **Choice:** the user's choice is recorded in their words. The candidates
+    are offered with their arcade slot, English record count, and whether the
+    user can easily win with them (they will need wins in play checks).
+  - **Trace:** a controlled trace links the character's quote table to one MC
+    file and offset, as `DISC-001` did for Ryu. That is a write breakpoint on
+    the table at the character's pick from a session checkpoint, and the
+    decoded file matching RAM. This also tests the hypothesis that `MCxx`
+    holds slot `0xXX`.
+  - **Slot:** the slot × 2 that the selector reads (`@(6,gbr)`) when this
+    character speaks is logged. It must match the arcade slot, or the
+    difference is recorded.
+  - **Identity:** the Saturn table equals the arcade Japanese records for
+    that slot, or the differences are recorded.
+  - **Load addresses:** where the table loads is recorded both when the
+    character is the first team member and when it is the second. A
+    partner's file was seen at WRAM-H `0x060D5F94` (`EXP-0023`).
+- **Notes:**
+  - The user needs a recorded session with this character winning, for
+    checkpoints like `DBG-003`'s.
+  - Each MC file has its own table offset; Ryu's is `0x25D8`.
+
+### RE-006 - Let the English mode cover a set of characters
+
+- **Status:** `BLOCKED`
+- **Milestone:** M4
+- **Dependencies:** RE-004.
+- **Blockers:** RE-004.
+- **Objective:** Replace the single-slot test in `tools/disc/english_mode.py`
+  (`slot × 2 == 18`) with a table of English slots. Adding a character is
+  then a data change.
+- **Acceptance criteria:**
+  - **Patch:** a version-3 patch, still same-size, tests the speaker's slot
+    against a per-slot table. A candidate location is the original remap
+    table at `0x06066718` (16 bytes), now loaded by nothing; it must be shown
+    unused before it is reused. Every original byte is checked.
+  - **Live check (RAM):** the slot table switches Ryu and the second
+    character to English, while a third character's quote stays
+    byte-identical to the unpatched game (the `EXP-0023` Storm control).
+  - **Regression:** Ryu's 16 draws still show the same cells as `EXP-0024`.
+  - **Tests:** unit tests for the patch table and for the slot-table data.
+- **Notes:** The fixed-index mode, endings and type-6 text are still not
+  reached. Note any change in the selector paths they share.
+
+### PAIR-002 - Pair the second character's records with the arcade English
+
+- **Status:** `BLOCKED`
+- **Milestone:** M4
+- **Dependencies:** RE-004, PAIR-001 (done).
+- **Blockers:** RE-004.
+- **Objective:** Confirm that the second character follows the same rule as
+  Ryu (Saturn draw `r` shows English record `r mod 8`) and record its
+  pairing table.
+- **Acceptance criteria:**
+  - **MAME runs:** with the character's slot forced, forced draws in MAME
+    (`EXP-0022`'s `run_pair.py`) read the predicted English and Japanese
+    records. Cover at least 4 draws, including one ≥ 8, in both languages.
+  - **Records:** `data/translations/<character>_pairing.json` holds addresses
+    and record numbers only.
+  - **Fit:** the character's English records 0-7 all fit 2 × 25 and use only
+    mapped characters (checked by `tools/text/caption.py`).
+- **Notes:** All arcade slots hold 9 English records except slot 8, which
+  holds 8 (`EXP-0022`), so English record 8 is unused for all of them.
+
+### GATE-TRANSLATION extension for the second character
+
+Before `RE-007`, the user extends `GATE-TRANSLATION` to the second character
+in their own words (the scope is Ryu only today). The extension is recorded
+under `GATE-TRANSLATION` and in `docs/localization_policy.md`.
+
+### RE-007 - Build Ryu and the second character from the source image
+
+- **Status:** `BLOCKED`
+- **Milestone:** M4
+- **Dependencies:** RE-004, RE-006, PAIR-002, the gate extension above.
+- **Blockers:** RE-004, RE-006, PAIR-002, the gate extension.
+- **Objective:** Generalize `tools/disc/build_english.py` to build several
+  characters from their specs, and produce one image with both characters'
+  English win quotes.
+- **Acceptance criteria:**
+  - **Spec:** `data/translations/<character>_win_quotes.json` holds source
+    addresses, hashes and pairing, but no text (rule 21).
+  - **Build:** one command builds the image from the untouched source. Only
+    `MMPACK.PCA` and the two MC files change, every sector passes EDC/ECC,
+    the ISO layout is unchanged, two builds are identical, and the source
+    hashes are unchanged.
+    - Every re-encoded file keeps its size, with its stream ending in its
+      last sector.
+  - **Live check:** all 16 draws of the second character are shown by
+    steering the RNG seed from a checkpoint (`EXP-0024` method), cell for
+    cell as compiled. Ryu's 16 draws are re-checked (regression). Other
+    characters' quotes stay byte-identical to the unpatched game.
+  - **Play check:** the user's cold-boot play check shows English for both
+    characters (at least one win each), plus another character's Japanese
+    quote and a Japanese continue hint.
+- **Outputs:** an experiment record, the generalized build tool and its tests,
+  the specs, and a regression reference.
+
 ## Later Milestones (outline only)
 
 These are placeholders so the order is visible. Each becomes a full task, with
@@ -784,7 +901,6 @@ for each is in `docs/playbook_from_mshvsf.md`.
 
 | ID | Milestone | Outline |
 | --- | --- | --- |
-| RE-004 | M4 | Second team slot and a second character through the same mechanism. |
 | RE-005 | M5 | File census against arcade slots; roster and exceptions (user decision); capacity; roster image; regression references. |
 | END-001 | M6 | Reach, renderer, RAM, disc source, arcade English, and indexing of one ending. |
 | END-002 | M7 | One ending localized. |
