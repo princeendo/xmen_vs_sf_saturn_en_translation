@@ -100,9 +100,11 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
 - **2026-10-28** (`SESSION-0029`, `EXP-0020`): the quote font draws the
   arcade English codes directly. A quote is 2 × 19 cells, all shown; only 59
   of 161 arcade English win quotes fit after re-wrapping (`FONT-002`, D-015).
-- Next: all M2 tasks are done. M3 (all of Ryu's quotes) puts English on disc,
-  so it needs `GATE-TRANSLATION` and a layout task for the quotes that do not
-  fit. Those tasks are to be written with the user.
+- **2026-10-28:** M3 tasks written at the user's request (not started):
+  `RE-002` (selector), `LAYOUT-001` (capacity route), `PAIR-001` (Ryu's
+  English pairing), `GATE-TRANSLATION` (now waiting on `PAIR-001`) and
+  `RE-003` (all of Ryu's quotes from a rebuilt image).
+- Next: `RE-002` or `LAYOUT-001`; both are ready and need no English.
 
 ## Milestones
 
@@ -469,11 +471,30 @@ prerequisites before English text goes on disc).
 ### GATE-TRANSLATION - Confirm reference and translation prerequisites
 
 - **Status:** `BLOCKED`
-- **Milestone:** M2
-- **Dependencies:** DOC-002, REF-001 to REF-007.
-- **Blockers:** Dependencies not done.
-- **Objective:** No English text goes on disc before the oracle, the pairing method, and the user's policy are settled.
-- **Acceptance criteria:** Every dependency is `DONE`; the user gives a recorded GO.
+- **Milestone:** M3 (entry gate)
+- **Dependencies:** DOC-002, REF-001 to REF-008 (all done), PAIR-001.
+- **Blockers:** PAIR-001.
+- **Objective:** Make an explicit go/no-go decision before any official or
+  translated English text goes into a disc build. The oracle, the pairing
+  method and the user's policy must be settled first.
+- **Scope:** Synthetic test strings (alphabets, pair-glyph samples, markers)
+  are not covered, as in `FONT-002` and `LAYOUT-001`. Live-RAM tests are not
+  covered either.
+- **Acceptance criteria:**
+  - Every dependency is `DONE`.
+  - `PAIR-001` gives, with evidence, the arcade English record (or none) for
+    each of Ryu's 16 Saturn win-quote records.
+  - The user records GO or NO-GO in their own words, with the scope (which
+    character, which surface), and chooses the pairing policy where the
+    evidence leaves a choice. An example is a Saturn record with no unique
+    English counterpart.
+- **Outputs:** A gate acceptance entry here and in `docs/localization_policy.md`.
+- **Notes:**
+  - The policy already says official arcade English, paired by the game's own
+    selection logic, with no rewording, and grammar fixes opt-in.
+  - Endings, special cases and other characters stay gated (rules 23 and 24).
+  - The arcade has 9 English records for Ryu (slot 9) but 16 Japanese, and
+    the Saturn copies the 16 (`EXP-0015`), so pairing is not one-to-one.
 
 ## Phase F: M1
 
@@ -551,6 +572,139 @@ prerequisites before English text goes on disc).
   - The grid is 2 × 19 cells of 16 px, all shown.
   - Capacity: 25 of 161 quotes fit as written, 59 after re-wrapping.
 
+## Phase H: M3 (Ryu's Win Quotes)
+
+M3: all of Ryu's win quotes are handled programmatically. The order is
+`RE-002` and `LAYOUT-001` (no English needed), then `PAIR-001`, then
+`GATE-TRANSLATION`, then `RE-003`. Records 16-21 of Ryu's table are ending
+text (`EXP-0015`) and stay out of scope (rule 23).
+
+### RE-002 - Identify the win-quote selector and force any record
+
+- **Status:** `READY`
+- **Milestone:** M3
+- **Dependencies:** DBG-005, RE-001 (done).
+- **Blockers:** None.
+- **Objective:** Find what chooses which of Ryu's 16 records is shown, and
+  force any record from one checkpoint, so every record can be verified live
+  without gameplay.
+- **Acceptance criteria:**
+  - The selector (index or pointer, its address and writer) is found by a
+    controlled trace from the `EXP-0013` checkpoints. For example: a read
+    breakpoint on the table from `pre_ko`, then the routine that computes the
+    record address.
+  - Forcing at least 3 distinct records from one checkpoint shows exactly
+    those records (cell check, as in `EXP-0020`), with a no-write control.
+  - When the choice is made (before or after the K.O., `EXP-0013`) is stated.
+- **Outputs:** An experiment, a forcing script (a debug harness only; it never
+  ships), and a runbook entry.
+- **Notes:**
+  - MSHvSF found an index store and a record pointer written between the K.O.
+    and the quote (MSHvSF `EXP-0025`). That is at most a HYPOTHESIS here.
+  - The arcade selects the slot at `0xFF8BB4` (`EXP-0009`); its index choice
+    is not traced.
+
+### LAYOUT-001 - Choose how English quotes fit the quote box
+
+- **Status:** `READY`
+- **Milestone:** M3
+- **Dependencies:** FONT-001, FONT-002, DISC-002 (done).
+- **Blockers:** None.
+- **Objective:** Find and test a way to show quotes longer than 2 × 19
+  full-cell characters, and record the capacity of each route. The user
+  chooses the route (the "Capacity route" in `docs/localization_policy.md`).
+- **Why:** None of Ryu's 9 arcade English quotes fits 2 × 19, even
+  re-wrapped. They are 43-50 characters long, with lines of up to 25. In all,
+  102 of 161 English win quotes do not fit (`EXP-0020`).
+- **Candidate routes** (each is a HYPOTHESIS until tested):
+  - **(a) Pair glyphs.** New 16×16 glyphs holding two narrow letters each,
+    stored in `FIX.PRS` over unused or sacrificed codes, or in a grown file,
+    giving up to 76 characters. The same-size limits are 1,659 bytes of slack
+    in the file's last sector and an unknown cart-RAM buffer size.
+  - **(b) More lines or cells.** Change the renderer's grid. This is a code
+    patch; the 38-code record size, the sprite count and the bubble size are
+    unmeasured.
+  - **(c) Narrower drawing.** For example, an 8-px advance. Also a code patch.
+- **Acceptance criteria:**
+  - **Limits:** the constraints of each route are measured. This includes
+    unused and seldom-used font codes (a census of every quote and ending
+    record that uses the font), `FIX.PRS` growth room on disc and in RAM, and
+    the renderer's grid constants.
+  - **Live test:** at least one route shows synthetic test text (for example
+    pair glyphs such as `Th`) in a live quote from a rebuilt image, after a
+    cold boot, with an unchanged control, and the original glyphs still draw
+    correctly.
+  - **Capacity:** a model is recorded (characters per line and per record,
+    and how many of the 161 English quotes fit). The user picks the route,
+    recorded in the policy.
+- **Outputs:** An experiment, font-build tooling (pair glyph rendering and a
+  repack via `tools/text/font_pack.py`), and a census report.
+- **Notes:**
+  - MSHvSF chose pair glyphs and repacked its font at the same size
+    (MSHvSF `LAYOUT-001`, `FONT-003`). That is a HYPOTHESIS here.
+  - The font passes through cart RAM, and a replayed state keeps its own copy
+    (`EXP-0019`), so font tests must start from a cold boot.
+
+### PAIR-001 - Pair Ryu's Saturn records with the arcade English
+
+- **Status:** `BLOCKED`
+- **Milestone:** M3
+- **Dependencies:** REF-003, REF-004 (done), RE-002.
+- **Blockers:** RE-002.
+- **Objective:** For each of Ryu's 16 Saturn win-quote records (= the arcade
+  Japanese slot 9), find which arcade English record the arcade shows for the
+  same game situation, or that none corresponds.
+- **Why:** The arcade has 16 Japanese but 9 English records for slot 9
+  (`EXP-0015`, `EXP-0008`). So index `k` cannot simply map to English record
+  `k`. The policy requires pairing by the game's own selection logic.
+- **Acceptance criteria:**
+  - The arcade's record-index choice for Japanese and English is traced in
+    MAME, from the code, not from data alone. For example: what computes the
+    index, and whether English and Japanese draw on the same state.
+  - The Saturn's index choice from `RE-002` is compared with the arcade's.
+  - A pairing table for records 0-15 is recorded, each entry labelled with
+    its evidence and confidence.
+  - At least 2 pairs are confirmed by running the same situation in both
+    arcade languages (`EXP-0009` method), or the experiment records why that
+    is not possible.
+- **Outputs:** An experiment and `data/translations/ryu_pairing.json` (codes
+  and record numbers only; no game text beyond the official English already
+  documented).
+- **Notes:** This reads English but writes none to disc, so it runs before the
+  gate.
+
+### RE-003 - Build all of Ryu's win quotes in English from the source image
+
+- **Status:** `BLOCKED`
+- **Milestone:** M3
+- **Dependencies:** GATE-TRANSLATION, LAYOUT-001, RE-002, PAIR-001, DISC-002.
+- **Blockers:** GATE-TRANSLATION, LAYOUT-001, RE-002, PAIR-001.
+- **Objective:** Compile each of Ryu's 16 win-quote records from its paired
+  official English (the gate's policy), through the chosen layout route, into
+  `MC09.SHP` (and `FIX.PRS` if the route needs it). Build the image from the
+  untouched source and verify every record live.
+- **Acceptance criteria:**
+  - **Compiler:** a caption compiler turns the pairing table plus the English
+    text into record codes (and glyphs) deterministically. It rejects text
+    that does not fit, and it has synthetic tests.
+  - **Build:** the image is built from the untouched source with
+    `tools/disc/patch_image.py`.
+    - Only the intended files' sectors change, with valid EDC/ECC.
+    - Two builds are identical, and the source hashes are unchanged.
+    - Rule 12 records are kept for every changed record.
+  - **Live check:** all 16 records are verified live by forcing (`RE-002`)
+    from one checkpoint, with each drawn cell equal to the compiler's
+    prediction. The original image is the control.
+  - **Play check:** the user's cold-boot play check shows English in at least
+    two independent Ryu wins (policy).
+  - **Provenance:** `data/translations/ryu_win_quotes.json` records the
+    arcade source address, English text, pairing, and any opt-in grammar fix
+    for each record.
+- **Outputs:** An experiment, the compiler and its tests, the translation
+  record, and a regression reference.
+- **Notes:** Records 16-21 (ending text) are untouched. Other characters are
+  M4.
+
 ## Later Milestones (outline only)
 
 These are placeholders so the order is visible. Each becomes a full task, with
@@ -559,9 +713,6 @@ for each is in `docs/playbook_from_mshvsf.md`.
 
 | ID | Milestone | Outline |
 | --- | --- | --- |
-| LAYOUT-001 | M3 | Choose a capacity route (pair glyphs or other) from measured headroom. |
-| RE-002 | M3 | Selection: record pointer, index setter, forcing from a checkpoint; all quote states. |
-| RE-003 | M3 | Caption compiler for one character; every record verified live by forcing. |
 | RE-004 | M4 | Second team slot and a second character through the same mechanism. |
 | RE-005 | M5 | File census against arcade slots; roster and exceptions (user decision); capacity; roster image; regression references. |
 | END-001 | M6 | Reach, renderer, RAM, disc source, arcade English, and indexing of one ending. |

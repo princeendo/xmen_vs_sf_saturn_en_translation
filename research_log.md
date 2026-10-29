@@ -955,3 +955,31 @@ hashes unchanged (42 of 42).
 Conclusion: `FONT-002` is `DONE` (**CONFIRMED**, D-015). The M2 tasks are all
 done. Further translation work needs the user's `GATE-TRANSLATION` decision
 and new tasks for layout (fitting 102 quotes) and M3.
+
+## 2026-10-28 — SESSION-0030: M3 tasks written (not started)
+
+User request (verbatim): "Write up the next tasks: GATE-TRANSLATION, a layout
+task for quotes that don't fit 2 × 19, and M3 (all of Ryu's quotes). Don't
+start them yet."
+
+Facts gathered for the task text (read-only, `tools.reference.xvsf_text` on
+`local/ref003/xmvsf-68k.bin`):
+
+- The arcade English win-quote slots hold 8-9 records each, and slot 18
+  aliases slot 11. **Slot 9 (Ryu) has 9 English records**, against 16
+  Japanese.
+- Ryu's English texts are 43-50 characters, with lines of up to 25. None fits
+  2 × 19 even when re-wrapped.
+
+Written in `TASKS.md`:
+
+| Task | Status |
+| --- | --- |
+| `RE-002` (selector and forcing) | `READY` |
+| `LAYOUT-001` (capacity route) | `READY` |
+| `PAIR-001` (Ryu's pairing; needs `RE-002`) | `BLOCKED` |
+| `GATE-TRANSLATION` (now depends on `PAIR-001`; synthetic test text is outside its scope) | `BLOCKED` |
+| `RE-003` (all 16 records from a rebuilt image) | `BLOCKED` |
+
+The outline rows for `LAYOUT-001`, `RE-002` and `RE-003` were replaced by
+these full tasks. No experiment was run.
