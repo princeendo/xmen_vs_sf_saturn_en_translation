@@ -1398,3 +1398,33 @@ Checks: `pytest` 162 passed; `ruff check`, `ruff format --check`, `mypy`, and `m
 
 Conclusion: `RE-005` is `DONE` (**CONFIRMED**, D-024). `RE-008` (the roster
 decision) is `READY`.
+
+## 2026-10-29 — SESSION-0043: M5 roster chosen (`RE-008`)
+
+User request (verbatim): "Start RE-008: choose the M5 roster and its
+exceptions."
+
+- **Evidence offered.** The select grid in the `EXP-0025` session (frame
+  3083, enlarged and read by the agent) shows 16 portraits:
+  - Magneto, Juggernaut, Dhalsim, Vega;
+  - Sabretooth, Storm, Chun-Li, Zangief;
+  - Gambit, Rogue, Cammy, Nash;
+  - Wolverine, Cyclops, Ryu, Ken.
+
+  Gouki (slot 15) and Apocalypse (slot 8, the boss) are not on it.
+  Census facts from `EXP-0029`.
+- **Question.** Options: the 16 on the grid (recommended); 16 plus Gouki;
+  all 18 with Apocalypse.
+- **Answer** (verbatim): "All 18, with Apocalypse".
+- **Written:**
+  - `data/text/m5_roster.json`, generated from `data/text/slot_census.json`
+    by an inline script: slots 0-17, the file and table offset from the
+    census, American names from `docs/names.md`, and spec paths for Ryu and
+    Ken;
+  - `docs/coverage_exceptions.md`: `MCED`, slot 18, ending records, English
+    record 8, and the rule-24 permission for Gouki's and Apocalypse's
+    ordinary win quotes.
+- **`TASKS.md`:** `RE-008` is `DONE`; `PAIR-003` and `RE-009` are `READY`.
+  `RE-010` gained a fallback for Apocalypse's play check.
+
+No experiment was run.

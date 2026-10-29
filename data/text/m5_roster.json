@@ -1,0 +1,170 @@
+{
+ "description": "M5 roster: the characters whose ordinary win quotes (Saturn records 0-15 of the MC file's table) M5 localizes. User decision 2026-10-29 (RE-008, SESSION-0043): \"All 18, with Apocalypse\". Exceptions are in docs/coverage_exceptions.md.",
+ "census": "data/text/slot_census.json",
+ "roster": [
+  {
+   "slot": 0,
+   "name_list": "Wolverine",
+   "american_name": "Wolverine",
+   "mc_file": "MC00.SHP;1",
+   "table_offset": "0x393c",
+   "english_records": 9,
+   "spec": null
+  },
+  {
+   "slot": 1,
+   "name_list": "Cyclops",
+   "american_name": "Cyclops",
+   "mc_file": "MC01.SHP;1",
+   "table_offset": "0x3c60",
+   "english_records": 9,
+   "spec": null
+  },
+  {
+   "slot": 2,
+   "name_list": "Storm",
+   "american_name": "Storm",
+   "mc_file": "MC02.SHP;1",
+   "table_offset": "0x40d4",
+   "english_records": 9,
+   "spec": null
+  },
+  {
+   "slot": 3,
+   "name_list": "Rogue",
+   "american_name": "Rogue",
+   "mc_file": "MC03.SHP;1",
+   "table_offset": "0x3f94",
+   "english_records": 9,
+   "spec": null
+  },
+  {
+   "slot": 4,
+   "name_list": "Gambit",
+   "american_name": "Gambit",
+   "mc_file": "MC04.SHP;1",
+   "table_offset": "0x34b4",
+   "english_records": 9,
+   "spec": null
+  },
+  {
+   "slot": 5,
+   "name_list": "Sabretooth",
+   "american_name": "Sabretooth",
+   "mc_file": "MC05.SHP;1",
+   "table_offset": "0x3460",
+   "english_records": 9,
+   "spec": null
+  },
+  {
+   "slot": 6,
+   "name_list": "Juggernaut",
+   "american_name": "Juggernaut",
+   "mc_file": "MC06.SHP;1",
+   "table_offset": "0x3438",
+   "english_records": 9,
+   "spec": null
+  },
+  {
+   "slot": 7,
+   "name_list": "Magneto",
+   "american_name": "Magneto",
+   "mc_file": "MC07.SHP;1",
+   "table_offset": "0x447c",
+   "english_records": 9,
+   "spec": null
+  },
+  {
+   "slot": 8,
+   "name_list": "Apocalypse",
+   "american_name": "Apocalypse",
+   "mc_file": "MC08.SHP;1",
+   "table_offset": "0xaa0",
+   "english_records": 8,
+   "spec": null,
+   "note": "boss, not on the select grid"
+  },
+  {
+   "slot": 9,
+   "name_list": "Ryu",
+   "american_name": "Ryu",
+   "mc_file": "MC09.SHP;1",
+   "table_offset": "0x25d8",
+   "english_records": 9,
+   "spec": "data/translations/ryu_win_quotes.json"
+  },
+  {
+   "slot": 10,
+   "name_list": "Ken",
+   "american_name": "Ken",
+   "mc_file": "MC0A.SHP;1",
+   "table_offset": "0x2a4c",
+   "english_records": 9,
+   "spec": "data/translations/ken_win_quotes.json"
+  },
+  {
+   "slot": 11,
+   "name_list": "Chun-Li",
+   "american_name": "Chun-Li",
+   "mc_file": "MC0B.SHP;1",
+   "table_offset": "0x349c",
+   "english_records": 9,
+   "spec": null
+  },
+  {
+   "slot": 12,
+   "name_list": "Dhalsim",
+   "american_name": "Dhalsim",
+   "mc_file": "MC0C.SHP;1",
+   "table_offset": "0x3048",
+   "english_records": 9,
+   "spec": null
+  },
+  {
+   "slot": 13,
+   "name_list": "Zangief",
+   "american_name": "Zangief",
+   "mc_file": "MC0D.SHP;1",
+   "table_offset": "0x2d68",
+   "english_records": 9,
+   "spec": null
+  },
+  {
+   "slot": 14,
+   "name_list": "Vega",
+   "american_name": "Bison",
+   "mc_file": "MC0E.SHP;1",
+   "table_offset": "0x221c",
+   "english_records": 9,
+   "spec": null
+  },
+  {
+   "slot": 15,
+   "name_list": "Gouki",
+   "american_name": "Akuma",
+   "mc_file": "MC0F.SHP;1",
+   "table_offset": "0x2e0c",
+   "english_records": 9,
+   "spec": null,
+   "note": "not on the select grid"
+  },
+  {
+   "slot": 16,
+   "name_list": "Nash",
+   "american_name": "Charlie",
+   "mc_file": "MC10.SHP;1",
+   "table_offset": "0x2a00",
+   "english_records": 9,
+   "spec": null
+  },
+  {
+   "slot": 17,
+   "name_list": "Cammy",
+   "american_name": "Cammy",
+   "mc_file": "MC11.SHP;1",
+   "table_offset": "0x2f1c",
+   "english_records": 9,
+   "spec": null
+  }
+ ]
+}

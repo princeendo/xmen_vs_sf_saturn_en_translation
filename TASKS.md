@@ -156,7 +156,11 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   arcade slot `xx` for all 18 files `MC00`-`MC11`. A third load trace
   (Cyclops, `MC01`, as second member) agrees. `MCED` and slot 18 (an alias
   of Chun-Li's slot 11) are irregular (`RE-005`, D-024).
-- Next: `RE-008` (ready): the user chooses the M5 roster.
+- **2026-10-29** (`SESSION-0043`): the user chose the M5 roster: all 18
+  characters of slots 0-17, including Gouki and Apocalypse ("All 18, with
+  Apocalypse"; `data/text/m5_roster.json`, `docs/coverage_exceptions.md`;
+  `RE-008`).
+- Next: `PAIR-003` and `RE-009` (both ready, independent).
 
 ## Milestones
 
@@ -992,7 +996,8 @@ pairing). The order is `RE-005`, then the user's roster decision (`RE-008`),
 then `PAIR-003` and `RE-009` (independent), then the user's gate extension,
 then `RE-010`, then `RE-011`. Endings (ending records in the MC files
 included), special cases and other text surfaces stay out of scope (rules 23
-and 24). Every fact below about a character other than Ryu and Ken is a
+and 24). The one exception is the ordinary win quotes of Gouki and
+Apocalypse, which the user put in the roster (`RE-008`). Every fact below about a character other than Ryu and Ken is a
 HYPOTHESIS until its task confirms it.
 
 Known before M5:
@@ -1060,7 +1065,7 @@ Known before M5:
 
 ### RE-008 - Choose the M5 roster and its exceptions
 
-- **Status:** `READY`
+- **Status:** `DONE` (2026-10-29, `SESSION-0043`)
 - **Milestone:** M5
 - **Dependencies:** RE-005 (done).
 - **Blockers:** None; the decision is the user's.
@@ -1079,13 +1084,26 @@ Known before M5:
   out until a task allows them. Which XvSF characters count as special is
   part of this decision. The census, not the name list alone, provides the
   evidence.
+- **Result:** the user chose all 18 characters of slots 0-17. Their answer,
+  verbatim: "All 18, with Apocalypse".
+  - The options put to them were: the 16 on the select grid; 16 plus Gouki;
+    all 18 with Apocalypse.
+  - Evidence offered: the select grid (`EXP-0025` session, frame 3083) shows
+    16 portraits. Gouki (slot 15) and Apocalypse (slot 8, the boss) are not
+    on it.
+  - `data/text/m5_roster.json` lists the 18 (slot, file, table offset,
+    English record count, American name).
+  - `docs/coverage_exceptions.md` lists `MCED`, slot 18, the ending records
+    and English record 8.
+  - This is the task permission rule 24 requires, for Gouki's and
+    Apocalypse's ordinary win quotes only.
 
 ### PAIR-003 - Confirm the pairing for every roster character
 
-- **Status:** `BLOCKED`
+- **Status:** `READY`
 - **Milestone:** M5
-- **Dependencies:** RE-008.
-- **Blockers:** The roster.
+- **Dependencies:** RE-008 (done).
+- **Blockers:** None.
 - **Objective:** Confirm in MAME that every roster character follows
   `r mod 8`, and record each pairing table.
 - **Acceptance criteria:**
@@ -1107,10 +1125,10 @@ Known before M5:
 
 ### RE-009 - Check that every roster file fits its sectors
 
-- **Status:** `BLOCKED`
+- **Status:** `READY`
 - **Milestone:** M5
-- **Dependencies:** RE-008.
-- **Blockers:** The roster.
+- **Dependencies:** RE-008 (done).
+- **Blockers:** None.
 - **Objective:** Before building, show that each roster MC file, with its 8
   English records written over the start of its table, re-encodes within
   its original size, with its stream ending in its last sector.
@@ -1162,6 +1180,9 @@ wording and any names listed by `PAIR-003`. The extension is recorded under
     - a non-roster speaker's Japanese quote;
     - a continue hint;
     - an irregular file if one is in the roster.
+    Apocalypse's quote shows only when he beats the player. If the play
+    check cannot reach it, a forced draw from a checkpoint of his win
+    covers his file instead, and the gap is recorded.
     Each English quote's pointer is read from a play state (`EXP-0028`'s
     `play_pointers.py`).
   - **Ryu and Ken:** their forced draws stay byte-identical to `EXP-0028`.
@@ -1199,7 +1220,7 @@ for each is in `docs/playbook_from_mshvsf.md`.
 | END-002 | M7 | One ending localized. |
 | END-003 | M8 | All roster endings; combined image with win quotes; coverage register. |
 | REL-001 | after M5 | Release patches (xdelta3 and SSP of the changed files) with a rebuild README; may be GitHub Release assets, never committed. Splice rather than re-compress changed streams to keep patches small. |
-| SPECIAL-001 | M9, user approval | Secret characters and bosses: which slots have their own official English and which reuse another's; boss pre-fight text; save- or progress-gated unlocks. |
+| SPECIAL-001 | M9, user approval | Secret characters and bosses: which slots have their own official English and which reuse another's (slot 18); boss pre-fight text; save- or progress-gated unlocks. Gouki's and Apocalypse's ordinary win quotes are in M5 (`RE-008`). |
 | UI-001 | after M8, user request | UI art: inventory English art already in every font before drawing anything; caption colour and style. |
 | UI-002 | after M8, user request | Attract-mode captions: which layer draws them, which container and codecs hold them, arcade and PS1 oracles. |
 | UI-003 | after M8, user request | Other UI text (continue screen, hints): find the arcade English by tracing the arcade code, not only by data search. |
