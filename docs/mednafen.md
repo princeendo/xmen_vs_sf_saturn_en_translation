@@ -325,3 +325,19 @@ Launches the patched build in the silent home (pinned by
 `tools.mednafen.home`), loads the state, and saves a screenshot after each
 step; breakpoint hits go to `OUT/events.log`. Smoke test (2026-10-28): the
 `EXP-0005` title state replayed to the title.
+
+## Forcing a Win-Quote Record (`RE-002`, `EXP-0021`)
+
+A debug harness only; it never ships in a build. From a checkpoint before
+the quote starts (for example `pre_ko`), with the patched build:
+
+1. `bpmode log`, then `bp write 060F8AE6-060F8AE6` (the index byte, quote
+   task + 38).
+2. `onhit 06066696 write workramh F8AE6 <index byte>`. The agent applies it
+   right after the game's own store.
+3. Run to the quote screen (660 frames from `pre_ko`).
+
+`research/experiments/EXP-0021/force_record.py OUT control 0 5 15` does all
+this and saves the screenshot, VDP1 VRAM and record per run. Check that the
+setter's R6 in the events is `0x060F8AC0`. If the task is elsewhere, the
+index byte is R6 + 38.

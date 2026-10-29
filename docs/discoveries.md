@@ -236,3 +236,21 @@ All 38 cells and 38 distinct glyphs display. Latin glyphs fill the cell
 2 × 19 as written and 59 after re-wrapping at word boundaries.
 
 Reproduce: `research/experiments/EXP-0020/README.md`, "Procedure".
+
+## D-016 (M3): The win-quote record is `RNG() & 0x0F` and can be forced (`RE-002`, `EXP-0021`)
+
+**How the record is chosen.** When the quote starts, after the K.O., the
+quote script sets up a task (`0x060F8AC0` in the tested session):
+
+1. It stores the record index `RNG() & 0x0F` at task + 38 (`0x06066696`).
+   The RNG is `0x06056B54`, with seed `0x060F545A` and seed = seed × 176 mod
+   32,749.
+2. It stores the table base at task + 52.
+3. It writes the record pointer base + 76 × index to WRAM-H `0x060F2490`
+   (`0x0606698C`), which the reader `0x06066A84` uses.
+
+**Forcing.** An agent `onhit` write of index `k` right after `0x06066696`
+shows record `k`. Indices 0, 1, 5, 8 and 15 drew all 38 cells exactly, over
+two sessions. The no-write control equals the live capture.
+
+Reproduce: `research/experiments/EXP-0021/README.md`, "Procedure".

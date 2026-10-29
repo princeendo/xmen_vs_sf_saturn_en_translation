@@ -983,3 +983,34 @@ Written in `TASKS.md`:
 
 The outline rows for `LAYOUT-001`, `RE-002` and `RE-003` were replaced by
 these full tasks. No experiment was run.
+
+## 2026-10-28 — SESSION-0031 / EXP-0021: win-quote selector found and forced
+
+Task: RE-002 ("Start RE-002: identify the win-quote selector and force any record.")
+
+Actions and results:
+
+- **Reads:** a table read log from `pre_ko` gave 38 reads at `0x06066A84`
+  with R8 = record 10 and MACL = 10 × 76. The code loads R8 from WRAM-H
+  `0x060F2490`. The pointer is 0 through `pre_quote` and set by
+  `quote_visible`.
+- **Pointer write:** the write log from `pre_quote` shows the writer
+  `0x0606698C`. It computes base (task + 52) + index (task + 38) × 76, or ×
+  100 under a flag.
+- **Index write:** the write log shows the task cleared, then the index
+  stored at `0x06066696` and the base at `0x060666D0`, in the same frame as
+  the pointer. The index is `RNG() & 0x0F`; the RNG is `0x06056B54`, an LCG
+  mod `0x7FED` with its seed at `0x060F545A`.
+- **Forcing** (`force_record.py`): `onhit` after the setter. Indices
+  0/5/15, then 5/1/8, each 38/38 cells exact. The controls equal the live
+  capture, and the repeats are byte-identical.
+
+The MSHvSF method carried over (find the record pointer, then the index
+setter, then force by `onhit`); every address and the random choice are
+XvSF's own findings. Only one task address was seen.
+
+Checks: `ruff check`, `ruff format --check`, `mypy` and `pytest` (134
+passed) clean; `force_record.py` also `mypy --strict`. No disc change.
+
+Conclusion: `RE-002` is `DONE` (**CONFIRMED**, D-016). `PAIR-001` is
+unblocked.

@@ -104,7 +104,11 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   `RE-002` (selector), `LAYOUT-001` (capacity route), `PAIR-001` (Ryu's
   English pairing), `GATE-TRANSLATION` (now waiting on `PAIR-001`) and
   `RE-003` (all of Ryu's quotes from a rebuilt image).
-- Next: `RE-002` or `LAYOUT-001`; both are ready and need no English.
+- **2026-10-28** (`SESSION-0031`, `EXP-0021`): Ryu's shown record is
+  `RNG() & 0x0F`, chosen when the quote starts; pointer `0x060F2490`. Any
+  record can be forced from `pre_ko`: 5 indices, 38/38 cells, with a control
+  (`RE-002`, D-016).
+- Next: `LAYOUT-001` or `PAIR-001` (both ready; neither puts English on disc).
 
 ## Milestones
 
@@ -581,7 +585,7 @@ text (`EXP-0015`) and stay out of scope (rule 23).
 
 ### RE-002 - Identify the win-quote selector and force any record
 
-- **Status:** `READY`
+- **Status:** `DONE`
 - **Milestone:** M3
 - **Dependencies:** DBG-005, RE-001 (done).
 - **Blockers:** None.
@@ -603,6 +607,14 @@ text (`EXP-0015`) and stay out of scope (rule 23).
     and the quote (MSHvSF `EXP-0025`). That is at most a HYPOTHESIS here.
   - The arcade selects the slot at `0xFF8BB4` (`EXP-0009`); its index choice
     is not traced.
+- **Evidence:** `EXP-0021`, D-016.
+  - The reader `0x06066A84` uses the pointer `0x060F2490`, written by
+    `0x0606698C` from the index at task + 38.
+  - The index is `RNG() & 0x0F`, stored at `0x06066696` when the quote
+    starts.
+  - Forcing indices 0, 1, 5, 8 and 15 showed exactly those records over two
+    sessions, with controls equal to the live capture. The runbook is in
+    `docs/mednafen.md`.
 
 ### LAYOUT-001 - Choose how English quotes fit the quote box
 
@@ -647,10 +659,10 @@ text (`EXP-0015`) and stay out of scope (rule 23).
 
 ### PAIR-001 - Pair Ryu's Saturn records with the arcade English
 
-- **Status:** `BLOCKED`
+- **Status:** `READY`
 - **Milestone:** M3
-- **Dependencies:** REF-003, REF-004 (done), RE-002.
-- **Blockers:** RE-002.
+- **Dependencies:** REF-003, REF-004, RE-002 (done).
+- **Blockers:** None.
 - **Objective:** For each of Ryu's 16 Saturn win-quote records (= the arcade
   Japanese slot 9), find which arcade English record the arcade shows for the
   same game situation, or that none corresponds.
