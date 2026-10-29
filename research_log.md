@@ -1563,3 +1563,42 @@ Checks: `pytest` 162 passed; `ruff check`, `ruff format --check`, `mypy`, and `m
 
 Conclusion: `RE-010` is `DONE` (**CONFIRMED**, D-027). `RE-011` is `READY`;
 M5 closes with it.
+
+## 2026-10-29 — SESSION-0048 / EXP-0033: regression references (`RE-011`)
+
+User request (verbatim): "Start RE-011: regression references for the
+confirmed builds."
+
+- **Program image.** `tools.reference.xvsf_text` gains `--program-out`
+  (`--out` becomes optional; one of them is required). The output
+  `1b1a5a26…` is byte-identical to `local/ref003/xmvsfu-68k.bin`. Two unit
+  tests were added.
+- **References.** `data/regression/references.json` was written from the
+  confirmed builds' outputs (`local/re003/b1`, `local/re007/b1`,
+  `local/re010/b1`, the three `build/` images): 2, 3 and 19 files, plus
+  Track 01 for each.
+- **Tool.** `tools.disc.regression`:
+  - checks the inputs (exit 2 if they differ; a missing source counts as
+    differing);
+  - rebuilds under `build/regression/<name>/` (deleting only there; the
+    guard is unit-tested);
+  - compares the hashes and deletes each image after hashing unless
+    `--keep`;
+  - writes the report with `--report`;
+  - takes `--references` for controls.
+- **Runs:**
+  - Working copy: 3/3 match, 5 min 24 s.
+  - Altered `MC09` hash: `MISMATCH`, exit 1.
+  - The tooling was committed locally (`2d4d224`) so a fresh clone could
+    hold it.
+  - Clean clone in the scratchpad (symlinks for the source folder,
+    `cps2.cpp` and the ROM folder; `tools` imported from the clone):
+    program image `1b1a5a26…`, 3/3 match (27 hashes), 5 min 20 s.
+  - Its report is `docs/regression_report.md`.
+- **Docs.** The README's build section now gives the program-image command
+  and the regression command.
+
+Checks: `pytest` 167 passed; `ruff check`, `ruff format --check` and `mypy` are clean.
+
+Conclusion: `RE-011` is `DONE` (**CONFIRMED**, D-028). **M5 is complete.**
+Next: M6 (endings) needs its tasks written; nothing in it has started.

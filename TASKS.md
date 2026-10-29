@@ -174,7 +174,15 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   and verified. All 18 roster characters show their official English win
   quotes, as first member, second member or CPU (`RE-010`, D-027). The user
   also added `UI-004` (the 4 MB cart warning) to the backlog.
-- Next: `RE-011` (ready): regression references. M5 closes with it.
+- **2026-10-29** (`SESSION-0048`, `EXP-0033`): regression references. All
+  three confirmed builds (Ryu; Ryu and Ken; the roster) rebuild byte for
+  byte from the untouched source, including from a fresh clone
+  (`tools.disc.regression`, `docs/regression_report.md`; `RE-011`, D-028).
+  **M5 is complete.**
+- Next: M6 (endings, `END-001`) is outlined only. Its full tasks need
+  writing before it starts (rule 23 is now satisfied). The backlog also
+  holds `UI-004` (cart warning), `SPECIAL-001` (including Apocalypse's
+  pre-fight line) and `REL-001` (release patches).
 
 ## Milestones
 
@@ -1266,7 +1274,7 @@ It is recorded under `GATE-TRANSLATION` and in `docs/localization_policy.md`.
 
 ### RE-011 - Regression references for the confirmed builds
 
-- **Status:** `READY`
+- **Status:** `DONE` (2026-10-29, `SESSION-0048`, `EXP-0033`, D-028)
 - **Milestone:** M5
 - **Dependencies:** RE-010 (done).
 - **Blockers:** None.
@@ -1289,6 +1297,14 @@ It is recorded under `GATE-TRANSLATION` and in `docs/localization_policy.md`.
     command writes that file. A clean-checkout run needs one, checked
     against the image's SHA-256 (`1b1a5a26…`,
     `data/text/slot_census.json`).
+- **Result:** every criterion met (`EXP-0033`).
+  - `tools.reference.xvsf_text --program-out` now writes the program image
+    (`1b1a5a26…`, byte-identical).
+  - `data/regression/references.json` holds the three builds.
+    `tools.disc.regression` rebuilds and compares them.
+  - Results: all match from the working copy and from a fresh clone (27 of
+    27 hashes). An altered hash is caught (exit 1).
+  - `docs/regression_report.md` is the clean run's report.
 
 ## Later Milestones (outline only)
 

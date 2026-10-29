@@ -505,3 +505,23 @@ WRAM-H copy) and as a CPU opponent. The continue hint stays Japanese.
   Apocalypse (CPU boss, `0x060C1AA0`) all showed English.
 
 Reproduce: `research/experiments/EXP-0032/README.md`, "Procedure".
+
+## D-028 (M5): Every confirmed build reproduces from the untouched source (`RE-011`, `EXP-0033`)
+
+`tools.disc.regression` rebuilds the three confirmed English builds byte
+for byte, checking every changed file and Track 01 against
+`data/regression/references.json`:
+
+- `EXP-0024`: Ryu, version 2, Track 01 `1034b8d7…`;
+- `EXP-0028`: Ryu and Ken, `b5dd07c2…`;
+- `EXP-0032`: the roster, `36672c5d…`.
+
+The inputs are the untouched disc image and the US arcade program image.
+`tools.reference.xvsf_text --program-out` now writes the program image from
+the ROM set and the pinned driver source (`1b1a5a26…`).
+
+**Evidence.** All 27 hashes matched in this working copy and in a fresh
+clone with only the three inputs linked. A copy of the references with one
+hash changed was reported as a mismatch.
+
+Reproduce: `research/experiments/EXP-0033/README.md`, "Procedure".

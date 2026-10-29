@@ -10,7 +10,7 @@ folders. The repository holds scripts, hashes, addresses and research records.
 
 ## Status
 
-**Win quotes: all 18 characters in English** (milestone M5 build, 2026-10-29).
+**Win quotes: all 18 characters in English** (milestone M5, complete 2026-10-29).
 These are Wolverine, Cyclops, Storm, Rogue, Gambit, Sabretooth, Juggernaut,
 Magneto, Apocalypse, Ryu, Ken, Chun-Li, Dhalsim, Zangief, Vega, Gouki, Nash
 and Cammy.
@@ -71,9 +71,15 @@ You need your own copies of the following:
   hashes in `references/saturn_jp/README.md`.
 - **The US arcade program** (`xmvsfu`, MAME 0.289 set) in 68000 byte order,
   at `local/ref003/xmvsfu-68k.bin`. The English text is read from it at
-  build time, so it is never stored in the repository. No command writes
-  this file yet. It is assembled by `tools.reference.xvsf_text.build_program`
-  (`EXP-0008`), and a command is planned under `RE-011`.
+  build time, so it is never stored in the repository. Write it from the
+  `xmvsfu` ROM zips and MAME 0.289's `cps2.cpp` driver source (SHA-256
+  `a8c09ef8…1602`):
+
+  ```bash
+  ./invenv.sh python -m tools.reference.xvsf_text --driver local/mame_src/cps2.cpp \
+    --set xmvsfu --rompath local/arcade_roms/xmvsf_mame0289 \
+    --program-out local/ref003/xmvsfu-68k.bin
+  ```
 
 Then one command builds the image under `build/`. The source image is
 never modified.
@@ -84,8 +90,10 @@ never modified.
   local/build_files --image build/roster_english
 ```
 
-The expected hashes are in `research/experiments/EXP-0032/README.md`
-(Track 01 `36672c5d…`). The image needs the 4 MB RAM cartridge (in Mednafen,
+The expected hashes are in `data/regression/references.json` (Track 01
+`36672c5d…`). To rebuild every confirmed build and check its hashes, run
+`./invenv.sh python -m tools.disc.regression`. The last run is in
+`docs/regression_report.md`. The image needs the 4 MB RAM cartridge (in Mednafen,
 `ss.cart auto`); see `docs/mednafen.md`.
 
 ## Layout
@@ -102,6 +110,7 @@ The expected hashes are in `research/experiments/EXP-0032/README.md`
 | `docs/` (other) | Protocol, playbook, text surfaces, names, Mednafen notes |
 | `data/translations/` | Per-character specs and pairing tables (addresses and hashes, no text) |
 | `data/text/` | Quote-file census, roster, capacity results |
+| `data/regression/` | Expected hashes of every confirmed build |
 | `references/` | Source identities and reference-release notes |
 | `research/experiments/` | One folder per significant experiment |
 | `tools/`, `tests/` | Python tooling and its tests |
