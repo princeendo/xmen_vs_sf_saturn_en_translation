@@ -1486,3 +1486,20 @@ Checks: `pytest` 162 passed; `ruff check`, `ruff format --check`, `mypy`, and `m
 
 Conclusion: `RE-009` is `DONE` (**CONFIRMED**, D-026). `RE-010` waits on the
 user's gate extension for the roster.
+
+## 2026-10-29 — SESSION-0046: `GATE-TRANSLATION` extended to the M5 roster
+
+User request (verbatim): "Let's do the GATE-TRANSLATION extension for the
+M5 roster."
+
+- Prerequisites checked: `RE-005`, `RE-008`, `PAIR-003` and `RE-009` are
+  `DONE`.
+- **Question 1** (scope, pairing, wording; options: go; go but not
+  Apocalypse; not yet). Answer: "Go (Recommended)".
+- **Question 2** ("Bison" in Cammy's English records 0 and 4; options: keep
+  as written; keep, and require "Vega" in a Saturn-names build now).
+  Answer: `Keep "Bison" (Recommended)`.
+- Recorded under `GATE-TRANSLATION` in `TASKS.md` and in
+  `docs/localization_policy.md`. `RE-010` is `READY`.
+
+No experiment was run.

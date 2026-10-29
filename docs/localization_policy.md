@@ -45,6 +45,20 @@ user extended `GATE-TRANSLATION` to Ken: "GATE-TRANSLATION: go for Ken's win quo
 | Pairing | Saturn record `k` shows Ken's official arcade English record `k mod 8` (slot 10); records `k` and `k + 8` repeat one English quote; English record 8 is unused | `EXP-0026`, D-021; `data/translations/ken_pairing.json` |
 | Wording | Official arcade English, no rewording; grammar fixes opt-in only | the 2026-10-27 policy above |
 
+**Translation gate, M5 roster (2026-10-29).** After `PAIR-003` (`EXP-0030`)
+and `RE-009` (`EXP-0031`), the user extended `GATE-TRANSLATION` to the
+roster. Asked to extend it to all 18 characters with the `k mod 8` pairing
+and the official arcade English with no rewording, they answered "Go
+(Recommended)". Asked about "Bison" in two of Cammy's quotes, they answered
+`Keep "Bison" (Recommended)`.
+
+| Topic | Decision | Evidence |
+| --- | --- | --- |
+| Scope | Ordinary win quotes (Saturn records 0-15 of each table) of all 18 roster characters, slots 0-17, Gouki and Apocalypse included; ending records, endings, slot 18, `MCED` and other surfaces stay gated | `data/text/m5_roster.json`, `docs/coverage_exceptions.md`, `TASKS.md` `GATE-TRANSLATION` |
+| Pairing | Saturn record `k` of slot `s` shows slot `s`'s official English record `k mod 8`; English record 8 is unused | `EXP-0030`, D-025; `data/translations/<name>_pairing.json` |
+| Wording | Official arcade English, no rewording; grammar fixes opt-in only | the 2026-10-27 policy above |
+| Names | "Bison" in Cammy's English records 0 and 4 is kept as written (American default); a Saturn-names variant decides under `LOC-001` | `data/translations/m5_english_fit.json`, `docs/names.md` |
+
 **Capacity route (2026-10-28).** After `LAYOUT-001` (`EXP-0023`) measured
 pair glyphs and found the game's own English mode, the user chose: "Use route
 (d), the game's native English mode. Build and test it from disc." So English

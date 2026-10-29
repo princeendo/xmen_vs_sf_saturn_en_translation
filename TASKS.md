@@ -167,8 +167,10 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
 - **2026-10-29** (`SESSION-0045`, `EXP-0031`): every roster file fits its
   sectors with its English records (margins 175-1,176 bytes; `RE-009`,
   D-026).
-- Next: the user's `GATE-TRANSLATION` extension for the roster (including
-  "Bison" in two of Cammy's records). After that comes `RE-010`.
+- **2026-10-29** (`SESSION-0046`): the user extended `GATE-TRANSLATION` to
+  all 18 roster characters' ordinary win quotes (GO; `k mod 8`; official
+  arcade English; "Bison" kept in Cammy's two records).
+- Next: `RE-010` (ready): build the roster image and verify it.
 
 ## Milestones
 
@@ -586,6 +588,25 @@ prerequisites before English text goes on disc).
     8 is not used.
   - **Wording:** the official arcade English, with no rewording. Grammar
     fixes stay opt-in only (policy).
+- **Gate extension, M5 roster (2026-10-29, `SESSION-0046`):**
+  - The user's decision is **GO**. They were asked: "Extend GATE-TRANSLATION to the M5 roster's ordinary win quotes (Saturn records 0-15 of each MC00-MC11 table, the 16 new characters added to Ryu and Ken), using the k mod 8 pairing and the official arcade English with no rewording?" Answer: "Go (Recommended)".
+  - Checked at acceptance: `RE-005`, `RE-008`, `PAIR-003` and `RE-009` are
+    `DONE` (`EXP-0029`-`EXP-0031`).
+  - **Scope:** the ordinary win quotes (Saturn records 0-15 of the quote
+    table) of all 18 roster characters, slots 0-17 (`data/text/m5_roster.json`).
+    That includes Gouki and Apocalypse, by the `RE-008` decision. Ending
+    records, endings, slot 18, `MCED` and every other surface remain gated
+    (rule 23; `docs/coverage_exceptions.md`).
+  - **Pairing policy:** Saturn record `k` of slot `s` shows slot `s`'s
+    official arcade English record `k mod 8` (D-025,
+    `data/translations/<name>_pairing.json`).
+  - **Wording:** the official arcade English, with no rewording. Grammar
+    fixes stay opt-in only.
+  - **Names:** Cammy's English records 0 and 4 say "Bison". The user was
+    asked how to handle them; answer: `Keep "Bison" (Recommended)`. The
+    official text stays as written, which matches the American-names
+    default. A Saturn-names variant decides its own wording under
+    `LOC-001`.
 
 ## Phase F: M1
 
@@ -1179,12 +1200,17 @@ ordinary win quotes in their own words. They decide on the pairing, the
 wording and any names listed by `PAIR-003`. The extension is recorded under
 `GATE-TRANSLATION` and in `docs/localization_policy.md`.
 
+Done 2026-10-29: GO for all 18 roster characters (`k mod 8`, official arcade
+English, no rewording), with "Bison" kept as written in Cammy's two records.
+It is recorded under `GATE-TRANSLATION` and in `docs/localization_policy.md`.
+
 ### RE-010 - Build the roster image and verify it
 
-- **Status:** `BLOCKED`
+- **Status:** `READY`
 - **Milestone:** M5
-- **Dependencies:** PAIR-003, RE-009, the gate extension above.
-- **Blockers:** Those tasks.
+- **Dependencies:** PAIR-003 (done), RE-009 (done), the gate extension above
+  (done).
+- **Blockers:** None.
 - **Objective:** One command builds, from the untouched source, an image in
   which every roster character shows its official English win quotes. Every
   file outside the roster stays unchanged.
