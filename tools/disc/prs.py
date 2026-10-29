@@ -16,6 +16,10 @@ The format is the one executed by the game's streaming decompressor at WRAM-H
 Copies may overlap their own output (run-length repeats). A file starts with a
 big-endian 32-bit entry count; for a count of 0 the single stream follows at
 offset 4 (`EXP-0017`). Files with a nonzero count are not handled.
+
+`compress` writes such a stream (greedy matching, offsets up to 0x1FFF back);
+`compress_file` adds the header and can pad the file to a fixed size, with
+leading literals added until the stream ends at or after ``min_end`` (`DISC-002`).
 """
 
 from __future__ import annotations
@@ -87,6 +91,107 @@ def decompress_file(data: bytes) -> tuple[bytes, int]:
         raise PrsError(f"entry count {count} is not handled")
     out, used = decompress(data[4:])
     return out, used + 4
+
+
+MAX_OFFSET = 0x1FFF
+MAX_LENGTH = 256
+
+
+class _Writer:
+    def __init__(self) -> None:
+        self.out = bytearray()
+        self.control = -1
+        self.used = 8
+
+    def bit(self, value: int) -> None:
+        if self.used == 8:
+            self.control = len(self.out)
+            self.out.append(0)
+            self.used = 0
+        self.out[self.control] |= value << self.used
+        self.used += 1
+
+
+def _longest(data: bytes, pos: int, chains: dict[bytes, list[int]]) -> tuple[int, int]:
+    best_size, best_offset = 0, 0
+    limit = min(MAX_LENGTH, len(data) - pos)
+    for start in reversed(chains.get(data[pos : pos + 2], [])):
+        if pos - start > MAX_OFFSET:
+            break
+        size = 0
+        while size < limit and data[start + size] == data[pos + size]:
+            size += 1
+        if size > best_size:
+            best_size, best_offset = size, start - pos
+            if size == limit:
+                break
+    return best_size, best_offset
+
+
+def compress(data: bytes, literals: int = 0) -> bytes:
+    """Return a stream that `decompress` turns back into ``data``.
+
+    The first ``literals`` bytes are always written as literals.
+    """
+    writer = _Writer()
+    out = writer.out
+    chains: dict[bytes, list[int]] = {}
+    pos = 0
+    indexed = 0
+
+    def index(upto: int) -> None:
+        nonlocal indexed
+        while indexed < upto:
+            chains.setdefault(data[indexed : indexed + 2], []).append(indexed)
+            indexed += 1
+
+    while pos < len(data):
+        size, offset = (0, 0) if pos < literals else _longest(data, pos, chains)
+        short = size >= 2 and offset >= -0x100 and size <= 5
+        if size < 2 or (size == 2 and not short):
+            writer.bit(1)
+            out.append(data[pos])
+            size = 1
+        elif short:
+            writer.bit(0)
+            writer.bit(0)
+            writer.bit((size - 2) >> 1)
+            writer.bit((size - 2) & 1)
+            out.append(offset + 0x100)
+        else:
+            writer.bit(0)
+            writer.bit(1)
+            word = (offset + 0x2000) << 3
+            if size <= 9:
+                out += (word | (size - 2)).to_bytes(2, "big")
+            else:
+                out += word.to_bytes(2, "big")
+                out.append(size - 1)
+        pos += size
+        index(pos)
+    writer.bit(0)
+    writer.bit(1)
+    out += bytes(3)
+    return bytes(out)
+
+
+def compress_file(data: bytes, size: int | None = None, min_end: int = 0) -> bytes:
+    """Return a whole file (count 0 + stream), zero-padded to ``size`` if given.
+
+    Leading literals are added until the stream (with its header) ends at or
+    after ``min_end`` bytes.
+    """
+    literals = 0
+    while True:
+        body = bytes(4) + compress(data, literals)
+        if len(body) >= min_end or literals >= len(data):
+            break
+        literals += max(1, (min_end - len(body)) * 8 // 9)
+    if size is not None:
+        if len(body) > size:
+            raise PrsError(f"compressed file is {len(body)} bytes; limit {size}")
+        body += bytes(size - len(body))
+    return body
 
 
 def main(argv: Sequence[str] | None = None) -> int:

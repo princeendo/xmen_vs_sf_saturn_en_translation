@@ -89,7 +89,11 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   Ryu's quote table is loaded from `MC09.SHP` (LSN 53,719), a 4-byte header
   plus an LZ77 stream decoded by `tools/disc/prs.py`; the table is at
   decompressed offset `0x25D8` (`DISC-001`, D-012). ISO listing committed.
-- Next: `DISC-002` (rebuild the image with the M1 change) or `FONT-001`.
+- **2026-10-28** (`SESSION-0027`, `EXP-0018`): **M2 reached.** An image
+  rebuilt from the untouched source, with only `MC09.SHP` re-encoded
+  (あいう in all 16 Ryu win-quote records), showed the change in two
+  cold-boot Ryu wins (`DISC-002`, D-013).
+- Next: `FONT-001` (M2 font work, before any English goes on disc).
 
 ## Milestones
 
@@ -490,13 +494,21 @@ prerequisites before English text goes on disc).
 
 ### DISC-002 - Reproduce the M1 change from a rebuilt image
 
-- **Status:** `READY`
+- **Status:** `DONE`
 - **Milestone:** M2
 - **Dependencies:** DISC-001 (done).
 - **Blockers:** None.
 - **Objective:** Make the same あいう change on a disc image built from the untouched source, and see it after a cold boot.
 - **Acceptance criteria:** A tool patches the source file found by `DISC-001` into a new image under `build/` (same size, in place, Mode 1 EDC/ECC regenerated for every changed sector); unchanged sectors stay byte-identical to the source; the source hashes are unchanged; an unattended cold boot plus the `pre_ko`-style route (or a user play check) shows the changed glyphs; the user does a cold-boot play check (policy).
-- **Notes:** Original and new bytes, offsets and sector numbers recorded (rule 12). From `DISC-001`: `MC09.SHP` is compressed. Record 10 is at decompressed offset `0x28D0`, and the M1 bytes `0A21 09E5 0AC8` are at `0x28D6`. The file takes 11 sectors (20,686 bytes, 1,842 bytes of slack). Either re-encode (an encoder the game's decoder accepts) or change the stream in place, and test both against the decoder first.
+- **Notes:** Original and new bytes, offsets and sector numbers recorded (rule 12). From `DISC-001`: `MC09.SHP` is compressed. Record 10 is at decompressed offset `0x28D0`, and the M1 bytes `0A21 09E5 0AC8` are at `0x28D6`. The file takes 11 sectors (20,686 bytes, 1,842 bytes of slack). Either re-encode (an encoder the game's decoder accepts) or change the stream in place, and test both against the decoder first. **Marker (2026-10-28):** the quote shown varies between sessions (`EXP-0007` vs `EXP-0013`) and its selector is unknown. So the rebuilt image writes あいう over line-1 cells 3-5 of all 16 Ryu win-quote records; record 10 gets exactly the M1 bytes. (Same method as MSHvSF's M2 marker.)
+- **Evidence:** `EXP-0018`, D-013.
+  - Only LSN 53,722-53,729 changed, and every sector passes EDC/ECC.
+  - Two builds are identical, and the source hashes are unchanged.
+  - The cold boot matches the original frame for frame.
+  - A pick from a state with the rebuilt image mounted loads the marked
+    table; the control loads the original.
+  - The user's cold-boot play check (2026-10-28) showed あいう in two wins
+    (records 1 and 8).
 
 ### FONT-001 - Find the quote font and prove its format
 

@@ -849,3 +849,42 @@ Checks: `./invenv.sh pytest -q` 119 passed (new `test_prs.py` and
 
 Conclusion: `DISC-001` is `DONE` (**CONFIRMED**, D-012). `DISC-002` and
 `FONT-001` are now unblocked.
+
+## 2026-10-28 — SESSION-0027 / EXP-0018: M2, quote change from a rebuilt image
+
+Task: DISC-002 ("Start DISC-002: reproduce the M1 change from a rebuilt image.")
+
+Decision recorded in `TASKS.md`: the marker goes into all 16 win-quote
+records, because the shown record varies between sessions; record 10 gets
+exactly the M1 bytes.
+
+Actions and results:
+
+- **DISPROVEN:** an in-place literal edit of the compressed stream. Only 41
+  of the 96 marker bytes are literals, and 203 later copies read the records.
+- **Encoder added** (`compress`/`compress_file`). It repacks `MC09.SHP` byte
+  for byte; 40 of the 51 fully decodable files repack exactly. Marker file
+  `60f2d10e…`, stream end 20,659 of 20,686.
+- **Tools:** `sector.py` and `patch_image.py` copied from MSHvSF `69c666c`.
+  EDC/ECC is reproduced on all 71,908 source sectors.
+- **Image:** rebuilt Track 01 `9b819618…`. Only LSN 53,722-53,729 changed;
+  all sectors are valid; two builds are identical.
+- **Cold boot:**
+  - The rebuilt image's frames diverged from the `EMU-003` frames at second 43.
+  - Control: the original booted now diverges identically, and the rebuilt
+    image equals it (93/93), so the divergence comes with the time of the run.
+  - The patched-build traces show no attract-time writes to the table, and
+    WRAM-H noise of 6-9 bytes between any two runs.
+  - D-001 annotated.
+- **Pick from state 5696:** with the rebuilt image mounted, the marked table
+  loads (the whole buffer equals the marked decode plus 259 fix-ups); the
+  original image loads the original.
+- **User play check from power-on** ("done"): two wins showed あいう in
+  records 1 and 8. The session's RAM table equals the marked decode.
+
+Checks: `./invenv.sh pytest -q` 127 passed; `ruff check`, `ruff format
+--check` and `mypy` clean (EXP-0018 scripts also `mypy --strict`). Source
+hashes unchanged (all 42 match `references/saturn_jp/README.md`).
+
+Conclusion: `DISC-002` is `DONE` (**CONFIRMED**, D-013). **M2 reached.**
+Next unblocked: `FONT-001`.

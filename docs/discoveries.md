@@ -15,7 +15,9 @@ untouched source image with no input. The log reports `SGID: T-1226G`,
 `SGAREA: J` and `Cart: 4MiB Extended RAM` (`ss.cart auto`). The title logo with
 `PRESS START BUTTON` shows from about 68 s to 75 s after launch. Three boots
 gave byte-identical frames at one-second sampling; title frame 070 hashes
-`ebfbb7da…e662`. Source hashes were unchanged.
+`ebfbb7da…e662`. (Note, `EXP-0018`: the frames from about 43 s depend on when
+the boot runs. Original boots about five hours apart diverge there, and boots
+minutes apart match, so these hashes reproduce only for boots close in time.) Source hashes were unchanged.
 
 Reproduce: `research/experiments/EXP-0001/README.md`, "Procedure".
 
@@ -160,3 +162,25 @@ has no hit. Two picks halted identically at `0x0600D124`. The same decoder
 fully consumes 50 files: `MC*.SHP`, `MS*.SHP` and `*.PCA`.
 
 Reproduce: `research/experiments/EXP-0017/README.md`, "Procedure".
+
+## D-013 (M2): A rebuilt image shows the quote change after a cold boot (`DISC-002`, `EXP-0018`)
+
+The image is built from the untouched source with only `MC09.SHP`
+re-encoded (`tools/disc/prs.py` `compress_file`):
+
+- **Content:** あいう (`09E1 09E3 09E5`) in line-1 cells 3-5 of all 16 Ryu
+  win-quote records. Record 10 gets exactly the M1 bytes.
+- **Size:** the original 20,686 bytes, with the stream ending in the last
+  sector.
+- **Sectors:** only LSN 53,722-53,729 change. Every sector passes EDC/ECC;
+  `tools/disc/sector.py` reproduces all 71,908 source sectors' EDC/ECC first.
+
+**Result.**
+
+- From power-on, two user Ryu wins showed あいう in records 1 and 8, with the
+  rest of each quote and the game normal.
+- Picking Ryu from a saved state with the rebuilt image mounted loads the
+  marked table. The original image loads the original table.
+- Re-encoding the original decoded file reproduces `MC09.SHP` byte for byte.
+
+Reproduce: `research/experiments/EXP-0018/README.md`, "Procedure".
