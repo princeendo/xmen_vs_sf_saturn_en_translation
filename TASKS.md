@@ -147,8 +147,12 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   speak their official arcade English win quotes (Track 01 `b5dd07c2…`).
   All 16 draws of each were checked, and the user's cold-boot play check
   passed (`RE-007`, D-023).
-- Next: M5 (`RE-005`) is outlined only. Its full task needs writing, and the
-  roster and exceptions need a user decision before it starts.
+- **2026-10-29:** M5 tasks written at the user's request ("Let's continue
+  on to M5, then."), none started: `RE-005` (census of the quote files),
+  `RE-008` (roster and exceptions, a user decision), `PAIR-003` (pairing),
+  `RE-009` (sector fit), a `GATE-TRANSLATION` extension, `RE-010` (roster
+  image) and `RE-011` (regression references).
+- Next: `RE-005` (ready).
 
 ## Milestones
 
@@ -976,6 +980,198 @@ official arcade English, no rewording). It is recorded under
   - A win finished by the second member, or a CPU win by Ryu or Ken, was not
     observed (`docs/known_unknowns.md`).
 
+## Phase J: M5 (All Ordinary Win Quotes)
+
+M5: every ordinary character's win quotes are localized by one systematic
+build, using the M4 mechanism (version-3 slot table, specs, `k mod 8`
+pairing). The order is `RE-005`, then the user's roster decision (`RE-008`),
+then `PAIR-003` and `RE-009` (independent), then the user's gate extension,
+then `RE-010`, then `RE-011`. Endings (ending records in the MC files
+included), special cases and other text surfaces stay out of scope (rules 23
+and 24). Every fact below about a character other than Ryu and Ken is a
+HYPOTHESIS until its task confirms it.
+
+Known before M5:
+
+- The data track has 19 quote files: `MC00`-`MC11` and `MCED`.
+  - `MCxx` holds slot `xx` is CONFIRMED for slots 9 and 10 (`EXP-0017`,
+    `EXP-0025`). It is SUPPORTED for 3, 0x0B, 0x0F and 0x11 by file content
+    (`EXP-0025`).
+  - `MCED` has no known slot.
+- The arcade has 19 win-quote pointers.
+  - 17 slots hold 9 English records and one (slot 8) holds 8.
+  - Two pointers alias earlier slots; slot 18 aliases slot 11
+    (`EXP-0008`, `EXP-0022`, `SESSION-0035`).
+  - The slot order is known only by the arcade name list (`EXP-0011`).
+- Two quote-loading cases are unobserved: a win finished by the second team
+  member (WRAM-H copy) and a CPU win by an English character
+  (`docs/known_unknowns.md`).
+
+### RE-005 - Census the quote files against the arcade slots
+
+- **Status:** `READY`
+- **Milestone:** M5
+- **Dependencies:** RE-007 (done).
+- **Blockers:** None.
+- **Objective:** For every quote file on the data track, find which arcade
+  win-quote slot it holds and where, and list the files that do not fit the
+  pattern. This is static analysis of the decoded files and the arcade
+  program, with no emulator.
+- **Acceptance criteria:**
+  - **Per file:** for each of the 19 files, record:
+    - its size;
+    - whether the stream decodes;
+    - the offset of a 16-record Japanese win-quote table equal byte for byte
+      to an arcade Japanese slot (table `0x17E19C`), or the closest match and
+      its differences;
+    - the number of records after the table (ending text);
+    - the sector budget (the size the re-encoded file must keep).
+  - **Per slot:** for each of the 19 arcade slots, record:
+    - the character, from the arcade name list (`EXP-0011`);
+    - its English record count, and any alias to an earlier slot;
+    - the Saturn file that holds its Japanese table, if any.
+  - **Irregular cases:** every file or slot that breaks
+    "`MCxx` holds slot `xx`, 16 records, English records 0-7" is listed with
+    its evidence. That includes `MCED`, the aliased slots and slot 8.
+  - **Live sample:** for one file not yet traced (not `MC09`, `MC0A` or
+    `MC0F`), a loader halt or pick-load confirms that the file loads when its
+    character is picked. This upgrades the mapping rule from SUPPORTED, or
+    rejects it.
+  - **Output:** a census script under the experiment, and
+    `data/text/slot_census.json` holding offsets, counts, sizes and hashes
+    only, no text (rule 21).
+- **Notes:** method from MSHvSF `RE-041` (`docs/playbook_from_mshvsf.md`,
+  Phase 3). Its findings (18 ordinary files, 5 irregular) are not XvSF facts.
+
+### RE-008 - Choose the M5 roster and its exceptions
+
+- **Status:** `BLOCKED`
+- **Milestone:** M5
+- **Dependencies:** RE-005.
+- **Blockers:** The census; then the user's decision.
+- **Objective:** With the user, fix which characters M5 localizes. Record
+  every excluded slot or file with its reason and evidence.
+- **Acceptance criteria:**
+  - **Choice:** the candidates come from the census, each with its slot,
+    file, English record count and any irregularity. The user's decision is
+    recorded in their words.
+  - **Roster file:** `data/text/m5_roster.json` lists each character's slot,
+    MC file and table offset.
+  - **Exceptions:** `docs/coverage_exceptions.md` lists every file and slot
+    not in the roster with its reason, evidence and the task that would take
+    it up (for example `SPECIAL-001`).
+- **Notes:** Rule 24 keeps secret characters, bosses and other special cases
+  out until a task allows them. Which XvSF characters count as special is
+  part of this decision. The census, not the name list alone, provides the
+  evidence.
+
+### PAIR-003 - Confirm the pairing for every roster character
+
+- **Status:** `BLOCKED`
+- **Milestone:** M5
+- **Dependencies:** RE-008.
+- **Blockers:** The roster.
+- **Objective:** Confirm in MAME that every roster character follows
+  `r mod 8`, and record each pairing table.
+- **Acceptance criteria:**
+  - **MAME runs:** for each roster slot, forced draws in MAME read the
+    predicted English record for all 16 draws. Japanese reads are checked
+    for at least 4 draws, including one ≥ 8. This generalizes `EXP-0022`'s
+    `run_pair.py` and `EXP-0026` to take the slot.
+  - **Records:** `data/translations/<character>_pairing.json` for each
+    character, with addresses and record numbers only.
+  - **Fit:** every English record 0-7 of every roster slot fits 2 × 25,
+    recompiles exactly, and uses only codes whose Saturn glyph is the
+    expected character. `@`, `{`, `|` and `}` draw other glyphs (D-015) and
+    must be listed if used.
+  - **Names:** any record that names a character whose American and Saturn
+    names differ (`docs/names.md`) is listed for the gate decision.
+- **Notes:** the selector and its remap are shared by all slots, so the rule
+  is expected to hold everywhere, but that is a HYPOTHESIS (rule 3). An
+  aliased or 8-record slot may break it.
+
+### RE-009 - Check that every roster file fits its sectors
+
+- **Status:** `BLOCKED`
+- **Milestone:** M5
+- **Dependencies:** RE-008.
+- **Blockers:** The roster.
+- **Objective:** Before building, show that each roster MC file, with its 8
+  English records written over the start of its table, re-encodes within
+  its original size, with its stream ending in its last sector.
+- **Acceptance criteria:**
+  - **Sizes:** for every roster file, the original size, the re-encoded
+    size and the margin are recorded.
+  - **Untouched bytes:** outside the 800-byte English area, the rebuilt
+    file decodes to the original decoded file byte for byte.
+  - **Options:** if a file does not fit, measure the alternatives and put
+    them to the user before `RE-010`. Examples: a better encoder, or fewer
+    changed bytes where English equals the original. Do not choose one.
+- **Notes:** `MC09` and `MC0A` fit (`EXP-0024`, `EXP-0028`). The open
+  question "Will longer (English) quote files fit 11 sectors?"
+  (`docs/known_unknowns.md`) is answered here for the roster.
+
+### GATE-TRANSLATION extension for the M5 roster
+
+Before `RE-010`, the user extends `GATE-TRANSLATION` to the roster's
+ordinary win quotes in their own words. They decide on the pairing, the
+wording and any names listed by `PAIR-003`. The extension is recorded under
+`GATE-TRANSLATION` and in `docs/localization_policy.md`.
+
+### RE-010 - Build the roster image and verify it
+
+- **Status:** `BLOCKED`
+- **Milestone:** M5
+- **Dependencies:** PAIR-003, RE-009, the gate extension above.
+- **Blockers:** Those tasks.
+- **Objective:** One command builds, from the untouched source, an image in
+  which every roster character shows its official English win quotes. Every
+  file outside the roster stays unchanged.
+- **Acceptance criteria:**
+  - **Build:** the `RE-007` build criteria, for every roster file:
+    - only `MMPACK.PCA` and the roster's MC files change, at their sizes;
+    - all sectors pass EDC/ECC, and the layout is unchanged;
+    - two builds are identical, and the source is unchanged;
+    - the slot table marks exactly the roster slots.
+  - **Every record, live:** every roster English record (8 per character)
+    is drawn through the English renderer from a checkpoint, cell for cell
+    as compiled (50/50). Writing the records into a known speaker's table in
+    RAM (the `EXP-0028` method) is enough for this.
+  - **Loads:** every roster file, picked from the built disc, loads equal to
+    the built file plus its fix-ups. If the pick states this needs do not
+    exist, one recorded user session supplies them.
+  - **Structural classes, in play:** the user's cold-boot play check covers:
+    - a first-member win;
+    - a win finished by the second member;
+    - a CPU win by a roster character;
+    - a non-roster speaker's Japanese quote;
+    - a continue hint;
+    - an irregular file if one is in the roster.
+    Each English quote's pointer is read from a play state (`EXP-0028`'s
+    `play_pointers.py`).
+  - **Ryu and Ken:** their forced draws stay byte-identical to `EXP-0028`.
+- **Outputs:** an experiment record, the roster build and its tests, the
+  specs, and the play-check evidence.
+
+### RE-011 - Regression references for the confirmed builds
+
+- **Status:** `BLOCKED`
+- **Milestone:** M5
+- **Dependencies:** RE-010.
+- **Blockers:** The roster build.
+- **Objective:** Every confirmed build can be rebuilt from the untouched
+  source, with its hashes compared, by one script.
+- **Acceptance criteria:**
+  - **References:** each confirmed build is recorded with its command,
+    inputs and expected file and Track 01 hashes: `EXP-0024` (Ryu, version
+    2), `EXP-0028` (Ryu and Ken) and `RE-010` (roster).
+  - **Script:** one command rebuilds each reference under `build/` and
+    reports match or mismatch per file. A run on a clean checkout matches
+    every reference.
+  - **Report:** `docs/regression_report.md` lists the references and the
+    last run.
+- **Notes:** method from MSHvSF `RE-047` (`docs/playbook_from_mshvsf.md`).
+
 ## Later Milestones (outline only)
 
 These are placeholders so the order is visible. Each becomes a full task, with
@@ -984,7 +1180,6 @@ for each is in `docs/playbook_from_mshvsf.md`.
 
 | ID | Milestone | Outline |
 | --- | --- | --- |
-| RE-005 | M5 | File census against arcade slots; roster and exceptions (user decision); capacity; roster image; regression references. |
 | END-001 | M6 | Reach, renderer, RAM, disc source, arcade English, and indexing of one ending. |
 | END-002 | M7 | One ending localized. |
 | END-003 | M8 | All roster endings; combined image with win quotes; coverage register. |

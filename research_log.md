@@ -1338,3 +1338,27 @@ Checks: `pytest` 162 passed; `ruff check`, `ruff format --check`, `mypy`, and `m
 
 Conclusion: `RE-007` is `DONE` (**CONFIRMED**, D-023). M4 is reached. M5
 (`RE-005`) is outline only and needs a full task and a user decision.
+
+## 2026-10-29 — SESSION-0041: M5 tasks written (not started)
+
+User request (verbatim): "Let's continue on to M5, then."
+
+M4 is confirmed (`RE-007`, D-023), so M5 may begin (rule 8). Facts used for
+the task text (read-only): the 19 quote files `MC00`-`MC11` and `MCED` on the
+data track (`references/saturn_jp/iso_listing.json`), the MSHvSF Phase 3
+method (`docs/playbook_from_mshvsf.md`, at most HYPOTHESIS here), and
+`EXP-0008`, `EXP-0022`, `EXP-0025`, `EXP-0028`.
+
+Written in `TASKS.md` (Phase J):
+
+| Task | Status |
+| --- | --- |
+| `RE-005` (census of quote files against arcade slots) | `READY` |
+| `RE-008` (roster and exceptions, user decision) | `BLOCKED` |
+| `PAIR-003` (pairing for every roster slot in MAME) | `BLOCKED` |
+| `RE-009` (every roster file fits its sectors) | `BLOCKED` |
+| A `GATE-TRANSLATION` extension for the roster | user decision |
+| `RE-010` (roster image, every record live, structural play check) | `BLOCKED` |
+| `RE-011` (regression references) | `BLOCKED` |
+
+The `RE-005` outline row was replaced. No experiment was run.
