@@ -2633,3 +2633,19 @@ clean.
 Conclusion: `LOC-007` is `DONE`; Phase N is complete. No task is `READY`;
 the next work needs the user's choice (M9 `SPECIAL-001`, `UI-004`,
 `REL-001`, `LOC-008`, or the "after M8" UI and text tasks).
+
+## 2026-10-30 — SESSION-0082: Write up UI-004 (boot-time messages)
+
+User request (verbatim): "Write up UI-004 (boot-time error messages) as a
+full task. Don't start it yet."
+
+- **Read:** `EXP-0002` (the no-cart warning, D-002), `docs/text_surfaces.md`,
+  the localization policy, and MSHvSF `TASKS.md` `UI-008` (read only).
+- **Observed (metadata only):** the disc's `ERR1.BIN`-`ERR5.BIN` are each
+  42,358 bytes with a BMP header for 352 × 240 at 4 bits per pixel. That the
+  game draws them, and which screen each is, is untested.
+- **Written:** Phase O, `BOOT-001` (census, `READY`) to `BOOT-005`
+  (verify), with every MSHvSF fact marked as a hypothesis. The `UI-004`
+  outline row points to it.
+
+No experiment was run; no code changed.

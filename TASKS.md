@@ -394,12 +394,13 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
     references rebuild byte for byte.
   - **README:** both build commands, American first; the register lists
     what each variant leaves.
-- **Next:** no task is `READY`. M9 (special cases) needs the user's
-  explicit task (rule 24). Backlog: `UI-004`, `SPECIAL-001`, `REL-001`,
-  `LOC-008`, and the "after M8" UI and text tasks.
-  The backlog also holds `UI-004` (boot-time error messages, including the
-  cart warning), `SPECIAL-001` (including
-  Apocalypse's pre-fight line) and `REL-001` (release patches).
+- **2026-10-30** (`SESSION-0082`): the boot-time message tasks are
+  written, `BOOT-001` to `BOOT-005` (Phase O, `UI-004`). Not started.
+- **Next:** `BOOT-001` (census of the boot-time messages; `READY`), when
+  the user starts it. M9 (special cases) needs the user's explicit task
+  (rule 24). Backlog: `SPECIAL-001` (including Apocalypse's pre-fight
+  line), `REL-001` (release patches), `LOC-008`, and the "after M8" UI and
+  text tasks.
 
 ## Milestones
 
@@ -2601,6 +2602,167 @@ its own; it becomes a task only if the user asks (`LOC-008`, outline).
   - **Coverage:** `docs/coverage_exceptions.md`, "Name variants".
   - **README:** both build commands, American first.
 
+## Phase O: Boot-Time Messages (`UI-004`, user request)
+
+The user asked (verbatim, 2026-10-29): "make sure you add to the backlog to
+translate any error messages that come up when you first load the game (like
+ones that are related to not having a 4M RAM cart, etc.)". These tasks were
+written on 2026-10-30 at the user's request; they are not started.
+
+Known before Phase O:
+
+- **No cart** (`EXP-0002`, D-002): with `ss.cart none` the game stops after
+  the SEGA licence screen on one static Japanese warning (`frames/015.png`
+  `5af68833…f2c7`): the 4 MB extended RAM cartridge is not inserted
+  correctly; turn the power off and reinsert it. That is the agent's
+  translation; no official English is known.
+- **Files:** the disc holds `ERR1.BIN`-`ERR5.BIN` (`references/saturn_jp/iso_listing.json`).
+  Each is 42,358 bytes and starts like a Windows BMP header: 352 × 240,
+  4 bits per pixel (read from the files' first bytes, 2026-10-30). Nothing
+  yet shows that the game draws them.
+- **MSHvSF** (`UI-008` there, `EXP-0103`/`EXP-0104`): its disc has five
+  files of the same names and format, drawn as they are. ERR5 was the
+  no-cart screen (also with a backup cart), ERR4 a 1 MB cart, ERR1
+  unformatted backup memory, ERR2 a damaged save, ERR3 too little free
+  memory. It shipped a recorded new translation using the US Saturn BIOS's
+  terms ("Memory Manager", "formatted"). **Every one of these facts is a
+  HYPOTHESIS for XvSF** (rule 13): file roles, triggers, format, drawing
+  path and wording.
+- **Policy** (`docs/localization_policy.md`): text with no official English
+  gets a recorded new translation, with the translator named and source
+  hashes kept, approved by the user surface by surface. Absence of official
+  English must be shown, not assumed.
+- **Scope:** only the game's own messages. The Saturn BIOS's screens
+  (memory manager, CD player, "no disc") are not the game's.
+
+### BOOT-001 - Census of the boot-time messages
+
+- **Status:** `READY`
+- **Milestone:** Boot-time messages (`UI-004`)
+- **Dependencies:** EMU-004 (done), DBG-002 (done).
+- **Blockers:** None.
+- **Objective:** List every message the game can show while it loads, with
+  the condition that shows it.
+- **Acceptance criteria:**
+  - **Triggers:** each condition the game may check at boot is tried from a
+    cold boot of the untouched image in Mednafen, one change at a time, with
+    the condition recorded (setting, file, how it was made):
+    - cart: none, backup cart, 1 MB extended RAM, 4 MB (control);
+    - backup memory: unformatted, nearly full, holding a damaged save of
+      this game (made from a real save, the damage recorded), and a normal
+      save (control);
+    - any other condition the boot code is seen to test (below).
+  - **Screens:** each message screen is captured (screenshot hash, frame),
+    and the agent transcribes and translates it. A screen that is the
+    BIOS's, not the game's, is recorded as such and left out.
+  - **Code:** the boot code's checks are found by tracing from the no-cart
+    screen back to its test (a breakpoint or read log), so that conditions
+    no trigger above reached are listed, with whether they can be made in
+    Mednafen.
+  - **Record:** `docs/text_surfaces.md` gets one row per message;
+    conditions that cannot be produced are listed with the reason.
+- **Notes:** saves and backup memory are machine-local files; the ones made
+  stay under ignored paths. Mednafen's backup and cart files used are
+  recorded by hash.
+
+### BOOT-002 - Where each message is stored and how it is drawn
+
+- **Status:** `BLOCKED`
+- **Milestone:** Boot-time messages (`UI-004`)
+- **Dependencies:** BOOT-001.
+- **Blockers:** The census.
+- **Objective:** For each message in `BOOT-001`, find the data the game
+  draws and the drawing path, so that an English version can be built.
+- **Acceptance criteria:**
+  - **Location:** per message, the file and offset (or code address) of its
+    text or picture, CONFIRMED by a controlled change: altering those bytes
+    (in RAM, or in a test build from the untouched source) changes that
+    screen and nothing else. `ERR1.BIN`-`ERR5.BIN` are the first
+    candidates; the file a screen reads is shown by a read log or a
+    single-file change, not by its name.
+  - **Format:** for a picture, its format and palette, decoded and drawn
+    back out to match the screenshot pixel for pixel; how it reaches the
+    screen (VDP1/VDP2, size limits). For text, its encoding and font.
+  - **Room:** what an English version may use: the picture's size and
+    colours, or the text's space and glyphs.
+- **Notes:** if a message is drawn from code or a font rather than a
+  picture, record it here and adjust `BOOT-004` before it starts.
+
+### BOOT-003 - Official English, and the user's wording
+
+- **Status:** `BLOCKED`
+- **Milestone:** Boot-time messages (`UI-004`)
+- **Dependencies:** BOOT-001, BOOT-002.
+- **Blockers:** The census and the formats.
+- **Objective:** An English text for every message, from an official source
+  where one exists, otherwise a recorded new translation the user approves.
+- **Acceptance criteria:**
+  - **Official English:** looked for, with each search recorded:
+    - the arcade has no cartridge or backup memory, so it has no such
+      message; this is recorded with the arcade's own boot and service
+      messages checked for any shared wording;
+    - the US PlayStation release (`SLUS-00627`, `REF-002`) is checked for
+      the nearest official messages (memory card), and any wording it
+      shares is noted;
+    - the US Saturn BIOS's terms for backup memory (for example "Memory
+      Manager", "formatted"), as MSHvSF used, are checked on a US BIOS the
+      user owns, if any; otherwise recorded as not checked.
+  - **New translation:** where no official English exists, a translation
+    by the agent, with the translator named and the source screen's hash
+    kept. Each line must fit `BOOT-002`'s room.
+  - **Decision:** the user sees every Japanese message beside its proposed
+    English and approves it in their own words, as a `GATE-TRANSLATION`
+    extension recorded in `docs/localization_policy.md` and under
+    `GATE-TRANSLATION` here. MSHvSF's approved wording may be offered as an
+    option, labelled as MSHvSF's.
+  - **Style:** the user also chooses the lettering (for a picture: the
+    font, size and colours) from rendered samples.
+
+### BOOT-004 - Build the English messages
+
+- **Status:** `BLOCKED`
+- **Milestone:** Boot-time messages (`UI-004`)
+- **Dependencies:** BOOT-002, BOOT-003, LOC-007 (done).
+- **Blockers:** The formats and the approved wording.
+- **Objective:** Every boot-time message in English in both name variants,
+  built from the untouched source.
+- **Acceptance criteria:**
+  - **Generator:** a script makes each replacement (picture or text) from
+    the approved wording, with checks of its format against `BOOT-002`
+    (size, palette, header); the generated files' hashes are recorded. No
+    game file or picture is committed (rule 21); the script and the
+    approved English are.
+  - **Build:** `tools.disc.build_english` takes the messages (an option or
+    a spec), for both `--names us` and `--names saturn`. Every changed
+    range is listed with its original and new bytes (rule 12); every
+    changed file fits its sectors; all sectors pass EDC/ECC.
+  - **Screens:** every message that `BOOT-001` could trigger is shown in
+    English from a cold boot of each built image and checked by the agent
+    against the generated file and the approved text.
+  - **No other change:** with the 4 MB cart and a normal save, the boot
+    and the M8 and Phase N checks are unchanged (the regression
+    references' other files are byte-identical).
+
+### BOOT-005 - Verify and register
+
+- **Status:** `BLOCKED`
+- **Milestone:** Boot-time messages (`UI-004`)
+- **Dependencies:** BOOT-004.
+- **Blockers:** The builds.
+- **Objective:** Play-check the English messages and lock the builds.
+- **Acceptance criteria:**
+  - **Play check:** the user boots each built image cold under at least
+    the no-cart condition and one save-memory condition chosen by the
+    agent, and confirms the English screens; then boots with the 4 MB cart
+    to the title.
+  - **Regression:** both variants' references in
+    `data/regression/references.json` are updated (or new ones added), and
+    all references match.
+  - **Coverage:** `docs/coverage_exceptions.md` lists any message left in
+    Japanese, or not triggered, and why.
+  - **README:** the "Still Japanese" list and the build commands are
+    updated.
+
 ## Later Milestones (outline only)
 
 These are placeholders so the order is visible. Each becomes a full task, with
@@ -2614,6 +2776,6 @@ for each is in `docs/playbook_from_mshvsf.md`.
 | UI-001 | after M8, user request | UI art: inventory English art already in every font before drawing anything; caption colour and style. Includes the `⚠乱入禁止` ("no challengers") sprite shown before and during the partner fight (spotted by the user, `EXP-0034`). |
 | UI-002 | after M8, user request | Attract-mode captions: which layer draws them, which container and codecs hold them, arcade and PS1 oracles. |
 | UI-003 | after M8, user request | Other UI text (continue screen, hints): find the arcade English by tracing the arcade code, not only by data search. |
-| UI-004 | user requests (2026-10-29); order not yet set | Every error or warning message the game can show when it first loads, not only the 4 MB RAM cart warning (seen in `EXP-0002`, Japanese). First list them: boot with no cart, with the wrong cart, and with other startup faults the game checks for (for example save-memory messages, if any), and record each screen. Count only the game's own messages; the Saturn BIOS's are not the game's. Then, per message, find where its text and art live (disc, BIOS or code) and how it is drawn, look for an official English source, and translate it. With no official English, the policy's recorded new translation applies, approved by the user. User request (verbatim, 2026-10-29): "make sure you add to the backlog to translate any error messages that come up when you first load the game (like ones that are related to not having a 4M RAM cart, etc.)" |
+| UI-004 | user requests (2026-10-29) | Every error or warning message the game shows when it first loads. **Written up as Phase O (`BOOT-001` to `BOOT-005`, 2026-10-30).** User request (verbatim, 2026-10-29): "make sure you add to the backlog to translate any error messages that come up when you first load the game (like ones that are related to not having a 4M RAM cart, etc.)" |
 | TXT-001 | after M8, user request | Rare, random, or region-gated text: trace every reader of every text table. |
 | LOC-008 | after Phase N, user request | An in-game toggle between the two name variants. MSHvSF deferred its own (`LOC-006` there, `EXP-0095`: the second variant's font did not fit the free cart RAM). If wanted, census the difference between the two variants' images early. |
