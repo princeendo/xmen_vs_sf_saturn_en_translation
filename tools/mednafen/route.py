@@ -16,7 +16,8 @@ repository, commit ``f8526c0``) for `END-013`, and generalized:
   the first pick's cell (`EXP-0046`). The second pick's moves start there
   and never cross that cell. Keys go through
   System Events with Mednafen brought to the front (pad A on K, directions
-  on I, M, J and L; the ``local/mednafen_pick`` home). A key that cannot be
+  on I, M, J and L, Z on O, C on U, and for menus Start on N and B on H;
+  the ``local/mednafen_pick`` home). A key that cannot be
   sent is retried, and the run stops if it still cannot be sent.
 - **Gouki** (slot 15) has his own cell above Juggernaut's, reached by "u"
   from Juggernaut (``GOUKI_CELL``; `EXP-0046`). He is picked like any
@@ -112,6 +113,8 @@ KEYS = {
     "a": ("k", 14),
     "z": ("o", 18),
     "c": ("u", 24),
+    "s": ("n", 17),  # Start, for menus (LOC-001)
+    "b": ("h", 11),  # B, to back out of menus (LOC-001)
 }
 PLAYER, CPU = (0x060F4200, 0x060F4A00), (0x060F4600, 0x060F4E00)
 BLOCKS = PLAYER + CPU
@@ -248,6 +251,8 @@ def pick_home() -> Path:
         "a": "a",
         "z": "z",
         "c": "c",
+        "s": "start",
+        "b": "b",
     }
     apply_settings(
         PICK_HOME / "mednafen.cfg",

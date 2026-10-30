@@ -4,13 +4,43 @@ Which names the Saturn shows, which the arcade English uses, and where they
 differ. Evidence: `EXP-0011`. Policy (`docs/localization_policy.md`): American
 names by default, both variants built.
 
+## Census of Every Name Surface (`LOC-001`, `EXP-0048`)
+
+Observed on the M8 build (`build/m8_roster_endings`) and in MAME 0.289
+(`xmvsfu`, `xmvsfjr2`). Every cell was read from an image; the evidence
+(file, frame, hash) is in `research/experiments/EXP-0048/`.
+
+| Surface | Saturn (M8 build) | US arcade | Japanese arcade |
+| --- | --- | --- | --- |
+| Select label | VEGA / GOUKI / NASH | BISON / AKUMA / CHARLIE | VEGA / GOUKI / NASH |
+| VS screen | VEGA / GOUKI / NASH | BISON / AKUMA / CHARLIE | VEGA / GOUKI / NASH |
+| Life bar | VEGA / GOUKI / NASH | BISON / AKUMA / CHARLIE | VEGA / GOUKI / NASH |
+| Win banner | VEGA / GOUKI / NASH | BISON / AKUMA / CHARLIE | VEGA / GOUKI / NASH |
+| Win-quote screen | no label; English text says "Bison" (Cammy's quotes 0 and 4) | no label | no label; Japanese text can name ベガ, ゴウキ |
+| Ending text | "Charlie" (Nash's 1, 4), "Bison" (Vega's 1, 4) | the same | Japanese |
+| Ending labels | `Charlie`, `Charlie's friend`, `Akuma`, `Bison`, `Vega` (Magneto's page 3) | the same | `Nash`, `Nazo no koe`, `Nash's friend`, `Gouki`, `Vega` |
+| Apocalypse's pre-fight boxes | Japanese, naming the player's character in katakana (ベガ, ゴウキ, ナッシュ) | none seen | Japanese, the same kind of naming |
+| Voice | "Vega", "Gouki", "Nash" heard by the user (moments not recorded) | not checked | not checked |
+
+No character name appears on the stage cards, the staff roll, initials
+entry, the rankings, attract mode, the title menu, or Option Mode
+(Saturn). The arcade rankings and initials entry name none either.
+
+So the M8 build is mixed: Saturn-convention art and voice, with
+American-convention English text and ending labels.
+
+**Magneto's page 3 (`Vega`):** the speaker is most plausibly the masked
+claw fighter, who is "Vega" in US naming and Balrog in Saturn naming
+(SUPPORTED). The Saturn label list has no `Balrog`, and its `Vega` entry
+means Shadaloo's leader in the Japanese scripts.
+
 ## Names That Differ
 
 | Character | Saturn (observed) | Arcade JP set | Arcade US set (art) | Arcade English text | Status |
 | --- | --- | --- | --- | --- | --- |
 | Akuma / Gouki | **GOUKI**: select label (`f00007661.png` `132c3d60…1d03`), VS screen and win banner (`f00011244.png` session) | **GOUKI** select label (`xmvsfjr2` frame 2650, `0b34de80…91d5`) | **AKUMA** select label (`xmvsfu` frame 2650, `79b2962c…d3f9`) | not named in any quote, ending or hint | **Differs, observed** |
-| Charlie / Nash | **NASH**: select label (`f00018389.png` `12e4796c…5695`) | not observed | not observed | **Charlie** (2 mentions) | **Differs** (Saturn art vs arcade English text) |
-| M. Bison / Vega (Shadaloo's leader) | not observed | not observed | not observed | **Bison** (4 mentions) | Expected to differ; Saturn side **UNKNOWN** |
+| Charlie / Nash | **NASH**: select label (`f00018389.png` `12e4796c…5695`) | **NASH** (`EXP-0048`) | **CHARLIE** (`EXP-0048`) | **Charlie** (2 mentions) | **Differs, observed** |
+| M. Bison / Vega (Shadaloo's leader) | **VEGA** (`EXP-0048`) | **VEGA** (`EXP-0048`) | **BISON** (`EXP-0048`) | **Bison** (4 mentions) | **Differs, observed** |
 | Shadaloo (organization) | Japanese text only | — | — | **Shadaloo** (2) | Same romanization in the English; Saturn not checked |
 
 The arcade's region ROMs also hold a 16-bit name list that contains both

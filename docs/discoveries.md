@@ -869,3 +869,22 @@ text M8 leaves Japanese or does not show, and why:
 - the boss-stage text and the warning.
 
 Reproduce: `./invenv.sh python -m tools.disc.regression`.
+
+## D-044 (Names): The Saturn's name art follows the Japanese convention on every surface (`LOC-001`, `EXP-0048`)
+
+- **Saturn art:** on the M8 build, the select label, VS screen, life bar
+  and win banner show `VEGA`, `GOUKI` and `NASH`, as the Japanese arcade
+  (`xmvsfjr2`) does. The US arcade (`xmvsfu`) shows `BISON`, `AKUMA` and
+  `CHARLIE` on the same surfaces.
+- **The M8 build is mixed:** its English text and ending labels are
+  American (from the arcade English), while its art is in the Saturn
+  convention.
+- **Boss-stage boxes:** the Saturn's Japanese pre-Apocalypse boxes name
+  the player's character in katakana (ベガ, ゴウキ, ナッシュ).
+- **No names:** stage cards, the staff roll, initials entry, the rankings
+  (default entries), attract mode, the title menu and Option Mode name no
+  character.
+- **Arcade:** Gouki has a reachable cell on the arcade grid in both sets.
+
+Reproduce: `research/experiments/EXP-0048/README.md` and
+`research/experiments/EXP-0048/arcade/RESULTS.md`.

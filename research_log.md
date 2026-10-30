@@ -2363,3 +2363,37 @@ start them yet."
 No experiment was run, and no code changed.
 
 Conclusion: Phase N is written. `LOC-001` is `READY` and not started.
+
+## 2026-10-30 — SESSION-0074: Census of every name surface (LOC-001, EXP-0048)
+
+User request (verbatim): "Start LOC-001: census of every name surface. If
+there are tasks that can be completed in parallel, you are authorized to
+set up several sub-sessions."
+
+- **Parallel work:** the arcade side (MAME, headless) went to a subagent
+  rather than a separate session, because its result was needed in this
+  task. It wrote `EXP-0048/arcade/` (13 runs, `RESULTS.md`), committed
+  nothing, and touched no Saturn state. Spot-check: the agent re-cropped
+  four life bars and viewed Magneto's page 5, which agree with
+  `RESULTS.md`.
+- **Saturn screens:** from the `EXP-0047` route runs and session, plus a
+  9,000-frame cold-boot attract recording (`menu_walk.py`).
+- **Failures:**
+  1. `menu1`-`menu8`: scripted Start presses landed on the wrong screens
+     (disc-load timing; the await step matched attract mode's own
+     title). The user opened Option Mode instead.
+  2. A first life-bar crop used transition frames; it was redone.
+- **Route key map:** `KEYS` gained Start (N) and B (H).
+- **Voice session:** `local/loc001/session`, user, sound on. The user
+  reported: "Heard 'Vega' and 'Gouki' and 'Nash'."
+- **Results:** see D-044 and `docs/names.md`.
+  - Saturn art is in the Japanese convention on every surface.
+  - The boss boxes name the player's character.
+  - Magneto's page 3 is most plausibly the claw fighter (Balrog in Saturn
+    naming).
+  - Option Mode labels the taunt button "CHOUHATU" (for the UI tasks).
+
+Checks: `pytest`, `ruff check`, `ruff format --check` and `mypy --strict`
+on tools, tests and `EXP-0048` are clean.
+
+Conclusion: `LOC-001` is `DONE`. `LOC-002` and `LOC-003` are `READY`.

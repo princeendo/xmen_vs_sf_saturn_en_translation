@@ -332,10 +332,17 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
     (`END-016`).
 - **2026-10-30** (`SESSION-0073`): the name-variant tasks are written,
   `LOC-001` to `LOC-007` (Phase N). Not started.
-- **Next:** `LOC-001` (census of every name surface; `READY`). M9 (special
-  cases) needs the user's explicit task (rule 24). Backlog: `UI-004`,
-  `SPECIAL-001`, `REL-001`, `LOC-008`, and the "after M8" UI and text
-  tasks.
+- **2026-10-30** (`SESSION-0074`, `EXP-0048`): the name census is done
+  (`LOC-001`, D-044).
+  - **Saturn art:** VEGA, GOUKI and NASH on every art surface, like the
+    Japanese arcade; the US arcade shows BISON, AKUMA and CHARLIE.
+  - **Voice:** the user heard the Saturn names spoken.
+  - **Boss stage:** the Japanese boxes name the player's character.
+  - **Magneto's page 3:** most plausibly the claw fighter.
+- **Next:** `LOC-002` (where the name art is stored) and `LOC-003` (voice),
+  both `READY` and independent. M9 (special cases) needs the user's
+  explicit task (rule 24). Backlog: `UI-004`, `SPECIAL-001`, `REL-001`,
+  `LOC-008`, and the "after M8" UI and text tasks.
   The backlog also holds `UI-004` (boot-time error messages, including the
   cart warning), `SPECIAL-001` (including
   Apocalypse's pre-fight line) and `REL-001` (release patches).
@@ -2243,7 +2250,7 @@ its own; it becomes a task only if the user asks (`LOC-008`, outline).
 
 ### LOC-001 - Census of every name surface
 
-- **Status:** `READY`
+- **Status:** `DONE` (`EXP-0048`, D-044)
 - **Milestone:** Name variants (after M8)
 - **Dependencies:** END-016 (M8 complete).
 - **Blockers:** None.
@@ -2284,13 +2291,25 @@ its own; it becomes a task only if the user asks (`LOC-008`, outline).
     Saturn and US arcade evidence. Unobserved cells are marked UNKNOWN.
 - **Notes:** this task only observes and records. It changes nothing on
   the disc. Where the art lives is `LOC-002`.
+- **Outcome:**
+  - **Saturn art:** select, VS, life bar and win banner show VEGA, GOUKI
+    and NASH, like the Japanese arcade; the US arcade shows BISON, AKUMA
+    and CHARLIE.
+  - **Boss stage:** the Japanese pre-Apocalypse boxes name the player's
+    character in katakana.
+  - **Voice:** the user heard "Vega", "Gouki" and "Nash"; when is
+    `LOC-003`'s.
+  - **Magneto's page 3:** the speaker is SUPPORTED as the claw fighter
+    (Balrog in Saturn naming, with no such label).
+  - **No names:** rankings, initials, menus, attract mode and credits.
 
 ### LOC-002 - Where each name surface is stored, and whether its US version exists
 
-- **Status:** `BLOCKED`
+- **Status:** `READY`
 - **Milestone:** Name variants (after M8)
-- **Dependencies:** LOC-001.
-- **Blockers:** The census.
+- **Dependencies:** LOC-001 (done).
+- **Blockers:** None. The surfaces are select label, VS screen, life bar
+  and win banner (`EXP-0048`).
 - **Objective:** For each art or text surface in `LOC-001` that shows a
   differing name, find where the Saturn stores it and whether the other
   convention's version is also on the disc.
@@ -2315,10 +2334,11 @@ its own; it becomes a task only if the user asks (`LOC-008`, outline).
 
 ### LOC-003 - Name calls in voice
 
-- **Status:** `BLOCKED`
+- **Status:** `READY`
 - **Milestone:** Name variants (after M8)
-- **Dependencies:** LOC-001.
-- **Blockers:** The census, which says which names are spoken, if any.
+- **Dependencies:** LOC-001 (done).
+- **Blockers:** None. "Vega", "Gouki" and "Nash" are spoken (`EXP-0048`);
+  the moments are this task's first step.
 - **Objective:** For each spoken differing name, find which clip plays,
   where it is stored, how it is chosen, and whether the other
   convention's clip is on the disc.
