@@ -90,7 +90,22 @@ words: "GATE-TRANSLATION: go for Nash's ending. MC10 ending records 16-21 plus w
 | Wording | Official arcade English, no rewording | the 2026-10-27 policy |
 | Names | "Charlie" kept in English records 1 and 4; labels `Charlie` and `Charlie's friend` | `EXP-0037`, `EXP-0039` |
 
-Every other ending and surface stays gated.
+**Gate extension, M8 roster endings (2026-10-30).** The user was asked
+whether to extend `GATE-TRANSLATION` to the endings of all 17 `END-011`
+roster characters, with page k showing the arcade English ending record k
+and no rewording. Answer: "Go (Recommended)". Asked how to handle the
+flagged names, they answered "Keep arcade names (Recommended)". The full
+questions are under `GATE-TRANSLATION` in `TASKS.md`.
+
+| Topic | Decision | Evidence |
+| --- | --- | --- |
+| Scope | The ending records of slots 0-7 and 9-17, first or second pick; each slot's arcade English records after its win quotes (version 4); each slot's `MCED` English script (slot 8's switched with Ryu's, slot 18's with Chun-Li's, neither marked); the switch code | `data/text/m8_ending_roster.json`, `EXP-0043`, `TASKS.md` `GATE-TRANSLATION` |
+| Pairing | Page k shows the slot's arcade English ending record k | D-039, `data/translations/<name>_ending_pairing.json` |
+| Wording | Official arcade English, no rewording | the 2026-10-27 policy |
+| Names | "Bison" kept in Vega's English records 1 and 4; labels `Akuma` (Gouki's page 5), `Bison` (Rogue's page 1) and `Vega` (Magneto's page 3), as the US arcade shows. A Saturn-names variant is `LOC-001`'s | `EXP-0044`, `docs/names.md` |
+
+Apocalypse's lines, the pre-boss line, the post-boss quote, slot 18's
+character (`SPECIAL-001`), the warning and every other surface stay gated.
 
 ## Deferred Until Evidence Exists
 

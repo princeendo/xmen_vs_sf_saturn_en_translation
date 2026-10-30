@@ -2199,3 +2199,24 @@ Checks: `pytest` 194 passed; `ruff check`, `ruff format --check` and
 Conclusion: `END-013` is `DONE` (D-040). The second-pick ending is not
 reached; it passes to `END-015`'s user play check. Next: the
 `GATE-TRANSLATION` extension for the M8 roster endings.
+
+## 2026-10-30 — SESSION-0069: Translation gate for the M8 roster endings
+
+User request (verbatim): "Let's do the GATE-TRANSLATION extension for the M8
+roster endings."
+
+- **Inputs:** `END-010` (scripts and space), `END-011` (roster),
+  `END-012` (pairing for all 17, D-039) and `END-013` (route, D-040).
+- **Asked:** GO or NO-GO for the endings of slots 0-7 and 9-17 (records,
+  English records after the win quotes, `MCED` English scripts with the
+  shared slots 8 and 18, the switch code), page k = arcade English record
+  k, no rewording. Answer: "Go (Recommended)".
+- **Names:** asked about "Bison" in Vega's records 1 and 4 and the labels
+  `Akuma`, `Bison` and `Vega` (Magneto's page 3). Answer: "Keep arcade
+  names (Recommended)".
+- Recorded under `GATE-TRANSLATION` in `TASKS.md` and in
+  `docs/localization_policy.md`. `END-014` is now `READY`.
+
+No experiment was run; no code changed.
+
+Conclusion: the gate is passed for the M8 roster endings. Next: `END-014`.

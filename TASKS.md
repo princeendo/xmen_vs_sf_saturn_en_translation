@@ -307,9 +307,12 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   the first pick on the player's side, and if the partner wins there is no
   ending. A second pick's ending was not reached; that passes to the
   `END-015` play check (`END-013`, D-040).
-- Next: the `GATE-TRANSLATION` extension for the M8 roster endings (the
-  user's decision), then `END-014`. Backlog: `UI-004`, `SPECIAL-001`,
-  `REL-001`.
+- **2026-10-30** (`SESSION-0069`): the user extended `GATE-TRANSLATION`
+  to the endings of all 17 M8 roster characters (GO): page k shows the
+  arcade English ending record k, no rewording, and the arcade names are
+  kept ("Bison" in Vega's text; the labels `Akuma`, `Bison`, `Vega`).
+- Next: `END-014` (build every roster ending; `READY`). Backlog: `UI-004`,
+  `SPECIAL-001`, `REL-001`.
   The backlog also holds `UI-004` (boot-time error messages, including the
   cart warning), `SPECIAL-001` (including
   Apocalypse's pre-fight line) and `REL-001` (release patches).
@@ -768,6 +771,27 @@ prerequisites before English text goes on disc).
   - **Wording:** the official arcade English, with no rewording.
   - **Names:** "Charlie" stays in English records 1 and 4. The labels are
     `Charlie` and `Charlie's friend`, as in the arcade (already in `MCED`).
+- **Gate extension, M8 roster endings (2026-10-30, `SESSION-0069`):**
+  - The user's decision is **GO**. They were asked: "Extend GATE-TRANSLATION to the endings of all 17 M8 roster characters (slots 0-7 and 9-17, Gouki included)? That covers each MC file's ending records, the English records placed after the win quotes, each slot's MCED English script (Apocalypse's shared with Ryu's, slot 18's with Chun-Li's), and the switch code. Page k shows the character's arcade English ending record k (END-012), in the official arcade English with no rewording." Answer: "Go (Recommended)".
+  - Checked at acceptance: `END-010` to `END-013` are `DONE`
+    (`EXP-0043`-`EXP-0045`).
+  - **Scope:**
+    - the ending records of the 17 `END-011` roster slots
+      (`data/text/m8_ending_roster.json`), first or second pick;
+    - each slot's arcade English ending records, placed after its win
+      quotes (version 4: quote table + 800 + 100k);
+    - each slot's `MCED` English script. Slot 8's script is switched with
+      Ryu's and slot 18's with Chun-Li's, because they are shared
+      (`END-011`). Slots 8 and 18 are not marked, and `MC08` gets no
+      English ending records;
+    - the version 4 switch code and the fixed-table marks.
+
+    Apocalypse's lines, the pre-boss line, the post-boss quote, slot 18's
+    character (`SPECIAL-001`) and the warning stay gated.
+  - **Pairing:** page k shows the slot's arcade English ending record k
+    (D-039, `data/translations/<name>_ending_pairing.json`).
+  - **Wording:** the official arcade English, with no rewording.
+  - **Names:** the user was asked: "How should the flagged names be handled? The official English says "Bison" in Vega's (M. Bison's) ending records 1 and 4. The arcade's own labels are "Akuma" (Gouki's page 5), "Bison" (Rogue's page 1) and "Vega" (Magneto's page 3, the claw-wielding Shadaloo member, as the US arcade shows)." Answer: "Keep arcade names (Recommended)". The text and labels stay as the US arcade shows them; a Saturn-names variant is `LOC-001`'s.
 
 ## Phase F: M1
 
@@ -2042,13 +2066,16 @@ covers:
 
 Dependencies: `END-010`, `END-012`.
 
+**Passed 2026-10-30 (`SESSION-0069`):** GO, with the arcade names kept;
+recorded under `GATE-TRANSLATION`.
+
 ### END-014 - Build every roster ending
 
-- **Status:** `BLOCKED`
+- **Status:** `READY`
 - **Milestone:** M8
 - **Dependencies:** GATE-TRANSLATION extension for the M8 roster endings,
-  END-010, END-012.
-- **Blockers:** The gate.
+  END-010, END-012 (all done).
+- **Blockers:** None.
 - **Objective:** One image, built from the untouched source, with all
   roster win quotes and all roster endings in English.
 - **Acceptance criteria:**
