@@ -107,6 +107,24 @@ questions are under `GATE-TRANSLATION` in `TASKS.md`.
 Apocalypse's lines, the pre-boss line, the post-boss quote, slot 18's
 character (`SPECIAL-001`), the warning and every other surface stay gated.
 
+**Name variants (2026-10-30, `LOC-004`).** After `LOC-001` to `LOC-003`
+(`EXP-0048`-`EXP-0050`) showed that every name surface's American version is
+already on the disc, the user was asked four questions. The full questions
+and the gate extension are under `GATE-TRANSLATION` and `LOC-004` in
+`TASKS.md`.
+
+| Topic | Question (short) | Answer | Meaning |
+| --- | --- | --- | --- |
+| American variant (default) | Switch every name surface to the US version already on the disc, with no new art or audio? | "Go (Recommended)" | Life bar (`FIX.PRS` cells), select label (`VS00` frames `0xA8`-`0xAA`), voice (table A entries 14-16 → `0x147`, `0x021`, `0x01B`), VS screen and win banner spelled from the existing letters. Ending text and labels stay as written (already American). |
+| Saturn-names text | Allow six name-only edits to the official English, and four label switches, for the Saturn-names variant? | "Go (Recommended)" | A `GATE-TRANSLATION` extension: "Bison" → "Vega" in Cammy's win quotes 0 and 4 and Vega's ending records 1 and 4; "Charlie" → "Nash" in Nash's ending records 1 and 4; labels `Charlie` → `Nash`, `Charlie's friend` → `Nash's friend`, `Akuma` → `Gouki`, `Bison` → `Vega` (Rogue's page 1). Art and voice keep the Saturn names. |
+| Magneto's page 3 (Saturn names) | `Balrog`, keep `Vega`, or no label? | "Balrog (Recommended)" | `Balrog` in 16-bit ASCII written into an `MCED` label entry no script uses. |
+| VS screen and win banner | If their letter lists are not found, trace on or allow an exception? | "Keep tracing (Recommended)" | `LOC-005` is not done until both screens show BISON, AKUMA and CHARLIE. |
+| Build switch | (named by the agent, not asked separately) | — | `build_english --names us` or `--names saturn`; default `us`. |
+
+The Saturn-names variant's other words are the official arcade English, with
+no rewording. The boss-stage katakana boxes are not part of either variant
+(`SPECIAL-001`).
+
 ## Deferred Until Evidence Exists
 
 These MSHvSF decisions depend on facts not yet known for XvSF. Each is put to
@@ -119,4 +137,4 @@ the user when its task produces the evidence, with options and costs.
 | Caption font, style and colour | The caption renderer and font are known | Credits-font pairs, gold (`FONT-010`, `FONT-011`) |
 | Attract-caption style | Attract captions are found (`UI-002`) | Saturn win-banner letters, arcade wording and layout (`UI-003`) |
 | Per-option defaults (unlocks and similar) | Each option exists | Boss unlock on by default (`OPT-001`) |
-| Name-variant presentation and an in-game toggle (the default itself is decided: American) | Both variants build | American names default from 2026-10-28, both variants released, American first; the toggle deferred past 0.1.0 (`LOC-001`, `LOC-006`, `EXP-0095`) |
+| Name-variant presentation and an in-game toggle (the default and each variant's contents are decided: American default, `LOC-004` above) | Both variants build (`LOC-008`) | American names default from 2026-10-28, both variants released, American first; the toggle deferred past 0.1.0 (`LOC-001`, `LOC-006`, `EXP-0095`) |

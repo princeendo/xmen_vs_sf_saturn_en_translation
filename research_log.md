@@ -2496,3 +2496,26 @@ Checks: `ruff check`, `ruff format --check` and `mypy --strict` on
 `EXP-0050` are clean; `pytest` passes.
 
 Conclusion: `LOC-003` is `DONE` (D-046). `LOC-004` is `READY`.
+
+## 2026-10-30 — SESSION-0078: The user's plan for each variant (LOC-004)
+
+User request (verbatim): "Start LOC-004: the user's plan for each variant."
+
+- **Edited lines:** the six Saturn-names lines were compiled from the
+  arcade English records (`local/ref003/xmvsfu-68k.bin`); each fits the
+  25-code line. The four Saturn labels are already in `MCED`'s list; no
+  `Balrog` label exists.
+- **Questions and answers** (`AskUserQuestion`):
+  - American variant with the disc's own assets: "Go (Recommended)".
+  - Saturn-names text edits (every edited line shown): "Go (Recommended)".
+  - Magneto's page 3 label: "Balrog (Recommended)".
+  - VS screen and win banner if the letter lists stay unfound: "Keep
+    tracing (Recommended)".
+- **Switch:** `build_english --names us|saturn`, default `us`, named by the
+  agent from the task's example.
+- **Recorded:** `docs/localization_policy.md` ("Name variants"),
+  `GATE-TRANSLATION` and `LOC-004` in `TASKS.md`, `docs/names.md`.
+
+No experiment was run; no code changed.
+
+Conclusion: `LOC-004` is `DONE`. `LOC-005` is `READY`.

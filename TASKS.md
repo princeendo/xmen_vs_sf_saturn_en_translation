@@ -360,7 +360,15 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
     disc (identified by the user).
   - **So:** every name surface, voice included, has its American version
     on the disc.
-- **Next:** `LOC-004` (the user's plan for each variant; `READY`). M9 (special cases) needs the user's
+- **2026-10-30** (`SESSION-0078`): `LOC-004` is done; the user's plan is
+  recorded (`docs/localization_policy.md`, "Name variants").
+  - **American (default):** every surface uses the US asset already on
+    the disc. The VS screen and win banner must be traced until they show
+    BISON, AKUMA and CHARLIE; no exception.
+  - **Saturn names:** a `GATE-TRANSLATION` extension for six name-only
+    edits and four labels, plus a new `Balrog` label for Magneto's page 3.
+  - **Switch:** `build_english --names us|saturn`, default `us`.
+- **Next:** `LOC-005` (build the American variant; `READY`). M9 (special cases) needs the user's
   explicit task (rule 24). Backlog: `UI-004`, `SPECIAL-001`, `REL-001`,
   `LOC-008`, and the "after M8" UI and text tasks.
   The backlog also holds `UI-004` (boot-time error messages, including the
@@ -842,6 +850,34 @@ prerequisites before English text goes on disc).
     (D-039, `data/translations/<name>_ending_pairing.json`).
   - **Wording:** the official arcade English, with no rewording.
   - **Names:** the user was asked: "How should the flagged names be handled? The official English says "Bison" in Vega's (M. Bison's) ending records 1 and 4. The arcade's own labels are "Akuma" (Gouki's page 5), "Bison" (Rogue's page 1) and "Vega" (Magneto's page 3, the claw-wielding Shadaloo member, as the US arcade shows)." Answer: "Keep arcade names (Recommended)". The text and labels stay as the US arcade shows them; a Saturn-names variant is `LOC-001`'s.
+- **Gate extension, Saturn-names variant (2026-10-30, `SESSION-0078`,
+  `LOC-004`):**
+  - The user's decision is **GO**. They were asked whether to allow
+    name-only edits to the official English for the Saturn-names variant,
+    "Every other word stays as written, and each line fits", and were
+    shown each edited line in full. Answer: "Go (Recommended)".
+  - Checked at acceptance: `LOC-001` to `LOC-003` are `DONE`
+    (`EXP-0048`-`EXP-0050`). Each edited line was compiled from the
+    official record (`local/ref003/xmvsfu-68k.bin`) and fits the 25-code
+    line.
+  - **Scope (Saturn-names variant only; the American variant keeps the
+    text as written):**
+    - Cammy's English win quotes 0 and 4: "Bison" → "Vega" (line 1 of
+      each);
+    - Vega's English ending records 1 and 4: "Bison's" → "Vega's" and
+      "Bison" → "Vega" (line 1 of each);
+    - Nash's English ending records 1 and 4: "Charlie" → "Nash" (line 1
+      of record 1, line 2 of record 4);
+    - the labels, from entries already in `MCED`'s list: `Charlie` →
+      `Nash`, `Charlie's friend` → `Nash's friend`, `Akuma` → `Gouki`
+      (Gouki's page 5), `Bison` → `Vega` (Rogue's page 1).
+  - **Magneto's page 3:** asked what the label should say (the US `Vega`
+    most likely means the claw fighter, Balrog in Saturn naming; no
+    `Balrog` label is on the disc), the user answered "Balrog
+    (Recommended)": write `Balrog` (16-bit ASCII) into an `MCED` label
+    entry no script uses. Saturn-names variant only.
+  - **Wording:** every other word is the official arcade English, with
+    no rewording.
 
 ## Phase F: M1
 
@@ -2399,7 +2435,8 @@ its own; it becomes a task only if the user asks (`LOC-008`, outline).
 
 ### LOC-004 - The user's plan for each variant
 
-- **Status:** `READY`
+- **Status:** `DONE` (`SESSION-0078`; `docs/localization_policy.md`,
+  "Name variants")
 - **Milestone:** Name variants (after M8)
 - **Dependencies:** LOC-001, LOC-002, LOC-003 (all done).
 - **Blockers:** None.
@@ -2427,13 +2464,26 @@ its own; it becomes a task only if the user asks (`LOC-008`, outline).
     `build_english --names us|saturn`), with American as the default.
   - **Recording:** the decisions go into `docs/localization_policy.md`,
     under `GATE-TRANSLATION` here, and in `docs/names.md`.
+- **Outcome:**
+  - **American (default):** "Go (Recommended)". Every surface points at
+    the US asset already on the disc; no new art or audio.
+  - **Saturn-names text:** "Go (Recommended)", recorded under
+    `GATE-TRANSLATION` (six edited lines, four labels).
+  - **Magneto's page 3:** "Balrog (Recommended)", a new `MCED` label.
+  - **VS screen and win banner:** "Keep tracing (Recommended)". `LOC-005`
+    is not done until they show the American names.
+  - **Switch:** `build_english --names us|saturn`, default `us`. The
+    agent named it from this task's example; it was not put to the user
+    as a separate question.
 
 ### LOC-005 - Build the American-names variant
 
-- **Status:** `BLOCKED`
+- **Status:** `READY`
 - **Milestone:** Name variants (after M8)
-- **Dependencies:** LOC-004.
-- **Blockers:** The user's plan.
+- **Dependencies:** LOC-004 (done).
+- **Blockers:** None. The VS-screen and win-banner letter lists are not
+  yet found (`docs/known_unknowns.md`); finding them is part of this
+  task.
 - **Objective:** One image, built from the untouched source, with every
   M8 change plus every name surface in the American convention, as
   `LOC-004` decided.
@@ -2443,7 +2493,10 @@ its own; it becomes a task only if the user asks (`LOC-008`, outline).
     Every changed file fits its sectors, and all sectors pass EDC/ECC.
   - **Surfaces:** each changed surface is shown in the emulator, compared
     with the US arcade's, and checked by the agent. Each spoken name is
-    confirmed by the user by ear.
+    confirmed by the user by ear. The surfaces are the life bar (both
+    cell sets), the select label, the VS screen, the win banner and the
+    pick and win calls. The VS screen and win banner have no exception
+    (`LOC-004`).
   - **No other change:** the M8 checks still hold. Every ending page and
     the forced win-quote draws are unchanged, apart from the names
     themselves.
@@ -2452,15 +2505,19 @@ its own; it becomes a task only if the user asks (`LOC-008`, outline).
 
 - **Status:** `BLOCKED`
 - **Milestone:** Name variants (after M8)
-- **Dependencies:** LOC-004, LOC-005 (the variant switch and its tooling).
-- **Blockers:** The user's plan and the American build.
+- **Dependencies:** LOC-004 (done), LOC-005 (the variant switch and its
+  tooling).
+- **Blockers:** The American build (`LOC-005`).
 - **Objective:** One image, built from the untouched source, with the
   English text and labels in the Saturn convention, as `LOC-004` decided.
   The art and voice keep the Saturn's own names.
 - **Acceptance criteria:**
   - **Build:** as `LOC-005`, with the gated name edits compiled from the
-    official records. Each edited record is listed with its source hash
-    and the edit.
+    official records (`GATE-TRANSLATION`, Saturn-names extension). Each
+    edited record is listed with its source hash and the edit.
+  - **Balrog label:** `Balrog` is written into an `MCED` label entry that
+    no script uses, shown to be unused by a scan of every script, and
+    Magneto's page 3 points at it.
   - **Screens:** every edited win quote is forced and shown, and every
     edited ending page is shown by the route. Each is checked by the
     agent against the approved lines.

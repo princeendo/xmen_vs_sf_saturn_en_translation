@@ -90,23 +90,29 @@ Apocalypse. Dhalsim and Sabretooth appear in the US win banner (`EXP-0009`).
   `Charlie`. So American-name labels are on the disc as text for the
   endings. The select, versus and banner names are still art (`LOC-001`).
 
-## Not Examined
+## Formerly Not Examined
 
-- **Voice.** Whether the Saturn announcer or victory voices speak these names,
-  and in which convention, was not checked (no audio analysis yet). MSHvSF's
-  disc held both conventions' voice clips; for XvSF that is a hypothesis
-  (`LOC-003`).
-- **Assets on the Saturn disc.** The disc holds no name as plain text in any
-  tested encoding (8-bit or 16-bit ASCII). The names are art. Whether
-  American-name art is also on the disc is `LOC-002`.
+- **Voice:** answered by `LOC-003` (`EXP-0050`). The Saturn calls the
+  name at the pick and on the win screen; the American calls are on the
+  disc.
+- **Assets on the Saturn disc:** answered by `LOC-002` (`EXP-0049`). The
+  American art is on the disc for every art surface; the VS screen and
+  win banner spell names from letter fonts.
 
-## Options and Costs (for the American-default policy)
+## The User's Plan (`LOC-004`, 2026-10-30)
 
-The default is already decided (American names, both variants). The open
-question is cost, which depends on `LOC-001` to `LOC-003`; the user's
-plan is `LOC-004` (`TASKS.md`, Phase N).
+Recorded in `docs/localization_policy.md` ("Name variants") and under
+`GATE-TRANSLATION` in `TASKS.md`.
 
-| Variant | What changes | Cost if the American art and voice are already on the disc | Cost if they are not |
-| --- | --- | --- | --- |
-| American (default) | Gouki→Akuma, Nash→Charlie, Vega→Bison on select labels, VS screen, win banners, life bars and any spoken name; the English text is already American | Point the game at the existing assets (MSHvSF did this for its game) | New art drawn in the existing font style for three names on four surfaces; voice either left Japanese-convention or re-recorded |
-| Saturn names (alternative) | Art unchanged; the English text's 6 American mentions (Charlie ×2, Bison ×4) edited to Nash and Vega | Small text edits per record (within the 25-code lines) | Same |
+| Surface | American variant (default, `--names us`) | Saturn-names variant (`--names saturn`) |
+| --- | --- | --- |
+| Life bar | BISON / AKUMA / CHARLIE cells already in `FIX.PRS` | unchanged (VEGA / GOUKI / NASH) |
+| Select label | `VS00` frames `0xA8` / `0xA9` / `0xAA` | unchanged |
+| VS screen, win banner | spelled from the existing `VS00` letters; no exception allowed | unchanged |
+| Voice | table A entries 14-16 → "Bison" `0x147`, "Akuma" `0x021`, "Charlie" `0x01B` | unchanged |
+| Win-quote text | as written ("Bison" in Cammy's 0 and 4) | "Vega" in Cammy's 0 and 4 |
+| Ending text | as written ("Bison", "Charlie") | "Vega" in Vega's records 1 and 4; "Nash" in Nash's records 1 and 4 |
+| Ending labels | as written (`Charlie`, `Charlie's friend`, `Akuma`, `Bison`, `Vega`) | `Nash`, `Nash's friend`, `Gouki`, `Vega`, and a new `Balrog` for Magneto's page 3 |
+| Boss-stage boxes | not part of either variant (`SPECIAL-001`) | the same |
+
+All the American assets already exist, so no new art or audio is drawn.
