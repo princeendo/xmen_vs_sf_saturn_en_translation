@@ -330,10 +330,12 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
     five references rebuild byte for byte.
   - **Coverage:** `docs/coverage_exceptions.md` registers what M8 leaves
     (`END-016`).
-- **Next:** no task is `READY`. M9 (special cases) needs the user's
-  explicit task (rule 24). `LOC-001` (name variants) is "after M8", by the
-  user's decision. Backlog: `UI-004`, `SPECIAL-001`, `REL-001`, and the
-  "after M8" UI and text tasks.
+- **2026-10-30** (`SESSION-0073`): the name-variant tasks are written,
+  `LOC-001` to `LOC-007` (Phase N). Not started.
+- **Next:** `LOC-001` (census of every name surface; `READY`). M9 (special
+  cases) needs the user's explicit task (rule 24). Backlog: `UI-004`,
+  `SPECIAL-001`, `REL-001`, `LOC-008`, and the "after M8" UI and text
+  tasks.
   The backlog also holds `UI-004` (boot-time error messages, including the
   cart warning), `SPECIAL-001` (including
   Apocalypse's pre-fight line) and `REL-001` (release patches).
@@ -2183,6 +2185,244 @@ recorded under `GATE-TRANSLATION`.
     rebuild and match (69 hashes, run at `acad50a`).
   - **README:** it now describes M8 and builds `build/m8_roster_endings`.
 
+## Phase N: Name Variants (after M8)
+
+The policy is decided (2026-10-27, changed 2026-10-28;
+`docs/localization_policy.md`): two English variants, built from the same
+pipeline.
+
+- **American names** (the default) and **Saturn names** (the alternative).
+- Each variant switches every surface together: text, labels, art and
+  voice. In the user's words, carried from MSHvSF: "It should be
+  consistent. We shouldn't display one name and speak another."
+- Releases list the American variant first.
+
+The M8 build is not consistent yet. Its text and ending labels are the
+arcade's American English ("Charlie", "Bison", `Akuma`), while its art
+still shows the Saturn's names (GOUKI, NASH).
+
+Known before Phase N (`EXP-0011`, `EXP-0038`, `EXP-0044`, `docs/names.md`):
+
+- **Names that differ:** Gouki / Akuma (select label art), Nash /
+  Charlie (select label art against English text), and Vega / Bison
+  (Shadaloo's leader; the Saturn side not yet observed).
+- **Names in the English text:**
+  - "Charlie" in Nash's ending records 1 and 4;
+  - "Bison" in Cammy's win quotes 0 and 4;
+  - "Bison" in Vega's ending records 1 and 4.
+- **Ending labels:** `MCED.SHP`'s 40-entry label list holds both
+  conventions: `Vega`, `Gouki`, `Nash`, then `Bison`, `Akuma`, `Charlie`,
+  `Nash's friend` and `Charlie's friend`.
+  - The Japanese scripts use the Saturn names (Rogue's page 1: `Vega`).
+  - The English scripts use the American ones (`Bison`, `Akuma`,
+    `Charlie`, `Charlie's friend`).
+- **Open label question:** Magneto's English page 3 uses entry `0x0F`
+  (`Vega`), the entry the Japanese scripts use for Shadaloo's leader. The
+  US arcade shows `Vega` there too, which in American naming is the claw
+  fighter (Saturn naming: Balrog). There is no `Balrog` entry.
+- **Not examined:** where the name art is stored, whether US-name art is
+  on the disc, and voice.
+
+Nothing from MSHvSF is assumed (rule 13). In MSHvSF every US-name asset was
+already on the disc (art records, speaker fields, voice clips and a
+name-call table in sound RAM). For XvSF that is a HYPOTHESIS until
+`LOC-002` and `LOC-003`.
+
+The order:
+
+1. `LOC-001` (census);
+2. `LOC-002` (art and storage) and `LOC-003` (voice), which are
+   independent;
+3. `LOC-004` (the user's per-surface plan, and the name edits' gate);
+4. `LOC-005` (American variant);
+5. `LOC-006` (Saturn-names variant);
+6. `LOC-007` (verify and register both).
+
+An in-game toggle between the variants is not planned. MSHvSF deferred
+its own; it becomes a task only if the user asks (`LOC-008`, outline).
+
+### LOC-001 - Census of every name surface
+
+- **Status:** `READY`
+- **Milestone:** Name variants (after M8)
+- **Dependencies:** END-016 (M8 complete).
+- **Blockers:** None.
+- **Objective:** For every name that differs between the Saturn and
+  American conventions, list every surface where the game shows it or
+  speaks it. Record what the Saturn shows there and what the US arcade
+  shows on the same surface.
+- **Acceptance criteria:**
+  - **Surfaces:** at least these, each with screen evidence (screenshot
+    SHA-256 and frame):
+    - character select labels;
+    - the VS screen;
+    - life-bar names;
+    - win banners ("X WIN");
+    - win-quote text;
+    - ending text and ending labels;
+    - the boss-stage and story lines, if they name anyone;
+    - initials entry and ranking;
+    - any menu that lists characters.
+
+    A surface is recorded as not naming anyone only after it has been
+    seen.
+  - **Characters:** Gouki, Nash and Vega (Shadaloo's leader) on each
+    surface where they appear. That includes Vega's own select label,
+    which has not been observed yet. Gouki is reached by his cell
+    (`EXP-0046`).
+  - **Both arcade conventions:** the same surfaces in `xmvsfu` (US) and
+    `xmvsfjr2` (Japan) in MAME 0.289, so that the US arcade's changes are
+    known per surface.
+  - **Magneto's page-3 speaker:** identified from the arcade and the
+    picture. Is it Shadaloo's leader or the claw fighter? The answer
+    decides that label's Saturn-names form.
+  - **Voice:** every moment a character or the announcer may say a name
+    (select, VS, round start, win). The user listens and identifies
+    spoken names (the user is the sound oracle). Clips are given one at a
+    time, never several at once.
+  - **Output:** `docs/names.md` gains a table of surface × name with the
+    Saturn and US arcade evidence. Unobserved cells are marked UNKNOWN.
+- **Notes:** this task only observes and records. It changes nothing on
+  the disc. Where the art lives is `LOC-002`.
+
+### LOC-002 - Where each name surface is stored, and whether its US version exists
+
+- **Status:** `BLOCKED`
+- **Milestone:** Name variants (after M8)
+- **Dependencies:** LOC-001.
+- **Blockers:** The census.
+- **Objective:** For each art or text surface in `LOC-001` that shows a
+  differing name, find where the Saturn stores it and whether the other
+  convention's version is also on the disc.
+- **Acceptance criteria:**
+  - **Location:** per surface, the drawing path, from the VDP1/VDP2
+    command or tile to its VRAM data, then to the file and offset it was
+    loaded from (the loader `0x0600D124`, as for the MC files). It must
+    be CONFIRMED by a controlled change: altering those bytes in RAM
+    alters only that name on screen.
+  - **The other convention:** present or absent, per surface. "Present"
+    needs the asset found and shown on screen by a controlled RAM change.
+    "Absent" needs the reader traced to its table, showing that no entry
+    holds the other name; a data search alone is not enough (the policy's
+    rule for absence).
+  - **Speaker labels:** confirm that the switch for each label is the
+    script's label byte (`MCED`, `EXP-0038`). Confirm whether a `Balrog`
+    label exists anywhere if `LOC-001` needs one.
+- **Notes:** the names are not plain text on the disc in any tested
+  encoding (`EXP-0011`), so expect art. MSHvSF found its name records by
+  searching reversed sprite-pattern sequences; for XvSF that method is a
+  HYPOTHESIS.
+
+### LOC-003 - Name calls in voice
+
+- **Status:** `BLOCKED`
+- **Milestone:** Name variants (after M8)
+- **Dependencies:** LOC-001.
+- **Blockers:** The census, which says which names are spoken, if any.
+- **Objective:** For each spoken differing name, find which clip plays,
+  where it is stored, how it is chosen, and whether the other
+  convention's clip is on the disc.
+- **Acceptance criteria:**
+  - **Sound path:** how the Saturn plays voice, observed on XvSF (sound
+    CPU, sound RAM, the format of the clips) before any decoder is
+    trusted. A decoder is validated against live output before its WAVs
+    are evidence.
+  - **Clips:** each candidate clip is exported as a WAV and identified by
+    the user by ear, one clip at a time. The clip's file and offset are
+    recorded.
+  - **Choice:** the table or code that picks a name clip, CONFIRMED by a
+    controlled change that plays the other clip in its place.
+  - **Absent clips:** if no clip exists for the other convention, that is
+    shown as in `LOC-002` (reader traced), and recorded for `LOC-004`.
+- **Notes:** if `LOC-001` finds that no differing name is spoken, this
+  task is closed with that evidence.
+
+### LOC-004 - The user's plan for each variant
+
+- **Status:** `BLOCKED`
+- **Milestone:** Name variants (after M8)
+- **Dependencies:** LOC-001, LOC-002, LOC-003.
+- **Blockers:** The census and the storage findings.
+- **Objective:** The user decides, surface by surface, what each variant
+  shows, given what is on the disc and what each choice costs.
+- **Acceptance criteria:**
+  - **Options and costs:** for every surface × name, the options and
+    their costs are put to the user:
+    - point the game at an existing asset;
+    - draw new art, recorded as new work like a new translation;
+    - leave the surface unchanged and record an exception.
+  - **Saturn-names text:** the Saturn-names variant changes the official
+    English's names. That is a `GATE-TRANSLATION` extension for name
+    edits only, and the user records it in their own words, covering:
+    - "Charlie" → "Nash" in Nash's ending records 1 and 4;
+    - "Bison" → "Vega" in Cammy's win quotes 0 and 4 and Vega's ending
+      records 1 and 4;
+    - the labels: `Charlie` → `Nash`, `Charlie's friend` → `Nash's
+      friend`, `Akuma` → `Gouki`, `Bison` → `Vega`, and Magneto's page 3
+      as `LOC-001` finds.
+
+    Each edited line must fit the 25-code line, and the user sees every
+    edited line before it is built.
+  - **Build switch:** the variant switch is named (for example
+    `build_english --names us|saturn`), with American as the default.
+  - **Recording:** the decisions go into `docs/localization_policy.md`,
+    under `GATE-TRANSLATION` here, and in `docs/names.md`.
+
+### LOC-005 - Build the American-names variant
+
+- **Status:** `BLOCKED`
+- **Milestone:** Name variants (after M8)
+- **Dependencies:** LOC-004.
+- **Blockers:** The user's plan.
+- **Objective:** One image, built from the untouched source, with every
+  M8 change plus every name surface in the American convention, as
+  `LOC-004` decided.
+- **Acceptance criteria:**
+  - **Build:** `tools.disc.build_english` with the variant switch. Every
+    changed range is listed with its original and new bytes (rule 12).
+    Every changed file fits its sectors, and all sectors pass EDC/ECC.
+  - **Surfaces:** each changed surface is shown in the emulator, compared
+    with the US arcade's, and checked by the agent. Each spoken name is
+    confirmed by the user by ear.
+  - **No other change:** the M8 checks still hold. Every ending page and
+    the forced win-quote draws are unchanged, apart from the names
+    themselves.
+
+### LOC-006 - Build the Saturn-names variant
+
+- **Status:** `BLOCKED`
+- **Milestone:** Name variants (after M8)
+- **Dependencies:** LOC-004, LOC-005 (the variant switch and its tooling).
+- **Blockers:** The user's plan and the American build.
+- **Objective:** One image, built from the untouched source, with the
+  English text and labels in the Saturn convention, as `LOC-004` decided.
+  The art and voice keep the Saturn's own names.
+- **Acceptance criteria:**
+  - **Build:** as `LOC-005`, with the gated name edits compiled from the
+    official records. Each edited record is listed with its source hash
+    and the edit.
+  - **Screens:** every edited win quote is forced and shown, and every
+    edited ending page is shown by the route. Each is checked by the
+    agent against the approved lines.
+  - **No other change:** everything else equals the American variant.
+
+### LOC-007 - Verify and register both variants
+
+- **Status:** `BLOCKED`
+- **Milestone:** Name variants (after M8)
+- **Dependencies:** LOC-005, LOC-006.
+- **Blockers:** Both builds.
+- **Objective:** Play-check both variants, and lock them.
+- **Acceptance criteria:**
+  - **Play check:** the user plays each variant from a cold boot, through
+    surfaces chosen by the agent that show every differing name at least
+    once. The pages and screens match the forced ones.
+  - **Regression:** both variants are added to
+    `data/regression/references.json`, and all references match.
+  - **Coverage:** `docs/coverage_exceptions.md` lists any surface left
+    unchanged in either variant, and why.
+  - **README:** both build commands, American first.
+
 ## Later Milestones (outline only)
 
 These are placeholders so the order is visible. Each becomes a full task, with
@@ -2198,4 +2438,4 @@ for each is in `docs/playbook_from_mshvsf.md`.
 | UI-003 | after M8, user request | Other UI text (continue screen, hints): find the arcade English by tracing the arcade code, not only by data search. |
 | UI-004 | user requests (2026-10-29); order not yet set | Every error or warning message the game can show when it first loads, not only the 4 MB RAM cart warning (seen in `EXP-0002`, Japanese). First list them: boot with no cart, with the wrong cart, and with other startup faults the game checks for (for example save-memory messages, if any), and record each screen. Count only the game's own messages; the Saturn BIOS's are not the game's. Then, per message, find where its text and art live (disc, BIOS or code) and how it is drawn, look for an official English source, and translate it. With no official English, the policy's recorded new translation applies, approved by the user. User request (verbatim, 2026-10-29): "make sure you add to the backlog to translate any error messages that come up when you first load the game (like ones that are related to not having a 4M RAM cart, etc.)" |
 | TXT-001 | after M8, user request | Rare, random, or region-gated text: trace every reader of every text table. |
-| LOC-001 | after M8 | Name variants (user decisions: both variants, 2026-10-27; American names default, 2026-10-28): whether both conventions' art and voice are already on the disc. |
+| LOC-008 | after Phase N, user request | An in-game toggle between the two name variants. MSHvSF deferred its own (`LOC-006` there, `EXP-0095`: the second variant's font did not fit the free cart RAM). If wanted, census the difference between the two variants' images early. |

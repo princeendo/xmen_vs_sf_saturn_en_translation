@@ -2331,3 +2331,35 @@ clean.
 Conclusion: `END-016` is `DONE` (D-043), and M8 is complete. No task is
 `READY`. The next work (M9 special cases, `LOC-001`, UI tasks, release)
 waits for the user's choice.
+
+## 2026-10-30 — SESSION-0073: Name-variant tasks written (Phase N)
+
+User request (verbatim): "Write up the LOC-001 tasks (name variants). Don't
+start them yet."
+
+- **Inputs:** the policy (American default, both variants, every surface
+  switched together), `docs/names.md` (`EXP-0011`), the `MCED` label
+  list (`EXP-0038`), the `END-012` names, and the MSHvSF method
+  (playbook, "Names and voice").
+- **Static check while writing:** in `ending_script_census.json`, Rogue's
+  Japanese ending labels Shadaloo's leader with entry `0x0F` (`Vega`),
+  and her English ending uses `0x13` (`Bison`). Magneto's English page 3
+  uses `0x0F` (`Vega`), so who speaks there (leader or claw fighter) is a
+  `LOC-001` item. There is no `Balrog` label.
+- **Tasks:**
+  - `LOC-001` census (`READY`);
+  - `LOC-002` storage and the other convention's art;
+  - `LOC-003` voice;
+  - `LOC-004` the user's plan, with a `GATE-TRANSLATION` extension for
+    the Saturn-names edits;
+  - `LOC-005` American build;
+  - `LOC-006` Saturn-names build;
+  - `LOC-007` verify and register.
+
+  `LOC-008` (an in-game toggle) is an outline row. The old `LOC-001`
+  outline row was replaced.
+- `docs/names.md`'s open questions now point to `LOC-002` and `LOC-003`.
+
+No experiment was run, and no code changed.
+
+Conclusion: Phase N is written. `LOC-001` is `READY` and not started.

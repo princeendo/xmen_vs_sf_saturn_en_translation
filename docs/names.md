@@ -54,15 +54,16 @@ Apocalypse. Dhalsim and Sabretooth appear in the US win banner (`EXP-0009`).
 - **Voice.** Whether the Saturn announcer or victory voices speak these names,
   and in which convention, was not checked (no audio analysis yet). MSHvSF's
   disc held both conventions' voice clips; for XvSF that is a hypothesis
-  (`LOC-001`).
+  (`LOC-003`).
 - **Assets on the Saturn disc.** The disc holds no name as plain text in any
   tested encoding (8-bit or 16-bit ASCII). The names are art. Whether
-  American-name art is also on the disc is `LOC-001`.
+  American-name art is also on the disc is `LOC-002`.
 
 ## Options and Costs (for the American-default policy)
 
 The default is already decided (American names, both variants). The open
-question is cost, which depends on `LOC-001`.
+question is cost, which depends on `LOC-001` to `LOC-003`; the user's
+plan is `LOC-004` (`TASKS.md`, Phase N).
 
 | Variant | What changes | Cost if the American art and voice are already on the disc | Cost if they are not |
 | --- | --- | --- | --- |
