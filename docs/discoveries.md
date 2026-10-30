@@ -582,8 +582,11 @@ Reproduce: `research/experiments/EXP-0035/README.md`, "Procedure".
 - **Loading:** when Nash is picked first, the file loader `0x0600D124`
   (R5 = `0x5D69`, R6 = `0x0024D000`) writes all six ending records. The
   buffer equals decoded `MC10.SHP` plus the 263 `EXP-0025` fix-ups.
-- **No rewrite:** from the pre-boss checkpoint through the last page,
-  nothing writes to the records again (write log, 0 hits).
+- ~~**No rewrite:** from the pre-boss checkpoint through the last page,
+  nothing writes to the records again (write log, 0 hits).~~ **Withdrawn
+  2026-10-29** (`EXP-0041`): those replays had no input, lost the boss fight
+  and never reached the ending. The disc edit below was shown in play, so
+  the result stands without this bullet.
 - **RAM edit:** one code changed in RAM before page 3 changed exactly that
   page's first cell, to the new code's `FIX.PRS` glyph.
 - **Disc edit:** an 8-byte, same-size edit at decoded `0x2EC0` (record 16)
@@ -676,3 +679,25 @@ Reproduce: `research/experiments/EXP-0038/README.md`, "Procedure".
   in `tools/disc/english_mode.py`.
 
 Reproduce: `research/experiments/EXP-0040/README.md`, "Procedure".
+
+## D-035 (M7): Nash's English ending records sit after his English win quotes, and the build shows them (`END-007`, `EXP-0041`)
+
+- **Placement:** `MC10.SHP` holds the 800 English win-quote bytes then the
+  600 English ending bytes at decoded `0x2A00`, and fits its 12 sectors
+  with 814 bytes to spare. Built with `tools.disc.build_english --patch-version 4`
+  and `data/translations/nash_ending.json`, together with version 4 in
+  `MMPACK.PCA` and Nash's `MCED` script header (`build/m7_nash_ending`,
+  Track 01 `2abe9771…`).
+- **No-play route:** picked from the select checkpoint, with the build's
+  code in RAM and the CPU side's vitality (`0x060F4610`, `0x060F4E10`) set
+  to 0 every 20 frames.
+- **What the route showed:**
+  - after the pick, `MC10` loads exactly (file + 263 fix-ups);
+  - the bytes after the win quotes are read only by the ending renderer
+    while it shows them (one read just past page 6, with no effect on
+    screen);
+  - the six pages are byte-identical to the English layout chosen in
+    `LAYOUT-002`.
+- **Loading:** `MCED` is loaded with the boss stage.
+
+Reproduce: `research/experiments/EXP-0041/README.md`, "Procedure".

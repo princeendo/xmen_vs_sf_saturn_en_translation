@@ -5,7 +5,14 @@ import hashlib
 import pytest
 
 from tools.disc.build_english import compile_records, mmpack_patches
-from tools.disc.english_mode import PATCHES, apply, as_bytes, check, patches_v3
+from tools.disc.english_mode import (
+    PATCHES,
+    apply,
+    as_bytes,
+    check,
+    patches_v3,
+    patches_v4,
+)
 from tools.text.caption import compile_record
 
 BASE = 0x06066000
@@ -107,4 +114,46 @@ def test_rejects_repeated_slot_or_file(specs: list[dict[str, object]]) -> None:
 
 def test_rejects_unknown_patch_version() -> None:
     with pytest.raises(ValueError, match="unknown patch version"):
-        mmpack_patches([character(9, "MC09.SHP;1")], 4)
+        mmpack_patches([character(9, "MC09.SHP;1")], 5)
+
+
+def win(slot: int, mc_file: str, table: str = "0x2a00") -> dict[str, object]:
+    return {"arcade_slot": slot, "mc_file": mc_file, "table_offset": table}
+
+
+def ending(slot: int, mc_file: str, table: str = "0x2a00") -> dict[str, object]:
+    return {**win(slot, mc_file, table), "kind": "ending"}
+
+
+def test_version_4_marks_endings_for_ending_specs_only() -> None:
+    specs = [win(9, "MC09.SHP;1"), win(16, "MC10.SHP;1"), ending(16, "MC10.SHP;1")]
+    assert mmpack_patches(specs, 4) == patches_v4([9, 16], [16])
+
+
+def test_ending_specs_need_version_4() -> None:
+    specs = [win(16, "MC10.SHP;1"), ending(16, "MC10.SHP;1")]
+    with pytest.raises(ValueError, match="need patch version 4"):
+        mmpack_patches(specs, 3)
+
+
+@pytest.mark.parametrize(
+    "specs",
+    [
+        [win(9, "MC09.SHP;1"), ending(16, "MC10.SHP;1")],
+        [win(16, "MC09.SHP;1"), ending(16, "MC10.SHP;1")],
+    ],
+)
+def test_ending_needs_its_win_quote_spec(specs: list[dict[str, object]]) -> None:
+    with pytest.raises(ValueError, match="no win-quote spec"):
+        mmpack_patches(specs, 4)
+
+
+def test_ending_and_win_tables_must_agree() -> None:
+    specs = [win(16, "MC10.SHP;1"), ending(16, "MC10.SHP;1", "0x2a02")]
+    with pytest.raises(ValueError, match="table offsets differ"):
+        mmpack_patches(specs, 4)
+
+
+def test_a_win_and_an_ending_spec_may_share_a_file() -> None:
+    specs = [win(16, "MC10.SHP;1"), ending(16, "MC10.SHP;1")]
+    assert mmpack_patches(specs, 4) == patches_v4([16], [16])

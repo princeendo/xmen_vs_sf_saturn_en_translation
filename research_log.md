@@ -1964,3 +1964,55 @@ Checks: `pytest` 177 passed; `ruff check`, `ruff format --check` and
 the experiment scripts after their runs; behaviour unchanged.
 
 Conclusion: `END-006` is `DONE` (**CONFIRMED**, D-034). Next: `END-007`.
+
+## 2026-10-29 — SESSION-0060: Correction to EXP-0036 (found during END-007)
+
+While setting up `EXP-0041`'s read logs from `local/checkpoints/end001/f00210163.mcs`
+with no input, the screenshots showed Nash losing to Apocalypse, then the
+continue screen and the title. `EXP-0036`'s write logs `wlog1` and
+`wlog_marker` replayed the same checkpoint with no input, so they never
+reached the partner fight or the ending. Their "no rewrite before the
+ending" claim is withdrawn in `EXP-0036` and in D-031, with a note. The
+disc-to-screen marker result stands: it came from the user's play-through.
+
+This is a recorded failure (AGENTS.md rule 6): a no-input replay from a
+checkpoint taken mid-play does not replay the play. A replay is valid only
+over spans where the outcome no longer depends on input, such as after the
+last hit (`f00220064`). Otherwise the route must force the outcome.
+
+## 2026-10-29 — SESSION-0061: Nash's English ending records placed and built (END-007, EXP-0041)
+
+User request (verbatim): "Start END-007: place Nash's English ending
+records."
+
+- **Spec and tools:** `data/translations/nash_ending.json` (addresses and
+  hashes). `tools.disc.build_english` takes ending specs with
+  `--patch-version 4` (writes after the win quotes, `patches_v4`, `MCED`
+  re-encode). 6 new tests.
+- **Build:** `build/m7_nash_ending` (Track 01 `2abe9771…`, all sectors
+  valid). `MC10` margin 814 bytes. `MCED` and `MMPACK` equal `EXP-0040`'s
+  fit-check outputs.
+- **Failures on the way:**
+  1. `area_reads.py` from `f00210163`: `MCED` not yet loaded there; then
+     Nash lost with no input. This also invalidated `EXP-0036`'s write logs
+     (correction recorded in `SESSION-0060`).
+  2. Route runs without `--mmpack` used the original code from the select
+     state (Japanese 76-byte pointers). Caught from the pointer log;
+     `--mmpack` added.
+  3. One route run lost window focus at the pick; rerun.
+- **Saturn vitality:** found from 8 debugger dumps across one fight of the
+  marker session. The CPU side's blocks are `0x060F4610` and `0x060F4E10`,
+  the arcade layout (`0xFF4xxx`) at `0x060Fxxxx`.
+- **Valid runs** (`route_after2`, `route_rest3`):
+  - load check passed;
+  - the space after the win quotes was read only during the ending (306
+    hits), plus one read just past page 6;
+  - the six pages are byte-identical to `EXP-0038`'s English trial;
+  - all win quotes are English, including the post-Apocalypse one (record
+    0).
+
+Checks: see below.
+
+Checks: `pytest` 183 passed; `ruff check`, `ruff format --check` and `mypy --strict tools tests` clean; `mypy --strict` on the EXP-0041 scripts clean (`MYPYPATH` with EXP-0025, EXP-0032 and EXP-0036). `tools.disc.regression`: `ryu_v2`, `ryu_ken_v3` and `roster_v3` all match after the `build_english` change (5 min 8 s).
+
+Conclusion: `END-007` is `DONE` (**CONFIRMED**, D-035). Next: `END-008`, the user's cold-boot play check.

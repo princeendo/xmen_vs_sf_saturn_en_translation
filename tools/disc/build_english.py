@@ -3,7 +3,7 @@
 Run from the repository root:
 
     ./invenv.sh python -m tools.disc.build_english SPEC [SPEC ...] OUT
-        [--program PATH] [--fix-grammar] [--patch-version {2,3}] [--image DIR]
+        [--program PATH] [--fix-grammar] [--patch-version {2,3,4}] [--image DIR]
 
 Each SPEC is a translation record such as
 `data/translations/ryu_win_quotes.json`. For each English record it names the
@@ -25,6 +25,15 @@ steps:
    Version 2 (`EXP-0023`) is the code-only Ryu patch; it takes exactly one
    SPEC, Ryu's, and reproduces `EXP-0024`'s files.
 
+An ending SPEC (``"kind": "ending"``, such as `data/translations/nash_ending.json`)
+needs version 4 (`END-006`, `EXP-0040`) and a win-quote SPEC for the same slot
+and file. Its records are compiled the same way and written right after
+that slot's English win quotes, at quote table + 800
+(`tools.disc.english_mode.ENDING_RECORDS`). ``MMPACK.PCA`` gets
+`tools.disc.english_mode.patches_v4`, and ``MCED.SHP`` gets
+`tools.disc.english_mode.mced_english_scripts` for the ending slots, re-encoded
+at its original size.
+
 Both files are read from the untouched data track and checked against
 `references/saturn_jp/iso_listing.json`. Each stream must still end in its
 file's last sector. ``OUT/changes.json`` records every changed range, with
@@ -42,7 +51,15 @@ import json
 from collections.abc import Sequence
 from pathlib import Path
 
-from tools.disc.english_mode import ENGLISH_SLOT2, PATCHES, as_bytes, patches_v3
+from tools.disc.english_mode import (
+    ENDING_RECORDS,
+    ENGLISH_SLOT2,
+    PATCHES,
+    as_bytes,
+    mced_english_scripts,
+    patches_v3,
+    patches_v4,
+)
 from tools.disc.iso9660 import RAW_SECTOR, USER_DATA
 from tools.disc.patch_image import find_entry
 from tools.disc.patch_image import main as patch_image
@@ -131,15 +148,34 @@ def build_mc(
     return rebuilt
 
 
+def is_ending(spec: dict[str, object]) -> bool:
+    return spec.get("kind") == "ending"
+
+
 def mmpack_patches(
     specs: list[dict[str, object]], version: int
 ) -> list[tuple[int, str, str]]:
-    slots = [int(str(spec["arcade_slot"])) for spec in specs]
-    if len(set(slots)) != len(slots):
-        raise ValueError(f"a slot appears twice: {slots}")
-    files = [str(spec["mc_file"]) for spec in specs]
-    if len(set(files)) != len(files):
-        raise ValueError(f"an MC file appears twice: {files}")
+    wins = [spec for spec in specs if not is_ending(spec)]
+    endings = [spec for spec in specs if is_ending(spec)]
+    for group in (wins, endings):
+        slots = [int(str(spec["arcade_slot"])) for spec in group]
+        if len(set(slots)) != len(slots):
+            raise ValueError(f"a slot appears twice: {slots}")
+        files = [str(spec["mc_file"]) for spec in group]
+        if len(set(files)) != len(files):
+            raise ValueError(f"an MC file appears twice: {files}")
+    slots = [int(str(spec["arcade_slot"])) for spec in wins]
+    ending_slots = [int(str(spec["arcade_slot"])) for spec in endings]
+    if endings and version != 4:
+        raise ValueError("ending specs need patch version 4")
+    for spec in endings:
+        match = [w for w in wins if w["arcade_slot"] == spec["arcade_slot"]]
+        if not match or match[0]["mc_file"] != spec["mc_file"]:
+            raise ValueError(f"ending slot {spec['arcade_slot']} has no win-quote spec")
+        if match[0]["table_offset"] != spec["table_offset"]:
+            raise ValueError(f"ending slot {spec['arcade_slot']}: table offsets differ")
+    if version == 4:
+        return patches_v4(slots, ending_slots)
     if version == 2:
         if slots != [ENGLISH_SLOT2 // 2]:
             raise ValueError("version 2 builds Ryu (slot 9) alone")
@@ -147,6 +183,28 @@ def mmpack_patches(
     if version == 3:
         return patches_v3(slots)
     raise ValueError(f"unknown patch version {version}")
+
+
+def build_mced(raw: bytes, slots: list[int], changes: list[dict[str, object]]) -> bytes:
+    decoded, _ = decompress_file(raw)
+    data = bytearray(decoded)
+    for offset, old, new in mced_english_scripts(decoded, slots):
+        data[offset : offset + len(old)] = new
+        changes.append(
+            {
+                "file": "MCED.SHP;1",
+                "decompressed_offset": f"{offset:#x}",
+                "length": len(old),
+                "original": old.hex(),
+                "modified": new.hex(),
+            }
+        )
+    rebuilt = compress_file(
+        bytes(data), size=len(raw), min_end=last_sector_start(len(raw)), lazy=True
+    )
+    if decompress_file(rebuilt)[0] != bytes(data):
+        raise ValueError("MCED.SHP round trip failed")
+    return rebuilt
 
 
 def build_mmpack(
@@ -199,7 +257,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("paths", type=Path, nargs="+", help="SPEC [SPEC ...] OUT")
     parser.add_argument("--program", type=Path, default=PROGRAM)
     parser.add_argument("--fix-grammar", action="store_true")
-    parser.add_argument("--patch-version", type=int, choices=(2, 3), default=3)
+    parser.add_argument("--patch-version", type=int, choices=(2, 3, 4), default=3)
     parser.add_argument("--image", type=Path, help="also build the image here")
     args = parser.parse_args(argv)
     if len(args.paths) < 2:
@@ -211,15 +269,30 @@ def main(argv: Sequence[str] | None = None) -> int:
     program = args.program.read_bytes()
     changes: list[dict[str, object]] = []
     summary: dict[str, object] = {"patch_version": args.patch_version}
-    for spec in specs:
+    endings = {str(s["mc_file"]): s for s in specs if is_ending(s)}
+    for spec in (s for s in specs if not is_ending(s)):
         english = compile_records(spec, program, args.fix_grammar)
         name = str(spec["mc_file"])
+        if name in endings:
+            if len(english) != ENDING_RECORDS:
+                raise ValueError(f"{name}: win quotes are not {ENDING_RECORDS} bytes")
+            ending = compile_records(endings[name], program, args.fix_grammar)
+            summary[f"{name} ending_sha256"] = hashlib.sha256(ending).hexdigest()
+            english += ending
         raw = read_file(name)
         table = int(str(spec["table_offset"]), 16)
         rebuilt = build_mc(raw, english, table, name, changes)
         summary[name] = file_summary(raw, rebuilt)
         summary[f"{name} english_sha256"] = hashlib.sha256(english).hexdigest()
         (out / name.split(";")[0]).write_bytes(rebuilt)
+    built = [str(spec["mc_file"]) for spec in specs if not is_ending(spec)]
+    if endings:
+        raw = read_file("MCED.SHP;1")
+        slots = [int(str(s["arcade_slot"])) for s in endings.values()]
+        rebuilt = build_mced(raw, slots, changes)
+        summary["MCED.SHP;1"] = file_summary(raw, rebuilt)
+        (out / "MCED.SHP").write_bytes(rebuilt)
+        built.append("MCED.SHP;1")
     raw = read_file("MMPACK.PCA;1")
     rebuilt = build_mmpack(raw, changes, patches)
     summary["MMPACK.PCA;1"] = file_summary(raw, rebuilt)
@@ -231,7 +304,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     if args.image is None:
         return 0
     files = []
-    for name in [*(str(spec["mc_file"]) for spec in specs), "MMPACK.PCA;1"]:
+    for name in [*built, "MMPACK.PCA;1"]:
         files += ["--file", name, "--data", str(out / name.split(";")[0])]
     return patch_image(
         [

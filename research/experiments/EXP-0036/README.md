@@ -15,7 +15,8 @@ edit reaches the screen.
 
 `MC10.SHP` is loaded once, when Nash is picked, by the file loader that
 loads the win quotes (`0x0600D124`, D-024), into the first-member buffer
-`0x0024D000`. Nothing rewrites the ending records afterwards. So a same-size
+`0x0024D000`. Nothing rewrites the ending records afterwards (not shown: see
+the correction under Actual Result). So a same-size
 edit of records 16-21 in `MC10.SHP` reaches the ending pages.
 
 ## Controlled Changes
@@ -87,14 +88,22 @@ not sent. The script now retries.
 
 ## Actual Result
 
-### No rewrite before the ending
+### No rewrite before the ending (WITHDRAWN, `EXP-0041`)
+
+> **Correction (2026-10-29, `SESSION-0060`).** These two runs replayed
+> `f00210163` with no input, so Nash lost to Apocalypse and the run went to
+> the continue screen, game over and the title. `EXP-0041` found this by
+> looking at the same replay's screenshots. Neither run reached the
+> partner fight or the ending, so neither says anything about writes there.
+> The claim is withdrawn. The disc-to-screen result below rests on the
+> user's play check, not on these logs. `EXP-0041` covers the same question
+> with a no-play route that does win.
 
 - **`wlog1`** (untouched image, frames 210,163-222,100): 0 writes to the
-  records, and they were unchanged at the end. That span covers the boss
-  stage's loads, the partner fight and all six pages.
+  records, and they were unchanged at the end. As run, the span covers a
+  lost boss fight, not the partner fight or the pages.
 - **`wlog_marker`** (marker image, frames 210,163-220,700): 0 writes. The
-  records still held the original bytes (`0bc30d76…`), so the game does not
-  reload `MC10` from disc in that span.
+  records still held the original bytes (`0bc30d76…`).
 
 ### RAM write
 
@@ -187,7 +196,8 @@ original `f00220654.png`:
 
 - Nash's ending records are loaded once, at the pick, by the file loader
   `0x0600D124`, from `MC10.SHP` into `0x0024D000` (records at `+0x2EC0`).
-- Nothing writes them again before or during the ending.
+- ~~Nothing writes them again before or during the ending.~~ Withdrawn:
+  the write logs did not reach the ending (see the correction above).
 - A RAM edit of a record changes exactly the predicted cell.
 - A same-size disc edit reaches RAM through the same loader.
 

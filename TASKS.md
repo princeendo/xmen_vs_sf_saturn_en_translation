@@ -252,8 +252,18 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   RAM: the unmarked ending is pixel-identical to the original, the marked
   one shows `EXP-0038`'s English ending, and Ryu's win quotes are unchanged.
   Both files fit (`END-006`, D-034; `tools/disc/english_mode.patches_v4`).
-- Next: `END-007` (data, ready), then `END-008`. Backlog: `UI-004`,
-  `SPECIAL-001`, `REL-001`.
+- **2026-10-29** (`SESSION-0061`, `EXP-0041`): Nash's English ending
+  records sit at `MC10` table + 800, after his English win quotes (814
+  bytes to spare). `tools.disc.build_english` builds ending specs
+  (`data/translations/nash_ending.json`, version 4). The M7 image
+  `build/m7_nash_ending` loads correctly. A no-play Saturn route (vitality
+  forcing) from the select checkpoint to the credits showed that the space
+  is read only by the ending, and that the six pages match the chosen
+  layout. Found on the way: no-input replays from mid-play checkpoints lose
+  the fight. `EXP-0036`'s "no rewrite" claim was withdrawn for that reason
+  (`END-007`, D-035).
+- Next: `END-008` (the user's cold-boot play check of `build/m7_nash_ending`).
+  Backlog: `UI-004`, `SPECIAL-001`, `REL-001`.
   The backlog also holds `UI-004` (boot-time error messages, including the
   cart warning), `SPECIAL-001` (including
   Apocalypse's pre-fight line) and `REL-001` (release patches).
@@ -1735,7 +1745,7 @@ recorded under `GATE-TRANSLATION` above and in
 
 ### END-007 - Data: place Nash's English ending records
 
-- **Status:** `READY`
+- **Status:** `DONE` (`EXP-0041`, D-035)
 - **Milestone:** M7
 - **Dependencies:** LAYOUT-002.
 - **Blockers:** None; `LAYOUT-002` chose option (a) (`EXP-0039`).
@@ -1764,11 +1774,11 @@ recorded under `GATE-TRANSLATION` above and in
 
 ### END-008 - Build Nash's English ending and play-check it
 
-- **Status:** `BLOCKED`
+- **Status:** `READY`
 - **Milestone:** M7
 - **Dependencies:** GATE-TRANSLATION extension for Nash's ending, END-006,
   END-007.
-- **Blockers:** `END-006` and `END-007`. The gate is done.
+- **Blockers:** None. `EXP-0041` already built `build/m7_nash_ending` with the extended tool, and its no-play route (`saturn_route.py`, with the build's code in RAM) showed the six English pages. That covers the "fast check". What remains is the cold-boot play check by the user, the win-quote check in that session, and the before and after record.
 - **Objective:** One image, built from the untouched source, with all 18
   roster characters' English win quotes and Nash's English ending, shown
   in play.
