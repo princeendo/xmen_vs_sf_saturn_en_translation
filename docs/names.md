@@ -34,6 +34,17 @@ claw fighter, who is "Vega" in US naming and Balrog in Saturn naming
 (SUPPORTED). The Saturn label list has no `Balrog`, and its `Vega` entry
 means Shadaloo's leader in the Japanese scripts.
 
+## Where Each Name Surface Is Stored (`LOC-002`, `EXP-0049`)
+
+| Surface | Stored in | American name present |
+| --- | --- | --- |
+| Life bar | `FIX.PRS` cells (player's set `0x0880`-`0x08CF`, CPU's set `0x0822`-`0x087F`) | BISON, AKUMA (both sets); CHARLIE at `0x03C8`-`0x03CF`; shown by RAM swaps |
+| Select label | `VS00.PRS` frames `0x96`-`0xA7` (slots 0-17) | BISON `0xA8`, AKUMA `0xA9`, CHARLIE `0xAA`; shown by RAM patches |
+| VS-screen name | `VS00.PRS` one-cell letter font | spelled from letters; all needed letters present; the letter-list source is UNKNOWN |
+| Win banner | `VS00.PRS` 2 × 2 letter font | spelled from letters; as above |
+| Ending labels | `MCED.SHP` label list | `Bison`, `Akuma`, `Charlie`, `Charlie's friend`; no `Balrog` |
+| Voice | per-character files (`019_SVEG.ADP`, `01A_SGOU.ADP`, `01B_SNAS.ADP`…) | `LOC-003` |
+
 ## Names That Differ
 
 | Character | Saturn (observed) | Arcade JP set | Arcade US set (art) | Arcade English text | Status |

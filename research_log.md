@@ -2434,3 +2434,37 @@ Checks: `ruff check`, `ruff format --check` and `mypy --strict` on
 
 Conclusion: `LOC-002` stays `IN_PROGRESS`. The life bar is done. The select
 label, banner and VS screen remain.
+
+## 2026-10-30 — SESSION-0076: Name surfaces located, LOC-002 done (EXP-0049)
+
+User request (verbatim): "Keep going on LOC-002: the select-label and
+banner controlled changes, then the face-file format for the VS screen."
+
+- **Select label:** from the title state `f00004409` with Start
+  (`keys:s`), a decode log showed `VS00.PRS` frames `0x97` (CYCLOPS) and
+  `0x9F` (RYU). Patching frame `0x97`'s entry showed BISON (`0xA8`), AKUMA
+  (`0xA9`) and CHARLIE (`0xAA`).
+- **VS screen:**
+  - the pack descriptors at `0x060255F8` + 16 × slot are the face files,
+    slices of `FCALL.PRS` (VDP1 `0x8000`);
+  - `0x06025808` is `VS00.PRS` (WRAM-L `0x002F7030`);
+  - the letter frames were mapped by DMA order, and the `vs_patch1` patch
+    (N → H data) showed HASH.
+- **Banner:** a decode log with vitality 0 showed `VS00` frames
+  `0xB8`-`0xC2`, and the `banner_vs00` patch showed HASH.
+- **CHARLIE's life-bar cells:** block `0x0880` repointed to them; the life
+  bar showed CHARL….
+- **Balrog:** no text anywhere.
+- **Failures:**
+  1. `FIX.PRS` swaps had no effect on the select, VS and banner screens
+     (same art, different file).
+  2. Key timing spoiled `label_a8` and `label_a8b`.
+  3. Searches for the VS and banner letter lists (`VS00` codes, strides
+     1-12) found nothing; this is left for `LOC-005`.
+- **Tools:** `patch_run.py` added; `write_log.py` gained RAM patches and
+  keys.
+
+Checks: `ruff check`, `ruff format --check` and `mypy --strict` on
+`EXP-0049` are clean; `pytest` passes.
+
+Conclusion: `LOC-002` is `DONE` (D-045). Next: `LOC-003`.

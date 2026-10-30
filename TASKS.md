@@ -347,9 +347,13 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   - **Win banner:** a `FIX.PRS` letter font.
   - **VS screen:** comes from the face files (`FC00`-`FC12.PRS`) through
     a second decoder.
-- **Next:** finish `LOC-002`: the select and banner controlled changes,
-  and the face-file format. `LOC-003` (voice) is `READY` and waits:
-  only one experiment may be in progress. M9 (special cases) needs the user's
+- **2026-10-30** (`SESSION-0076`, `EXP-0049`): `LOC-002` is done (D-045).
+  - **Storage:** every name surface is located by a controlled change.
+  - **American art:** BISON, AKUMA and CHARLIE are already on the disc
+    for the life bar (`FIX.PRS`) and the select label (`VS00.PRS`); the VS
+    and banner fonts can spell them.
+  - **Absent:** a `Balrog` label.
+- **Next:** `LOC-003` (voice; `READY`). M9 (special cases) needs the user's
   explicit task (rule 24). Backlog: `UI-004`, `SPECIAL-001`, `REL-001`,
   `LOC-008`, and the "after M8" UI and text tasks.
   The backlog also holds `UI-004` (boot-time error messages, including the
@@ -2314,7 +2318,7 @@ its own; it becomes a task only if the user asks (`LOC-008`, outline).
 
 ### LOC-002 - Where each name surface is stored, and whether its US version exists
 
-- **Status:** `IN_PROGRESS` (`EXP-0049`)
+- **Status:** `DONE` (`EXP-0049`, D-045)
 - **Milestone:** Name variants (after M8)
 - **Dependencies:** LOC-001 (done).
 - **Blockers:** None. The surfaces are select label, VS screen, life bar
@@ -2336,17 +2340,17 @@ its own; it becomes a task only if the user asks (`LOC-008`, outline).
   - **Speaker labels:** confirm that the switch for each label is the
     script's label byte (`MCED`, `EXP-0038`). Confirm whether a `Balrog`
     label exists anywhere if `LOC-001` needs one.
-- **Progress (2026-10-30, `EXP-0049`):**
-  - **Life bar:** CONFIRMED. The names are compressed cells in
-    `FIX.PRS`, with BISON and AKUMA beside VEGA and GOUKI, and CHARLIE
-    present. A RAM swap showed AKUMA.
-  - **Select label:** uses the same cells (SUPPORTED).
-  - **Win banner:** a `FIX.PRS` letter font; the name source is not
-    found.
-  - **VS screen:** drawn from the face files `FC00`-`FC12.PRS` through a
-    second decoder (`0x060252BA`).
-  - **Left:** the select-label and banner controlled changes, the
-    face-file format and its names, and CHARLIE on screen.
+- **Outcome:** every surface's storage is confirmed by a RAM change.
+  - **Life bar:** `FIX.PRS` cells.
+  - **Select label:** `VS00.PRS` frames `0x96`-`0xAA`.
+  - **VS name and win banner:** `VS00.PRS` letter fonts.
+  - **Ending labels:** `MCED.SHP`.
+  - **American art:** BISON, AKUMA and CHARLIE are present and shown for
+    the life bar and the select label; the VS and banner screens can
+    spell them with existing letters.
+  - **Absent:** a `Balrog` label.
+  - **Open, for `LOC-005`:** where the VS and banner screens get each
+    character's letter list.
 - **Notes:** the names are not plain text on the disc in any tested
   encoding (`EXP-0011`), so expect art. MSHvSF found its name records by
   searching reversed sprite-pattern sequences; for XvSF that method is a

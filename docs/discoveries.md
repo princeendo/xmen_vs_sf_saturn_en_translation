@@ -888,3 +888,28 @@ Reproduce: `./invenv.sh python -m tools.disc.regression`.
 
 Reproduce: `research/experiments/EXP-0048/README.md` and
 `research/experiments/EXP-0048/arcade/RESULTS.md`.
+
+## D-045 (Names): Every name surface's art is on the disc in both conventions (`LOC-002`, `EXP-0049`)
+
+- **Life bar:** cells of **`FIX.PRS`**, which is loaded raw at WRAM-L
+  `0x002C3EA0`.
+  - Decoded by `0x06024CF0` (cell index R3; base at `0x0602586C`; block
+    table at + 16; size/type bytes at + `0x390`) and sent to VDP1 by SCU
+    DMA (`0x06024010`).
+  - The player's set (`0x0880`-`0x08CF`) and the CPU's set
+    (`0x0822`-`0x087F`) both hold BISON and AKUMA. CHARLIE is at
+    `0x03C8`-`0x03CF`.
+- **Select label:** **`VS00.PRS`** frames `0x96`-`0xA7` (slots 0-17), plus
+  BISON `0xA8`, AKUMA `0xA9` and CHARLIE `0xAA`. `VS00.PRS` is loaded raw
+  at WRAM-L `0x002F7030`. Its frame table is at + 16, 6 bytes a frame;
+  the frames are unpacked by a second decoder (`0x060252BA`).
+- **VS-screen name and win banner:** spelled from two `VS00.PRS` letter
+  fonts, one cell (N = `0x7E`) and 2 × 2 cells (N = `0xBD`). Every letter
+  the American names need is there.
+- **Controlled changes** (patches to the RAM copies):
+  - the life bar showed AKUMA and CHARL…;
+  - the select label showed BISON, AKUMA and CHARLIE;
+  - the VS name and the banner showed HASH.
+- **No `Balrog`:** no file holds a `Balrog` label or text.
+
+Reproduce: `research/experiments/EXP-0049/README.md`.

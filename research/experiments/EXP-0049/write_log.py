@@ -3,10 +3,16 @@ r"""EXP-0049: log CPU writes (or reads, or executions) after a save state.
 Run from the repository root:
 
     ./invenv.sh python research/experiments/EXP-0049/write_log.py \
-        CUE OUT STATE FIRST:LAST FRAMES [KIND]
+        CUE OUT STATE FIRST:LAST FRAMES [KIND] [ADDRESS:OLD:NEW ...]
 
-KIND is ``write`` (the default), ``read`` or ``pc``. Loads STATE into a
-silent Mednafen on CUE, sets a KIND breakpoint in log mode on the bus range
+KIND is ``write`` (the default), ``read`` or ``pc``. Each ADDRESS:OLD:NEW
+(hex, work RAM) is written after loading STATE, once RAM is checked to
+hold OLD (for example vitality 0, so that a fight ends with no input).
+An item ``keys:MOVES`` instead sends those keys
+(`tools.mednafen.route.KEYS`, Mednafen in front, the route's pick home)
+once the breakpoint is set.
+Loads STATE into a silent Mednafen on CUE, sets a KIND breakpoint in log
+mode on the bus range
 FIRST-LAST (hex, both ends included, with its
 cache-through mirror for addresses below ``0x20000000``), runs FRAMES
 frames, and writes every hit line to ``OUT/hits.txt`` with a summary of the
@@ -30,11 +36,17 @@ from pathlib import Path
 sys.path.insert(0, str(Path.cwd()))
 from tools.mednafen.agent import Agent, AgentError
 from tools.mednafen.home import QUIET_HOME, configure
-from tools.mednafen.route import BINARY, parse_hit
+from tools.mednafen.route import BINARY, parse_hit, pick_home, send
 
 
 def main(
-    cue: Path, out: Path, state: Path, area: str, frames: int, kind: str = "write"
+    cue: Path,
+    out: Path,
+    state: Path,
+    area: str,
+    frames: int,
+    kind: str = "write",
+    patches: list[str] | None = None,
 ) -> int:
     out.mkdir(parents=True, exist_ok=False)
     configure()
@@ -45,7 +57,13 @@ def main(
     agent_dir = (out / "agent").resolve()
     env = {
         **os.environ,
-        "MEDNAFEN_HOME": str(QUIET_HOME.resolve()),
+        "MEDNAFEN_HOME": str(
+            (
+                pick_home()
+                if any(s.startswith("keys:") for s in patches or [])
+                else QUIET_HOME
+            ).resolve()
+        ),
         "MEDNAFEN_AGENT_DIR": str(agent_dir),
         "MEDNAFEN_ALLOWMULTI": "1",
     }
@@ -67,9 +85,20 @@ def main(
             time.sleep(3)
             agent.loadstate(state.resolve())
             agent.pause()
+            keys = [s[5:] for s in patches or [] if s.startswith("keys:")]
+            for spec in (s for s in patches or [] if not s.startswith("keys:")):
+                address, old, new = spec.split(":")
+                found = agent.bus_read(int(address, 16), len(bytes.fromhex(old)))
+                if found != bytes.fromhex(old):
+                    raise RuntimeError(f"{address}: found {found.hex()}")
+                agent.bus_write(int(address, 16), bytes.fromhex(new))
             agent.clear_events()
             agent.bpmode("log")
             agent.breakpoints(kind, ranges)
+            for moves in keys:
+                agent.run()
+                send(process.pid, moves)
+                agent.pause()
             agent.frames(frames)
             agent.wait_halted(300.0)
             agent.breakpoints(kind)
@@ -90,4 +119,6 @@ def main(
 if __name__ == "__main__":
     a = sys.argv
     kind = a[6] if len(a) > 6 else "write"
-    raise SystemExit(main(Path(a[1]), Path(a[2]), Path(a[3]), a[4], int(a[5]), kind))
+    raise SystemExit(
+        main(Path(a[1]), Path(a[2]), Path(a[3]), a[4], int(a[5]), kind, a[7:])
+    )
