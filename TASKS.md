@@ -281,7 +281,15 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   - `END-014`: build;
   - `END-015`: verify;
   - `END-016`: coverage and regression.
-- Next: `END-010` (ready). Backlog: `UI-004`, `SPECIAL-001`, `REL-001`.
+- **2026-10-30** (`SESSION-0065`, `EXP-0043`): static census. Every
+  roster slot 0-17 has an English `MCED` script that shows its arcade
+  English ending records in order, and every MC file fits its English
+  ending (compressed margins 259-1,293 bytes). Slots 8/9 share Ryu's ending
+  and 11/18 share Chun-Li's. English labels to gate: `Akuma`, `Charlie`,
+  `Charlie's friend`, `Bison`, and `Vega` in Magneto's script (`END-010`,
+  D-038).
+- Next: `END-011` (the user's ending roster). Backlog: `UI-004`,
+  `SPECIAL-001`, `REL-001`.
   The backlog also holds `UI-004` (boot-time error messages, including the
   cart warning), `SPECIAL-001` (including
   Apocalypse's pre-fight line) and `REL-001` (release patches).
@@ -1889,7 +1897,7 @@ Known before M8:
 
 ### END-010 - Census of every roster ending's scripts and space
 
-- **Status:** `READY`
+- **Status:** `DONE` (`EXP-0043`, D-038)
 - **Milestone:** M8
 - **Dependencies:** END-009 (done).
 - **Blockers:** None.
@@ -1917,10 +1925,10 @@ Known before M8:
 
 ### END-011 - Choose the M8 ending roster and its exceptions
 
-- **Status:** `BLOCKED`
+- **Status:** `READY`
 - **Milestone:** M8
 - **Dependencies:** END-010.
-- **Blockers:** The census.
+- **Blockers:** None; the census is `EXP-0043` (`data/text/ending_script_census.json`).
 - **Objective:** The user chooses which endings M8 covers, with the census
   in front of them. This is the `RE-008` method.
 - **Acceptance criteria:**

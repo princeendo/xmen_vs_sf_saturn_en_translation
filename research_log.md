@@ -2089,3 +2089,29 @@ Written in `TASKS.md` (Phase M):
 
 The outline row `END-010` (M8) was replaced. Three references to it now
 point at `END-012` or `END-013`. No experiment was run.
+
+## 2026-10-30 — SESSION-0065: Census of roster ending scripts and space (END-010, EXP-0043)
+
+User request (verbatim): "Start END-010: census of every roster ending's
+scripts and space."
+
+- **Script format:** read in full from raw bytes. Scenes are (length,
+  record·256 + label) pairs, then `FFFF` and a trailing word; the
+  scene-offset table length is its first entry / 2.
+- **`census_scripts.py`** → `data/text/ending_script_census.json`:
+  - All 18 roster English scripts show records 0 to n − 1 in order.
+  - The Japanese scripts are in order except slot 8 (Ryu's script against
+    `MC08`'s copy of Magneto's 4 records).
+  - Trailing words don't always repeat the last page in English scripts;
+    meaning unknown.
+- **Aliases:** 8/9 = Ryu's ending, matching the arcade English pointer
+  equality. 11/18 = Chun-Li's.
+- **Fit:** every roster file fits, compressed margins 259 (Apocalypse) to
+  1,293 bytes. Nash's margin (814) equals the M7 build, a cross-check.
+- **Labels flagged:** `Akuma`, `Charlie`, `Charlie's friend`, `Bison`, and
+  `Vega` in Magneto's English script (to check in MAME).
+
+Conclusion: `END-010` is `DONE` (D-038). Next: `END-011`, the user's
+choice.
+
+Checks: `pytest` 183 passed; `ruff check` and `mypy --strict` on the census script clean. `ruff format` reflowed the script after the run; a rerun gave a byte-identical JSON.

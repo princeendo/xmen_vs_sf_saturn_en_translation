@@ -1,0 +1,2426 @@
+{
+ "source": "EXP-0043 census_scripts.py",
+ "labels": [
+  "                ",
+  "Wolverine       ",
+  "Cyclops         ",
+  "Storm           ",
+  "Rogue           ",
+  "Gambit          ",
+  "Sabretooth      ",
+  "Juggernaut      ",
+  "Magneto         ",
+  "Apocalypse      ",
+  "Ryu             ",
+  "Ken             ",
+  "Chun-Li         ",
+  "Dhalsim         ",
+  "Zangief         ",
+  "Vega            ",
+  "Gouki           ",
+  "Nash            ",
+  "Cammy           ",
+  "Bison           ",
+  "Akuma           ",
+  "Charlie         ",
+  "Jubilee         ",
+  "Rogue.Chun-Li   ",
+  "Forge           ",
+  "Birdie          ",
+  "Eliza           ",
+  "His son         ",
+  "Professor X     ",
+  "Iceman          ",
+  "Beast           ",
+  "Archangel       ",
+  "Wife            ",
+  "TV News         ",
+  "Colossus        ",
+  "Nazo no koe     ",
+  "Nash's friend   ",
+  "Matsuo Tsurayaba",
+  "Psylocke        ",
+  "Charlie's friend"
+ ],
+ "slots": [
+  {
+   "slot": 0,
+   "label_name": "Wolverine       ",
+   "script_offset": "0x2814",
+   "shared_with": [],
+   "header": [
+    "0x8",
+    "0x30",
+    "0x30",
+    "0x30"
+   ],
+   "english_header_same_for_2_4_6": true,
+   "arcade_english_pointer": "0x18ad86",
+   "japanese": {
+    "scenes": 2,
+    "pages": 7,
+    "records": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ],
+    "records_per_scene": [
+     [
+      0,
+      1
+     ],
+     [
+      2,
+      3,
+      4,
+      5,
+      6
+     ]
+    ],
+    "page_lengths": [
+     288,
+     288,
+     288,
+     288,
+     288,
+     288,
+     288
+    ],
+    "labels": [
+     22,
+     1,
+     22,
+     1,
+     22,
+     1,
+     1
+    ],
+    "label_names": {
+     "0x01": "Wolverine       ",
+     "0x16": "Jubilee         "
+    },
+    "flagged_labels": [],
+    "trailing_repeats_last": true
+   },
+   "english": {
+    "scenes": 2,
+    "pages": 6,
+    "records": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "records_per_scene": [
+     [
+      0,
+      1,
+      2
+     ],
+     [
+      3,
+      4,
+      5
+     ]
+    ],
+    "page_lengths": [
+     384,
+     384,
+     384,
+     384,
+     384,
+     384
+    ],
+    "labels": [
+     22,
+     22,
+     22,
+     1,
+     1,
+     1
+    ],
+    "label_names": {
+     "0x01": "Wolverine       ",
+     "0x16": "Jubilee         "
+    },
+    "flagged_labels": [],
+    "trailing_repeats_last": true
+   },
+   "arcade_english_records": 6,
+   "saturn_japanese_records": 7,
+   "english_records_in_order": true,
+   "japanese_records_in_order": true,
+   "space": {
+    "mc_file": "MC00.SHP;1",
+    "english_ending_bytes": 600,
+    "free_after_win_quotes": 948,
+    "fits_free_space": true,
+    "file_size": 31838,
+    "natural_lazy_with_ending": 31030,
+    "compressed_margin": 808
+   }
+  },
+  {
+   "slot": 1,
+   "label_name": "Cyclops         ",
+   "script_offset": "0x2868",
+   "shared_with": [],
+   "header": [
+    "0x8",
+    "0x36",
+    "0x36",
+    "0x36"
+   ],
+   "english_header_same_for_2_4_6": true,
+   "arcade_english_pointer": "0x18afde",
+   "japanese": {
+    "scenes": 3,
+    "pages": 7,
+    "records": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ],
+    "records_per_scene": [
+     [
+      0,
+      1,
+      2
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      5,
+      6
+     ]
+    ],
+    "page_lengths": [
+     288,
+     288,
+     288,
+     288,
+     288,
+     288,
+     768
+    ],
+    "labels": [
+     2,
+     2,
+     2,
+     2,
+     10,
+     2,
+     0
+    ],
+    "label_names": {
+     "0x02": "Cyclops         ",
+     "0x0a": "Ryu             "
+    },
+    "flagged_labels": [],
+    "trailing_repeats_last": true
+   },
+   "english": {
+    "scenes": 3,
+    "pages": 9,
+    "records": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "records_per_scene": [
+     [
+      0,
+      1,
+      2
+     ],
+     [
+      3,
+      4,
+      5
+     ],
+     [
+      6,
+      7,
+      8
+     ]
+    ],
+    "page_lengths": [
+     384,
+     384,
+     384,
+     384,
+     384,
+     384,
+     384,
+     384,
+     768
+    ],
+    "labels": [
+     0,
+     0,
+     0,
+     2,
+     2,
+     10,
+     0,
+     0,
+     0
+    ],
+    "label_names": {
+     "0x02": "Cyclops         ",
+     "0x0a": "Ryu             "
+    },
+    "flagged_labels": [],
+    "trailing_repeats_last": true
+   },
+   "arcade_english_records": 9,
+   "saturn_japanese_records": 7,
+   "english_records_in_order": true,
+   "japanese_records_in_order": true,
+   "space": {
+    "mc_file": "MC01.SHP;1",
+    "english_ending_bytes": 900,
+    "free_after_win_quotes": 948,
+    "fits_free_space": true,
+    "file_size": 35411,
+    "natural_lazy_with_ending": 34778,
+    "compressed_margin": 633
+   }
+  },
+  {
+   "slot": 2,
+   "label_name": "Storm           ",
+   "script_offset": "0x28d4",
+   "shared_with": [],
+   "header": [
+    "0x8",
+    "0x36",
+    "0x36",
+    "0x36"
+   ],
+   "english_header_same_for_2_4_6": true,
+   "arcade_english_pointer": "0x18b362",
+   "japanese": {
+    "scenes": 3,
+    "pages": 7,
+    "records": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ],
+    "records_per_scene": [
+     [
+      0,
+      1
+     ],
+     [
+      2
+     ],
+     [
+      3,
+      4,
+      5,
+      6
+     ]
+    ],
+    "page_lengths": [
+     288,
+     288,
+     512,
+     288,
+     288,
+     288,
+     768
+    ],
+    "labels": [
+     0,
+     3,
+     0,
+     24,
+     3,
+     24,
+     0
+    ],
+    "label_names": {
+     "0x03": "Storm           ",
+     "0x18": "Forge           "
+    },
+    "flagged_labels": [],
+    "trailing_repeats_last": true
+   },
+   "english": {
+    "scenes": 3,
+    "pages": 6,
+    "records": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "records_per_scene": [
+     [
+      0,
+      1,
+      2
+     ],
+     [
+      3
+     ],
+     [
+      4,
+      5
+     ]
+    ],
+    "page_lengths": [
+     384,
+     384,
+     384,
+     384,
+     384,
+     768
+    ],
+    "labels": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    "label_names": {},
+    "flagged_labels": [],
+    "trailing_repeats_last": false
+   },
+   "arcade_english_records": 6,
+   "saturn_japanese_records": 7,
+   "english_records_in_order": true,
+   "japanese_records_in_order": true,
+   "space": {
+    "mc_file": "MC02.SHP;1",
+    "english_ending_bytes": 600,
+    "free_after_win_quotes": 948,
+    "fits_free_space": true,
+    "file_size": 28822,
+    "natural_lazy_with_ending": 28040,
+    "compressed_margin": 782
+   }
+  },
+  {
+   "slot": 3,
+   "label_name": "Rogue           ",
+   "script_offset": "0x2934",
+   "shared_with": [],
+   "header": [
+    "0x8",
+    "0x34",
+    "0x34",
+    "0x34"
+   ],
+   "english_header_same_for_2_4_6": true,
+   "arcade_english_pointer": "0x18b5ba",
+   "japanese": {
+    "scenes": 2,
+    "pages": 8,
+    "records": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7
+    ],
+    "records_per_scene": [
+     [
+      0,
+      1,
+      2
+     ],
+     [
+      3,
+      4,
+      5,
+      6,
+      7
+     ]
+    ],
+    "page_lengths": [
+     320,
+     320,
+     320,
+     320,
+     320,
+     320,
+     320,
+     768
+    ],
+    "labels": [
+     15,
+     4,
+     4,
+     0,
+     4,
+     12,
+     4,
+     23
+    ],
+    "label_names": {
+     "0x04": "Rogue           ",
+     "0x0c": "Chun-Li         ",
+     "0x0f": "Vega            ",
+     "0x17": "Rogue.Chun-Li   "
+    },
+    "flagged_labels": [
+     "Vega            "
+    ],
+    "trailing_repeats_last": true
+   },
+   "english": {
+    "scenes": 2,
+    "pages": 6,
+    "records": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "records_per_scene": [
+     [
+      0,
+      1,
+      2
+     ],
+     [
+      3,
+      4,
+      5
+     ]
+    ],
+    "page_lengths": [
+     384,
+     384,
+     384,
+     384,
+     384,
+     768
+    ],
+    "labels": [
+     19,
+     4,
+     4,
+     4,
+     12,
+     12
+    ],
+    "label_names": {
+     "0x04": "Rogue           ",
+     "0x0c": "Chun-Li         ",
+     "0x13": "Bison           "
+    },
+    "flagged_labels": [
+     "Bison           "
+    ],
+    "trailing_repeats_last": true
+   },
+   "arcade_english_records": 6,
+   "saturn_japanese_records": 8,
+   "english_records_in_order": true,
+   "japanese_records_in_order": true,
+   "space": {
+    "mc_file": "MC03.SHP;1",
+    "english_ending_bytes": 600,
+    "free_after_win_quotes": 1024,
+    "fits_free_space": true,
+    "file_size": 33591,
+    "natural_lazy_with_ending": 32729,
+    "compressed_margin": 862
+   }
+  },
+  {
+   "slot": 4,
+   "label_name": "Gambit          ",
+   "script_offset": "0x298c",
+   "shared_with": [],
+   "header": [
+    "0x8",
+    "0x2c",
+    "0x2c",
+    "0x2c"
+   ],
+   "english_header_same_for_2_4_6": true,
+   "arcade_english_pointer": "0x18b812",
+   "japanese": {
+    "scenes": 2,
+    "pages": 6,
+    "records": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "records_per_scene": [
+     [
+      0,
+      1,
+      2,
+      3
+     ],
+     [
+      4,
+      5
+     ]
+    ],
+    "page_lengths": [
+     384,
+     384,
+     384,
+     384,
+     384,
+     768
+    ],
+    "labels": [
+     5,
+     4,
+     4,
+     5,
+     5,
+     0
+    ],
+    "label_names": {
+     "0x04": "Rogue           ",
+     "0x05": "Gambit          "
+    },
+    "flagged_labels": [],
+    "trailing_repeats_last": true
+   },
+   "english": {
+    "scenes": 2,
+    "pages": 5,
+    "records": [
+     0,
+     1,
+     2,
+     3,
+     4
+    ],
+    "records_per_scene": [
+     [
+      0,
+      1
+     ],
+     [
+      2,
+      3,
+      4
+     ]
+    ],
+    "page_lengths": [
+     384,
+     384,
+     384,
+     384,
+     768
+    ],
+    "labels": [
+     0,
+     0,
+     5,
+     5,
+     0
+    ],
+    "label_names": {
+     "0x05": "Gambit          "
+    },
+    "flagged_labels": [],
+    "trailing_repeats_last": true
+   },
+   "arcade_english_records": 5,
+   "saturn_japanese_records": 6,
+   "english_records_in_order": true,
+   "japanese_records_in_order": true,
+   "space": {
+    "mc_file": "MC04.SHP;1",
+    "english_ending_bytes": 500,
+    "free_after_win_quotes": 872,
+    "fits_free_space": true,
+    "file_size": 29086,
+    "natural_lazy_with_ending": 28360,
+    "compressed_margin": 726
+   }
+  },
+  {
+   "slot": 5,
+   "label_name": "Sabretooth      ",
+   "script_offset": "0x29d8",
+   "shared_with": [],
+   "header": [
+    "0x8",
+    "0x24",
+    "0x24",
+    "0x24"
+   ],
+   "english_header_same_for_2_4_6": true,
+   "arcade_english_pointer": "0x18ba06",
+   "japanese": {
+    "scenes": 2,
+    "pages": 4,
+    "records": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "records_per_scene": [
+     [
+      0,
+      1
+     ],
+     [
+      2,
+      3
+     ]
+    ],
+    "page_lengths": [
+     320,
+     384,
+     384,
+     768
+    ],
+    "labels": [
+     25,
+     25,
+     6,
+     6
+    ],
+    "label_names": {
+     "0x06": "Sabretooth      ",
+     "0x19": "Birdie          "
+    },
+    "flagged_labels": [],
+    "trailing_repeats_last": true
+   },
+   "english": {
+    "scenes": 2,
+    "pages": 6,
+    "records": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "records_per_scene": [
+     [
+      0,
+      1,
+      2
+     ],
+     [
+      3,
+      4,
+      5
+     ]
+    ],
+    "page_lengths": [
+     384,
+     384,
+     384,
+     384,
+     384,
+     768
+    ],
+    "labels": [
+     25,
+     25,
+     6,
+     6,
+     6,
+     1
+    ],
+    "label_names": {
+     "0x01": "Wolverine       ",
+     "0x06": "Sabretooth      ",
+     "0x19": "Birdie          "
+    },
+    "flagged_labels": [],
+    "trailing_repeats_last": true
+   },
+   "arcade_english_records": 6,
+   "saturn_japanese_records": 4,
+   "english_records_in_order": true,
+   "japanese_records_in_order": true,
+   "space": {
+    "mc_file": "MC05.SHP;1",
+    "english_ending_bytes": 600,
+    "free_after_win_quotes": 720,
+    "fits_free_space": true,
+    "file_size": 28746,
+    "natural_lazy_with_ending": 28030,
+    "compressed_margin": 716
+   }
+  },
+  {
+   "slot": 6,
+   "label_name": "Juggernaut      ",
+   "script_offset": "0x2a20",
+   "shared_with": [],
+   "header": [
+    "0x8",
+    "0x38",
+    "0x38",
+    "0x38"
+   ],
+   "english_header_same_for_2_4_6": true,
+   "arcade_english_pointer": "0x18bc5e",
+   "japanese": {
+    "scenes": 2,
+    "pages": 9,
+    "records": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "records_per_scene": [
+     [
+      0,
+      1,
+      2,
+      3
+     ],
+     [
+      4,
+      5,
+      6,
+      7,
+      8
+     ]
+    ],
+    "page_lengths": [
+     256,
+     256,
+     256,
+     256,
+     256,
+     256,
+     256,
+     256,
+     256
+    ],
+    "labels": [
+     7,
+     7,
+     7,
+     7,
+     7,
+     7,
+     7,
+     7,
+     0
+    ],
+    "label_names": {
+     "0x07": "Juggernaut      "
+    },
+    "flagged_labels": [],
+    "trailing_repeats_last": true
+   },
+   "english": {
+    "scenes": 2,
+    "pages": 6,
+    "records": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "records_per_scene": [
+     [
+      0,
+      1,
+      2
+     ],
+     [
+      3,
+      4,
+      5
+     ]
+    ],
+    "page_lengths": [
+     256,
+     256,
+     256,
+     256,
+     256,
+     768
+    ],
+    "labels": [
+     7,
+     7,
+     7,
+     7,
+     7,
+     7
+    ],
+    "label_names": {
+     "0x07": "Juggernaut      "
+    },
+    "flagged_labels": [],
+    "trailing_repeats_last": true
+   },
+   "arcade_english_records": 6,
+   "saturn_japanese_records": 9,
+   "english_records_in_order": true,
+   "japanese_records_in_order": true,
+   "space": {
+    "mc_file": "MC06.SHP;1",
+    "english_ending_bytes": 600,
+    "free_after_win_quotes": 1100,
+    "fits_free_space": true,
+    "file_size": 28820,
+    "natural_lazy_with_ending": 28183,
+    "compressed_margin": 637
+   }
+  },
+  {
+   "slot": 7,
+   "label_name": "Magneto         ",
+   "script_offset": "0x2a7c",
+   "shared_with": [],
+   "header": [
+    "0x8",
+    "0x2a",
+    "0x2a",
+    "0x2a"
+   ],
+   "english_header_same_for_2_4_6": true,
+   "arcade_english_pointer": "0x18beb6",
+   "japanese": {
+    "scenes": 3,
+    "pages": 4,
+    "records": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "records_per_scene": [
+     [
+      0
+     ],
+     [
+      1
+     ],
+     [
+      2,
+      3
+     ]
+    ],
+    "page_lengths": [
+     320,
+     384,
+     320,
+     768
+    ],
+    "labels": [
+     8,
+     8,
+     0,
+     0
+    ],
+    "label_names": {
+     "0x08": "Magneto         "
+    },
+    "flagged_labels": [],
+    "trailing_repeats_last": true
+   },
+   "english": {
+    "scenes": 3,
+    "pages": 7,
+    "records": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ],
+    "records_per_scene": [
+     [
+      0,
+      1
+     ],
+     [
+      2,
+      3
+     ],
+     [
+      4,
+      5,
+      6
+     ]
+    ],
+    "page_lengths": [
+     384,
+     384,
+     384,
+     384,
+     384,
+     384,
+     768
+    ],
+    "labels": [
+     8,
+     8,
+     15,
+     0,
+     0,
+     0,
+     0
+    ],
+    "label_names": {
+     "0x08": "Magneto         ",
+     "0x0f": "Vega            "
+    },
+    "flagged_labels": [
+     "Vega            "
+    ],
+    "trailing_repeats_last": false
+   },
+   "arcade_english_records": 7,
+   "saturn_japanese_records": 4,
+   "english_records_in_order": true,
+   "japanese_records_in_order": true,
+   "space": {
+    "mc_file": "MC07.SHP;1",
+    "english_ending_bytes": 700,
+    "free_after_win_quotes": 720,
+    "fits_free_space": true,
+    "file_size": 34961,
+    "natural_lazy_with_ending": 34047,
+    "compressed_margin": 914
+   }
+  },
+  {
+   "slot": 8,
+   "label_name": "Apocalypse      ",
+   "script_offset": "0x2ad4",
+   "shared_with": [
+    9
+   ],
+   "header": [
+    "0x8",
+    "0x32",
+    "0x32",
+    "0x32"
+   ],
+   "english_header_same_for_2_4_6": true,
+   "arcade_english_pointer": "0x18c172",
+   "japanese": {
+    "scenes": 3,
+    "pages": 6,
+    "records": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "records_per_scene": [
+     [
+      0,
+      1,
+      2
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      5
+     ]
+    ],
+    "page_lengths": [
+     256,
+     256,
+     256,
+     256,
+     256,
+     768
+    ],
+    "labels": [
+     2,
+     2,
+     10,
+     2,
+     10,
+     10
+    ],
+    "label_names": {
+     "0x02": "Cyclops         ",
+     "0x0a": "Ryu             "
+    },
+    "flagged_labels": [],
+    "trailing_repeats_last": true
+   },
+   "english": {
+    "scenes": 3,
+    "pages": 7,
+    "records": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ],
+    "records_per_scene": [
+     [
+      0,
+      1
+     ],
+     [
+      2,
+      3
+     ],
+     [
+      4,
+      5,
+      6
+     ]
+    ],
+    "page_lengths": [
+     384,
+     384,
+     384,
+     384,
+     320,
+     352,
+     768
+    ],
+    "labels": [
+     2,
+     10,
+     10,
+     2,
+     10,
+     0,
+     0
+    ],
+    "label_names": {
+     "0x02": "Cyclops         ",
+     "0x0a": "Ryu             "
+    },
+    "flagged_labels": [],
+    "trailing_repeats_last": true
+   },
+   "arcade_english_records": 7,
+   "saturn_japanese_records": 4,
+   "english_records_in_order": true,
+   "japanese_records_in_order": false,
+   "space": {
+    "mc_file": "MC08.SHP;1",
+    "english_ending_bytes": 700,
+    "free_after_win_quotes": 720,
+    "fits_free_space": true,
+    "file_size": 29667,
+    "natural_lazy_with_ending": 29408,
+    "compressed_margin": 259
+   }
+  },
+  {
+   "slot": 9,
+   "label_name": "Ryu             ",
+   "script_offset": "0x2ad4",
+   "shared_with": [
+    8
+   ],
+   "header": [
+    "0x8",
+    "0x32",
+    "0x32",
+    "0x32"
+   ],
+   "english_header_same_for_2_4_6": true,
+   "arcade_english_pointer": "0x18c172",
+   "japanese": {
+    "scenes": 3,
+    "pages": 6,
+    "records": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "records_per_scene": [
+     [
+      0,
+      1,
+      2
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      5
+     ]
+    ],
+    "page_lengths": [
+     256,
+     256,
+     256,
+     256,
+     256,
+     768
+    ],
+    "labels": [
+     2,
+     2,
+     10,
+     2,
+     10,
+     10
+    ],
+    "label_names": {
+     "0x02": "Cyclops         ",
+     "0x0a": "Ryu             "
+    },
+    "flagged_labels": [],
+    "trailing_repeats_last": true
+   },
+   "english": {
+    "scenes": 3,
+    "pages": 7,
+    "records": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ],
+    "records_per_scene": [
+     [
+      0,
+      1
+     ],
+     [
+      2,
+      3
+     ],
+     [
+      4,
+      5,
+      6
+     ]
+    ],
+    "page_lengths": [
+     384,
+     384,
+     384,
+     384,
+     320,
+     352,
+     768
+    ],
+    "labels": [
+     2,
+     10,
+     10,
+     2,
+     10,
+     0,
+     0
+    ],
+    "label_names": {
+     "0x02": "Cyclops         ",
+     "0x0a": "Ryu             "
+    },
+    "flagged_labels": [],
+    "trailing_repeats_last": true
+   },
+   "arcade_english_records": 7,
+   "saturn_japanese_records": 6,
+   "english_records_in_order": true,
+   "japanese_records_in_order": true,
+   "space": {
+    "mc_file": "MC09.SHP;1",
+    "english_ending_bytes": 700,
+    "free_after_win_quotes": 872,
+    "fits_free_space": true,
+    "file_size": 20686,
+    "natural_lazy_with_ending": 20080,
+    "compressed_margin": 606
+   }
+  },
+  {
+   "slot": 10,
+   "label_name": "Ken             ",
+   "script_offset": "0x2b34",
+   "shared_with": [],
+   "header": [
+    "0x8",
+    "0x28",
+    "0x28",
+    "0x28"
+   ],
+   "english_header_same_for_2_4_6": true,
+   "arcade_english_pointer": "0x18c42e",
+   "japanese": {
+    "scenes": 2,
+    "pages": 5,
+    "records": [
+     0,
+     1,
+     2,
+     3,
+     4
+    ],
+    "records_per_scene": [
+     [
+      0,
+      1
+     ],
+     [
+      2,
+      3,
+      4
+     ]
+    ],
+    "page_lengths": [
+     320,
+     320,
+     288,
+     288,
+     352
+    ],
+    "labels": [
+     11,
+     27,
+     26,
+     27,
+     11
+    ],
+    "label_names": {
+     "0x0b": "Ken             ",
+     "0x1a": "Eliza           ",
+     "0x1b": "His son         "
+    },
+    "flagged_labels": [],
+    "trailing_repeats_last": true
+   },
+   "english": {
+    "scenes": 2,
+    "pages": 4,
+    "records": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "records_per_scene": [
+     [
+      0,
+      1,
+      2
+     ],
+     [
+      3
+     ]
+    ],
+    "page_lengths": [
+     320,
+     320,
+     320,
+     512
+    ],
+    "labels": [
+     11,
+     27,
+     11,
+     26
+    ],
+    "label_names": {
+     "0x0b": "Ken             ",
+     "0x1a": "Eliza           ",
+     "0x1b": "His son         "
+    },
+    "flagged_labels": [],
+    "trailing_repeats_last": true
+   },
+   "arcade_english_records": 4,
+   "saturn_japanese_records": 5,
+   "english_records_in_order": true,
+   "japanese_records_in_order": true,
+   "space": {
+    "mc_file": "MC0A.SHP;1",
+    "english_ending_bytes": 400,
+    "free_after_win_quotes": 796,
+    "fits_free_space": true,
+    "file_size": 23258,
+    "natural_lazy_with_ending": 22651,
+    "compressed_margin": 607
+   }
+  },
+  {
+   "slot": 11,
+   "label_name": "Chun-Li         ",
+   "script_offset": "0x2b78",
+   "shared_with": [
+    18
+   ],
+   "header": [
+    "0x8",
+    "0x30",
+    "0x30",
+    "0x30"
+   ],
+   "english_header_same_for_2_4_6": true,
+   "arcade_english_pointer": "0x18c5be",
+   "japanese": {
+    "scenes": 2,
+    "pages": 7,
+    "records": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ],
+    "records_per_scene": [
+     [
+      0,
+      1
+     ],
+     [
+      2,
+      3,
+      4,
+      5,
+      6
+     ]
+    ],
+    "page_lengths": [
+     256,
+     256,
+     256,
+     256,
+     256,
+     256,
+     768
+    ],
+    "labels": [
+     28,
+     28,
+     12,
+     29,
+     30,
+     31,
+     12
+    ],
+    "label_names": {
+     "0x0c": "Chun-Li         ",
+     "0x1c": "Professor X     ",
+     "0x1d": "Iceman          ",
+     "0x1e": "Beast           ",
+     "0x1f": "Archangel       "
+    },
+    "flagged_labels": [],
+    "trailing_repeats_last": true
+   },
+   "english": {
+    "scenes": 2,
+    "pages": 6,
+    "records": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "records_per_scene": [
+     [
+      0,
+      1,
+      2
+     ],
+     [
+      3,
+      4,
+      5
+     ]
+    ],
+    "page_lengths": [
+     256,
+     256,
+     256,
+     256,
+     256,
+     768
+    ],
+    "labels": [
+     28,
+     28,
+     28,
+     29,
+     30,
+     31
+    ],
+    "label_names": {
+     "0x1c": "Professor X     ",
+     "0x1d": "Iceman          ",
+     "0x1e": "Beast           ",
+     "0x1f": "Archangel       "
+    },
+    "flagged_labels": [],
+    "trailing_repeats_last": true
+   },
+   "arcade_english_records": 6,
+   "saturn_japanese_records": 7,
+   "english_records_in_order": true,
+   "japanese_records_in_order": true,
+   "space": {
+    "mc_file": "MC0B.SHP;1",
+    "english_ending_bytes": 600,
+    "free_after_win_quotes": 948,
+    "fits_free_space": true,
+    "file_size": 33270,
+    "natural_lazy_with_ending": 31977,
+    "compressed_margin": 1293
+   }
+  },
+  {
+   "slot": 12,
+   "label_name": "Dhalsim         ",
+   "script_offset": "0x2bcc",
+   "shared_with": [],
+   "header": [
+    "0x8",
+    "0x2a",
+    "0x2a",
+    "0x2a"
+   ],
+   "english_header_same_for_2_4_6": true,
+   "arcade_english_pointer": "0x18c816",
+   "japanese": {
+    "scenes": 3,
+    "pages": 4,
+    "records": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "records_per_scene": [
+     [
+      0
+     ],
+     [
+      1
+     ],
+     [
+      2,
+      3
+     ]
+    ],
+    "page_lengths": [
+     384,
+     256,
+     320,
+     768
+    ],
+    "labels": [
+     13,
+     13,
+     13,
+     32
+    ],
+    "label_names": {
+     "0x0d": "Dhalsim         ",
+     "0x20": "Wife            "
+    },
+    "flagged_labels": [],
+    "trailing_repeats_last": true
+   },
+   "english": {
+    "scenes": 3,
+    "pages": 6,
+    "records": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "records_per_scene": [
+     [
+      0,
+      1
+     ],
+     [
+      2
+     ],
+     [
+      3,
+      4,
+      5
+     ]
+    ],
+    "page_lengths": [
+     320,
+     320,
+     256,
+     320,
+     320,
+     768
+    ],
+    "labels": [
+     0,
+     0,
+     0,
+     0,
+     13,
+     32
+    ],
+    "label_names": {
+     "0x0d": "Dhalsim         ",
+     "0x20": "Wife            "
+    },
+    "flagged_labels": [],
+    "trailing_repeats_last": false
+   },
+   "arcade_english_records": 6,
+   "saturn_japanese_records": 4,
+   "english_records_in_order": true,
+   "japanese_records_in_order": true,
+   "space": {
+    "mc_file": "MC0C.SHP;1",
+    "english_ending_bytes": 600,
+    "free_after_win_quotes": 720,
+    "fits_free_space": true,
+    "file_size": 27001,
+    "natural_lazy_with_ending": 26370,
+    "compressed_margin": 631
+   }
+  },
+  {
+   "slot": 13,
+   "label_name": "Zangief         ",
+   "script_offset": "0x2c20",
+   "shared_with": [],
+   "header": [
+    "0x8",
+    "0x24",
+    "0x24",
+    "0x24"
+   ],
+   "english_header_same_for_2_4_6": true,
+   "arcade_english_pointer": "0x18ca6e",
+   "japanese": {
+    "scenes": 2,
+    "pages": 4,
+    "records": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "records_per_scene": [
+     [
+      0
+     ],
+     [
+      1,
+      2,
+      3
+     ]
+    ],
+    "page_lengths": [
+     512,
+     320,
+     336,
+     768
+    ],
+    "labels": [
+     33,
+     34,
+     14,
+     14
+    ],
+    "label_names": {
+     "0x0e": "Zangief         ",
+     "0x21": "TV News         ",
+     "0x22": "Colossus        "
+    },
+    "flagged_labels": [],
+    "trailing_repeats_last": true
+   },
+   "english": {
+    "scenes": 2,
+    "pages": 5,
+    "records": [
+     0,
+     1,
+     2,
+     3,
+     4
+    ],
+    "records_per_scene": [
+     [
+      0,
+      1,
+      2
+     ],
+     [
+      3,
+      4
+     ]
+    ],
+    "page_lengths": [
+     384,
+     384,
+     384,
+     384,
+     768
+    ],
+    "labels": [
+     0,
+     0,
+     0,
+     14,
+     34
+    ],
+    "label_names": {
+     "0x0e": "Zangief         ",
+     "0x22": "Colossus        "
+    },
+    "flagged_labels": [],
+    "trailing_repeats_last": true
+   },
+   "arcade_english_records": 5,
+   "saturn_japanese_records": 4,
+   "english_records_in_order": true,
+   "japanese_records_in_order": true,
+   "space": {
+    "mc_file": "MC0D.SHP;1",
+    "english_ending_bytes": 500,
+    "free_after_win_quotes": 720,
+    "fits_free_space": true,
+    "file_size": 28016,
+    "natural_lazy_with_ending": 27232,
+    "compressed_margin": 784
+   }
+  },
+  {
+   "slot": 14,
+   "label_name": "Vega            ",
+   "script_offset": "0x2c64",
+   "shared_with": [],
+   "header": [
+    "0x8",
+    "0x24",
+    "0x24",
+    "0x24"
+   ],
+   "english_header_same_for_2_4_6": true,
+   "arcade_english_pointer": "0x18cc62",
+   "japanese": {
+    "scenes": 2,
+    "pages": 4,
+    "records": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "records_per_scene": [
+     [
+      0
+     ],
+     [
+      1,
+      2,
+      3
+     ]
+    ],
+    "page_lengths": [
+     384,
+     320,
+     320,
+     768
+    ],
+    "labels": [
+     15,
+     15,
+     15,
+     15
+    ],
+    "label_names": {
+     "0x0f": "Vega            "
+    },
+    "flagged_labels": [
+     "Vega            "
+    ],
+    "trailing_repeats_last": true
+   },
+   "english": {
+    "scenes": 2,
+    "pages": 5,
+    "records": [
+     0,
+     1,
+     2,
+     3,
+     4
+    ],
+    "records_per_scene": [
+     [
+      0,
+      1,
+      2
+     ],
+     [
+      3,
+      4
+     ]
+    ],
+    "page_lengths": [
+     320,
+     320,
+     320,
+     320,
+     768
+    ],
+    "labels": [
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    "label_names": {},
+    "flagged_labels": [],
+    "trailing_repeats_last": false
+   },
+   "arcade_english_records": 5,
+   "saturn_japanese_records": 4,
+   "english_records_in_order": true,
+   "japanese_records_in_order": true,
+   "space": {
+    "mc_file": "MC0E.SHP;1",
+    "english_ending_bytes": 500,
+    "free_after_win_quotes": 720,
+    "fits_free_space": true,
+    "file_size": 24759,
+    "natural_lazy_with_ending": 24265,
+    "compressed_margin": 494
+   }
+  },
+  {
+   "slot": 15,
+   "label_name": "Gouki           ",
+   "script_offset": "0x2ca8",
+   "shared_with": [],
+   "header": [
+    "0x8",
+    "0x24",
+    "0x24",
+    "0x24"
+   ],
+   "english_header_same_for_2_4_6": true,
+   "arcade_english_pointer": "0x18ce56",
+   "japanese": {
+    "scenes": 2,
+    "pages": 4,
+    "records": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "records_per_scene": [
+     [
+      0,
+      1,
+      2
+     ],
+     [
+      3
+     ]
+    ],
+    "page_lengths": [
+     384,
+     384,
+     384,
+     768
+    ],
+    "labels": [
+     1,
+     1,
+     16,
+     1
+    ],
+    "label_names": {
+     "0x01": "Wolverine       ",
+     "0x10": "Gouki           "
+    },
+    "flagged_labels": [
+     "Gouki           "
+    ],
+    "trailing_repeats_last": true
+   },
+   "english": {
+    "scenes": 2,
+    "pages": 6,
+    "records": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "records_per_scene": [
+     [
+      0,
+      1,
+      2,
+      3,
+      4
+     ],
+     [
+      5
+     ]
+    ],
+    "page_lengths": [
+     320,
+     320,
+     320,
+     320,
+     320,
+     768
+    ],
+    "labels": [
+     0,
+     0,
+     0,
+     1,
+     20,
+     0
+    ],
+    "label_names": {
+     "0x01": "Wolverine       ",
+     "0x14": "Akuma           "
+    },
+    "flagged_labels": [
+     "Akuma           "
+    ],
+    "trailing_repeats_last": false
+   },
+   "arcade_english_records": 6,
+   "saturn_japanese_records": 4,
+   "english_records_in_order": true,
+   "japanese_records_in_order": true,
+   "space": {
+    "mc_file": "MC0F.SHP;1",
+    "english_ending_bytes": 600,
+    "free_after_win_quotes": 720,
+    "fits_free_space": true,
+    "file_size": 25139,
+    "natural_lazy_with_ending": 24578,
+    "compressed_margin": 561
+   }
+  },
+  {
+   "slot": 16,
+   "label_name": "Nash            ",
+   "script_offset": "0x2cf0",
+   "shared_with": [],
+   "header": [
+    "0x8",
+    "0x38",
+    "0x38",
+    "0x38"
+   ],
+   "english_header_same_for_2_4_6": true,
+   "arcade_english_pointer": "0x18d0ae",
+   "japanese": {
+    "scenes": 4,
+    "pages": 6,
+    "records": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "records_per_scene": [
+     [
+      0,
+      1
+     ],
+     [
+      2,
+      3
+     ],
+     [
+      4
+     ],
+     [
+      5
+     ]
+    ],
+    "page_lengths": [
+     256,
+     256,
+     256,
+     256,
+     320,
+     768
+    ],
+    "labels": [
+     0,
+     0,
+     17,
+     35,
+     17,
+     36
+    ],
+    "label_names": {
+     "0x11": "Nash            ",
+     "0x23": "Nazo no koe     ",
+     "0x24": "Nash's friend   "
+    },
+    "flagged_labels": [
+     "Nash            ",
+     "Nash's friend   "
+    ],
+    "trailing_repeats_last": true
+   },
+   "english": {
+    "scenes": 4,
+    "pages": 6,
+    "records": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "records_per_scene": [
+     [
+      0
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      3
+     ],
+     [
+      4,
+      5
+     ]
+    ],
+    "page_lengths": [
+     384,
+     384,
+     384,
+     384,
+     384,
+     768
+    ],
+    "labels": [
+     0,
+     0,
+     0,
+     21,
+     39,
+     0
+    ],
+    "label_names": {
+     "0x15": "Charlie         ",
+     "0x27": "Charlie's friend"
+    },
+    "flagged_labels": [
+     "Charlie         ",
+     "Charlie's friend"
+    ],
+    "trailing_repeats_last": false
+   },
+   "arcade_english_records": 6,
+   "saturn_japanese_records": 6,
+   "english_records_in_order": true,
+   "japanese_records_in_order": true,
+   "space": {
+    "mc_file": "MC10.SHP;1",
+    "english_ending_bytes": 600,
+    "free_after_win_quotes": 872,
+    "fits_free_space": true,
+    "file_size": 23913,
+    "natural_lazy_with_ending": 23099,
+    "compressed_margin": 814
+   }
+  },
+  {
+   "slot": 17,
+   "label_name": "Cammy           ",
+   "script_offset": "0x2d58",
+   "shared_with": [],
+   "header": [
+    "0x8",
+    "0x62",
+    "0x62",
+    "0x62"
+   ],
+   "english_header_same_for_2_4_6": true,
+   "arcade_english_pointer": "0x18d306",
+   "japanese": {
+    "scenes": 7,
+    "pages": 12,
+    "records": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11
+    ],
+    "records_per_scene": [
+     [
+      0,
+      1
+     ],
+     [
+      2,
+      3,
+      4
+     ],
+     [
+      5
+     ],
+     [
+      6,
+      7,
+      8
+     ],
+     [
+      9
+     ],
+     [
+      10
+     ],
+     [
+      11
+     ]
+    ],
+    "page_lengths": [
+     256,
+     256,
+     256,
+     256,
+     256,
+     256,
+     256,
+     256,
+     256,
+     256,
+     256,
+     768
+    ],
+    "labels": [
+     0,
+     0,
+     18,
+     37,
+     37,
+     38,
+     38,
+     18,
+     38,
+     18,
+     0,
+     0
+    ],
+    "label_names": {
+     "0x12": "Cammy           ",
+     "0x25": "Matsuo Tsurayaba",
+     "0x26": "Psylocke        "
+    },
+    "flagged_labels": [],
+    "trailing_repeats_last": true
+   },
+   "english": {
+    "scenes": 7,
+    "pages": 13,
+    "records": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12
+    ],
+    "records_per_scene": [
+     [
+      0
+     ],
+     [
+      1,
+      2,
+      3,
+      4
+     ],
+     [
+      5
+     ],
+     [
+      6,
+      7
+     ],
+     [
+      8
+     ],
+     [
+      9,
+      10
+     ],
+     [
+      11,
+      12
+     ]
+    ],
+    "page_lengths": [
+     256,
+     256,
+     256,
+     256,
+     256,
+     256,
+     256,
+     256,
+     256,
+     256,
+     256,
+     256,
+     768
+    ],
+    "labels": [
+     0,
+     37,
+     37,
+     0,
+     0,
+     0,
+     18,
+     38,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    "label_names": {
+     "0x12": "Cammy           ",
+     "0x25": "Matsuo Tsurayaba",
+     "0x26": "Psylocke        "
+    },
+    "flagged_labels": [],
+    "trailing_repeats_last": true
+   },
+   "arcade_english_records": 13,
+   "saturn_japanese_records": 12,
+   "english_records_in_order": true,
+   "japanese_records_in_order": true,
+   "space": {
+    "mc_file": "MC11.SHP;1",
+    "english_ending_bytes": 1300,
+    "free_after_win_quotes": 1328,
+    "fits_free_space": true,
+    "file_size": 28494,
+    "natural_lazy_with_ending": 27835,
+    "compressed_margin": 659
+   }
+  },
+  {
+   "slot": 18,
+   "label_name": "Bison           ",
+   "script_offset": "0x2b78",
+   "shared_with": [
+    11
+   ],
+   "header": [
+    "0x8",
+    "0x30",
+    "0x30",
+    "0x30"
+   ],
+   "english_header_same_for_2_4_6": true,
+   "arcade_english_pointer": "0x18c5be",
+   "japanese": {
+    "scenes": 2,
+    "pages": 7,
+    "records": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ],
+    "records_per_scene": [
+     [
+      0,
+      1
+     ],
+     [
+      2,
+      3,
+      4,
+      5,
+      6
+     ]
+    ],
+    "page_lengths": [
+     256,
+     256,
+     256,
+     256,
+     256,
+     256,
+     768
+    ],
+    "labels": [
+     28,
+     28,
+     12,
+     29,
+     30,
+     31,
+     12
+    ],
+    "label_names": {
+     "0x0c": "Chun-Li         ",
+     "0x1c": "Professor X     ",
+     "0x1d": "Iceman          ",
+     "0x1e": "Beast           ",
+     "0x1f": "Archangel       "
+    },
+    "flagged_labels": [],
+    "trailing_repeats_last": true
+   },
+   "english": {
+    "scenes": 2,
+    "pages": 6,
+    "records": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "records_per_scene": [
+     [
+      0,
+      1,
+      2
+     ],
+     [
+      3,
+      4,
+      5
+     ]
+    ],
+    "page_lengths": [
+     256,
+     256,
+     256,
+     256,
+     256,
+     768
+    ],
+    "labels": [
+     28,
+     28,
+     28,
+     29,
+     30,
+     31
+    ],
+    "label_names": {
+     "0x1c": "Professor X     ",
+     "0x1d": "Iceman          ",
+     "0x1e": "Beast           ",
+     "0x1f": "Archangel       "
+    },
+    "flagged_labels": [],
+    "trailing_repeats_last": true
+   }
+  }
+ ]
+}

@@ -731,3 +731,22 @@ play-checked in `EXP-0042`):
 and matched all 48 hashes (`docs/regression_report.md`, run at `f2ed18a`).
 
 Reproduce: `./invenv.sh python -m tools.disc.regression`.
+
+## D-038 (M8): Every roster slot has an English ending script that fits (`END-010`, `EXP-0043`)
+
+- **Scripts:** every roster slot 0-17 has an English script in `MCED.SHP`.
+  Each shows its arcade English ending records 0 to n − 1, once each, in
+  order, under its own scene breaks and labels. The Japanese scripts show
+  each file's Japanese records in order, except slot 8.
+- **Aliases explained:**
+  - Slots 8 and 9 share Ryu's script (labels Cyclops and Ryu), and the
+    arcade English pointer for slot 8 equals Ryu's.
+  - Slots 11 and 18 share Chun-Li's script and pointers.
+- **Space:** each file's English ending (100 × the arcade English count)
+  fits after its English win quotes. The free space ranges from 720 to
+  1,328 bytes, and lazy re-encoding leaves 259 to 1,293 bytes per file.
+- **Labels:** the English labels include `Akuma` (Gouki), `Charlie` and
+  `Charlie's friend` (Nash), `Bison` (Rogue) and `Vega` (Magneto).
+
+Output: `data/text/ending_script_census.json`. Reproduce:
+`research/experiments/EXP-0043/README.md`, "Procedure".
