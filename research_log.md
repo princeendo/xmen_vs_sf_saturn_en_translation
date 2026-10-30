@@ -2166,3 +2166,36 @@ byte-identical outputs after formatting.
 
 Conclusion: `END-012` is `DONE` (**CONFIRMED**, D-039). Next: `END-013`;
 the gate extension can be asked.
+
+## 2026-10-30 — SESSION-0068: Saturn route to any roster ending; whose ending plays (END-013, EXP-0045)
+
+User request (verbatim): "Start END-013: Saturn route to any roster ending,
+first or second pick."
+
+- **Fighter blocks:** found from the `EXP-0041` dumps. The arcade's 7
+  first-pick words hold the same values at `0x060Fxxxx`. The per-block
+  character is at + `0x23`. The block contents swap at a tag (4 fields and
+  vitality swap), and `0x060F4200` is the active fighter.
+- **Tool:** `tools/mednafen/route.py` promoted from `EXP-0041`, with grid
+  moves, policies, a Gouki start state and `MC0F` patching. 11 tests.
+- **Failures:**
+  1. A zsh loop ran nothing (the command was passed as one word); a Python
+     driver was used instead.
+  2. Three versions of the "second" policy failed to make the second pick
+     finish the boss (one write; a 900-frame window that ended in the
+     dialogue; "partner active" already true in the dialogue).
+  3. The fourth knocked out the first pick, and the team lost the match.
+  4. The tag policy (Z + C) did not tag.
+- **Results:**
+  - `first`: the first pick's ending (Nash, Wolverine, Gouki).
+  - `cpu_final`: the partner's win quote from WRAM-H, continue, no ending.
+  - The partner fight always had the first pick on the player's side.
+- **Gouki:** the state with his cell shown is the second pick, with Gouki
+  already chosen; used as the Gouki start state.
+
+Checks: `pytest` 194 passed; `ruff check`, `ruff format --check` and
+`mypy --strict tools tests` clean.
+
+Conclusion: `END-013` is `DONE` (D-040). The second-pick ending is not
+reached; it passes to `END-015`'s user play check. Next: the
+`GATE-TRANSLATION` extension for the M8 roster endings.

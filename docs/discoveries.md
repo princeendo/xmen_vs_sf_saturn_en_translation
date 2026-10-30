@@ -770,3 +770,25 @@ Every Saturn Japanese ending record equals its arcade record. Pairing files:
 and `Vega` (Magneto's page 3, as the arcade shows).
 
 Reproduce: `research/experiments/EXP-0044/README.md`, "Procedure".
+
+## D-040 (M8): The ending is the first pick's, and a route reaches any roster ending (`END-013`, `EXP-0045`)
+
+- **The fighter blocks:** the four blocks are at `0x060F4200`/`4A00` (the
+  player's side; `4200` is the active fighter) and `0x060F4600`/`4E00`
+  (the CPU's side). Each holds its character at + `0x23` (slot × 2) and
+  vitality at + `0x10`. This is the arcade's `0xFF4xxx` layout.
+- **The route tool:** `tools.mednafen.route` picks any grid character first
+  or second from the select checkpoint (Gouki from a state where he is
+  already the first pick). It checks that both members' files load, and
+  sets vitality to win or lose fights with no play.
+- **Whose ending** (two teams plus Gouki's, untouched image):
+  - the partner fight always puts the first pick on the player's side;
+  - if the player wins it, the first pick's ending plays, from the first
+    member's buffer;
+  - if the partner wins it, the partner's win quote is read from the second
+    member's buffer (WRAM-H `0x060B0000` + its table), then the continue
+    screen, with no ending.
+- **No second pick's ending was reached.** Knocking out the first pick at
+  the boss loses the match, and a sent tag (Z + C) did not take effect.
+
+Reproduce: `research/experiments/EXP-0045/README.md`, "Procedure".

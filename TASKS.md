@@ -300,9 +300,16 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   Saturn scripts'. Pairing files are in `data/translations/`. Names for the
   gate: "Bison" in Vega's text; the labels `Akuma`, `Bison`, `Vega`
   (Magneto, as the arcade shows); and Nash's `Charlie` (`END-012`, D-039).
-- Next: `END-013` (Saturn route; ready). The `GATE-TRANSLATION` extension
-  can now be asked (its inputs `END-010` and `END-012` are done).
-  Backlog: `UI-004`, `SPECIAL-001`, `REL-001`.
+- **2026-10-30** (`SESSION-0068`, `EXP-0045`): `tools.mednafen.route`
+  reaches any roster character's ending on the Saturn with no play (Gouki
+  from a state where he is already picked). Both members' files load
+  correctly. The ending is always the first pick's: the partner fight puts
+  the first pick on the player's side, and if the partner wins there is no
+  ending. A second pick's ending was not reached; that passes to the
+  `END-015` play check (`END-013`, D-040).
+- Next: the `GATE-TRANSLATION` extension for the M8 roster endings (the
+  user's decision), then `END-014`. Backlog: `UI-004`, `SPECIAL-001`,
+  `REL-001`.
   The backlog also holds `UI-004` (boot-time error messages, including the
   cart warning), `SPECIAL-001` (including
   Apocalypse's pre-fight line) and `REL-001` (release patches).
@@ -1987,7 +1994,7 @@ Known before M8:
 
 ### END-013 - Saturn route to any roster ending, first or second pick
 
-- **Status:** `READY`
+- **Status:** `DONE` (`EXP-0045`, D-040)
 - **Milestone:** M8
 - **Dependencies:** END-011.
 - **Blockers:** None; the roster is `data/text/m8_ending_roster.json`.
@@ -2010,6 +2017,16 @@ Known before M8:
     English records.
   - **Open census items:** each `END-010` item that needs a run is settled
     or recorded.
+- **Outcome:**
+  - The tool is `tools.mednafen.route`.
+  - Whose ending: the first pick's, when the player wins the partner fight.
+    When the partner wins it, there is no ending.
+  - A second pick's ending was not reached: knocking out the first pick at
+    the boss loses the match, and a sent tag did not take effect. The
+    second-pick criterion is therefore not shown and passes to
+    `END-015`'s user play check (tag by hand before Apocalypse falls).
+    If it cannot be done, it is recorded in `END-016`.
+
 
 ### GATE-TRANSLATION extension for the M8 roster endings
 
@@ -2062,8 +2079,12 @@ Dependencies: `END-010`, `END-012`.
   - **Win quotes:** unchanged against the M5 checks (the `EXP-0032`
     forced draws).
   - **Play check:** the user plays from a cold boot to at least two
-    endings chosen by the agent: one first pick, one second pick, neither
-    Nash. Their pages match the route's screens.
+    endings chosen by the agent, neither Nash, and their pages match the
+    route's screens. The second one is an attempt at a second-pick ending:
+    the user tags to the partner before Apocalypse falls (`EXP-0045` could
+    not do it with no play). If the partner fight still puts the first pick
+    on the player's side, that is recorded as the answer, and the second
+    play-through is a first-pick ending instead.
 
 ### END-016 - Coverage register and regression references for M8
 
