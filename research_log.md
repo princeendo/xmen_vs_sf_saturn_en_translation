@@ -2468,3 +2468,31 @@ Checks: `ruff check`, `ruff format --check` and `mypy --strict` on
 `EXP-0049` are clean; `pytest` passes.
 
 Conclusion: `LOC-002` is `DONE` (D-045). Next: `LOC-003`.
+
+## 2026-10-30 — SESSION-0077: Name calls in voice (LOC-003, EXP-0050)
+
+User request (verbatim): "Start LOC-003: name calls in voice."
+
+- **Recording:** Mednafen's `-soundrecord` works with scripted runs
+  (`voice_record.py`). The user heard "Vega" in the pick moment (clip 1).
+- **Sound path:**
+  - The `.ADP` files are stereo ADPCM music (`SELE` and `VS` are
+    `INITDATA` parts 3 and 4).
+  - The clip bank is `INITDATA` part 5 in sound RAM.
+  - The mixer's channel records are at `0x0601776C`.
+- **Decoder:** copied from MSHvSF (`6161166`); it matched 102 of 102
+  channel states.
+- **Failures:**
+  1. Write breakpoints on sound RAM, SCU DMA and the channel records saw
+     no mixer activity (slave SH-2, HYPOTHESIS).
+  2. A late dump gave stale records; clips 2 and 3 were sound effects.
+  3. Real-time polling (`channel_poll.py`) found the true pick clips.
+- **Clips identified by the user, one at a time:** `0x121` "Vega",
+  `0x147` "Bison", `0x021` "Akuma", `0x01B` "Charlie".
+- **Table:** table A in `MMPACK.PCA` (decoded `0x79EE`). Patching entries
+  14 and 16 changed the pick and win calls; table B changed neither.
+
+Checks: `ruff check`, `ruff format --check` and `mypy --strict` on
+`EXP-0050` are clean; `pytest` passes.
+
+Conclusion: `LOC-003` is `DONE` (D-046). `LOC-004` is `READY`.

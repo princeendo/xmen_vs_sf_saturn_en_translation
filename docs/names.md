@@ -43,7 +43,7 @@ means Shadaloo's leader in the Japanese scripts.
 | VS-screen name | `VS00.PRS` one-cell letter font | spelled from letters; all needed letters present; the letter-list source is UNKNOWN |
 | Win banner | `VS00.PRS` 2 × 2 letter font | spelled from letters; as above |
 | Ending labels | `MCED.SHP` label list | `Bison`, `Akuma`, `Charlie`, `Charlie's friend`; no `Balrog` |
-| Voice | per-character files (`019_SVEG.ADP`, `01A_SGOU.ADP`, `01B_SNAS.ADP`…) | `LOC-003` |
+| Voice | clips in the sound-RAM bank (`INITDATA.PCA`), chosen by table A in `MMPACK.PCA` (decoded `0x79EE`), at the pick and on the win screen; the `.ADP` files are music | "Bison" `0x147`, "Akuma" `0x021`, "Charlie" `0x01B` (`EXP-0050`) |
 
 ## Names That Differ
 

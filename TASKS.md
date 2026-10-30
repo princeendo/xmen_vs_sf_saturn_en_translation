@@ -353,7 +353,14 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
     for the life bar (`FIX.PRS`) and the select label (`VS00.PRS`); the VS
     and banner fonts can spell them.
   - **Absent:** a `Balrog` label.
-- **Next:** `LOC-003` (voice; `READY`). M9 (special cases) needs the user's
+- **2026-10-30** (`SESSION-0077`, `EXP-0050`): `LOC-003` is done (D-046).
+  - **Calls:** the Saturn calls the name at the pick and on the win
+    screen, from a slot-indexed table in `MMPACK.PCA`.
+  - **American calls:** "Bison", "Akuma" and "Charlie" are already on the
+    disc (identified by the user).
+  - **So:** every name surface, voice included, has its American version
+    on the disc.
+- **Next:** `LOC-004` (the user's plan for each variant; `READY`). M9 (special cases) needs the user's
   explicit task (rule 24). Backlog: `UI-004`, `SPECIAL-001`, `REL-001`,
   `LOC-008`, and the "after M8" UI and text tasks.
   The backlog also holds `UI-004` (boot-time error messages, including the
@@ -2358,7 +2365,7 @@ its own; it becomes a task only if the user asks (`LOC-008`, outline).
 
 ### LOC-003 - Name calls in voice
 
-- **Status:** `READY`
+- **Status:** `DONE` (`EXP-0050`, D-046)
 - **Milestone:** Name variants (after M8)
 - **Dependencies:** LOC-001 (done).
 - **Blockers:** None. "Vega", "Gouki" and "Nash" are spoken (`EXP-0048`);
@@ -2380,13 +2387,22 @@ its own; it becomes a task only if the user asks (`LOC-008`, outline).
     shown as in `LOC-002` (reader traced), and recorded for `LOC-004`.
 - **Notes:** if `LOC-001` finds that no differing name is spoken, this
   task is closed with that evidence.
+- **Outcome:**
+  - **When:** the name is called at the pick and on the win screen.
+  - **Clips:** they are in the sound-RAM bank from `INITDATA.PCA`, and
+    MSHvSF's decoder reproduces 102 of 102 channel states.
+  - **The choice:** table A in `MMPACK.PCA` (decoded `0x79EE`), indexed
+    by slot, picks the call. A RAM patch changed the call at both
+    moments.
+  - **American calls:** "Bison" `0x147`, "Akuma" `0x021` and "Charlie"
+    `0x01B` are on the disc (identified by the user).
 
 ### LOC-004 - The user's plan for each variant
 
-- **Status:** `BLOCKED`
+- **Status:** `READY`
 - **Milestone:** Name variants (after M8)
-- **Dependencies:** LOC-001, LOC-002, LOC-003.
-- **Blockers:** The census and the storage findings.
+- **Dependencies:** LOC-001, LOC-002, LOC-003 (all done).
+- **Blockers:** None.
 - **Objective:** The user decides, surface by surface, what each variant
   shows, given what is on the disc and what each choice costs.
 - **Acceptance criteria:**

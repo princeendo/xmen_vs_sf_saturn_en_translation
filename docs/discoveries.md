@@ -913,3 +913,29 @@ Reproduce: `research/experiments/EXP-0048/README.md` and
 - **No `Balrog`:** no file holds a `Balrog` label or text.
 
 Reproduce: `research/experiments/EXP-0049/README.md`.
+
+## D-046 (Names): The name calls, their table and the American calls (`LOC-003`, `EXP-0050`)
+
+- **When:** the Saturn calls the character's name when they are picked and
+  on the win screen.
+- **The clips:** they are ADPCM clips in the 113-clip bank that
+  `INITDATA.PCA` part 5 puts in sound RAM at `0x5C00`:
+  - a u32 count;
+  - (u16 ID, u16 length, u32 offset) entries;
+  - the data from `0x5F8C`.
+
+  The SH-2 mixer (16 channel records at WRAM-H `0x0601776C`) decodes them
+  with MSHvSF's algorithm (the same multiplier table, at `0x060168F4`).
+  Replaying each active channel reproduced the stored step and predictor
+  in 102 of 102 records.
+- **The choice:** the call ID is the first word of table A, 12-byte
+  records indexed by slot, in `MMPACK.PCA` (decoded `0x79EE`, WRAM-H
+  `0x0601B9EE`). Vega `0x121`, Gouki `0x01D`, Nash `0x149`. Changing
+  entry 14 or 16 changed the call at the pick and at the win.
+- **American calls:** on the disc already, identified by the user from
+  single clips:
+  - "Bison" `0x147` (table entry 18, slot 18's call);
+  - "Akuma" `0x021` (entry 19);
+  - "Charlie" `0x01B` (entry 20).
+
+Reproduce: `research/experiments/EXP-0050/README.md`.
