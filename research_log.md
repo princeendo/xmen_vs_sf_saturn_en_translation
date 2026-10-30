@@ -2682,3 +2682,29 @@ Checks: `pytest`, `ruff check`, `ruff format --check`, `mypy --strict` are
 clean.
 
 Conclusion: `BOOT-001` is `DONE` (D-049). `BOOT-002` is `READY`.
+
+## 2026-10-30 — SESSION-0084: Where the boot warnings are stored and drawn (BOOT-002, EXP-0054)
+
+User request (verbatim): "Start BOOT-002: where each message is stored and how it is drawn."
+
+- **Alignment:** the best match of screen and picture is picture row =
+  screen row − 8 (as MSHvSF found; checked here). The first comparison
+  used the wrong sign and found thousands of differences.
+- **Colours:** a 5-bit comparison still differed. Each picture index maps
+  to one screen colour, the same in all files; the converter at
+  `0x060220DC` keeps the low five bits of each channel. With that rule every
+  pixel of all five screens matches (0 of 84,480 differ).
+- **VRAM:** VDP2 VRAM `0x0` holds the picture as an 8-bit bitmap, 512 bytes
+  a row, all 240 rows.
+- **Test build** `build/boot002_markers` (five marked files): each warning
+  changed only in its own band rows; the control boot was unchanged.
+- **`ERR5`:** an `onhit` write at `0x060228D4` (`8908` → `8905` at
+  `0x060228FA`) sent the no-cart case to the −1 branch, which showed
+  `ERR5.BIN` (and the marked copy on the test image).
+- **Tools:** `compare_screen.py`, `markers.py`; `boot_dump.py` gained VDP
+  dumps and `onhit:` writes. The agent has no colour-RAM space.
+
+Checks: `pytest`, `ruff check`, `ruff format --check`, `mypy --strict` are
+clean.
+
+Conclusion: `BOOT-002` is `DONE` (D-050). `BOOT-003` is `READY`.

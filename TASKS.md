@@ -403,7 +403,14 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   - **A fifth,** `ERR5.BIN`, follows from the code (an unsteady cart ID or a
     failing 1 MB cart); not produced in Mednafen.
   - **No warning:** a 1 MB cart; the 16 MiB CS1 RAM hangs on "NOW LOADING".
-- **Next:** `BOOT-002` (where each message is stored and drawn; `READY`).
+- **2026-10-30** (`SESSION-0084`, `EXP-0054`): `BOOT-002` is done (D-050).
+  - **Path:** each `ERRn.BIN` is drawn unchanged into a VDP2 bitmap, 8 rows
+    down; a test build with marker bands and a forced `ERR5` confirmed it,
+    pixel for pixel.
+  - **Palette bug:** the game keeps the low five bits of each colour
+    channel, so the warnings show darker than drawn.
+  - **Room:** 352 × 232 visible, 16 colours, same file size and header.
+- **Next:** `BOOT-003` (official English, and the user's wording; `READY`).
   M9 (special cases) needs the user's explicit task
   (rule 24). Backlog: `SPECIAL-001` (including Apocalypse's pre-fight
   line), `REL-001` (release patches), `LOC-008`, and the "after M8" UI and
@@ -2685,7 +2692,7 @@ Known before Phase O:
 
 ### BOOT-002 - Where each message is stored and how it is drawn
 
-- **Status:** `READY`
+- **Status:** `DONE` (`EXP-0054`, D-050)
 - **Milestone:** Boot-time messages (`UI-004`)
 - **Dependencies:** BOOT-001 (done).
 - **Blockers:** None.
@@ -2705,13 +2712,22 @@ Known before Phase O:
     colours, or the text's space and glyphs.
 - **Notes:** if a message is drawn from code or a font rather than a
   picture, record it here and adjust `BOOT-004` before it starts.
+- **Outcome:**
+  - **Location:** `ERR1`-`ERR5.BIN`, whole files, loaded raw to
+    `0x06080000`. A test build with a marker band in each changed only its
+    own screen's band rows; `ERR5` was shown by forcing the −1 branch.
+  - **Format:** 352 × 240, 4-bit BMP; unpacked into an 8-bit VDP2 bitmap,
+    screen row = picture row + 8; palette converted from the low five bits
+    of each channel. Every screen matches its file pixel for pixel.
+  - **Room:** all 352 columns, picture rows 0-231; 16 colours from a
+    palette the file carries; the file size and header layout fixed.
 
 ### BOOT-003 - Official English, and the user's wording
 
-- **Status:** `BLOCKED`
+- **Status:** `READY`
 - **Milestone:** Boot-time messages (`UI-004`)
-- **Dependencies:** BOOT-001, BOOT-002.
-- **Blockers:** The census and the formats.
+- **Dependencies:** BOOT-001, BOOT-002 (both done).
+- **Blockers:** None.
 - **Objective:** An English text for every message, from an official source
   where one exists, otherwise a recorded new translation the user approves.
 - **Acceptance criteria:**

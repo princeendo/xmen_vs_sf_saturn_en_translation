@@ -76,6 +76,10 @@ Cold boots of the untouched image, one condition changed at a time
 | D: no free space for a new record; 16 needed | `ERR3.BIN` | 18 blocks or fewer free | the game goes on | `eb804399…` | No |
 | E: the 4 MB cart is not inserted | `ERR5.BIN` | an unsteady cart ID, or a 1 MB cart failing its RAM test (from the code); not produced in Mednafen | leaves to the BIOS | the file only | No |
 
+How they are drawn (`BOOT-002`, `EXP-0054`): each picture is shown
+unchanged, 8 rows down, with a palette the game converts from the low five
+bits of each channel; `ERR5` was shown by a code change.
+
 Developer English already in the data, not triggered: a disc file-error
 table in file `0` ("FILE LOAD ERROR", "READ ERROR"…) and exception text in
 `MMPACK.PCA` ("CPU ADDRESS ERROR"…). See `EXP-0053`.

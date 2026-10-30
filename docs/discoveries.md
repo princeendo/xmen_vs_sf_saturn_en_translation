@@ -1008,3 +1008,19 @@ Reproduce: `research/experiments/EXP-0052/README.md`.
   cart gave `ERR4`.
 
 Reproduce: `research/experiments/EXP-0053/README.md`.
+
+## D-050 (Boot): The warning pictures are drawn unchanged, with a palette bug (`BOOT-002`, `EXP-0054`)
+
+- **Path:** `ERRn.BIN` (raw, 42,358 bytes, 352 × 240 4-bit BMP) is loaded
+  into WRAM-H `0x06080000`, unpacked into an 8-bit VDP2 bitmap at VDP2 VRAM
+  `0x0` (512 bytes a row), and shown with screen row y = picture row y − 8;
+  picture rows 232-239 are off screen.
+- **Palette:** 256 entries from file offset 54 go to colour RAM; each
+  channel keeps its **low** five bits (`0x060220DC`), so the screens are
+  darker and differently coloured than the pictures.
+- **Controlled changes:** a test build with a marker band in each file
+  changed only that screen's band rows; forcing the cart test's −1 branch
+  in RAM showed `ERR5.BIN`. All five screens match their files pixel for
+  pixel under the game's colour rule.
+
+Reproduce: `research/experiments/EXP-0054/README.md`.
