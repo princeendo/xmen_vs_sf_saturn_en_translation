@@ -271,8 +271,17 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   all four confirmed builds byte for byte (48 of 48 hashes;
   `docs/regression_report.md`). The README describes Nash's English ending
   and its build command (`END-009`, D-037). **M7 is complete.**
-- Next: M8 (`END-010`, all roster endings) needs its tasks written; nothing
-  in it has started. Backlog: `UI-004`, `SPECIAL-001`, `REL-001`.
+- **2026-10-30:** M8 tasks written at the user's request ("Write up the M8
+  tasks for all roster endings. Don't start them yet."), none started:
+  - `END-010`: static census (ready);
+  - `END-011`: the user's ending roster;
+  - `END-012`: arcade pairing;
+  - `END-013`: Saturn route tool, team rule and second pick;
+  - the gate extension;
+  - `END-014`: build;
+  - `END-015`: verify;
+  - `END-016`: coverage and regression.
+- Next: `END-010` (ready). Backlog: `UI-004`, `SPECIAL-001`, `REL-001`.
   The backlog also holds `UI-004` (boot-time error messages, including the
   cart warning), `SPECIAL-001` (including
   Apocalypse's pre-fight line) and `REL-001` (release patches).
@@ -1819,6 +1828,232 @@ recorded under `GATE-TRANSLATION` above and in
     earlier three.
   - The README's status and build section mention Nash's ending.
 
+## Phase M: M8 (Every Roster Ending In English)
+
+M8: the M7 pipeline, generalized. Every roster ending that the user puts
+in scope shows its official arcade English on the Saturn, whether the
+character is picked first or second. All of it is built from the untouched
+source, together with the win quotes, verified, and registered.
+
+M7 is complete (D-029 to D-037). Nothing from Nash's ending is assumed for
+another character: each character's script, pairing, space and screens get
+their own evidence. Special cases stay out until `END-011` puts them in
+scope (rule 24). Apocalypse's pre-fight line, the post-boss story screens,
+the warning and other UI stay with `SPECIAL-001` and `UI-001`.
+
+The order:
+
+1. `END-010` (static census, ready);
+2. `END-011` (the user's roster choice);
+3. `END-012` (arcade pairing) and `END-013` (Saturn route), which are
+   independent;
+4. the `GATE-TRANSLATION` extension;
+5. `END-014` (build);
+6. `END-015` (verify every ending);
+7. `END-016` (coverage and regression).
+
+Known before M8:
+
+- **One ending is proven** (Nash, slot 16, first pick):
+  - **Code:** version 4 (`patches_v4`) marks a slot with bit 7 of its
+    fixed-table low byte.
+  - **Records:** the English records go at quote table + 800.
+  - **Script:** the slot's `MCED` script header word 0 is set to its
+    English script (`mced_english_scripts`).
+  - **Build and check:** `build_english` builds ending specs. The Saturn
+    route (`EXP-0041` `saturn_route.py`) reaches the ending with no play.
+- **Space** (`data/text/ending_census.json`, D-031). After the 800 bytes of
+  English win quotes, each file has 416 + 76 × (its Japanese ending
+  records) bytes before the old Japanese ending ends. Every roster slot's
+  English ending (100 × the arcade English count) fits there:
+  - tightest: Cammy (1,300 of 1,328), Magneto and Apocalypse (700 of 720);
+  - widest: Juggernaut (600 of 1,100).
+
+  The compressed fit is not measured. The M5 margins range from 175 bytes
+  (Apocalypse) to 1,176.
+- **Counts:** arcade English counts per slot 0-17 are 6, 9, 6, 6, 5, 6, 6,
+  7, 7, 7, 4, 6, 6, 5, 5, 6, 6, 13. The Saturn Japanese counts are 7, 7, 7,
+  8, 6, 4, 9, 4, 4, 6, 5, 7, 4, 4, 4, 4, 6, 12.
+- **Aliases:**
+  - Arcade English: slot 9 (Ryu) equals slot 8 (Apocalypse).
+  - Arcade Japanese: slot 8 equals slot 7 (Magneto).
+  - `MCED`: slots 8 and 9 share one script, and slots 11 and 18 share
+    another.
+  - What these mean is UNKNOWN.
+- **Labels** (D-033): `MCED`'s 40-entry list has the roster names, `Bison`,
+  `Akuma`, `Charlie` and 18 other speakers.
+- **Team rule** (`EXP-0034`, `EXP-0037`): the ending belonged to the
+  partner fight's winner, who was the first pick in every run. Whose ending
+  plays when the second pick wins the partner fight is untested on the
+  Saturn. Nash's English ending as second pick is untested.
+
+### END-010 - Census of every roster ending's scripts and space
+
+- **Status:** `READY`
+- **Milestone:** M8
+- **Dependencies:** END-009 (done).
+- **Blockers:** None.
+- **Objective:** A static census, from the decoded files and the arcade
+  program only, of what each roster slot's English ending needs.
+- **Acceptance criteria:**
+  - **Scripts:** for each slot 0-18, both `MCED` scripts are parsed (the
+    `EXP-0038` format): scenes, pages, record indices, page lengths, label
+    indices and their names. The English script's records must be 0 to the
+    arcade English count − 1, once each, in order. Any other shape is
+    listed.
+  - **Shared scripts and aliases:** slots 8/9 and 11/18 share scripts, and
+    the arcade has the English 9 = 8 and Japanese 8 = 7 equalities. Each is
+    explained from data (which character's records the shared script reads)
+    or recorded as open, with the experiment that would settle it.
+  - **Space:** for each slot, the English bytes against the free space
+    after the English win quotes. Then the compressed fit, with English win
+    quotes and English ending together (the `EXP-0031` method).
+  - **Labels:** every label index the English scripts use, and its name.
+    Names whose two conventions differ are flagged (`docs/names.md`).
+  - **Output:** `data/text/ending_script_census.json` (indices, counts,
+    offsets, sizes and flags; no text).
+- **Notes:** no emulator run is needed. Anything that cannot be settled
+  statically becomes an `END-013` route check.
+
+### END-011 - Choose the M8 ending roster and its exceptions
+
+- **Status:** `BLOCKED`
+- **Milestone:** M8
+- **Dependencies:** END-010.
+- **Blockers:** The census.
+- **Objective:** The user chooses which endings M8 covers, with the census
+  in front of them. This is the `RE-008` method.
+- **Acceptance criteria:**
+  - **Options:** each is shown with its evidence and costs:
+    - all ordinary characters;
+    - Gouki (secret);
+    - Apocalypse (the boss, with a shared script and aliases);
+    - Ryu (his script and English pointer are shared with Apocalypse);
+    - Cammy (13 English records, Japanese block unbounded);
+    - second-pick endings.
+  - **Recorded:** the user's choice, in their words, in
+    `data/text/m8_ending_roster.json` and `docs/coverage_exceptions.md`.
+
+### END-012 - Arcade pairing for every roster ending
+
+- **Status:** `BLOCKED`
+- **Milestone:** M8
+- **Dependencies:** END-011.
+- **Blockers:** The roster.
+- **Objective:** Confirm in MAME, for every roster character, which English
+  record each Saturn page shows. This is the `EXP-0037` method.
+- **Acceptance criteria:**
+  - **Route:** `EXP-0037`'s no-play MAME route, generalized to pick any
+    roster character first (cursor moves found by snapshot, then checked),
+    in English and Japanese. Gouki's pick and any unreachable character are
+    recorded as such.
+  - **Prediction first:** before the logged runs, a committed prediction
+    for every slot: page k reads ending record k of the point character, in
+    either language. Then the reads are compared, and every exception is
+    recorded.
+  - **Partners:** at least two characters are run with two partners each.
+  - **Pairing files:** `data/translations/<name>_ending_pairing.json`
+    (addresses and hashes), each pair CONFIRMED by reads. Saturn records
+    must equal the arcade Japanese ones byte for byte.
+  - **Names:** every English record that names a character whose two
+    conventions differ, for the gate (the `PAIR-003` method).
+
+### END-013 - Saturn route to any roster ending, first or second pick
+
+- **Status:** `BLOCKED`
+- **Milestone:** M8
+- **Dependencies:** END-011.
+- **Blockers:** The roster.
+- **Objective:** Make the `EXP-0041` Saturn route a tool that reaches any
+  roster character's ending with no play. Use it to settle what the census
+  could not, and whose ending plays.
+- **Acceptance criteria:**
+  - **Tool:** `saturn_route.py` promoted under `tools/mednafen/`, with unit
+    tests for anything testable without the game. It takes the character,
+    the partner, which of them is picked first, and the image. It writes the
+    build's code into RAM when it starts from a post-Start state (the
+    `EXP-0041` lesson), or boots cold.
+  - **Team rule:** on the untouched image, for at least two teams, run with
+    the character picked first and then second, with the partner fight won
+    by each side in turn (vitality forcing on the chosen side). Record whose
+    ending plays in each case.
+  - **Second pick:** for the second member's ending, show which buffer its
+    records are read from (WRAM-H `0x060B0000` + table + `0x4C0` is the
+    HYPOTHESIS). Show that version 4's pointer rule points at that copy's
+    English records.
+  - **Open census items:** each `END-010` item that needs a run is settled
+    or recorded.
+
+### GATE-TRANSLATION extension for the M8 roster endings
+
+Before `END-014`, the user extends `GATE-TRANSLATION` to the `END-011`
+roster's endings: GO or NO-GO in their own words, recorded under
+`GATE-TRANSLATION` and in `docs/localization_policy.md`. The question
+covers:
+
+- the ending records and scripts in scope;
+- the pairing (`END-012`);
+- the official English, with no rewording;
+- every flagged name (`END-010` labels, `END-012` records).
+
+Dependencies: `END-010`, `END-012`.
+
+### END-014 - Build every roster ending
+
+- **Status:** `BLOCKED`
+- **Milestone:** M8
+- **Dependencies:** GATE-TRANSLATION extension for the M8 roster endings,
+  END-010, END-012.
+- **Blockers:** The gate.
+- **Objective:** One image, built from the untouched source, with all
+  roster win quotes and all roster endings in English.
+- **Acceptance criteria:**
+  - **Specs:** an ending spec per roster slot, generated from its pairing
+    file (`EXP-0041` `make_spec.py`, generalized).
+  - **Build:** `tools.disc.build_english` (version 4). Every changed file's
+    stream ends in its last sector, and the margins are recorded. Every
+    `MCED` change is listed (rule 12). All sectors pass EDC/ECC.
+  - **Load check:** for every roster character picked first and second,
+    the buffer equals the built file plus fix-ups.
+
+### END-015 - Verify every roster ending
+
+- **Status:** `BLOCKED`
+- **Milestone:** M8
+- **Dependencies:** END-013, END-014.
+- **Blockers:** The build and the route tool.
+- **Objective:** Show every roster ending in English on the build, against
+  the arcade.
+- **Acceptance criteria:**
+  - **Route checks:** for every roster character, first pick, the route
+    reaches the ending on the build. Every page is compared with
+    `END-012`'s arcade English snapshots (picture, label, text, line count,
+    scene breaks) and checked by the agent. A second-pick run is made for
+    every character whose second-pick ending `END-013` showed. Reads after
+    each character's win quotes happen only during its ending (the
+    `EXP-0041` read log).
+  - **Win quotes:** unchanged against the M5 checks (the `EXP-0032`
+    forced draws).
+  - **Play check:** the user plays from a cold boot to at least two
+    endings chosen by the agent: one first pick, one second pick, neither
+    Nash. Their pages match the route's screens.
+
+### END-016 - Coverage register and regression references for M8
+
+- **Status:** `BLOCKED`
+- **Milestone:** M8
+- **Dependencies:** END-015.
+- **Blockers:** The verified build.
+- **Objective:** Record what M8 covers and leaves, and lock the build.
+- **Acceptance criteria:**
+  - **Coverage:** `docs/coverage_exceptions.md` lists every ending surface
+    and record left Japanese, and why. That includes each roster exclusion,
+    unused Japanese records, and anything `END-010` to `END-015` could not
+    show.
+  - **Regression:** the M8 build is added to
+    `data/regression/references.json`, and all references match.
+  - **README:** the status and build command are updated.
+
 ## Later Milestones (outline only)
 
 These are placeholders so the order is visible. Each becomes a full task, with
@@ -1827,7 +2062,6 @@ for each is in `docs/playbook_from_mshvsf.md`.
 
 | ID | Milestone | Outline |
 | --- | --- | --- |
-| END-010 | M8 | All roster endings, including second-member endings; combined image with win quotes; coverage register; regression references. |
 | REL-001 | after M5 | Release patches (xdelta3 and SSP of the changed files) with a rebuild README; may be GitHub Release assets, never committed. Splice rather than re-compress changed streams to keep patches small. |
 | SPECIAL-001 | M9, user approval | Secret characters and bosses: which slots have their own official English and which reuse another's (slot 18); boss pre-fight text (Apocalypse's pre-fight line is captured, `docs/text_surfaces.md`); save- or progress-gated unlocks. Gouki's and Apocalypse's ordinary win quotes are in M5 (`RE-008`). |
 | UI-001 | after M8, user request | UI art: inventory English art already in every font before drawing anything; caption colour and style. Includes the `⚠乱入禁止` ("no challengers") sprite shown before and during the partner fight (spotted by the user, `EXP-0034`). |

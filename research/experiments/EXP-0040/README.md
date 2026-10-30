@@ -140,7 +140,7 @@ files fit their sectors.
   member's base (Ryu `0x060B2A98`, WRAM-H), so the same rule applies to his
   copy: second-member table + 800. That copy holds the English quotes too
   (D-027). But the second member's ending was never reached; it stays
-  untested (`END-010`).
+  untested (`END-013`).
 - **The bytes after the English win quotes** are assumed unread. `END-007`
   must show it with a read log.
 - **A task-identity assumption.** The flag is set on the selector's r6 task,

@@ -127,7 +127,7 @@ regression references.
 ## Uncertainty and Alternatives
 
 - **One team:** Nash and Ryu, Nash first. Nash as the second pick is not
-  covered (`END-010`).
+  covered (`END-013`).
 - **Screen hash match:** the session's page screenshots equal the route's
   byte for byte. So the cold boot and the route's code-in-RAM method agree
   for this ending.

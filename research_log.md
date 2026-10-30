@@ -2058,3 +2058,34 @@ Checks: `pytest` 183 passed; `ruff check` clean.
 
 Conclusion: `END-009` is `DONE` (D-037). **M7 is complete.** Next: write
 the M8 tasks (not started).
+
+## 2026-10-30 — SESSION-0064: M8 tasks written (not started)
+
+User request (verbatim): "Write up the M8 tasks for all roster endings.
+Don't start them yet."
+
+Facts gathered (read-only) for the task text:
+
+- **Space:** from `data/text/ending_census.json` and the M5 fit margins.
+  The free space after each file's English win quotes (416 + 76 × its
+  Japanese ending count) holds every roster slot's English ending
+  (100 × the arcade English count). Tightest: Cammy (1,300 of 1,328), and
+  Magneto and Apocalypse (700 of 720). The compressed fit is not measured.
+- **Aliases:** English 9 = 8, Japanese 8 = 7, and `MCED`'s shared scripts
+  (8/9, 11/18).
+
+Written in `TASKS.md` (Phase M):
+
+| Task | Status |
+| --- | --- |
+| `END-010` (static census of scripts, aliases, space, labels) | `READY` |
+| `END-011` (the user's ending roster and exceptions) | `BLOCKED` |
+| `END-012` (MAME pairing for every roster ending, predictions first) | `BLOCKED` |
+| `END-013` (Saturn route tool; team rule; second-pick buffer) | `BLOCKED` |
+| `GATE-TRANSLATION` extension for the roster endings | waits on `END-010` and `END-012` |
+| `END-014` (build every roster ending) | `BLOCKED` |
+| `END-015` (verify every ending: route, win quotes, user play check of two) | `BLOCKED` |
+| `END-016` (coverage register, regression, README) | `BLOCKED` |
+
+The outline row `END-010` (M8) was replaced. Three references to it now
+point at `END-012` or `END-013`. No experiment was run.
