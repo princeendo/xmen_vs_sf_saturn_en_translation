@@ -1,7 +1,7 @@
 # EXP-0051 (Names): The American-Names Variant
 
 Task: LOC-005
-Status: IN_PROGRESS
+Status: DONE
 Confidence: see "Conclusion"
 
 ## Observation
@@ -224,16 +224,75 @@ MEDNAFEN_ALLOWMULTI=1 ./invenv.sh python research/experiments/EXP-0051/force_dra
 
 Clips cut from the cold-boot recordings (`sound.wav`, 48 kHz stereo):
 
-| Clip | Run | Moment | SHA-256 |
-| --- | --- | --- | --- |
-| 1 | `coldA2` | Gouki picked (93.2-96.8 s) | `6a860f46…` |
-| 2 | `coldA2` | Vega picked (102.1-105.7 s) | `c8ab02da…` |
-| 3 | `coldA2` | Gouki's team wins (121.5-129.5 s) | `0b945b77…` |
-| 4 | `coldB` | Nash picked (85.4-89.0 s) | `1941f6df…` |
-| 5 | `coldB` | Nash's team wins, stage 1 (113.0-121.0 s) | `37f6165b…` |
+Each clip was sent alone, without saying which name was expected.
+
+| Clip | Run | Moment | SHA-256 | The user heard |
+| --- | --- | --- | --- | --- |
+| 1 | `coldA2` | Gouki picked (93.2-96.8 s) | `6a860f46…` | "I heard Akuma." |
+| 2 | `coldA2` | Vega picked (102.1-105.7 s) | `c8ab02da…` | "I think I heard \"Bison\"." |
+| 3 | `coldA2` | Gouki's team wins (121.5-129.5 s) | `0b945b77…` | "Akuma" |
+| 4 | `coldB` | Nash picked (85.4-89.0 s) | `1941f6df…` | "Charlie" |
+| 5 | `coldB` | Nash's team wins, stage 1 (113.0-121.0 s) | `37f6165b…` | "Charlie" |
 
 ```bash
 ffmpeg -i local/loc005/coldA2/sound.wav -ss 93.2 -to 96.8 local/loc005/clips/clip1.wav
 ```
 
 (and likewise for the others, with the times above).
+
+## Conclusion
+
+**CONFIRMED:**
+
+- **The switch:** the word at `0x060F5478` (R11 + `0xD478`, the arcade's
+  `0xFF5478`) chooses a Japanese or an American list for the select
+  label, VS screen, life bar, win banner and name call (change 1, and
+  each surface's list traced).
+- **The sites:** changing only the 10 reads in `tools/disc/names.py` to
+  return 2 gives the American names on every surface and the American
+  calls, with the word left at 0 (change 2, in RAM and on the built
+  image).
+- **The build:** `build_english --names us` builds it from the untouched
+  source. A cold boot shows BISON, AKUMA and CHARLIE on every art surface
+  as the US arcade does, and the user heard "Akuma", "Bison" and
+  "Charlie" at the picks and the wins.
+- **No other change:** the M8 endings and the forced quote draws match
+  `END-015`, apart from the names.
+
+## Uncertainty and Alternatives
+
+- **CPU-side BISON and CHARLIE** were not seen on the built image (no CPU
+  team held them). The CPU lists hold them (`0x06080F26`), and the CPU
+  side's AKUMA came from the same list.
+- **Other readers:** 35 readers of the word were judged not to pick a
+  per-character list from their code. One (`0x0604FD02`, request `0x9E`
+  or `0x9F`) chooses a region-dependent sound; it was left as the Saturn
+  has it.
+- **Two-player screens** (Versus Mode, a second player's side) were not
+  played. They draw through the same routines (the four life-bar
+  routines cover both sides and both team members).
+- **Opponent order:** the CPU teams differed between runs. Unpatched
+  control runs differ as well, so that was taken as key timing, not the
+  patch.
+- **The select label's US path** skips a per-slot offset that the
+  Japanese path applies (`0x060639EE`-`0x06063A28`). The labels look as
+  in the US arcade; the offset's purpose was not traced.
+
+## Reproduction
+
+The build, cold-boot and regression commands are in the sections "The
+build", "Cold boot of the built image" and "No other change" above. The
+RAM tests:
+
+```bash
+B="build/m8_roster_endings/X-Men vs. Street Fighter (Japan) (3M).cue"
+W=local/loc001/session/states; P=research/experiments/EXP-0049/patch_run.py
+SITES=$(./invenv.sh python -c "from tools.disc.names import patches; print(' '.join(f'{a:08X}:{o}:{n}' for a,o,n in patches('us')))")
+./invenv.sh python $P "$B" local/loc005/g_life $W/f00007177.mcs 420 060F5478:0000:0002
+./invenv.sh python $P "$B" local/loc005/s_life $W/f00007177.mcs 420 ${=SITES}
+./invenv.sh python $P "$B" local/loc005/s_ban $W/f00029551.mcs 200 060F4610:0019:0000 ${=SITES}
+./invenv.sh python $P "$B" local/loc005/s_sel_vega local/checkpoints/re004/f00002973.mcs 60 ${=SITES} keys:uuu
+./invenv.sh python $P "$B" local/loc005/s_vs $W/f00007004.mcs 160 ${=SITES} keys:a
+./invenv.sh python research/experiments/EXP-0050/channel_poll.py "$B" local/loc005/v_vega \
+  local/checkpoints/re004/f00002973.mcs uuu a 4 ${=SITES}
+```

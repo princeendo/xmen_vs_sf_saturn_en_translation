@@ -2561,5 +2561,10 @@ User request (verbatim): "Start LOC-005: build the American-names variant."
 Checks: `pytest` (202 passed), `ruff check`, `ruff format --check`,
 `mypy --strict` are clean.
 
-Conclusion: `LOC-005` stays `IN_PROGRESS` until the user identifies the
-five calls.
+Ear check: five clips from the cold-boot recordings, sent one at a time
+without the expected name. The user heard: clip 1 (Gouki picked) "I heard
+Akuma."; clip 2 (Vega picked) "I think I heard \"Bison\"."; clip 3
+(Gouki's team wins) "Akuma"; clip 4 (Nash picked) "Charlie"; clip 5
+(Nash's team wins) "Charlie".
+
+Conclusion: `LOC-005` is `DONE` (D-047). `LOC-006` is `READY`.

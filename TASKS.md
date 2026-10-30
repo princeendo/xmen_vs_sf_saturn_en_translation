@@ -368,17 +368,17 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   - **Saturn names:** a `GATE-TRANSLATION` extension for six name-only
     edits and four labels, plus a new `Balrog` label for Magneto's page 3.
   - **Switch:** `build_english --names us|saturn`, default `us`.
-- **2026-10-30** (`SESSION-0079`, `EXP-0051`, in progress): the American
-  variant is built (`build/loc005_names_us`, `--names us`).
+- **2026-10-30** (`SESSION-0079`, `EXP-0051`): `LOC-005` is done (D-047).
   - **How:** a region word (`0x060F5478`, the arcade's `0xFF5478`) picks
-    every name surface's Japanese or American list (D-047). The build
-    makes 10 reads of it return US; the word stays 0.
-  - **Shown from a cold boot:** BISON, AKUMA and CHARLIE on the select
-    label, VS screen, life bar (both sides) and win banner.
+    every name surface's Japanese or American list. The build makes the
+    10 reads of it that choose names return US; the word stays 0.
+  - **Shown from a cold boot** of `build/loc005_names_us`: BISON, AKUMA
+    and CHARLIE on the select label, VS screen, life bar (both sides) and
+    win banner. The user heard "Akuma", "Bison" and "Charlie" at the
+    picks and wins.
   - **No other change:** 17 endings and 34 forced quote draws match M8,
     apart from the names.
-  - **Left:** the user's ear check of the five calls.
-- **Next:** finish `LOC-005` (the user's ear check). M9 (special cases) needs the user's
+- **Next:** `LOC-006` (build the Saturn-names variant; `READY`). M9 (special cases) needs the user's
   explicit task (rule 24). Backlog: `UI-004`, `SPECIAL-001`, `REL-001`,
   `LOC-008`, and the "after M8" UI and text tasks.
   The backlog also holds `UI-004` (boot-time error messages, including the
@@ -2488,7 +2488,7 @@ its own; it becomes a task only if the user asks (`LOC-008`, outline).
 
 ### LOC-005 - Build the American-names variant
 
-- **Status:** `IN_PROGRESS` (`EXP-0051`)
+- **Status:** `DONE` (`EXP-0051`, D-047)
 - **Milestone:** Name variants (after M8)
 - **Dependencies:** LOC-004 (done).
 - **Blockers:** None. The VS-screen and win-banner lists were found
@@ -2510,13 +2510,25 @@ its own; it becomes a task only if the user asks (`LOC-008`, outline).
     the forced win-quote draws are unchanged, apart from the names
     themselves.
 
+- **Outcome:**
+  - **Build:** `build_english --names us` (the default; `tools/disc/names.py`),
+    image `build/loc005_names_us`, Track 01 `441c9cfc…92f3`. Only
+    `MMPACK.PCA` changes from M8: 10 sites, `00BD` → `E002` (20 decoded
+    bytes, `local/loc005/files_us/changes.json`). 71,908 sectors pass.
+  - **Surfaces:** from a cold boot, BISON, AKUMA and CHARLIE on every art
+    surface, as the US arcade shows them. The user heard "Akuma",
+    "Bison" and "Charlie" (five clips). CPU-side BISON and CHARLIE were
+    not met in play.
+  - **No other change:** 17 endings and the Ryu and Ken forced draws
+    match `END-015`, apart from the names.
+
 ### LOC-006 - Build the Saturn-names variant
 
-- **Status:** `BLOCKED`
+- **Status:** `READY`
 - **Milestone:** Name variants (after M8)
-- **Dependencies:** LOC-004 (done), LOC-005 (the variant switch and its
-  tooling).
-- **Blockers:** The American build (`LOC-005`).
+- **Dependencies:** LOC-004 (done), LOC-005 (done; the variant switch and
+  its tooling).
+- **Blockers:** None.
 - **Objective:** One image, built from the untouched source, with the
   English text and labels in the Saturn convention, as `LOC-004` decided.
   The art and voice keep the Saturn's own names.
