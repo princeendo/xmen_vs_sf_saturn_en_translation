@@ -18,13 +18,10 @@ repository, commit ``f8526c0``) for `END-013`, and generalized:
   System Events with Mednafen brought to the front (pad A on K, directions
   on I, M, J and L; the ``local/mednafen_pick`` home). A key that cannot be
   sent is retried, and the run stops if it still cannot be sent.
-- **Gouki** (slot 15) is not on the grid, and no cursor move to his cell is
-  known. For ``--first 15`` the run starts from ``GOUKI_STATE`` instead.
-  That state is the second pick, with Gouki already picked first
-  (`EXP-0045`), so only the second pick is made. Its RAM holds the untouched
-  ``MC0F.SHP``. When CUE's ``MC0F`` differs, every differing decoded byte
-  is written into the first buffer after checking the original, as for the
-  code below.
+- **Gouki** (slot 15) has his own cell above Juggernaut's, reached by "u"
+  from Juggernaut (``GOUKI_CELL``; `EXP-0046`). He is picked like any
+  other character, first or second. (`EXP-0045` started his runs from a
+  saved state instead.)
 - **Code.** The select state already holds the untouched ``MMPACK.PCA``
   code. With ``--mmpack``, every byte where the built file's decoded
   streams differ is written into RAM first, after checking the original
@@ -90,7 +87,8 @@ from tools.mednafen.hotkeys import activate, frontmost_pid, osascript
 
 BINARY = Path("vendor/mednafen/build-agent/src/mednafen")
 STATE = Path("local/checkpoints/re004/f00002973.mcs")
-GOUKI, GOUKI_STATE = 15, Path("local/re004/session/states/f00009348.mcs")
+GOUKI = 15
+GOUKI_CELL = (-1, 1)  # above Juggernaut's cell (EXP-0046)
 PICK_HOME = Path("local/mednafen_pick")
 SOURCE_TRACK = Path(
     "local/disc_images/xmvsf_saturn_jp_3m/"
@@ -129,6 +127,8 @@ TAG_EVERY = 15  # steps between tag chords (300 frames)
 
 
 def cell(slot: int) -> tuple[int, int]:
+    if slot == GOUKI:
+        return GOUKI_CELL
     for row, cells in enumerate(GRID):
         if slot in cells:
             return row, cells.index(slot)
@@ -143,7 +143,8 @@ def step(at: tuple[int, int], move: str, taken: int | None) -> tuple[int, int] |
     row, col = at[0] + MOVES[move][0], at[1] + MOVES[move][1]
     if taken in GRID_SLOTS and (row, col) == cell(taken):
         row, col = row + MOVES[move][0], col + MOVES[move][1]
-    return (row, col) if 0 <= row < len(GRID) and 0 <= col < len(GRID[0]) else None
+    inside = 0 <= row < len(GRID) and 0 <= col < len(GRID[0])
+    return (row, col) if inside or (row, col) == GOUKI_CELL else None
 
 
 def grid_moves(target: int, start: int, taken: int | None = None) -> str:
@@ -151,7 +152,7 @@ def grid_moves(target: int, start: int, taken: int | None = None) -> str:
 
     The second cursor skips the first pick's cell (``taken``; `EXP-0046`):
     from Cyclops, with Rogue taken, "u" lands on Storm. Moves off the grid
-    are never planned (Gouki's cell is above it).
+    are never planned, except into Gouki's cell above Juggernaut's.
     """
     if target == taken:
         raise ValueError(f"slot {target} is already taken")
@@ -391,7 +392,7 @@ def run(
         "first": first,
         "second": second,
         "policy": policy,
-        "first_moves": "" if first == GOUKI else grid_moves(first, FIRST_START),
+        "first_moves": grid_moves(first, FIRST_START),
         "second_moves": grid_moves(second, second_start(first), taken=first),
     }
     pointers: list[tuple[int, str]] = []
@@ -412,19 +413,7 @@ def run(
                         raise
                     time.sleep(0.5)
             time.sleep(3)
-            agent.loadstate((GOUKI_STATE if first == GOUKI else STATE).resolve())
-            if first == GOUKI:
-                agent.pause()
-                original = decompress_file(
-                    track_file(SOURCE_TRACK, roster[GOUKI]["mc_file"])
-                )[0]
-                ranges_mc = byte_ranges(original, files[GOUKI])
-                for offset, old, new in ranges_mc:
-                    if agent.bus_read(FIRST_BUFFER + offset, len(old)) != old:
-                        raise RuntimeError(f"{offset:#x}: not the original MC0F")
-                    agent.bus_write(FIRST_BUFFER + offset, new)
-                result["mc0f_ranges"] = len(ranges_mc)
-                agent.run()
+            agent.loadstate(STATE.resolve())
             if mmpack is not None:
                 agent.pause()
                 ranges = code_ranges(
@@ -438,11 +427,10 @@ def run(
                 agent.run()
             time.sleep(0.5)
             # a screenshot of each cursor before its A press shows a wrong pick
-            if first != GOUKI:
-                send(process.pid, str(result["first_moves"]))
-                agent.screenshot((out / "first_cursor.png").resolve())
-                send(process.pid, "a")
-                time.sleep(PRESS_GAP * 2)
+            send(process.pid, str(result["first_moves"]))
+            agent.screenshot((out / "first_cursor.png").resolve())
+            send(process.pid, "a")
+            time.sleep(PRESS_GAP * 2)
             agent.screenshot((out / "second_start.png").resolve())
             send(process.pid, str(result["second_moves"]))
             agent.screenshot((out / "second_cursor.png").resolve())

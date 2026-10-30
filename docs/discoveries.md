@@ -819,3 +819,24 @@ Reproduce: `research/experiments/EXP-0045/README.md`, "Procedure".
   - Gouki's cell is reached by "u" from Juggernaut (route select state).
 
 Reproduce: `research/experiments/EXP-0046/README.md`, "Procedure".
+
+## D-042 (M8): Every roster ending shows in English, first or second pick (`END-015`, `EXP-0047`)
+
+- **Pages:** on `build/m8_roster_endings`, the route reaches all 17
+  roster endings (Gouki picked from his cell). Every page (112) matches
+  the arcade's English page in picture, label, text, line breaks and
+  scene breaks. Nash's pages are byte-identical to M7's.
+- **Reads:** the English ending bytes are read only by the renderer
+  (`0x06066A84`) during the ending. The one exception is a read in the
+  20 frames when a win quote showing English record 7 begins: the
+  renderer reads once past the record. Ryu's and Ken's 16 forced draws
+  on the M8 code and files are byte-identical to M5's, record 7
+  included.
+- **Play:** booted cold and played by the user, Cammy's ending and Ryu's
+  ending as the second pick match the route's screens.
+- **Second pick:** Ryu's ending was read from the second member's buffer
+  (WRAM-H `0x060B0000`) + his quote table + 800 + 100k, version 4's rule
+  for a second pick. Ryu got the player's side of the partner fight
+  after tags (Z + C by hand) during the stages and the boss fight.
+
+Reproduce: `research/experiments/EXP-0047/README.md`, "Procedure".

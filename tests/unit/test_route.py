@@ -43,7 +43,14 @@ def test_second_cursor_moves_start_on_cyclops() -> None:
 
 def test_off_grid_slot_is_refused() -> None:
     with pytest.raises(ValueError, match="not on the select grid"):
-        grid_moves(15, FIRST_START)
+        grid_moves(8, FIRST_START)  # Apocalypse
+
+
+def test_gouki_is_reached_through_juggernaut() -> None:
+    # EXP-0046 runs gouki1 and gouki2
+    assert grid_moves(15, FIRST_START) == "uuullu"
+    assert grid_moves(15, SECOND_START, taken=10) == "uuuu"
+    assert grid_moves(6, FIRST_START, taken=15) == "uuull"
 
 
 def chars(player: tuple[int, int], cpu: tuple[int, int]) -> dict[int, int]:
@@ -140,7 +147,7 @@ def test_second_cursor_moves_never_cross_the_first_pick() -> None:
     assert grid_moves(2, SECOND_START, taken=3) == "u"
     assert grid_moves(7, SECOND_START, taken=6) == "uulu"  # "uuu" left the grid
     assert grid_moves(10, SECOND_START, taken=9) == "r"
-    assert grid_moves(3, SECOND_START, taken=15) == "u"  # Gouki is off the grid
+    assert grid_moves(3, SECOND_START, taken=15) == "u"  # not in the way
     with pytest.raises(ValueError, match="already taken"):
         grid_moves(3, SECOND_START, taken=3)
 

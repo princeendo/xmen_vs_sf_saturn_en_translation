@@ -2264,3 +2264,43 @@ Checks: `pytest` 198 passed; `ruff check`, `ruff format --check`, `mypy
 --strict tools tests` and the `EXP-0046` scripts are clean.
 
 Conclusion: `END-014` is `DONE` (D-041). Next: `END-015`.
+
+## 2026-10-30 — SESSION-0071: Verify every roster ending (END-015, EXP-0047)
+
+User request (verbatim): "Start END-015: verify every roster ending."
+
+- **Route change:** Gouki is now picked from his cell (`GOUKI_CELL`),
+  which replaces `GOUKI_STATE`. 1 test.
+- **Runs:** `run_endings.py` ran 17 routes on the build, 4 at a time,
+  in 20 runs:
+  - Rogue: one wrong pick (Ken), and one strict-check miss on her
+    game-written longs;
+  - Dhalsim: one run stopped at its pick (Mednafen not in front).
+
+  Every page pointer was reached.
+- **Pages:** `compare_pages.py` sheets, reviewed by the agent. All 112
+  pages match the arcade's. Colour-cycling pictures differ only in
+  timing.
+- **Reads:** besides the ending, only in the 20 frames of record-7 win
+  quotes. Counts: 51 per page − 1, plus 1 per record-7 quote; Dhalsim
+  has 1 more.
+- **Forced draws:** `force_draws.py` (copied from `EXP-0032`, version 4
+  and ending bytes). Ryu 17/17 and Ken 17/17 are byte-identical to M5,
+  screens and VDP1.
+- **Play check:** the user played Cammy's ending, then Wolverine (first)
+  with Ryu (second), tagging with Z + C. Ryu's ending played.
+  - `play_pages.py`: all 13 and 7 pages found. Colour-cycling pages
+    matched by text box, and their pictures were checked.
+  - `state_reads.py`: Ryu's pages read from `0x060B28F8` + 100k.
+- **Failures:**
+  1. ffmpeg had no `drawtext`, and zsh read `$n:l` as a modifier. Sheets
+     were made from Python instead.
+  2. `state_reads.py` first failed on a second state ("loadstate not
+     allowed while halted"); it now resumes between states.
+- **Not settled:** who gets the partner fight. "The character active at
+  the boss fight's start" fits both plays (HYPOTHESIS).
+
+Checks: `pytest` 199 passed; `ruff check`, `ruff format --check`, `mypy
+--strict` on tools, tests and the EXP-0046/0047 scripts are clean.
+
+Conclusion: `END-015` is `DONE` (D-042). Next: `END-016`.

@@ -7,8 +7,9 @@ Run from the repository root:
 
 For the 16 grid characters in roster order, team i is (G[i], G[i + 1]),
 wrapping, so each is picked once first and once second. Gouki (not on the
-grid) is picked first from `tools.mednafen.route.GOUKI_STATE`, with Cyclops
-second. Given FIRST:SECOND pairs, only those teams are run.
+grid) is picked first, with Cyclops second. In `EXP-0046` that was from the
+route's saved Gouki state; since `END-015` the route picks his cell. Given
+FIRST:SECOND pairs, only those teams are run.
 
 Each attempt is one `tools.mednafen.route.run` with ``frames=0``: the picks,
 then both buffers, saved. Runs are made one at a time (each brings Mednafen

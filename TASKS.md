@@ -316,7 +316,16 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   built file loads into both team buffers, Gouki included (picked from his
   cell above Juggernaut's). The second select cursor skips the first
   pick's cell, and the route now plans for it (`END-014`, D-041).
-- Next: `END-015` (verify every roster ending; `READY`). Backlog: `UI-004`,
+- **2026-10-30** (`SESSION-0071`, `EXP-0047`): every roster ending is
+  verified on the M8 build.
+  - **Route:** all 17 endings, every page matching the arcade's English.
+    Gouki is now picked from his cell.
+  - **Win quotes:** unchanged from M5 (forced draws byte-identical).
+  - **Play check:** the user played Cammy's ending, then Ryu's as the
+    second pick after tagging with Z + C. A second pick's ending is
+    reachable and shows in English from the second buffer (`END-015`,
+    D-042).
+- Next: `END-016` (coverage and regression; `READY`). Backlog: `UI-004`,
   `SPECIAL-001`, `REL-001`.
   The backlog also holds `UI-004` (boot-time error messages, including the
   cart warning), `SPECIAL-001` (including
@@ -2108,7 +2117,7 @@ recorded under `GATE-TRANSLATION`.
 
 ### END-015 - Verify every roster ending
 
-- **Status:** `READY`
+- **Status:** `DONE` (`EXP-0047`, D-042)
 - **Milestone:** M8
 - **Dependencies:** END-013, END-014 (both done).
 - **Blockers:** None. Gouki's cell (`EXP-0046`) can replace `GOUKI_STATE`
@@ -2132,13 +2141,25 @@ recorded under `GATE-TRANSLATION`.
     not do it with no play). If the partner fight still puts the first pick
     on the player's side, that is recorded as the answer, and the second
     play-through is a first-pick ending instead.
+- **Outcome:**
+  - **Route:** all 17 roster endings on the build, Gouki picked from his
+    cell. Every page (112) matches the arcade's.
+  - **Reads:** the ending bytes are read only during the ending, plus one
+    renderer read past win-quote record 7. Ryu's and Ken's forced draws
+    are byte-identical to M5's.
+  - **Play check:** the user played Cammy's ending, then Ryu's as the
+    second pick after tagging. Both match the route's screens.
+  - **Second pick:** Ryu's ending was read from the second buffer +
+    table + 800 + 100k, version 4's rule.
+  - **Who gets the partner fight** is a HYPOTHESIS: the character active
+    at the start of the boss fight.
 
 ### END-016 - Coverage register and regression references for M8
 
-- **Status:** `BLOCKED`
+- **Status:** `READY`
 - **Milestone:** M8
-- **Dependencies:** END-015.
-- **Blockers:** The verified build.
+- **Dependencies:** END-015 (done).
+- **Blockers:** None.
 - **Objective:** Record what M8 covers and leaves, and lock the build.
 - **Acceptance criteria:**
   - **Coverage:** `docs/coverage_exceptions.md` lists every ending surface
