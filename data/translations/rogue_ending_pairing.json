@@ -1,0 +1,137 @@
+{
+ "description": "Rogue (arcade slot 3) ending: with the English layout (LAYOUT-002), page k shows arcade English record k; the Japanese records pair with the arcade's by index (EXP-0044).",
+ "rule": "page k reads the point character's ending record k, in either language, whatever the partner",
+ "slot": 3,
+ "mc_file": "MC03.SHP;1",
+ "table_offset": "0x3f94",
+ "english_pages": [
+  {
+   "page": 1,
+   "arcade_en_record": 0,
+   "arcade_en_address": "0x18b5ba",
+   "arcade_en_sha256": "9e71d1fc3c7ea2d35bc3ce43d007e6b8e1b624cf160b5c2029746c283c98cd20",
+   "en_names": [],
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "page": 2,
+   "arcade_en_record": 1,
+   "arcade_en_address": "0x18b61e",
+   "arcade_en_sha256": "89b822f2395f538533c82ff8633eb03064eb798909539189d9d4f95e7cb82fb1",
+   "en_names": [],
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "page": 3,
+   "arcade_en_record": 2,
+   "arcade_en_address": "0x18b682",
+   "arcade_en_sha256": "fb9e7c0a4cd1182feac04ce441059e6b2deb93507c4c262859fdfeb138b92733",
+   "en_names": [],
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "page": 4,
+   "arcade_en_record": 3,
+   "arcade_en_address": "0x18b6e6",
+   "arcade_en_sha256": "5760bc7ed15c21587e6957e99bac371a01a12fb8649fa8b9a1867fe0254c6528",
+   "en_names": [],
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "page": 5,
+   "arcade_en_record": 4,
+   "arcade_en_address": "0x18b74a",
+   "arcade_en_sha256": "3f91cb2c76500f74c68b0cbc23f18e7fb99e1cf28be3f5be63e1961b30d523ff",
+   "en_names": [],
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "page": 6,
+   "arcade_en_record": 5,
+   "arcade_en_address": "0x18b7ae",
+   "arcade_en_sha256": "6fabcae92483b0bf35c780807edca3adf3da20f928914008d8db92cfadc1e0ba",
+   "en_names": [],
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  }
+ ],
+ "japanese_records": [
+  {
+   "saturn_record": 16,
+   "saturn_file_offset": "0x4454",
+   "arcade_jp_record": 0,
+   "arcade_jp_address": "0x1844c4",
+   "saturn_equals_arcade_jp": true,
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "saturn_record": 17,
+   "saturn_file_offset": "0x44a0",
+   "arcade_jp_record": 1,
+   "arcade_jp_address": "0x184510",
+   "saturn_equals_arcade_jp": true,
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "saturn_record": 18,
+   "saturn_file_offset": "0x44ec",
+   "arcade_jp_record": 2,
+   "arcade_jp_address": "0x18455c",
+   "saturn_equals_arcade_jp": true,
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "saturn_record": 19,
+   "saturn_file_offset": "0x4538",
+   "arcade_jp_record": 3,
+   "arcade_jp_address": "0x1845a8",
+   "saturn_equals_arcade_jp": true,
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "saturn_record": 20,
+   "saturn_file_offset": "0x4584",
+   "arcade_jp_record": 4,
+   "arcade_jp_address": "0x1845f4",
+   "saturn_equals_arcade_jp": true,
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "saturn_record": 21,
+   "saturn_file_offset": "0x45d0",
+   "arcade_jp_record": 5,
+   "arcade_jp_address": "0x184640",
+   "saturn_equals_arcade_jp": true,
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "saturn_record": 22,
+   "saturn_file_offset": "0x461c",
+   "arcade_jp_record": 6,
+   "arcade_jp_address": "0x18468c",
+   "saturn_equals_arcade_jp": true,
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "saturn_record": 23,
+   "saturn_file_offset": "0x4668",
+   "arcade_jp_record": 7,
+   "arcade_jp_address": "0x1846d8",
+   "saturn_equals_arcade_jp": true,
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  }
+ ]
+}

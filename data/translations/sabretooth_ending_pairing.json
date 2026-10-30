@@ -1,0 +1,101 @@
+{
+ "description": "Sabretooth (arcade slot 5) ending: with the English layout (LAYOUT-002), page k shows arcade English record k; the Japanese records pair with the arcade's by index (EXP-0044).",
+ "rule": "page k reads the point character's ending record k, in either language, whatever the partner",
+ "slot": 5,
+ "mc_file": "MC05.SHP;1",
+ "table_offset": "0x3460",
+ "english_pages": [
+  {
+   "page": 1,
+   "arcade_en_record": 0,
+   "arcade_en_address": "0x18ba06",
+   "arcade_en_sha256": "61ad6b7ca805144d8ff79a64556e311de92ab4163d9ec78cc46eef3ade4345b1",
+   "en_names": [],
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "page": 2,
+   "arcade_en_record": 1,
+   "arcade_en_address": "0x18ba6a",
+   "arcade_en_sha256": "92e04bc0c439eba4b3a7b39f40253b9df20a9b7a69f927c878a32c03b03aa863",
+   "en_names": [],
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "page": 3,
+   "arcade_en_record": 2,
+   "arcade_en_address": "0x18bace",
+   "arcade_en_sha256": "71cc053016c3259ff971afaf63187681b52d91ded277288e2185e99388af75f0",
+   "en_names": [],
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "page": 4,
+   "arcade_en_record": 3,
+   "arcade_en_address": "0x18bb32",
+   "arcade_en_sha256": "85a9dac803e2cc6e4d7153abc26b66f22dd6b3a2edef78ed844d7cd9c742cd4a",
+   "en_names": [],
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "page": 5,
+   "arcade_en_record": 4,
+   "arcade_en_address": "0x18bb96",
+   "arcade_en_sha256": "6cb3d647b94cbcdaf8083953f96f724d235dd29d1059715cb4d1ca9717b891a0",
+   "en_names": [],
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "page": 6,
+   "arcade_en_record": 5,
+   "arcade_en_address": "0x18bbfa",
+   "arcade_en_sha256": "8a3b705f6d7f814dd1080872cdfbe3178f94367ff8ec1f5030c7524a85426a6e",
+   "en_names": [],
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  }
+ ],
+ "japanese_records": [
+  {
+   "saturn_record": 16,
+   "saturn_file_offset": "0x3920",
+   "arcade_jp_record": 0,
+   "arcade_jp_address": "0x1848ec",
+   "saturn_equals_arcade_jp": true,
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "saturn_record": 17,
+   "saturn_file_offset": "0x396c",
+   "arcade_jp_record": 1,
+   "arcade_jp_address": "0x184938",
+   "saturn_equals_arcade_jp": true,
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "saturn_record": 18,
+   "saturn_file_offset": "0x39b8",
+   "arcade_jp_record": 2,
+   "arcade_jp_address": "0x184984",
+   "saturn_equals_arcade_jp": true,
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "saturn_record": 19,
+   "saturn_file_offset": "0x3a04",
+   "arcade_jp_record": 3,
+   "arcade_jp_address": "0x1849d0",
+   "saturn_equals_arcade_jp": true,
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  }
+ ]
+}

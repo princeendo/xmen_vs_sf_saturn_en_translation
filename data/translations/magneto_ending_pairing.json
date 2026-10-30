@@ -1,0 +1,110 @@
+{
+ "description": "Magneto (arcade slot 7) ending: with the English layout (LAYOUT-002), page k shows arcade English record k; the Japanese records pair with the arcade's by index (EXP-0044).",
+ "rule": "page k reads the point character's ending record k, in either language, whatever the partner",
+ "slot": 7,
+ "mc_file": "MC07.SHP;1",
+ "table_offset": "0x447c",
+ "english_pages": [
+  {
+   "page": 1,
+   "arcade_en_record": 0,
+   "arcade_en_address": "0x18beb6",
+   "arcade_en_sha256": "b90e817ad452b493fac899c3c0c0cb9d770c0826afa63940772efcd564f4c9e6",
+   "en_names": [],
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "page": 2,
+   "arcade_en_record": 1,
+   "arcade_en_address": "0x18bf1a",
+   "arcade_en_sha256": "56bccec5d342166f7279c0f24bbe5f6d455bd191b7c899dbb49c036c4c93fe7d",
+   "en_names": [],
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "page": 3,
+   "arcade_en_record": 2,
+   "arcade_en_address": "0x18bf7e",
+   "arcade_en_sha256": "d3e2e613a6e418ee14281067b6df857516a97166931cbc2383e5ce1210d019a0",
+   "en_names": [],
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "page": 4,
+   "arcade_en_record": 3,
+   "arcade_en_address": "0x18bfe2",
+   "arcade_en_sha256": "89c1e8c7f589cffdf6caf4b8381f56856b6d3e2549392b97ea108226c9d83013",
+   "en_names": [],
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "page": 5,
+   "arcade_en_record": 4,
+   "arcade_en_address": "0x18c046",
+   "arcade_en_sha256": "f7ea954401cb5ec03983d5fea0a9d3d38f299e4f86de0800a4414181cad208bd",
+   "en_names": [],
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "page": 6,
+   "arcade_en_record": 5,
+   "arcade_en_address": "0x18c0aa",
+   "arcade_en_sha256": "85116498fd226fda9b3a83780fef052c14eee124dcf34023dccb449d6c89d8b3",
+   "en_names": [],
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "page": 7,
+   "arcade_en_record": 6,
+   "arcade_en_address": "0x18c10e",
+   "arcade_en_sha256": "974ed4d105f9d7ec313d6de81435eacd2e59f8a940ee6c9694964ceddb38e671",
+   "en_names": [],
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  }
+ ],
+ "japanese_records": [
+  {
+   "saturn_record": 16,
+   "saturn_file_offset": "0x493c",
+   "arcade_jp_record": 0,
+   "arcade_jp_address": "0x184cc8",
+   "saturn_equals_arcade_jp": true,
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "saturn_record": 17,
+   "saturn_file_offset": "0x4988",
+   "arcade_jp_record": 1,
+   "arcade_jp_address": "0x184d14",
+   "saturn_equals_arcade_jp": true,
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "saturn_record": 18,
+   "saturn_file_offset": "0x49d4",
+   "arcade_jp_record": 2,
+   "arcade_jp_address": "0x184d60",
+   "saturn_equals_arcade_jp": true,
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "saturn_record": 19,
+   "saturn_file_offset": "0x4a20",
+   "arcade_jp_record": 3,
+   "arcade_jp_address": "0x184dac",
+   "saturn_equals_arcade_jp": true,
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  }
+ ]
+}

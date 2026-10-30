@@ -1,0 +1,92 @@
+{
+ "description": "Zangief (arcade slot 13) ending: with the English layout (LAYOUT-002), page k shows arcade English record k; the Japanese records pair with the arcade's by index (EXP-0044).",
+ "rule": "page k reads the point character's ending record k, in either language, whatever the partner",
+ "slot": 13,
+ "mc_file": "MC0D.SHP;1",
+ "table_offset": "0x2d68",
+ "english_pages": [
+  {
+   "page": 1,
+   "arcade_en_record": 0,
+   "arcade_en_address": "0x18ca6e",
+   "arcade_en_sha256": "65706ebd9610b6c44223b6b10e62df289440f7f5383911aa014866b0a4bc98fd",
+   "en_names": [],
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "page": 2,
+   "arcade_en_record": 1,
+   "arcade_en_address": "0x18cad2",
+   "arcade_en_sha256": "1b60eeb893eb87f1a4a4d26ceb2f131bcfc7421b1c7eae7f32209bf7cfda8eb8",
+   "en_names": [],
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "page": 3,
+   "arcade_en_record": 2,
+   "arcade_en_address": "0x18cb36",
+   "arcade_en_sha256": "99ac07d35e8af5d6f04ced05d440474a8dee4076c622219fbed08c6680996804",
+   "en_names": [],
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "page": 4,
+   "arcade_en_record": 3,
+   "arcade_en_address": "0x18cb9a",
+   "arcade_en_sha256": "15a7cc85b0b61979425b433b56edd13819aa72382ccb91a99640500c4413463b",
+   "en_names": [],
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "page": 5,
+   "arcade_en_record": 4,
+   "arcade_en_address": "0x18cbfe",
+   "arcade_en_sha256": "dadccf76ca5111b2cf8c4af204a9d78ba52ae2eef4d7061b710b1917de683b56",
+   "en_names": [],
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  }
+ ],
+ "japanese_records": [
+  {
+   "saturn_record": 16,
+   "saturn_file_offset": "0x3228",
+   "arcade_jp_record": 0,
+   "arcade_jp_address": "0x185480",
+   "saturn_equals_arcade_jp": true,
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "saturn_record": 17,
+   "saturn_file_offset": "0x3274",
+   "arcade_jp_record": 1,
+   "arcade_jp_address": "0x1854cc",
+   "saturn_equals_arcade_jp": true,
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "saturn_record": 18,
+   "saturn_file_offset": "0x32c0",
+   "arcade_jp_record": 2,
+   "arcade_jp_address": "0x185518",
+   "saturn_equals_arcade_jp": true,
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "saturn_record": 19,
+   "saturn_file_offset": "0x330c",
+   "arcade_jp_record": 3,
+   "arcade_jp_address": "0x185564",
+   "saturn_equals_arcade_jp": true,
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  }
+ ]
+}

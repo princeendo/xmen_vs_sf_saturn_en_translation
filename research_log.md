@@ -2136,3 +2136,33 @@ Recorded:
 - `TASKS.md`: `END-011` DONE; `END-012` and `END-013` READY.
 
 No experiment was run.
+
+## 2026-10-30 — SESSION-0067: Arcade pairing for every roster ending (END-012, EXP-0044)
+
+User request (verbatim): "Start END-012: arcade pairing for every roster
+ending."
+
+- **Route:** generalized to any grid character (moves from Cyclops). The
+  select snapshots confirmed all 16 grid picks. For Gouki, 7 words holding
+  the first pick's slot × 2 were found by dumps after three picks; forcing
+  them to `0x1E` made Gouki the first pick (his tables were read; his win
+  quote and English ending were shown).
+- **Predictions:** `predictions.json` was committed (`8caed7c`) before the
+  logged runs. The Gouki probe had shown some of his ending before; this is
+  recorded.
+- **First attempt at the 38 timelines:** a zsh loop split arguments wrongly
+  (`--force-char` and `read`); regenerated from Python. A safety check
+  blocked an `rm` on shell-variable paths; files were overwritten instead.
+- **Runs:** 38, six in parallel; all met every prediction. Wolverine's and
+  Chun-Li's partner checks were identical.
+- **Pairing:** 16 new files, all CONFIRMED; Nash's addresses equal
+  `EXP-0037`'s.
+- **Names:** "Bison" in Vega's records 1 and 4. Labels `Akuma`, `Bison`,
+  `Vega` (Magneto's page 3, checked on the arcade snapshot).
+
+Checks: `ruff check`, `ruff format --check` and `mypy --strict` on the
+EXP-0044 scripts are clean. `compare.py` and `make_pairing.py` reran to
+byte-identical outputs after formatting.
+
+Conclusion: `END-012` is `DONE` (**CONFIRMED**, D-039). Next: `END-013`;
+the gate extension can be asked.

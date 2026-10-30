@@ -1,0 +1,128 @@
+{
+ "description": "Wolverine (arcade slot 0) ending: with the English layout (LAYOUT-002), page k shows arcade English record k; the Japanese records pair with the arcade's by index (EXP-0044).",
+ "rule": "page k reads the point character's ending record k, in either language, whatever the partner",
+ "slot": 0,
+ "mc_file": "MC00.SHP;1",
+ "table_offset": "0x393c",
+ "english_pages": [
+  {
+   "page": 1,
+   "arcade_en_record": 0,
+   "arcade_en_address": "0x18ad86",
+   "arcade_en_sha256": "8e0b86d05e0fcc6c096e9eba59373412ab848551c06d4ef8f3a9e07d0c45f9fe",
+   "en_names": [],
+   "runs": 2,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "page": 2,
+   "arcade_en_record": 1,
+   "arcade_en_address": "0x18adea",
+   "arcade_en_sha256": "8489a1dc6774bcdda10034ccff984b3bf2482297c240c6ffa776ec0474b68a72",
+   "en_names": [],
+   "runs": 2,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "page": 3,
+   "arcade_en_record": 2,
+   "arcade_en_address": "0x18ae4e",
+   "arcade_en_sha256": "3c2b2e57fa7c13c716a5a89a385f667015b26693fbddfc615fe2e7e21294b7dd",
+   "en_names": [],
+   "runs": 2,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "page": 4,
+   "arcade_en_record": 3,
+   "arcade_en_address": "0x18aeb2",
+   "arcade_en_sha256": "d7ce69f6f5246b15f7eaaade3c24a60853e881f3e846c874a142a960eb61b496",
+   "en_names": [],
+   "runs": 2,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "page": 5,
+   "arcade_en_record": 4,
+   "arcade_en_address": "0x18af16",
+   "arcade_en_sha256": "99a88b8ec9e56166e35cf66226a7163fe80edd4776934ef0faf5e178a787c412",
+   "en_names": [],
+   "runs": 2,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "page": 6,
+   "arcade_en_record": 5,
+   "arcade_en_address": "0x18af7a",
+   "arcade_en_sha256": "5e85ea727fca90f493c6434fbdf428dc6a0607cc2ce2cfacbbf8bb795cddfe14",
+   "en_names": [],
+   "runs": 2,
+   "confidence": "CONFIRMED"
+  }
+ ],
+ "japanese_records": [
+  {
+   "saturn_record": 16,
+   "saturn_file_offset": "0x3dfc",
+   "arcade_jp_record": 0,
+   "arcade_jp_address": "0x183e88",
+   "saturn_equals_arcade_jp": true,
+   "runs": 2,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "saturn_record": 17,
+   "saturn_file_offset": "0x3e48",
+   "arcade_jp_record": 1,
+   "arcade_jp_address": "0x183ed4",
+   "saturn_equals_arcade_jp": true,
+   "runs": 2,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "saturn_record": 18,
+   "saturn_file_offset": "0x3e94",
+   "arcade_jp_record": 2,
+   "arcade_jp_address": "0x183f20",
+   "saturn_equals_arcade_jp": true,
+   "runs": 2,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "saturn_record": 19,
+   "saturn_file_offset": "0x3ee0",
+   "arcade_jp_record": 3,
+   "arcade_jp_address": "0x183f6c",
+   "saturn_equals_arcade_jp": true,
+   "runs": 2,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "saturn_record": 20,
+   "saturn_file_offset": "0x3f2c",
+   "arcade_jp_record": 4,
+   "arcade_jp_address": "0x183fb8",
+   "saturn_equals_arcade_jp": true,
+   "runs": 2,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "saturn_record": 21,
+   "saturn_file_offset": "0x3f78",
+   "arcade_jp_record": 5,
+   "arcade_jp_address": "0x184004",
+   "saturn_equals_arcade_jp": true,
+   "runs": 2,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "saturn_record": 22,
+   "saturn_file_offset": "0x3fc4",
+   "arcade_jp_record": 6,
+   "arcade_jp_address": "0x184050",
+   "saturn_equals_arcade_jp": true,
+   "runs": 2,
+   "confidence": "CONFIRMED"
+  }
+ ]
+}

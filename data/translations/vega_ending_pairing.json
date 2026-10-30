@@ -1,0 +1,96 @@
+{
+ "description": "Vega (arcade slot 14) ending: with the English layout (LAYOUT-002), page k shows arcade English record k; the Japanese records pair with the arcade's by index (EXP-0044).",
+ "rule": "page k reads the point character's ending record k, in either language, whatever the partner",
+ "slot": 14,
+ "mc_file": "MC0E.SHP;1",
+ "table_offset": "0x221c",
+ "english_pages": [
+  {
+   "page": 1,
+   "arcade_en_record": 0,
+   "arcade_en_address": "0x18cc62",
+   "arcade_en_sha256": "80afd308dddaa13ecaffc9c593f7c2ea799bd8f715fef1da565181e77755adef",
+   "en_names": [],
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "page": 2,
+   "arcade_en_record": 1,
+   "arcade_en_address": "0x18ccc6",
+   "arcade_en_sha256": "cbb060284b17e444d9a10aff05cd9c99933f0ae1c91e70111da456944d32089d",
+   "en_names": [
+    "Bison"
+   ],
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "page": 3,
+   "arcade_en_record": 2,
+   "arcade_en_address": "0x18cd2a",
+   "arcade_en_sha256": "1b8b26c2fd38542f9ce41a22ae4391fbea5894a3ac1c6f1a4b9eb40dd3ea5062",
+   "en_names": [],
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "page": 4,
+   "arcade_en_record": 3,
+   "arcade_en_address": "0x18cd8e",
+   "arcade_en_sha256": "8ee914760f5da0fa666016b29fad3a83cef95052d7674309bcd4a835807bba9f",
+   "en_names": [],
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "page": 5,
+   "arcade_en_record": 4,
+   "arcade_en_address": "0x18cdf2",
+   "arcade_en_sha256": "3b3489516fad2c0fe00ad189d53e5f10dd48eedc53abbabca9555e15889be4f5",
+   "en_names": [
+    "Bison"
+   ],
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  }
+ ],
+ "japanese_records": [
+  {
+   "saturn_record": 16,
+   "saturn_file_offset": "0x26dc",
+   "arcade_jp_record": 0,
+   "arcade_jp_address": "0x1855b0",
+   "saturn_equals_arcade_jp": true,
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "saturn_record": 17,
+   "saturn_file_offset": "0x2728",
+   "arcade_jp_record": 1,
+   "arcade_jp_address": "0x1855fc",
+   "saturn_equals_arcade_jp": true,
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "saturn_record": 18,
+   "saturn_file_offset": "0x2774",
+   "arcade_jp_record": 2,
+   "arcade_jp_address": "0x185648",
+   "saturn_equals_arcade_jp": true,
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "saturn_record": 19,
+   "saturn_file_offset": "0x27c0",
+   "arcade_jp_record": 3,
+   "arcade_jp_address": "0x185694",
+   "saturn_equals_arcade_jp": true,
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  }
+ ]
+}

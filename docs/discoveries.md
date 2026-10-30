@@ -750,3 +750,23 @@ Reproduce: `./invenv.sh python -m tools.disc.regression`.
 
 Output: `data/text/ending_script_census.json`. Reproduce:
 `research/experiments/EXP-0043/README.md`, "Procedure".
+
+## D-039 (M8): Every roster ending pairs page k with record k, and the arcade's scene breaks equal the Saturn scripts' (`END-012`, `EXP-0044`)
+
+38 no-play MAME runs on `xmvsfu` met every prediction committed before
+them. They covered all 17 M8 roster characters (Gouki by forcing his pick)
+in English and Japanese, plus a second partner for Wolverine and Chun-Li:
+
+- the ending selector reads the point character's table entry;
+- page k reads record k (100-byte English or 76-byte Japanese), k = 0 to
+  n − 1;
+- the table is re-read exactly where the character's Saturn `MCED` script
+  of that language starts a scene;
+- the partner changes nothing.
+
+Every Saturn Japanese ending record equals its arcade record. Pairing files:
+`data/translations/<name>_ending_pairing.json`. Names for the gate:
+"Bison" in Vega's English records 1 and 4, and the labels `Akuma`, `Bison`
+and `Vega` (Magneto's page 3, as the arcade shows).
+
+Reproduce: `research/experiments/EXP-0044/README.md`, "Procedure".

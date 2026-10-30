@@ -293,8 +293,16 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   included), first and second pick. Ryu's script, shared with Apocalypse's
   slot, is switched, and Apocalypse is not marked (`END-011`;
   `data/text/m8_ending_roster.json`).
-- Next: `END-012` (arcade pairing) and `END-013` (Saturn route), both
-  ready. Backlog: `UI-004`, `SPECIAL-001`, `REL-001`.
+- **2026-10-30** (`SESSION-0067`, `EXP-0044`): arcade pairing for all 17
+  roster endings. 38 MAME runs (Gouki by a forced pick) met every
+  prediction committed beforehand: page k = record k in both languages,
+  the partner changes nothing, and the arcade's scene breaks equal the
+  Saturn scripts'. Pairing files are in `data/translations/`. Names for the
+  gate: "Bison" in Vega's text; the labels `Akuma`, `Bison`, `Vega`
+  (Magneto, as the arcade shows); and Nash's `Charlie` (`END-012`, D-039).
+- Next: `END-013` (Saturn route; ready). The `GATE-TRANSLATION` extension
+  can now be asked (its inputs `END-010` and `END-012` are done).
+  Backlog: `UI-004`, `SPECIAL-001`, `REL-001`.
   The backlog also holds `UI-004` (boot-time error messages, including the
   cart warning), `SPECIAL-001` (including
   Apocalypse's pre-fight line) and `REL-001` (release patches).
@@ -1955,7 +1963,7 @@ Known before M8:
 
 ### END-012 - Arcade pairing for every roster ending
 
-- **Status:** `READY`
+- **Status:** `DONE` (`EXP-0044`, D-039)
 - **Milestone:** M8
 - **Dependencies:** END-011.
 - **Blockers:** None; the roster is `data/text/m8_ending_roster.json`.

@@ -1,0 +1,101 @@
+{
+ "description": "Dhalsim (arcade slot 12) ending: with the English layout (LAYOUT-002), page k shows arcade English record k; the Japanese records pair with the arcade's by index (EXP-0044).",
+ "rule": "page k reads the point character's ending record k, in either language, whatever the partner",
+ "slot": 12,
+ "mc_file": "MC0C.SHP;1",
+ "table_offset": "0x3048",
+ "english_pages": [
+  {
+   "page": 1,
+   "arcade_en_record": 0,
+   "arcade_en_address": "0x18c816",
+   "arcade_en_sha256": "6597312214376eb467b62e04467bad42e7fcd4afbc36abd576542deda5d8479f",
+   "en_names": [],
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "page": 2,
+   "arcade_en_record": 1,
+   "arcade_en_address": "0x18c87a",
+   "arcade_en_sha256": "5b64708b84ba2798c44c4dc99ff7599159460ad45c344e48fe71fb120d5a1c29",
+   "en_names": [],
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "page": 3,
+   "arcade_en_record": 2,
+   "arcade_en_address": "0x18c8de",
+   "arcade_en_sha256": "e72109b391426d1f1143697aa11190acd5ea1e6ae927a097a8972e2e1a095ce9",
+   "en_names": [],
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "page": 4,
+   "arcade_en_record": 3,
+   "arcade_en_address": "0x18c942",
+   "arcade_en_sha256": "cf637f6a6751e06aed392fb8507c0954f3cc45e5ca105c3093560dbab8fce8d9",
+   "en_names": [],
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "page": 5,
+   "arcade_en_record": 4,
+   "arcade_en_address": "0x18c9a6",
+   "arcade_en_sha256": "d8bcd2c3bf81bde45771dbc8a4d51eaf086806be13c5727089d44c79f568bf0c",
+   "en_names": [],
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "page": 6,
+   "arcade_en_record": 5,
+   "arcade_en_address": "0x18ca0a",
+   "arcade_en_sha256": "4af96362302d29988619a2f4e082ee90b52d4a23cad6ec2b7b6a9785ee93e9a5",
+   "en_names": [],
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  }
+ ],
+ "japanese_records": [
+  {
+   "saturn_record": 16,
+   "saturn_file_offset": "0x3508",
+   "arcade_jp_record": 0,
+   "arcade_jp_address": "0x185350",
+   "saturn_equals_arcade_jp": true,
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "saturn_record": 17,
+   "saturn_file_offset": "0x3554",
+   "arcade_jp_record": 1,
+   "arcade_jp_address": "0x18539c",
+   "saturn_equals_arcade_jp": true,
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "saturn_record": 18,
+   "saturn_file_offset": "0x35a0",
+   "arcade_jp_record": 2,
+   "arcade_jp_address": "0x1853e8",
+   "saturn_equals_arcade_jp": true,
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "saturn_record": 19,
+   "saturn_file_offset": "0x35ec",
+   "arcade_jp_record": 3,
+   "arcade_jp_address": "0x185434",
+   "saturn_equals_arcade_jp": true,
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  }
+ ]
+}

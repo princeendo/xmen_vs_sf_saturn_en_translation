@@ -1,0 +1,128 @@
+{
+ "description": "Ryu (arcade slot 9) ending: with the English layout (LAYOUT-002), page k shows arcade English record k; the Japanese records pair with the arcade's by index (EXP-0044).",
+ "rule": "page k reads the point character's ending record k, in either language, whatever the partner",
+ "slot": 9,
+ "mc_file": "MC09.SHP;1",
+ "table_offset": "0x25d8",
+ "english_pages": [
+  {
+   "page": 1,
+   "arcade_en_record": 0,
+   "arcade_en_address": "0x18c172",
+   "arcade_en_sha256": "58cafc5cb977c9950533907f791e69fde1425a4cb01ed0858acbfbd1d7704da4",
+   "en_names": [],
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "page": 2,
+   "arcade_en_record": 1,
+   "arcade_en_address": "0x18c1d6",
+   "arcade_en_sha256": "be5e95b15d1f578043b7a41bcff6573ca9559acfce6e6f42d9119d6a42ca4775",
+   "en_names": [],
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "page": 3,
+   "arcade_en_record": 2,
+   "arcade_en_address": "0x18c23a",
+   "arcade_en_sha256": "e44fe050ed828b6770889a53a955b1475ec465207b4960cf805b2c1dd7a9df18",
+   "en_names": [],
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "page": 4,
+   "arcade_en_record": 3,
+   "arcade_en_address": "0x18c29e",
+   "arcade_en_sha256": "f01abd633f8250ba9ee12c645004101fee24515aa50ae8e207ce38f79bfd8d8a",
+   "en_names": [],
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "page": 5,
+   "arcade_en_record": 4,
+   "arcade_en_address": "0x18c302",
+   "arcade_en_sha256": "d8f3abc21b689025999ffb7f5a68520c1cf21740679567a10067c3cf9335fd0f",
+   "en_names": [],
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "page": 6,
+   "arcade_en_record": 5,
+   "arcade_en_address": "0x18c366",
+   "arcade_en_sha256": "cb0e6a21990093703cd2cbff71f8bd60ff3a440f9d99ef04b9925ae85c0fe00e",
+   "en_names": [],
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "page": 7,
+   "arcade_en_record": 6,
+   "arcade_en_address": "0x18c3ca",
+   "arcade_en_sha256": "65ad24556fa10f17fae9f382bd7870394aa088215a8a608514b8583c4f61b8d2",
+   "en_names": [],
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  }
+ ],
+ "japanese_records": [
+  {
+   "saturn_record": 16,
+   "saturn_file_offset": "0x2a98",
+   "arcade_jp_record": 0,
+   "arcade_jp_address": "0x184df8",
+   "saturn_equals_arcade_jp": true,
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "saturn_record": 17,
+   "saturn_file_offset": "0x2ae4",
+   "arcade_jp_record": 1,
+   "arcade_jp_address": "0x184e44",
+   "saturn_equals_arcade_jp": true,
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "saturn_record": 18,
+   "saturn_file_offset": "0x2b30",
+   "arcade_jp_record": 2,
+   "arcade_jp_address": "0x184e90",
+   "saturn_equals_arcade_jp": true,
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "saturn_record": 19,
+   "saturn_file_offset": "0x2b7c",
+   "arcade_jp_record": 3,
+   "arcade_jp_address": "0x184edc",
+   "saturn_equals_arcade_jp": true,
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "saturn_record": 20,
+   "saturn_file_offset": "0x2bc8",
+   "arcade_jp_record": 4,
+   "arcade_jp_address": "0x184f28",
+   "saturn_equals_arcade_jp": true,
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "saturn_record": 21,
+   "saturn_file_offset": "0x2c14",
+   "arcade_jp_record": 5,
+   "arcade_jp_address": "0x184f74",
+   "saturn_equals_arcade_jp": true,
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  }
+ ]
+}

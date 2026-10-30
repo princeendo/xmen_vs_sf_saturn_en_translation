@@ -1,0 +1,110 @@
+{
+ "description": "Gambit (arcade slot 4) ending: with the English layout (LAYOUT-002), page k shows arcade English record k; the Japanese records pair with the arcade's by index (EXP-0044).",
+ "rule": "page k reads the point character's ending record k, in either language, whatever the partner",
+ "slot": 4,
+ "mc_file": "MC04.SHP;1",
+ "table_offset": "0x34b4",
+ "english_pages": [
+  {
+   "page": 1,
+   "arcade_en_record": 0,
+   "arcade_en_address": "0x18b812",
+   "arcade_en_sha256": "66926e73ffe2553138c14c0cb41e549b4e03c89ff158b7b152de457d1aa1871a",
+   "en_names": [],
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "page": 2,
+   "arcade_en_record": 1,
+   "arcade_en_address": "0x18b876",
+   "arcade_en_sha256": "d2382d65c108db4dab6aae68f7f6176a29d0b75edb68380584d9e8a9565bfcf4",
+   "en_names": [],
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "page": 3,
+   "arcade_en_record": 2,
+   "arcade_en_address": "0x18b8da",
+   "arcade_en_sha256": "fe3f3ad6023e654c46e4635a8a5648e432377760416e17861fa2f435ef1e24ea",
+   "en_names": [],
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "page": 4,
+   "arcade_en_record": 3,
+   "arcade_en_address": "0x18b93e",
+   "arcade_en_sha256": "3891b1216846388f22adec4dec302befb1c4289186834360cdc75dc9a181ee59",
+   "en_names": [],
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "page": 5,
+   "arcade_en_record": 4,
+   "arcade_en_address": "0x18b9a2",
+   "arcade_en_sha256": "aeb36bd80d72f7ed62c0ea8307ea223ffa9a0ec70529151deccfe62b6c24b8fd",
+   "en_names": [],
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  }
+ ],
+ "japanese_records": [
+  {
+   "saturn_record": 16,
+   "saturn_file_offset": "0x3974",
+   "arcade_jp_record": 0,
+   "arcade_jp_address": "0x184724",
+   "saturn_equals_arcade_jp": true,
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "saturn_record": 17,
+   "saturn_file_offset": "0x39c0",
+   "arcade_jp_record": 1,
+   "arcade_jp_address": "0x184770",
+   "saturn_equals_arcade_jp": true,
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "saturn_record": 18,
+   "saturn_file_offset": "0x3a0c",
+   "arcade_jp_record": 2,
+   "arcade_jp_address": "0x1847bc",
+   "saturn_equals_arcade_jp": true,
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "saturn_record": 19,
+   "saturn_file_offset": "0x3a58",
+   "arcade_jp_record": 3,
+   "arcade_jp_address": "0x184808",
+   "saturn_equals_arcade_jp": true,
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "saturn_record": 20,
+   "saturn_file_offset": "0x3aa4",
+   "arcade_jp_record": 4,
+   "arcade_jp_address": "0x184854",
+   "saturn_equals_arcade_jp": true,
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  },
+  {
+   "saturn_record": 21,
+   "saturn_file_offset": "0x3af0",
+   "arcade_jp_record": 5,
+   "arcade_jp_address": "0x1848a0",
+   "saturn_equals_arcade_jp": true,
+   "runs": 1,
+   "confidence": "CONFIRMED"
+  }
+ ]
+}
