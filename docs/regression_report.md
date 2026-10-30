@@ -13,11 +13,12 @@ the script with `--report`; the last run is below.
 | `ryu_ken_v3` | `EXP-0028` | `RE-007` | 2 | 3 | 3 | `b5dd07c2…` |
 | `roster_v3` | `EXP-0032` | `RE-010` | 18 | 3 | 19 | `36672c5d…` |
 | `nash_ending_v4` | `EXP-0041` | `END-008` | 19 | 4 | 20 | `2abe9771…` |
+| `roster_endings_v4` | `EXP-0046` | `END-014` | 35 | 4 | 20 | `7bb8ab82…` |
 
 ## Last Run
 
-- Date: 2026-10-30T01:39:21+00:00
-- Commit: `f2ed18a`
+- Date: 2026-10-30T15:41:02+00:00
+- Commit: `acad50a`
 - Python: 3.13.13
 - Source Track 01: `c904a386…` (matches)
 - Program image: `1b1a5a26…` (matches)
@@ -72,5 +73,26 @@ the script with `--report`; the last run is below.
 | `nash_ending_v4` | `MMPACK.PCA;1` | `276d534c…` | `276d534c…` | yes |
 | `nash_ending_v4` | `MCED.SHP;1` | `cca9332d…` | `cca9332d…` | yes |
 | `nash_ending_v4` | `Track 01` | `2abe9771…` | `2abe9771…` | yes |
+| `roster_endings_v4` | `MC00.SHP;1` | `12367af4…` | `12367af4…` | yes |
+| `roster_endings_v4` | `MC01.SHP;1` | `3f5e7ab4…` | `3f5e7ab4…` | yes |
+| `roster_endings_v4` | `MC02.SHP;1` | `a608e360…` | `a608e360…` | yes |
+| `roster_endings_v4` | `MC03.SHP;1` | `fe4b9d82…` | `fe4b9d82…` | yes |
+| `roster_endings_v4` | `MC04.SHP;1` | `49233397…` | `49233397…` | yes |
+| `roster_endings_v4` | `MC05.SHP;1` | `02179ea7…` | `02179ea7…` | yes |
+| `roster_endings_v4` | `MC06.SHP;1` | `89fa13f2…` | `89fa13f2…` | yes |
+| `roster_endings_v4` | `MC07.SHP;1` | `b2776f78…` | `b2776f78…` | yes |
+| `roster_endings_v4` | `MC08.SHP;1` | `7bb06fec…` | `7bb06fec…` | yes |
+| `roster_endings_v4` | `MC09.SHP;1` | `f9c524a5…` | `f9c524a5…` | yes |
+| `roster_endings_v4` | `MC0A.SHP;1` | `4a8aafea…` | `4a8aafea…` | yes |
+| `roster_endings_v4` | `MC0B.SHP;1` | `76c6c033…` | `76c6c033…` | yes |
+| `roster_endings_v4` | `MC0C.SHP;1` | `284c9667…` | `284c9667…` | yes |
+| `roster_endings_v4` | `MC0D.SHP;1` | `2a3ae96e…` | `2a3ae96e…` | yes |
+| `roster_endings_v4` | `MC0E.SHP;1` | `35daca66…` | `35daca66…` | yes |
+| `roster_endings_v4` | `MC0F.SHP;1` | `983aca7b…` | `983aca7b…` | yes |
+| `roster_endings_v4` | `MC10.SHP;1` | `d97633a6…` | `d97633a6…` | yes |
+| `roster_endings_v4` | `MC11.SHP;1` | `736aab3d…` | `736aab3d…` | yes |
+| `roster_endings_v4` | `MCED.SHP;1` | `b37c3a64…` | `b37c3a64…` | yes |
+| `roster_endings_v4` | `MMPACK.PCA;1` | `36179171…` | `36179171…` | yes |
+| `roster_endings_v4` | `Track 01` | `7bb8ab82…` | `7bb8ab82…` | yes |
 
 Result: all references match.

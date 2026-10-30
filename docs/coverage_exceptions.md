@@ -3,20 +3,21 @@
 What the M5 win-quote build deliberately leaves untouched, and why. The
 roster is `data/text/m5_roster.json`: all 18 characters of arcade slots 0-17
 (user decision 2026-10-29, `RE-008`: "All 18, with Apocalypse"). Every build
-must leave the items below byte-identical to the source image.
+must leave the items below byte-identical to the source image. What the M8
+ending build covers and leaves is in the last section.
 
 ## Files and slots outside the roster
 
 | Item | Reason | Evidence | Taken up by |
 | --- | --- | --- | --- |
-| `MCED.SHP` | Holds no arcade Japanese win-quote or ending record of any slot; its role and its loader are unknown. | `EXP-0029`, D-024 | a later task, if it turns out to hold text (`docs/known_unknowns.md`) |
+| `MCED.SHP` | Holds no arcade Japanese win-quote or ending record of any slot. It is the ending overlay: the scene scripts and speaker labels (`EXP-0038`, D-033). M7 and M8 change only its script header words (below). | `EXP-0029`, D-024, D-033 | M7, M8 |
 | Arcade slot 18 | Has no file of its own: its Japanese and English pointers both equal slot 11's (Chun-Li). Which character uses it, if any, is unknown. Slot 11's table is localized in `MC0B.SHP`; if slot 18 reads that file, it shows the same English. | `EXP-0029`, D-024 | `SPECIAL-001` |
 
 ## Parts of roster files outside M5
 
 | Item | Reason | Evidence | Taken up by |
 | --- | --- | --- | --- |
-| Records after the 16 quotes in every `MCxx` (4-12 per file) | Japanese ending records; endings wait until win quotes are proven and generalized (rule 23). | `EXP-0025`, `EXP-0029` | `END-001` and later |
+| Records after the 16 quotes in every `MCxx` (4-12 per file) | Japanese ending records; endings waited until win quotes were proven and generalized (rule 23). | `EXP-0025`, `EXP-0029` | **Taken up by M8** for slots 0-7 and 9-17 (below); slot 8's stay Japanese |
 | Everything else in each `MCxx` outside the first 800 bytes of its quote table | Not win-quote text. The English records (8 × 100 bytes) are written over the start of the 1,216-byte Japanese table; the rest of the table and of the file stays as decoded. | `EXP-0024`, `EXP-0028` | — |
 | Arcade English record 8 of each slot (none in slot 8) | Never chosen by the win-quote selector (`r mod 8`). | `EXP-0022`, `EXP-0026` | before claiming full English coverage (`docs/known_unknowns.md`) |
 
@@ -55,3 +56,38 @@ with the character picked first or second.
 | Slot 8 (Apocalypse) | **No English ending of his own.** He is the boss, not selectable. His `MCED` script is Ryu's, and his arcade English pointer equals Ryu's. Switching Ryu's shared script to English switches slot 8's too, but slot 8 is not marked in the fixed table, and `MC08` gets no English ending records. If Apocalypse's ending could ever play, it would show `MC08`'s Japanese records under Ryu's English script. That it never plays is a HYPOTHESIS, to be recorded by `END-016`. | `EXP-0043`, D-038 |
 | Slot 18 (name list: Bison) | No file. It shares Chun-Li's script and pointers, and Chun-Li's switch changes it too. Which character uses it stays with `SPECIAL-001`. | `EXP-0029`, `EXP-0043` |
 | `mced_english_scripts` | It refuses a slot whose script is shared with an unlisted slot. The M8 build must allow slot 9 with slot 8, and slot 11 with slot 18, explicitly (`END-014`). | `tools/disc/english_mode.py` |
+
+## M8 coverage register (`END-016`, 2026-10-30)
+
+The M8 build is `build/m8_roster_endings` (`EXP-0046`, D-041; reference
+`roster_endings_v4`). It covers:
+
+- the ordinary win quotes of slots 0-17 (M5);
+- the endings of slots 0-7 and 9-17 in the official arcade English.
+
+Every page of those endings was shown on screen with the character picked
+first (`EXP-0047`, D-042). With the character picked second, Ryu's ending
+was shown in play.
+
+### Ending text left Japanese, or not shown
+
+| Item | Status | Why | Evidence | Taken up by |
+| --- | --- | --- | --- | --- |
+| Slot 8 (Apocalypse): `MC08`'s 4 Japanese ending records (decoded `0xF60` + 76k) | Japanese, unchanged | He is the boss, not a roster pick, so slot 8 is not marked and gets no English records (`END-011`). His `MCED` script is Ryu's, so it is now the English script. That his ending never plays is a **HYPOTHESIS**: in 17 routes, 2 plays and `EXP-0045`'s routes, every ending was a team member's. If it ever played, it would show these Japanese records under Ryu's English script. | `EXP-0043`, `EXP-0045`, `EXP-0047` | `SPECIAL-001` |
+| Slot 18 (name list: Bison) | No file of its own | It shares Chun-Li's script and pointers, so Chun-Li's switch covers it. Which character uses it, if any, is unknown. | `EXP-0029`, `EXP-0043` | `SPECIAL-001` |
+| The tail of each roster file's old Japanese ending | Japanese bytes, not shown | The English bytes (800 + 100n from the quote table) are shorter than the Japanese records they replace. The rest stays as decoded: 348 bytes (slot 0), 48 (1), 348 (2), 424 (3), 372 (4), 120 (5), 500 (6), 20 (7), 172 (9), 396 (10), 348 (11), 120 (12), 220 (13), 220 (14), 120 (15), 272 (16), 28 (17). The English script reads only the n English records. The renderer read once past the last record in M7 (`EXP-0041`), and every page matches the arcade. | `EXP-0041`, `EXP-0046`, `EXP-0047` | — |
+| The Japanese ending scripts in `MCED.SHP` | Japanese, unchanged, not run | Each roster script's language-0 header word now points to its English script (17 words), so the Japanese scripts are no longer reached for roster slots. | `EXP-0046` | — |
+| Second-pick endings other than Ryu's | English on disc, not shown | Every roster file loads into the second buffer unchanged (`EXP-0046`). Ryu's second-pick ending used version 4's second-buffer rule (`EXP-0047`). The others use the same rule and are **SUPPORTED**, not shown. A route cannot reach them, because the route's tag did not take effect (`EXP-0045`). | `EXP-0045`, `EXP-0046`, `EXP-0047` | — |
+| Gouki's ending in an ordinary save | English on disc; reachable only if his cell is open | His cell above Juggernaut's is open in the route's select state. Whether it is open in a fresh save (an unlock) is unknown. | `EXP-0046` | — |
+
+### Other text around the endings, unchanged
+
+| Item | Status | Taken up by |
+| --- | --- | --- |
+| Apocalypse's pre-fight exchange: two Japanese boxes at the top of the boss stage (the "target confirmed" line, then Apocalypse's) | Japanese, seen in every play check | `SPECIAL-001` |
+| The `⚠乱入禁止` ("no challengers") warning in the boss and partner fights | Japanese | `UI-001` |
+| The staff roll, `GAME OVER`, initials entry and score screens | Already English on the Japanese disc (`EXP-0034`) | — |
+
+The win quote after Apocalypse and in the partner fight is the winner's
+ordinary win quote, in English since M5. It was seen in English in every
+play check.

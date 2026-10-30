@@ -26,32 +26,33 @@ and Cammy.
   for player wins, wins finished by the second team member, and CPU wins,
   the boss included. See `docs/discoveries.md` (D-018 to D-027).
 
-**Endings: Nash's in English** (milestone M7, 2026-10-30).
+**Endings: all 17 playable characters in English** (milestone M8,
+2026-10-30). Every character but Apocalypse, the boss.
 
-- **What it shows:** the six pages of Nash's ending show the official
-  arcade English in the Saturn's own English layout (the arcade's scene
-  breaks and pictures, and the speaker labels `Charlie` and `Charlie's
-  friend`).
+- **What it shows:** each ending shows the official arcade English in the
+  Saturn's own English layout: the arcade's scene breaks and pictures, and
+  its speaker labels (for example `Charlie`, `Akuma` and `Bison`).
 - **How:** the game already holds an English script for each ending in
-  `MCED.SHP`. A small code change (patch version 4) switches Nash's
-  ending to it, and his English pages sit right after his English win
-  quotes.
-- **Checks:** a cold-boot play check showed every page as approved. See
-  `docs/discoveries.md` (D-029 to D-036).
+  `MCED.SHP`. A small code change (patch version 4) switches each
+  character's ending to it, and its English pages sit right after its
+  English win quotes.
+- **Checks:** every page of all 17 endings was shown in the emulator and
+  matched the arcade's English page. A cold-boot play check showed Cammy's
+  ending, and Ryu's when he was picked second and the player tagged him
+  in. See `docs/discoveries.md` (D-029 to D-042). What M8 leaves is listed
+  in `docs/coverage_exceptions.md`.
 
 **Still Japanese:**
 
-- every other character's ending, and Nash's when he is the second pick;
+- Apocalypse's pre-fight exchange in the final stage;
+- the "no challengers" (乱入禁止) warning in the final fights;
 - continue-screen hints;
 - attract-mode captions;
-- Apocalypse's pre-fight line;
-- the 4 MB RAM cart warning, and any other error message shown at boot;
-- the "no challengers" (乱入禁止) warning before the final partner fight;
-- the ending text stored in each quote file.
+- the 4 MB RAM cart warning, and any other error message shown at boot.
 
 Character names on screen still follow the Saturn (Japanese) convention, for
-example GOUKI and NASH. The quotes and Nash's ending use the arcade English as
-written, so they say "Charlie".
+example GOUKI and NASH. The quotes and endings use the arcade English as
+written, so they say "Charlie", "Akuma" and "Bison".
 
 **Not released.** No patch has been published yet. Release patches (xdelta
 and SSP) are planned once the open tasks are done (`REL-001`).
@@ -102,14 +103,14 @@ never modified.
 ```bash
 ./invenv.sh python -m tools.disc.build_english \
   data/translations/{wolverine,cyclops,storm,rogue,gambit,sabretooth,juggernaut,magneto,apocalypse,ryu,ken,chun_li,dhalsim,zangief,vega,gouki,nash,cammy}_win_quotes.json \
-  data/translations/nash_ending.json \
-  local/build_files --patch-version 4 --image build/m7_nash_ending
+  data/translations/{wolverine,cyclops,storm,rogue,gambit,sabretooth,juggernaut,magneto,ryu,ken,chun_li,dhalsim,zangief,vega,gouki,nash,cammy}_ending.json \
+  local/build_files --patch-version 4 --image build/m8_roster_endings
 ```
 
-Leave out `nash_ending.json` and `--patch-version 4` for the win quotes
-alone (`36672c5d…`). The expected hashes are in
-`data/regression/references.json` (with Nash's ending, Track 01
-`2abe9771…`). To rebuild every confirmed build and check its hashes, run
+Leave out the `_ending.json` specs and `--patch-version 4` for the win
+quotes alone (`36672c5d…`). The expected hashes are in
+`data/regression/references.json` (with every ending, Track 01
+`7bb8ab82…`). To rebuild every confirmed build and check its hashes, run
 `./invenv.sh python -m tools.disc.regression`. The last run is in
 `docs/regression_report.md`. The image needs the 4 MB RAM cartridge (in Mednafen,
 `ss.cart auto`); see `docs/mednafen.md`.

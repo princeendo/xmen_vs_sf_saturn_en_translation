@@ -325,8 +325,15 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
     second pick after tagging with Z + C. A second pick's ending is
     reachable and shows in English from the second buffer (`END-015`,
     D-042).
-- Next: `END-016` (coverage and regression; `READY`). Backlog: `UI-004`,
-  `SPECIAL-001`, `REL-001`.
+- **2026-10-30** (`SESSION-0072`, D-043): **M8 is complete.**
+  - **Regression:** the M8 build is reference `roster_endings_v4`, and all
+    five references rebuild byte for byte.
+  - **Coverage:** `docs/coverage_exceptions.md` registers what M8 leaves
+    (`END-016`).
+- **Next:** no task is `READY`. M9 (special cases) needs the user's
+  explicit task (rule 24). `LOC-001` (name variants) is "after M8", by the
+  user's decision. Backlog: `UI-004`, `SPECIAL-001`, `REL-001`, and the
+  "after M8" UI and text tasks.
   The backlog also holds `UI-004` (boot-time error messages, including the
   cart warning), `SPECIAL-001` (including
   Apocalypse's pre-fight line) and `REL-001` (release patches).
@@ -2156,7 +2163,7 @@ recorded under `GATE-TRANSLATION`.
 
 ### END-016 - Coverage register and regression references for M8
 
-- **Status:** `READY`
+- **Status:** `DONE` (D-043)
 - **Milestone:** M8
 - **Dependencies:** END-015 (done).
 - **Blockers:** None.
@@ -2169,6 +2176,12 @@ recorded under `GATE-TRANSLATION`.
   - **Regression:** the M8 build is added to
     `data/regression/references.json`, and all references match.
   - **README:** the status and build command are updated.
+- **Outcome:**
+  - **Coverage:** "M8 coverage register" in `docs/coverage_exceptions.md`
+    covers six ending items and three surrounding ones.
+  - **Regression:** reference `roster_endings_v4`; all five references
+    rebuild and match (69 hashes, run at `acad50a`).
+  - **README:** it now describes M8 and builds `build/m8_roster_endings`.
 
 ## Later Milestones (outline only)
 

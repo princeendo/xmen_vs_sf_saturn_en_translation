@@ -2304,3 +2304,30 @@ Checks: `pytest` 199 passed; `ruff check`, `ruff format --check`, `mypy
 --strict` on tools, tests and the EXP-0046/0047 scripts are clean.
 
 Conclusion: `END-015` is `DONE` (D-042). Next: `END-016`.
+
+## 2026-10-30 — SESSION-0072: M8 coverage register and regression (END-016)
+
+User request (verbatim): "Start END-016: coverage register and regression
+references for M8."
+
+- **Reference:** `roster_endings_v4` was added to
+  `data/regression/references.json`. Its file hashes come from
+  `local/end014/b1/changes.json`, and its Track 01 hash was computed from
+  `build/m8_roster_endings`.
+- **Regression:** `./invenv.sh python -m tools.disc.regression --report
+  docs/regression_report.md` rebuilt all 5 references from the untouched
+  source, and all 69 hashes match (exit 0, about 10 minutes).
+  `nash_ending_v4` still matches after `END-014` rewrote
+  `nash_ending.json` with the same records.
+- **Coverage:** `docs/coverage_exceptions.md` has a new "M8 coverage
+  register". Two older rows were updated: the Japanese ending records
+  (taken up by M8, except slot 8) and `MCED.SHP` (the ending overlay).
+- **README:** the status now covers all 17 endings, the "still Japanese"
+  list is updated, and the build command makes `build/m8_roster_endings`.
+
+Checks: `pytest` 199 passed; `ruff check` and `ruff format --check` are
+clean.
+
+Conclusion: `END-016` is `DONE` (D-043), and M8 is complete. No task is
+`READY`. The next work (M9 special cases, `LOC-001`, UI tasks, release)
+waits for the user's choice.

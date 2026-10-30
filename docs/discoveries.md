@@ -840,3 +840,32 @@ Reproduce: `research/experiments/EXP-0046/README.md`, "Procedure".
   after tags (Z + C by hand) during the stages and the boss fight.
 
 Reproduce: `research/experiments/EXP-0047/README.md`, "Procedure".
+
+## D-043 (M8): The M8 build reproduces from the untouched source, and its coverage is registered (`END-016`)
+
+`data/regression/references.json` now holds `roster_endings_v4`
+(`EXP-0046`, verified in `EXP-0047`):
+
+- the 18 win-quote specs plus the 17 roster ending specs;
+- patch version 4;
+- 20 file hashes, including `MCED.SHP` `b37c3a64…` and `MMPACK.PCA`
+  `36179171…`;
+- Track 01 `7bb8ab82…`.
+
+`tools.disc.regression` rebuilt all five references from the untouched
+image and matched all 69 hashes (`docs/regression_report.md`, run at
+`acad50a`). `nash_ending_v4` still matches. Its spec gained a description
+and two size fields in `END-014`, and its records are unchanged.
+
+`docs/coverage_exceptions.md` ("M8 coverage register") lists the ending
+text M8 leaves Japanese or does not show, and why:
+
+- slot 8's ending records;
+- slot 18;
+- the tails of the old Japanese endings;
+- the unused Japanese scripts;
+- second-pick endings other than Ryu's;
+- Gouki's unlock;
+- the boss-stage text and the warning.
+
+Reproduce: `./invenv.sh python -m tools.disc.regression`.
