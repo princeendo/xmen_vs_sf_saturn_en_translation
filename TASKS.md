@@ -266,8 +266,13 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   `build/m7_nash_ending` from a cold boot to Nash's ending. All six pages
   are byte-identical to the chosen English layout, and all seven win quotes
   in the session are English (`END-008`, D-036).
-- Next: `END-009` (regression reference for the M7 build), the last M7
-  task. Backlog: `UI-004`, `SPECIAL-001`, `REL-001`.
+- **2026-10-30** (`SESSION-0063`): `nash_ending_v4` is in
+  `data/regression/references.json`, and `tools.disc.regression` rebuilds
+  all four confirmed builds byte for byte (48 of 48 hashes;
+  `docs/regression_report.md`). The README describes Nash's English ending
+  and its build command (`END-009`, D-037). **M7 is complete.**
+- Next: M8 (`END-010`, all roster endings) needs its tasks written; nothing
+  in it has started. Backlog: `UI-004`, `SPECIAL-001`, `REL-001`.
   The backlog also holds `UI-004` (boot-time error messages, including the
   cart warning), `SPECIAL-001` (including
   Apocalypse's pre-fight line) and `REL-001` (release patches).
@@ -1802,7 +1807,7 @@ recorded under `GATE-TRANSLATION` above and in
 
 ### END-009 - Regression reference for the ending build
 
-- **Status:** `READY`
+- **Status:** `DONE` (D-037)
 - **Milestone:** M7
 - **Dependencies:** END-008.
 - **Blockers:** None; `build/m7_nash_ending` is confirmed (`EXP-0042`).

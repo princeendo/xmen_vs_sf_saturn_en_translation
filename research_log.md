@@ -2037,3 +2037,24 @@ said "done".
   `f00050757.mcs`.
 
 Conclusion: `END-008` is `DONE` (**CONFIRMED**, D-036). Next: `END-009`.
+
+## 2026-10-30 — SESSION-0063: Regression reference for the ending build (END-009); M7 complete
+
+User request (verbatim): "Start END-009: regression reference for the
+ending build."
+
+- **New reference:** `nash_ending_v4` added to
+  `data/regression/references.json`. Its hashes come from
+  `local/end007/b1/changes.json`; each was re-hashed from the built file
+  and Track 01 from `build/m7_nash_ending`. Against `roster_v3`, only
+  `MC10` and `MMPACK.PCA` differ, plus the new `MCED.SHP`.
+- **Regression:** `./invenv.sh python -m tools.disc.regression --report
+  docs/regression_report.md` gave `ryu_v2`, `ryu_ken_v3`, `roster_v3` and
+  `nash_ending_v4`: match; 48/48 hashes; exit 0.
+- **README:** M7 status, the "still Japanese" list, and the build command
+  with the ending spec and `--patch-version 4`.
+
+Checks: `pytest` 183 passed; `ruff check` clean.
+
+Conclusion: `END-009` is `DONE` (D-037). **M7 is complete.** Next: write
+the M8 tasks (not started).

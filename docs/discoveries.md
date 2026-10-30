@@ -715,3 +715,19 @@ the user to Nash's ending (Nash first, Ryu partner).
   second member's and the one after Apocalypse.
 
 Reproduce: `research/experiments/EXP-0042/README.md`, "Procedure".
+
+## D-037 (M7): The Nash-ending build reproduces from the untouched source (`END-009`)
+
+`data/regression/references.json` now holds `nash_ending_v4` (`EXP-0041`,
+play-checked in `EXP-0042`):
+
+- the 18 win-quote specs plus `data/translations/nash_ending.json`;
+- patch version 4;
+- 20 file hashes, including `MCED.SHP` `cca9332d…`, `MC10.SHP` `d97633a6…`
+  and `MMPACK.PCA` `276d534c…`;
+- Track 01 `2abe9771…`.
+
+`tools.disc.regression` rebuilt all four references from the untouched image
+and matched all 48 hashes (`docs/regression_report.md`, run at `f2ed18a`).
+
+Reproduce: `./invenv.sh python -m tools.disc.regression`.

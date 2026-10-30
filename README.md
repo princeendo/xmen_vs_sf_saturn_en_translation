@@ -26,9 +26,22 @@ and Cammy.
   for player wins, wins finished by the second team member, and CPU wins,
   the boss included. See `docs/discoveries.md` (D-018 to D-027).
 
+**Endings: Nash's in English** (milestone M7, 2026-10-30).
+
+- **What it shows:** the six pages of Nash's ending show the official
+  arcade English in the Saturn's own English layout (the arcade's scene
+  breaks and pictures, and the speaker labels `Charlie` and `Charlie's
+  friend`).
+- **How:** the game already holds an English script for each ending in
+  `MCED.SHP`. A small code change (patch version 4) switches Nash's
+  ending to it, and his English pages sit right after his English win
+  quotes.
+- **Checks:** a cold-boot play check showed every page as approved. See
+  `docs/discoveries.md` (D-029 to D-036).
+
 **Still Japanese:**
 
-- endings;
+- every other character's ending, and Nash's when he is the second pick;
 - continue-screen hints;
 - attract-mode captions;
 - Apocalypse's pre-fight line;
@@ -37,7 +50,8 @@ and Cammy.
 - the ending text stored in each quote file.
 
 Character names on screen still follow the Saturn (Japanese) convention, for
-example GOUKI and NASH. The quotes use the arcade English as written.
+example GOUKI and NASH. The quotes and Nash's ending use the arcade English as
+written, so they say "Charlie".
 
 **Not released.** No patch has been published yet. Release patches (xdelta
 and SSP) are planned once the open tasks are done (`REL-001`).
@@ -88,11 +102,14 @@ never modified.
 ```bash
 ./invenv.sh python -m tools.disc.build_english \
   data/translations/{wolverine,cyclops,storm,rogue,gambit,sabretooth,juggernaut,magneto,apocalypse,ryu,ken,chun_li,dhalsim,zangief,vega,gouki,nash,cammy}_win_quotes.json \
-  local/build_files --image build/roster_english
+  data/translations/nash_ending.json \
+  local/build_files --patch-version 4 --image build/m7_nash_ending
 ```
 
-The expected hashes are in `data/regression/references.json` (Track 01
-`36672c5d…`). To rebuild every confirmed build and check its hashes, run
+Leave out `nash_ending.json` and `--patch-version 4` for the win quotes
+alone (`36672c5d…`). The expected hashes are in
+`data/regression/references.json` (with Nash's ending, Track 01
+`2abe9771…`). To rebuild every confirmed build and check its hashes, run
 `./invenv.sh python -m tools.disc.regression`. The last run is in
 `docs/regression_report.md`. The image needs the 4 MB RAM cartridge (in Mednafen,
 `ss.cart auto`); see `docs/mednafen.md`.
