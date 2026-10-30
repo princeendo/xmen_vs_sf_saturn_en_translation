@@ -50,9 +50,21 @@ and Cammy.
 - attract-mode captions;
 - the 4 MB RAM cart warning, and any other error message shown at boot.
 
-Character names on screen still follow the Saturn (Japanese) convention, for
-example GOUKI and NASH. The quotes and endings use the arcade English as
-written, so they say "Charlie", "Akuma" and "Bison".
+**Character names: two variants** (`LOC-004` to `LOC-007`, 2026-10-30).
+
+- **American (the default):** BISON, AKUMA and CHARLIE on the select
+  screen, VS screen, life bars and win banner, and in the spoken name
+  calls, as in the US arcade. The game keeps the arcade's own American name
+  lists; the build makes the 10 places that pick a name read them. The
+  quotes and endings use the arcade English as written ("Bison", "Akuma",
+  "Charlie").
+- **Saturn names:** the Saturn's own VEGA, GOUKI and NASH in the art and
+  voice, and the same names in the English: six lines and five speaker
+  labels changed, name only, and Magneto's page 3 speaker labelled
+  `Balrog`.
+- **Checks:** each variant was played from a cold boot by the user, and
+  every edited quote and ending page was shown in the emulator. See
+  `docs/names.md` and `docs/discoveries.md` (D-044 to D-048).
 
 **Not released.** No patch has been published yet. Release patches (xdelta
 and SSP) are planned once the open tasks are done (`REL-001`).
@@ -98,19 +110,24 @@ You need your own copies of the following:
   ```
 
 Then one command builds the image under `build/`. The source image is
-never modified.
+never modified. The American-names variant (the default):
 
 ```bash
 ./invenv.sh python -m tools.disc.build_english \
   data/translations/{wolverine,cyclops,storm,rogue,gambit,sabretooth,juggernaut,magneto,apocalypse,ryu,ken,chun_li,dhalsim,zangief,vega,gouki,nash,cammy}_win_quotes.json \
   data/translations/{wolverine,cyclops,storm,rogue,gambit,sabretooth,juggernaut,magneto,ryu,ken,chun_li,dhalsim,zangief,vega,gouki,nash,cammy}_ending.json \
-  local/build_files --patch-version 4 --image build/m8_roster_endings
+  local/build_us --patch-version 4 --names us --image build/names_us
 ```
 
-Leave out the `_ending.json` specs and `--patch-version 4` for the win
-quotes alone (`36672c5d…`). The expected hashes are in
-`data/regression/references.json` (with every ending, Track 01
-`7bb8ab82…`). To rebuild every confirmed build and check its hashes, run
+The Saturn-names variant: the same specs, with
+`local/build_saturn --patch-version 4 --names saturn --image build/names_saturn`.
+
+The expected hashes are in `data/regression/references.json`: Track 01
+`441c9cfc…` (American, `names_us_v4`) and `b11c8cd9…` (Saturn names,
+`names_saturn_v4`). `--names none` leaves the names as the Saturn has them
+and reproduces the earlier builds: with every ending, Track 01 `7bb8ab82…`
+(M8); without the `_ending.json` specs and `--patch-version 4`, the win
+quotes alone (`36672c5d…`). To rebuild every confirmed build and check its hashes, run
 `./invenv.sh python -m tools.disc.regression`. The last run is in
 `docs/regression_report.md`. The image needs the 4 MB RAM cartridge (in Mednafen,
 `ss.cart auto`); see `docs/mednafen.md`.

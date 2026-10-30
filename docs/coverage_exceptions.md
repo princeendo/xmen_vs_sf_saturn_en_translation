@@ -91,3 +91,20 @@ was shown in play.
 The win quote after Apocalypse and in the partner fight is the winner's
 ordinary win quote, in English since M5. It was seen in English in every
 play check.
+
+## Name variants (`LOC-007`, 2026-10-30)
+
+Both variants are built from the M8 build's specs with `--names us`
+(`EXP-0051`) or `--names saturn` (`EXP-0052`). What either leaves unchanged:
+
+| Item | Variant | Status | Why | Evidence | Taken up by |
+| --- | --- | --- | --- | --- | --- |
+| Apocalypse's pre-fight boxes on the boss stage | both | Japanese; they name the player's character in katakana (ナッシュ, ゴウキ, ベガ) | Special-case text, outside both variants (`LOC-004`) | `EXP-0048`, `EXP-0051` run B | `SPECIAL-001` |
+| Quote and ending text, ending labels | American | As the arcade wrote them ("Bison", "Akuma", "Charlie"; Magneto's page 3 `Vega`) | Already American (`LOC-004`) | `EXP-0047` | — |
+| Art and voice | Saturn names | The Saturn's own (VEGA, GOUKI, NASH) | That is the variant; its code equals M8's | `EXP-0048`, `EXP-0052` | — |
+| Label entry 9 (`Apocalypse`) | Saturn names | Replaced by `Balrog` | No script in any language uses it; it holds Magneto's page 3 label | `EXP-0052`, D-048 | — |
+| Region-dependent sound request (`0x0604FD02`: `0x9E` or `0x9F`) | both | As the Saturn has it (`0x9E`) | Not a per-character list; what it plays was not identified | `EXP-0051` | — |
+| Table B (`MMPACK.PCA`, after table A) | both | Unchanged | Its role is unknown; it changed neither name call | `EXP-0050` | `docs/known_unknowns.md` |
+| The VS screen's clip from the cart (`0x0240FBD7`) | both | Unchanged | Not identified; not from the name-call table | `EXP-0050` | `docs/known_unknowns.md` |
+| CPU-side BISON and CHARLIE (life bar, VS screen) | American | In the build, not seen in play | No CPU team held them in the routes or plays; the CPU-side AKUMA came from the same list | `EXP-0051` | — |
+| Second player's side, Versus Mode | both | Not played | The same routines draw both sides | `EXP-0051` | — |

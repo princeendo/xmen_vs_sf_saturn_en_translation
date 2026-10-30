@@ -235,3 +235,11 @@ for s in range(19):
 print([i for i in range(40) if i not in used])
 PY
 ```
+
+## Play Check (`LOC-007`, 2026-10-30)
+
+The user played the built image from a cold boot (`local/loc007/saturn`,
+173 screenshots), on the same route as the American check. Their report:
+"done", with nothing wrong. The agent viewed every screenshot: select
+labels `VEGA`, `GOUKI`, `NASH`; VS screen `NASH` / `GOUKI`; life bar
+`NASH` / `GOUKI`; banner "NASH / GOUKI / WIN"; Nash's English win quote.

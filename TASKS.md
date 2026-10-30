@@ -386,7 +386,15 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
     label entry 9, which no script used).
   - **Nothing else:** against the American build, only the edited records,
     labels and the 10 American name sites differ.
-- **Next:** `LOC-007` (verify and register both variants; `READY`). M9 (special cases) needs the user's
+- **2026-10-30** (`SESSION-0081`): `LOC-007` is done. **Phase N (name
+  variants) is complete.**
+  - **Play check:** the user played both images from a cold boot; every
+    name surface showed the variant's names.
+  - **Regression:** `names_us_v4` and `names_saturn_v4` added; all seven
+    references rebuild byte for byte.
+  - **README:** both build commands, American first; the register lists
+    what each variant leaves.
+- **Next:** no task is `READY`. M9 (special cases) needs the user's
   explicit task (rule 24). Backlog: `UI-004`, `SPECIAL-001`, `REL-001`,
   `LOC-008`, and the "after M8" UI and text tasks.
   The backlog also holds `UI-004` (boot-time error messages, including the
@@ -2567,7 +2575,7 @@ its own; it becomes a task only if the user asks (`LOC-008`, outline).
 
 ### LOC-007 - Verify and register both variants
 
-- **Status:** `READY`
+- **Status:** `DONE` (`SESSION-0081`)
 - **Milestone:** Name variants (after M8)
 - **Dependencies:** LOC-005, LOC-006 (both done).
 - **Blockers:** None.
@@ -2580,6 +2588,17 @@ its own; it becomes a task only if the user asks (`LOC-008`, outline).
     `data/regression/references.json`, and all references match.
   - **Coverage:** `docs/coverage_exceptions.md` lists any surface left
     unchanged in either variant, and why.
+  - **README:** both build commands, American first.
+- **Outcome:**
+  - **Play check:** the user played each variant from a cold boot (Vega
+    and Gouki hovered, Nash and Gouki picked, the first fight won) and
+    reported nothing wrong. The recorded screens match the forced ones:
+    BISON, AKUMA, CHARLIE (American) and VEGA, GOUKI, NASH (Saturn names)
+    on the select labels, VS screen, life bar and banner.
+  - **Regression:** `names_us_v4` (Track 01 `441c9cfc…`) and
+    `names_saturn_v4` (`b11c8cd9…`) in `data/regression/references.json`;
+    all seven references match (`docs/regression_report.md`).
+  - **Coverage:** `docs/coverage_exceptions.md`, "Name variants".
   - **README:** both build commands, American first.
 
 ## Later Milestones (outline only)

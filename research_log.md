@@ -2605,3 +2605,31 @@ Checks: `pytest` (206 passed), `ruff check`, `ruff format --check`,
 `mypy --strict` are clean.
 
 Conclusion: `LOC-006` is `DONE` (D-048). `LOC-007` is `READY`.
+
+## 2026-10-30 — SESSION-0081: Verify and register both variants (LOC-007)
+
+User request (verbatim): "Start LOC-007: verify and register both variants."
+
+- **References:** `names_us_v4` and `names_saturn_v4` added to
+  `data/regression/references.json` (with a `names` field; older
+  references rebuild with `none`).
+- **Regression:** `./invenv.sh python -m tools.disc.regression --report
+  docs/regression_report.md`: all seven references match.
+- **Play check, American** (`local/loc007/us`, sound recorded): the user
+  hovered Vega and Gouki, picked Nash and Gouki, won the first fight, and
+  said "done". Screens viewed: BISON, AKUMA, CHARLIE labels; VS and life
+  bar CHARLIE / AKUMA; banner CHARLIE / AKUMA / WIN.
+- **Play check, Saturn names** (`local/loc007/saturn`): the same route;
+  "done". VEGA, GOUKI, NASH labels; VS and life bar NASH / GOUKI; banner
+  NASH / GOUKI / WIN.
+- **README:** the build section had no `--names`, so its command would now
+  build the American variant and its win-quotes-only hash would not match;
+  it now gives both variants and notes `--names none` for the older hashes.
+- **Coverage:** "Name variants" section in `docs/coverage_exceptions.md`.
+
+Checks: `pytest`, `ruff check`, `ruff format --check`, `mypy --strict` are
+clean.
+
+Conclusion: `LOC-007` is `DONE`; Phase N is complete. No task is `READY`;
+the next work needs the user's choice (M9 `SPECIAL-001`, `UI-004`,
+`REL-001`, `LOC-008`, or the "after M8" UI and text tasks).

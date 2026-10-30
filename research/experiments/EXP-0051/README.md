@@ -296,3 +296,15 @@ SITES=$(./invenv.sh python -c "from tools.disc.names import patches; print(' '.j
 ./invenv.sh python research/experiments/EXP-0050/channel_poll.py "$B" local/loc005/v_vega \
   local/checkpoints/re004/f00002973.mcs uuu a 4 ${=SITES}
 ```
+
+## Play Check (`LOC-007`, 2026-10-30)
+
+The user played the built image from a cold boot (interactive home, sound
+on, `local/loc007/us`, session recorder every 3 s, 224 screenshots):
+hovered Vega and Gouki, picked Nash first and Gouki second, and won the
+first fight. Their report: "done", with nothing wrong.
+
+The agent viewed every screenshot (contact sheets, then 3 × crops): select
+labels `BISON`, `AKUMA`, `CHARLIE`; VS screen `CHARLIE` / `AKUMA`; life
+bar `CHARLIE` / `AKUMA`; banner "CHARLIE / AKUMA / WIN". These match the
+cold-boot runs above.
