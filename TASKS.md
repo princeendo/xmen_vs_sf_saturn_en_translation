@@ -396,8 +396,15 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
     what each variant leaves.
 - **2026-10-30** (`SESSION-0082`): the boot-time message tasks are
   written, `BOOT-001` to `BOOT-005` (Phase O, `UI-004`). Not started.
-- **Next:** `BOOT-001` (census of the boot-time messages; `READY`), when
-  the user starts it. M9 (special cases) needs the user's explicit task
+- **2026-10-30** (`SESSION-0083`, `EXP-0053`): `BOOT-001` is done (D-049).
+  - **Four warnings shown:** no cart or a backup cart (`ERR4.BIN`),
+    unformatted backup memory (`ERR1`), a damaged save (`ERR2`), 18 blocks
+    or fewer free (`ERR3`).
+  - **A fifth,** `ERR5.BIN`, follows from the code (an unsteady cart ID or a
+    failing 1 MB cart); not produced in Mednafen.
+  - **No warning:** a 1 MB cart; the 16 MiB CS1 RAM hangs on "NOW LOADING".
+- **Next:** `BOOT-002` (where each message is stored and drawn; `READY`).
+  M9 (special cases) needs the user's explicit task
   (rule 24). Backlog: `SPECIAL-001` (including Apocalypse's pre-fight
   line), `REL-001` (release patches), `LOC-008`, and the "after M8" UI and
   text tasks.
@@ -2637,7 +2644,7 @@ Known before Phase O:
 
 ### BOOT-001 - Census of the boot-time messages
 
-- **Status:** `READY`
+- **Status:** `DONE` (`EXP-0053`, D-049)
 - **Milestone:** Boot-time messages (`UI-004`)
 - **Dependencies:** EMU-004 (done), DBG-002 (done).
 - **Blockers:** None.
@@ -2664,13 +2671,24 @@ Known before Phase O:
 - **Notes:** saves and backup memory are machine-local files; the ones made
   stay under ignored paths. Mednafen's backup and cart files used are
   recorded by hash.
+- **Outcome:**
+  - **Triggers:** 12 cases (5 carts; 7 backup-memory fixtures) from cold
+    boots of the untouched image, each in its own home; fixtures by hash.
+  - **Screens:** four warnings, transcribed and translated by the agent;
+    the file of each identified in RAM. After a button, A and B leave to
+    the BIOS, C and D let the game go on. The BIOS screen is left out.
+  - **Code:** the boot check (`0x060228D4`), the picture loader
+    (`0x060221E0`) and the cart test (`CPK.EMM`). The fifth picture
+    (`ERR5.BIN`) and its conditions come from the code; they cannot be
+    made with Mednafen's carts.
+  - **Record:** `docs/text_surfaces.md` ("Boot-Time Messages").
 
 ### BOOT-002 - Where each message is stored and how it is drawn
 
-- **Status:** `BLOCKED`
+- **Status:** `READY`
 - **Milestone:** Boot-time messages (`UI-004`)
-- **Dependencies:** BOOT-001.
-- **Blockers:** The census.
+- **Dependencies:** BOOT-001 (done).
+- **Blockers:** None.
 - **Objective:** For each message in `BOOT-001`, find the data the game
   draws and the drawing path, so that an English version can be built.
 - **Acceptance criteria:**

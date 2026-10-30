@@ -31,7 +31,9 @@ and one more step. The steps are:
 
 The image is booted cold: no save state is loaded, so every byte of code
 comes from CUE's own disc. Mednafen runs from the ``local/mednafen_pick``
-home (silent, the route's key map). ``OUT/sound.wav`` is the recording;
+home (silent, the route's key map), or from the home named by the
+environment variable ``COLD_WALK_HOME`` (`EXP-0053`: a case home with the
+key map's settings). ``OUT/sound.wav`` is the recording;
 ``OUT/steps.json`` records each step's frame and the WAV's length in
 samples at its start, so that a sound can be cut from the moment it was
 made. Screenshots go to ``OUT/shots/``. OUT is an ignored path.
@@ -80,7 +82,11 @@ def wav_frames(path: Path) -> int:
 def main(cue: Path, out: Path, steps: list[str]) -> int:
     out.mkdir(parents=True, exist_ok=False)
     (out / "shots").mkdir()
-    home = pick_home()
+    home = (
+        Path(os.environ["COLD_WALK_HOME"])
+        if "COLD_WALK_HOME" in os.environ
+        else pick_home()
+    )
     agent_dir = (out / "agent").resolve()
     wav = (out / "sound.wav").resolve()
     env = {

@@ -58,6 +58,24 @@ names; fight HUD and callouts (`FIGHT!`, `FIRST ATTACK`, hit counts, `K.O.`,
 
 Endings other than Nash's (reached in `EXP-0034`, above); boss and secret-character text;
 versus mode screens; options sub-screens (button config, sound test, other
-values); save/backup messages; the cart-missing warning (Japanese, seen in
-`EXP-0002`); rare or region-gated text. Each needs its own capture before it
+values); rare or region-gated text. The boot-time warnings (save/backup and cart
+messages) are listed below (`BOOT-001`). Each needs its own capture before it
 can be inventoried.
+
+## Boot-Time Messages (`BOOT-001`, `EXP-0053`)
+
+Cold boots of the untouched image, one condition changed at a time
+(Mednafen cart setting, backup-RAM fixture). Each is a full-screen picture,
+`ERRn.BIN`, identified by the bitmap the game loaded into RAM.
+
+| Message | File | Condition | After a button | Sample (SHA-256) | Arcade English? |
+| --- | --- | --- | --- | --- | --- |
+| A: the 4 MB cart is not inserted correctly; power off and reinsert it | `ERR4.BIN` | no cart, or a backup-memory cart | leaves to the BIOS | `fdd6ce8d…` | No (the arcade has no cart) |
+| B: backup RAM not initialized; erase all records in the Saturn's save-data screen | `ERR1.BIN` | unformatted backup memory | leaves to the BIOS | `26815f5e…` | No |
+| C: the record could not be read; earlier data will not be used | `ERR2.BIN` | a damaged save | the game goes on | `8a03df41…` | No |
+| D: no free space for a new record; 16 needed | `ERR3.BIN` | 18 blocks or fewer free | the game goes on | `eb804399…` | No |
+| E: the 4 MB cart is not inserted | `ERR5.BIN` | an unsteady cart ID, or a 1 MB cart failing its RAM test (from the code); not produced in Mednafen | leaves to the BIOS | the file only | No |
+
+Developer English already in the data, not triggered: a disc file-error
+table in file `0` ("FILE LOAD ERROR", "READ ERROR"…) and exception text in
+`MMPACK.PCA` ("CPU ADDRESS ERROR"…). See `EXP-0053`.

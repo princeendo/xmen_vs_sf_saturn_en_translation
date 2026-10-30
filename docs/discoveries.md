@@ -987,3 +987,24 @@ Reproduce: `research/experiments/EXP-0051/README.md`.
   sites differ.
 
 Reproduce: `research/experiments/EXP-0052/README.md`.
+
+## D-049 (Boot): The boot check and its five warning pictures (`BOOT-001`, `EXP-0053`)
+
+- **The check:** `CPK.PCA` (decoded at WRAM-H `0x06022000`) loads `CPK.EMM`
+  into `0x06080000` and runs a cart test and a backup-memory test
+  (`0x060228D4`). A failure loads `ERRn.BIN` (names at `0x06023D74`, 16
+  bytes each) into `0x06080000` and draws it (`0x060221E0`).
+- **Conditions and pictures,** shown in Mednafen and identified by the
+  bitmap in RAM:
+  - no cart, or a backup cart: `ERR4.BIN` (cart test −2), then the BIOS;
+  - unformatted backup memory: `ERR1.BIN` (backup test −1), then the BIOS;
+  - a damaged save: `ERR2.BIN` (−3), then the game;
+  - 18 blocks or fewer free: `ERR3.BIN` (−2), then the game.
+- **`ERR5.BIN`** (cart test −1): an unsteady cart ID or a 1 MB cart failing
+  its RAM test, from `CPK.EMM`'s code; not produced in Mednafen.
+- **No warning:** a 1 MB cart, and the 16 MiB CS1 RAM (which then hangs on
+  "NOW LOADING").
+- **Not MSHvSF's mapping:** there the no-cart picture was `ERR5` and a 1 MB
+  cart gave `ERR4`.
+
+Reproduce: `research/experiments/EXP-0053/README.md`.

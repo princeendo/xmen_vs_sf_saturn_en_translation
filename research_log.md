@@ -2649,3 +2649,36 @@ full task. Don't start it yet."
   outline row points to it.
 
 No experiment was run; no code changed.
+
+## 2026-10-30 — SESSION-0083: Census of the boot-time messages (BOOT-001, EXP-0053)
+
+User request (verbatim): "Start BOOT-001: census of the boot-time messages."
+
+- **Tools copied from MSHvSF** (read only there): `frame_capture.py`
+  (`d95a62a`, unchanged) and `backup_ram.py` with its tests (`447e573`;
+  corruption offset made a parameter). The `.bkr` layout matched a real
+  XvSF save (`XMEN_VS_SF_`, 992 bytes, block 2).
+- **Census** (`census.py`, 12 cases, one fresh home each): four warnings.
+  The first run stopped on a bug in the copied tool (a one-block dummy
+  file got a negative size); fixed with a test, then rerun.
+- **Files:** the bitmap at `0x06080000` in each warning's RAM dump equals
+  `ERR4` (no cart, backup cart), `ERR1` (unformatted), `ERR2` (damaged),
+  `ERR3` (18 free).
+- **Code:** `CPK.PCA` at `0x06022000`, boot check `0x060228D4`, picture
+  loader `0x060221E0`, cart test `CPK.EMM` (ID at `0x24FFFFFF`, RAM tests).
+  `ERR5` = −1 (unsteady ID, failing 1 MB cart): not producible here.
+- **Disproven for XvSF** (MSHvSF hypotheses, rule 13):
+  1. "No cart shows `ERR5`": it shows `ERR4`.
+  2. "A 1 MB cart shows `ERR4`": a 1 MB cart passes the check and the
+     game runs its attract with demo fights.
+- **Buttons:** A and B leave to the BIOS multiplayer screen; C and D
+  continue (the `cold_walk.py` home override was added for this).
+- **Other text:** developer English in file `0` and `MMPACK.PCA`, not
+  triggered; `.FHD` names unused.
+- **Failure:** a frame-sampled grid first picked black frames for two
+  crops; the right frames were then taken from the sheet order.
+
+Checks: `pytest`, `ruff check`, `ruff format --check`, `mypy --strict` are
+clean.
+
+Conclusion: `BOOT-001` is `DONE` (D-049). `BOOT-002` is `READY`.
