@@ -410,8 +410,13 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   - **Palette bug:** the game keeps the low five bits of each colour
     channel, so the warnings show darker than drawn.
   - **Room:** 352 × 232 visible, 16 colours, same file size and header.
-- **Next:** `BOOT-003` (official English, and the user's wording; `READY`).
-  M9 (special cases) needs the user's explicit task
+- **2026-10-30** (`SESSION-0085`, `EXP-0055`): `BOOT-003` is done.
+  - **No official English** in the arcade, the US PlayStation release or
+    the Saturn BIOS; the BIOS's labels and Capcom's PlayStation wording
+    were used as terms.
+  - **Approved:** the agent's translation, the Japanese look, "control
+    panel", and "insert" for `ERR5` (`data/translations/boot_warnings.json`).
+- **Next:** `BOOT-004` (build the English messages; `READY`). M9 (special cases) needs the user's explicit task
   (rule 24). Backlog: `SPECIAL-001` (including Apocalypse's pre-fight
   line), `REL-001` (release patches), `LOC-008`, and the "after M8" UI and
   text tasks.
@@ -919,6 +924,16 @@ prerequisites before English text goes on disc).
     entry no script uses. Saturn-names variant only.
   - **Wording:** every other word is the official arcade English, with
     no rewording.
+
+- **Gate extension, boot warnings (2026-10-30, `SESSION-0085`, `BOOT-003`):**
+  - The user's decision is **GO**. They were asked: "There is no official English for these five warnings: XvSF had no US Saturn release, and the arcade has no cart or save memory. Approve the proposed English on the right of the sheets as a new translation (by Claude, recorded with each Japanese screen's hash)? It uses the exact labels on the Saturn screens the player reaches ("Memory Manager", "System Memory") and Capcom's own wording from the US PlayStation release ("saved data", "free space"). The "16" in the free-space warning is kept as the original says." Answer: "Approve (Recommended)".
+  - **Scope:** the five pictures `ERR1`-`ERR5.BIN`, with the lines in
+    `data/translations/boot_warnings.json`; every other surface stays
+    gated.
+  - **Style:** "Match Japanese (Recommended)" (the original palette);
+    "control panel (Recommended)"; `ERR5` `"insert" (Recommended)`.
+  - **Translator:** Claude (the agent), `EXP-0055`; no official English
+    exists (searches recorded there).
 
 ## Phase F: M1
 
@@ -2724,7 +2739,7 @@ Known before Phase O:
 
 ### BOOT-003 - Official English, and the user's wording
 
-- **Status:** `READY`
+- **Status:** `DONE` (`EXP-0055`)
 - **Milestone:** Boot-time messages (`UI-004`)
 - **Dependencies:** BOOT-001, BOOT-002 (both done).
 - **Blockers:** None.
@@ -2751,13 +2766,27 @@ Known before Phase O:
     option, labelled as MSHvSF's.
   - **Style:** the user also chooses the lettering (for a picture: the
     font, size and colours) from rendered samples.
+- **Outcome:**
+  - **Official English:** none. The arcade has no such message; the US
+    PlayStation release has Capcom's memory-card wording (noted as
+    register); both Saturn BIOSes and the screens the player reaches give
+    the labels "Memory Manager" and "System Memory". US BIOS checked on the
+    user's own `mpr-17933.bin`.
+  - **New translation:** by Claude, every line within the room (27
+    characters at the 12-pixel pitch; nothing below picture row 231), with
+    the source hashes, in `data/translations/boot_warnings.json`.
+  - **Decision:** recorded under `GATE-TRANSLATION` and in
+    `docs/localization_policy.md`; MSHvSF's wording was offered as an
+    option and not chosen.
+  - **Style:** the user chose from rendered sheets: the quote font in the
+    Japanese palette.
 
 ### BOOT-004 - Build the English messages
 
-- **Status:** `BLOCKED`
+- **Status:** `READY`
 - **Milestone:** Boot-time messages (`UI-004`)
-- **Dependencies:** BOOT-002, BOOT-003, LOC-007 (done).
-- **Blockers:** The formats and the approved wording.
+- **Dependencies:** BOOT-002, BOOT-003, LOC-007 (all done).
+- **Blockers:** None.
 - **Objective:** Every boot-time message in English in both name variants,
   built from the untouched source.
 - **Acceptance criteria:**

@@ -125,6 +125,19 @@ The Saturn-names variant's other words are the official arcade English, with
 no rewording. The boss-stage katakana boxes are not part of either variant
 (`SPECIAL-001`).
 
+**Boot warnings (2026-10-30, `BOOT-003`, `EXP-0055`).** No official
+English exists for the five boot warnings (`ERR1`-`ERR5.BIN`): XvSF had no US
+Saturn release, and neither the arcade nor the US PlayStation release has
+these messages. The user saw each Japanese screen beside the proposed
+English, in two looks, and answered:
+
+| Question (short) | Answer | Meaning |
+| --- | --- | --- |
+| Approve the proposed English as a new translation? | "Approve (Recommended)" | `data/translations/boot_warnings.json`, by Claude, with each source picture's hash; the Saturn BIOS's labels ("Memory Manager", "System Memory") and Capcom's PlayStation register; "16" kept |
+| Which look? | "Match Japanese (Recommended)" | The `FIX.PRS` quote font, white with cyan and red highlights and a yellow "WARNING", in the original palette, so the screens look as dim as the Japanese ones |
+| The "multiplayer screen" | "control panel (Recommended)" | "…go to the Saturn's control panel." |
+| `ERR5`'s verb | `"insert" (Recommended)` | "Turn off the power and insert the 4MB Extended RAM Cartridge." |
+
 ## Deferred Until Evidence Exists
 
 These MSHvSF decisions depend on facts not yet known for XvSF. Each is put to

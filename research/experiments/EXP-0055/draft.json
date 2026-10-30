@@ -1,0 +1,84 @@
+{
+ "description": "BOOT-003 draft (EXP-0055): proposed English for the five boot warnings, a new translation by the agent (Claude), for the user's approval. {text} is drawn cyan and [text] red, as the Japanese highlights; an empty line is a short gap. Terms from the Sega Saturn BIOS screens the player reaches ('Memory Manager', 'System Memory', EXP-0055) and Capcom's US PlayStation release of this game ('saved data', 'free').",
+ "screens": {
+  "ERR4.BIN": {
+   "when": "no cart, or a backup cart (EXP-0053, warning A)",
+   "source_sha256": "d2c36a03",
+   "lines": [
+    "The {4MB Extended RAM}",
+    "{Cartridge} is not",
+    "inserted correctly.",
+    "",
+    "Turn off the power and",
+    "reinsert the {4MB}",
+    "{Extended RAM Cartridge}."
+   ]
+  },
+  "ERR5.BIN": {
+   "when": "an unsteady cart ID, or a failing 1 MB cart (warning E; code only)",
+   "source_sha256": "d7905109",
+   "lines": [
+    "The {4MB Extended RAM}",
+    "{Cartridge} is not",
+    "inserted.",
+    "",
+    "Turn off the power and",
+    "insert the {4MB Extended}",
+    "{RAM Cartridge}."
+   ]
+  },
+  "ERR1.BIN": {
+   "when": "unformatted backup memory (warning B)",
+   "source_sha256": "4b0ffd3e",
+   "lines": [
+    "The backup in System",
+    "Memory (Cartridge Memory)",
+    "is not ready yet (it has",
+    "not been initialized).",
+    "",
+    "In the Sega Saturn's",
+    "{Memory Manager}, clear all",
+    "saved data (initialize it).",
+    "",
+    "Press any button now to go",
+    "to the Saturn's control",
+    "panel."
+   ]
+  },
+  "ERR2.BIN": {
+   "when": "a damaged save (warning C)",
+   "source_sha256": "0d891367",
+   "lines": [
+    "The saved data could not",
+    "be read correctly.",
+    "",
+    "If you start the game now,",
+    "your earlier data will",
+    "not be used.",
+    "",
+    "Press any button to start",
+    "the game."
+   ]
+  },
+  "ERR3.BIN": {
+   "when": "18 blocks or fewer free (warning D)",
+   "source_sha256": "4e4f9424",
+   "lines": [
+    "There is not enough free",
+    "space to save new data.",
+    "",
+    "If you start the game now,",
+    "new data cannot be saved",
+    "unless you delete other",
+    "data in the Sega Saturn's",
+    "{Memory Manager}.",
+    "",
+    "Saving new data needs [16]",
+    "blocks of free space.",
+    "",
+    "Press any button now to",
+    "start the game."
+   ]
+  }
+ }
+}

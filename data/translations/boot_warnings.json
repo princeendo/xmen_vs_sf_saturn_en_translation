@@ -1,0 +1,95 @@
+{
+ "description": "BOOT-003 (EXP-0055): the approved English for the five boot warnings, ERR1.BIN-ERR5.BIN. A new translation by Claude (the agent), approved by the user on 2026-10-30 under GATE-TRANSLATION (boot-warnings extension). There is no official English (no US Saturn release; the arcade has no cart or save memory). Terms from the Sega Saturn BIOS screens the player reaches ('Memory Manager', 'System Memory') and Capcom's US PlayStation release of this game. {text} is drawn cyan and [text] red, as the Japanese highlights; an empty line is a short gap; the title is 'WARNING' in yellow.",
+ "translator": "Claude (agent), EXP-0055",
+ "approved": "2026-10-30, SESSION-0085",
+ "style": {
+  "font": "FIX.PRS quote font (tools.text.font), codes from tools.text.caption",
+  "pitch": 12,
+  "line": 14,
+  "palette": "japanese",
+  "title": "WARNING",
+  "title_top": 24,
+  "top": 52
+ },
+ "screens": {
+  "ERR4.BIN": {
+   "when": "no cart, or a backup cart (EXP-0053, warning A)",
+   "source_sha256": "d2c36a0366bed45e0579b3ca6931be1f219400431cec2fbd6ad118514461dd46",
+   "lines": [
+    "The {4MB Extended RAM}",
+    "{Cartridge} is not",
+    "inserted correctly.",
+    "",
+    "Turn off the power and",
+    "reinsert the {4MB}",
+    "{Extended RAM Cartridge}."
+   ]
+  },
+  "ERR5.BIN": {
+   "when": "an unsteady cart ID, or a failing 1 MB cart (warning E; code only)",
+   "source_sha256": "d790510928135a2d1ee05284d6e05fbbb1c964369f630d7478a49a50986a7d67",
+   "lines": [
+    "The {4MB Extended RAM}",
+    "{Cartridge} is not",
+    "inserted.",
+    "",
+    "Turn off the power and",
+    "insert the {4MB Extended}",
+    "{RAM Cartridge}."
+   ]
+  },
+  "ERR1.BIN": {
+   "when": "unformatted backup memory (warning B)",
+   "source_sha256": "4b0ffd3ef93b32e613e2a8b6558d1e90052c07a67ac5752fd7dddbfd08ceab6a",
+   "lines": [
+    "The backup in System",
+    "Memory (Cartridge Memory)",
+    "is not ready yet (it has",
+    "not been initialized).",
+    "",
+    "In the Sega Saturn's",
+    "{Memory Manager}, clear all",
+    "saved data (initialize it).",
+    "",
+    "Press any button now to go",
+    "to the Saturn's control",
+    "panel."
+   ]
+  },
+  "ERR2.BIN": {
+   "when": "a damaged save (warning C)",
+   "source_sha256": "0d891367f76c895d743592c212bfdaac91d70f40cae9377ddbc8c88ebbc85d66",
+   "lines": [
+    "The saved data could not",
+    "be read correctly.",
+    "",
+    "If you start the game now,",
+    "your earlier data will",
+    "not be used.",
+    "",
+    "Press any button to start",
+    "the game."
+   ]
+  },
+  "ERR3.BIN": {
+   "when": "18 blocks or fewer free (warning D)",
+   "source_sha256": "4e4f94241eb639816a112e7bc143ea7cb8124febfae464d47eb3e2ceac065cf5",
+   "lines": [
+    "There is not enough free",
+    "space to save new data.",
+    "",
+    "If you start the game now,",
+    "new data cannot be saved",
+    "unless you delete other",
+    "data in the Sega Saturn's",
+    "{Memory Manager}.",
+    "",
+    "Saving new data needs [16]",
+    "blocks of free space.",
+    "",
+    "Press any button now to",
+    "start the game."
+   ]
+  }
+ }
+}

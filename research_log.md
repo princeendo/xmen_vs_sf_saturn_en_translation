@@ -2708,3 +2708,26 @@ Checks: `pytest`, `ruff check`, `ruff format --check`, `mypy --strict` are
 clean.
 
 Conclusion: `BOOT-002` is `DONE` (D-050). `BOOT-003` is `READY`.
+
+## 2026-10-30 — SESSION-0085: Official English and the user's wording (BOOT-003, EXP-0055)
+
+User request (verbatim): "Start BOOT-003: official English, and the user's wording."
+
+- **Searches:** the US arcade program (coin and test-mode text only), the
+  US PlayStation image (Capcom's memory-card messages), both Saturn BIOSes
+  (English labels), and the screens a player reaches from warning B
+  (Mednafen: "Manage Memory", then "Memory Manager" / "System Memory").
+  No official English for these warnings.
+- **Draft and samples:** `draft.json`, `render_samples.py` (quote font, 12 px
+  pitch, two palettes). The first sheet showed the Japanese originals in
+  their file palette, not as the game shows them; redrawn with the game's
+  colour rule (equal to the real screenshots pixel for pixel) before
+  sending.
+- **Decisions** (verbatim): "Approve (Recommended)", "Match Japanese
+  (Recommended)", "control panel (Recommended)", `"insert" (Recommended)`. Recorded in `data/translations/boot_warnings.json`, the
+  policy and `GATE-TRANSLATION`.
+
+Checks: `pytest`, `ruff check`, `ruff format --check`, `mypy --strict` are
+clean.
+
+Conclusion: `BOOT-003` is `DONE`. `BOOT-004` is `READY`.
