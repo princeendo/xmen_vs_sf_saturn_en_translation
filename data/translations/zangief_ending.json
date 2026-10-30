@@ -1,0 +1,81 @@
+{
+ "kind": "ending",
+ "description": "Zangief's ending in English: the official arcade English, paired by GATE-TRANSLATION (M8 extension, user decision 2026-10-30, SESSION-0069; page k shows English record k), shown with the Saturn's own English ending script through patch version 4.",
+ "character": "Zangief",
+ "arcade_slot": 13,
+ "mc_file": "MC0D.SHP;1",
+ "table_offset": "0x2d68",
+ "records_offset": "0x320",
+ "english_bytes": 1300,
+ "japanese_space": 1520,
+ "script": "MCED.SHP;1 (tools.disc.english_mode.mced_english_scripts)",
+ "source": {
+  "set": "xmvsfu (MAME 0.289, references/arcade/)",
+  "program_order": "68000 (EXP-0008)",
+  "english_endings_table": "0x17e318",
+  "slot_base": "0x18ca6e"
+ },
+ "pairing": "data/translations/zangief_ending_pairing.json",
+ "records": [
+  {
+   "english_record": 0,
+   "page": 1,
+   "saturn_record": 16,
+   "source_address": "0x18ca6e",
+   "sha256": "65706ebd9610b6c44223b6b10e62df289440f7f5383911aa014866b0a4bc98fd",
+   "line_lengths": [
+    17,
+    0
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 1,
+   "page": 2,
+   "saturn_record": 17,
+   "source_address": "0x18cad2",
+   "sha256": "1b60eeb893eb87f1a4a4d26ceb2f131bcfc7421b1c7eae7f32209bf7cfda8eb8",
+   "line_lengths": [
+    17,
+    20
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 2,
+   "page": 3,
+   "saturn_record": 18,
+   "source_address": "0x18cb36",
+   "sha256": "99ac07d35e8af5d6f04ced05d440474a8dee4076c622219fbed08c6680996804",
+   "line_lengths": [
+    24,
+    20
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 3,
+   "page": 4,
+   "saturn_record": 19,
+   "source_address": "0x18cb9a",
+   "sha256": "15a7cc85b0b61979425b433b56edd13819aa72382ccb91a99640500c4413463b",
+   "line_lengths": [
+    23,
+    22
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 4,
+   "page": 5,
+   "saturn_record": null,
+   "source_address": "0x18cbfe",
+   "sha256": "dadccf76ca5111b2cf8c4af204a9d78ba52ae2eef4d7061b710b1917de683b56",
+   "line_lengths": [
+    18,
+    23
+   ],
+   "grammar_fix": null
+  }
+ ]
+}

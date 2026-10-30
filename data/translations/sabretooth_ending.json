@@ -1,0 +1,93 @@
+{
+ "kind": "ending",
+ "description": "Sabretooth's ending in English: the official arcade English, paired by GATE-TRANSLATION (M8 extension, user decision 2026-10-30, SESSION-0069; page k shows English record k), shown with the Saturn's own English ending script through patch version 4.",
+ "character": "Sabretooth",
+ "arcade_slot": 5,
+ "mc_file": "MC05.SHP;1",
+ "table_offset": "0x3460",
+ "records_offset": "0x320",
+ "english_bytes": 1400,
+ "japanese_space": 1520,
+ "script": "MCED.SHP;1 (tools.disc.english_mode.mced_english_scripts)",
+ "source": {
+  "set": "xmvsfu (MAME 0.289, references/arcade/)",
+  "program_order": "68000 (EXP-0008)",
+  "english_endings_table": "0x17e318",
+  "slot_base": "0x18ba06"
+ },
+ "pairing": "data/translations/sabretooth_ending_pairing.json",
+ "records": [
+  {
+   "english_record": 0,
+   "page": 1,
+   "saturn_record": 16,
+   "source_address": "0x18ba06",
+   "sha256": "61ad6b7ca805144d8ff79a64556e311de92ab4163d9ec78cc46eef3ade4345b1",
+   "line_lengths": [
+    23,
+    0
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 1,
+   "page": 2,
+   "saturn_record": 17,
+   "source_address": "0x18ba6a",
+   "sha256": "92e04bc0c439eba4b3a7b39f40253b9df20a9b7a69f927c878a32c03b03aa863",
+   "line_lengths": [
+    25,
+    0
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 2,
+   "page": 3,
+   "saturn_record": 18,
+   "source_address": "0x18bace",
+   "sha256": "71cc053016c3259ff971afaf63187681b52d91ded277288e2185e99388af75f0",
+   "line_lengths": [
+    22,
+    0
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 3,
+   "page": 4,
+   "saturn_record": 19,
+   "source_address": "0x18bb32",
+   "sha256": "85a9dac803e2cc6e4d7153abc26b66f22dd6b3a2edef78ed844d7cd9c742cd4a",
+   "line_lengths": [
+    22,
+    20
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 4,
+   "page": 5,
+   "saturn_record": null,
+   "source_address": "0x18bb96",
+   "sha256": "6cb3d647b94cbcdaf8083953f96f724d235dd29d1059715cb4d1ca9717b891a0",
+   "line_lengths": [
+    12,
+    0
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 5,
+   "page": 6,
+   "saturn_record": null,
+   "source_address": "0x18bbfa",
+   "sha256": "8a3b705f6d7f814dd1080872cdfbe3178f94367ff8ec1f5030c7524a85426a6e",
+   "line_lengths": [
+    15,
+    0
+   ],
+   "grammar_fix": null
+  }
+ ]
+}

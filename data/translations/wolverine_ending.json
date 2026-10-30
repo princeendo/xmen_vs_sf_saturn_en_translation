@@ -1,0 +1,93 @@
+{
+ "kind": "ending",
+ "description": "Wolverine's ending in English: the official arcade English, paired by GATE-TRANSLATION (M8 extension, user decision 2026-10-30, SESSION-0069; page k shows English record k), shown with the Saturn's own English ending script through patch version 4.",
+ "character": "Wolverine",
+ "arcade_slot": 0,
+ "mc_file": "MC00.SHP;1",
+ "table_offset": "0x393c",
+ "records_offset": "0x320",
+ "english_bytes": 1400,
+ "japanese_space": 1748,
+ "script": "MCED.SHP;1 (tools.disc.english_mode.mced_english_scripts)",
+ "source": {
+  "set": "xmvsfu (MAME 0.289, references/arcade/)",
+  "program_order": "68000 (EXP-0008)",
+  "english_endings_table": "0x17e318",
+  "slot_base": "0x18ad86"
+ },
+ "pairing": "data/translations/wolverine_ending_pairing.json",
+ "records": [
+  {
+   "english_record": 0,
+   "page": 1,
+   "saturn_record": 16,
+   "source_address": "0x18ad86",
+   "sha256": "8e0b86d05e0fcc6c096e9eba59373412ab848551c06d4ef8f3a9e07d0c45f9fe",
+   "line_lengths": [
+    22,
+    24
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 1,
+   "page": 2,
+   "saturn_record": 17,
+   "source_address": "0x18adea",
+   "sha256": "8489a1dc6774bcdda10034ccff984b3bf2482297c240c6ffa776ec0474b68a72",
+   "line_lengths": [
+    19,
+    8
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 2,
+   "page": 3,
+   "saturn_record": 18,
+   "source_address": "0x18ae4e",
+   "sha256": "3c2b2e57fa7c13c716a5a89a385f667015b26693fbddfc615fe2e7e21294b7dd",
+   "line_lengths": [
+    15,
+    8
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 3,
+   "page": 4,
+   "saturn_record": 19,
+   "source_address": "0x18aeb2",
+   "sha256": "d7ce69f6f5246b15f7eaaade3c24a60853e881f3e846c874a142a960eb61b496",
+   "line_lengths": [
+    25,
+    22
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 4,
+   "page": 5,
+   "saturn_record": 20,
+   "source_address": "0x18af16",
+   "sha256": "99a88b8ec9e56166e35cf66226a7163fe80edd4776934ef0faf5e178a787c412",
+   "line_lengths": [
+    19,
+    25
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 5,
+   "page": 6,
+   "saturn_record": 21,
+   "source_address": "0x18af7a",
+   "sha256": "5e85ea727fca90f493c6434fbdf428dc6a0607cc2ce2cfacbbf8bb795cddfe14",
+   "line_lengths": [
+    25,
+    0
+   ],
+   "grammar_fix": null
+  }
+ ]
+}

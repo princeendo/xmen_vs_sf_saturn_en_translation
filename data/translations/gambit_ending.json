@@ -1,0 +1,81 @@
+{
+ "kind": "ending",
+ "description": "Gambit's ending in English: the official arcade English, paired by GATE-TRANSLATION (M8 extension, user decision 2026-10-30, SESSION-0069; page k shows English record k), shown with the Saturn's own English ending script through patch version 4.",
+ "character": "Gambit",
+ "arcade_slot": 4,
+ "mc_file": "MC04.SHP;1",
+ "table_offset": "0x34b4",
+ "records_offset": "0x320",
+ "english_bytes": 1300,
+ "japanese_space": 1672,
+ "script": "MCED.SHP;1 (tools.disc.english_mode.mced_english_scripts)",
+ "source": {
+  "set": "xmvsfu (MAME 0.289, references/arcade/)",
+  "program_order": "68000 (EXP-0008)",
+  "english_endings_table": "0x17e318",
+  "slot_base": "0x18b812"
+ },
+ "pairing": "data/translations/gambit_ending_pairing.json",
+ "records": [
+  {
+   "english_record": 0,
+   "page": 1,
+   "saturn_record": 16,
+   "source_address": "0x18b812",
+   "sha256": "66926e73ffe2553138c14c0cb41e549b4e03c89ff158b7b152de457d1aa1871a",
+   "line_lengths": [
+    21,
+    20
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 1,
+   "page": 2,
+   "saturn_record": 17,
+   "source_address": "0x18b876",
+   "sha256": "d2382d65c108db4dab6aae68f7f6176a29d0b75edb68380584d9e8a9565bfcf4",
+   "line_lengths": [
+    17,
+    12
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 2,
+   "page": 3,
+   "saturn_record": 18,
+   "source_address": "0x18b8da",
+   "sha256": "fe3f3ad6023e654c46e4635a8a5648e432377760416e17861fa2f435ef1e24ea",
+   "line_lengths": [
+    18,
+    0
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 3,
+   "page": 4,
+   "saturn_record": 19,
+   "source_address": "0x18b93e",
+   "sha256": "3891b1216846388f22adec4dec302befb1c4289186834360cdc75dc9a181ee59",
+   "line_lengths": [
+    23,
+    12
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 4,
+   "page": 5,
+   "saturn_record": 20,
+   "source_address": "0x18b9a2",
+   "sha256": "aeb36bd80d72f7ed62c0ea8307ea223ffa9a0ec70529151deccfe62b6c24b8fd",
+   "line_lengths": [
+    20,
+    23
+   ],
+   "grammar_fix": null
+  }
+ ]
+}

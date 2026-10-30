@@ -311,7 +311,12 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   to the endings of all 17 M8 roster characters (GO): page k shows the
   arcade English ending record k, no rewording, and the arcade names are
   kept ("Bison" in Vega's text; the labels `Akuma`, `Bison`, `Vega`).
-- Next: `END-014` (build every roster ending; `READY`). Backlog: `UI-004`,
+- **2026-10-30** (`SESSION-0070`, `EXP-0046`): `build/m8_roster_endings`
+  holds every roster character's English win quotes and ending. Every
+  built file loads into both team buffers, Gouki included (picked from his
+  cell above Juggernaut's). The second select cursor skips the first
+  pick's cell, and the route now plans for it (`END-014`, D-041).
+- Next: `END-015` (verify every roster ending; `READY`). Backlog: `UI-004`,
   `SPECIAL-001`, `REL-001`.
   The backlog also holds `UI-004` (boot-time error messages, including the
   cart warning), `SPECIAL-001` (including
@@ -2071,7 +2076,7 @@ recorded under `GATE-TRANSLATION`.
 
 ### END-014 - Build every roster ending
 
-- **Status:** `READY`
+- **Status:** `DONE` (`EXP-0046`, D-041)
 - **Milestone:** M8
 - **Dependencies:** GATE-TRANSLATION extension for the M8 roster endings,
   END-010, END-012 (all done).
@@ -2086,13 +2091,28 @@ recorded under `GATE-TRANSLATION`.
     `MCED` change is listed (rule 12). All sectors pass EDC/ECC.
   - **Load check:** for every roster character picked first and second,
     the buffer equals the built file plus fix-ups.
+- **Outcome:**
+  - **Image:** `build/m8_roster_endings` (Track 01 `7bb8ab82…`). It is
+    reproducible, and all its sectors pass EDC/ECC.
+  - **Specs:** 17 ending specs, from `make_specs.py`. Nash's records are
+    unchanged from M7.
+  - **Shared scripts:** Ryu's and Chun-Li's are switched with slots 8 and
+    18 by `mced_shared_with`.
+  - **Margins:** the smallest is 494 bytes. The 17 `MCED` header words
+    are listed in `EXP-0046`.
+  - **Load:** every roster character loads into both buffers. Rogue
+    differs only in four longs the game writes, as on the untouched image.
+    Gouki is picked from his cell above Juggernaut's.
+  - **Route fix:** the second cursor skips the first pick's cell, so
+    second-pick moves are now planned with that rule.
 
 ### END-015 - Verify every roster ending
 
-- **Status:** `BLOCKED`
+- **Status:** `READY`
 - **Milestone:** M8
-- **Dependencies:** END-013, END-014.
-- **Blockers:** The build and the route tool.
+- **Dependencies:** END-013, END-014 (both done).
+- **Blockers:** None. Gouki's cell (`EXP-0046`) can replace `GOUKI_STATE`
+  in the route, so his ending runs from a disc load.
 - **Objective:** Show every roster ending in English on the build, against
   the arcade.
 - **Acceptance criteria:**

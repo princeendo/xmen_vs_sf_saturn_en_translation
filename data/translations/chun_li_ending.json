@@ -1,0 +1,96 @@
+{
+ "kind": "ending",
+ "description": "Chun-Li's ending in English: the official arcade English, paired by GATE-TRANSLATION (M8 extension, user decision 2026-10-30, SESSION-0069; page k shows English record k), shown with the Saturn's own English ending script through patch version 4.",
+ "character": "Chun-Li",
+ "arcade_slot": 11,
+ "mc_file": "MC0B.SHP;1",
+ "table_offset": "0x349c",
+ "records_offset": "0x320",
+ "english_bytes": 1400,
+ "japanese_space": 1748,
+ "script": "MCED.SHP;1 (tools.disc.english_mode.mced_english_scripts)",
+ "source": {
+  "set": "xmvsfu (MAME 0.289, references/arcade/)",
+  "program_order": "68000 (EXP-0008)",
+  "english_endings_table": "0x17e318",
+  "slot_base": "0x18c5be"
+ },
+ "pairing": "data/translations/chun_li_ending_pairing.json",
+ "records": [
+  {
+   "english_record": 0,
+   "page": 1,
+   "saturn_record": 16,
+   "source_address": "0x18c5be",
+   "sha256": "0dda8555204594a8992320096fac6be1835535bb5835c43e838011dde0719d0e",
+   "line_lengths": [
+    10,
+    0
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 1,
+   "page": 2,
+   "saturn_record": 17,
+   "source_address": "0x18c622",
+   "sha256": "90299270091c98e814f3e4f45e36026e02ddd99c224da85e495cf002c88a24ab",
+   "line_lengths": [
+    18,
+    25
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 2,
+   "page": 3,
+   "saturn_record": 18,
+   "source_address": "0x18c686",
+   "sha256": "f39f9172826540312e8fd6f1ff15550aeef80674267787d92f53fb0603bc6702",
+   "line_lengths": [
+    21,
+    25
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 3,
+   "page": 4,
+   "saturn_record": 19,
+   "source_address": "0x18c6ea",
+   "sha256": "8107d0c0061a8da8a5e63d7cfe4c14343d83b50cf6ff8d078c03c9242bd08bef",
+   "line_lengths": [
+    13,
+    0
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 4,
+   "page": 5,
+   "saturn_record": 20,
+   "source_address": "0x18c74e",
+   "sha256": "0b9c9e6cf65e7d2c566c3fa54dabdef08a5ae613db6abc77b3054a0f915b1117",
+   "line_lengths": [
+    18,
+    14
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 5,
+   "page": 6,
+   "saturn_record": 21,
+   "source_address": "0x18c7b2",
+   "sha256": "278f7bfad8ed133a9f3170869538bfbfa133e08019da8858f1ac6a8fdfa7ad6c",
+   "line_lengths": [
+    23,
+    0
+   ],
+   "grammar_fix": null
+  }
+ ],
+ "mced_shared_with": [
+  18
+ ]
+}

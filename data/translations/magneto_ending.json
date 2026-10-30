@@ -1,0 +1,105 @@
+{
+ "kind": "ending",
+ "description": "Magneto's ending in English: the official arcade English, paired by GATE-TRANSLATION (M8 extension, user decision 2026-10-30, SESSION-0069; page k shows English record k), shown with the Saturn's own English ending script through patch version 4.",
+ "character": "Magneto",
+ "arcade_slot": 7,
+ "mc_file": "MC07.SHP;1",
+ "table_offset": "0x447c",
+ "records_offset": "0x320",
+ "english_bytes": 1500,
+ "japanese_space": 1520,
+ "script": "MCED.SHP;1 (tools.disc.english_mode.mced_english_scripts)",
+ "source": {
+  "set": "xmvsfu (MAME 0.289, references/arcade/)",
+  "program_order": "68000 (EXP-0008)",
+  "english_endings_table": "0x17e318",
+  "slot_base": "0x18beb6"
+ },
+ "pairing": "data/translations/magneto_ending_pairing.json",
+ "records": [
+  {
+   "english_record": 0,
+   "page": 1,
+   "saturn_record": 16,
+   "source_address": "0x18beb6",
+   "sha256": "b90e817ad452b493fac899c3c0c0cb9d770c0826afa63940772efcd564f4c9e6",
+   "line_lengths": [
+    20,
+    25
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 1,
+   "page": 2,
+   "saturn_record": 17,
+   "source_address": "0x18bf1a",
+   "sha256": "56bccec5d342166f7279c0f24bbe5f6d455bd191b7c899dbb49c036c4c93fe7d",
+   "line_lengths": [
+    20,
+    24
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 2,
+   "page": 3,
+   "saturn_record": 18,
+   "source_address": "0x18bf7e",
+   "sha256": "d3e2e613a6e418ee14281067b6df857516a97166931cbc2383e5ce1210d019a0",
+   "line_lengths": [
+    19,
+    22
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 3,
+   "page": 4,
+   "saturn_record": 19,
+   "source_address": "0x18bfe2",
+   "sha256": "89c1e8c7f589cffdf6caf4b8381f56856b6d3e2549392b97ea108226c9d83013",
+   "line_lengths": [
+    20,
+    22
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 4,
+   "page": 5,
+   "saturn_record": null,
+   "source_address": "0x18c046",
+   "sha256": "f7ea954401cb5ec03983d5fea0a9d3d38f299e4f86de0800a4414181cad208bd",
+   "line_lengths": [
+    24,
+    21
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 5,
+   "page": 6,
+   "saturn_record": null,
+   "source_address": "0x18c0aa",
+   "sha256": "85116498fd226fda9b3a83780fef052c14eee124dcf34023dccb449d6c89d8b3",
+   "line_lengths": [
+    20,
+    14
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 6,
+   "page": 7,
+   "saturn_record": null,
+   "source_address": "0x18c10e",
+   "sha256": "974ed4d105f9d7ec313d6de81435eacd2e59f8a940ee6c9694964ceddb38e671",
+   "line_lengths": [
+    19,
+    23
+   ],
+   "grammar_fix": null
+  }
+ ]
+}

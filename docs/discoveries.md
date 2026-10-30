@@ -792,3 +792,30 @@ Reproduce: `research/experiments/EXP-0044/README.md`, "Procedure".
   the boss loses the match, and a sent tag (Z + C) did not take effect.
 
 Reproduce: `research/experiments/EXP-0045/README.md`, "Procedure".
+
+## D-041 (M8): Every roster ending is built and loads from the disc (`END-014`, `EXP-0046`)
+
+- **The build:** `build/m8_roster_endings` (Track 01 `7bb8ab82…`),
+  from the untouched source with `tools.disc.build_english` version 4.
+  - The inputs are the 18 roster win-quote specs and 17 ending specs
+    (`data/translations/<name>_ending.json`).
+  - It is reproducible, and all 71,908 sectors pass EDC/ECC.
+  - Each roster MC file changes only at its quote table: 8 English win
+    quotes, then the n arcade English ending records.
+  - `MCED.SHP` changes only in 17 script header words. Ryu's script is
+    switched with Apocalypse's, and Chun-Li's with slot 18's, by explicit
+    permission (`mced_shared_with`).
+  - `MMPACK.PCA` has exactly `patches_v4` (48).
+  - The smallest compressed margin is 494 bytes (`MC0E`).
+- **Load:** every roster character's built file loads from the disc into
+  both team buffers, equal to the file plus fix-ups. Gouki is picked from
+  his cell.
+- **Rogue:** the game writes into four `9999 9999` longs of Rogue's loaded
+  `MC03` (decoded `0x9332`, `0xA446`, `0xB018`, `0xBDE4`) after loading,
+  on the untouched image too.
+- **Select cursor:**
+  - the second cursor skips the first pick's cell, and starts on Wolverine
+    when Cyclops is the first pick;
+  - Gouki's cell is reached by "u" from Juggernaut (route select state).
+
+Reproduce: `research/experiments/EXP-0046/README.md`, "Procedure".

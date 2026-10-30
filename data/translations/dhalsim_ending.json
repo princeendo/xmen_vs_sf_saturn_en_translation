@@ -1,0 +1,93 @@
+{
+ "kind": "ending",
+ "description": "Dhalsim's ending in English: the official arcade English, paired by GATE-TRANSLATION (M8 extension, user decision 2026-10-30, SESSION-0069; page k shows English record k), shown with the Saturn's own English ending script through patch version 4.",
+ "character": "Dhalsim",
+ "arcade_slot": 12,
+ "mc_file": "MC0C.SHP;1",
+ "table_offset": "0x3048",
+ "records_offset": "0x320",
+ "english_bytes": 1400,
+ "japanese_space": 1520,
+ "script": "MCED.SHP;1 (tools.disc.english_mode.mced_english_scripts)",
+ "source": {
+  "set": "xmvsfu (MAME 0.289, references/arcade/)",
+  "program_order": "68000 (EXP-0008)",
+  "english_endings_table": "0x17e318",
+  "slot_base": "0x18c816"
+ },
+ "pairing": "data/translations/dhalsim_ending_pairing.json",
+ "records": [
+  {
+   "english_record": 0,
+   "page": 1,
+   "saturn_record": 16,
+   "source_address": "0x18c816",
+   "sha256": "6597312214376eb467b62e04467bad42e7fcd4afbc36abd576542deda5d8479f",
+   "line_lengths": [
+    23,
+    16
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 1,
+   "page": 2,
+   "saturn_record": 17,
+   "source_address": "0x18c87a",
+   "sha256": "5b64708b84ba2798c44c4dc99ff7599159460ad45c344e48fe71fb120d5a1c29",
+   "line_lengths": [
+    21,
+    24
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 2,
+   "page": 3,
+   "saturn_record": 18,
+   "source_address": "0x18c8de",
+   "sha256": "e72109b391426d1f1143697aa11190acd5ea1e6ae927a097a8972e2e1a095ce9",
+   "line_lengths": [
+    23,
+    16
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 3,
+   "page": 4,
+   "saturn_record": 19,
+   "source_address": "0x18c942",
+   "sha256": "cf637f6a6751e06aed392fb8507c0954f3cc45e5ca105c3093560dbab8fce8d9",
+   "line_lengths": [
+    19,
+    23
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 4,
+   "page": 5,
+   "saturn_record": null,
+   "source_address": "0x18c9a6",
+   "sha256": "d8bcd2c3bf81bde45771dbc8a4d51eaf086806be13c5727089d44c79f568bf0c",
+   "line_lengths": [
+    20,
+    19
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 5,
+   "page": 6,
+   "saturn_record": null,
+   "source_address": "0x18ca0a",
+   "sha256": "4af96362302d29988619a2f4e082ee90b52d4a23cad6ec2b7b6a9785ee93e9a5",
+   "line_lengths": [
+    23,
+    23
+   ],
+   "grammar_fix": null
+  }
+ ]
+}

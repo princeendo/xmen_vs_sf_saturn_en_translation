@@ -248,25 +248,33 @@ def patches_v4(slots: list[int], ending_slots: list[int]) -> list[tuple[int, str
 
 
 def mced_english_scripts(
-    decoded: bytes, slots: list[int]
+    decoded: bytes, slots: list[int], shared: list[int] | None = None
 ) -> list[tuple[int, bytes, bytes]]:
     """Edits to decoded ``MCED.SHP`` that make ``slots`` run their English script.
 
     Each edit is (decoded offset, old bytes, new bytes): the script's
     language-0 header word becomes its language-2 word. A script shared with a
     slot outside ``slots`` (slots 8 and 9, and 11 and 18, share one) is refused,
-    as the change would switch that slot too.
+    as the change would switch that slot too, unless that slot is listed in
+    ``shared`` (`END-011`: Apocalypse's script switches with Ryu's, slot 18's
+    with Chun-Li's). A slot in ``shared`` must share a script with ``slots``.
     """
     bases = [
         int.from_bytes(decoded[MCED_SCRIPTS + 4 * s : MCED_SCRIPTS + 4 * s + 4], "big")
         for s in range(SLOTS)
     ]
+    also = [] if shared is None else shared
+    for slot in also:
+        if slot in slots or not 0 <= slot < SLOTS:
+            raise ValueError(f"shared slot {slot} is an ending slot or out of range")
+        if bases[slot] not in {bases[s] for s in slots}:
+            raise ValueError(f"slot {slot} shares no script with {sorted(slots)}")
     edits = []
     for slot in sorted(slots):
         if not 0 <= slot < SLOTS:
             raise ValueError(f"slot {slot} is outside 0-{SLOTS - 1}")
         sharing = [s for s, base in enumerate(bases) if base == bases[slot]]
-        outside = [s for s in sharing if s not in slots]
+        outside = [s for s in sharing if s not in slots and s not in also]
         if outside:
             raise ValueError(f"slot {slot} shares its script with {outside}")
         header = bases[slot] + MCED_RELOCATION

@@ -1,0 +1,69 @@
+{
+ "kind": "ending",
+ "description": "Ken's ending in English: the official arcade English, paired by GATE-TRANSLATION (M8 extension, user decision 2026-10-30, SESSION-0069; page k shows English record k), shown with the Saturn's own English ending script through patch version 4.",
+ "character": "Ken",
+ "arcade_slot": 10,
+ "mc_file": "MC0A.SHP;1",
+ "table_offset": "0x2a4c",
+ "records_offset": "0x320",
+ "english_bytes": 1200,
+ "japanese_space": 1596,
+ "script": "MCED.SHP;1 (tools.disc.english_mode.mced_english_scripts)",
+ "source": {
+  "set": "xmvsfu (MAME 0.289, references/arcade/)",
+  "program_order": "68000 (EXP-0008)",
+  "english_endings_table": "0x17e318",
+  "slot_base": "0x18c42e"
+ },
+ "pairing": "data/translations/ken_ending_pairing.json",
+ "records": [
+  {
+   "english_record": 0,
+   "page": 1,
+   "saturn_record": 16,
+   "source_address": "0x18c42e",
+   "sha256": "6510078afa6daf327cb02a9a4166efbd80e1dee8933ea2f852711d792f2b582d",
+   "line_lengths": [
+    21,
+    22
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 1,
+   "page": 2,
+   "saturn_record": 17,
+   "source_address": "0x18c492",
+   "sha256": "54014f474b1fb5a58d65c60b10a0d510d30e5e37cf71a0939b99e75f8aed564d",
+   "line_lengths": [
+    24,
+    18
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 2,
+   "page": 3,
+   "saturn_record": 18,
+   "source_address": "0x18c4f6",
+   "sha256": "2f74225231737f470934a650c3c8a41164459ec710e2aac345af99f348fabf89",
+   "line_lengths": [
+    21,
+    21
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 3,
+   "page": 4,
+   "saturn_record": 19,
+   "source_address": "0x18c55a",
+   "sha256": "ec6051a2f1523426c97ceefe0fb19bc2993305f0b08ab204e508a35a68c29a78",
+   "line_lengths": [
+    23,
+    24
+   ],
+   "grammar_fix": null
+  }
+ ]
+}

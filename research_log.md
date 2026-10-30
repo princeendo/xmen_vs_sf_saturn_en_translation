@@ -2220,3 +2220,47 @@ roster endings."
 No experiment was run; no code changed.
 
 Conclusion: the gate is passed for the M8 roster endings. Next: `END-014`.
+
+## 2026-10-30 — SESSION-0070: Build every roster ending (END-014, EXP-0046)
+
+User request (verbatim): "Start END-014: build every roster ending."
+
+- **Specs:** `make_specs.py` wrote 17 ending specs from the pairing files.
+  Nash's records equal the M7 spec's.
+- **Shared scripts:** `mced_english_scripts` gained `shared`, passed by a
+  spec's `mced_shared_with` (Ryu 8, Chun-Li 18). 2 tests.
+- **Build:** `build/m8_roster_endings`, Track 01 `7bb8ab82…`; all 71,908
+  sectors valid. `check_build.py`: every MC file holds exactly its English
+  bytes and is otherwise unchanged; 17 `MCED` words as the census gives;
+  `MMPACK` = `patches_v4`; smallest margin 494. A second build gave 21
+  identical files. Its `--image` into `local/` was refused, as designed:
+  images go under `build/`.
+- **Failures on the way:**
+  1. `load1`: 4 of 17 teams failed. The driver's summary overwrote the
+     slot numbers with the pass flags (fixed). Every failure was during a
+     parallel rebuild, which looked like CPU load, but that was not the
+     cause (below).
+  2. `load2`-`load4`: still failing on an idle machine. A "picked" readout
+     from the fighter blocks right after the pick gave nonsense ([5, 1]
+     for a Cyclops team) and was dropped. The buffers were saved instead.
+  3. `identify_buffers.py`: the failed buffers held another character's
+     file exactly (wrong picks), except Rogue's, which differed in 8
+     bytes.
+  4. Screenshots before each A press (`control2`, `control3`, untouched
+     image): the second cursor skips the first pick's cell, and starts on
+     Wolverine when Cyclops is taken. The route was fixed to plan for it.
+  5. Rogue's 8 bytes: the same on the untouched image. They are four
+     `9999 9999` longs the game writes after loading.
+  6. `load5`: the first planner refused Cyclops to Ken with Ryu taken.
+     It was rewritten as a breadth-first search with the skip. Two first
+     picks lost a key ("l" and A), so the driver now retries wrong picks.
+  7. `load6`: all 17 teams pass (one retry).
+- **Gouki:** a wrong pick in `load4` had loaded his file from the build,
+  which showed his cell. `gouki_cell.py`: "uuullu" from Ken and "uuuu"
+  from Cyclops pick him first and second; the built `MC0F` loads into
+  either buffer with no differences.
+
+Checks: `pytest` 198 passed; `ruff check`, `ruff format --check`, `mypy
+--strict tools tests` and the `EXP-0046` scripts are clean.
+
+Conclusion: `END-014` is `DONE` (D-041). Next: `END-015`.

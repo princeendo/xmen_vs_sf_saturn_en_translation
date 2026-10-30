@@ -1,0 +1,93 @@
+{
+ "kind": "ending",
+ "description": "Storm's ending in English: the official arcade English, paired by GATE-TRANSLATION (M8 extension, user decision 2026-10-30, SESSION-0069; page k shows English record k), shown with the Saturn's own English ending script through patch version 4.",
+ "character": "Storm",
+ "arcade_slot": 2,
+ "mc_file": "MC02.SHP;1",
+ "table_offset": "0x40d4",
+ "records_offset": "0x320",
+ "english_bytes": 1400,
+ "japanese_space": 1748,
+ "script": "MCED.SHP;1 (tools.disc.english_mode.mced_english_scripts)",
+ "source": {
+  "set": "xmvsfu (MAME 0.289, references/arcade/)",
+  "program_order": "68000 (EXP-0008)",
+  "english_endings_table": "0x17e318",
+  "slot_base": "0x18b362"
+ },
+ "pairing": "data/translations/storm_ending_pairing.json",
+ "records": [
+  {
+   "english_record": 0,
+   "page": 1,
+   "saturn_record": 16,
+   "source_address": "0x18b362",
+   "sha256": "054ef25c4c376dff3c5b28a69df6b904b19bdca4067d1716918db2e122bf9e25",
+   "line_lengths": [
+    24,
+    22
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 1,
+   "page": 2,
+   "saturn_record": 17,
+   "source_address": "0x18b3c6",
+   "sha256": "fce6e0768886a9f4735dc265c3d06aa872eb480092d1ef06d29421484ca0cc88",
+   "line_lengths": [
+    16,
+    24
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 2,
+   "page": 3,
+   "saturn_record": 18,
+   "source_address": "0x18b42a",
+   "sha256": "f4a9b688075b26ce98238f26f40b33daf800b454d5070d41a22e2353c98d5911",
+   "line_lengths": [
+    25,
+    20
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 3,
+   "page": 4,
+   "saturn_record": 19,
+   "source_address": "0x18b48e",
+   "sha256": "0d1821278ab2a1e869d696028487513cf4c1666cc98a68ed0f866f43d60b57e4",
+   "line_lengths": [
+    25,
+    17
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 4,
+   "page": 5,
+   "saturn_record": 20,
+   "source_address": "0x18b4f2",
+   "sha256": "c6169204dd26af9e451a5b6a9fc886191a5311b49fe785eaff3fee7950591f2b",
+   "line_lengths": [
+    23,
+    20
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 5,
+   "page": 6,
+   "saturn_record": 21,
+   "source_address": "0x18b556",
+   "sha256": "347edf08b9c07370ebe1aae485425560a8105bc6dec002a014d93c90401734a4",
+   "line_lengths": [
+    23,
+    19
+   ],
+   "grammar_fix": null
+  }
+ ]
+}

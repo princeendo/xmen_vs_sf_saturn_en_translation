@@ -1,0 +1,177 @@
+{
+ "kind": "ending",
+ "description": "Cammy's ending in English: the official arcade English, paired by GATE-TRANSLATION (M8 extension, user decision 2026-10-30, SESSION-0069; page k shows English record k), shown with the Saturn's own English ending script through patch version 4.",
+ "character": "Cammy",
+ "arcade_slot": 17,
+ "mc_file": "MC11.SHP;1",
+ "table_offset": "0x2f1c",
+ "records_offset": "0x320",
+ "english_bytes": 2100,
+ "japanese_space": 2128,
+ "script": "MCED.SHP;1 (tools.disc.english_mode.mced_english_scripts)",
+ "source": {
+  "set": "xmvsfu (MAME 0.289, references/arcade/)",
+  "program_order": "68000 (EXP-0008)",
+  "english_endings_table": "0x17e318",
+  "slot_base": "0x18d306"
+ },
+ "pairing": "data/translations/cammy_ending_pairing.json",
+ "records": [
+  {
+   "english_record": 0,
+   "page": 1,
+   "saturn_record": 16,
+   "source_address": "0x18d306",
+   "sha256": "318a96ac19ff39afeaa10e7435e9b48618f85421efa87b4bdc2aaecba8e0e471",
+   "line_lengths": [
+    24,
+    23
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 1,
+   "page": 2,
+   "saturn_record": 17,
+   "source_address": "0x18d36a",
+   "sha256": "f5b5669218d2fdf3c894d1201d7acc4aee87c1f977c27b68679b89f5352a6eae",
+   "line_lengths": [
+    22,
+    21
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 2,
+   "page": 3,
+   "saturn_record": 18,
+   "source_address": "0x18d3ce",
+   "sha256": "f1ea2a1de69d3e0342eb649df772f2c512e02929cb923ec8310bf29ae0851813",
+   "line_lengths": [
+    17,
+    11
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 3,
+   "page": 4,
+   "saturn_record": 19,
+   "source_address": "0x18d432",
+   "sha256": "f8dfc033af12a9ab9e03fd773124fe1a650abcf0e8060960345e6cdf216ec55d",
+   "line_lengths": [
+    15,
+    20
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 4,
+   "page": 5,
+   "saturn_record": 20,
+   "source_address": "0x18d496",
+   "sha256": "cdf3041297012e2457231b75d59fa5f0b1cf2cfcb0fdc94e7850bce1c8ab7484",
+   "line_lengths": [
+    17,
+    13
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 5,
+   "page": 6,
+   "saturn_record": 21,
+   "source_address": "0x18d4fa",
+   "sha256": "25e05a4b2468851be6cfe876ceeb942aa319436d9c42d83402cc2b88fb54e7df",
+   "line_lengths": [
+    25,
+    21
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 6,
+   "page": 7,
+   "saturn_record": 22,
+   "source_address": "0x18d55e",
+   "sha256": "940a9cedb119e69024976ace84c0727dc7a44d1c51da2e8332e5c4f0d14ad4c5",
+   "line_lengths": [
+    17,
+    23
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 7,
+   "page": 8,
+   "saturn_record": 23,
+   "source_address": "0x18d5c2",
+   "sha256": "1852f4b549ef5051eecae4842ca8b3848d3773c0f0091fb665ce80d289a3d2a4",
+   "line_lengths": [
+    22,
+    25
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 8,
+   "page": 9,
+   "saturn_record": 24,
+   "source_address": "0x18d626",
+   "sha256": "d10bb345e6840b8e6fcb55fcc0a8f34861834f0aefcf0b2fe69792e5d5322df1",
+   "line_lengths": [
+    19,
+    0
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 9,
+   "page": 10,
+   "saturn_record": 25,
+   "source_address": "0x18d68a",
+   "sha256": "936d95deae5244054351a15b514877d20ffc44ce04d6b02a5634db3fbed37f04",
+   "line_lengths": [
+    23,
+    19
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 10,
+   "page": 11,
+   "saturn_record": 26,
+   "source_address": "0x18d6ee",
+   "sha256": "cb262cccffe99f2e0fda61ac209b85d0914f173f1163ec95e4a85c9b08f1b3a9",
+   "line_lengths": [
+    17,
+    12
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 11,
+   "page": 12,
+   "saturn_record": 27,
+   "source_address": "0x18d752",
+   "sha256": "85d5a585f6495a8e388662bebe996084f9e9ebfd1faff529f3fe17e4e355ba45",
+   "line_lengths": [
+    23,
+    24
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 12,
+   "page": 13,
+   "saturn_record": null,
+   "source_address": "0x18d7b6",
+   "sha256": "81a7a023205a5510f4b35332aaa691f1208ab4225dea6acefcfe63f861be134f",
+   "line_lengths": [
+    20,
+    22
+   ],
+   "grammar_fix": null
+  }
+ ]
+}

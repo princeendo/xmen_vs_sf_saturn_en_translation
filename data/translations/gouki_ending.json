@@ -1,0 +1,93 @@
+{
+ "kind": "ending",
+ "description": "Gouki's ending in English: the official arcade English, paired by GATE-TRANSLATION (M8 extension, user decision 2026-10-30, SESSION-0069; page k shows English record k), shown with the Saturn's own English ending script through patch version 4.",
+ "character": "Gouki",
+ "arcade_slot": 15,
+ "mc_file": "MC0F.SHP;1",
+ "table_offset": "0x2e0c",
+ "records_offset": "0x320",
+ "english_bytes": 1400,
+ "japanese_space": 1520,
+ "script": "MCED.SHP;1 (tools.disc.english_mode.mced_english_scripts)",
+ "source": {
+  "set": "xmvsfu (MAME 0.289, references/arcade/)",
+  "program_order": "68000 (EXP-0008)",
+  "english_endings_table": "0x17e318",
+  "slot_base": "0x18ce56"
+ },
+ "pairing": "data/translations/gouki_ending_pairing.json",
+ "records": [
+  {
+   "english_record": 0,
+   "page": 1,
+   "saturn_record": 16,
+   "source_address": "0x18ce56",
+   "sha256": "5f988f01d3016fe708da2fd9949b3092f903876c7a0a7887a94d77b163cd1633",
+   "line_lengths": [
+    15,
+    11
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 1,
+   "page": 2,
+   "saturn_record": 17,
+   "source_address": "0x18ceba",
+   "sha256": "b6860ccf6016db57d8c2010bb68874a67ab130af68bf76caf104b6b0357834bf",
+   "line_lengths": [
+    19,
+    20
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 2,
+   "page": 3,
+   "saturn_record": 18,
+   "source_address": "0x18cf1e",
+   "sha256": "e1a3c72108fb9311215f762a781cc7fe35d83fcb4c0b5cbfe7866650b8c7a32c",
+   "line_lengths": [
+    16,
+    18
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 3,
+   "page": 4,
+   "saturn_record": 19,
+   "source_address": "0x18cf82",
+   "sha256": "2b0b45bfa611eb635f4c36e3037dc57907f810664baf2b0e6443476a2d95ef3c",
+   "line_lengths": [
+    22,
+    14
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 4,
+   "page": 5,
+   "saturn_record": null,
+   "source_address": "0x18cfe6",
+   "sha256": "f5eb8e0649609551c44e823791ec2e7baded5e633d5eabc220d5ff8f3214cc3c",
+   "line_lengths": [
+    3,
+    23
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 5,
+   "page": 6,
+   "saturn_record": null,
+   "source_address": "0x18d04a",
+   "sha256": "55da0f57d086dd9ca64664e9625b2a6bd729435d1f19b9ce3f6030541de66beb",
+   "line_lengths": [
+    24,
+    23
+   ],
+   "grammar_fix": null
+  }
+ ]
+}

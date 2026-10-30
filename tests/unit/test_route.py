@@ -14,6 +14,7 @@ from tools.mednafen.route import (
     byte_ranges,
     fixups_match,
     grid_moves,
+    second_start,
 )
 
 
@@ -131,3 +132,20 @@ def test_byte_ranges_lists_each_run_of_differences() -> None:
     ]
     with pytest.raises(ValueError, match="lengths differ"):
         byte_ranges(old, new[:-1])
+
+
+def test_second_cursor_moves_never_cross_the_first_pick() -> None:
+    # EXP-0046: from Cyclops, "u" skips a taken Rogue; "ul" landed on Sabretooth
+    assert grid_moves(4, SECOND_START, taken=3) == "lu"
+    assert grid_moves(2, SECOND_START, taken=3) == "u"
+    assert grid_moves(7, SECOND_START, taken=6) == "uulu"  # "uuu" left the grid
+    assert grid_moves(10, SECOND_START, taken=9) == "r"
+    assert grid_moves(3, SECOND_START, taken=15) == "u"  # Gouki is off the grid
+    with pytest.raises(ValueError, match="already taken"):
+        grid_moves(3, SECOND_START, taken=3)
+
+
+def test_second_cursor_starts_on_wolverine_when_cyclops_is_taken() -> None:
+    assert second_start(1) == 0
+    assert second_start(16) == SECOND_START
+    assert grid_moves(2, second_start(1), taken=1) == "uur"

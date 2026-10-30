@@ -1,0 +1,81 @@
+{
+ "kind": "ending",
+ "description": "Vega's ending in English: the official arcade English, paired by GATE-TRANSLATION (M8 extension, user decision 2026-10-30, SESSION-0069; page k shows English record k), shown with the Saturn's own English ending script through patch version 4.",
+ "character": "Vega",
+ "arcade_slot": 14,
+ "mc_file": "MC0E.SHP;1",
+ "table_offset": "0x221c",
+ "records_offset": "0x320",
+ "english_bytes": 1300,
+ "japanese_space": 1520,
+ "script": "MCED.SHP;1 (tools.disc.english_mode.mced_english_scripts)",
+ "source": {
+  "set": "xmvsfu (MAME 0.289, references/arcade/)",
+  "program_order": "68000 (EXP-0008)",
+  "english_endings_table": "0x17e318",
+  "slot_base": "0x18cc62"
+ },
+ "pairing": "data/translations/vega_ending_pairing.json",
+ "records": [
+  {
+   "english_record": 0,
+   "page": 1,
+   "saturn_record": 16,
+   "source_address": "0x18cc62",
+   "sha256": "80afd308dddaa13ecaffc9c593f7c2ea799bd8f715fef1da565181e77755adef",
+   "line_lengths": [
+    18,
+    9
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 1,
+   "page": 2,
+   "saturn_record": 17,
+   "source_address": "0x18ccc6",
+   "sha256": "cbb060284b17e444d9a10aff05cd9c99933f0ae1c91e70111da456944d32089d",
+   "line_lengths": [
+    24,
+    22
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 2,
+   "page": 3,
+   "saturn_record": 18,
+   "source_address": "0x18cd2a",
+   "sha256": "1b8b26c2fd38542f9ce41a22ae4391fbea5894a3ac1c6f1a4b9eb40dd3ea5062",
+   "line_lengths": [
+    13,
+    0
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 3,
+   "page": 4,
+   "saturn_record": 19,
+   "source_address": "0x18cd8e",
+   "sha256": "8ee914760f5da0fa666016b29fad3a83cef95052d7674309bcd4a835807bba9f",
+   "line_lengths": [
+    23,
+    12
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 4,
+   "page": 5,
+   "saturn_record": null,
+   "source_address": "0x18cdf2",
+   "sha256": "3b3489516fad2c0fe00ad189d53e5f10dd48eedc53abbabca9555e15889be4f5",
+   "line_lengths": [
+    25,
+    23
+   ],
+   "grammar_fix": null
+  }
+ ]
+}

@@ -32,7 +32,9 @@ that slot's English win quotes, at quote table + 800
 (`tools.disc.english_mode.ENDING_RECORDS`). ``MMPACK.PCA`` gets
 `tools.disc.english_mode.patches_v4`, and ``MCED.SHP`` gets
 `tools.disc.english_mode.mced_english_scripts` for the ending slots, re-encoded
-at its original size.
+at its original size. An ending SPEC's ``mced_shared_with`` lists the slots
+whose script it shares and that switch with it (`END-014`: Ryu's lists 8,
+Chun-Li's 18); a shared script is refused otherwise.
 
 Both files are read from the untouched data track and checked against
 `references/saturn_jp/iso_listing.json`. Each stream must still end in its
@@ -185,10 +187,15 @@ def mmpack_patches(
     raise ValueError(f"unknown patch version {version}")
 
 
-def build_mced(raw: bytes, slots: list[int], changes: list[dict[str, object]]) -> bytes:
+def build_mced(
+    raw: bytes,
+    slots: list[int],
+    changes: list[dict[str, object]],
+    shared: list[int] | None = None,
+) -> bytes:
     decoded, _ = decompress_file(raw)
     data = bytearray(decoded)
-    for offset, old, new in mced_english_scripts(decoded, slots):
+    for offset, old, new in mced_english_scripts(decoded, slots, shared):
         data[offset : offset + len(old)] = new
         changes.append(
             {
@@ -289,7 +296,11 @@ def main(argv: Sequence[str] | None = None) -> int:
     if endings:
         raw = read_file("MCED.SHP;1")
         slots = [int(str(s["arcade_slot"])) for s in endings.values()]
-        rebuilt = build_mced(raw, slots, changes)
+        shared = [
+            int(x) for s in endings.values() for x in s.get("mced_shared_with", [])
+        ]
+        rebuilt = build_mced(raw, slots, changes, shared)
+        summary["MCED shared slots"] = shared
         summary["MCED.SHP;1"] = file_summary(raw, rebuilt)
         (out / "MCED.SHP").write_bytes(rebuilt)
         built.append("MCED.SHP;1")

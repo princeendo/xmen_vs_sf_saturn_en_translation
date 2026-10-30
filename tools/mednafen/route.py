@@ -12,7 +12,9 @@ repository, commit ``f8526c0``) for `END-013`, and generalized:
 - **Picks.** From the select state ``STATE`` (untouched image, after Start,
   cursor on Ken), the first pick is reached with ``grid_moves`` from Ken and
   confirmed with button A. The second cursor starts on Cyclops
-  (`EXP-0041`), so the second pick uses moves from there. Keys go through
+  (`EXP-0041`), or on Wolverine when Cyclops is the first pick, and it skips
+  the first pick's cell (`EXP-0046`). The second pick's moves start there
+  and never cross that cell. Keys go through
   System Events with Mednafen brought to the front (pad A on K, directions
   on I, M, J and L; the ``local/mednafen_pick`` home). A key that cannot be
   sent is retried, and the run stops if it still cannot be sent.
@@ -30,7 +32,9 @@ repository, commit ``f8526c0``) for `END-013`, and generalized:
 - **Load check.** After both picks, the first member's buffer
   (``0x0024D000``) and the second's (``0x060B0000``) are compared with
   their MC files from CUE's own track, plus the `EXP-0025` fix-ups (file
-  value + buffer + ``0x40``).
+  value + buffer + ``0x40``). Both buffers (``BUFFER_DUMP`` bytes each) are
+  saved to OUT, so that a failed check can be compared with every MC file
+  (`END-014`).
 - **Fights.** The four fighter blocks (``BLOCKS``) hold each fighter's
   character at + ``0x23`` (slot x 2) and vitality at + ``0x10``
   (`EXP-0045`). Every ``STEP`` frames, ``Route.targets`` decides which
@@ -99,7 +103,9 @@ GRID = (
     (4, 3, 17, 16),
     (0, 1, 9, 10),
 )
+GRID_SLOTS = {slot for row in GRID for slot in row}
 FIRST_START, SECOND_START = 10, 1  # Ken; Cyclops
+WOLVERINE = 0  # the second cursor's start when Cyclops is the first pick (EXP-0046)
 KEYS = {
     "u": ("i", 12),
     "d": ("m", 16),
@@ -114,6 +120,7 @@ BLOCKS = PLAYER + CPU
 CHAR, VITALITY = 0x23, 0x10
 APOCALYPSE = 8
 FIRST_BUFFER, SECOND_BUFFER = 0x0024D000, 0x060B0000
+BUFFER_DUMP = 0x11000  # larger than any decoded MC file (69,136 bytes)
 POINTER = 0x060F2490
 STEP, SHOT_EVERY, PRESS_GAP = 20, 120, 1.0
 KNOCKOUT_STEPS = 600  # at most 12,000 frames of knocking out the first pick
@@ -128,12 +135,44 @@ def cell(slot: int) -> tuple[int, int]:
     raise ValueError(f"slot {slot} is not on the select grid")
 
 
-def grid_moves(target: int, start: int) -> str:
-    """Cursor moves from ``start`` to ``target``: vertical first, then horizontal."""
-    (r0, c0), (r1, c1) = cell(start), cell(target)
-    vertical = "u" * (r0 - r1) if r1 < r0 else "d" * (r1 - r0)
-    horizontal = "l" * (c0 - c1) if c1 < c0 else "r" * (c1 - c0)
-    return vertical + horizontal
+MOVES = {"u": (-1, 0), "d": (1, 0), "l": (0, -1), "r": (0, 1)}
+
+
+def step(at: tuple[int, int], move: str, taken: int | None) -> tuple[int, int] | None:
+    """One cursor move; a taken cell is skipped (`EXP-0046`). None: off the grid."""
+    row, col = at[0] + MOVES[move][0], at[1] + MOVES[move][1]
+    if taken in GRID_SLOTS and (row, col) == cell(taken):
+        row, col = row + MOVES[move][0], col + MOVES[move][1]
+    return (row, col) if 0 <= row < len(GRID) and 0 <= col < len(GRID[0]) else None
+
+
+def grid_moves(target: int, start: int, taken: int | None = None) -> str:
+    """The shortest cursor moves from ``start`` to ``target``, vertical first.
+
+    The second cursor skips the first pick's cell (``taken``; `EXP-0046`):
+    from Cyclops, with Rogue taken, "u" lands on Storm. Moves off the grid
+    are never planned (Gouki's cell is above it).
+    """
+    if target == taken:
+        raise ValueError(f"slot {target} is already taken")
+    goal = cell(target)
+    frontier: list[tuple[tuple[int, int], str]] = [(cell(start), "")]
+    seen = {cell(start)}
+    while frontier:
+        at, moves = frontier.pop(0)
+        if at == goal:
+            return moves
+        for move in MOVES:
+            nxt = step(at, move, taken)
+            if nxt is not None and nxt not in seen:
+                seen.add(nxt)
+                frontier.append((nxt, moves + move))
+    raise ValueError(f"no path from {start} to {target}")
+
+
+def second_start(first: int) -> int:
+    """The second cursor's cell: Cyclops, or Wolverine if Cyclops is taken."""
+    return WOLVERINE if first == SECOND_START else SECOND_START
 
 
 @dataclass
@@ -353,7 +392,7 @@ def run(
         "second": second,
         "policy": policy,
         "first_moves": "" if first == GOUKI else grid_moves(first, FIRST_START),
-        "second_moves": grid_moves(second, SECOND_START),
+        "second_moves": grid_moves(second, second_start(first), taken=first),
     }
     pointers: list[tuple[int, str]] = []
     hits: dict[str, list[int]] = {}
@@ -398,25 +437,33 @@ def run(
                 result["mmpack_ranges"] = len(ranges)
                 agent.run()
             time.sleep(0.5)
+            # a screenshot of each cursor before its A press shows a wrong pick
             if first != GOUKI:
-                send(process.pid, str(result["first_moves"]) + "a")
+                send(process.pid, str(result["first_moves"]))
+                agent.screenshot((out / "first_cursor.png").resolve())
+                send(process.pid, "a")
                 time.sleep(PRESS_GAP * 2)
-            send(process.pid, str(result["second_moves"]) + "a")
+            agent.screenshot((out / "second_start.png").resolve())
+            send(process.pid, str(result["second_moves"]))
+            agent.screenshot((out / "second_cursor.png").resolve())
+            send(process.pid, "a")
             for _ in range(5):
                 time.sleep(PRESS_GAP)
                 send(process.pid, "a")
             agent.pause()
             agent.screenshot((out / "after_pick.png").resolve())
+            buffers = {
+                "first": agent.bus_read(FIRST_BUFFER, BUFFER_DUMP),
+                "second": agent.bus_read(SECOND_BUFFER, BUFFER_DUMP),
+            }
+            for member, ram in buffers.items():
+                (out / f"{member}_buffer.bin").write_bytes(ram)
             result["load_check"] = {
                 "first": fixups_match(
-                    files[first],
-                    agent.bus_read(FIRST_BUFFER, len(files[first])),
-                    FIRST_BUFFER + 0x40,
+                    files[first], buffers["first"], FIRST_BUFFER + 0x40
                 ),
                 "second": fixups_match(
-                    files[second],
-                    agent.bus_read(SECOND_BUFFER, len(files[second])),
-                    SECOND_BUFFER + 0x40,
+                    files[second], buffers["second"], SECOND_BUFFER + 0x40
                 ),
             }
             if area is not None:

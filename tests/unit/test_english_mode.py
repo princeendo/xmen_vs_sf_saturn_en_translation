@@ -199,3 +199,22 @@ def test_mced_english_scripts_refuses_a_shared_script() -> None:
     with pytest.raises(ValueError, match="shares its script with \\[8\\]"):
         mced_english_scripts(bytes(data), [9])
     assert len(mced_english_scripts(bytes(data), [8, 9])) == 1
+
+
+def test_mced_english_scripts_switches_a_listed_shared_script() -> None:
+    bases = [0x2800 + 0x40 * s for s in range(SLOTS)]
+    bases[8] = bases[9]
+    data = mced(bases)
+    header = bases[9] + MCED_RELOCATION
+    assert mced_english_scripts(bytes(data), [9], shared=[8]) == [
+        (header, bytes.fromhex("0008"), bytes.fromhex("0038"))
+    ]
+
+
+def test_mced_english_scripts_refuses_a_shared_slot_that_shares_nothing() -> None:
+    bases = [0x2800 + 0x40 * s for s in range(SLOTS)]
+    data = mced(bases)
+    with pytest.raises(ValueError, match="slot 8 shares no script"):
+        mced_english_scripts(bytes(data), [9], shared=[8])
+    with pytest.raises(ValueError, match="shared slot 9 is an ending slot"):
+        mced_english_scripts(bytes(data), [9], shared=[9])

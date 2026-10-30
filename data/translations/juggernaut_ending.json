@@ -1,0 +1,93 @@
+{
+ "kind": "ending",
+ "description": "Juggernaut's ending in English: the official arcade English, paired by GATE-TRANSLATION (M8 extension, user decision 2026-10-30, SESSION-0069; page k shows English record k), shown with the Saturn's own English ending script through patch version 4.",
+ "character": "Juggernaut",
+ "arcade_slot": 6,
+ "mc_file": "MC06.SHP;1",
+ "table_offset": "0x3438",
+ "records_offset": "0x320",
+ "english_bytes": 1400,
+ "japanese_space": 1900,
+ "script": "MCED.SHP;1 (tools.disc.english_mode.mced_english_scripts)",
+ "source": {
+  "set": "xmvsfu (MAME 0.289, references/arcade/)",
+  "program_order": "68000 (EXP-0008)",
+  "english_endings_table": "0x17e318",
+  "slot_base": "0x18bc5e"
+ },
+ "pairing": "data/translations/juggernaut_ending_pairing.json",
+ "records": [
+  {
+   "english_record": 0,
+   "page": 1,
+   "saturn_record": 16,
+   "source_address": "0x18bc5e",
+   "sha256": "266ec0c1a59235458866f8fe2899286b60cec327b2a22beb8c68c46bbade2583",
+   "line_lengths": [
+    21,
+    14
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 1,
+   "page": 2,
+   "saturn_record": 17,
+   "source_address": "0x18bcc2",
+   "sha256": "2dbbe00102de9ae15ba03d1d86856dc19f8c79559120178a37be8f15d184da0d",
+   "line_lengths": [
+    21,
+    0
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 2,
+   "page": 3,
+   "saturn_record": 18,
+   "source_address": "0x18bd26",
+   "sha256": "1290b0b08542927187413065c2d944b0afb9f7f21bdd900de1054a6f928e5422",
+   "line_lengths": [
+    17,
+    15
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 3,
+   "page": 4,
+   "saturn_record": 19,
+   "source_address": "0x18bd8a",
+   "sha256": "c707237603aa90ae753be676049f45beb8fdf47a22a129cc018aaa4a811c341b",
+   "line_lengths": [
+    20,
+    23
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 4,
+   "page": 5,
+   "saturn_record": 20,
+   "source_address": "0x18bdee",
+   "sha256": "08ba89d760844e82794e0a686d5782969810f834482b3a4e0b381f96cced8d12",
+   "line_lengths": [
+    21,
+    17
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 5,
+   "page": 6,
+   "saturn_record": 21,
+   "source_address": "0x18be52",
+   "sha256": "8d8423a1fcc7ba75d9b5be514343a69b13b362bded63a67d7354965f42bb2568",
+   "line_lengths": [
+    18,
+    18
+   ],
+   "grammar_fix": null
+  }
+ ]
+}

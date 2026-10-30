@@ -1,11 +1,13 @@
 {
  "kind": "ending",
- "description": "Nash's ending in English: the official arcade English, paired by GATE-TRANSLATION (user decision 2026-10-29, SESSION-0058; page k shows English record k), shown with the Saturn's own English ending script (LAYOUT-002) through patch version 4 (END-006).",
+ "description": "Nash's ending in English: the official arcade English, paired by GATE-TRANSLATION (M8 extension, user decision 2026-10-30, SESSION-0069; page k shows English record k), shown with the Saturn's own English ending script through patch version 4.",
  "character": "Nash",
  "arcade_slot": 16,
  "mc_file": "MC10.SHP;1",
  "table_offset": "0x2a00",
  "records_offset": "0x320",
+ "english_bytes": 1400,
+ "japanese_space": 1672,
  "script": "MCED.SHP;1 (tools.disc.english_mode.mced_english_scripts)",
  "source": {
   "set": "xmvsfu (MAME 0.289, references/arcade/)",

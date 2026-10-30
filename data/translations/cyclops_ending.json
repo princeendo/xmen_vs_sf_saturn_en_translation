@@ -1,0 +1,129 @@
+{
+ "kind": "ending",
+ "description": "Cyclops's ending in English: the official arcade English, paired by GATE-TRANSLATION (M8 extension, user decision 2026-10-30, SESSION-0069; page k shows English record k), shown with the Saturn's own English ending script through patch version 4.",
+ "character": "Cyclops",
+ "arcade_slot": 1,
+ "mc_file": "MC01.SHP;1",
+ "table_offset": "0x3c60",
+ "records_offset": "0x320",
+ "english_bytes": 1700,
+ "japanese_space": 1748,
+ "script": "MCED.SHP;1 (tools.disc.english_mode.mced_english_scripts)",
+ "source": {
+  "set": "xmvsfu (MAME 0.289, references/arcade/)",
+  "program_order": "68000 (EXP-0008)",
+  "english_endings_table": "0x17e318",
+  "slot_base": "0x18afde"
+ },
+ "pairing": "data/translations/cyclops_ending_pairing.json",
+ "records": [
+  {
+   "english_record": 0,
+   "page": 1,
+   "saturn_record": 16,
+   "source_address": "0x18afde",
+   "sha256": "96520faa6131dc413c6bf459b2f074e091194c71ec63ec6a6eb2a1ae798243d0",
+   "line_lengths": [
+    23,
+    18
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 1,
+   "page": 2,
+   "saturn_record": 17,
+   "source_address": "0x18b042",
+   "sha256": "94749a8b80086186de4966d9fbdd9520c4c1fe422eedbc8df1f643ff1d67b4ad",
+   "line_lengths": [
+    21,
+    25
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 2,
+   "page": 3,
+   "saturn_record": 18,
+   "source_address": "0x18b0a6",
+   "sha256": "7069a5165f9a0c4aa0cd2cc1de61f6d5f62cf80eef336b0b3eeec1ecae183829",
+   "line_lengths": [
+    23,
+    25
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 3,
+   "page": 4,
+   "saturn_record": 19,
+   "source_address": "0x18b10a",
+   "sha256": "e7faef515303388f3d89ec62a38bdcf1f4512b0fc2a11c314eb0765f26f5b03a",
+   "line_lengths": [
+    14,
+    24
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 4,
+   "page": 5,
+   "saturn_record": 20,
+   "source_address": "0x18b16e",
+   "sha256": "693622354ecd61acbf215eea437f7e80c30f7da74121b3bf31dc4a22419af894",
+   "line_lengths": [
+    25,
+    21
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 5,
+   "page": 6,
+   "saturn_record": 21,
+   "source_address": "0x18b1d2",
+   "sha256": "8e64dc9f23aa3be805c7b0b70c5b008ef332a412fc4f4c7fde2a19b62c315ed1",
+   "line_lengths": [
+    16,
+    24
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 6,
+   "page": 7,
+   "saturn_record": 22,
+   "source_address": "0x18b236",
+   "sha256": "309389e5069eafc006da980293a968341d7df05512f820ab260dd78ad6568229",
+   "line_lengths": [
+    25,
+    22
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 7,
+   "page": 8,
+   "saturn_record": null,
+   "source_address": "0x18b29a",
+   "sha256": "2f254ac432dc9b2fe400e4d7f8078fba169899ecf34964f7da0964284f1214e6",
+   "line_lengths": [
+    22,
+    0
+   ],
+   "grammar_fix": null
+  },
+  {
+   "english_record": 8,
+   "page": 9,
+   "saturn_record": null,
+   "source_address": "0x18b2fe",
+   "sha256": "1c3c31eb9c5b934a74e168fd095318650fef1db9eb958e79093104a3b1852d5a",
+   "line_lengths": [
+    14,
+    12
+   ],
+   "grammar_fix": null
+  }
+ ]
+}
