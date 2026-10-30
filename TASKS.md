@@ -339,8 +339,17 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   - **Voice:** the user heard the Saturn names spoken.
   - **Boss stage:** the Japanese boxes name the player's character.
   - **Magneto's page 3:** most plausibly the claw fighter.
-- **Next:** `LOC-002` (where the name art is stored) and `LOC-003` (voice),
-  both `READY` and independent. M9 (special cases) needs the user's
+- **2026-10-30** (`SESSION-0075`, `EXP-0049`, in progress): the life-bar
+  names are compressed cells in `FIX.PRS`, decoded by `0x06024CF0`.
+  - **US names:** BISON, AKUMA and CHARLIE are all there, and a RAM swap
+    made the life bar read AKUMA.
+  - **Select label:** uses the same cells.
+  - **Win banner:** a `FIX.PRS` letter font.
+  - **VS screen:** comes from the face files (`FC00`-`FC12.PRS`) through
+    a second decoder.
+- **Next:** finish `LOC-002`: the select and banner controlled changes,
+  and the face-file format. `LOC-003` (voice) is `READY` and waits:
+  only one experiment may be in progress. M9 (special cases) needs the user's
   explicit task (rule 24). Backlog: `UI-004`, `SPECIAL-001`, `REL-001`,
   `LOC-008`, and the "after M8" UI and text tasks.
   The backlog also holds `UI-004` (boot-time error messages, including the
@@ -2305,7 +2314,7 @@ its own; it becomes a task only if the user asks (`LOC-008`, outline).
 
 ### LOC-002 - Where each name surface is stored, and whether its US version exists
 
-- **Status:** `READY`
+- **Status:** `IN_PROGRESS` (`EXP-0049`)
 - **Milestone:** Name variants (after M8)
 - **Dependencies:** LOC-001 (done).
 - **Blockers:** None. The surfaces are select label, VS screen, life bar
@@ -2327,6 +2336,17 @@ its own; it becomes a task only if the user asks (`LOC-008`, outline).
   - **Speaker labels:** confirm that the switch for each label is the
     script's label byte (`MCED`, `EXP-0038`). Confirm whether a `Balrog`
     label exists anywhere if `LOC-001` needs one.
+- **Progress (2026-10-30, `EXP-0049`):**
+  - **Life bar:** CONFIRMED. The names are compressed cells in
+    `FIX.PRS`, with BISON and AKUMA beside VEGA and GOUKI, and CHARLIE
+    present. A RAM swap showed AKUMA.
+  - **Select label:** uses the same cells (SUPPORTED).
+  - **Win banner:** a `FIX.PRS` letter font; the name source is not
+    found.
+  - **VS screen:** drawn from the face files `FC00`-`FC12.PRS` through a
+    second decoder (`0x060252BA`).
+  - **Left:** the select-label and banner controlled changes, the
+    face-file format and its names, and CHARLIE on screen.
 - **Notes:** the names are not plain text on the disc in any tested
   encoding (`EXP-0011`), so expect art. MSHvSF found its name records by
   searching reversed sprite-pattern sequences; for XvSF that method is a

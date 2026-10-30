@@ -2397,3 +2397,40 @@ Checks: `pytest`, `ruff check`, `ruff format --check` and `mypy --strict`
 on tools, tests and `EXP-0048` are clean.
 
 Conclusion: `LOC-001` is `DONE`. `LOC-002` and `LOC-003` are `READY`.
+
+## 2026-10-30 — SESSION-0075: Where the name art is stored (LOC-002, EXP-0049, in progress)
+
+User request (verbatim): "Start LOC-002: where each name surface is stored,
+and whether its US version exists."
+
+- **Life bar:** traced from the VDP1 sprites to the SCU DMA (`0x06024010`),
+  the composition buffer (`0x06024DDC`), the cell decoder (`0x06024CF0`)
+  and the pack, which is `FIX.PRS` loaded raw at `0x002C3EA0`.
+  - `cells.py` reproduces 18 of 18 VRAM cells.
+  - Both name sets hold BISON and AKUMA; CHARLIE has separate cells.
+  - `swap1`: GOUKI's cells became AKUMA's and the life bar read AKUMA.
+    CONFIRMED.
+- **Select label:** same cells as the CPU-side life bar.
+- **Win banner:** a 2 × 2 letter font in `FIX.PRS`.
+- **VS screen:** one-cell letters matching `FIX.PRS`, but drawn from the
+  face files through a second decoder (`0x060252BA`) reading `FC0C.PRS` /
+  `FCALL.PRS` in VDP1 VRAM.
+- **Failures:**
+  1. Write breakpoints on VRAM saw nothing (DMA).
+  2. The agent's `physical` space returns zeros.
+  3. My first cell-to-VRAM pairing was off (fixed by brute-force match).
+  4. `swap2`: a lost key.
+  5. `swap3`: the select labels are decoded before the select state.
+  6. `swap_vs`/`swap_vs2`: no effect, which led to the face-file path.
+  7. `swap_banner`: no banner without input.
+  8. Name-text searches (linear codes, strides 1-16, glyph cell numbers)
+     found nothing.
+- **Asides:** 19 face files exist (`FC00`-`FC12`, slots 0-18), and
+  voice files are named per character (`019_SVEG.ADP`, `01A_SGOU.ADP`,
+  `01B_SNAS.ADP`).
+
+Checks: `ruff check`, `ruff format --check` and `mypy --strict` on
+`EXP-0049` are clean; `pytest` passes.
+
+Conclusion: `LOC-002` stays `IN_PROGRESS`. The life bar is done. The select
+label, banner and VS screen remain.
