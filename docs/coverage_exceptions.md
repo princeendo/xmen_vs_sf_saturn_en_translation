@@ -35,3 +35,23 @@ Their other text (boss pre-fight exchanges, unlock conditions, endings)
 stays with `SPECIAL-001` and the ending tasks. Apocalypse's pre-fight line,
 a Japanese box at the top of the screen, was seen in the `EXP-0032` play
 check and is unchanged (`docs/text_surfaces.md`).
+
+## M8 endings (`END-011`, 2026-10-30)
+
+Roster: `data/text/m8_ending_roster.json`. The user was given the
+`END-010` census (`EXP-0043`) and answered three questions:
+
+| Question | Answer (verbatim) |
+| --- | --- |
+| Which characters' endings should M8 put into English? | "All 17 playable (Recommended)" |
+| Ryu's ending script is shared with Apocalypse's slot. How should that be handled? | "Switch shared layout (Rec.)" |
+| Should M8 also cover endings when the character is picked second? | "Yes, include (Recommended)" |
+
+So M8 covers the endings of slots 0-7 and 9-17, Gouki and Cammy included,
+with the character picked first or second.
+
+| Item | Treatment | Evidence |
+| --- | --- | --- |
+| Slot 8 (Apocalypse) | **No English ending of his own.** He is the boss, not selectable. His `MCED` script is Ryu's, and his arcade English pointer equals Ryu's. Switching Ryu's shared script to English switches slot 8's too, but slot 8 is not marked in the fixed table, and `MC08` gets no English ending records. If Apocalypse's ending could ever play, it would show `MC08`'s Japanese records under Ryu's English script. That it never plays is a HYPOTHESIS, to be recorded by `END-016`. | `EXP-0043`, D-038 |
+| Slot 18 (name list: Bison) | No file. It shares Chun-Li's script and pointers, and Chun-Li's switch changes it too. Which character uses it stays with `SPECIAL-001`. | `EXP-0029`, `EXP-0043` |
+| `mced_english_scripts` | It refuses a slot whose script is shared with an unlisted slot. The M8 build must allow slot 9 with slot 8, and slot 11 with slot 18, explicitly (`END-014`). | `tools/disc/english_mode.py` |

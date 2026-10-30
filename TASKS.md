@@ -288,8 +288,13 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   and 11/18 share Chun-Li's. English labels to gate: `Akuma`, `Charlie`,
   `Charlie's friend`, `Bison`, and `Vega` in Magneto's script (`END-010`,
   D-038).
-- Next: `END-011` (the user's ending roster). Backlog: `UI-004`,
-  `SPECIAL-001`, `REL-001`.
+- **2026-10-30** (`SESSION-0066`): the user chose the M8 ending roster:
+  all 17 playable characters (slots 0-7 and 9-17, Gouki and Cammy
+  included), first and second pick. Ryu's script, shared with Apocalypse's
+  slot, is switched, and Apocalypse is not marked (`END-011`;
+  `data/text/m8_ending_roster.json`).
+- Next: `END-012` (arcade pairing) and `END-013` (Saturn route), both
+  ready. Backlog: `UI-004`, `SPECIAL-001`, `REL-001`.
   The backlog also holds `UI-004` (boot-time error messages, including the
   cart warning), `SPECIAL-001` (including
   Apocalypse's pre-fight line) and `REL-001` (release patches).
@@ -1925,7 +1930,7 @@ Known before M8:
 
 ### END-011 - Choose the M8 ending roster and its exceptions
 
-- **Status:** `READY`
+- **Status:** `DONE`
 - **Milestone:** M8
 - **Dependencies:** END-010.
 - **Blockers:** None; the census is `EXP-0043` (`data/text/ending_script_census.json`).
@@ -1941,13 +1946,19 @@ Known before M8:
     - second-pick endings.
   - **Recorded:** the user's choice, in their words, in
     `data/text/m8_ending_roster.json` and `docs/coverage_exceptions.md`.
+- **Decision (2026-10-30, `SESSION-0066`):** "All 17 playable
+  (Recommended)", "Switch shared layout (Rec.)" for Ryu and Apocalypse's
+  shared script, and "Yes, include (Recommended)" for second-pick endings.
+  Recorded in `data/text/m8_ending_roster.json` and
+  `docs/coverage_exceptions.md`.
+
 
 ### END-012 - Arcade pairing for every roster ending
 
-- **Status:** `BLOCKED`
+- **Status:** `READY`
 - **Milestone:** M8
 - **Dependencies:** END-011.
-- **Blockers:** The roster.
+- **Blockers:** None; the roster is `data/text/m8_ending_roster.json`.
 - **Objective:** Confirm in MAME, for every roster character, which English
   record each Saturn page shows. This is the `EXP-0037` method.
 - **Acceptance criteria:**
@@ -1968,10 +1979,10 @@ Known before M8:
 
 ### END-013 - Saturn route to any roster ending, first or second pick
 
-- **Status:** `BLOCKED`
+- **Status:** `READY`
 - **Milestone:** M8
 - **Dependencies:** END-011.
-- **Blockers:** The roster.
+- **Blockers:** None; the roster is `data/text/m8_ending_roster.json`.
 - **Objective:** Make the `EXP-0041` Saturn route a tool that reaches any
   roster character's ending with no play. Use it to settle what the census
   could not, and whose ending plays.

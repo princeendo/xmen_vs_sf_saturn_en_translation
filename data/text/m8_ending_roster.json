@@ -1,0 +1,216 @@
+{
+ "description": "M8 ending roster (END-011). User decision 2026-10-30, SESSION-0066; answers recorded verbatim in docs/coverage_exceptions.md.",
+ "decision": {
+  "roster": "All 17 playable (Recommended)",
+  "ryu_shared_script": "Switch shared layout (Rec.)",
+  "second_pick": "Yes, include (Recommended)"
+ },
+ "first_and_second_pick": true,
+ "roster_slots": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  9,
+  10,
+  11,
+  12,
+  13,
+  14,
+  15,
+  16,
+  17
+ ],
+ "excluded": [
+  {
+   "slot": 8,
+   "name": "Apocalypse",
+   "reason": "the boss, not selectable; his slot's MCED script and arcade English pointer are Ryu's (EXP-0043). His MCED script is switched to English with Ryu's (shared), but slot 8 is not marked and MC08 gets no English ending records."
+  },
+  {
+   "slot": 18,
+   "name": "(name list: Bison)",
+   "reason": "no MC file; shares Chun-Li's script and pointers; which character uses it is SPECIAL-001."
+  }
+ ],
+ "members": [
+  {
+   "slot": 0,
+   "name": "Wolverine",
+   "mc_file": "MC00.SHP;1",
+   "table_offset": "0x393c",
+   "mark_slot": true,
+   "mced_script_shared_with": [],
+   "american_name": "Wolverine",
+   "english_ending_records": 6
+  },
+  {
+   "slot": 1,
+   "name": "Cyclops",
+   "mc_file": "MC01.SHP;1",
+   "table_offset": "0x3c60",
+   "mark_slot": true,
+   "mced_script_shared_with": [],
+   "american_name": "Cyclops",
+   "english_ending_records": 9
+  },
+  {
+   "slot": 2,
+   "name": "Storm",
+   "mc_file": "MC02.SHP;1",
+   "table_offset": "0x40d4",
+   "mark_slot": true,
+   "mced_script_shared_with": [],
+   "american_name": "Storm",
+   "english_ending_records": 6
+  },
+  {
+   "slot": 3,
+   "name": "Rogue",
+   "mc_file": "MC03.SHP;1",
+   "table_offset": "0x3f94",
+   "mark_slot": true,
+   "mced_script_shared_with": [],
+   "american_name": "Rogue",
+   "english_ending_records": 6
+  },
+  {
+   "slot": 4,
+   "name": "Gambit",
+   "mc_file": "MC04.SHP;1",
+   "table_offset": "0x34b4",
+   "mark_slot": true,
+   "mced_script_shared_with": [],
+   "american_name": "Gambit",
+   "english_ending_records": 5
+  },
+  {
+   "slot": 5,
+   "name": "Sabretooth",
+   "mc_file": "MC05.SHP;1",
+   "table_offset": "0x3460",
+   "mark_slot": true,
+   "mced_script_shared_with": [],
+   "american_name": "Sabretooth",
+   "english_ending_records": 6
+  },
+  {
+   "slot": 6,
+   "name": "Juggernaut",
+   "mc_file": "MC06.SHP;1",
+   "table_offset": "0x3438",
+   "mark_slot": true,
+   "mced_script_shared_with": [],
+   "american_name": "Juggernaut",
+   "english_ending_records": 6
+  },
+  {
+   "slot": 7,
+   "name": "Magneto",
+   "mc_file": "MC07.SHP;1",
+   "table_offset": "0x447c",
+   "mark_slot": true,
+   "mced_script_shared_with": [],
+   "american_name": "Magneto",
+   "english_ending_records": 7
+  },
+  {
+   "slot": 9,
+   "name": "Ryu",
+   "mc_file": "MC09.SHP;1",
+   "table_offset": "0x25d8",
+   "mark_slot": true,
+   "mced_script_shared_with": [
+    8
+   ],
+   "american_name": "Ryu",
+   "english_ending_records": 7
+  },
+  {
+   "slot": 10,
+   "name": "Ken",
+   "mc_file": "MC0A.SHP;1",
+   "table_offset": "0x2a4c",
+   "mark_slot": true,
+   "mced_script_shared_with": [],
+   "american_name": "Ken",
+   "english_ending_records": 4
+  },
+  {
+   "slot": 11,
+   "name": "Chun-Li",
+   "mc_file": "MC0B.SHP;1",
+   "table_offset": "0x349c",
+   "mark_slot": true,
+   "mced_script_shared_with": [
+    18
+   ],
+   "american_name": "Chun-Li",
+   "english_ending_records": 6
+  },
+  {
+   "slot": 12,
+   "name": "Dhalsim",
+   "mc_file": "MC0C.SHP;1",
+   "table_offset": "0x3048",
+   "mark_slot": true,
+   "mced_script_shared_with": [],
+   "american_name": "Dhalsim",
+   "english_ending_records": 6
+  },
+  {
+   "slot": 13,
+   "name": "Zangief",
+   "mc_file": "MC0D.SHP;1",
+   "table_offset": "0x2d68",
+   "mark_slot": true,
+   "mced_script_shared_with": [],
+   "american_name": "Zangief",
+   "english_ending_records": 5
+  },
+  {
+   "slot": 14,
+   "name": "Vega",
+   "mc_file": "MC0E.SHP;1",
+   "table_offset": "0x221c",
+   "mark_slot": true,
+   "mced_script_shared_with": [],
+   "american_name": "Bison",
+   "english_ending_records": 5
+  },
+  {
+   "slot": 15,
+   "name": "Gouki",
+   "mc_file": "MC0F.SHP;1",
+   "table_offset": "0x2e0c",
+   "mark_slot": true,
+   "mced_script_shared_with": [],
+   "american_name": "Akuma",
+   "english_ending_records": 6
+  },
+  {
+   "slot": 16,
+   "name": "Nash",
+   "mc_file": "MC10.SHP;1",
+   "table_offset": "0x2a00",
+   "mark_slot": true,
+   "mced_script_shared_with": [],
+   "american_name": "Charlie",
+   "english_ending_records": 6
+  },
+  {
+   "slot": 17,
+   "name": "Cammy",
+   "mc_file": "MC11.SHP;1",
+   "table_offset": "0x2f1c",
+   "mark_slot": true,
+   "mced_script_shared_with": [],
+   "american_name": "Cammy",
+   "english_ending_records": 13
+  }
+ ]
+}

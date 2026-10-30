@@ -2115,3 +2115,24 @@ Conclusion: `END-010` is `DONE` (D-038). Next: `END-011`, the user's
 choice.
 
 Checks: `pytest` 183 passed; `ruff check` and `mypy --strict` on the census script clean. `ruff format` reflowed the script after the run; a rerun gave a byte-identical JSON.
+
+## 2026-10-30 — SESSION-0066: M8 ending roster chosen (END-011)
+
+User request (verbatim): "Start END-011: choose the M8 ending roster and
+its exceptions."
+
+Asked with the `EXP-0043` census. Answers (verbatim):
+
+- "All 17 playable (Recommended)";
+- "Switch shared layout (Rec.)" (Ryu's script shared with Apocalypse's
+  slot; Apocalypse not marked);
+- "Yes, include (Recommended)" (second-pick endings).
+
+Recorded:
+
+- `data/text/m8_ending_roster.json`: 17 members, slots 0-7 and 9-17;
+  exclusions 8 and 18 with reasons;
+- `docs/coverage_exceptions.md` (M8 endings section);
+- `TASKS.md`: `END-011` DONE; `END-012` and `END-013` READY.
+
+No experiment was run.
