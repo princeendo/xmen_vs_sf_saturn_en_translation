@@ -3,7 +3,8 @@
 Run from the repository root:
 
     ./invenv.sh python -m tools.disc.build_english SPEC [SPEC ...] OUT
-        [--program PATH] [--fix-grammar] [--patch-version {2,3,4}] [--image DIR]
+        [--program PATH] [--fix-grammar] [--patch-version {2,3,4}]
+        [--names {us,none,saturn}] [--image DIR]
 
 Each SPEC is a translation record such as
 `data/translations/ryu_win_quotes.json`. For each English record it names the
@@ -36,6 +37,11 @@ at its original size. An ending SPEC's ``mced_shared_with`` lists the slots
 whose script it shares and that switch with it (`END-014`: Ryu's lists 8,
 Chun-Li's 18); a shared script is refused otherwise.
 
+``--names`` picks the name variant (`LOC-004`): ``us`` (the default) adds
+`tools.disc.names` patches to ``MMPACK.PCA``, so that every name surface
+shows the American name; ``none`` leaves the Saturn's names, as every build
+before `LOC-005` did. ``saturn`` is `LOC-006`'s.
+
 Both files are read from the untouched data track and checked against
 `references/saturn_jp/iso_listing.json`. Each stream must still end in its
 file's last sector. ``OUT/changes.json`` records every changed range, with
@@ -63,6 +69,8 @@ from tools.disc.english_mode import (
     patches_v4,
 )
 from tools.disc.iso9660 import RAW_SECTOR, USER_DATA
+from tools.disc.names import VARIANTS
+from tools.disc.names import patches as name_patches
 from tools.disc.patch_image import find_entry
 from tools.disc.patch_image import main as patch_image
 from tools.disc.prs import (
@@ -187,6 +195,18 @@ def mmpack_patches(
     raise ValueError(f"unknown patch version {version}")
 
 
+def with_names(
+    patches: list[tuple[int, str, str]], names: str
+) -> list[tuple[int, str, str]]:
+    """``patches`` plus the name variant's; no two may touch the same bytes."""
+    extra = name_patches(names)
+    taken = {a + i for a, old, _ in patches for i in range(len(as_bytes(old)))}
+    for address, old, _ in extra:
+        if any(address + i in taken for i in range(len(as_bytes(old)))):
+            raise ValueError(f"{address:#x}: a name patch overlaps a text patch")
+    return [*patches, *extra]
+
+
 def build_mced(
     raw: bytes,
     slots: list[int],
@@ -265,17 +285,21 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--program", type=Path, default=PROGRAM)
     parser.add_argument("--fix-grammar", action="store_true")
     parser.add_argument("--patch-version", type=int, choices=(2, 3, 4), default=3)
+    parser.add_argument("--names", choices=VARIANTS, default="us")
     parser.add_argument("--image", type=Path, help="also build the image here")
     args = parser.parse_args(argv)
     if len(args.paths) < 2:
         parser.error("give at least one SPEC and OUT")
     *spec_paths, out = args.paths
     specs = [json.loads(path.read_text()) for path in spec_paths]
-    patches = mmpack_patches(specs, args.patch_version)
+    patches = with_names(mmpack_patches(specs, args.patch_version), args.names)
     out.mkdir(parents=True, exist_ok=False)
     program = args.program.read_bytes()
     changes: list[dict[str, object]] = []
-    summary: dict[str, object] = {"patch_version": args.patch_version}
+    summary: dict[str, object] = {
+        "patch_version": args.patch_version,
+        "names": args.names,
+    }
     endings = {str(s["mc_file"]): s for s in specs if is_ending(s)}
     for spec in (s for s in specs if not is_ending(s)):
         english = compile_records(spec, program, args.fix_grammar)

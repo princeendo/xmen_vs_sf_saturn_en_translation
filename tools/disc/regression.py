@@ -6,8 +6,9 @@ Run from the repository root:
         [--report docs/regression_report.md] [--references PATH]
 
 The references are `data/regression/references.json` (`RE-011`). Each one
-names the specs, the patch version and the expected SHA-256 of every changed
-file and of the built Track 01. The checks run in this order:
+names the specs, the patch version, the name variant (``names``; ``none``
+when absent, as for every reference made before `LOC-005`) and the expected
+SHA-256 of every changed file and of the built Track 01. The checks run in this order:
 
 1. **Inputs:** the source Track 01 and the US arcade program image
    (``local/ref003/xmvsfu-68k.bin``) must hash to the recorded values. Write
@@ -75,6 +76,8 @@ def rebuild(reference: dict[str, object]) -> dict[str, object]:
         str(files),
         "--patch-version",
         str(reference["patch_version"]),
+        "--names",
+        str(reference.get("names", "none")),
         "--image",
         str(image),
     ]

@@ -939,3 +939,32 @@ Reproduce: `research/experiments/EXP-0049/README.md`.
   - "Charlie" `0x01B` (entry 20).
 
 Reproduce: `research/experiments/EXP-0050/README.md`.
+
+## D-047 (Names): A region word picks every name surface; the American variant reads it as US at 10 sites (`LOC-005`, `EXP-0051`)
+
+- **The word:** R11 + `0xD478`, WRAM-H **`0x060F5478`** (the arcade's
+  `0xFF5478`; D-018's size word). The Saturn keeps it at 0. Set to 2 in
+  RAM, the select label, VS screen, life bar and win banner all showed
+  the American names.
+- **The lists:** each name surface takes slot × 2 into a 19-word Japanese
+  list, or into the American list 38 bytes after it when the word is
+  non-zero:
+  - life bar: `0x06080F00` (CPU side) and `0x06080F4C` (player side) cell
+    codes (cell + `0x5400`), widths from `0x06080F98`; CHARLIE is cell
+    `0x03C8` or `0x03CC`, 4 cells wide;
+  - select label `0x06084720`/`0x06084746`, VS screen
+    `0x060845D8`/`0x060845FE`, banner `0x0606E348`/`0x0606E36E`;
+  - name call `0x0604FBFC`/`0x0604FC22`: requests `0xA0` + slot, and
+    `0xB2`-`0xB4` (table A entries 18-20: "Bison", "Akuma", "Charlie")
+    for slots 14-16.
+- **The sites:** the 10 reads of the word that choose those lists
+  (`tools/disc/names.py`; a static scan found 45 readers in `MMPACK.PCA`,
+  the rest choose no per-character list). Each `00BD` changed to `E002`
+  (`mov #2,r0`), with the word left at 0, gave American names on every
+  surface and the American calls, in RAM and from a cold boot of the
+  built image.
+- **The build:** `tools.disc.build_english --names us` (the default). The
+  decoded `MMPACK.PCA` differs from the M8 build's in exactly those 20
+  bytes.
+
+Reproduce: `research/experiments/EXP-0051/README.md`.

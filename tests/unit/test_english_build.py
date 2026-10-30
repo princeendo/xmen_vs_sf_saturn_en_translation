@@ -4,7 +4,7 @@ import hashlib
 
 import pytest
 
-from tools.disc.build_english import compile_records, mmpack_patches
+from tools.disc.build_english import compile_records, mmpack_patches, with_names
 from tools.disc.english_mode import (
     PATCHES,
     apply,
@@ -13,6 +13,7 @@ from tools.disc.english_mode import (
     patches_v3,
     patches_v4,
 )
+from tools.disc.names import US_SITES
 from tools.text.caption import compile_record
 
 BASE = 0x06066000
@@ -157,3 +158,24 @@ def test_ending_and_win_tables_must_agree() -> None:
 def test_a_win_and_an_ending_spec_may_share_a_file() -> None:
     specs = [win(16, "MC10.SHP;1"), ending(16, "MC10.SHP;1")]
     assert mmpack_patches(specs, 4) == patches_v4([16], [16])
+
+
+def test_names_us_adds_one_region_read_per_site() -> None:
+    patches = with_names(patches_v4([0, 16], [16]), "us")
+    added = patches[len(patches_v4([0, 16], [16])) :]
+    assert [a for a, _, _ in added] == sorted(US_SITES)
+    assert all((old, new) == ("00BD", "E002") for _, old, new in added)
+
+
+def test_names_none_adds_nothing_and_saturn_is_refused() -> None:
+    assert with_names(PATCHES, "none") == PATCHES
+    with pytest.raises(ValueError, match="LOC-006"):
+        with_names(PATCHES, "saturn")
+
+
+def test_name_patches_never_overlap_text_patches() -> None:
+    slots = list(range(18))
+    for patches in (PATCHES, patches_v3(slots), patches_v4(slots, slots)):
+        with_names(patches, "us")
+    with pytest.raises(ValueError, match="overlaps"):
+        with_names([(0x060639E6, "00BD", "0009")], "us")

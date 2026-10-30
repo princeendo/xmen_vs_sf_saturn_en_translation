@@ -2519,3 +2519,47 @@ User request (verbatim): "Start LOC-004: the user's plan for each variant."
 No experiment was run; no code changed.
 
 Conclusion: `LOC-004` is `DONE`. `LOC-005` is `READY`.
+
+## 2026-10-30 — SESSION-0079: Build the American-names variant (LOC-005, EXP-0051)
+
+User request (verbatim): "Start LOC-005: build the American-names variant."
+
+- **Life bar:** a PC log on the cell decoder and a write log on its
+  request record led to the HUD's sprite list (`0x060E3020`) and four
+  19-word code lists at `0x06080F00`, each with an American twin 38
+  bytes later (BISON, AKUMA, CHARLIE). The routine adds 38 when R11 +
+  `0xD478` (`0x060F5478`) is non-zero.
+- **Hypothesis tested:** the same word picks every name surface. Set to
+  2 in RAM, it turned the select label, VS screen, life bar and banner
+  American. It cannot ship that way (D-018: the quote and ending layout
+  follow it).
+- **Sites:** read logs of the word on the select, VS and win screens, and
+  a static scan of `MMPACK.PCA` (45 readers), gave 10 name sites. Changed
+  to `mov #2,r0` with the word at 0, they turned every surface American
+  and played `0x147`, `0x021`, `0x01B` at the picks and the win. The voice
+  goes through the game's own American list (requests `0xB2`-`0xB4` =
+  table A entries 18-20), not by editing table A as planned in `LOC-004`;
+  the clips are the same ones.
+- **Build:** `tools/disc/names.py`; `build_english --names {us,none,saturn}`
+  (default `us`; `none` for the older references; `saturn` refused until
+  `LOC-006`). Image `build/loc005_names_us`, Track 01 `441c9cfc…92f3`.
+  Only `MMPACK.PCA` differs from M8 (20 decoded bytes); 71,908 sectors
+  pass EDC/ECC.
+- **Cold boot** (`cold_walk.py`): the select cursor starts on Cyclops,
+  and menus take Start only at some moments, so a press-until-match step
+  was added. Run A picked Cyclops by mistake (one Start too many in the
+  plan); run A2 and run B passed.
+- **Regression:** 17 endings (7 retries for lost keys) and 34 forced
+  draws. 91/109 pages and all 34 draw screenshots byte-identical to
+  `END-015`; the rest differ by capture timing (pictures' colour
+  cycling) or by AKUMA's banner letters left in VDP1 (Ryu's case has
+  Gouki as partner).
+- **Failure:** three wait loops matched their own command line in
+  `pgrep` and never ended; they were stopped and the process was matched
+  by a pattern that cannot match itself.
+
+Checks: `pytest` (202 passed), `ruff check`, `ruff format --check`,
+`mypy --strict` are clean.
+
+Conclusion: `LOC-005` stays `IN_PROGRESS` until the user identifies the
+five calls.

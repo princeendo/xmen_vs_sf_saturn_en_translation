@@ -368,7 +368,17 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   - **Saturn names:** a `GATE-TRANSLATION` extension for six name-only
     edits and four labels, plus a new `Balrog` label for Magneto's page 3.
   - **Switch:** `build_english --names us|saturn`, default `us`.
-- **Next:** `LOC-005` (build the American variant; `READY`). M9 (special cases) needs the user's
+- **2026-10-30** (`SESSION-0079`, `EXP-0051`, in progress): the American
+  variant is built (`build/loc005_names_us`, `--names us`).
+  - **How:** a region word (`0x060F5478`, the arcade's `0xFF5478`) picks
+    every name surface's Japanese or American list (D-047). The build
+    makes 10 reads of it return US; the word stays 0.
+  - **Shown from a cold boot:** BISON, AKUMA and CHARLIE on the select
+    label, VS screen, life bar (both sides) and win banner.
+  - **No other change:** 17 endings and 34 forced quote draws match M8,
+    apart from the names.
+  - **Left:** the user's ear check of the five calls.
+- **Next:** finish `LOC-005` (the user's ear check). M9 (special cases) needs the user's
   explicit task (rule 24). Backlog: `UI-004`, `SPECIAL-001`, `REL-001`,
   `LOC-008`, and the "after M8" UI and text tasks.
   The backlog also holds `UI-004` (boot-time error messages, including the
@@ -2478,12 +2488,11 @@ its own; it becomes a task only if the user asks (`LOC-008`, outline).
 
 ### LOC-005 - Build the American-names variant
 
-- **Status:** `READY`
+- **Status:** `IN_PROGRESS` (`EXP-0051`)
 - **Milestone:** Name variants (after M8)
 - **Dependencies:** LOC-004 (done).
-- **Blockers:** None. The VS-screen and win-banner letter lists are not
-  yet found (`docs/known_unknowns.md`); finding them is part of this
-  task.
+- **Blockers:** None. The VS-screen and win-banner lists were found
+  (`EXP-0051`, D-047).
 - **Objective:** One image, built from the untouched source, with every
   M8 change plus every name surface in the American convention, as
   `LOC-004` decided.

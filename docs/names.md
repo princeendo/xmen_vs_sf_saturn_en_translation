@@ -40,10 +40,16 @@ means Shadaloo's leader in the Japanese scripts.
 | --- | --- | --- |
 | Life bar | `FIX.PRS` cells (player's set `0x0880`-`0x08CF`, CPU's set `0x0822`-`0x087F`) | BISON, AKUMA (both sets); CHARLIE at `0x03C8`-`0x03CF`; shown by RAM swaps |
 | Select label | `VS00.PRS` frames `0x96`-`0xA7` (slots 0-17) | BISON `0xA8`, AKUMA `0xA9`, CHARLIE `0xAA`; shown by RAM patches |
-| VS-screen name | `VS00.PRS` one-cell letter font | spelled from letters; all needed letters present; the letter-list source is UNKNOWN |
-| Win banner | `VS00.PRS` 2 × 2 letter font | spelled from letters; as above |
+| VS-screen name | `VS00.PRS` one-cell letter font | spelled from letters; a per-character record from the Japanese list `0x060845D8` or the American list `0x060845FE` (`EXP-0051`) |
+| Win banner | `VS00.PRS` 2 × 2 letter font | spelled from letters; the Japanese list `0x0606E348` or the American list `0x0606E36E` (`EXP-0051`) |
 | Ending labels | `MCED.SHP` label list | `Bison`, `Akuma`, `Charlie`, `Charlie's friend`; no `Balrog` |
 | Voice | clips in the sound-RAM bank (`INITDATA.PCA`), chosen by table A in `MMPACK.PCA` (decoded `0x79EE`), at the pick and on the win screen; the `.ADP` files are music | "Bison" `0x147`, "Akuma" `0x021`, "Charlie" `0x01B` (`EXP-0050`) |
+
+**How the American names are chosen (`EXP-0051`, D-047).** The life bar,
+select label, VS screen, win banner and voice each have a Japanese list
+and an American list 38 bytes after it, chosen by the region word
+`0x060F5478` (the arcade's `0xFF5478`), which the Saturn keeps at 0. The American variant changes the 10 reads of that word that
+choose those lists, not the word itself (`tools/disc/names.py`).
 
 ## Names That Differ
 
