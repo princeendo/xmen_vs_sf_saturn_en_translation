@@ -21,6 +21,8 @@ and one more step. The steps are:
 - ``press:KEY:PNG:N``: press KEY, run ``PRESS_WAIT`` frames, and repeat
   until the screen matches PNG (as ``await``), at most N times. Menus take
   a key only at some moments, so a fixed count of presses is unreliable;
+- ``save:NAME``: a save state ``OUT/NAME.mcs`` (the agent saves while
+  running, so the state is a few frames after the step);
 - ``ko:N``: run N frames, ``STEP`` at a time, setting the CPU side's two
   vitality words to 0 before each step (`tools.mednafen.route.CPU`, + 0x10;
   `EXP-0045`), with a screenshot every ``STEP`` frames (the win banner
@@ -166,6 +168,10 @@ def main(cue: Path, out: Path, steps: list[str]) -> int:
                         raise RuntimeError(f"{reference} never matched")
                 elif kind == "shot":
                     agent.screenshot((out / "shots" / f"{value}.png").resolve())
+                elif kind == "save":
+                    agent.run()
+                    agent.savestate((out / f"{value}.mcs").resolve())
+                    agent.pause()
                 elif kind == "keys":
                     agent.run()
                     send(process.pid, value)

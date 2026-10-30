@@ -2568,3 +2568,40 @@ Akuma."; clip 2 (Vega picked) "I think I heard \"Bison\"."; clip 3
 (Nash's team wins) "Charlie".
 
 Conclusion: `LOC-005` is `DONE` (D-047). `LOC-006` is `READY`.
+
+## 2026-10-30 — SESSION-0080: Build the Saturn-names variant (LOC-006, EXP-0052)
+
+User request (verbatim): "Start LOC-006: build the Saturn-names variant."
+
+- **Unused label entry:** the label list's only reader (`0x060D5CF8`, in
+  the ending overlay) is indexed by the script's label byte. A scan of all
+  19 slots' scripts in all four languages found entry 9 (`Apocalypse`)
+  unused, and code right after the list. `Balrog` goes into entry 9.
+  Entry 19 (`Bison`) was considered and not used: it is in use in the
+  American variant, and the slot + 1 layout of entries 1-19 suggested
+  other readers until the reader was traced.
+- **Build support:** `data/translations/saturn_names.json` (names only, no
+  dialogue) and `tools/disc/names.py` (`edit_lines`, `label_edits`,
+  `entry_edits`); `build_english --names saturn` recompiles the six
+  records after their edit and logs each with its source hash. A label
+  that ends a scene also has its scene-end word switched (Nash page 4).
+- **Build:** `build/loc006_names_saturn`, Track 01 `b11c8cd9…e26e`, 0
+  invalid sectors. `MMPACK.PCA` equals M8's. Decoded against the American
+  build, differences only in the edited records, labels, entry 9 and the
+  10 name sites.
+- **Cammy's quotes:** no forced-draw case existed for Cammy, so a state was
+  saved at her first fight on a cold boot of the built image
+  (`cold_walk.py` gained `save:`), and `quote_seeds.py` set the seed and
+  CPU vitality. Seed 1 gave record 0, seed 9 record 4. The first scan ran
+  1,300 frames and missed the quote screen; 800 frames showed both.
+- **Endings:** Rogue, Magneto, Vega, Gouki and Nash routed on the built
+  image (all first-attempt loads). Every edited line and label read as
+  approved; 18 of 19 unedited pages byte-identical to the American build,
+  the other differing only in the picture's moment.
+- **Failure:** a wait loop for the Cammy run matched a process other than
+  the walker and timed out; it was stopped.
+
+Checks: `pytest` (206 passed), `ruff check`, `ruff format --check`,
+`mypy --strict` are clean.
+
+Conclusion: `LOC-006` is `DONE` (D-048). `LOC-007` is `READY`.

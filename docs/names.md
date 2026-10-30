@@ -122,3 +122,7 @@ Recorded in `docs/localization_policy.md` ("Name variants") and under
 | Boss-stage boxes | not part of either variant (`SPECIAL-001`) | the same |
 
 All the American assets already exist, so no new art or audio is drawn.
+
+Built: the American variant in `LOC-005` (`EXP-0051`, D-047), the
+Saturn-names variant in `LOC-006` (`EXP-0052`, D-048). Magneto's `Balrog`
+label is written into label entry 9 (`Apocalypse`), which no script uses.

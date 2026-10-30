@@ -40,7 +40,12 @@ Chun-Li's 18); a shared script is refused otherwise.
 ``--names`` picks the name variant (`LOC-004`): ``us`` (the default) adds
 `tools.disc.names` patches to ``MMPACK.PCA``, so that every name surface
 shows the American name; ``none`` leaves the Saturn's names, as every build
-before `LOC-005` did. ``saturn`` is `LOC-006`'s.
+before `LOC-005` did. ``saturn`` (`LOC-006`) changes no code but makes the
+name edits of `tools.disc.names.SATURN` to the official English: in the
+records it lists (each recompiled after its edit, instead of being checked
+against its source bytes) and, for ending slots, in ``MCED.SHP``'s English
+scripts and label list. ``OUT/changes.json`` lists each edited record with
+its source hash and the edit.
 
 Both files are read from the untouched data track and checked against
 `references/saturn_jp/iso_listing.json`. Each stream must still end in its
@@ -69,7 +74,14 @@ from tools.disc.english_mode import (
     patches_v4,
 )
 from tools.disc.iso9660 import RAW_SECTOR, USER_DATA
-from tools.disc.names import VARIANTS
+from tools.disc.names import (
+    VARIANTS,
+    edit_lines,
+    entry_edits,
+    label_edits,
+    load_saturn,
+    text_edits,
+)
 from tools.disc.names import patches as name_patches
 from tools.disc.patch_image import find_entry
 from tools.disc.patch_image import main as patch_image
@@ -111,11 +123,19 @@ def last_sector_start(size: int) -> int:
 
 
 def compile_records(
-    spec: dict[str, object], program: bytes, fix_grammar: bool
+    spec: dict[str, object],
+    program: bytes,
+    fix_grammar: bool,
+    edits: dict[int, list[tuple[int, str, str]]] | None = None,
+    log: list[dict[str, object]] | None = None,
 ) -> bytes:
+    """The spec's records, compiled; ``edits`` maps a record to its name edits."""
     out = bytearray()
     records = spec["records"]
     assert isinstance(records, list)
+    named = {} if edits is None else edits
+    if set(named) - set(range(len(records))):
+        raise ValueError(f"name edits for missing records {sorted(named)}")
     for index, entry in enumerate(records):
         if entry["english_record"] != index:
             raise ValueError("records must be listed in English record order")
@@ -127,9 +147,22 @@ def compile_records(
         fix = entry.get("grammar_fix")
         if fix_grammar and fix:
             lines = list(fix)
+        if index in named:
+            lines = edit_lines(lines, named[index])
         compiled = compile_record(lines)
-        if compiled != source and not (fix_grammar and fix):
+        if compiled != source and not (fix_grammar and fix) and index not in named:
             raise ValueError(f"English record {index}: recompiled bytes differ")
+        if index in named and log is not None:
+            log.append(
+                {
+                    "mc_file": spec.get("mc_file"),
+                    "english_record": index,
+                    "source_address": entry["source_address"],
+                    "source_sha256": entry["sha256"],
+                    "edits": [list(e) for e in named[index]],
+                    "compiled_sha256": hashlib.sha256(compiled).hexdigest(),
+                }
+            )
         out += compiled
     return bytes(out)
 
@@ -212,10 +245,18 @@ def build_mced(
     slots: list[int],
     changes: list[dict[str, object]],
     shared: list[int] | None = None,
+    saturn: dict[str, list[dict[str, object]]] | None = None,
 ) -> bytes:
     decoded, _ = decompress_file(raw)
     data = bytearray(decoded)
-    for offset, old, new in mced_english_scripts(decoded, slots, shared):
+    edits = mced_english_scripts(decoded, slots, shared)
+    if saturn is not None:
+        edits += label_edits(decoded, saturn, slots) + entry_edits(decoded, saturn)
+    for offset, old, new in edits:
+        if data[offset : offset + len(old)] != old:
+            raise ValueError(
+                f"MCED.SHP {offset:#x}: found {data[offset : offset + len(old)].hex()}"
+            )
         data[offset : offset + len(old)] = new
         changes.append(
             {
@@ -292,6 +333,14 @@ def main(argv: Sequence[str] | None = None) -> int:
         parser.error("give at least one SPEC and OUT")
     *spec_paths, out = args.paths
     specs = [json.loads(path.read_text()) for path in spec_paths]
+    saturn = load_saturn() if args.names == "saturn" else None
+    named = {
+        str(spec["mc_file"]) + (" ending" if is_ending(spec) else ""): (
+            {} if saturn is None else text_edits(saturn, str(path))
+        )
+        for path, spec in zip(spec_paths, specs, strict=True)
+    }
+    edited: list[dict[str, object]] = []
     patches = with_names(mmpack_patches(specs, args.patch_version), args.names)
     out.mkdir(parents=True, exist_ok=False)
     program = args.program.read_bytes()
@@ -302,12 +351,18 @@ def main(argv: Sequence[str] | None = None) -> int:
     }
     endings = {str(s["mc_file"]): s for s in specs if is_ending(s)}
     for spec in (s for s in specs if not is_ending(s)):
-        english = compile_records(spec, program, args.fix_grammar)
         name = str(spec["mc_file"])
+        english = compile_records(spec, program, args.fix_grammar, named[name], edited)
         if name in endings:
             if len(english) != ENDING_RECORDS:
                 raise ValueError(f"{name}: win quotes are not {ENDING_RECORDS} bytes")
-            ending = compile_records(endings[name], program, args.fix_grammar)
+            ending = compile_records(
+                endings[name],
+                program,
+                args.fix_grammar,
+                named[f"{name} ending"],
+                edited,
+            )
             summary[f"{name} ending_sha256"] = hashlib.sha256(ending).hexdigest()
             english += ending
         raw = read_file(name)
@@ -323,7 +378,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         shared = [
             int(x) for s in endings.values() for x in s.get("mced_shared_with", [])
         ]
-        rebuilt = build_mced(raw, slots, changes, shared)
+        rebuilt = build_mced(raw, slots, changes, shared, saturn)
         summary["MCED shared slots"] = shared
         summary["MCED.SHP;1"] = file_summary(raw, rebuilt)
         (out / "MCED.SHP").write_bytes(rebuilt)
@@ -332,6 +387,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     rebuilt = build_mmpack(raw, changes, patches)
     summary["MMPACK.PCA;1"] = file_summary(raw, rebuilt)
     (out / "MMPACK.PCA").write_bytes(rebuilt)
+    if saturn is not None:
+        summary["saturn_name_records"] = edited
     (out / "changes.json").write_text(
         json.dumps({"files": summary, "changes": changes}, indent=1) + "\n"
     )

@@ -968,3 +968,22 @@ Reproduce: `research/experiments/EXP-0050/README.md`.
   bytes.
 
 Reproduce: `research/experiments/EXP-0051/README.md`.
+
+## D-048 (Names): The Saturn-names variant; ending label entry 9 is unused (`LOC-006`, `EXP-0052`)
+
+- **Label list:** `MCED.SHP`'s 40-entry list (decoded `0x3DA8`, RAM
+  `0x060D5DA8`) has one reader, `0x060D5CF8`, indexed by the label byte of
+  the script page. Entry 9 (`Apocalypse`) is used by no script of any
+  slot in any language.
+- **The variant:** `build_english --names saturn` writes the approved name
+  edits (`data/translations/saturn_names.json`): six recompiled official
+  records, five label switches in the English ending scripts, and
+  `Balrog` in entry 9. It changes no code; `MMPACK.PCA` equals the M8
+  build's.
+- **Shown on the built image:** Cammy's forced quotes 0 and 4 and the
+  routed endings of Rogue, Magneto, Vega, Gouki and Nash read with the
+  Saturn names and labels as approved. Against the American build, only
+  the edited records, the label bytes, entry 9 and the 10 American name
+  sites differ.
+
+Reproduce: `research/experiments/EXP-0052/README.md`.

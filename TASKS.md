@@ -378,7 +378,15 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
     picks and wins.
   - **No other change:** 17 endings and 34 forced quote draws match M8,
     apart from the names.
-- **Next:** `LOC-006` (build the Saturn-names variant; `READY`). M9 (special cases) needs the user's
+- **2026-10-30** (`SESSION-0080`, `EXP-0052`): `LOC-006` is done (D-048).
+  - **Build:** `build_english --names saturn`, image
+    `build/loc006_names_saturn`; no code change.
+  - **Shown:** Cammy's quotes 0 and 4 forced, and the Rogue, Magneto,
+    Vega, Gouki and Nash endings routed, read as approved (`Balrog` in
+    label entry 9, which no script used).
+  - **Nothing else:** against the American build, only the edited records,
+    labels and the 10 American name sites differ.
+- **Next:** `LOC-007` (verify and register both variants; `READY`). M9 (special cases) needs the user's
   explicit task (rule 24). Backlog: `UI-004`, `SPECIAL-001`, `REL-001`,
   `LOC-008`, and the "after M8" UI and text tasks.
   The backlog also holds `UI-004` (boot-time error messages, including the
@@ -2524,7 +2532,7 @@ its own; it becomes a task only if the user asks (`LOC-008`, outline).
 
 ### LOC-006 - Build the Saturn-names variant
 
-- **Status:** `READY`
+- **Status:** `DONE` (`EXP-0052`, D-048)
 - **Milestone:** Name variants (after M8)
 - **Dependencies:** LOC-004 (done), LOC-005 (done; the variant switch and
   its tooling).
@@ -2543,13 +2551,26 @@ its own; it becomes a task only if the user asks (`LOC-008`, outline).
     edited ending page is shown by the route. Each is checked by the
     agent against the approved lines.
   - **No other change:** everything else equals the American variant.
+- **Outcome:**
+  - **Build:** `build_english --names saturn`
+    (`data/translations/saturn_names.json`), image
+    `build/loc006_names_saturn`, Track 01 `b11c8cd9…e26e`; 71,908 sectors
+    pass. Edited records, with source hashes and edits, are in
+    `local/loc006/files_saturn/changes.json` and `EXP-0052`.
+  - **Balrog:** label entry 9 (`Apocalypse`), used by no script in any
+    language (one reader, indexed by the script's label byte).
+  - **Screens:** Cammy's quotes 0 and 4 forced by seed on the built image;
+    the five endings routed; every edited line and label read as approved.
+  - **No other change:** decoded against the American build, only the
+    edited records, label bytes, entry 9 and the 10 American name sites
+    differ.
 
 ### LOC-007 - Verify and register both variants
 
-- **Status:** `BLOCKED`
+- **Status:** `READY`
 - **Milestone:** Name variants (after M8)
-- **Dependencies:** LOC-005, LOC-006.
-- **Blockers:** Both builds.
+- **Dependencies:** LOC-005, LOC-006 (both done).
+- **Blockers:** None.
 - **Objective:** Play-check both variants, and lock them.
 - **Acceptance criteria:**
   - **Play check:** the user plays each variant from a cold boot, through

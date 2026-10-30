@@ -1,0 +1,21 @@
+{
+ "description": "The Saturn-names variant's edits to the official English (LOC-006): names only, as approved under GATE-TRANSLATION (Saturn-names extension, user decision 2026-10-30, SESSION-0078, LOC-004). Each text edit replaces the one occurrence of old in that line of the compiled official record; every other word stays as written. Each label edit sets that slot's English ending script's label byte old to new, on every page that has it. The label entry is written into MCED's label list (EXP-0038), at an index that no script uses in any language (EXP-0052).",
+ "text": [
+  {"spec": "data/translations/cammy_win_quotes.json", "english_record": 0, "line": 0, "old": "Bison", "new": "Vega"},
+  {"spec": "data/translations/cammy_win_quotes.json", "english_record": 4, "line": 0, "old": "Bison", "new": "Vega"},
+  {"spec": "data/translations/vega_ending.json", "english_record": 1, "line": 0, "old": "Bison", "new": "Vega"},
+  {"spec": "data/translations/vega_ending.json", "english_record": 4, "line": 0, "old": "Bison", "new": "Vega"},
+  {"spec": "data/translations/nash_ending.json", "english_record": 1, "line": 0, "old": "Charlie", "new": "Nash"},
+  {"spec": "data/translations/nash_ending.json", "english_record": 4, "line": 1, "old": "Charlie", "new": "Nash"}
+ ],
+ "labels": [
+  {"slot": 3, "pages": [1], "old": 19, "new": 15, "names": ["Bison", "Vega"]},
+  {"slot": 7, "pages": [3], "old": 15, "new": 9, "names": ["Vega", "Balrog"]},
+  {"slot": 15, "pages": [5], "old": 20, "new": 16, "names": ["Akuma", "Gouki"]},
+  {"slot": 16, "pages": [4], "old": 21, "new": 17, "names": ["Charlie", "Nash"]},
+  {"slot": 16, "pages": [5], "old": 39, "new": 36, "names": ["Charlie's friend", "Nash's friend"]}
+ ],
+ "label_entries": [
+  {"index": 9, "old": "Apocalypse", "new": "Balrog"}
+ ]
+}
