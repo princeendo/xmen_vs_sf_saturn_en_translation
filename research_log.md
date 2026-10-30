@@ -2016,3 +2016,24 @@ Checks: see below.
 Checks: `pytest` 183 passed; `ruff check`, `ruff format --check` and `mypy --strict tools tests` clean; `mypy --strict` on the EXP-0041 scripts clean (`MYPYPATH` with EXP-0025, EXP-0032 and EXP-0036). `tools.disc.regression`: `ryu_v2`, `ryu_ken_v3` and `roster_v3` all match after the `build_english` change (5 min 8 s).
 
 Conclusion: `END-007` is `DONE` (**CONFIRMED**, D-035). Next: `END-008`, the user's cold-boot play check.
+
+## 2026-10-30 — SESSION-0062: Play check of Nash's English ending (END-008, EXP-0042)
+
+User request (verbatim): "Start END-008: build Nash's English ending and
+play-check it." The image was already built in `EXP-0041` (Track 01
+`2abe9771…`, re-hashed before the session). Mednafen was cold-booted on it
+with the recorder (`--keep-states 150`). The user played (Nash and Ryu) and
+said "done".
+
+- **Ending:**
+  - the six pages' text boxes match the approved pages in order (6-11
+    shots each);
+  - each page has session screenshots byte-identical to `EXP-0041`'s route
+    pages.
+- **Win quotes:** found from contact sheets (a bubble-colour detector was
+  tried first and was too noisy). All seven are English (hashes in
+  `EXP-0042`).
+- **Kept:** `local/checkpoints/end008/f00050413.mcs` and
+  `f00050757.mcs`.
+
+Conclusion: `END-008` is `DONE` (**CONFIRMED**, D-036). Next: `END-009`.

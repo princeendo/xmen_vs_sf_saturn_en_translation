@@ -701,3 +701,17 @@ Reproduce: `research/experiments/EXP-0040/README.md`, "Procedure".
 - **Loading:** `MCED` is loaded with the boss stage.
 
 Reproduce: `research/experiments/EXP-0041/README.md`, "Procedure".
+
+## D-036 (M7): Nash's ending in English, from a built image, in play (`END-008`, `EXP-0042`)
+
+`build/m7_nash_ending` (Track 01 `2abe9771…`) was booted cold and played by
+the user to Nash's ending (Nash first, Ryu partner).
+
+- **Ending:** all six pages have session screenshots byte-identical to the
+  layout the user chose (`LAYOUT-002`, `EXP-0038`, `EXP-0041`). That is
+  official arcade English, the Saturn's English scene breaks and pictures,
+  and the labels `Charlie` and `Charlie's friend`.
+- **Win quotes:** all seven in the session were English, including the
+  second member's and the one after Apocalypse.
+
+Reproduce: `research/experiments/EXP-0042/README.md`, "Procedure".

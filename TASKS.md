@@ -262,8 +262,12 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   layout. Found on the way: no-input replays from mid-play checkpoints lose
   the fight. `EXP-0036`'s "no rewrite" claim was withdrawn for that reason
   (`END-007`, D-035).
-- Next: `END-008` (the user's cold-boot play check of `build/m7_nash_ending`).
-  Backlog: `UI-004`, `SPECIAL-001`, `REL-001`.
+- **2026-10-30** (`SESSION-0062`, `EXP-0042`): the user played
+  `build/m7_nash_ending` from a cold boot to Nash's ending. All six pages
+  are byte-identical to the chosen English layout, and all seven win quotes
+  in the session are English (`END-008`, D-036).
+- Next: `END-009` (regression reference for the M7 build), the last M7
+  task. Backlog: `UI-004`, `SPECIAL-001`, `REL-001`.
   The backlog also holds `UI-004` (boot-time error messages, including the
   cart warning), `SPECIAL-001` (including
   Apocalypse's pre-fight line) and `REL-001` (release patches).
@@ -1774,7 +1778,7 @@ recorded under `GATE-TRANSLATION` above and in
 
 ### END-008 - Build Nash's English ending and play-check it
 
-- **Status:** `READY`
+- **Status:** `DONE` (`EXP-0042`, D-036)
 - **Milestone:** M7
 - **Dependencies:** GATE-TRANSLATION extension for Nash's ending, END-006,
   END-007.
@@ -1798,10 +1802,10 @@ recorded under `GATE-TRANSLATION` above and in
 
 ### END-009 - Regression reference for the ending build
 
-- **Status:** `BLOCKED`
+- **Status:** `READY`
 - **Milestone:** M7
 - **Dependencies:** END-008.
-- **Blockers:** The confirmed build.
+- **Blockers:** None; `build/m7_nash_ending` is confirmed (`EXP-0042`).
 - **Objective:** Add the M7 build to `data/regression/references.json`, and
   show that every reference still rebuilds byte for byte.
 - **Acceptance criteria:**
