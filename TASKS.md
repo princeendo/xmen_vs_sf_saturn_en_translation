@@ -475,9 +475,13 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
     `NO CHALLENGERS` and picks it by the region word.
   - **Build:** `build_english --no-challengers` (one region read as US); the
     user chose the arcade's sign and saw it in play.
-- **Next:** `CAP-001` (attract captions) and `HINT-001` (continue hints) are
-  `READY`; the user's order starts with `CAP-001`. Check the remaining
-  region-word readers first (`docs/known_unknowns.md`).
+- **2026-10-31** (`SESSION-0095`, `EXP-0064`): `CAP-001` is done (D-056).
+  - **Census:** four captions, the same in eight attract cycles.
+  - **Storage:** NBG1 tiles from `OPENING*.ST2` via XvSF's own ring-buffer
+    LZ (MSHvSF's LZ fails here); confirmed by a one-byte disc change.
+  - **English:** the US arcade and PS1 show the same four captions.
+- **Next:** `CAP-002` (the user's plan for the captions) and `HINT-001`
+  (continue hints) are `READY`; the user's order is captions, then hints.
   Backlog
   after the phases: `REL-001` (release patches), `TXT-001`, and the rest of
   `UI-001` and `UI-003`.
@@ -3133,7 +3137,7 @@ Known before Phase Q:
 
 ### CAP-001 - Attract captions: census, storage and official English
 
-- **Status:** `READY`
+- **Status:** `DONE`
 - **Milestone:** After M8 (`UI-002`)
 - **Dependencies:** SPEC-005 (the user's order).
 - **Blockers:** None (`SPEC-005` done 2026-10-31).
@@ -3147,13 +3151,20 @@ Known before Phase Q:
   - **Official English:** the US arcade's (MAME) and the US PlayStation's
     captions, paired by sequence position and neighbouring screens (not by
     frame number).
+- **Notes:** Done 2026-10-31 (`EXP-0064`, D-056). Eight Saturn cycles, four
+  captions; NBG1 tiles from `OPENING*.ST2`, decoded by XvSF's ring-buffer LZ
+  (`tools.disc.st2_stream`, rewritten from MSHvSF's, whose LZ is wrong for
+  XvSF); a one-byte disc change confirmed it in RAM and on screen. The US
+  arcade and PS1 show the same four English captions ("UNCCANY" as written),
+  paired by order and neighbouring screens. The caption maps' source is
+  `CAP-002`'s first question.
 
 ### CAP-002 - Attract captions: the user's plan, build and verify
 
-- **Status:** `BLOCKED`
+- **Status:** `READY`
 - **Milestone:** After M8 (`UI-002`)
 - **Dependencies:** CAP-001.
-- **Blockers:** The census.
+- **Blockers:** None (`CAP-001` done 2026-10-31).
 - **Objective:** English attract captions in both name variants.
 - **Acceptance criteria:**
   - **Plan:** options and samples (layout, lettering, colour) put to the

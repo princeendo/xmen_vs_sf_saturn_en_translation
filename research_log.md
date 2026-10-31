@@ -3020,3 +3020,49 @@ Checks: `pytest` (226 passed), `ruff check`, `ruff format --check`, `mypy
 Conclusion: `NOCH-001` is `DONE` (D-055). `CAP-001` and `HINT-001` are
 `READY`.
 
+## 2026-10-31 — SESSION-0095: The attract captions (CAP-001, EXP-0064)
+
+User request (verbatim): "Start CAP-001: the attract captions."
+
+- **Census:** a silent cold boot, every 20 frames to 24,000 (about 40
+  minutes, slower than planned: each screenshot halts the emulator). Eight
+  cycles, four captions each, the same every time.
+- **Arcade:** MAME `xmvsfu`, every 15 frames to 15,000: four captions per
+  ~3,700-frame cycle; the scroll reads "PREPARE FOR THE UNCCANY TAG BATTLE
+  MODE!!" (as written).
+- **Layer:** no VDP1 sprites on a caption; NBG1 (2 × 2-cell, 16 colours),
+  map `0x6C000`. `tools/memory/vdp2_plane.py` copied from MSHvSF (`40b3ad0`).
+- **Container and codec:**
+  - `tools/disc/st2_stream.py` copied from MSHvSF: its container parse fits,
+    but its LZ raised on every block.
+  - **Rejected:** a zero-filled window decoded every block to size, but its
+    output held none of the caption's characters (and 3 of 300 background
+    cells, by chance).
+  - Tracing from RAM found the decoder (`0x06021AF6`): copies read an
+    absolute ring position. The tool was rewritten to that and checked
+    against RAM (equal except the size field the game writes).
+- **Agent quirks:** `savestate` and `loadstate` are refused while halted
+  (run, save, halt; load, then halt); `bus_read` covers work RAM only (VDP2
+  VRAM through the `vdp2vram` space).
+- **Controlled change:**
+  - Replaying a state from frame 2,600 on a changed image showed nothing:
+    the stream was already in memory.
+  - Changing only `OPENING6` showed nothing on a cold boot: that boot
+    streamed the identical block from `OPENING7`.
+  - Changing both: RAM held the two predicted bytes, and caption 2 gained
+    three white pixels; the untouched image is the control.
+- **Mapping mistakes:** twice a contact-sheet tile or a composite quadrant
+  was mapped to the wrong frame or page; each was re-checked against
+  per-frame data before use.
+- **PS1 US:** the user's BIOS from MSHvSF's `EXP-0072` (`scph1001.bin`,
+  hash checked) in a separate silent home; two cycles, the arcade's four
+  captions word for word.
+- **Caption 4 in `OPENING2`/`3`:** split over two consecutive blocks.
+
+Checks: `pytest` (230 passed), `ruff check`, `ruff format --check`, `mypy
+--strict` are clean. No build tool changed, so no regression run (the
+user's rule).
+
+Conclusion: `CAP-001` is `DONE` (D-056). `CAP-002` and `HINT-001` are
+`READY`.
+

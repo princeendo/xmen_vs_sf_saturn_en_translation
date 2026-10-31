@@ -1137,3 +1137,29 @@ Reproduce: `research/experiments/EXP-0061/README.md` and
   `0x28B`-`0x28F`.
 
 Reproduce: `research/experiments/EXP-0063/README.md`.
+
+## D-056 (UI): The attract captions: NBG1 tiles from `OPENING*.ST2`, XvSF's ring-buffer LZ, and their official English (`CAP-001`, `EXP-0064`)
+
+- **Census:** four captions (日米ヒーロー 夢の競演!!, 2つの心を 1つに合わせ,
+  友情の 合体技!!, and a scrolling ヴァリアブル ヒーローバトル!!), the same in
+  all eight attract cycles of a 24,000-frame cold boot.
+- **Layer:** VDP2 NBG1, 16 colours, 2 × 2-cell characters, 2-word pattern
+  names, map page `0x6C000` (plane 2 × 2 pages); captions 3 and 4 are
+  brought into view by NBG1's scroll.
+- **Storage:** `OPENING0`-`7.ST2`: caption 1 in section C, captions 2-4 in
+  the `MISS` stream's graphics blocks, in every file.
+- **Codec:** `0x06021AF6`: flags MSB first; a copy word `w` takes
+  `(w & 0xF) + 3` bytes from **ring position** `w >> 4` of a 0x1000-byte
+  ring, not a distance back (MSHvSF's LZ fails on XvSF). Decoded into WRAM-H
+  `0x06080000`, then DMA'd to VDP2 VRAM. `tools.disc.st2_stream` reproduces
+  the game's RAM, except the size the game writes at + 0x10.
+- **Controlled change:** one literal byte in `OPENING6`/`7.ST2` (`12` →
+  `FF`) changed exactly the two predicted decoded bytes in RAM and three
+  pixels of caption 2 on screen, against an untouched-image control.
+- **Official English:** the US arcade and the US PS1 show THE WILDEST /
+  CROSSOVER / YOU HAVE / NEVER DREAMT!, COMBINE / YOUR POWERS, THE MARVELOUS
+  / TEAM-UP MOVE! and a scrolling PREPARE FOR THE UNCCANY TAG BATTLE MODE!!
+  in the same slots, paired with the Saturn's by order and neighbouring
+  screens.
+
+Reproduce: `research/experiments/EXP-0064/README.md`.
