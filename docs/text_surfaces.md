@@ -83,3 +83,11 @@ bits of each channel; `ERR5` was shown by a code change.
 Developer English already in the data, not triggered: a disc file-error
 table in file `0` ("FILE LOAD ERROR", "READ ERROR"…) and exception text in
 `MMPACK.PCA` ("CPU ADDRESS ERROR"…). See `EXP-0053`.
+
+## The Boss Stage (`SPEC-001`, `EXP-0058`)
+
+| Surface | Where | Storage | Arcade English? |
+| --- | --- | --- | --- |
+| Apocalypse's pre-fight boxes: the player's line, Apocalypse's answer naming the player, his "behold my true form" | Top of the boss stage, before he transforms | Decoded `MC08.SHP` `0x1090`, 18 slots × 3 records × 76 bytes (Alpha Chun-Li uses Chun-Li's, by the index table at `MMPACK.PCA` `0x51CAC`) | **No.** The US arcade skips the boxes when its language is not Japanese, and has no English for them |
+| The quote before the boss stage | After the sixth win | An ordinary random win quote (no story line) | Yes (M5) |
+| The quote after Apocalypse | After the seventh win | The character's fixed record (`0x060666E0`; flag `0x060F5083` set by the seventh win) | Yes; the fixed values equal the arcade's |

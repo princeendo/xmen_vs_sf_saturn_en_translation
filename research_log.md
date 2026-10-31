@@ -2800,3 +2800,37 @@ up sub-sessions or sub-agents. If not, we'll stay here."
   inside each task, as in `LOC-001`.
 
 No experiment was run.
+
+## 2026-10-30 — SESSION-0089: Census of the special cases (SPEC-001, EXP-0058)
+
+User request: as `SESSION-0088` ("Let's begin with SPECIAL-001, …").
+
+- **Route runs** (`EXP-0051`): the quote pointer showed three boss-stage
+  records per slot at `0x060C2090` + `0xE4` × slot; they equal decoded
+  `MC08.SHP` `0x1090`.
+- **Walks** of the untouched image to the boss stage: `walk1_derailed`
+  (a stray keystroke picked Cammy; the user reported it), `walk1` (states
+  too late), `walk2` (states before the boxes). A RAM swap of Ryu's record
+  0 changed his first box: CONFIRMED.
+- **Pre-boss quote:** random (records 13, then 12, for Ryu).
+  **Disproven:** that it is a fixed story line, and that English record 8
+  is its English (record 8 is a team line).
+- **Fixed flag:** `0x060F5083` set at the seventh win (write log).
+- **Alpha Chun-Li:** Start held over Chun-Li gives `0x0024` (the walker
+  gained `chord:` and `peek:`). **Gouki:** open with a fresh save
+  (**disproven:** save-gated). The fresh home's firmware link first pointed
+  to a relative path and Mednafen could not start; fixed.
+- **Subagent (MAME only):** slot 18 = Alpha Chun-Li; the arcade skips the
+  boxes when not Japanese and has no English for them; the fixed flag is
+  set at the seventh win with the Saturn's values. It found that
+  `local/ref003/xmvsfu-68k.bin` holds encrypted opcodes (data is fine) and
+  dumped the decrypted opcodes for code reading.
+- **Lead for SPEC-002:** slot 18's fixed-table entry has no English flag in
+  the builds.
+- **Failure:** old wait loops matched their own command lines and never
+  ended; they were stopped.
+
+Checks: `pytest`, `ruff check`, `ruff format --check`, `mypy --strict` are
+clean.
+
+Conclusion: `SPEC-001` is `DONE` (D-052). `SPEC-002` is `READY`.

@@ -438,7 +438,15 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   warning, then a study of `LOC-008`; release patches after. Written up
   as Phase P (`SPEC-001` to `SPEC-005`), Phase Q (`CAP-001`, `CAP-002`,
   `HINT-001`, `HINT-002`, `NOCH-001`) and Phase R (`LOC-008`).
-- **Next:** `SPEC-001` (census of the special cases; `READY`). Backlog
+- **2026-10-30** (`SESSION-0089`, `EXP-0058`): `SPEC-001` is done (D-052).
+  - **Boss boxes:** three per character in `MC08.SHP`; the US arcade has
+    no English for them and skips them.
+  - **Quotes:** the post-boss quote is the fixed record (as the arcade);
+    the pre-boss quote is random, not a story line.
+  - **Characters:** slot 18 is Alpha Chun-Li (Start held); Gouki needs no
+    unlock. Alpha Chun-Li's quotes are likely still Japanese in the builds.
+- **Next:** `SPEC-002` (official English for the special cases; `READY`).
+  Backlog
   after the phases: `REL-001` (release patches), `TXT-001`, and the rest of
   `UI-001` and `UI-003`.
 
@@ -2911,7 +2919,7 @@ Known before Phase P (each a lead, not a finding about what remains):
 
 ### SPEC-001 - Census of the special cases
 
-- **Status:** `READY`
+- **Status:** `DONE` (`EXP-0058`, D-052)
 - **Milestone:** M9 (`SPECIAL-001`)
 - **Dependencies:** M8 (done), Phase N (done), the user's request above.
 - **Blockers:** None.
@@ -2930,13 +2938,26 @@ Known before Phase P (each a lead, not a finding about what remains):
   - **Storage:** for each surface, the file and record it is read from,
     CONFIRMED by a controlled change.
   - **Record:** `docs/text_surfaces.md`, `docs/known_unknowns.md`.
+- **Outcome:**
+  - **Characters:** selectable 0-7 and 9-17 (Gouki with no unlock); slot 8
+    (Apocalypse) boss only; slot 18 Alpha Chun-Li, by Start held over
+    Chun-Li (character word `0x0024`, Saturn and arcade).
+  - **Text surfaces:** Apocalypse's three boxes per character (Japanese,
+    naming the player in box 2); the random pre-boss quote; the fixed
+    post-boss quote; the partner fight's warning (`NOCH-001`).
+  - **Storage:** boxes in `MC08.SHP` `0x1090` (controlled change); index
+    table `MMPACK.PCA` `0x51CAC`; fixed flag `0x060F5083`, set at the
+    seventh win.
+  - **Arcade:** no English for the boxes (skipped unless Japanese); the
+    fixed table equals the Saturn's.
+  - **Record:** `docs/text_surfaces.md`, `docs/known_unknowns.md`.
 
 ### SPEC-002 - Official English for the special cases
 
-- **Status:** `BLOCKED`
+- **Status:** `READY`
 - **Milestone:** M9 (`SPECIAL-001`)
-- **Dependencies:** SPEC-001.
-- **Blockers:** The census.
+- **Dependencies:** SPEC-001 (done).
+- **Blockers:** None.
 - **Objective:** For each special surface, the arcade's official English, its
   pairing with the Saturn's records, and whether it fits; or evidence that
   none exists.

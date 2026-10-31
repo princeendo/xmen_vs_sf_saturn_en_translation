@@ -1040,3 +1040,21 @@ Reproduce: `research/experiments/EXP-0054/README.md`.
   text starts 2 rows higher to keep its last shadow on screen.
 
 Reproduce: `research/experiments/EXP-0056/README.md`.
+
+## D-052 (Special): The boss stage's boxes, the fixed post-boss quote, and the special characters (`SPEC-001`, `EXP-0058`)
+
+- **Boxes:** three per player character (the player's line, Apocalypse's
+  answer naming the player, his "behold my true form"), from decoded
+  `MC08.SHP` `0x1090`: 18 slots × 3 records × 76 bytes, at WRAM-H
+  `0x060C2090` + `0xE4` × slot during the boss stage. A RAM swap of Ryu's
+  record changed his first box.
+- **The US arcade has no English for them:** it skips the boxes when the
+  language is not Japanese (`0x031798`, MAME).
+- **Quotes:** the quote after the sixth win is random; after Apocalypse
+  (the seventh win, which sets `0x060F5083`) the fixed record is shown, as
+  in the arcade, with the same fixed values.
+- **Slot 18** is Chun-Li in her Alpha costume (Start held over Chun-Li) on
+  the Saturn and in the arcade; she uses Chun-Li's boxes. **Gouki** needs no
+  unlock on the Saturn.
+
+Reproduce: `research/experiments/EXP-0058/README.md`.

@@ -78,7 +78,7 @@ was shown in play.
 | The tail of each roster file's old Japanese ending | Japanese bytes, not shown | The English bytes (800 + 100n from the quote table) are shorter than the Japanese records they replace. The rest stays as decoded: 348 bytes (slot 0), 48 (1), 348 (2), 424 (3), 372 (4), 120 (5), 500 (6), 20 (7), 172 (9), 396 (10), 348 (11), 120 (12), 220 (13), 220 (14), 120 (15), 272 (16), 28 (17). The English script reads only the n English records. The renderer read once past the last record in M7 (`EXP-0041`), and every page matches the arcade. | `EXP-0041`, `EXP-0046`, `EXP-0047` | — |
 | The Japanese ending scripts in `MCED.SHP` | Japanese, unchanged, not run | Each roster script's language-0 header word now points to its English script (17 words), so the Japanese scripts are no longer reached for roster slots. | `EXP-0046` | — |
 | Second-pick endings other than Ryu's | English on disc, not shown | Every roster file loads into the second buffer unchanged (`EXP-0046`). Ryu's second-pick ending used version 4's second-buffer rule (`EXP-0047`). The others use the same rule and are **SUPPORTED**, not shown. A route cannot reach them, because the route's tag did not take effect (`EXP-0045`). | `EXP-0045`, `EXP-0046`, `EXP-0047` | — |
-| Gouki's ending in an ordinary save | English on disc; reachable only if his cell is open | His cell above Juggernaut's is open in the route's select state. Whether it is open in a fresh save (an unlock) is unknown. | `EXP-0046` | — |
+| Gouki's ending in an ordinary save | English on disc | His cell above Juggernaut's is open with a fresh save too: no unlock (`EXP-0058`). | `EXP-0046`, `EXP-0058` | — |
 
 ### Other text around the endings, unchanged
 

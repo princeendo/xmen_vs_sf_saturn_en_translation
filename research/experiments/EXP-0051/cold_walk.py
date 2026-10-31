@@ -21,6 +21,11 @@ and one more step. The steps are:
 - ``press:KEY:PNG:N``: press KEY, run ``PRESS_WAIT`` frames, and repeat
   until the screen matches PNG (as ``await``), at most N times. Menus take
   a key only at some moments, so a fixed count of presses is unreliable;
+- ``chord:MOVES``: hold the keys for MOVES together for a moment
+  (`tools.mednafen.route.send_chord`; `SPEC-001`: Start held over a pick),
+  then run ``SETTLE`` frames;
+- ``peek:ADDRESS:LENGTH``: read LENGTH bytes at the bus ADDRESS (hex) into
+  ``steps.json``;
 - ``save:NAME``: a save state ``OUT/NAME.mcs`` (the agent saves while
   running, so the state is a few frames after the step);
 - ``ko:N``: run N frames, ``STEP`` at a time, setting the CPU side's two
@@ -51,7 +56,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path.cwd()))
 from tools.mednafen.agent import Agent, AgentError
-from tools.mednafen.route import BINARY, CPU, pick_home, send
+from tools.mednafen.route import BINARY, CPU, pick_home, send, send_chord
 
 SHOT_EVERY, SETTLE, STEP = 60, 30, 20
 AWAIT_STEP, AWAIT_LIMIT = 30, 12.0
@@ -174,6 +179,17 @@ def main(cue: Path, out: Path, steps: list[str]) -> int:
                         raise RuntimeError(f"{reference} never matched")
                 elif kind == "shot":
                     agent.screenshot((out / "shots" / f"{value}.png").resolve())
+                elif kind == "chord":
+                    agent.run()
+                    send_chord(process.pid, value)
+                    agent.pause()
+                    agent.frames(SETTLE)
+                    agent.wait_halted(60.0)
+                    frame += SETTLE
+                elif kind == "peek":
+                    address, _, length = value.partition(":")
+                    data = agent.bus_read(int(address, 16), int(length))
+                    record[-1]["bytes"] = data.hex()
                 elif kind == "save":
                     agent.run()
                     agent.savestate((out / f"{value}.mcs").resolve())
