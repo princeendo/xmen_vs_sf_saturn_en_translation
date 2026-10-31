@@ -10,7 +10,8 @@ names the specs, the patch version, the name variant (``names``; ``none``
 when absent, as for every reference made before `LOC-005`), whether the
 boot-warning pictures are built (``boot_warnings``, `BOOT-004`), whether the
 special cases are (``special``, `SPEC-004`), whether the "no challengers"
-sign is (``no_challengers``, `NOCH-001`) and the expected
+sign is (``no_challengers``, `NOCH-001`), whether the attract captions are
+(``attract_captions``, `CAP-002`; art from ``CAPTION_ART``) and the expected
 SHA-256 of every changed file and of the built Track 01. The checks run in this order:
 
 1. **Inputs:** the source Track 01 and the US arcade program image
@@ -51,6 +52,7 @@ from pathlib import Path
 from tools.disc import build_english
 
 REFERENCES = Path("data/regression/references.json")
+CAPTION_ART = Path("local/cap002/art")  # EXP-0065/caption_art.py output
 ROOT = (Path("build") / "regression").resolve()
 TRACK = build_english.TRACK
 
@@ -88,6 +90,11 @@ def rebuild(reference: dict[str, object]) -> dict[str, object]:
         *(["--boot-warnings"] if reference.get("boot_warnings") else []),
         *(["--special"] if reference.get("special") else []),
         *(["--no-challengers"] if reference.get("no_challengers") else []),
+        *(
+            ["--attract-captions", str(CAPTION_ART)]
+            if reference.get("attract_captions")
+            else []
+        ),
         "--image",
         str(image),
     ]
