@@ -120,6 +120,27 @@ arcade's own yellow-to-orange colours, with UNCANNY. I approve the arcade's
 English wording as shown." Recorded in `docs/localization_policy.md` as a
 `GATE-TRANSLATION` extension.
 
+## Caption Windows and Room
+
+- **Windows** (map replay against each caption's RAM arrays; the same in all
+  eight files): caption 1 frames 126-188, caption 2 478-540, caption 3
+  724-785, caption 4 from about 1,061.
+- **Bases** (WRAM-H `0x06020BBC`, NBG1's; character = base + 4 × index):
+  caption 1 `0x210` (section C), 2 `0x1844`, 3 `0x188`, 4 `0x1920`; each
+  graphics block's part 1 (offsets in its header) is the NBG1 character set
+  at that base.
+- **Timeline** ([`base_timeline.py`](base_timeline.py), from `states1/t00002600`,
+  every 4 frames): base `0x210` from frame 138 to about 362; caption 1 uses
+  indices 0-106 (262-326); the scene right after it (330-346) uses 107-178,
+  past section C part 1's 173 characters. So caption 1 has exactly its own
+  107 slots (one blank), and the memory after part 1 is in use.
+- **Caption 1 does not fit:** the arcade art needs 123-125 characters (best
+  per-line alignment; flips do not help). Merging near-identical cells
+  reaches 106 only at 32 differing pixels per cell. Redrawing the letters at
+  a 24- or 26-pixel pitch gives 120 and 128.
+- **Caption 4:** its block's base is shared with a 235-index animated scene
+  in its window; its room is not yet measured.
+
 ## Build Design
 
 1. Per caption window, rewrite the section A map updates so each English
