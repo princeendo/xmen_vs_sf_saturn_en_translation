@@ -3066,3 +3066,38 @@ user's rule).
 Conclusion: `CAP-001` is `DONE` (D-056). `CAP-002` and `HINT-001` are
 `READY`.
 
+## 2026-10-31 — SESSION-0096: English attract captions, the plan (CAP-002, EXP-0065)
+
+User requests (verbatim): "Let's start CAP-002. But I want to use "Uncanny"
+instead of "Unccany" if possible."; ""Decide it" can be left out if you
+don't find a useful/meaningful place to put it."; "Feel free to remove any
+images once we consider investigations for that path complete. You can make
+that a standing rule, especially if you can regenerate the image with the
+right build command."; then "Use option A: the arcade's art in the arcade's
+own yellow-to-orange colours, with UNCANNY. I approve the arcade's English
+wording as shown."
+
+- **Images:** five finished images removed (`cap001_probe`, `spec004_*`,
+  `noch001_*`); the rule is kept in the agent's memory.
+- **Map path:** a staging copy at `0x0604C000`, built by `0x0601F9E4` from
+  index and attribute arrays (`0x06033020`, `0x06035020`) that a word-LZ
+  fills. MSHvSF's section A decoders reproduce those arrays exactly.
+- **Maps must change:** blank cells share one character, so English of
+  another shape cannot be painted into the Japanese maps.
+- **Arcade art:** the banner stitched (8 px a frame); UNCANNY made from the
+  arcade's own letters (28-px pitch). Nine colours in all.
+- **Palette path:** colour RAM by DMA from `0x06046000`, which a per-frame
+  routine fills through a table from the source `0x0602E020`; the script's
+  palette records reproduce the source exactly. The arcade colours fit
+  exactly (4 bits per channel on both).
+- **First palette replay compared to colour RAM** (wrong target) and
+  matched nothing; recorded so the table step is not forgotten.
+- **Budget:** captions 1 and 4 need 25 and 8 more characters than their
+  Japanese slots.
+
+Checks: `pytest` (230 passed), `ruff check`, `ruff format --check` are
+clean. No build tool changed.
+
+Conclusion: `CAP-002` stays `IN_PROGRESS`: plan and gate done; the build is
+next (EXP-0065, "Build Design").
+

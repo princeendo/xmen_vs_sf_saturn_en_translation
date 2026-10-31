@@ -156,6 +156,20 @@ variants read the region as US at `0x0605F838` only (`build_english
 --no-challengers`): the arcade's art (`FIX.PRS` `0x480`-`0x487`), width and
 position. The other option offered was to remove the sign.
 
+**Attract captions (2026-10-31, `CAP-002`, `EXP-0065`).** The official
+English is the US arcade's four captions, shown identically by the US PS1
+(`EXP-0064`). The user decided (verbatim):
+
+| Question (short) | Answer |
+| --- | --- |
+| The arcade's "UNCCANY" | "But I want to use "Uncanny" instead of "Unccany" if possible." |
+| 決めろ! (decoded, never shown) | ""Decide it" can be left out if you don't find a useful/meaningful place to put it." |
+| Lettering and colours, from samples of two options | "Use option A: the arcade's art in the arcade's own yellow-to-orange colours, with UNCANNY. I approve the arcade's English wording as shown." |
+
+So the captions are the arcade's own art, layout and colours, in both name
+variants, with UNCANNY made from the arcade's own letters; 決めろ! is left
+out. This extends `GATE-TRANSLATION` to the attract captions.
+
 ## Deferred Until Evidence Exists
 
 These MSHvSF decisions depend on facts not yet known for XvSF. Each is put to

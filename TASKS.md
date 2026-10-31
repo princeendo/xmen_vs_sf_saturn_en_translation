@@ -480,8 +480,10 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   - **Storage:** NBG1 tiles from `OPENING*.ST2` via XvSF's own ring-buffer
     LZ (MSHvSF's LZ fails here); confirmed by a one-byte disc change.
   - **English:** the US arcade and PS1 show the same four captions.
-- **Next:** `CAP-002` (the user's plan for the captions) and `HINT-001`
-  (continue hints) are `READY`; the user's order is captions, then hints.
+- **2026-10-31** (`SESSION-0096`, `EXP-0065`): `CAP-002` in progress. The
+  user chose the arcade's art and colours, with UNCANNY (`GATE-TRANSLATION`
+  extended); the map and palette paths are confirmed offline.
+- **Next:** `CAP-002`'s build (EXP-0065, "Build Design"); then `HINT-001`.
   Backlog
   after the phases: `REL-001` (release patches), `TXT-001`, and the rest of
   `UI-001` and `UI-003`.
@@ -3161,7 +3163,7 @@ Known before Phase Q:
 
 ### CAP-002 - Attract captions: the user's plan, build and verify
 
-- **Status:** `READY`
+- **Status:** `IN_PROGRESS`
 - **Milestone:** After M8 (`UI-002`)
 - **Dependencies:** CAP-001.
 - **Blockers:** None (`CAP-001` done 2026-10-31).
