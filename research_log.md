@@ -2731,3 +2731,28 @@ Checks: `pytest`, `ruff check`, `ruff format --check`, `mypy --strict` are
 clean.
 
 Conclusion: `BOOT-003` is `DONE`. `BOOT-004` is `READY`.
+
+## 2026-10-30 — SESSION-0086: Build the English boot warnings (BOOT-004, EXP-0056)
+
+User request (verbatim): "Start BOOT-004: build the English messages."
+
+- **Generator:** `tools/disc/boot_warnings.py`, promoted from `EXP-0055`;
+  its output equalled the approved samples byte for byte. Tests found a
+  markup check that let a lone `{` through; fixed.
+- **Build:** `build_english --boot-warnings` (regression passes it when a
+  reference says `boot_warnings`); both name variants built, all sectors
+  valid, the other 20 files equal to the name-variant references.
+- **Failure and correction:** the first build's no-free-space screen
+  differed in 64 shadow pixels on screen row 232. Every screenshot has
+  content only on rows 8-231: the display is 224 lines, so `EXP-0054`'s
+  "picture rows 0-231 visible" was wrong (rows 224-239 are hidden). D-050,
+  `EXP-0054` and the generator were corrected, and `ERR3`'s text moved up 2
+  rows. The first build is kept as `build/boot004_*_v1`.
+- **Screens:** every warning on both images, and the forced `ERR5`, equal
+  their pictures (0 differing pixels); the control boots equal the
+  name-variant images' (`d92881d1…`, `6d6e4b7d…`).
+
+Checks: `pytest`, `ruff check`, `ruff format --check`, `mypy --strict` are
+clean.
+
+Conclusion: `BOOT-004` is `DONE` (D-051). `BOOT-005` is `READY`.

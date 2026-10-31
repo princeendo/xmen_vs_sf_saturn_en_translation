@@ -7,7 +7,8 @@ Run from the repository root:
 
 The references are `data/regression/references.json` (`RE-011`). Each one
 names the specs, the patch version, the name variant (``names``; ``none``
-when absent, as for every reference made before `LOC-005`) and the expected
+when absent, as for every reference made before `LOC-005`), whether the
+boot-warning pictures are built (``boot_warnings``, `BOOT-004`) and the expected
 SHA-256 of every changed file and of the built Track 01. The checks run in this order:
 
 1. **Inputs:** the source Track 01 and the US arcade program image
@@ -78,6 +79,7 @@ def rebuild(reference: dict[str, object]) -> dict[str, object]:
         str(reference["patch_version"]),
         "--names",
         str(reference.get("names", "none")),
+        *(["--boot-warnings"] if reference.get("boot_warnings") else []),
         "--image",
         str(image),
     ]

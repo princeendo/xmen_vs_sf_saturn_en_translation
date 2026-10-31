@@ -409,14 +409,22 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
     pixel for pixel.
   - **Palette bug:** the game keeps the low five bits of each colour
     channel, so the warnings show darker than drawn.
-  - **Room:** 352 × 232 visible, 16 colours, same file size and header.
+  - **Room:** 352 × 224 visible (corrected in `BOOT-004`), 16 colours,
+    same file size and header.
 - **2026-10-30** (`SESSION-0085`, `EXP-0055`): `BOOT-003` is done.
   - **No official English** in the arcade, the US PlayStation release or
     the Saturn BIOS; the BIOS's labels and Capcom's PlayStation wording
     were used as terms.
   - **Approved:** the agent's translation, the Japanese look, "control
     panel", and "insert" for `ERR5` (`data/translations/boot_warnings.json`).
-- **Next:** `BOOT-004` (build the English messages; `READY`). M9 (special cases) needs the user's explicit task
+- **2026-10-30** (`SESSION-0086`, `EXP-0056`): `BOOT-004` is done (D-051).
+  - **Build:** `build_english --boot-warnings`, both name variants
+    (`build/boot004_us`, `build/boot004_saturn`).
+  - **Shown:** every warning from a cold boot, and `ERR5` forced, equal to
+    its built picture; the normal boot unchanged.
+  - **Correction:** the display is 224 lines, so `BOOT-002`'s room was 8
+    rows too tall; `ERR3`'s text moved up 2 rows.
+- **Next:** `BOOT-005` (verify and register; `READY`). M9 (special cases) needs the user's explicit task
   (rule 24). Backlog: `SPECIAL-001` (including Apocalypse's pre-fight
   line), `REL-001` (release patches), `LOC-008`, and the "after M8" UI and
   text tasks.
@@ -2734,8 +2742,9 @@ Known before Phase O:
   - **Format:** 352 × 240, 4-bit BMP; unpacked into an 8-bit VDP2 bitmap,
     screen row = picture row + 8; palette converted from the low five bits
     of each channel. Every screen matches its file pixel for pixel.
-  - **Room:** all 352 columns, picture rows 0-231; 16 colours from a
-    palette the file carries; the file size and header layout fixed.
+  - **Room:** all 352 columns, picture rows 0-223 (corrected by
+    `EXP-0056`; first recorded as 0-231); 16 colours from a palette the
+    file carries; the file size and header layout fixed.
 
 ### BOOT-003 - Official English, and the user's wording
 
@@ -2783,7 +2792,7 @@ Known before Phase O:
 
 ### BOOT-004 - Build the English messages
 
-- **Status:** `READY`
+- **Status:** `DONE` (`EXP-0056`, D-051)
 - **Milestone:** Boot-time messages (`UI-004`)
 - **Dependencies:** BOOT-002, BOOT-003, LOC-007 (all done).
 - **Blockers:** None.
@@ -2805,13 +2814,26 @@ Known before Phase O:
   - **No other change:** with the 4 MB cart and a normal save, the boot
     and the M8 and Phase N checks are unchanged (the regression
     references' other files are byte-identical).
+- **Outcome:**
+  - **Generator:** `tools/disc/boot_warnings.py` (with tests), from the
+    approved data file; each picture checked for size, header and palette.
+    Hashes: `ERR1` `72fbff0a…`, `ERR2` `5cee7adb…`, `ERR3` `017b7a5e…`,
+    `ERR4` `970f953a…`, `ERR5` `7c918f31…`.
+  - **Build:** `--boot-warnings` with `--names us` (Track 01
+    `e8c9cc4f…`) and `--names saturn` (`f53d2378…`); changed spans listed
+    with original and new bytes; 0 invalid sectors in each.
+  - **Screens:** six per image (five conditions and the forced `ERR5`),
+    0 differing pixels each; the agent read every line against the
+    approved text.
+  - **No other change:** the other 20 files equal the name-variant
+    references; the normal boot equals the images without the warnings.
 
 ### BOOT-005 - Verify and register
 
-- **Status:** `BLOCKED`
+- **Status:** `READY`
 - **Milestone:** Boot-time messages (`UI-004`)
-- **Dependencies:** BOOT-004.
-- **Blockers:** The builds.
+- **Dependencies:** BOOT-004 (done).
+- **Blockers:** None.
 - **Objective:** Play-check the English messages and lock the builds.
 - **Acceptance criteria:**
   - **Play check:** the user boots each built image cold under at least

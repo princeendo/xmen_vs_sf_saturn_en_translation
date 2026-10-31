@@ -101,7 +101,9 @@ H=local/boot001/c2/homes/none_valid
   bytes per row. In the no-cart dump all 240 rows equal the file's, row y at
   `y × 0x200`, and nothing else is written there (`v_none/vdp2vram.bin`).
 - **Position:** screen row y shows picture row y − 8. Screen rows 0-7 are
-  black; picture rows 232-239 are never shown.
+  black. **Corrected by `EXP-0056`:** the display is 224 lines (screen rows
+  8-231; the screenshots pad 8 rows above and below), so picture rows
+  224-239 are never shown, not only 232-239.
 
 ### Every pixel
 
@@ -145,7 +147,7 @@ rule; 352 × 240 = 84,480 pixels each):
 | --- | --- |
 | File | raw, exactly 42,358 bytes (read as `0xA576`); BMP header 14 + 40 bytes, palette at 54, pixels at 118 (the game reads the offset at 10 and assumes the palette at 54) |
 | Picture | 352 × 240, 4 bits per pixel, bottom-up, 176 bytes per row |
-| Visible | all 352 columns; picture rows 0-231 (rows 232-239 are below the screen) |
+| Visible | all 352 columns; picture rows 0-223 (corrected by `EXP-0056`; this record first said 0-231) |
 | Colours | 16 indices. The five files share one palette. As shown: 0 `000000`, 1 `404040`, 2 `000000`, 3 `000040`, 4 `000040`, 5 `c0c0c0`, 6 `c0c0c0`, 7 `000040`, 8 `000000`, 9 `008080`, 10 `00c0c0`, 11 `c0c000`, 12 `c0c000`, 13 `000000`, 14 `c00000`, 15 `00c000` (15 is unused) |
 | Text area now | `ERR1` x 32-321, rows 26-207; `ERR2` x 47-308, rows 26-191; `ERR3` x 32-319, rows 26-207; `ERR4` x 70-284, rows 26-160; `ERR5` x 70-281, rows 26-160 (picture rows) |
 

@@ -4,7 +4,7 @@ Run from the repository root:
 
     ./invenv.sh python -m tools.disc.build_english SPEC [SPEC ...] OUT
         [--program PATH] [--fix-grammar] [--patch-version {2,3,4}]
-        [--names {us,none,saturn}] [--image DIR]
+        [--names {us,none,saturn}] [--boot-warnings] [--image DIR]
 
 Each SPEC is a translation record such as
 `data/translations/ryu_win_quotes.json`. For each English record it names the
@@ -47,6 +47,10 @@ against its source bytes) and, for ending slots, in ``MCED.SHP``'s English
 scripts and label list. ``OUT/changes.json`` lists each edited record with
 its source hash and the edit.
 
+``--boot-warnings`` also writes the approved English boot-warning pictures,
+``ERR1``-``ERR5.BIN`` (`tools.disc.boot_warnings`, `BOOT-004`), drawn from the
+untouched files and ``FIX.PRS``; each keeps its size and header.
+
 Both files are read from the untouched data track and checked against
 `references/saturn_jp/iso_listing.json`. Each stream must still end in its
 file's last sector. ``OUT/changes.json`` records every changed range, with
@@ -64,6 +68,9 @@ import json
 from collections.abc import Sequence
 from pathlib import Path
 
+from tools.disc.boot_warnings import NAMES as BOOT_WARNINGS
+from tools.disc.boot_warnings import build as build_boot_warnings
+from tools.disc.boot_warnings import load_layout
 from tools.disc.english_mode import (
     ENDING_RECORDS,
     ENGLISH_SLOT2,
@@ -312,6 +319,19 @@ def build_mmpack(
     return rebuilt
 
 
+def changed_range(name: str, raw: bytes, rebuilt: bytes) -> dict[str, object]:
+    """The span from the first to the last changed byte of a raw file (rule 12)."""
+    diff = [i for i in range(len(raw)) if raw[i] != rebuilt[i]]
+    first, last = diff[0], diff[-1] + 1
+    return {
+        "file": name,
+        "file_offset": f"{first:#x}",
+        "length": last - first,
+        "original": raw[first:last].hex(),
+        "modified": rebuilt[first:last].hex(),
+    }
+
+
 def file_summary(raw: bytes, rebuilt: bytes) -> dict[str, object]:
     return {
         "size": len(raw),
@@ -327,6 +347,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--fix-grammar", action="store_true")
     parser.add_argument("--patch-version", type=int, choices=(2, 3, 4), default=3)
     parser.add_argument("--names", choices=VARIANTS, default="us")
+    parser.add_argument("--boot-warnings", action="store_true")
     parser.add_argument("--image", type=Path, help="also build the image here")
     args = parser.parse_args(argv)
     if len(args.paths) < 2:
@@ -348,6 +369,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     summary: dict[str, object] = {
         "patch_version": args.patch_version,
         "names": args.names,
+        "boot_warnings": args.boot_warnings,
     }
     endings = {str(s["mc_file"]): s for s in specs if is_ending(s)}
     for spec in (s for s in specs if not is_ending(s)):
@@ -383,6 +405,14 @@ def main(argv: Sequence[str] | None = None) -> int:
         summary["MCED.SHP;1"] = file_summary(raw, rebuilt)
         (out / "MCED.SHP").write_bytes(rebuilt)
         built.append("MCED.SHP;1")
+    if args.boot_warnings:
+        originals = {name: read_file(f"{name};1") for name in BOOT_WARNINGS}
+        pictures = build_boot_warnings(read_file("FIX.PRS;1"), originals, load_layout())
+        for name, picture in pictures.items():
+            changes.append(changed_range(name, originals[name], picture))
+            summary[f"{name};1"] = file_summary(originals[name], picture)
+            (out / name).write_bytes(picture)
+            built.append(f"{name};1")
     raw = read_file("MMPACK.PCA;1")
     rebuilt = build_mmpack(raw, changes, patches)
     summary["MMPACK.PCA;1"] = file_summary(raw, rebuilt)

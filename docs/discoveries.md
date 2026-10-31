@@ -1013,8 +1013,9 @@ Reproduce: `research/experiments/EXP-0053/README.md`.
 
 - **Path:** `ERRn.BIN` (raw, 42,358 bytes, 352 × 240 4-bit BMP) is loaded
   into WRAM-H `0x06080000`, unpacked into an 8-bit VDP2 bitmap at VDP2 VRAM
-  `0x0` (512 bytes a row), and shown with screen row y = picture row y − 8;
-  picture rows 232-239 are off screen.
+  `0x0` (512 bytes a row), and shown with screen row y = picture row y − 8.
+  The display is 224 lines, so picture rows 224-239 are off screen
+  (corrected by `EXP-0056`; first recorded as 232-239).
 - **Palette:** 256 entries from file offset 54 go to colour RAM; each
   channel keeps its **low** five bits (`0x060220DC`), so the screens are
   darker and differently coloured than the pictures.
@@ -1024,3 +1025,18 @@ Reproduce: `research/experiments/EXP-0053/README.md`.
   pixel under the game's colour rule.
 
 Reproduce: `research/experiments/EXP-0054/README.md`.
+
+## D-051 (Boot): The English boot warnings, built in both name variants (`BOOT-004`, `EXP-0056`)
+
+- **Build:** `tools.disc.build_english --boot-warnings` draws the approved
+  English (`data/translations/boot_warnings.json`) into `ERR1`-`ERR5.BIN`
+  with `tools.disc.boot_warnings`, keeping each file's size, header and
+  palette.
+- **Shown:** from cold boots of the American and Saturn-names images, the
+  no-cart, backup-cart, unformatted, damaged-save and no-free-space
+  warnings, and `ERR5` by its forced branch, equal their built pictures
+  pixel for pixel. The normal boot equals the images without the warnings.
+- **Visible rows:** the display is 224 lines, picture rows 0-223; `ERR3`'s
+  text starts 2 rows higher to keep its last shadow on screen.
+
+Reproduce: `research/experiments/EXP-0056/README.md`.

@@ -1,5 +1,5 @@
 {
- "description": "BOOT-003 (EXP-0055): the approved English for the five boot warnings, ERR1.BIN-ERR5.BIN. A new translation by Claude (the agent), approved by the user on 2026-10-30 under GATE-TRANSLATION (boot-warnings extension). There is no official English (no US Saturn release; the arcade has no cart or save memory). Terms from the Sega Saturn BIOS screens the player reaches ('Memory Manager', 'System Memory') and Capcom's US PlayStation release of this game. {text} is drawn cyan and [text] red, as the Japanese highlights; an empty line is a short gap; the title is 'WARNING' in yellow.",
+ "description": "BOOT-003 (EXP-0055): the approved English for the five boot warnings, ERR1.BIN-ERR5.BIN. A new translation by Claude (the agent), approved by the user on 2026-10-30 under GATE-TRANSLATION (boot-warnings extension). There is no official English (no US Saturn release; the arcade has no cart or save memory). Terms from the Sega Saturn BIOS screens the player reaches ('Memory Manager', 'System Memory') and Capcom's US PlayStation release of this game. {text} is drawn cyan and [text] red, as the Japanese highlights; an empty line is a short gap; the title is 'WARNING' in yellow. ERR3.BIN's block starts 2 rows higher ('top' 50) so its last line's shadow stays within the 224 visible lines (EXP-0056).",
  "translator": "Claude (agent), EXP-0055",
  "approved": "2026-10-30, SESSION-0085",
  "style": {
@@ -89,7 +89,8 @@
     "",
     "Press any button now to",
     "start the game."
-   ]
+   ],
+   "top": 50
   }
  }
 }
