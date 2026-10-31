@@ -3101,3 +3101,30 @@ clean. No build tool changed.
 Conclusion: `CAP-002` stays `IN_PROGRESS`: plan and gate done; the build is
 next (EXP-0065, "Build Design").
 
+## 2026-10-31 — SESSION-0097: Video memory for the English captions (CAP-002, EXP-0065)
+
+User requests (verbatim): "Go ahead with the caption build."; then, when
+caption 1 did not fit, "Investigate video memory for captions 1 and 4
+first, before building any caption."
+
+- **Caption windows and bases** traced; caption 1 had only its own 107
+  slots by the first measure. Rejected cheap fixes: merging near-identical
+  cells (32 px per cell to fit), tighter letter pitch (120/128 characters),
+  palette-swapped sharing (no shared shapes).
+- **Joint line alignment:** caption 1 to 112 characters with the art
+  unchanged.
+- **Visibility:** VDP2 registers read as zero; scroll and map registers
+  come from RAM each frame (`0x06020EC6`). `vram_visible.py` records written
+  and visible slots; the first, whole-page version found nothing free.
+- **A VDP2 register image search** found the setup list at `0x060217E0`, not
+  a per-frame image.
+- **The file choice:** `0x06021736` picks the attract file; patched in RAM
+  to force each of the eight. The first eight runs started too early (the
+  previous cycle's demo) and missed caption 4; rerun from frame 1,700.
+- **Result:** all four captions fit in every file (EXP-0065, "Video Memory
+  for Captions 1 and 4").
+
+Checks: `pytest` (230 passed), `ruff check`, `ruff format --check` clean.
+
+Conclusion: `CAP-002` stays `IN_PROGRESS`; the build is next.
+
