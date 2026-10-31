@@ -424,7 +424,16 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
     its built picture; the normal boot unchanged.
   - **Correction:** the display is 224 lines, so `BOOT-002`'s room was 8
     rows too tall; `ERR3`'s text moved up 2 rows.
-- **Next:** `BOOT-005` (verify and register; `READY`). M9 (special cases) needs the user's explicit task
+- **2026-10-30** (`SESSION-0087`, `EXP-0057`): `BOOT-005` is done. **Phase
+  O (boot-time messages) is complete.**
+  - **Play check:** the user booted both images without the cart and with
+    a save-memory problem; every warning they saw equals its built
+    picture.
+  - **Regression:** `boot_warnings_us_v4` and `boot_warnings_saturn_v4`
+    added; all nine references match.
+  - **README and register:** both build commands with `--boot-warnings`;
+    what the warnings leave is listed.
+- **Next:** no task is `READY`. M9 (special cases) needs the user's explicit task
   (rule 24). Backlog: `SPECIAL-001` (including Apocalypse's pre-fight
   line), `REL-001` (release patches), `LOC-008`, and the "after M8" UI and
   text tasks.
@@ -2830,7 +2839,7 @@ Known before Phase O:
 
 ### BOOT-005 - Verify and register
 
-- **Status:** `READY`
+- **Status:** `DONE` (`EXP-0057`)
 - **Milestone:** Boot-time messages (`UI-004`)
 - **Dependencies:** BOOT-004 (done).
 - **Blockers:** None.
@@ -2847,6 +2856,20 @@ Known before Phase O:
     Japanese, or not triggered, and why.
   - **README:** the "Still Japanese" list and the build commands are
     updated.
+- **Outcome:**
+  - **Play check:** six recorded cold boots in copies of the user's home.
+    No cart on both images (`ERR4`), a damaged save on the American image
+    (`ERR2`), 18 blocks free on the Saturn-names image (`ERR3`): each
+    screen equals its built picture. Both normal boots passed the boot
+    check with no warning (the American one to attract; the Saturn-names
+    one was closed at the CAPCOM logo, and `EXP-0056`'s scripted boot of
+    it reached the attract fight). The user: "done", nothing wrong.
+  - **Regression:** two new references, `boot_warnings_us_v4` (Track 01
+    `e8c9cc4f…`) and `boot_warnings_saturn_v4` (`f53d2378…`); all nine
+    match.
+  - **Coverage:** `docs/coverage_exceptions.md`, "Boot warnings": no boot
+    message left in Japanese; `ERR5` shown only by its forced branch.
+  - **README:** updated.
 
 ## Later Milestones (outline only)
 

@@ -108,3 +108,18 @@ Both variants are built from the M8 build's specs with `--names us`
 | The VS screen's clip from the cart (`0x0240FBD7`) | both | Unchanged | Not identified; not from the name-call table | `EXP-0050` | `docs/known_unknowns.md` |
 | CPU-side BISON and CHARLIE (life bar, VS screen) | American | In the build, not seen in play | No CPU team held them in the routes or plays; the CPU-side AKUMA came from the same list | `EXP-0051` | — |
 | Second player's side, Versus Mode | both | Not played | The same routines draw both sides | `EXP-0051` | — |
+
+## Boot warnings (`BOOT-005`, 2026-10-30)
+
+`--boot-warnings` replaces all five warning pictures, `ERR1`-`ERR5.BIN`
+(`EXP-0056`). No boot message is left in Japanese. What is not shown, or not
+the game's:
+
+| Item | Status | Why | Evidence |
+| --- | --- | --- | --- |
+| `ERR5.BIN` ("not inserted") | English on disc; shown only by forcing its branch | The cart test chooses it for an unsteady cart ID or a 1 MB cart that fails its RAM test; Mednafen's carts produce neither | `EXP-0053`, `EXP-0054`, `EXP-0056` |
+| "16" in the no-free-space warning | Kept as the original says | The game warns at 18 free blocks or fewer (of Mednafen's 64-byte blocks); the text was translated as written (`BOOT-003`) | `EXP-0053`, `EXP-0055` |
+| Disc-error text in file `0` ("FILE LOAD ERROR", "READ ERROR"…) and exception text in `MMPACK.PCA` ("CPU ADDRESS ERROR"…) | Already English, not triggered | Developer text; needs a disc read failure or a crash | `EXP-0053` |
+| `ERRBKUPJ.FHD` and three more names in file `0` | Unused | No such files on the disc, and no code refers to them | `EXP-0053` |
+| The Saturn's own screens after warnings A and B (the CD-player menu, Memory Manager) | The BIOS's, not the game's | Already labelled in English by the BIOS | `EXP-0055` |
+| The 16 MiB CS1 RAM cart | No message; the game hangs on "NOW LOADING" | It passes the cart test | `EXP-0053` |

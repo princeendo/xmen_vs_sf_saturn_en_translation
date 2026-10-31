@@ -47,8 +47,15 @@ and Cammy.
 - Apocalypse's pre-fight exchange in the final stage;
 - the "no challengers" (乱入禁止) warning in the final fights;
 - continue-screen hints;
-- attract-mode captions;
-- the 4 MB RAM cart warning, and any other error message shown at boot.
+- attract-mode captions.
+
+**Boot warnings: all five in English** (`BOOT-001` to `BOOT-005`,
+2026-10-30). The game shows a full-screen warning at boot when the 4 MB RAM
+cart is missing (or not working) or when the save memory is unformatted,
+damaged or too full. There is no official English for these, so they are a
+new translation, approved by the user, drawn in the game's own English quote
+font and colours. Each was shown from a cold boot, and the user checked them
+on both name variants. See `docs/text_surfaces.md` and `docs/discoveries.md` (D-049 to D-051).
 
 **Character names: two variants** (`LOC-004` to `LOC-007`, 2026-10-30).
 
@@ -116,15 +123,16 @@ never modified. The American-names variant (the default):
 ./invenv.sh python -m tools.disc.build_english \
   data/translations/{wolverine,cyclops,storm,rogue,gambit,sabretooth,juggernaut,magneto,apocalypse,ryu,ken,chun_li,dhalsim,zangief,vega,gouki,nash,cammy}_win_quotes.json \
   data/translations/{wolverine,cyclops,storm,rogue,gambit,sabretooth,juggernaut,magneto,ryu,ken,chun_li,dhalsim,zangief,vega,gouki,nash,cammy}_ending.json \
-  local/build_us --patch-version 4 --names us --image build/names_us
+  local/build_us --patch-version 4 --names us --boot-warnings --image build/names_us
 ```
 
 The Saturn-names variant: the same specs, with
-`local/build_saturn --patch-version 4 --names saturn --image build/names_saturn`.
+`local/build_saturn --patch-version 4 --names saturn --boot-warnings --image build/names_saturn`.
 
 The expected hashes are in `data/regression/references.json`: Track 01
-`441c9cfc…` (American, `names_us_v4`) and `b11c8cd9…` (Saturn names,
-`names_saturn_v4`). `--names none` leaves the names as the Saturn has them
+`e8c9cc4f…` (American, `boot_warnings_us_v4`) and `f53d2378…` (Saturn names,
+`boot_warnings_saturn_v4`). Without `--boot-warnings` the boot warnings stay
+Japanese (`441c9cfc…`, `names_us_v4`; `b11c8cd9…`, `names_saturn_v4`). `--names none` leaves the names as the Saturn has them
 and reproduces the earlier builds: with every ending, Track 01 `7bb8ab82…`
 (M8); without the `_ending.json` specs and `--patch-version 4`, the win
 quotes alone (`36672c5d…`). To rebuild every confirmed build and check its hashes, run

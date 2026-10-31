@@ -2756,3 +2756,26 @@ Checks: `pytest`, `ruff check`, `ruff format --check`, `mypy --strict` are
 clean.
 
 Conclusion: `BOOT-004` is `DONE` (D-051). `BOOT-005` is `READY`.
+
+## 2026-10-30 — SESSION-0087: Verify and register the boot warnings (BOOT-005, EXP-0057)
+
+User request (verbatim): "Start BOOT-005: verify and register."
+
+- **Play check** (`play_check.py`): six cold boots, each in a fresh copy of
+  the user's interactive home, recorded every second. The user's report:
+  "done". Every warning screenshot equals its built picture
+  (`ERR4` on both images, `ERR2` American, `ERR3` Saturn names). The
+  recordings of the damaged-save and no-space boots end on the warning;
+  the Saturn-names normal boot was closed at the CAPCOM logo, after the
+  boot check. Both are covered by `EXP-0053` and `EXP-0056`'s scripted
+  boots, and recorded as such rather than asking for more boots.
+- **Regression:** `boot_warnings_us_v4` and `boot_warnings_saturn_v4`
+  added; `./invenv.sh python -m tools.disc.regression --report
+  docs/regression_report.md`: all nine match.
+- **README** and **coverage register** updated.
+
+Checks: `pytest`, `ruff check`, `ruff format --check`, `mypy --strict` are
+clean.
+
+Conclusion: `BOOT-005` is `DONE`; Phase O is complete. No task is `READY`;
+the next work needs the user's choice.

@@ -16,11 +16,13 @@ the script with `--report`; the last run is below.
 | `roster_endings_v4` | `EXP-0046` | `END-014` | 35 | 4 | 20 | `7bb8ab82…` |
 | `names_us_v4` | `EXP-0051` | `LOC-005` | 35 | 4 | 20 | `441c9cfc…` |
 | `names_saturn_v4` | `EXP-0052` | `LOC-006` | 35 | 4 | 20 | `b11c8cd9…` |
+| `boot_warnings_us_v4` | `EXP-0056` | `BOOT-004` | 35 | 4 | 25 | `e8c9cc4f…` |
+| `boot_warnings_saturn_v4` | `EXP-0056` | `BOOT-004` | 35 | 4 | 25 | `f53d2378…` |
 
 ## Last Run
 
-- Date: 2026-10-30T22:24:57+00:00
-- Commit: `0772a90`
+- Date: 2026-10-31T00:18:15+00:00
+- Commit: `fcdb55c`
 - Python: 3.13.13
 - Source Track 01: `c904a386…` (matches)
 - Program image: `1b1a5a26…` (matches)
@@ -138,5 +140,57 @@ the script with `--report`; the last run is below.
 | `names_saturn_v4` | `MCED.SHP;1` | `6184f150…` | `6184f150…` | yes |
 | `names_saturn_v4` | `MMPACK.PCA;1` | `36179171…` | `36179171…` | yes |
 | `names_saturn_v4` | `Track 01` | `b11c8cd9…` | `b11c8cd9…` | yes |
+| `boot_warnings_us_v4` | `MC00.SHP;1` | `12367af4…` | `12367af4…` | yes |
+| `boot_warnings_us_v4` | `MC01.SHP;1` | `3f5e7ab4…` | `3f5e7ab4…` | yes |
+| `boot_warnings_us_v4` | `MC02.SHP;1` | `a608e360…` | `a608e360…` | yes |
+| `boot_warnings_us_v4` | `MC03.SHP;1` | `fe4b9d82…` | `fe4b9d82…` | yes |
+| `boot_warnings_us_v4` | `MC04.SHP;1` | `49233397…` | `49233397…` | yes |
+| `boot_warnings_us_v4` | `MC05.SHP;1` | `02179ea7…` | `02179ea7…` | yes |
+| `boot_warnings_us_v4` | `MC06.SHP;1` | `89fa13f2…` | `89fa13f2…` | yes |
+| `boot_warnings_us_v4` | `MC07.SHP;1` | `b2776f78…` | `b2776f78…` | yes |
+| `boot_warnings_us_v4` | `MC08.SHP;1` | `7bb06fec…` | `7bb06fec…` | yes |
+| `boot_warnings_us_v4` | `MC09.SHP;1` | `f9c524a5…` | `f9c524a5…` | yes |
+| `boot_warnings_us_v4` | `MC0A.SHP;1` | `4a8aafea…` | `4a8aafea…` | yes |
+| `boot_warnings_us_v4` | `MC0B.SHP;1` | `76c6c033…` | `76c6c033…` | yes |
+| `boot_warnings_us_v4` | `MC0C.SHP;1` | `284c9667…` | `284c9667…` | yes |
+| `boot_warnings_us_v4` | `MC0D.SHP;1` | `2a3ae96e…` | `2a3ae96e…` | yes |
+| `boot_warnings_us_v4` | `MC0E.SHP;1` | `35daca66…` | `35daca66…` | yes |
+| `boot_warnings_us_v4` | `MC0F.SHP;1` | `983aca7b…` | `983aca7b…` | yes |
+| `boot_warnings_us_v4` | `MC10.SHP;1` | `d97633a6…` | `d97633a6…` | yes |
+| `boot_warnings_us_v4` | `MC11.SHP;1` | `736aab3d…` | `736aab3d…` | yes |
+| `boot_warnings_us_v4` | `MCED.SHP;1` | `b37c3a64…` | `b37c3a64…` | yes |
+| `boot_warnings_us_v4` | `ERR1.BIN;1` | `72fbff0a…` | `72fbff0a…` | yes |
+| `boot_warnings_us_v4` | `ERR2.BIN;1` | `5cee7adb…` | `5cee7adb…` | yes |
+| `boot_warnings_us_v4` | `ERR3.BIN;1` | `017b7a5e…` | `017b7a5e…` | yes |
+| `boot_warnings_us_v4` | `ERR4.BIN;1` | `970f953a…` | `970f953a…` | yes |
+| `boot_warnings_us_v4` | `ERR5.BIN;1` | `7c918f31…` | `7c918f31…` | yes |
+| `boot_warnings_us_v4` | `MMPACK.PCA;1` | `b5b7927c…` | `b5b7927c…` | yes |
+| `boot_warnings_us_v4` | `Track 01` | `e8c9cc4f…` | `e8c9cc4f…` | yes |
+| `boot_warnings_saturn_v4` | `MC00.SHP;1` | `12367af4…` | `12367af4…` | yes |
+| `boot_warnings_saturn_v4` | `MC01.SHP;1` | `3f5e7ab4…` | `3f5e7ab4…` | yes |
+| `boot_warnings_saturn_v4` | `MC02.SHP;1` | `a608e360…` | `a608e360…` | yes |
+| `boot_warnings_saturn_v4` | `MC03.SHP;1` | `fe4b9d82…` | `fe4b9d82…` | yes |
+| `boot_warnings_saturn_v4` | `MC04.SHP;1` | `49233397…` | `49233397…` | yes |
+| `boot_warnings_saturn_v4` | `MC05.SHP;1` | `02179ea7…` | `02179ea7…` | yes |
+| `boot_warnings_saturn_v4` | `MC06.SHP;1` | `89fa13f2…` | `89fa13f2…` | yes |
+| `boot_warnings_saturn_v4` | `MC07.SHP;1` | `b2776f78…` | `b2776f78…` | yes |
+| `boot_warnings_saturn_v4` | `MC08.SHP;1` | `7bb06fec…` | `7bb06fec…` | yes |
+| `boot_warnings_saturn_v4` | `MC09.SHP;1` | `f9c524a5…` | `f9c524a5…` | yes |
+| `boot_warnings_saturn_v4` | `MC0A.SHP;1` | `4a8aafea…` | `4a8aafea…` | yes |
+| `boot_warnings_saturn_v4` | `MC0B.SHP;1` | `76c6c033…` | `76c6c033…` | yes |
+| `boot_warnings_saturn_v4` | `MC0C.SHP;1` | `284c9667…` | `284c9667…` | yes |
+| `boot_warnings_saturn_v4` | `MC0D.SHP;1` | `2a3ae96e…` | `2a3ae96e…` | yes |
+| `boot_warnings_saturn_v4` | `MC0E.SHP;1` | `8ac63fff…` | `8ac63fff…` | yes |
+| `boot_warnings_saturn_v4` | `MC0F.SHP;1` | `983aca7b…` | `983aca7b…` | yes |
+| `boot_warnings_saturn_v4` | `MC10.SHP;1` | `15143957…` | `15143957…` | yes |
+| `boot_warnings_saturn_v4` | `MC11.SHP;1` | `b07c60ba…` | `b07c60ba…` | yes |
+| `boot_warnings_saturn_v4` | `MCED.SHP;1` | `6184f150…` | `6184f150…` | yes |
+| `boot_warnings_saturn_v4` | `ERR1.BIN;1` | `72fbff0a…` | `72fbff0a…` | yes |
+| `boot_warnings_saturn_v4` | `ERR2.BIN;1` | `5cee7adb…` | `5cee7adb…` | yes |
+| `boot_warnings_saturn_v4` | `ERR3.BIN;1` | `017b7a5e…` | `017b7a5e…` | yes |
+| `boot_warnings_saturn_v4` | `ERR4.BIN;1` | `970f953a…` | `970f953a…` | yes |
+| `boot_warnings_saturn_v4` | `ERR5.BIN;1` | `7c918f31…` | `7c918f31…` | yes |
+| `boot_warnings_saturn_v4` | `MMPACK.PCA;1` | `36179171…` | `36179171…` | yes |
+| `boot_warnings_saturn_v4` | `Track 01` | `f53d2378…` | `f53d2378…` | yes |
 
 Result: all references match.
