@@ -2834,3 +2834,39 @@ Checks: `pytest`, `ruff check`, `ruff format --check`, `mypy --strict` are
 clean.
 
 Conclusion: `SPEC-001` is `DONE` (D-052). `SPEC-002` is `READY`.
+
+## 2026-10-30 — SESSION-0090: Official English for the special cases (SPEC-002, EXP-0059)
+
+User request (verbatim): "Start SPEC-002: official English for the special
+cases."
+
+- **PlayStation (US):** `ps1_scan.py` found 21 long English runs; none is
+  boss-box text. The two that mention Apocalypse are an ending narration
+  and a win quote. This supports the arcade trace (D-052): no official box
+  English.
+- **Post-boss quote:** `post_boss_pairing.py` on the 17 `EXP-0051` route
+  runs: each showed the slot's fixed English record (17 of 17).
+- **Box room** (untouched image, RAM): with the language and region words
+  at 2 the boxes were skipped; with the region word only, test English
+  drew in 2 × 19 wide cells from 100-byte records. A 2 × 25 box renderer is
+  not tried.
+- **Alpha Chun-Li, American build:** her quotes and first two ending pages
+  are English in the Japanese layout (garbled), and the later pages are
+  Japanese. The SPEC-001 HYPOTHESIS "her quotes are still Japanese" is
+  **disproven** in its wording: they are English records drawn in the
+  wrong layout. Her table word `0x06066704` at `0x0205` fixed the quote,
+  and at `0x0285` the ending, each against a control.
+- **Subagent (MAME `xmvsfu` only):** slot 18 reads Chun-Li's English quote
+  and ending records at the same addresses; her ending's second scene
+  draws the Alpha costume through its own scene handler (art, not traced).
+  It copied the `EXP-0044` runner and the timeline Lua with an opcode tap;
+  copies are in `EXP-0059/arcade/`. Its first attempt named the new verb
+  `logreads_op`, which the parser cannot match; those runs were deleted and
+  rerun.
+- **Tooling:** PIL is not installed; contact sheets were made with ffmpeg.
+
+Checks: `pytest` (218 passed), `ruff check`, `ruff format --check`, `mypy
+--strict` are clean.
+
+Conclusion: `SPEC-002` is `DONE` (D-053). `SPEC-003` is `READY`: it needs
+the user's plan (new box English or skip the boxes; Alpha Chun-Li's flag).

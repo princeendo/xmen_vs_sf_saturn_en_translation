@@ -445,7 +445,14 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
     the pre-boss quote is random, not a story line.
   - **Characters:** slot 18 is Alpha Chun-Li (Start held); Gouki needs no
     unlock. Alpha Chun-Li's quotes are likely still Japanese in the builds.
-- **Next:** `SPEC-002` (official English for the special cases; `READY`).
+- **2026-10-30** (`SESSION-0090`, `EXP-0059`): `SPEC-002` is done (D-053).
+  - **Boss boxes:** no official English anywhere; the box code holds
+    2 × 19 wide cells, and can skip them as the arcade does.
+  - **Post-boss quote:** the fixed English record, already built.
+  - **Alpha Chun-Li:** official English is Chun-Li's (arcade, MAME). The
+    builds garble it because her table word lacks the flags; `0x0285`
+    fixes her quotes and ending in RAM.
+- **Next:** `SPEC-003` (the user's plan for the special cases; `READY`).
   Backlog
   after the phases: `REL-001` (release patches), `TXT-001`, and the rest of
   `UI-001` and `UI-003`.
@@ -2954,7 +2961,7 @@ Known before Phase P (each a lead, not a finding about what remains):
 
 ### SPEC-002 - Official English for the special cases
 
-- **Status:** `READY`
+- **Status:** `DONE`
 - **Milestone:** M9 (`SPECIAL-001`)
 - **Dependencies:** SPEC-001 (done).
 - **Blockers:** None.
@@ -2971,13 +2978,32 @@ Known before Phase P (each a lead, not a finding about what remains):
     variants (the line naming the player) paired slot by slot.
   - **Names:** which name each English line uses, against both variants.
   - **Fit:** each line against the renderer's room.
+- **Notes:** Done 2026-10-30 (`EXP-0059`, D-053).
+- **Outcome:**
+  - **Boss boxes:** no official English. The arcade code skips them
+    unless the language is Japanese; the US PlayStation release has none.
+    The box code draws 2 × 19 wide cells (38 per box); with the language
+    word set, it skips them as the arcade does. Only the second box
+    (Apocalypse's answer) of slots 14-16 depends on the name variant
+    (Bison/Vega, Akuma/Gouki, Charlie/Nash).
+  - **Post-boss quote:** each slot's fixed English record (17 of 17),
+    already built and named per variant.
+  - **Alpha Chun-Li:** the arcade gives her Chun-Li's English quotes and
+    ending text at the same addresses (MAME). In the builds she shows
+    garbled English, then Japanese. Her table word `0x06066704` at
+    `0x0285` (RAM, controlled) shows Chun-Li's English quote and ending.
+  - **Not text:** the arcade draws her Alpha costume in her ending's
+    second scene; the Saturn does not (`docs/known_unknowns.md`).
+  - **Pairing by forcing:** the boxes have no English to pair. The
+    post-boss quote and Alpha Chun-Li's text are the existing pairings,
+    shown on both sides.
 
 ### SPEC-003 - The user's plan for the special cases
 
-- **Status:** `BLOCKED`
+- **Status:** `READY`
 - **Milestone:** M9 (`SPECIAL-001`)
-- **Dependencies:** SPEC-002.
-- **Blockers:** The official English.
+- **Dependencies:** SPEC-002 (done).
+- **Blockers:** None.
 - **Objective:** The user decides what each special surface shows, in both
   name variants, and any unlock option.
 - **Acceptance criteria:**

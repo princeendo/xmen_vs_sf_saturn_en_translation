@@ -1058,3 +1058,27 @@ Reproduce: `research/experiments/EXP-0056/README.md`.
   unlock on the Saturn.
 
 Reproduce: `research/experiments/EXP-0058/README.md`.
+
+## D-053 (Special): Official English for the special cases, and Alpha Chun-Li's flag (`SPEC-002`, `EXP-0059`)
+
+- **Boss boxes:** no official English. The arcade skips them when its
+  language is not Japanese (code trace, D-052), and the US PlayStation
+  release has no English for them either (data search).
+- **Box room:** the Saturn box code draws 2 lines × 19 wide cells. With the
+  region word `0x060F5478` at 2, it reads 100-byte records from the same
+  base. With the language word `0x060F547A` at 2, it skips the boxes, as the
+  arcade does. Only the second box (Apocalypse's answer) of slots 14-16
+  names a character whose name differs between the two name variants.
+- **Post-boss quote:** each slot's fixed English record (17 of 17 route
+  runs), as in the arcade.
+- **Slot 18 in the arcade** reads Chun-Li's English win quotes and ending
+  text at the same addresses (MAME read taps and breakpoints).
+- **Slot 18 in the builds:** its fixed-table word `0x06066704` is `0x0005`,
+  so its quotes and first ending pages draw English records in the Japanese
+  layout, garbled, and its later ending pages are Japanese. Each was fixed
+  in RAM by one controlled change against a control:
+  - `0x0205` (the English flag) gave a clean English quote;
+  - `0x0285` (the English flag and the ending bit) gave Chun-Li's English
+    ending, the arcade's pages.
+
+Reproduce: `research/experiments/EXP-0059/README.md`.
