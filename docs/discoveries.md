@@ -1163,3 +1163,27 @@ Reproduce: `research/experiments/EXP-0063/README.md`.
   screens.
 
 Reproduce: `research/experiments/EXP-0064/README.md`.
+
+## D-057 (UI): How the attract draws a caption, the flash before caption 3, and the zoom on captions 1 and 2 (`CAP-002`, `EXP-0065`)
+
+- **Maps:** section A's script (MSHvSF's decoders, unchanged) writes NBG1's
+  index and attribute arrays (WRAM-H `0x06033020`/`0x06035020`, frame bit
+  6); the builder `0x0601F9E4` makes pattern names, character = base
+  (`0x06020BBC`) + 4 × index. Replayed arrays equal RAM in all 8,192 words.
+- **Palette:** the script's palette records set the source `0x0602E020`
+  (4 bits a channel); NBG1 palette 0 entry e is source index `0x3FF` + e.
+- **The flash:** 決めろ! flashes with white for 16 frames before caption 3
+  (script frames 706-723, its own map and indices in caption 3's block).
+  The arcade flashes TO EXECUTE in the same slot with the same timing.
+- **The zoom:** `XVSOPEN.PCA` (decoded at `0x0601F000`) shrinks NBG1
+  horizontally for captions 1 and 2: its scroll handler `0x0601FDB8`, at
+  script counter `0x06020C24` = 127 or 479 with `0x06020C47` = 0 (the
+  opening, not `PDEMO`), writes `0x00011200` / `0x00011280` (16.16) to
+  `0x06020C54` and NBG1's x (19 / 12). Setting the literals at `0x0601FE50`
+  and `0x0601FE78` to `0x00010000`, in RAM and then on disc, shows both
+  captions at full size, each line where the build placed it.
+- **English build:** `build_english --attract-captions` (all eight files,
+  their self-check, and `XVSOPEN.PCA`), verified by forced captures of all
+  eight files and a cold boot.
+
+Reproduce: `research/experiments/EXP-0065/README.md`.

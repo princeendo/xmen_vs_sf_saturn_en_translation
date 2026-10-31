@@ -4,7 +4,8 @@ The user chose the US arcade's own caption art, layout and colours, with the
 banner respelled UNCANNY from the arcade's letters (`EXP-0065`,
 ``docs/localization_policy.md``). The art is game-derived and read at build
 time from ART (``c1.png``-``c3.png``, 352 x 200 crops of the arcade captions;
-``banner.png``, the stitched banner): `EXP-0065/caption_art.py` makes it from
+``flash.png``, the TO EXECUTE flashed before caption 3; ``banner.png``, the
+stitched banner): `EXP-0065/caption_art.py` makes it from
 MAME snapshots.
 
 How the attract draws a caption (`EXP-0064`, `EXP-0065`): NBG1 tiles. Section
@@ -19,19 +20,23 @@ Per file, using ``data/attract/caption_room.json`` (the indices each caption
 may use, by block):
 
 - **Glyphs:** each caption's art is placed on the plane at its scroll
-  (captions 1-3) or along the banner's path (caption 4), each line aligned
-  to the 16-pixel grid to need the fewest distinct characters, and cut into
-  2 x 2-cell characters; colours become palette entries 1-9 (``ENTRIES``).
+  (captions 1-3 and the flash), each line centred on the screen (caption 1
+  to within 3 pixels, to fit) and moved up or down to need the fewest
+  distinct characters, or along the banner's path (caption 4), aligned to
+  the 16-pixel grid; then cut into 2 x 2-cell characters. Colours become
+  palette entries 1-9 (``ENTRIES``: the arcade's, with NOW LOADING's
+  purple outline).
 - **Blocks:** each glyph's 128 bytes go to its index in the block (part 1
   + 128 x index; caption 1's extra slots in section C's part 2, at 0x20 +
   their VRAM address).
-- **Script:** the Japanese caption's map updates are replaced (captions 1-3)
-  or, for the banner, its rows are cleared from the window's updates and
-  written column by column as it scrolls, switching to the second block's
-  indices at the script's re-index frame (files 0-4); the four caption
-  palette loads get the arcade colours; the banner's scroll step becomes 9
-  pixels a frame (``BANNER_STEP``), so the 1,098-pixel banner crosses the
-  screen in the script's frames.
+- **Script:** the Japanese caption's map updates are replaced (captions 1-3;
+  the flash's keeps its cells, blanked outside the window) or, for the
+  banner, its rows are cleared from the window's updates and written column
+  by column as it scrolls, switching to the second block's indices at the
+  script's re-index frame (files 0-4); the caption palette loads (the
+  flash's four that are not white) get the arcade colours; the banner's
+  scroll step becomes 9 pixels a frame (``BANNER_STEP``), so the
+  1,098-pixel banner crosses the screen in the script's frames.
 - **Encoding:** section A with `tools.disc.st2_encode.script_encode`, the
   changed graphics blocks with ``lz_encode``; each must fit the original's
   room (the compressed-size field and every later offset stay unchanged; the
@@ -45,6 +50,7 @@ pixel. The output is game-derived: write it under ``local/`` only.
 from __future__ import annotations
 
 import argparse
+import itertools
 import json
 import struct
 import subprocess
@@ -73,13 +79,15 @@ SCREEN_W, SCREEN_H = 352, 240
 ART_TOP = 12  # screen y of the arcade crops' row 0
 ENTRIES = {  # arcade colour -> NBG1 palette 0 entry, and its 4-bit source colour
     "111111": (1, 0xF111),
-    "000000": (2, 0xF000),
+    # The arcade's black outline drawn in NOW LOADING's purple (502080 on
+    # screen), the user's choice (EXP-0065).
+    "000000": (2, 0xF528),
     "ffffff": (3, 0xFFFF),
     "ffff99": (4, 0xFFF9),
     "ffee00": (5, 0xFFE0),
     "ffcc00": (6, 0xFFC0),
     "ffaa00": (7, 0xFFA0),
-    "ff8811": (8, 0xF881),
+    "ff8811": (8, 0xFF81),
     "dd6622": (9, 0xFD62),
 }
 BACKGROUND = 1
@@ -91,19 +99,39 @@ TAIL = -1  # Frame.parts key for the bytes after the end word
 
 @dataclass(frozen=True)
 class Still:
-    """A caption shown whole (captions 1-3)."""
+    """A caption shown whole (captions 1-3, and the flash before caption 3)."""
 
     art: str
     build: int  # script frame of the Japanese caption's map update
-    palette: int  # script frame of its palette load
+    palettes: tuple[int, ...]  # script frames of its palette loads
     scroll: tuple[int, int]
+    room: str = ""  # the room entry giving its block, when not its own
+    keep: bool = False  # keep the map's cells outside the window (blanked)
+    slack: int = 0  # pixels a line may sit off the screen's centre
 
 
 STILLS = {
-    "caption1": Still("c1.png", 126, 127, (19, 16)),
-    "caption2": Still("c2.png", 478, 479, (12, 16)),
-    "caption3": Still("c3.png", 724, 724, (16, 272)),
+    # Centred to 3 pixels: exactly centred needs 140 characters, 118 fit.
+    "caption1": Still("c1.png", 126, (127,), (19, 16), slack=3),
+    "caption2": Still("c2.png", 478, (479,), (12, 16)),
+    # 決めろ! flashes with white over frames 707-722 from caption 3's block;
+    # the arcade flashes TO EXECUTE (EXP-0065). The white records stay.
+    "flash": Still(
+        "flash.png", 706, (707, 712, 716, 720), (192, 16), "caption3", keep=True
+    ),
+    "caption3": Still("c3.png", 724, (724,), (16, 272)),
 }
+# The attract module XVSOPEN.PCA (decoded at 0x0601F000) shrinks NBG1 to
+# 1/1.0703 and 1/1.0723 for captions 1 and 2 (its scroll handler, at script
+# counter 127 and 479, opening streams only), which fitted the Japanese art.
+# The English art is drawn at full size, so both factors become 1.0
+# (EXP-0065).
+XVSOPEN = "XVSOPEN.PCA"
+XVSOPEN_BASE = 0x0601F000
+ZOOM_PATCHES = [
+    (0x0601FE50, "00011200", "00010000"),  # caption 1's x zoom, 16.16
+    (0x0601FE78, "00011280", "00010000"),  # caption 2's
+]
 BANNER_ART = "banner.png"
 BANNER_FIRST, BANNER_CLEAR = 951, 1118  # window: blank fill .. the clear
 BANNER_PALETTE = 952
@@ -328,6 +356,79 @@ def best_shifts(rows: list[list[int]], x0: int, y0: int) -> list[tuple[int, int]
     return shifts
 
 
+_CENTRED: dict[tuple[object, ...], list[tuple[int, int]]] = {}
+
+
+def centred_shifts(
+    rows: list[list[int]], x0: int, y0: int, slack: int
+) -> list[tuple[int, int]]:
+    """Per-line shifts that centre each line on the 352-pixel screen to within
+    ``slack`` pixels and need the fewest distinct cells: every combination of
+    horizontal shifts, each with vertical shifts (-8..7) by coordinate
+    descent. The art's columns are screen columns."""
+    key = (tuple(tuple(row) for row in rows), x0, y0, slack)
+    if key in _CENTRED:  # the same art and scroll in every file
+        return _CENTRED[key]
+    spans = lines(rows)
+    centres = []
+    for top, bottom in spans:
+        xs = [
+            x
+            for y in range(top, bottom)
+            for x, v in enumerate(rows[y])
+            if v != BACKGROUND
+        ]
+        centres.append(round(SCREEN_W / 2 - (min(xs) + max(xs) + 1) / 2))
+    memo: dict[tuple[int, tuple[int, int]], dict[tuple[int, int], Cell]] = {}
+
+    def line_cells(i: int, shift: tuple[int, int]) -> dict[tuple[int, int], Cell]:
+        if (i, shift) not in memo:
+            top, bottom = spans[i]
+            only = [row if top <= y < bottom else [] for y, row in enumerate(rows)]
+            cells: dict[tuple[int, int], list[int]] = {}
+            for y, row in enumerate(only):
+                for x, value in enumerate(row):
+                    if value != BACKGROUND:
+                        px, py = x0 + x + shift[0], y0 + y + shift[1]
+                        cell = cells.setdefault(
+                            (px // 16, py // 16), [BACKGROUND] * 256
+                        )
+                        cell[(py % 16) * 16 + px % 16] = value
+            memo[(i, shift)] = {k: tuple(v) for k, v in cells.items()}
+        return memo[(i, shift)]
+
+    def count(trial: list[tuple[int, int]]) -> int:
+        cells: dict[tuple[int, int], Cell] = {}
+        for i, shift in enumerate(trial):
+            for at, cell in line_cells(i, shift).items():
+                if at in cells:  # two lines share the cell: overlay the ink
+                    cell = tuple(
+                        a if b == BACKGROUND else b
+                        for a, b in zip(cells[at], cell, strict=True)
+                    )
+                cells[at] = cell
+        return len(set(cells.values()))
+
+    best: tuple[int, list[tuple[int, int]]] | None = None
+    for dxs in itertools.product(*(range(c - slack, c + slack + 1) for c in centres)):
+        trial = [(dx, 0) for dx in dxs]
+        value = count(trial)
+        improved = True
+        while improved:
+            improved = False
+            for i, dx in enumerate(dxs):
+                for dy in range(-8, 8):
+                    option = trial[:]
+                    option[i] = (dx, dy)
+                    if (n := count(option)) < value:
+                        value, trial, improved = n, option, True
+        if best is None or value < best[0]:
+            best = (value, trial)
+    assert best is not None
+    _CENTRED[key] = best[1]
+    return best[1]
+
+
 def char_bytes(cell: Cell) -> bytes:
     """A 2 x 2-cell character: four 8 x 8 4 bpp cells, left pixel high."""
     out = bytearray()
@@ -433,10 +534,10 @@ def build(
     plan = Plan()
 
     for key, still in STILLS.items():
-        info = room[key]
+        info = room[still.room or key]
         _, _, rows = read_png(art / still.art)
         x0, y0 = still.scroll[0], still.scroll[1] + ART_TOP
-        cells = place(rows, x0, y0, best_shifts(rows, x0, y0))
+        cells = place(rows, x0, y0, centred_shifts(rows, x0, y0, still.slack))
         old = map_words(frames[still.build])
         if key == "caption1":
             block, base, section = section_c, info["base"], True
@@ -449,13 +550,15 @@ def build(
             first, _ = block.part1()
             base = info.get("base", 0)
             own = sorted({w for w in old[:ARRAY] if w != 0xFFFF})
-            blank = block.blank(own if key == "caption2" else ())
+            blank = block.blank(own if key in ("caption2", "flash") else ())
             free = [i for i in own if i != blank]
             changed.add(number)
         index, writes = assign(cells, free, blank)
         for i, cell in writes:
             block.put(i, base, cell, section)
         words = [0xFFFF] * 0x2000
+        if still.keep:  # the old cells stay written, blank, attributes kept
+            words[:ARRAY] = [blank if w != 0xFFFF else w for w in old[:ARRAY]]
         visible_cols = range(x0 // 16, (x0 + SCREEN_W - 1) // 16 + 1)
         visible_rows = range(
             still.scroll[1] // 16, (still.scroll[1] + SCREEN_H - 1) // 16 + 1
@@ -465,9 +568,11 @@ def build(
                 k = word_index(column % 64, row % 32)
                 placed = cells.get((column, row))
                 words[k] = blank if placed is None or placed == BLANK else index[placed]
-                words[ARRAY + k] = 0
+                if not still.keep:
+                    words[ARRAY + k] = 0
         set_map(frames[still.build], words)
-        recolour(frames[still.palette])
+        for n in still.palettes:
+            recolour(frames[n])
         plan.stills[key] = (still, cells)
 
     banner_cells = schedule_banner(frames, stream, room["caption4"], art, changed, plan)
@@ -675,7 +780,7 @@ def check(name: str, data: bytes, room: dict[str, Any], plan: Plan) -> None:
         return tuple(pixels)
 
     for key, (still, cells) in plan.stills.items():
-        info = room[key]
+        info = room[still.room or key]
         block = section_c if key == "caption1" else stream[info["block"]]
         base = info.get("base", 0)
         state = states[still.build]
@@ -704,7 +809,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("st2_dir", type=Path, help="the untouched OPENING*.ST2")
     parser.add_argument(
-        "art", type=Path, help="c1-c3.png and banner.png (ignored path)"
+        "art", type=Path, help="c1-c3.png, flash.png and banner.png (ignored path)"
     )
     parser.add_argument("--out-dir", type=Path, required=True, help="ignored path")
     parser.add_argument("--room", type=Path, default=ROOM)

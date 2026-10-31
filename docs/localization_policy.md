@@ -163,12 +163,26 @@ English is the US arcade's four captions, shown identically by the US PS1
 | Question (short) | Answer |
 | --- | --- |
 | The arcade's "UNCCANY" | "But I want to use "Uncanny" instead of "Unccany" if possible." |
-| 決めろ! (decoded, never shown) | ""Decide it" can be left out if you don't find a useful/meaningful place to put it." |
+| 決めろ! (then thought never shown) | ""Decide it" can be left out if you don't find a useful/meaningful place to put it." |
 | Lettering and colours, from samples of two options | "Use option A: the arcade's art in the arcade's own yellow-to-orange colours, with UNCANNY. I approve the arcade's English wording as shown." |
 
 So the captions are the arcade's own art, layout and colours, in both name
-variants, with UNCANNY made from the arcade's own letters; 決めろ! is left
-out. This extends `GATE-TRANSLATION` to the attract captions.
+variants, with UNCANNY made from the arcade's own letters. This extends
+`GATE-TRANSLATION` to the attract captions.
+
+決めろ! turned out to show: the user's attract check found it ("There was
+still a Japanese piece int he English opening."), a 16-frame white flash
+before caption 3. The arcade flashes its own TO EXECUTE in that slot, with
+the same timing, so that is the "useful/meaningful place" the user's
+answer allowed for: the build shows the arcade's TO EXECUTE there, in its
+art and colours (`EXP-0065`). The user may still choose to blank it.
+
+After watching the fixed build, the user expected the captions in NOW
+LOADING's palette and saw them off centre. Shown both outlines, the user
+decided (verbatim): "Use NOW LOADING's purple outline, fix the orange, and
+centre the captions." So the captions keep the arcade's art and shades
+with NOW LOADING's purple outline, each line centred on the Saturn's
+screen (caption 1 to within 3 pixels, to fit its room).
 
 ## Deferred Until Evidence Exists
 

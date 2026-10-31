@@ -483,7 +483,14 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
 - **2026-10-31** (`SESSION-0096`, `EXP-0065`): `CAP-002` in progress. The
   user chose the arcade's art and colours, with UNCANNY (`GATE-TRANSLATION`
   extended); the map and palette paths are confirmed offline.
-- **Next:** `CAP-002`'s build (EXP-0065, "Build Design"); then `HINT-001`.
+- **2026-10-31** (`SESSION-0097`/`0098`, `EXP-0065`): `CAP-002` built
+  and checked, in both variants. The user's first check found 決めろ!
+  flashing before caption 3; it now flashes the arcade's TO EXECUTE. The
+  second found off-centre lines and the wrong orange: fixed, with NOW
+  LOADING's purple outline (the user's choice) and captions 1 and 2's
+  zoom removed in `XVSOPEN.PCA` (D-057).
+- **Next:** the user's attract check of this build, in each variant; then
+  `CAP-002` is done and `HINT-001` starts.
   Backlog
   after the phases: `REL-001` (release patches), `TXT-001`, and the rest of
   `UI-001` and `UI-003`.

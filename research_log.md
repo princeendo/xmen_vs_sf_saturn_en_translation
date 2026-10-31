@@ -3128,3 +3128,54 @@ Checks: `pytest` (230 passed), `ruff check`, `ruff format --check` clean.
 
 Conclusion: `CAP-002` stays `IN_PROGRESS`; the build is next.
 
+
+## 2026-10-31 — SESSION-0098: The caption build, and the flash before caption 3 (CAP-002, EXP-0065)
+
+User requests (verbatim): "Start the caption build now."; then, after
+watching the first build, "There was still a Japanese piece int he English
+opening."
+
+- **Build:** `tools/disc/attract_captions.py` (`build_english
+  --attract-captions`) with the new ring-LZ encoders (`st2_encode.py`).
+  Failures on the way, each fixed: the banner's pre-built columns over
+  capacity (now written just in time); stale blank columns after the
+  re-index (all 64 columns rewritten there); a column written at the
+  re-index frame blanked (`n <= reindex`); four scripts' trailing pad byte
+  (kept).
+- **The Japanese piece:** 決めろ! flashing with white for 16 frames before
+  caption 3 (script frames 706-723). `EXP-0064` called it never shown; its
+  20-frame census missed it. Corrected there and in `known_unknowns.md`.
+- **Arcade:** MAME frames 1,990-2,040 every frame: the arcade flashes TO
+  EXECUTE in that slot with the same timing. Built from the arcade's frame
+  2,000 into the flash's own 52 indices (33 used), its four non-white
+  palette records recoloured.
+- **Comparison method:** pixel comparison against the original disc is
+  invalid (stream timing differs between images: files 0, 1, 3 drift). The
+  previous caption build, with the same layout, is the control: only the
+  flash differs (files 0 and 3 still drift; single one-frame shifts).
+- **References:** `attract_captions_us_v4`, `attract_captions_saturn_v4`.
+- **The user's second check** (verbatim in `EXP-0065`): no Japanese; some
+  captions off centre; colours not NOW LOADING's. Found: `ff8811` encoded
+  `F881` (olive); NOW LOADING outlines in purple. The user chose NOW
+  LOADING's purple outline and centred captions.
+- **Centring:** the build's 8-pixel line shifts removed (centred; caption
+  1 within 3 pixels to fit). Captions 1 and 2 stayed off centre: rejected a
+  line-scroll table (all zero), a scroll offset and a two-axis zoom; a
+  per-band fit found a horizontal zoom, 274/256, set by `XVSOPEN.PCA` at
+  the opening's script counter 127 and 479. Its two literals set to 1.0,
+  first in RAM, then on disc (D-057).
+- **Save states keep the old attract module:** after the disc change, the
+  literals in RAM were still the old ones at caption 1, so the zoom was
+  checked from a cold boot.
+- **An edit accident:** an empty slice made a string replacement insert
+  text between every character of `attract_captions.py`; undone by
+  removing the inserted copies (exact), checked by line count and diff.
+- **Regression:** two full runs stopped early, each made stale by a later
+  build-tool change; one full run on the final tools.
+
+Checks: `pytest` (239 passed), `ruff check`, `ruff format --check`, `mypy
+tools` clean. Full regression (`tools.disc.regression --report`): all 15
+references match, the two attract-caption references included.
+
+Conclusion: `CAP-002` stays `IN_PROGRESS` until the user's attract check of
+this build in both variants.

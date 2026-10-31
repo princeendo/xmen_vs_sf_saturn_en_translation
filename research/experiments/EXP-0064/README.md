@@ -80,7 +80,9 @@ C="local/disc_images/xmvsf_saturn_jp_3m/X-Men vs. Street Fighter (Japan) (3M).cu
     horizontally (`SCXIN1` `0x2A8` → `0x528` over 80 frames).
 - **決めろ!** ("Decide it!") sits in the same page's top right while
   caption 3 shows, outside the visible area. It was never on screen in the
-  eight cycles.
+  eight cycles. **Corrected by `EXP-0065`:** it flashes for 16 frames just
+  before caption 3 (from its own map at script frame 706); this census,
+  every 20 frames, missed it.
 
 ### File, container and codec
 
@@ -249,7 +251,9 @@ Cyclops.
 - **The maps:** where NBG1's caption maps come from (MSHvSF: section A's
   script) was not traced; `CAP-002` needs it for English layouts.
 - **決めろ!** is decoded with caption 3 and placed in the plane but was never
-  shown; when (or whether) it shows is unknown.
+  shown; when (or whether) it shows is unknown. (Answered by `EXP-0065`: a
+  16-frame white flash before caption 3; the arcade flashes TO EXECUTE
+  there.)
 - **Which file plays:** each cycle streams one `OPENING` file; which, and in
   what order, was not traced. The captions' characters are in all eight, so
   an English build must change all eight.

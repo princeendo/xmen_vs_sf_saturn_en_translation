@@ -5,11 +5,13 @@ import struct
 import pytest
 
 from tools.disc.attract_captions import (
+    BACKGROUND,
     BLANK,
     ENTRIES,
     PALETTE_ZERO,
     Frame,
     assign,
+    centred_shifts,
     char_bytes,
     join_frames,
     parse_frames,
@@ -70,3 +72,12 @@ def test_assign_refuses_more_characters_than_room() -> None:
     assert sorted(i for i, _ in writes) == [5, 7]
     with pytest.raises(ValueError, match="room"):
         assign(cells, [5], 0)
+
+
+def test_a_line_is_centred_on_the_screen() -> None:
+    rows = [[BACKGROUND] * 352 for _ in range(4)]
+    for y in (1, 2):
+        for x in range(10, 50):  # ink centred at x = 30, the screen's at 176
+            rows[y][x] = 3
+    [(dx, _)] = centred_shifts(rows, 0, 0, 0)
+    assert dx == 146

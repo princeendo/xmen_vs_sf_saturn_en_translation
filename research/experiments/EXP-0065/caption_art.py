@@ -7,8 +7,9 @@ Run from the repository root:
 SNAPS holds MAME ``xmvsfu`` snapshots (`stitch_banner.py`'s run, every frame
 around the captions); BANNER is the stitched, respelled banner
 (`respell.py`, UNCANNY). Writes ``OUT/c1.png``-``c3.png`` (each caption, 352
-x 200: arcade columns 16-367, rows 0-199, frames 1,440, 1,800 and 2,055) and
-``OUT/banner.png``. Game-derived: OUT goes under ``local/``.
+x 200: arcade columns 16-367, rows 0-199, frames 1,440, 1,800 and 2,055),
+``OUT/flash.png`` (TO EXECUTE, flashed before caption 3: frame 2,000, cut the
+same way) and ``OUT/banner.png``. Game-derived: OUT goes under ``local/``.
 """
 
 from __future__ import annotations
@@ -18,7 +19,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-FRAMES = {"c1": 1440, "c2": 1800, "c3": 2055}
+FRAMES = {"c1": 1440, "c2": 1800, "c3": 2055, "flash": 2000}
 
 
 def main(snaps: Path, banner: Path, out: Path) -> int:

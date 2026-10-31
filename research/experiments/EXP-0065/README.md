@@ -1,10 +1,11 @@
 # EXP-0065 (UI): English Attract Captions: the Map Path and the User's Options
 
 Task: CAP-002
-Status: IN_PROGRESS (map and palette paths confirmed; the user chose option
-A; the build to come)
+Status: IN_PROGRESS (built and checked, the flash before caption 3
+included; the user's attract check of the fixed build to come)
 Confidence: CONFIRMED for the map and palette paths (offline replays equal
-RAM); the build is not yet done
+RAM) and for the build's screens (self-check; forced captures of all eight
+files)
 
 ## Observation
 
@@ -218,7 +219,126 @@ blank character.
 4. Check offline (every caption frame renders as planned; maps elsewhere
    unchanged), then from a cold boot, then the user's attract check.
 
+## The Build
+
+[`tools/disc/attract_captions.py`](../../../tools/disc/attract_captions.py),
+run by `build_english --attract-captions local/cap002/art`, rebuilds all
+eight `OPENING*.ST2` (same size; 530,974-656,610 changed bytes each, from
+`0x812`). The art comes from [`caption_art.py`](caption_art.py)
+(`c1`-`c3.png`, `flash.png`, `banner.png`).
+
+- **Encoders:** [`tools/disc/st2_encode.py`](../../../tools/disc/st2_encode.py)
+  (from MSHvSF, rewritten for XvSF's ring LZ). Optimal parses beat the
+  originals, so section A and every changed block fit their old room; the
+  build refuses otherwise.
+- **The banner:** written column by column just before each column shows,
+  rewriting all 64 plane columns at the script's re-index frame (files
+  0-4); its step goes from 8 to 9 pixels a frame.
+- **Self-check:** the build decodes what it wrote and renders every caption
+  frame (and the flash) from it; all eight files pass.
+
+## The Flash Before Caption 3
+
+The user's attract check of the first build (2026-10-31, verbatim): "There
+was still a Japanese piece int he English opening."
+
+- **What it was:** 決めろ! flashing with white for 16 frames just before
+  caption 3. `EXP-0064`'s census sampled every 20 frames and missed it;
+  "never shown" there is wrong.
+- **The script:** frame 706 writes a full-screen NBG1 map (1,186 cells, 52
+  indices of its own: 175-226 or 188-239, the blank first) at scroll (192,
+  16) from caption 3's block; palette records at 707 (normal), 710 (white),
+  712, 714, 716, 718, 720, 722 alternate; 723 is black; caption 3 at 724.
+  The same in all eight files.
+- **The arcade:** MAME `xmvsfu` frames 1,990-2,040, every frame
+  (`local/cap002/mame_flash`): TO EXECUTE flashes with white in the same
+  slot, with the same timing (3 frames, then white and text in pairs, 1
+  white, 1 black), frames 1,999-2,015. All nine text frames are identical.
+  So the arcade's English has a place for it, and the build shows the
+  arcade's TO EXECUTE (`flash.png`, frame 2,000, `454849cd…`).
+- **Room:** TO EXECUTE needs 33 characters (shift -8, +4 px) of the 51
+  non-blank indices. Of those indices, only the blank is used again while
+  the block is current (frame 787).
+- **Change:** a fourth still (`flash`): the 706 map keeps its cells and
+  attributes, English in the window, every other written cell blank; the
+  four non-white records recoloured; white and black records unchanged.
+
+### Verification (new US image, `build/cap002_us`)
+
+- **Flash, every frame 2,380-2,520, each file forced:** all eight show
+  `TTTWWTTWWTTWWTTWB` (T: TO EXECUTE identical to file 6's, W: white, B:
+  black), then caption 3. No other picture in the slot.
+- **Against the previous build** (same disc layout, frames 1,740-2,900
+  every 4, [`compare_runs.py`](compare_runs.py)): files 2, 4, 6 and 7 differ
+  only at 2,464-2,476 (the flash) and one frame each in 4 and 6; file 1
+  at 2,460 (TO EXECUTE against 決めろ!) and file 5 at one frame. Each single
+  extra frame is the same scene one frame apart. Files 0 and 3 drift by a
+  few frames throughout, in this comparison and in a control (the previous
+  build against the original disc: 0, 1 and 3 drift); stream timing is not
+  frame-exact between runs, so these files cannot be compared frame by
+  frame.
+- **Both variants** carry identical `OPENING*.ST2`, equal to the
+  standalone build.
+
+## The User's Second Check: Colour, Outline, Centring
+
+The user's report on the fixed build (2026-10-31, verbatim): "No Japanese
+noticed in attract mode", "Some of the captions in attract mode now look
+off-center" and "The colors/shading on the letters that are now English in
+attract mode don't seem to have the same palette as the "Now Loading"
+message, which is the palette I expected."
+
+- **NOW LOADING** (cold boot, frames ~2,028-2,548,
+  `tools.mednafen.frame_capture`): the same seven shades as the arcade
+  captions (`f0f0f0` … `d06020` on screen), outlined in purple `502080`.
+- **A colour bug:** the arcade's `ff8811` was encoded `F881` (red 8), not
+  `FF81`; it showed as olive `888810`, the captions' most-used shade. Fixed.
+- **The outline:** samples of both put to the user
+  (`local/cap002/outline_compare.png`); the user chose (verbatim): "Use NOW
+  LOADING's purple outline, fix the orange, and centre the captions." The
+  outline entry is `F528`; it shows as `502088`.
+- **Centring, first cause:** the build moved each line up to 8 pixels to
+  save characters. Lines are now centred: exactly for captions 2, 3 and
+  the flash; caption 1 to 3 pixels (exactly centred needs 140 characters,
+  its room is 119-125; within 3 pixels, 118).
+- **Centring, second cause, a zoom:** captions 1 and 2 still showed 8-13
+  pixels left, narrower than planned, with a black strip at the right.
+  Rejected first: NBG1's line-scroll table (all zero,
+  [`line_scroll.py`](line_scroll.py)), a plain scroll offset and a
+  uniform two-axis zoom (23-50 % of pixels unmatched). Fitting each 8-row
+  band of the screen against NBG1 rendered from VRAM gave one horizontal
+  factor, 274/256, at x scroll 19 (caption 2: 0 of 6,159 pixels differ).
+  [`ram_frames.py`](ram_frames.py): WRAM-H `0x06020C54` holds `0x00011200`
+  at caption 1, `0x00011280` at caption 2, `0x00010000` at caption 3 and
+  the banner. Write log: `0x0601FE3E` and `0x0601FE62` write them, in the
+  scroll handler `0x0601FDB8` (called on script frames with bit 2), when
+  the script counter `0x06020C24` is 127 or 479 and `0x06020C47` is 0. That
+  byte chooses `opening?.st2` (0) or `pdemo??.st2` (`0x06021720`), so the
+  branch serves the opening only; 39 of the 47 `PDEMO` scripts have scroll
+  frames there but never reach it. The literals (`0x0601FE50`,
+  `0x0601FE78`, each loaded only by its one instruction) are in
+  `XVSOPEN.PCA`, decoded at `0x0601F000` (offsets `0xE50`, `0xE78`).
+- **Controlled change (RAM):** both literals set to `0x00010000` after the
+  load, nothing else: captions 1 and 2 show at full size, every line where
+  the build placed it (+3, +1, -2.5, -2; 0, +0.5 pixels from centre), no
+  black strip (`local/cap002/zoom1`).
+- **On disc:** `build_english --attract-captions` now also rewrites
+  `XVSOPEN.PCA` (same size, PRS round trip checked) with both literals
+  `00010000`.
+- **Save states hold the old module:** from `states2/t00003840` on the new
+  image, RAM still had `00011200` at caption 1, so the module is not
+  reloaded before the opening; the disc change was checked from a cold
+  boot (`tools.mednafen.frame_capture`, frames 2,700-3,900 every 6):
+  captions 1 and 2, the flash, caption 3 and the banner all full width,
+  lines at +3, +1, -2.5, -2 / 0, +0.5 / 0 / 0, 0 / 0 pixels from centre,
+  orange `f88810`, outline `502088`.
+- **Against the previous build** (forced captures, all eight files): only
+  caption frames differ (files 1, 2, 5, 7; 0, 3, 4, 6 drift in timing).
+
 ## Uncertainty
 
 - The table at `0x06060000` and the one-entry shift between source and
   buffer are observed, not traced.
+- Files 0 and 3 could not be compared frame by frame after caption 3
+  (timing drift); their flash frames were checked directly.
+- Why stream timing drifts between runs from one state was not traced.
