@@ -2969,3 +2969,54 @@ change; otherwise rebuild only the new references with --only." Recorded in
 
 Conclusion: `SPEC-005` is `DONE`; Phase P is complete. `CAP-001`,
 `HINT-001` and `NOCH-001` are `READY`.
+
+## 2026-10-31 — SESSION-0094: The "no challengers" sign (NOCH-001, EXP-0063)
+
+User requests (verbatim): "What about UI-001, addressing the Japanese text
+when you can't press start?"; "Start NOCH-001 now, ahead of the captions and
+hints."
+
+- **Cleanup first** (user request): 16 old build images, 2,038 uncited
+  save states and 102 debugger trace logs removed (18.9 GB); kept the
+  inputs, `local/checkpoints/`, the 13 cited states, screenshots, sound
+  clips and dumps.
+- **Storage:** the sign is five VDP1 cells; the cells equal `FIX.PRS` codes
+  `0x28B`-`0x28F`, decoded at run time (not on disc or in work RAM raw).
+  Emptying `0x28F` in the RAM font removed 止.
+- **Tracing up:** the glyph decoder's R2 walks a code-to-VRAM cache map, not
+  the source. A read log on the map entry found the sprite-list processor
+  (count 5, code `0x28B`); its entry decoding gave `0x5400` + code and the
+  width field; `0x568B` led to the sprite definition at `0x0607C5BE`, next to
+  an English one (`0x5880`, 8 cells).
+- **Dead ends** (recorded so they are not retried):
+  - `def_a`/`def_b`/`def_c`: patching the definition gives "NO CHALLE" (5
+    cells), or all 8 cells running off the right edge; the word after the
+    code belongs to the next definition. Position is not in the definition.
+  - A write log on `0x060F0A1E`-`0x060F0A31` found a stack, not the sign
+    object.
+  - A write log of the interpreter's x word ran too few frames at first:
+    the logs' frame numbers are not run-relative.
+- **The choice:** the x is set at `0x0605F82E`-`0x0605F868` from the region
+  word (D-047). One read (`0x0605F838`) taken as US shows the arcade's NO
+  CHALLENGERS, right-aligned where the sign was; only the sign's area
+  changed; the boss fight was identical.
+- **User's choice** (verbatim): "Use the arcade's own NO CHALLENGERS, as in
+  the sample (the one region-word change)."
+- **Build:** `build_english --no-challengers` (`with_extra` refuses
+  overlaps), `regression.py`'s `no_challengers` flag, 2 unit tests. Only 2
+  decoded `MMPACK.PCA` bytes differ from the `SPEC-004` builds.
+- **Route:** Ryu and Cyclops on both images; the English sign from the
+  post-boss splash to the partner fight's knockout, as the Japanese one in
+  `EXP-0047`'s M8 run.
+- **Play:** the user chose the American image only ("Open the play check on
+  the American-names image only."). Ryu and Akuma, Apocalypse beaten, the
+  partner fight against Cyclops; a state there draws codes `0x480`-`0x487`.
+- **Registered:** `no_challengers_us_v4`, `no_challengers_saturn_v4`. The
+  build tool changed, so the full regression ran (the user's rule).
+
+Checks: `pytest` (226 passed), `ruff check`, `ruff format --check`, `mypy
+--strict` are clean; `tools.disc.regression`: all thirteen references match.
+
+Conclusion: `NOCH-001` is `DONE` (D-055). `CAP-001` and `HINT-001` are
+`READY`.
+

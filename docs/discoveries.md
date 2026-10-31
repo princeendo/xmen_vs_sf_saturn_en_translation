@@ -1112,3 +1112,28 @@ Reproduce: `research/experiments/EXP-0059/README.md`.
 
 Reproduce: `research/experiments/EXP-0061/README.md` and
 `research/experiments/EXP-0062/README.md`.
+
+## D-055 (UI): The "no challengers" sign, and the arcade's English sign the region word picks (`NOCH-001`, `EXP-0063`)
+
+- **The sign:** `FIX.PRS` codes `0x28B`-`0x28F` (⚠乱入禁止), five VDP1 cells
+  at the top right, from the post-boss splash through the partner fight
+  and its continue screen. Emptying code `0x28F` in the RAM font removed
+  止 (against a control).
+- **The definition:** a sprite script in the overlay code reads it once,
+  from `0x0607C5BE` (`1234 0480 0400 568B`: 5 cells, `0x5400` + `0x28B`).
+  The definition before it (`0x0607C5B6`, `1234 0480 0700 5880`) is the
+  arcade's `NO CHALLENGERS`: 8 cells from code `0x480`.
+- **The choice:** `0x0605F82E`-`0x0605F868` reads the region word
+  (`0x060F5478`, D-047) at **`0x0605F838`**. Non-zero gives variant
+  `0x020E` with x `0x130` − 16; zero (the Saturn) gives `0x020F` with
+  `0x130` + 32. Taking that one read as US (`00BD` → `E002`, decoded
+  `MMPACK.PCA` `0x4AC98`) shows the full `NO CHALLENGERS`, ending at the
+  sign's right edge; only the sign's area changed, and the boss fight was
+  pixel-identical.
+- **Build:** `build_english --no-challengers`, both name variants
+  (`no_challengers_us_v4`, `no_challengers_saturn_v4`). Shown by route on
+  both images; in the user's cold-boot play on the American image, a state
+  in the partner fight draws codes `0x480`-`0x487` there and none of
+  `0x28B`-`0x28F`.
+
+Reproduce: `research/experiments/EXP-0063/README.md`.

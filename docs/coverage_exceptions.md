@@ -85,7 +85,7 @@ was shown in play.
 | Item | Status | Taken up by |
 | --- | --- | --- |
 | Apocalypse's pre-fight exchange: three boxes at the top of the boss stage | Japanese without `--special`; English with it (below) | **Done with `--special`** (`SPEC-004`) |
-| The `⚠乱入禁止` ("no challengers") warning in the boss and partner fights | Japanese | `UI-001` |
+| The `⚠乱入禁止` ("no challengers") sign, from the post-boss splash through the partner fight and its continue screen (not in the boss fight) | Japanese without `--no-challengers`; the arcade's `NO CHALLENGERS` with it (below) | **Done with `--no-challengers`** (`NOCH-001`) |
 | The staff roll, `GAME OVER`, initials entry and score screens | Already English on the Japanese disc (`EXP-0034`) | — |
 
 The win quote after Apocalypse and in the partner fight is the winner's
@@ -149,3 +149,19 @@ the boss stage from a cold boot on each image (`EXP-0062`).
 | Alpha Chun-Li picked second | Not shown | Her quotes and ending use the same table word as when picked first. | `EXP-0061` | — |
 | Alpha Chun-Li's ending art | Her usual outfit in the second scene | The arcade has its own scene handler for slot 18; art is outside the text scope. | `EXP-0059` | `docs/known_unknowns.md` |
 | The arcade's 4 records after its box table, and its second index table | Not built | Their use is unknown. | `EXP-0058` | — |
+
+## "No challengers" sign (`NOCH-001`, 2026-10-31)
+
+`build_english --no-challengers` (`EXP-0063`, D-055; references
+`no_challengers_us_v4` and `no_challengers_saturn_v4`) reads the region
+word as US at the one place that picks the sign, so the game draws the
+arcade's own `NO CHALLENGERS` (art, width and position). It was shown by
+route on both images and seen by the user in play on the American image.
+
+| Item | Status | Why | Evidence | Taken up by |
+| --- | --- | --- | --- | --- |
+| The Japanese sign's font codes `0x28B`-`0x28F` | In `FIX.PRS`, unchanged, no longer drawn by the sign | The build changes no art; nothing else was seen to use them | `EXP-0063` | — |
+| The sign's variants `0x020C` and `0x020D` (x offsets 0 and +24) | Not reached | Their conditions are unknown; the region read is shared with the variant the game took | `EXP-0063` | — |
+| A second similar block (`0x0605F894`, x = 96) | Not traced | It may be the other side's sign, for a second player | `EXP-0063` | — |
+| The user's play on the Saturn-names image | Not played | The change is byte-identical in both variants; the route showed it on both | `EXP-0063` | — |
+

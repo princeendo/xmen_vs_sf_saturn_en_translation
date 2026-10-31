@@ -27,7 +27,7 @@ fight. Every screenshot was checked by the agent.
 | --- | --- | --- | --- | --- |
 | Pre-boss story line | Win-quote layout (team portraits, bubble), two lines | ~210,184 | `f00210184.png` `4cfcc72e…68cd` | Yes |
 | Post-Apocalypse win quote | Win-quote layout, two lines | ~217,028-217,265 | `f00217153.png` `f18a8c3c…919b` | Yes |
-| "No challengers" warning | `⚠乱入禁止` sprite at top right, from the black pre-fight screen through the partner fight and its continue screen | ~216,914 to the end of the partner fight | `f00216914.png` `67335bfd…a64f`; in the fight `f00219310.png` `2f7e6207…8da8` | Yes |
+| "No challengers" warning (`NO CHALLENGERS` with `--no-challengers`, `NOCH-001`) | `⚠乱入禁止` sprite at top right, from the black pre-fight screen through the partner fight and its continue screen | ~216,914 to the end of the partner fight | `f00216914.png` `67335bfd…a64f`; in the fight `f00219310.png` `2f7e6207…8da8` | Yes |
 | **Ending pages** | Six timed pages: picture window at top centre (black on pages 1, 2, 5), purple box at the bottom with 1-2 lines; full-width Japanese font | 220,539-222,930 | Page 1 `f00220654.png` `9d66b488…ddbd`; 2 `f00220887.png` `361438a2…48f6`; 3 `f00221112.png` `4c3ef8e4…3d8e`; 4 `f00221342.png` `388c0716…8dcc`; 5 `f00221690.png` `78a2207a…91df`; 6 `f00222037.png` `ab2f6006…fa94` | Yes |
 | Ending speaker labels | Small Latin label above the box on pages 3-6: `Nash`, `Nazo no koe`, `Nash`, `Nash's friend` | 221,112-222,930 | as pages 3-6 | Latin letters; `Nazo no koe` is romanized Japanese ("mysterious voice") |
 | QSound notice | Under `Presented by CAPCOM`: English notice plus one Japanese trademark line | ~226,838-226,953 | `f00226838.png` `fc75088a…b047` | One line |

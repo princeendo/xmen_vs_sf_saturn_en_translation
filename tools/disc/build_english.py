@@ -60,6 +60,12 @@ in `SPEC-003`. It needs patch version 4 and Apocalypse's win-quote SPEC
   Chun-Li's English quotes and ending as the arcade does (needs Chun-Li's
   ending SPEC, whose script slot 18 shares).
 
+``--no-challengers`` (`NOCH-001`, `EXP-0063`) shows the arcade's own
+``NO CHALLENGERS`` sign in place of ``⚠乱入禁止``, as the user chose: the one
+region-word read that picks the sign (``0x0605F838``) is taken as US, as
+``--names us`` does at its own sites. The game then draws the arcade's
+English definition, art (``FIX.PRS`` ``0x480``-``0x487``) and position.
+
 ``--boot-warnings`` also writes the approved English boot-warning pictures,
 ``ERR1``-``ERR5.BIN`` (`tools.disc.boot_warnings`, `BOOT-004`), drawn from the
 untouched files and ``FIX.PRS``; each keeps its size and header.
@@ -99,6 +105,8 @@ from tools.disc.english_mode import (
 )
 from tools.disc.iso9660 import RAW_SECTOR, USER_DATA
 from tools.disc.names import (
+    REGION_READ,
+    US_REGION,
     VARIANTS,
     edit_lines,
     entry_edits,
@@ -268,6 +276,7 @@ def mmpack_patches(
 
 SPECIAL_FILE = "MC08.SHP;1"  # Apocalypse's file holds the boss boxes
 ALPHA_CHUN_LI, CHUN_LI = 18, 11
+NO_CHALLENGERS = 0x0605F838  # the region read that picks the sign (NOCH-001)
 
 
 def shared_slots(spec: dict[str, object]) -> list[int]:
@@ -291,16 +300,27 @@ def special_patches(
     return [*boss_boxes.patches(), *alpha]
 
 
+def with_extra(
+    patches: list[tuple[int, str, str]], extra: list[tuple[int, str, str]], what: str
+) -> list[tuple[int, str, str]]:
+    """``patches`` plus ``extra``; no two may touch the same bytes."""
+    taken = {a + i for a, old, _ in patches for i in range(len(as_bytes(old)))}
+    for address, old, _ in extra:
+        if any(address + i in taken for i in range(len(as_bytes(old)))):
+            raise ValueError(f"{address:#x}: a {what} patch overlaps another patch")
+    return [*patches, *extra]
+
+
 def with_names(
     patches: list[tuple[int, str, str]], names: str
 ) -> list[tuple[int, str, str]]:
     """``patches`` plus the name variant's; no two may touch the same bytes."""
-    extra = name_patches(names)
-    taken = {a + i for a, old, _ in patches for i in range(len(as_bytes(old)))}
-    for address, old, _ in extra:
-        if any(address + i in taken for i in range(len(as_bytes(old)))):
-            raise ValueError(f"{address:#x}: a name patch overlaps a text patch")
-    return [*patches, *extra]
+    return with_extra(patches, name_patches(names), "name")
+
+
+def no_challengers_patches() -> list[tuple[int, str, str]]:
+    """``--no-challengers``: the sign's region read taken as US (`EXP-0063`)."""
+    return [(NO_CHALLENGERS, REGION_READ, US_REGION)]
 
 
 def build_mced(
@@ -405,6 +425,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--names", choices=VARIANTS, default="us")
     parser.add_argument("--boot-warnings", action="store_true")
     parser.add_argument("--special", action="store_true")
+    parser.add_argument("--no-challengers", action="store_true")
     parser.add_argument("--image", type=Path, help="also build the image here")
     args = parser.parse_args(argv)
     if len(args.paths) < 2:
@@ -422,6 +443,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     patches = with_names(mmpack_patches(specs, args.patch_version), args.names)
     if args.special:
         patches += special_patches(specs, args.patch_version)
+    if args.no_challengers:
+        patches = with_extra(patches, no_challengers_patches(), "no-challengers")
     out.mkdir(parents=True, exist_ok=False)
     program = args.program.read_bytes()
     changes: list[dict[str, object]] = []
@@ -430,6 +453,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         "names": args.names,
         "boot_warnings": args.boot_warnings,
         "special": args.special,
+        "no_challengers": args.no_challengers,
     }
     endings = {str(s["mc_file"]): s for s in specs if is_ending(s)}
     for spec in (s for s in specs if not is_ending(s)):

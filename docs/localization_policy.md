@@ -148,6 +148,14 @@ on the boss stage have no official English: the US arcade skips them
 | Switch Alpha Chun-Li to Chun-Li's official English? | "Yes, Chun-Li's English (Recommended)" | Slot 18's table word `0x0285`, as the arcade shows her |
 | Approve the 36 lines? | "Approve all (Recommended)" | `data/translations/boss_boxes.json`, by Claude, with each source record's hash; the second box of slots 14-16 per name variant (Bison/Vega, Akuma/Gouki, Charlie/Nash) |
 
+**"No challengers" sign (2026-10-31, `NOCH-001`, `EXP-0063`).** The game
+keeps the arcade's English sign and picks it by the region word. Shown a
+before-and-after sample, the user chose (verbatim): "Use the arcade's own NO
+CHALLENGERS, as in the sample (the one region-word change)." So both name
+variants read the region as US at `0x0605F838` only (`build_english
+--no-challengers`): the arcade's art (`FIX.PRS` `0x480`-`0x487`), width and
+position. The other option offered was to remove the sign.
+
 ## Deferred Until Evidence Exists
 
 These MSHvSF decisions depend on facts not yet known for XvSF. Each is put to

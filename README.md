@@ -44,9 +44,15 @@ and Cammy.
 
 **Still Japanese:**
 
-- the "no challengers" (乱入禁止) warning in the final fights;
 - continue-screen hints;
 - attract-mode captions.
+
+**"No challengers" sign: the arcade's English** (`NOCH-001`, 2026-10-31).
+After Apocalypse, the top-right sign reads `NO CHALLENGERS` in place of
+⚠乱入禁止. The game still holds the arcade's English sign (its art, width and
+position) and picks it by the region setting; the build reads the region as
+US at that one place. The user saw it in play. See `docs/discoveries.md`
+(D-055).
 
 **Special cases: Apocalypse's boxes and Alpha Chun-Li** (`SPEC-001` to
 `SPEC-005`, 2026-10-31).
@@ -139,15 +145,17 @@ never modified. The American-names variant (the default):
   data/translations/{wolverine,cyclops,storm,rogue,gambit,sabretooth,juggernaut,magneto,apocalypse,ryu,ken,chun_li,dhalsim,zangief,vega,gouki,nash,cammy}_win_quotes.json \
   data/translations/{wolverine,cyclops,storm,rogue,gambit,sabretooth,juggernaut,magneto,ryu,ken,chun_li,dhalsim,zangief,vega,gouki,nash,cammy}_ending.json \
   local/build_us --patch-version 4 --names us --boot-warnings --special \
-  --image build/names_us
+  --no-challengers --image build/names_us
 ```
 
 The Saturn-names variant: the same specs, with
-`local/build_saturn --patch-version 4 --names saturn --boot-warnings --special --image build/names_saturn`.
+`local/build_saturn --patch-version 4 --names saturn --boot-warnings --special --no-challengers --image build/names_saturn`.
 
 The expected hashes are in `data/regression/references.json`: Track 01
-`5d1f76e4…` (American, `special_us_v4`) and `a4e3e98e…` (Saturn names,
-`special_saturn_v4`). Without `--special` Apocalypse's boxes and Alpha
+`6820f12d…` (American, `no_challengers_us_v4`) and `57c397ea…` (Saturn
+names, `no_challengers_saturn_v4`). Without `--no-challengers` the sign
+stays Japanese (`5d1f76e4…`, `special_us_v4`; `a4e3e98e…`,
+`special_saturn_v4`). Without `--special` too, Apocalypse's boxes and Alpha
 Chun-Li stay as before (`e8c9cc4f…`, `boot_warnings_us_v4`; `f53d2378…`,
 `boot_warnings_saturn_v4`). Without `--boot-warnings` too, the boot warnings stay
 Japanese (`441c9cfc…`, `names_us_v4`; `b11c8cd9…`, `names_saturn_v4`). `--names none` leaves the names as the Saturn has them

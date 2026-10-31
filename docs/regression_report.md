@@ -20,11 +20,13 @@ the script with `--report`; the last run is below.
 | `boot_warnings_saturn_v4` | `EXP-0056` | `BOOT-004` | 35 | 4 | 25 | `f53d2378…` |
 | `special_us_v4` | `EXP-0061` | `SPEC-004` | 35 | 4 | 25 | `5d1f76e4…` |
 | `special_saturn_v4` | `EXP-0061` | `SPEC-004` | 35 | 4 | 25 | `a4e3e98e…` |
+| `no_challengers_us_v4` | `EXP-0063` | `NOCH-001` | 35 | 4 | 25 | `6820f12d…` |
+| `no_challengers_saturn_v4` | `EXP-0063` | `NOCH-001` | 35 | 4 | 25 | `57c397ea…` |
 
 ## Last Run
 
-- Date: 2026-10-31T15:31:53+00:00
-- Commit: `94b6351`
+- Date: 2026-10-31T17:27:11+00:00
+- Commit: `8394b43`
 - Python: 3.13.13
 - Source Track 01: `c904a386…` (matches)
 - Program image: `1b1a5a26…` (matches)
@@ -246,5 +248,57 @@ the script with `--report`; the last run is below.
 | `special_saturn_v4` | `ERR5.BIN;1` | `7c918f31…` | `7c918f31…` | yes |
 | `special_saturn_v4` | `MMPACK.PCA;1` | `1c8476e4…` | `1c8476e4…` | yes |
 | `special_saturn_v4` | `Track 01` | `a4e3e98e…` | `a4e3e98e…` | yes |
+| `no_challengers_us_v4` | `MC00.SHP;1` | `12367af4…` | `12367af4…` | yes |
+| `no_challengers_us_v4` | `MC01.SHP;1` | `3f5e7ab4…` | `3f5e7ab4…` | yes |
+| `no_challengers_us_v4` | `MC02.SHP;1` | `a608e360…` | `a608e360…` | yes |
+| `no_challengers_us_v4` | `MC03.SHP;1` | `fe4b9d82…` | `fe4b9d82…` | yes |
+| `no_challengers_us_v4` | `MC04.SHP;1` | `49233397…` | `49233397…` | yes |
+| `no_challengers_us_v4` | `MC05.SHP;1` | `02179ea7…` | `02179ea7…` | yes |
+| `no_challengers_us_v4` | `MC06.SHP;1` | `89fa13f2…` | `89fa13f2…` | yes |
+| `no_challengers_us_v4` | `MC07.SHP;1` | `b2776f78…` | `b2776f78…` | yes |
+| `no_challengers_us_v4` | `MC08.SHP;1` | `c3538551…` | `c3538551…` | yes |
+| `no_challengers_us_v4` | `MC09.SHP;1` | `f9c524a5…` | `f9c524a5…` | yes |
+| `no_challengers_us_v4` | `MC0A.SHP;1` | `4a8aafea…` | `4a8aafea…` | yes |
+| `no_challengers_us_v4` | `MC0B.SHP;1` | `76c6c033…` | `76c6c033…` | yes |
+| `no_challengers_us_v4` | `MC0C.SHP;1` | `284c9667…` | `284c9667…` | yes |
+| `no_challengers_us_v4` | `MC0D.SHP;1` | `2a3ae96e…` | `2a3ae96e…` | yes |
+| `no_challengers_us_v4` | `MC0E.SHP;1` | `35daca66…` | `35daca66…` | yes |
+| `no_challengers_us_v4` | `MC0F.SHP;1` | `983aca7b…` | `983aca7b…` | yes |
+| `no_challengers_us_v4` | `MC10.SHP;1` | `d97633a6…` | `d97633a6…` | yes |
+| `no_challengers_us_v4` | `MC11.SHP;1` | `736aab3d…` | `736aab3d…` | yes |
+| `no_challengers_us_v4` | `MCED.SHP;1` | `b37c3a64…` | `b37c3a64…` | yes |
+| `no_challengers_us_v4` | `ERR1.BIN;1` | `72fbff0a…` | `72fbff0a…` | yes |
+| `no_challengers_us_v4` | `ERR2.BIN;1` | `5cee7adb…` | `5cee7adb…` | yes |
+| `no_challengers_us_v4` | `ERR3.BIN;1` | `017b7a5e…` | `017b7a5e…` | yes |
+| `no_challengers_us_v4` | `ERR4.BIN;1` | `970f953a…` | `970f953a…` | yes |
+| `no_challengers_us_v4` | `ERR5.BIN;1` | `7c918f31…` | `7c918f31…` | yes |
+| `no_challengers_us_v4` | `MMPACK.PCA;1` | `32c1772a…` | `32c1772a…` | yes |
+| `no_challengers_us_v4` | `Track 01` | `6820f12d…` | `6820f12d…` | yes |
+| `no_challengers_saturn_v4` | `MC00.SHP;1` | `12367af4…` | `12367af4…` | yes |
+| `no_challengers_saturn_v4` | `MC01.SHP;1` | `3f5e7ab4…` | `3f5e7ab4…` | yes |
+| `no_challengers_saturn_v4` | `MC02.SHP;1` | `a608e360…` | `a608e360…` | yes |
+| `no_challengers_saturn_v4` | `MC03.SHP;1` | `fe4b9d82…` | `fe4b9d82…` | yes |
+| `no_challengers_saturn_v4` | `MC04.SHP;1` | `49233397…` | `49233397…` | yes |
+| `no_challengers_saturn_v4` | `MC05.SHP;1` | `02179ea7…` | `02179ea7…` | yes |
+| `no_challengers_saturn_v4` | `MC06.SHP;1` | `89fa13f2…` | `89fa13f2…` | yes |
+| `no_challengers_saturn_v4` | `MC07.SHP;1` | `b2776f78…` | `b2776f78…` | yes |
+| `no_challengers_saturn_v4` | `MC08.SHP;1` | `86fba33a…` | `86fba33a…` | yes |
+| `no_challengers_saturn_v4` | `MC09.SHP;1` | `f9c524a5…` | `f9c524a5…` | yes |
+| `no_challengers_saturn_v4` | `MC0A.SHP;1` | `4a8aafea…` | `4a8aafea…` | yes |
+| `no_challengers_saturn_v4` | `MC0B.SHP;1` | `76c6c033…` | `76c6c033…` | yes |
+| `no_challengers_saturn_v4` | `MC0C.SHP;1` | `284c9667…` | `284c9667…` | yes |
+| `no_challengers_saturn_v4` | `MC0D.SHP;1` | `2a3ae96e…` | `2a3ae96e…` | yes |
+| `no_challengers_saturn_v4` | `MC0E.SHP;1` | `8ac63fff…` | `8ac63fff…` | yes |
+| `no_challengers_saturn_v4` | `MC0F.SHP;1` | `983aca7b…` | `983aca7b…` | yes |
+| `no_challengers_saturn_v4` | `MC10.SHP;1` | `15143957…` | `15143957…` | yes |
+| `no_challengers_saturn_v4` | `MC11.SHP;1` | `b07c60ba…` | `b07c60ba…` | yes |
+| `no_challengers_saturn_v4` | `MCED.SHP;1` | `6184f150…` | `6184f150…` | yes |
+| `no_challengers_saturn_v4` | `ERR1.BIN;1` | `72fbff0a…` | `72fbff0a…` | yes |
+| `no_challengers_saturn_v4` | `ERR2.BIN;1` | `5cee7adb…` | `5cee7adb…` | yes |
+| `no_challengers_saturn_v4` | `ERR3.BIN;1` | `017b7a5e…` | `017b7a5e…` | yes |
+| `no_challengers_saturn_v4` | `ERR4.BIN;1` | `970f953a…` | `970f953a…` | yes |
+| `no_challengers_saturn_v4` | `ERR5.BIN;1` | `7c918f31…` | `7c918f31…` | yes |
+| `no_challengers_saturn_v4` | `MMPACK.PCA;1` | `42524835…` | `42524835…` | yes |
+| `no_challengers_saturn_v4` | `Track 01` | `57c397ea…` | `57c397ea…` | yes |
 
 Result: all references match.

@@ -469,8 +469,15 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
     Saturn-names image); every box matched the forced runs glyph for glyph.
   - **Registered:** `special_us_v4` and `special_saturn_v4`; the README and
     the coverage register updated.
-- **Next:** Phase Q. `CAP-001`, `HINT-001` and `NOCH-001` are `READY`; the
-  user's order starts with `CAP-001` (attract captions).
+- **2026-10-31** (`SESSION-0094`, `EXP-0063`): `NOCH-001` is done (D-055),
+  taken before the captions and hints at the user's request.
+  - **Sign:** `FIX.PRS` codes `0x28B`-`0x28F`; the game keeps the arcade's
+    `NO CHALLENGERS` and picks it by the region word.
+  - **Build:** `build_english --no-challengers` (one region read as US); the
+    user chose the arcade's sign and saw it in play.
+- **Next:** `CAP-001` (attract captions) and `HINT-001` (continue hints) are
+  `READY`; the user's order starts with `CAP-001`. Check the remaining
+  region-word readers first (`docs/known_unknowns.md`).
   Backlog
   after the phases: `REL-001` (release patches), `TXT-001`, and the rest of
   `UI-001` and `UI-003`.
@@ -3187,7 +3194,7 @@ Known before Phase Q:
 
 ### NOCH-001 - The "no challengers" warning: storage, English art, build and verify
 
-- **Status:** `READY`
+- **Status:** `DONE`
 - **Milestone:** After M8 (`UI-001`)
 - **Dependencies:** SPEC-005 (the user's order).
 - **Blockers:** None (`SPEC-005` done 2026-10-31).
@@ -3200,6 +3207,12 @@ Known before Phase Q:
     put to the user, approved in their words.
   - **Build and verify:** both variants; shown in the partner fight from a
     route and in the user's play; register updated.
+- **Notes:** Done 2026-10-31 (`EXP-0063`, D-055). The user asked to take it
+  before the captions and hints ("Start NOCH-001 now, ahead of the captions
+  and hints."), then chose the arcade's own sign ("Use the arcade's own NO
+  CHALLENGERS, as in the sample (the one region-word change).") and played
+  the American image only. References `no_challengers_us_v4` and
+  `no_challengers_saturn_v4`.
 
 ## Phase R: An In-Game Name Toggle, Studied (`LOC-008`)
 
