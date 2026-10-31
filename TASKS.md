@@ -433,10 +433,14 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
     added; all nine references match.
   - **README and register:** both build commands with `--boot-warnings`;
     what the warnings leave is listed.
-- **Next:** no task is `READY`. M9 (special cases) needs the user's explicit task
-  (rule 24). Backlog: `SPECIAL-001` (including Apocalypse's pre-fight
-  line), `REL-001` (release patches), `LOC-008`, and the "after M8" UI and
-  text tasks.
+- **2026-10-30** (`SESSION-0088`): the user asked for, in order, the special
+  cases, the attract captions, continue hints and "no challengers"
+  warning, then a study of `LOC-008`; release patches after. Written up
+  as Phase P (`SPEC-001` to `SPEC-005`), Phase Q (`CAP-001`, `CAP-002`,
+  `HINT-001`, `HINT-002`, `NOCH-001`) and Phase R (`LOC-008`).
+- **Next:** `SPEC-001` (census of the special cases; `READY`). Backlog
+  after the phases: `REL-001` (release patches), `TXT-001`, and the rest of
+  `UI-001` and `UI-003`.
 
 ## Milestones
 
@@ -2871,6 +2875,256 @@ Known before Phase O:
     message left in Japanese; `ERR5` shown only by its forced branch.
   - **README:** updated.
 
+## Phase P: Special Cases (M9, `SPECIAL-001`)
+
+The user asked for this work by name (verbatim, 2026-10-30): "Let's begin
+with SPECIAL-001, then look at attract captions and continue hints as well as
+the "no challengers" warning. Finally, look at LOC-008 to see what the
+technical challenge is. We'll make a LOC-008 decision after the look. Once all
+of that is done, we'll worry about release patches." That is the explicit
+task that rule 24 requires for special cases.
+
+Known before Phase P (each a lead, not a finding about what remains):
+
+- **Boss stage:** two Japanese boxes at the top of the screen before
+  Apocalypse transforms ("target confirmed", then Apocalypse's line). His
+  line names the player's character in katakana (ベガよ, ゴウキよ, あわれなり
+  ナッシュ, `EXP-0048`), so its English must follow the name variant.
+- **Pre-boss story line:** a win-quote-layout screen (team portraits, two
+  lines) before the boss stage (`f00210184.png`, `EXP-0034`).
+- **Post-boss quote:** the win quote after Apocalypse and in the partner
+  fight is the winner's ordinary quote, English since M5
+  (`docs/coverage_exceptions.md`).
+- **Slot 18:** shares Chun-Li's pointers and script; name-list entry 19 is
+  "Bison"; table A's entry 18 is the "Bison" call. Which character uses it
+  is unknown (`docs/known_unknowns.md`).
+- **Slot 8 (Apocalypse):** his ending is never reached in any route or play
+  (HYPOTHESIS); `MC08` has Japanese ending records under Ryu's English
+  script.
+- **Gouki:** his cell above Juggernaut's is open in the route's state and in
+  cold boots with this project's saves; whether a fresh save hides him is
+  unknown.
+- **MSHvSF** (`docs/playbook_from_mshvsf.md`, every item a HYPOTHESIS for
+  XvSF): boss pre-fight exchanges per player slot with official English,
+  found 2 codes off at first; secret characters' endings with no official
+  English; unlocks needing a chain of session words.
+
+### SPEC-001 - Census of the special cases
+
+- **Status:** `READY`
+- **Milestone:** M9 (`SPECIAL-001`)
+- **Dependencies:** M8 (done), Phase N (done), the user's request above.
+- **Blockers:** None.
+- **Objective:** List every special character, boss and special-fight text
+  surface on the Saturn, and every condition that unlocks or reaches one.
+- **Acceptance criteria:**
+  - **Characters:** which slots are selectable, hidden or boss-only;
+    Gouki's and any other unlock condition, each shown by a controlled
+    change to the flag or save that holds it, forcing one word at a time.
+  - **Slot 18:** which character or mode uses it, from a log of the speaker
+    slot on the Saturn (and the arcade's `0xFF8BB4` in MAME).
+  - **Text surfaces:** every box, quote and caption from the last stage's
+    approach to the credits (pre-boss line, Apocalypse's boxes, partner
+    fight, any others), with how it is reached, its screenshot and its
+    language; for text that names the player, which name forms appear.
+  - **Storage:** for each surface, the file and record it is read from,
+    CONFIRMED by a controlled change.
+  - **Record:** `docs/text_surfaces.md`, `docs/known_unknowns.md`.
+
+### SPEC-002 - Official English for the special cases
+
+- **Status:** `BLOCKED`
+- **Milestone:** M9 (`SPECIAL-001`)
+- **Dependencies:** SPEC-001.
+- **Blockers:** The census.
+- **Objective:** For each special surface, the arcade's official English, its
+  pairing with the Saturn's records, and whether it fits; or evidence that
+  none exists.
+- **Acceptance criteria:**
+  - **Search by code:** each surface's arcade text is found by tracing the
+    arcade code that draws it (MAME read taps, `EXP-0009` method), not only
+    by data search; a surface with no English is shown to have none by that
+    trace.
+  - **Pairing:** each Saturn record paired with its arcade English record,
+    shown by forcing the record in both (as `PAIR-001` did); per-slot
+    variants (the line naming the player) paired slot by slot.
+  - **Names:** which name each English line uses, against both variants.
+  - **Fit:** each line against the renderer's room.
+
+### SPEC-003 - The user's plan for the special cases
+
+- **Status:** `BLOCKED`
+- **Milestone:** M9 (`SPECIAL-001`)
+- **Dependencies:** SPEC-002.
+- **Blockers:** The official English.
+- **Objective:** The user decides what each special surface shows, in both
+  name variants, and any unlock option.
+- **Acceptance criteria:**
+  - **Gate:** a `GATE-TRANSLATION` extension in the user's words, covering
+    each surface's English, its pairing, and its names in both variants;
+    recorded new translations, if any, approved line by line.
+  - **Unlocks:** if an unlock exists, whether a build should change it,
+    put to the user with its cost.
+  - **Recording:** `docs/localization_policy.md` and `GATE-TRANSLATION`.
+
+### SPEC-004 - Build the special cases
+
+- **Status:** `BLOCKED`
+- **Milestone:** M9 (`SPECIAL-001`)
+- **Dependencies:** SPEC-003.
+- **Blockers:** The user's plan.
+- **Objective:** Both name variants built from the untouched source with the
+  approved special-case English.
+- **Acceptance criteria:**
+  - **Build:** a `build_english` option or spec; every changed range listed
+    (rule 12); sectors fit; EDC/ECC pass.
+  - **Screens:** every changed surface forced or routed and checked by the
+    agent against the approved lines, in both variants.
+  - **No other change:** the other regression references' files unchanged,
+    and the M8 endings and quotes as before.
+
+### SPEC-005 - Verify and register the special cases
+
+- **Status:** `BLOCKED`
+- **Milestone:** M9 (`SPECIAL-001`)
+- **Dependencies:** SPEC-004.
+- **Blockers:** The builds.
+- **Objective:** Play-check and lock the special cases.
+- **Acceptance criteria:**
+  - **Play check:** the user plays to the boss stage in each variant from a
+    cold boot (with any approved unlock), and the screens match the forced
+    ones.
+  - **Regression, coverage, README:** references updated; the register lists
+    what remains; the README's "Still Japanese" list updated.
+
+## Phase Q: Attract Captions, Continue Hints and the "No Challengers" Warning (`UI-001` to `UI-003`)
+
+Requested by the user after Phase P (2026-10-30, quoted above). Each surface
+has its own tasks; they share the order census, official English, the user's
+plan, build, verify.
+
+Known before Phase Q:
+
+- **Attract captions:** 4 full-screen Japanese captions between demo scenes;
+  the US arcade shows English captions in the same slots, paired by order
+  (HYPOTHESIS, `docs/text_surfaces.md`).
+- **Continue hints:** a boxed two-line Japanese tip under `CONTINUE?`; the
+  arcade holds 23 English hint records and draws them as two-line pages
+  (`EXP-0008`, `EXP-0009`).
+- **"No challengers":** the `⚠乱入禁止` sprite before and during the partner
+  fight; the US arcade shows `NO CHALLENGERS` there.
+- **MSHvSF** (HYPOTHESES for XvSF): captions were VDP2 tiles streamed from
+  `.ST2` files with three codecs; hints were a quote-font table whose
+  official English was found only by tracing the arcade code, after a data
+  search had wrongly concluded there was none; the warning-type art was
+  copied from English glyphs already in the font.
+
+### CAP-001 - Attract captions: census, storage and official English
+
+- **Status:** `BLOCKED`
+- **Milestone:** After M8 (`UI-002`)
+- **Dependencies:** SPEC-005 (the user's order).
+- **Blockers:** Phase P.
+- **Objective:** Every attract caption, where it is stored and how it is
+  drawn, and the official English for each.
+- **Acceptance criteria:**
+  - **Census:** every caption from cold-boot no-input captures, with frame,
+    screenshot hash and transcription; how many attract cycles were watched.
+  - **Storage:** the layer, file, container and codec, CONFIRMED by a
+    controlled change; a decoder is trusted only after it reproduces RAM.
+  - **Official English:** the US arcade's (MAME) and the US PlayStation's
+    captions, paired by sequence position and neighbouring screens (not by
+    frame number).
+
+### CAP-002 - Attract captions: the user's plan, build and verify
+
+- **Status:** `BLOCKED`
+- **Milestone:** After M8 (`UI-002`)
+- **Dependencies:** CAP-001.
+- **Blockers:** The census.
+- **Objective:** English attract captions in both name variants.
+- **Acceptance criteria:**
+  - **Plan:** options and samples (layout, lettering, colour) put to the
+    user; a `GATE-TRANSLATION` extension in their words.
+  - **Build:** both variants from the untouched source; changed ranges
+    listed; sectors and EDC/ECC pass; patches kept small where a stream can
+    be spliced.
+  - **Screens and play check:** every caption shown from a cold boot and
+    checked; the user watches an attract cycle in each variant.
+  - **Register:** references, coverage register and README updated.
+
+### HINT-001 - Continue hints: census, storage and official English
+
+- **Status:** `BLOCKED`
+- **Milestone:** After M8 (`UI-003`)
+- **Dependencies:** SPEC-005 (the user's order).
+- **Blockers:** Phase P.
+- **Objective:** Every continue hint the Saturn can show, where it is stored
+  and how one is chosen, and the arcade's official English for each.
+- **Acceptance criteria:**
+  - **Census:** the hint table and the selector, found from a recorded
+    continue screen; every record forced and shown.
+  - **Official English:** the arcade's hint records and its selector, found
+    by tracing the arcade code (MAME read taps); the pairing shown by forcing
+    the same choice in both; any region branch recorded.
+  - **Fit:** each English hint against the hint box's room.
+
+### HINT-002 - Continue hints: the user's plan, build and verify
+
+- **Status:** `BLOCKED`
+- **Milestone:** After M8 (`UI-003`)
+- **Dependencies:** HINT-001.
+- **Blockers:** The census.
+- **Objective:** English continue hints in both name variants.
+- **Acceptance criteria:** as `CAP-002`, for the hints: a gate extension;
+  both variants built; every hint forced and checked; a play check at a
+  continue screen; register updated.
+
+### NOCH-001 - The "no challengers" warning: storage, English art, build and verify
+
+- **Status:** `BLOCKED`
+- **Milestone:** After M8 (`UI-001`)
+- **Dependencies:** SPEC-005 (the user's order).
+- **Blockers:** Phase P.
+- **Objective:** The `⚠乱入禁止` sprite in English in both variants.
+- **Acceptance criteria:**
+  - **Storage:** the sprite's cells and the code that places them, CONFIRMED
+    by a controlled change.
+  - **English art:** the US arcade's `NO CHALLENGERS` (MAME); English art
+    already in the Saturn's fonts inventoried first; options and samples
+    put to the user, approved in their words.
+  - **Build and verify:** both variants; shown in the partner fight from a
+    route and in the user's play; register updated.
+
+## Phase R: An In-Game Name Toggle, Studied (`LOC-008`)
+
+Requested by the user after Phase Q: "look at LOC-008 to see what the
+technical challenge is. We'll make a LOC-008 decision after the look."
+
+### LOC-008 - Study an in-game toggle between the name variants
+
+- **Status:** `BLOCKED`
+- **Milestone:** After Phase N (`LOC-008`)
+- **Dependencies:** CAP-002, HINT-002, NOCH-001 (the user's order).
+- **Blockers:** Phase Q.
+- **Objective:** Measure what an in-game choice between the American and
+  Saturn names would take, so the user can decide whether to build it.
+- **Acceptance criteria:**
+  - **Difference census:** every byte that differs between the two
+    variants' images at that point (code sites, records, labels, entries,
+    any Phase P and Q differences), grouped by file and by when it is
+    loaded.
+  - **Mechanism:** how a single setting could select each group at run
+    time (for example the 10 name sites reading a setting instead of a
+    constant; both versions of each edited record; the label bytes), with
+    the free space each needs and where it would come from, measured, not
+    assumed. MSHvSF's finding that a second font did not fit its free cart
+    RAM is a HYPOTHESIS here.
+  - **Setting:** where a toggle could live (Options menu, save memory),
+    from the Options table and its save, and what it would cost.
+  - **Report:** options with costs and risks, put to the user; the user's
+    decision recorded. No toggle is built in this task.
+
 ## Later Milestones (outline only)
 
 These are placeholders so the order is visible. Each becomes a full task, with
@@ -2880,10 +3134,10 @@ for each is in `docs/playbook_from_mshvsf.md`.
 | ID | Milestone | Outline |
 | --- | --- | --- |
 | REL-001 | after M5 | Release patches (xdelta3 and SSP of the changed files) with a rebuild README; may be GitHub Release assets, never committed. Splice rather than re-compress changed streams to keep patches small. |
-| SPECIAL-001 | M9, user approval | Secret characters and bosses: which slots have their own official English and which reuse another's (slot 18); boss pre-fight text (Apocalypse's pre-fight line is captured, `docs/text_surfaces.md`); save- or progress-gated unlocks. Gouki's and Apocalypse's ordinary win quotes are in M5 (`RE-008`). |
-| UI-001 | after M8, user request | UI art: inventory English art already in every font before drawing anything; caption colour and style. Includes the `⚠乱入禁止` ("no challengers") sprite shown before and during the partner fight (spotted by the user, `EXP-0034`). |
-| UI-002 | after M8, user request | Attract-mode captions: which layer draws them, which container and codecs hold them, arcade and PS1 oracles. |
-| UI-003 | after M8, user request | Other UI text (continue screen, hints): find the arcade English by tracing the arcade code, not only by data search. |
+| SPECIAL-001 | M9, user request (2026-10-30) | Secret characters, bosses and their text. **Written up as Phase P (`SPEC-001` to `SPEC-005`, 2026-10-30).** |
+| UI-001 | after M8, user request | UI art. The `⚠乱入禁止` ("no challengers") sprite is **Phase Q's `NOCH-001`** (2026-10-30); a wider inventory of English art stays here. |
+| UI-002 | after M8, user request | Attract-mode captions. **Written up as Phase Q (`CAP-001`, `CAP-002`, 2026-10-30).** |
+| UI-003 | after M8, user request | Continue hints. **Written up as Phase Q (`HINT-001`, `HINT-002`, 2026-10-30).** Other UI text stays here. |
 | UI-004 | user requests (2026-10-29) | Every error or warning message the game shows when it first loads. **Written up as Phase O (`BOOT-001` to `BOOT-005`, 2026-10-30).** User request (verbatim, 2026-10-29): "make sure you add to the backlog to translate any error messages that come up when you first load the game (like ones that are related to not having a 4M RAM cart, etc.)" |
 | TXT-001 | after M8, user request | Rare, random, or region-gated text: trace every reader of every text table. |
-| LOC-008 | after Phase N, user request | An in-game toggle between the two name variants. MSHvSF deferred its own (`LOC-006` there, `EXP-0095`: the second variant's font did not fit the free cart RAM). If wanted, census the difference between the two variants' images early. |
+| LOC-008 | after Phase N, user request | An in-game name toggle. **Its study is Phase R (`LOC-008`, 2026-10-30)**; building one waits for the user's decision. |

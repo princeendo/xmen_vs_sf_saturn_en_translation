@@ -2779,3 +2779,24 @@ clean.
 
 Conclusion: `BOOT-005` is `DONE`; Phase O is complete. No task is `READY`;
 the next work needs the user's choice.
+
+## 2026-10-30 — SESSION-0088: Write up the special cases, UI text and the toggle study
+
+User request (verbatim): "Let's begin with SPECIAL-001, then look at attract
+captions and continue hints as well as the "no challengers" warning.
+Finally, look at LOC-008 to see what the technical challenge is. We'll make
+a LOC-008 decision after the look. Once all of that is done, we'll worry
+about release patches. If any of this can be done in parallel, we can set
+up sub-sessions or sub-agents. If not, we'll stay here."
+
+- **Written:** Phase P (`SPEC-001` to `SPEC-005`; the request is rule 24's
+  explicit task), Phase Q (`CAP-001`, `CAP-002`, `HINT-001`, `HINT-002`,
+  `NOCH-001`), Phase R (`LOC-008`, a study ending in the user's decision).
+  The outline rows point to them.
+- **Parallel work:** not as separate sessions. `AGENTS.md` allows one
+  reverse-engineering experiment in progress at a time, and key-driven
+  Mednafen runs need the window in front, so two sessions would collide.
+  Headless arcade (MAME) work for the official English goes to subagents
+  inside each task, as in `LOC-001`.
+
+No experiment was run.
