@@ -47,6 +47,19 @@ against its source bytes) and, for ending slots, in ``MCED.SHP``'s English
 scripts and label list. ``OUT/changes.json`` lists each edited record with
 its source hash and the edit.
 
+``--special`` (`SPEC-004`, `EXP-0061`) adds the special cases the user approved
+in `SPEC-003`. It needs patch version 4 and Apocalypse's win-quote SPEC
+(``MC08.SHP``):
+
+- Apocalypse's boss-stage boxes in English (`tools.disc.boss_boxes`): the
+  approved records written into ``MC08.SHP`` after its English quotes, and
+  the box setup and index-table changes in ``MMPACK.PCA``; slots 14-16's
+  second box follows ``--names`` (``saturn``, or the American names
+  otherwise);
+- slot 18 (Alpha Chun-Li) marked English, with the ending bit, so she shows
+  Chun-Li's English quotes and ending as the arcade does (needs Chun-Li's
+  ending SPEC, whose script slot 18 shares).
+
 ``--boot-warnings`` also writes the approved English boot-warning pictures,
 ``ERR1``-``ERR5.BIN`` (`tools.disc.boot_warnings`, `BOOT-004`), drawn from the
 untouched files and ``FIX.PRS``; each keeps its size and header.
@@ -66,8 +79,10 @@ import argparse
 import hashlib
 import json
 from collections.abc import Sequence
+from itertools import pairwise
 from pathlib import Path
 
+from tools.disc import boss_boxes
 from tools.disc.boot_warnings import NAMES as BOOT_WARNINGS
 from tools.disc.boot_warnings import build as build_boot_warnings
 from tools.disc.boot_warnings import load_layout
@@ -76,9 +91,11 @@ from tools.disc.english_mode import (
     ENGLISH_SLOT2,
     PATCHES,
     as_bytes,
+    ending_slot_patches,
     mced_english_scripts,
     patches_v3,
     patches_v4,
+    slot_patches,
 )
 from tools.disc.iso9660 import RAW_SECTOR, USER_DATA
 from tools.disc.names import (
@@ -175,21 +192,35 @@ def compile_records(
 
 
 def build_mc(
-    raw: bytes, english: bytes, table: int, name: str, changes: list[dict[str, object]]
+    raw: bytes,
+    english: bytes,
+    table: int,
+    name: str,
+    changes: list[dict[str, object]],
+    extra: dict[int, bytes] | None = None,
 ) -> bytes:
+    """``raw`` with ``english`` at ``table``, and each ``extra`` offset's bytes."""
     decoded, _ = decompress_file(raw)
     data = bytearray(decoded)
-    end = table + len(english)
-    changes.append(
-        {
-            "file": name,
-            "decompressed_offset": f"{table:#x}",
-            "length": len(english),
-            "original": bytes(data[table:end]).hex(),
-            "modified": english.hex(),
-        }
-    )
-    data[table:end] = english
+    edits = {table: english, **(extra or {})}
+    spans = sorted((offset, offset + len(new)) for offset, new in edits.items())
+    for (_, end), (start, _) in pairwise(spans):
+        if start < end:
+            raise ValueError(f"{name}: edits overlap at {start:#x}")
+    for offset, new in sorted(edits.items()):
+        end = offset + len(new)
+        if end > len(data):
+            raise ValueError(f"{name}: edit at {offset:#x} runs past the file")
+        changes.append(
+            {
+                "file": name,
+                "decompressed_offset": f"{offset:#x}",
+                "length": len(new),
+                "original": bytes(data[offset:end]).hex(),
+                "modified": new.hex(),
+            }
+        )
+        data[offset:end] = new
     rebuilt = compress_file(
         bytes(data), size=len(raw), min_end=last_sector_start(len(raw)), lazy=True
     )
@@ -233,6 +264,31 @@ def mmpack_patches(
     if version == 3:
         return patches_v3(slots)
     raise ValueError(f"unknown patch version {version}")
+
+
+SPECIAL_FILE = "MC08.SHP;1"  # Apocalypse's file holds the boss boxes
+ALPHA_CHUN_LI, CHUN_LI = 18, 11
+
+
+def shared_slots(spec: dict[str, object]) -> list[int]:
+    value = spec.get("mced_shared_with", [])
+    return [int(str(x)) for x in value] if isinstance(value, list) else []
+
+
+def special_patches(
+    specs: list[dict[str, object]], version: int
+) -> list[tuple[int, str, str]]:
+    """``--special``'s ``MMPACK.PCA`` changes: the boss boxes and slot 18."""
+    if version != 4:
+        raise ValueError("--special needs patch version 4")
+    files = {str(s["mc_file"]) for s in specs if not is_ending(s)}
+    if SPECIAL_FILE not in files:
+        raise ValueError(f"--special needs the {SPECIAL_FILE} win-quote spec")
+    shared = [s for s in specs if is_ending(s) and ALPHA_CHUN_LI in shared_slots(s)]
+    if [int(str(s["arcade_slot"])) for s in shared] != [CHUN_LI]:
+        raise ValueError("--special needs Chun-Li's ending spec, shared with slot 18")
+    alpha = slot_patches([ALPHA_CHUN_LI]) + ending_slot_patches([ALPHA_CHUN_LI])
+    return [*boss_boxes.patches(), *alpha]
 
 
 def with_names(
@@ -348,6 +404,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--patch-version", type=int, choices=(2, 3, 4), default=3)
     parser.add_argument("--names", choices=VARIANTS, default="us")
     parser.add_argument("--boot-warnings", action="store_true")
+    parser.add_argument("--special", action="store_true")
     parser.add_argument("--image", type=Path, help="also build the image here")
     args = parser.parse_args(argv)
     if len(args.paths) < 2:
@@ -363,6 +420,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     }
     edited: list[dict[str, object]] = []
     patches = with_names(mmpack_patches(specs, args.patch_version), args.names)
+    if args.special:
+        patches += special_patches(specs, args.patch_version)
     out.mkdir(parents=True, exist_ok=False)
     program = args.program.read_bytes()
     changes: list[dict[str, object]] = []
@@ -370,6 +429,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         "patch_version": args.patch_version,
         "names": args.names,
         "boot_warnings": args.boot_warnings,
+        "special": args.special,
     }
     endings = {str(s["mc_file"]): s for s in specs if is_ending(s)}
     for spec in (s for s in specs if not is_ending(s)):
@@ -389,7 +449,10 @@ def main(argv: Sequence[str] | None = None) -> int:
             english += ending
         raw = read_file(name)
         table = int(str(spec["table_offset"]), 16)
-        rebuilt = build_mc(raw, english, table, name, changes)
+        extra = None
+        if args.special and name == SPECIAL_FILE:
+            extra = boss_boxes.records(boss_boxes.load(), args.names)
+        rebuilt = build_mc(raw, english, table, name, changes, extra)
         summary[name] = file_summary(raw, rebuilt)
         summary[f"{name} english_sha256"] = hashlib.sha256(english).hexdigest()
         (out / name.split(";")[0]).write_bytes(rebuilt)

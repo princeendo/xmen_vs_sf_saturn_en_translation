@@ -2891,3 +2891,40 @@ Checks: `pytest` (218 passed), `ruff check`, `ruff format --check`, `mypy
 
 Conclusion: `SPEC-003` is `DONE`. `SPEC-004` is `READY`, starting with the
 box-code change to the 2 × 25 layout.
+
+## 2026-10-31 — SESSION-0092: Build the special cases (SPEC-004, EXP-0061)
+
+User request (verbatim): "Start SPEC-004: build the special cases."
+
+- **Trace:** write logs on the quote pointer and on the box task showed the
+  boxes use the win-quote renderer. The box setup (`0x060667C4`) picks the
+  start index by slot and the base by the global language word, and never
+  sets the English task byte.
+- **Room:** 5,100 bytes needed. `MC08` has 4,824 unused bytes at `0xDC0`
+  and a 1,792-byte zero run at `0x4A3C`. Read and write logs on the run
+  found no access over the boss stage and partner fight. The far triple
+  goes there.
+- **RAM test:** the setup change, index table and records turned Cyclops's
+  three boxes into the approved English in the 2 × 25 layout, against a
+  Japanese control. The walk meant to pick Ryu picked Cyclops (a lost
+  key); the test does not depend on the character.
+- **Build:** `tools/disc/boss_boxes.py`, `build_english --special`, and
+  `regression.py`'s `special` flag. 6 new unit tests.
+- **Screens:** 17 route runs per image.
+  - Lost keys caused repeated picks, and failed runs ran to the end. The
+    user asked why; the route tool gained `--stop-on-bad-load`, and
+    `--shot-every` for the boxes.
+  - The checker first counted the partner's win quotes as boxes (same
+    WRAM-H range) and took the third box's crop from the fight. Both were
+    fixed (last three pointers; a 120-frame window).
+  - The user chose to check only the variant slots on the Saturn image.
+    The full run had already finished overnight with Rogue failing her
+    pick three times; her records are byte-identical to the American
+    image's.
+- **Alpha Chun-Li:** a cold-boot walk on the American image showed English
+  boxes, quotes and ending.
+
+Checks: `pytest` (224 passed), `ruff check`, `ruff format --check`, `mypy
+--strict` are clean; `tools.disc.regression`: all nine references match.
+
+Conclusion: `SPEC-004` is `DONE` (D-054). `SPEC-005` is `READY`.

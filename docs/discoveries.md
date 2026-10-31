@@ -1082,3 +1082,28 @@ Reproduce: `research/experiments/EXP-0058/README.md`.
     ending, the arcade's pages.
 
 Reproduce: `research/experiments/EXP-0059/README.md`.
+
+## D-054 (Special): Apocalypse's boxes in the 2 × 25 English layout, and Alpha Chun-Li (`SPEC-004`, `EXP-0061`)
+
+- **Box setup** (`0x060667C4`): the boxes use the win-quote renderer.
+  - The setup stores a start index from the byte table `0x0606684C`
+    (indexed by slot) at task + 38.
+  - It stores a base chosen by the global language word at task + 52.
+  - Each later box adds 1 to the index.
+- **English layout:** the setup never sets the task byte + `0x5C` that the
+  English builds' renderer reads.
+  - Rewriting 26 bytes at `0x06066804` sets it to 2, with base
+    `0x060C1DC0` (`MC08` + `0xDC0`). The boxes then draw 2 × 25 cells from
+    100-byte records.
+  - Shown first in RAM against a control (Cyclops's three boxes), then on
+    the built images.
+- **Records:** the 51 English records live in `MC08.SHP`'s space the
+  English builds leave unused:
+  - 16 triples at `0xDC0`-`0x2080`;
+  - one triple at `0x4A4C`, in a zero run nothing read or wrote from the
+    boxes to the partner fight.
+- **Builds:** both name variants (`build_english --special`) show every
+  approved box. Alpha Chun-Li (slot 18, word `0x0285`) shows Chun-Li's
+  English boxes, quotes and ending.
+
+Reproduce: `research/experiments/EXP-0061/README.md`.

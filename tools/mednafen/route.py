@@ -61,8 +61,9 @@ repository, commit ``f8526c0``) for `END-013`, and generalized:
     to 0.
 - **Logs.** Phase changes, the player side's characters at the partner
   fight, every change of the quote pointer ``0x060F2490``, and a screenshot
-  every ``SHOT_EVERY`` frames. With ``--area``, a read-breakpoint log
-  (`EXP-0041`).
+  every ``SHOT_EVERY`` frames (``--shot-every``). With ``--area``, a
+  read-breakpoint log (`EXP-0041`). With ``--stop-on-bad-load``, a run whose
+  load check fails ends right after the check.
 
 Outputs go to OUT (an ignored path): ``result.json``, ``shots/``.
 """
@@ -372,6 +373,8 @@ def run(
     mmpack: Path | None = None,
     area: tuple[int, int] | None = None,
     frames: int = 30000,
+    shot_every: int = SHOT_EVERY,
+    stop_on_bad_load: bool = False,
 ) -> dict[str, object]:
     out.mkdir(parents=True, exist_ok=False)
     (out / "shots").mkdir()
@@ -451,7 +454,7 @@ def run(
             }
             for member, ram in buffers.items():
                 (out / f"{member}_buffer.bin").write_bytes(ram)
-            result["load_check"] = {
+            check = {
                 "first": fixups_match(
                     files[first], buffers["first"], FIRST_BUFFER + 0x40
                 ),
@@ -459,6 +462,9 @@ def run(
                     files[second], buffers["second"], SECOND_BUFFER + 0x40
                 ),
             }
+            result["load_check"] = check
+            if stop_on_bad_load and not all(check.values()):
+                frames = 0
             if area is not None:
                 agent.bpmode("log")
                 agent.breakpoints(
@@ -496,7 +502,7 @@ def run(
                             hits.setdefault(parse_hit(line).get("PC", "?"), []).append(
                                 frame
                             )
-                if frame % SHOT_EVERY == 0:
+                if frame % shot_every == 0:
                     agent.screenshot((out / "shots" / f"r{frame:06d}.png").resolve())
             if area is not None:
                 agent.breakpoints("read", [])
@@ -526,6 +532,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--mmpack", type=Path)
     parser.add_argument("--area")
     parser.add_argument("--frames", type=int, default=30000)
+    parser.add_argument("--shot-every", type=int, default=SHOT_EVERY)
+    parser.add_argument("--stop-on-bad-load", action="store_true")
     args = parser.parse_args(argv)
     area = None
     if args.area:
@@ -540,6 +548,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         args.mmpack,
         area,
         args.frames,
+        args.shot_every,
+        args.stop_on_bad_load,
     )
     print(json.dumps({k: result[k] for k in ("load_check", "events")}))
     return 0

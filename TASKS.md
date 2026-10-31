@@ -456,8 +456,14 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   - **Boxes:** the user chose new English in the quote layout and
     approved all 36 lines (`data/translations/boss_boxes.json`).
   - **Alpha Chun-Li:** Chun-Li's official English (word `0x0285`).
-- **Next:** `SPEC-004` (build the special cases; `READY`). It starts with
-  the box-code change to the 2 × 25 layout.
+- **2026-10-31** (`SESSION-0092`, `EXP-0061`): `SPEC-004` is done (D-054).
+  - **Boxes:** the box setup now sets the renderer's English byte and a
+    new base, so the approved lines draw in the 2 × 25 layout; every box
+    read on the built images.
+  - **Alpha Chun-Li:** Chun-Li's English quotes and ending on the built
+    image.
+- **Next:** `SPEC-005` (the user's play check and the references;
+  `READY`).
   Backlog
   after the phases: `REL-001` (release patches), `TXT-001`, and the rest of
   `UI-001` and `UI-003`.
@@ -3041,7 +3047,7 @@ Known before Phase P (each a lead, not a finding about what remains):
 
 ### SPEC-004 - Build the special cases
 
-- **Status:** `READY`
+- **Status:** `DONE`
 - **Milestone:** M9 (`SPECIAL-001`)
 - **Dependencies:** SPEC-003 (done).
 - **Blockers:** None.
@@ -3054,13 +3060,27 @@ Known before Phase P (each a lead, not a finding about what remains):
     agent against the approved lines, in both variants.
   - **No other change:** the other regression references' files unchanged,
     and the M8 endings and quotes as before.
+- **Notes:** Done 2026-10-31 (`EXP-0061`, D-054).
+- **Outcome:**
+  - **Build:** `build_english --special`; `tools/disc/boss_boxes.py`. The
+    box setup sets the task's English byte and a new base; 51 English
+    records in `MC08.SHP`'s unused space; slot 18's word `0x0285`. Both
+    images: 71,908 sectors, 0 invalid.
+  - **Screens:** all 17 slots routed on the American image, 51 boxes read
+    as approved; the Saturn-names image's variant boxes (Vega, Gouki,
+    Nash) read; Alpha Chun-Li walked from a cold boot (boxes, quotes and
+    ending in English).
+  - **No other change:** only `MC08.SHP` and `MMPACK.PCA` differ from the
+    `BOOT-004` builds, inside the planned ranges.
+  - **Tools:** the route tool gained `--shot-every` and
+    `--stop-on-bad-load`.
 
 ### SPEC-005 - Verify and register the special cases
 
-- **Status:** `BLOCKED`
+- **Status:** `READY`
 - **Milestone:** M9 (`SPECIAL-001`)
-- **Dependencies:** SPEC-004.
-- **Blockers:** The builds.
+- **Dependencies:** SPEC-004 (done).
+- **Blockers:** None.
 - **Objective:** Play-check and lock the special cases.
 - **Acceptance criteria:**
   - **Play check:** the user plays to the boss stage in each variant from a
