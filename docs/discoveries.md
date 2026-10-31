@@ -1105,5 +1105,10 @@ Reproduce: `research/experiments/EXP-0059/README.md`.
 - **Builds:** both name variants (`build_english --special`) show every
   approved box. Alpha Chun-Li (slot 18, word `0x0285`) shows Chun-Li's
   English boxes, quotes and ending.
+- **Play check** (`SPEC-005`, `EXP-0062`): from a cold boot with no unlock,
+  the user reached the boss stage on both images (Alpha Chun-Li; Vega with
+  the Saturn names). Every box equals the forced screen on every glyph
+  pixel. References `special_us_v4` and `special_saturn_v4`.
 
-Reproduce: `research/experiments/EXP-0061/README.md`.
+Reproduce: `research/experiments/EXP-0061/README.md` and
+`research/experiments/EXP-0062/README.md`.

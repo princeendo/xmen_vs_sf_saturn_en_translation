@@ -11,7 +11,7 @@ ending build covers and leaves is in the last section.
 | Item | Reason | Evidence | Taken up by |
 | --- | --- | --- | --- |
 | `MCED.SHP` | Holds no arcade Japanese win-quote or ending record of any slot. It is the ending overlay: the scene scripts and speaker labels (`EXP-0038`, D-033). M7 and M8 change only its script header words (below). | `EXP-0029`, D-024, D-033 | M7, M8 |
-| Arcade slot 18 | Has no file of its own: its Japanese and English pointers both equal slot 11's (Chun-Li). Which character uses it, if any, is unknown. Slot 11's table is localized in `MC0B.SHP`; if slot 18 reads that file, it shows the same English. | `EXP-0029`, D-024 | `SPECIAL-001` |
+| Arcade slot 18 | Has no file of its own: its Japanese and English pointers both equal slot 11's (Chun-Li). It is Alpha Chun-Li (`EXP-0058`). Slot 11's table is localized in `MC0B.SHP`; slot 18 reads it, and shows the English correctly with `--special` (`SPEC-004`). | `EXP-0029`, D-024, D-054 | `SPEC-004` |
 
 ## Parts of roster files outside M5
 
@@ -54,7 +54,7 @@ with the character picked first or second.
 | Item | Treatment | Evidence |
 | --- | --- | --- |
 | Slot 8 (Apocalypse) | **No English ending of his own.** He is the boss, not selectable. His `MCED` script is Ryu's, and his arcade English pointer equals Ryu's. Switching Ryu's shared script to English switches slot 8's too, but slot 8 is not marked in the fixed table, and `MC08` gets no English ending records. If Apocalypse's ending could ever play, it would show `MC08`'s Japanese records under Ryu's English script. That it never plays is a HYPOTHESIS, to be recorded by `END-016`. | `EXP-0043`, D-038 |
-| Slot 18 (name list: Bison) | No file. It shares Chun-Li's script and pointers, and Chun-Li's switch changes it too. Which character uses it stays with `SPECIAL-001`. | `EXP-0029`, `EXP-0043` |
+| Slot 18 (name list: Bison) | No file. It shares Chun-Li's script and pointers, and Chun-Li's switch changes it too. It is Alpha Chun-Li (`EXP-0058`); her ending is English with `--special` (`SPEC-004`). | `EXP-0029`, `EXP-0043`, D-054 |
 | `mced_english_scripts` | It refuses a slot whose script is shared with an unlisted slot. The M8 build must allow slot 9 with slot 8, and slot 11 with slot 18, explicitly (`END-014`). | `tools/disc/english_mode.py` |
 
 ## M8 coverage register (`END-016`, 2026-10-30)
@@ -73,8 +73,8 @@ was shown in play.
 
 | Item | Status | Why | Evidence | Taken up by |
 | --- | --- | --- | --- | --- |
-| Slot 8 (Apocalypse): `MC08`'s 4 Japanese ending records (decoded `0xF60` + 76k) | Japanese, unchanged | He is the boss, not a roster pick, so slot 8 is not marked and gets no English records (`END-011`). His `MCED` script is Ryu's, so it is now the English script. That his ending never plays is a **HYPOTHESIS**: in 17 routes, 2 plays and `EXP-0045`'s routes, every ending was a team member's. If it ever played, it would show these Japanese records under Ryu's English script. | `EXP-0043`, `EXP-0045`, `EXP-0047` | `SPECIAL-001` |
-| Slot 18 (Alpha Chun-Li, `EXP-0058`) | Garbled English, then Japanese | It shares Chun-Li's script and pointers, but its fixed-table word has neither the English flag nor the ending bit. So her quotes and first ending pages draw English records in the Japanese layout, and the later pages are Japanese (`EXP-0059`). The word `0x0285` shows Chun-Li's English, as the arcade does. | `EXP-0029`, `EXP-0043`, `EXP-0059` | `SPEC-004` |
+| Slot 8 (Apocalypse): `MC08`'s 4 Japanese ending records (decoded `0xF60` + 76k) | Japanese, unchanged; with `--special`, overwritten by English box records (`EXP-0061`) | He is the boss, not a roster pick, so slot 8 is not marked and gets no English records (`END-011`). His `MCED` script is Ryu's, so it is now the English script. That his ending never plays is a **HYPOTHESIS**: in 17 routes, 2 plays and `EXP-0045`'s routes, every ending was a team member's. If it ever played, it would show these Japanese records under Ryu's English script. | `EXP-0043`, `EXP-0045`, `EXP-0047` | `SPECIAL-001` |
+| Slot 18 (Alpha Chun-Li, `EXP-0058`) | Garbled English, then Japanese | It shares Chun-Li's script and pointers, but its fixed-table word has neither the English flag nor the ending bit. So her quotes and first ending pages draw English records in the Japanese layout, and the later pages are Japanese (`EXP-0059`). The word `0x0285` shows Chun-Li's English, as the arcade does; `--special` sets it (`EXP-0061`, `EXP-0062`). | `EXP-0029`, `EXP-0043`, `EXP-0059` | **Done with `--special`** (`SPEC-004`) |
 | The tail of each roster file's old Japanese ending | Japanese bytes, not shown | The English bytes (800 + 100n from the quote table) are shorter than the Japanese records they replace. The rest stays as decoded: 348 bytes (slot 0), 48 (1), 348 (2), 424 (3), 372 (4), 120 (5), 500 (6), 20 (7), 172 (9), 396 (10), 348 (11), 120 (12), 220 (13), 220 (14), 120 (15), 272 (16), 28 (17). The English script reads only the n English records. The renderer read once past the last record in M7 (`EXP-0041`), and every page matches the arcade. | `EXP-0041`, `EXP-0046`, `EXP-0047` | — |
 | The Japanese ending scripts in `MCED.SHP` | Japanese, unchanged, not run | Each roster script's language-0 header word now points to its English script (17 words), so the Japanese scripts are no longer reached for roster slots. | `EXP-0046` | — |
 | Second-pick endings other than Ryu's | English on disc, not shown | Every roster file loads into the second buffer unchanged (`EXP-0046`). Ryu's second-pick ending used version 4's second-buffer rule (`EXP-0047`). The others use the same rule and are **SUPPORTED**, not shown. A route cannot reach them, because the route's tag did not take effect (`EXP-0045`). | `EXP-0045`, `EXP-0046`, `EXP-0047` | — |
@@ -84,7 +84,7 @@ was shown in play.
 
 | Item | Status | Taken up by |
 | --- | --- | --- |
-| Apocalypse's pre-fight exchange: two Japanese boxes at the top of the boss stage (the "target confirmed" line, then Apocalypse's) | Japanese, seen in every play check | `SPECIAL-001` |
+| Apocalypse's pre-fight exchange: three boxes at the top of the boss stage | Japanese without `--special`; English with it (below) | **Done with `--special`** (`SPEC-004`) |
 | The `⚠乱入禁止` ("no challengers") warning in the boss and partner fights | Japanese | `UI-001` |
 | The staff roll, `GAME OVER`, initials entry and score screens | Already English on the Japanese disc (`EXP-0034`) | — |
 
@@ -99,7 +99,7 @@ Both variants are built from the M8 build's specs with `--names us`
 
 | Item | Variant | Status | Why | Evidence | Taken up by |
 | --- | --- | --- | --- | --- | --- |
-| Apocalypse's pre-fight boxes on the boss stage | both | Japanese; they name the player's character in katakana (ナッシュ, ゴウキ, ベガ) | Special-case text, outside both variants (`LOC-004`) | `EXP-0048`, `EXP-0051` run B | `SPECIAL-001` |
+| Apocalypse's pre-fight boxes on the boss stage | both | Japanese without `--special`. With it, English; the second box of slots 14-16 names the character as the variant does (Bison/Vega, Akuma/Gouki, Charlie/Nash) | Special-case text (`LOC-004`), done by `SPEC-004` | `EXP-0048`, `EXP-0051` run B, `EXP-0061` | **Done with `--special`** |
 | Quote and ending text, ending labels | American | As the arcade wrote them ("Bison", "Akuma", "Charlie"; Magneto's page 3 `Vega`) | Already American (`LOC-004`) | `EXP-0047` | — |
 | Art and voice | Saturn names | The Saturn's own (VEGA, GOUKI, NASH) | That is the variant; its code equals M8's | `EXP-0048`, `EXP-0052` | — |
 | Label entry 9 (`Apocalypse`) | Saturn names | Replaced by `Balrog` | No script in any language uses it; it holds Magneto's page 3 label | `EXP-0052`, D-048 | — |
@@ -123,3 +123,29 @@ the game's:
 | `ERRBKUPJ.FHD` and three more names in file `0` | Unused | No such files on the disc, and no code refers to them | `EXP-0053` |
 | The Saturn's own screens after warnings A and B (the CD-player menu, Memory Manager) | The BIOS's, not the game's | Already labelled in English by the BIOS | `EXP-0055` |
 | The 16 MiB CS1 RAM cart | No message; the game hangs on "NOW LOADING" | It passes the cart test | `EXP-0053` |
+
+## Special cases (`SPEC-005`, 2026-10-31)
+
+The special-case builds are `build_english --special` on top of the
+boot-warning builds (`EXP-0061`, D-054; references `special_us_v4` and
+`special_saturn_v4`). They cover:
+
+- Apocalypse's three boxes before the boss fight, for all 17 roster slots,
+  in new English approved by the user (`data/translations/boss_boxes.json`),
+  in the 2 × 25 layout;
+- Alpha Chun-Li (slot 18): Chun-Li's official English win quotes, boxes,
+  post-boss quote and ending.
+
+Every box of the 17 slots was shown on the American image, and the variant
+boxes and 16 slots on the Saturn-names image (`EXP-0061`). The user played to
+the boss stage from a cold boot on each image (`EXP-0062`).
+
+| Item | Status | Why | Evidence | Taken up by |
+| --- | --- | --- | --- | --- |
+| Slot 8 (Apocalypse)'s ending | Would show English box records under Ryu's English script | Its 4 Japanese records lay in the free space the boxes now use. That his ending never plays is a **HYPOTHESIS** (above). | `EXP-0061` | — |
+| `MC08`'s zero run at `0x4A3C` | Holds Cammy's three boxes | Nothing read or wrote it from the boxes to the partner fight. Its use elsewhere is unknown; that `MC08` is loaded only for the boss stage is a **HYPOTHESIS**. | `EXP-0061` | — |
+| Rogue's boxes on the Saturn-names image | English on disc, not shown there | Her pick failed three times in the routes; her records are byte-identical to the American image's, which were shown. | `EXP-0061` | — |
+| Alpha Chun-Li on the Saturn-names image | English on disc, not played | Her slot-18 bytes equal the American image's, where she was walked and played. | `EXP-0061`, `EXP-0062` | — |
+| Alpha Chun-Li picked second | Not shown | Her quotes and ending use the same table word as when picked first. | `EXP-0061` | — |
+| Alpha Chun-Li's ending art | Her usual outfit in the second scene | The arcade has its own scene handler for slot 18; art is outside the text scope. | `EXP-0059` | `docs/known_unknowns.md` |
+| The arcade's 4 records after its box table, and its second index table | Not built | Their use is unknown. | `EXP-0058` | — |

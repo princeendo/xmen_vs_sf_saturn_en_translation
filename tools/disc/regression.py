@@ -27,6 +27,10 @@ Unless ``--keep`` is given, each rebuilt image (hundreds of MB) is deleted
 after hashing. Only ``build/regression/`` is ever deleted. With ``--report``,
 a Markdown report of the references and this run is written. Exit 0 means
 every reference matched.
+
+When to run all of them (user decision, 2026-10-31): only after a change to
+the build tools. Otherwise rebuild only newly added references with
+``--only``; the others stand as matched by the last full run.
 """
 
 from __future__ import annotations

@@ -462,8 +462,15 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
     read on the built images.
   - **Alpha Chun-Li:** Chun-Li's English quotes and ending on the built
     image.
-- **Next:** `SPEC-005` (the user's play check and the references;
-  `READY`).
+- **2026-10-31** (`SESSION-0093`, `EXP-0062`): `SPEC-005` is done; Phase P
+  is complete.
+  - **Play check:** the user played to the boss stage from a cold boot on
+    each image (Alpha Chun-Li on the American image, Vega on the
+    Saturn-names image); every box matched the forced runs glyph for glyph.
+  - **Registered:** `special_us_v4` and `special_saturn_v4`; the README and
+    the coverage register updated.
+- **Next:** Phase Q. `CAP-001`, `HINT-001` and `NOCH-001` are `READY`; the
+  user's order starts with `CAP-001` (attract captions).
   Backlog
   after the phases: `REL-001` (release patches), `TXT-001`, and the rest of
   `UI-001` and `UI-003`.
@@ -3077,7 +3084,7 @@ Known before Phase P (each a lead, not a finding about what remains):
 
 ### SPEC-005 - Verify and register the special cases
 
-- **Status:** `READY`
+- **Status:** `DONE`
 - **Milestone:** M9 (`SPECIAL-001`)
 - **Dependencies:** SPEC-004 (done).
 - **Blockers:** None.
@@ -3088,6 +3095,12 @@ Known before Phase P (each a lead, not a finding about what remains):
     ones.
   - **Regression, coverage, README:** references updated; the register lists
     what remains; the README's "Still Japanese" list updated.
+- **Notes:** Done 2026-10-31 (`EXP-0062`). The user played Alpha Chun-Li
+  with Ryu on `build/spec004_us` (boss beaten, post-boss quote) and Vega
+  with Ryu on `build/spec004_saturn` (to the boss fight), with no unlock.
+  The six boxes equal `EXP-0061`'s forced screens on every glyph pixel.
+  References `special_us_v4` and `special_saturn_v4`; the register's
+  "Special cases" section lists what remains.
 
 ## Phase Q: Attract Captions, Continue Hints and the "No Challengers" Warning (`UI-001` to `UI-003`)
 
@@ -3113,10 +3126,10 @@ Known before Phase Q:
 
 ### CAP-001 - Attract captions: census, storage and official English
 
-- **Status:** `BLOCKED`
+- **Status:** `READY`
 - **Milestone:** After M8 (`UI-002`)
 - **Dependencies:** SPEC-005 (the user's order).
-- **Blockers:** Phase P.
+- **Blockers:** None (`SPEC-005` done 2026-10-31).
 - **Objective:** Every attract caption, where it is stored and how it is
   drawn, and the official English for each.
 - **Acceptance criteria:**
@@ -3147,10 +3160,10 @@ Known before Phase Q:
 
 ### HINT-001 - Continue hints: census, storage and official English
 
-- **Status:** `BLOCKED`
+- **Status:** `READY`
 - **Milestone:** After M8 (`UI-003`)
 - **Dependencies:** SPEC-005 (the user's order).
-- **Blockers:** Phase P.
+- **Blockers:** None (`SPEC-005` done 2026-10-31).
 - **Objective:** Every continue hint the Saturn can show, where it is stored
   and how one is chosen, and the arcade's official English for each.
 - **Acceptance criteria:**
@@ -3174,10 +3187,10 @@ Known before Phase Q:
 
 ### NOCH-001 - The "no challengers" warning: storage, English art, build and verify
 
-- **Status:** `BLOCKED`
+- **Status:** `READY`
 - **Milestone:** After M8 (`UI-001`)
 - **Dependencies:** SPEC-005 (the user's order).
-- **Blockers:** Phase P.
+- **Blockers:** None (`SPEC-005` done 2026-10-31).
 - **Objective:** The `⚠乱入禁止` sprite in English in both variants.
 - **Acceptance criteria:**
   - **Storage:** the sprite's cells and the code that places them, CONFIRMED

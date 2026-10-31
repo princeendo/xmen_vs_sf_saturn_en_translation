@@ -44,10 +44,25 @@ and Cammy.
 
 **Still Japanese:**
 
-- Apocalypse's pre-fight exchange in the final stage;
 - the "no challengers" (乱入禁止) warning in the final fights;
 - continue-screen hints;
 - attract-mode captions.
+
+**Special cases: Apocalypse's boxes and Alpha Chun-Li** (`SPEC-001` to
+`SPEC-005`, 2026-10-31).
+
+- **Apocalypse's boxes:** the three boxes before the boss fight are in
+  English, in the win quotes' 2 × 25 layout. There is no official English
+  for them (the US arcade skips them), so they are a new translation,
+  approved by the user. The second box names the player's character, as
+  each name variant spells it.
+- **Alpha Chun-Li** (hold Start on Chun-Li): her win quotes, boxes,
+  post-boss quote and ending are Chun-Li's official English, as in the
+  arcade.
+- **Checks:** every box of all 17 roster characters was shown in the
+  emulator, and the user played to the boss stage from a cold boot on each
+  name variant (Alpha Chun-Li, then Vega). See `docs/discoveries.md`
+  (D-052 to D-054).
 
 **Boot warnings: all five in English** (`BOOT-001` to `BOOT-005`,
 2026-10-30). The game shows a full-screen warning at boot when the 4 MB RAM
@@ -123,15 +138,18 @@ never modified. The American-names variant (the default):
 ./invenv.sh python -m tools.disc.build_english \
   data/translations/{wolverine,cyclops,storm,rogue,gambit,sabretooth,juggernaut,magneto,apocalypse,ryu,ken,chun_li,dhalsim,zangief,vega,gouki,nash,cammy}_win_quotes.json \
   data/translations/{wolverine,cyclops,storm,rogue,gambit,sabretooth,juggernaut,magneto,ryu,ken,chun_li,dhalsim,zangief,vega,gouki,nash,cammy}_ending.json \
-  local/build_us --patch-version 4 --names us --boot-warnings --image build/names_us
+  local/build_us --patch-version 4 --names us --boot-warnings --special \
+  --image build/names_us
 ```
 
 The Saturn-names variant: the same specs, with
-`local/build_saturn --patch-version 4 --names saturn --boot-warnings --image build/names_saturn`.
+`local/build_saturn --patch-version 4 --names saturn --boot-warnings --special --image build/names_saturn`.
 
 The expected hashes are in `data/regression/references.json`: Track 01
-`e8c9cc4f…` (American, `boot_warnings_us_v4`) and `f53d2378…` (Saturn names,
-`boot_warnings_saturn_v4`). Without `--boot-warnings` the boot warnings stay
+`5d1f76e4…` (American, `special_us_v4`) and `a4e3e98e…` (Saturn names,
+`special_saturn_v4`). Without `--special` Apocalypse's boxes and Alpha
+Chun-Li stay as before (`e8c9cc4f…`, `boot_warnings_us_v4`; `f53d2378…`,
+`boot_warnings_saturn_v4`). Without `--boot-warnings` too, the boot warnings stay
 Japanese (`441c9cfc…`, `names_us_v4`; `b11c8cd9…`, `names_saturn_v4`). `--names none` leaves the names as the Saturn has them
 and reproduces the earlier builds: with every ending, Track 01 `7bb8ab82…`
 (M8); without the `_ending.json` specs and `--patch-version 4`, the win

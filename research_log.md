@@ -2928,3 +2928,44 @@ Checks: `pytest` (224 passed), `ruff check`, `ruff format --check`, `mypy
 --strict` are clean; `tools.disc.regression`: all nine references match.
 
 Conclusion: `SPEC-004` is `DONE` (D-054). `SPEC-005` is `READY`.
+
+## 2026-10-31 — SESSION-0093: Verify and register the special cases (SPEC-005, EXP-0062)
+
+User request (verbatim): "Start SPEC-005: verify and register the special cases."
+
+- **Play check:** `EXP-0062/play_check.py` opened `build/spec004_us`, then
+  `build/spec004_saturn`, each in a copy of the interactive home with the
+  4 MB cart and a valid save, with a screenshot every half second. The
+  agent suggested Alpha Chun-Li on the American image and Vega on the
+  Saturn-names image.
+  - **American:** Ryu and Alpha Chun-Li (character byte `0x24`, table word
+    `0285`, from a state dump); the boss beaten; her post-boss quote in
+    English.
+  - **Saturn names:** Ryu and Vega (`0x1C`); to the boss fight.
+- **Comparison:** whole screens differ from the forced runs (score, timer,
+  bars, portrait), so the box area's glyph pixels were compared. All six
+  boxes match; the only differing pixels are the portrait corner outside
+  the box and, once, "PRESS START" blinking.
+  - A first try matched the post-boss quote against the forced walk's
+    screenshots: they have another size, the crop failed, and empty
+    outputs compared equal. That result was discarded; the quote is
+    recorded as read on screen.
+  - "So many I have fought..." in the American play is Ryu's quote
+    (`EXP-0042`), not Alpha Chun-Li's.
+- **Registered:** `special_us_v4` and `special_saturn_v4` (25 files each;
+  only `MC08.SHP` and `MMPACK.PCA` differ from the boot-warning references).
+- **Docs:** README (status, "Still Japanese", build commands with
+  `--special`, hashes), `docs/coverage_exceptions.md` ("Special cases" and
+  the updated rows), D-054, and `docs/known_unknowns.md` (the "text-like
+  data after Apocalypse's ending records" is the box table, `EXP-0058`).
+
+Checks: `pytest` (224 passed), `ruff check`, `ruff format --check`, `mypy
+--strict` are clean; `tools.disc.regression`: all eleven references match
+(about 30 minutes). The user asked why so many images were built: no build
+code had changed, so `--only` the two new references would have done. User
+decision (verbatim): "Yes. Run the full regression only when the build tools
+change; otherwise rebuild only the new references with --only." Recorded in
+`tools/disc/regression.py`'s docstring.
+
+Conclusion: `SPEC-005` is `DONE`; Phase P is complete. `CAP-001`,
+`HINT-001` and `NOCH-001` are `READY`.
