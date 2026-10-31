@@ -1,0 +1,344 @@
+{
+ "description": "Approved English (SPEC-003, EXP-0060) for Apocalypse's boss-stage boxes (decoded MC08.SHP 0x1090, 18 slots x 3 records x 76 bytes, EXP-0058), a new translation by the agent (Claude), approved by the user on 2026-10-30 (\"Approve all\"); recorded under GATE-TRANSLATION. No official English exists (EXP-0059). Each record is 2 lines of at most 25 cells, the win quotes' English layout. source_sha256 is the first 8 hex digits of the record's 76 bytes; slot 8 repeats slot 7's records, and record 2 has two versions (A, B). The second box of slots 14-16 names the player: 'us' for the American-names variant, 'saturn' for the Saturn-names variant.",
+ "record_2": {
+  "A": {
+   "source_sha256": "ea42db3f",
+   "slots": [
+    0,
+    1,
+    2,
+    7,
+    8,
+    9,
+    10,
+    11,
+    14,
+    16
+   ],
+   "lines": [
+    "Behold my true form!",
+    "Now offer up your life!!"
+   ]
+  },
+  "B": {
+   "source_sha256": "bc75a1ff",
+   "slots": [
+    3,
+    4,
+    5,
+    6,
+    12,
+    13,
+    15,
+    17
+   ],
+   "lines": [
+    "Behold Apocalypse's true",
+    "form! Now give your life!"
+   ]
+  }
+ },
+ "slots": {
+  "0": {
+   "character": "Wolverine",
+   "record_0": {
+    "source_sha256": "4762ca6b",
+    "lines": [
+     "So it's you, Apocalypse!",
+     "Fine! Today you die!"
+    ]
+   },
+   "record_1": {
+    "source_sha256": "84fa63e1",
+    "lines": [
+     "Poor berserker Wolverine,",
+     "think you've cornered me?"
+    ]
+   }
+  },
+  "1": {
+   "character": "Cyclops",
+   "record_0": {
+    "source_sha256": "35339c41",
+    "lines": [
+     "I've got you, Apocalypse!",
+     "Your schemes end here!!"
+    ]
+   },
+   "record_1": {
+    "source_sha256": "f472c77a",
+    "lines": [
+     "Think you've cornered me?",
+     "Cyclops, you all lose!"
+    ]
+   }
+  },
+  "2": {
+   "character": "Storm",
+   "record_0": {
+    "source_sha256": "278047f7",
+    "lines": [
+     "No escape, Apocalypse!",
+     "Free the people you took!"
+    ]
+   },
+   "record_1": {
+    "source_sha256": "6c26f360",
+    "lines": [
+     "Storm, mighty wind rider,",
+     "alas, that cannot be."
+    ]
+   }
+  },
+  "3": {
+   "character": "Rogue",
+   "record_0": {
+    "source_sha256": "6e88d52f",
+    "lines": [
+     "So it IS you, Apocalypse.",
+     "Now c'mon, bring it on!!"
+    ]
+   },
+   "record_1": {
+    "source_sha256": "bdd2d15b",
+    "lines": [
+     "Rogue, foolish mutant.",
+     "You never had a chance."
+    ]
+   }
+  },
+  "4": {
+   "character": "Gambit",
+   "record_0": {
+    "source_sha256": "df23670f",
+    "lines": [
+     "Game's over, monsieur.",
+     "Care to say a prayer?"
+    ]
+   },
+   "record_1": {
+    "source_sha256": "7caebd33",
+    "lines": [
+     "Gambit, foolish thief.",
+     "It is you who die here."
+    ]
+   }
+  },
+  "5": {
+   "character": "Sabretooth",
+   "record_0": {
+    "source_sha256": "7a71f1a2",
+    "lines": [
+     "Hmph! What a pushover!",
+     "Birdy, we eat after this!"
+    ]
+   },
+   "record_1": {
+    "source_sha256": "06b1851e",
+    "lines": [
+     "Foolish killer Sabretooth",
+     "you are the one trapped."
+    ]
+   }
+  },
+  "6": {
+   "character": "Juggernaut",
+   "record_0": {
+    "source_sha256": "08f264d6",
+    "lines": [
+     "Raaaaaaaaaaaaaaargh!!",
+     "So YOU'RE Apocalypse?!"
+    ]
+   },
+   "record_1": {
+    "source_sha256": "8736f0f7",
+    "lines": [
+     "Juggernaut, you big fool.",
+     "Learn that I am stronger."
+    ]
+   }
+  },
+  "7": {
+   "character": "Magneto (slot 8 repeats these)",
+   "record_0": {
+    "source_sha256": "338de629",
+    "lines": [
+     "Your mistake, Apocalypse,",
+     "was to anger me, Magneto!"
+    ]
+   },
+   "record_1": {
+    "source_sha256": "2bb951bb",
+    "lines": [
+     "Laughable, Magneto.",
+     "Think you've cornered me?"
+    ]
+   }
+  },
+  "9": {
+   "character": "Ryu",
+   "record_0": {
+    "source_sha256": "afd70df9",
+    "lines": [
+     "So you're Apocalypse!",
+     "Fight me! Take my fist!!"
+    ]
+   },
+   "record_1": {
+    "source_sha256": "88b33a55",
+    "lines": [
+     "Ryu, you lost warrior.",
+     "Your fists can't harm me."
+    ]
+   }
+  },
+  "10": {
+   "character": "Ken",
+   "record_0": {
+    "source_sha256": "a4974d53",
+    "lines": [
+     "You're Apocalypse, huh?",
+     "KO in 1 minute. I'm busy."
+    ]
+   },
+   "record_1": {
+    "source_sha256": "1620f6c3",
+    "lines": [
+     "Ken, presumptuous human,",
+     "you mean to defeat me?"
+    ]
+   }
+  },
+  "11": {
+   "character": "Chun-Li",
+   "record_0": {
+    "source_sha256": "9c30a4f7",
+    "lines": [
+     "So you're Apocalypse?",
+     "Freeze! You're arrested!!"
+    ]
+   },
+   "record_1": {
+    "source_sha256": "d2def7a1",
+    "lines": [
+     "Arrest me? Ha ha ha ha!",
+     "Chun-Li, don't be absurd."
+    ]
+   }
+  },
+  "12": {
+   "character": "Dhalsim",
+   "record_0": {
+    "source_sha256": "129b69cd",
+    "lines": [
+     "Apocalypse... lost soul,",
+     "yet to find enlightenment"
+    ]
+   },
+   "record_1": {
+    "source_sha256": "91bbae27",
+    "lines": [
+     "Dhalsim, you false yogi.",
+     "Think you've cornered me?"
+    ]
+   }
+  },
+  "13": {
+   "character": "Zangief",
+   "record_0": {
+    "source_sha256": "18b95c47",
+    "lines": [
+     "Hm? Whoever you are,",
+     "you dare match my steel?"
+    ]
+   },
+   "record_1": {
+    "source_sha256": "6ee8a3d8",
+    "lines": [
+     "Zangief, hopeless fool.",
+     "You think you can win?"
+    ]
+   }
+  },
+  "14": {
+   "character": "M. Bison (Vega)",
+   "record_0": {
+    "source_sha256": "2aa7c404",
+    "lines": [
+     "So you came, Apocalypse!",
+     "Your era ended long ago!!"
+    ]
+   },
+   "record_1": {
+    "source_sha256": "f91b68cc",
+    "us": [
+     "Bison, lower than trash,",
+     "you think you'll beat me?"
+    ],
+    "saturn": [
+     "Vega, lower than trash,",
+     "you think you'll beat me?"
+    ]
+   }
+  },
+  "15": {
+   "character": "Akuma (Gouki)",
+   "record_0": {
+    "source_sha256": "67f83978",
+    "lines": [
+     "........",
+     ""
+    ]
+   },
+   "record_1": {
+    "source_sha256": "ba94be5a",
+    "us": [
+     "Akuma, however strong,",
+     "a human has limits..."
+    ],
+    "saturn": [
+     "Gouki, however strong,",
+     "a human has limits..."
+    ]
+   }
+  },
+  "16": {
+   "character": "Charlie (Nash)",
+   "record_0": {
+    "source_sha256": "ba418f66",
+    "lines": [
+     "..... Now, Apocalypse,",
+     "you're coming with me."
+    ]
+   },
+   "record_1": {
+    "source_sha256": "f4ff79ec",
+    "us": [
+     "Pitiful, Charlie.",
+     "Think you've cornered me?"
+    ],
+    "saturn": [
+     "Pitiful, Nash.",
+     "Think you've cornered me?"
+    ]
+   }
+  },
+  "17": {
+   "character": "Cammy",
+   "record_0": {
+    "source_sha256": "943995bb",
+    "lines": [
+     "Target Apocalypse",
+     "confirmed... Destroy!"
+    ]
+   },
+   "record_1": {
+    "source_sha256": "ac062dea",
+    "lines": [
+     "Hello and goodbye, Cammy.",
+     "Your brief life ends now."
+    ]
+   }
+  }
+ }
+}

@@ -138,6 +138,16 @@ English, in two looks, and answered:
 | The "multiplayer screen" | "control panel (Recommended)" | "…go to the Saturn's control panel." |
 | `ERR5`'s verb | `"insert" (Recommended)` | "Turn off the power and insert the 4MB Extended RAM Cartridge." |
 
+**Special cases (2026-10-30, `SPEC-003`, `EXP-0060`).** Apocalypse's boxes
+on the boss stage have no official English: the US arcade skips them
+(`EXP-0059`). The user answered:
+
+| Question (short) | Answer | Meaning |
+| --- | --- | --- |
+| What should the builds show in Apocalypse's boxes? | "New English, quote layout (Recommended)" | A new translation in the win quotes' 2 × 25 layout, which needs a box-code change (`SPEC-004`); if it cannot be made, the choice returns to the user |
+| Switch Alpha Chun-Li to Chun-Li's official English? | "Yes, Chun-Li's English (Recommended)" | Slot 18's table word `0x0285`, as the arcade shows her |
+| Approve the 36 lines? | "Approve all (Recommended)" | `data/translations/boss_boxes.json`, by Claude, with each source record's hash; the second box of slots 14-16 per name variant (Bison/Vega, Akuma/Gouki, Charlie/Nash) |
+
 ## Deferred Until Evidence Exists
 
 These MSHvSF decisions depend on facts not yet known for XvSF. Each is put to

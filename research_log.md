@@ -2870,3 +2870,24 @@ Checks: `pytest` (218 passed), `ruff check`, `ruff format --check`, `mypy
 
 Conclusion: `SPEC-002` is `DONE` (D-053). `SPEC-003` is `READY`: it needs
 the user's plan (new box English or skip the boxes; Alpha Chun-Li's flag).
+
+## 2026-10-30 — SESSION-0091: The user's plan for the special cases (SPEC-003, EXP-0060)
+
+User request (verbatim): "Start SPEC-003: the user's plan for the special
+cases."
+
+- **Questions:** the user chose new English for the boss boxes in the
+  2 × 25 quote layout (over the 2 × 19 layout, skipping them, or leaving
+  them Japanese), and Chun-Li's official English for Alpha Chun-Li.
+- **Translation:** the agent drafted 36 distinct lines from the 54 records
+  (slot 8 repeats slot 7; record 2 has two versions). `check_draft.py`
+  first found Cammy's reply one letter too long; it was shortened before
+  the user saw it. The user approved all lines.
+- **Recorded:** `data/translations/boss_boxes.json`, the
+  `GATE-TRANSLATION` extension, `docs/localization_policy.md`.
+
+Checks: `pytest` (218 passed), `ruff check`, `ruff format --check`, `mypy
+--strict` are clean.
+
+Conclusion: `SPEC-003` is `DONE`. `SPEC-004` is `READY`, starting with the
+box-code change to the 2 × 25 layout.

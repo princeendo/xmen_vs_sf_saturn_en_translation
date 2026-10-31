@@ -452,7 +452,12 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   - **Alpha Chun-Li:** official English is Chun-Li's (arcade, MAME). The
     builds garble it because her table word lacks the flags; `0x0285`
     fixes her quotes and ending in RAM.
-- **Next:** `SPEC-003` (the user's plan for the special cases; `READY`).
+- **2026-10-30** (`SESSION-0091`, `EXP-0060`): `SPEC-003` is done.
+  - **Boxes:** the user chose new English in the quote layout and
+    approved all 36 lines (`data/translations/boss_boxes.json`).
+  - **Alpha Chun-Li:** Chun-Li's official English (word `0x0285`).
+- **Next:** `SPEC-004` (build the special cases; `READY`). It starts with
+  the box-code change to the 2 × 25 layout.
   Backlog
   after the phases: `REL-001` (release patches), `TXT-001`, and the rest of
   `UI-001` and `UI-003`.
@@ -970,6 +975,17 @@ prerequisites before English text goes on disc).
     "control panel (Recommended)"; `ERR5` `"insert" (Recommended)`.
   - **Translator:** Claude (the agent), `EXP-0055`; no official English
     exists (searches recorded there).
+
+- **Gate extension, special cases (2026-10-30, `SESSION-0091`, `SPEC-003`):**
+  - The user's decision is **GO**. Asked "Apocalypse's three text boxes on the boss stage have no official English (the US arcade skips them). What should the builds show?", they answered "New English, quote layout (Recommended)". Asked "Alpha Chun-Li (Start held over Chun-Li) shows garbled English, then Japanese, in the builds. Switch her to Chun-Li's official English (the arcade does)?", they answered "Yes, Chun-Li's English (Recommended)". Shown all 36 lines and asked "Approve these 36 lines as the new English for Apocalypse's boxes?", they answered "Approve all (Recommended)".
+  - **Scope:** the 54 box records of decoded `MC08.SHP` `0x1090` with the
+    lines in `data/translations/boss_boxes.json`, in the 2 × 25 quote
+    layout; slot 18's table word set to `0x0285` (Chun-Li's official
+    English quotes and ending). Every other surface stays gated.
+  - **Names:** the second box of slots 14-16 follows the variant
+    (Bison/Vega, Akuma/Gouki, Charlie/Nash).
+  - **Translator:** Claude (the agent), `EXP-0060`; no official English
+    exists for the boxes (`EXP-0059`).
 
 ## Phase F: M1
 
@@ -3000,7 +3016,7 @@ Known before Phase P (each a lead, not a finding about what remains):
 
 ### SPEC-003 - The user's plan for the special cases
 
-- **Status:** `READY`
+- **Status:** `DONE`
 - **Milestone:** M9 (`SPECIAL-001`)
 - **Dependencies:** SPEC-002 (done).
 - **Blockers:** None.
@@ -3013,13 +3029,22 @@ Known before Phase P (each a lead, not a finding about what remains):
   - **Unlocks:** if an unlock exists, whether a build should change it,
     put to the user with its cost.
   - **Recording:** `docs/localization_policy.md` and `GATE-TRANSLATION`.
+- **Notes:** Done 2026-10-30 (`EXP-0060`).
+- **Outcome:**
+  - **Boxes:** new English (Claude's, approved line by line) in the 2 × 25
+    quote layout, `data/translations/boss_boxes.json`; the second box of
+    slots 14-16 per name variant.
+  - **Alpha Chun-Li:** Chun-Li's official English (table word `0x0285`).
+  - **Unlocks:** none exist to change (Gouki open; Alpha by Start held).
+  - **Fallback:** if the 2 × 25 box layout cannot be made, the choice
+    returns to the user.
 
 ### SPEC-004 - Build the special cases
 
-- **Status:** `BLOCKED`
+- **Status:** `READY`
 - **Milestone:** M9 (`SPECIAL-001`)
-- **Dependencies:** SPEC-003.
-- **Blockers:** The user's plan.
+- **Dependencies:** SPEC-003 (done).
+- **Blockers:** None.
 - **Objective:** Both name variants built from the untouched source with the
   approved special-case English.
 - **Acceptance criteria:**
