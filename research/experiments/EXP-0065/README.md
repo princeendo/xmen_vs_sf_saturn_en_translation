@@ -141,6 +141,69 @@ English wording as shown." Recorded in `docs/localization_policy.md` as a
 - **Caption 4:** its block's base is shared with a 235-index animated scene
   in its window; its room is not yet measured.
 
+## Video Memory for Captions 1 and 4
+
+The user chose to investigate memory before building any caption
+(2026-10-31, verbatim): "Investigate video memory for captions 1 and 4
+first, before building any caption."
+
+### Fewer characters, same art
+
+Choosing the four lines' 16-pixel alignments together (each line moves at
+most 4 pixels from the arcade's position) brings caption 1 to **112**
+distinct characters (from 123); the art is unchanged. Two pairs differ by 2
+pixels only (110 if merged); the next differ by 7 or more. Colour-swapped
+sharing saves nothing (112 distinct shapes).
+
+### What the screen shows, frame by frame
+
+- **Registers:** VDP2 registers read back as zero. The game copies scroll
+  and map registers from RAM every frame (`0x06020EC6`): NBG0/NBG1 x and y
+  from `0x06020C5C`, NBG2 x and y `0x06020C64`, NBG3 x `0x06020C5A`, NBG2's
+  map registers `0x06020C28`; a line-scroll table (RAM `0x060234D4`) goes
+  to VRAM `0x63C00`. The setup list at `0x060217E0` holds BGON, character
+  and map settings.
+- [`vram_visible.py`](vram_visible.py) records, every 2 frames, which
+  128-byte VRAM slots change and which slots each layer shows inside the
+  352 × 224 screen (NBG1 counts whole rows when its line-scroll table is not
+  zero). [`vram_timeline.py`](vram_timeline.py), its first version, counted
+  whole map pages and found almost nothing free (leftover map data).
+- **The file choice:** the attract file's digit is built at `0x06021736`
+  (`bsrf` to a random pick, + `'0'`) into `opening?.st2` (RAM `0x06020289`).
+  Replacing the call with `mov #k,r0` (`E00k`) forces file k. Each file was
+  recorded from `states2/t00003840` with that patch, skipping 1,700 frames,
+  700 steps of 2 frames (to frame 3,106: the opening and caption 4).
+- **Section C** goes to fixed places: part 0 at VRAM 0, part 1 right after
+  it (base `0x1F8` in the even files, part 0 `0x3F00` bytes; `0x210` in the
+  odd files, `0x4200`); its load is at frame ~1,737.
+
+### The room ([`free_windows.py`](free_windows.py))
+
+A slot is free for a caption if it was last written between the opening's
+start and the caption's window, is not written again during the window, and
+no layer shows it from that write to its next write.
+
+| File | Caption 1 window | Free (written by section C) | Caption 4 window | Banner-only slots | Free |
+| --- | --- | --- | --- | --- | --- |
+| `OPENING0` | 1,747-1,937 | 20 (`0x9780`-`0x12100`) | 2,709-2,879 | 182 | 101 |
+| `OPENING1` | 1,747-1,935 | 14 (`0x9D80`-`0xE280`) | 2,705-2,875 | 182 | 100 |
+| `OPENING2` | 1,747-1,937 | 20 | 2,707-2,875 | 121 | 81 |
+| `OPENING3` | 1,748-1,936 | 14 | 2,706-2,874 | 121 | 56 |
+| `OPENING4` | 1,748-1,936 | 20 | 2,708-2,876 | 197 | 91 |
+| `OPENING5` | 1,748-1,936 | 14 | 2,706-2,876 | 135 | 79 |
+| `OPENING6` | 1,748-1,938 | 20 | 2,708-2,876 | 135 | 77 |
+| `OPENING7` | 1,748-1,936 | 14 | 2,706-2,876 | 135 | 20 |
+
+**All four captions fit, in every file:** caption 1 needs 6 slots beyond
+its own 106 (14-20 free, all in section C, which the build controls);
+caption 4 needs 107 and has 121-197 slots shown only during its scroll;
+captions 2 (57 of 139) and 3 (84 of 95) fit in their own.
+
+The free slots after frame 3,106 (the title, then the demo) were not
+followed; the cold-boot check must compare those screens. Some banner-only
+slots are black cells around the banner, which the new map shows as the
+blank character.
+
 ## Build Design
 
 1. Per caption window, rewrite the section A map updates so each English
@@ -157,6 +220,5 @@ English wording as shown." Recorded in `docs/localization_policy.md` as a
 
 ## Uncertainty
 
-- Room for captions 1 and 4's extra characters is not yet found.
 - The table at `0x06060000` and the one-entry shift between source and
   buffer are observed, not traced.
