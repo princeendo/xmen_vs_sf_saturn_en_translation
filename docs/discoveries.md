@@ -1187,3 +1187,36 @@ Reproduce: `research/experiments/EXP-0064/README.md`.
   eight files and a cold boot.
 
 Reproduce: `research/experiments/EXP-0065/README.md`.
+
+## D-058 (UI): The continue hints: table, starter, the arcade's map and English, and the fit (`HINT-001`, `EXP-0066`)
+
+- **Table:** the Saturn's continue hints are records 0-15 of a 76-byte
+  (2 × 19 codes) Japanese table at `0x06085544` in `MMPACK.PCA` (decoded
+  segment 2, loaded at `0x0601F000`; record 10 is decoded `0x70C9C`):
+  twelve distinct hints, with 12-15 repeating 4, 2, 9 and 3. Records 16-20
+  (an "in development" notice and a name list) follow; the starter never
+  reaches them.
+- **Starter:** `0x06066728` masks a value from `0x06056B54` with `0x0F`
+  (`0x06066730`), then `0x06066734` stores the index and the base
+  (`0x06085544` when the word `0x060F547A` is 0). The renderer `0x06066948`
+  reads base + index × 76, or × 100 when `0x060F5478` is nonzero. Forcing
+  each index (`mov #i,r0` for the mask) showed record `i`, all 16.
+- **The arcade:** the same starter at `0x04F42A` (`0xFF547A`/`0xFF5478`).
+  With the language word nonzero, a byte map (`0x04F476`, also at the
+  Saturn's `0x060667A8`: `00 02 … 16 00 02 04 06`) picks English area
+  records `270 + map[i]` and `271 + map[i]`, two pages; in Japanese, record
+  `i` of `0x18397C`, one page (records 1-16 equal the Saturn's; record 0
+  has an extra レバー). Forced in MAME for all 16 indices in both languages
+  and seen on screen. From index 8 on, the English pairs are out of step
+  with the Japanese hints, and index 11 ends on the "COMING SOON" record.
+- **No English on the Saturn disc:** the starter's English base
+  (`0x06085B80`) holds unrelated data, and no arcade English hint record is
+  on the disc.
+- **Fit:** with the Saturn's own English path switched on in RAM and two
+  arcade records written at the base, the renderer drew both pages in its
+  English mode (2 × 25 at 12 pixels) inside the hint box. Two 25-code lines
+  fit, and every arrow code draws (`0x0134` ↑, `0x0136` →, `0x0137` ↘,
+  `0x0138` ↓, `0x0139` ↙, `0x013A` ←).
+- **Pairing:** `data/translations/hint_pairing.json` (addresses and hashes).
+
+Reproduce: `research/experiments/EXP-0066/README.md`.

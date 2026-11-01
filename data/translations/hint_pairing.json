@@ -1,0 +1,373 @@
+{
+ "description": "Continue hints (HINT-001, EXP-0066): for each index (rand & 0x0F) the Saturn's Japanese record and the two English records the US arcade shows for the same index, as forced in both.",
+ "rule": "index = rand() & 0x0F; Japanese: record index, one page; English: records map[index] and map[index] + 1, two pages",
+ "index_map": "00 02 04 06 08 0a 0c 0e 10 12 14 16 00 02 04 06",
+ "arcade": {
+  "program": "xmvsfu, 68000 order (EXP-0008)",
+  "starter": "0x04f42a",
+  "map": "0x4f476",
+  "japanese_table": "0x18397c",
+  "english_table": "0x18d81a"
+ },
+ "saturn": {
+  "file": "MMPACK.PCA (decoded segment 2, loaded at 0x0601f000)",
+  "starter": "0x06066728",
+  "map": "0x060667a8",
+  "japanese_table": "0x06085544",
+  "english_table_pointer": "0x06085b80 (not English text, EXP-0066)"
+ },
+ "hints": [
+  {
+   "index": 0,
+   "saturn_record": 0,
+   "saturn_address": "0x06085544",
+   "saturn_sha256": "5aa9f1e744d270ee3aa4171416785d36d8adf3e843aa7414012a60930c220e54",
+   "arcade_jp_address": "0x18397c",
+   "arcade_jp_equal": false,
+   "english_pages": [
+    {
+     "record": 0,
+     "area_record": 270,
+     "address": "0x18d81a",
+     "sha256": "8a22c173e59f752d5244e03f985f221a8158a2c8f0df309f17ee2a0d6c46451d"
+    },
+    {
+     "record": 1,
+     "area_record": 271,
+     "address": "0x18d87e",
+     "sha256": "e944e634139dddccb0d60e269c0f813264ab6053e06206a182da899c48095e07"
+    }
+   ]
+  },
+  {
+   "index": 1,
+   "saturn_record": 1,
+   "saturn_address": "0x06085590",
+   "saturn_sha256": "7b406362380759148aca95c81c8913d7c488d5251b0c2f80111942323f39f693",
+   "arcade_jp_address": "0x1839c8",
+   "arcade_jp_equal": true,
+   "english_pages": [
+    {
+     "record": 2,
+     "area_record": 272,
+     "address": "0x18d8e2",
+     "sha256": "b4d65b9caec86d6c8e71af25c0dbf5b67bd26046012ec5596ea9f82b785ae76d"
+    },
+    {
+     "record": 3,
+     "area_record": 273,
+     "address": "0x18d946",
+     "sha256": "b31afebe0d1c12229c8a56aae2ccba02f7293665c5cbd159db749319664bf179"
+    }
+   ]
+  },
+  {
+   "index": 2,
+   "saturn_record": 2,
+   "saturn_address": "0x060855dc",
+   "saturn_sha256": "5218f01f27d51cc8b1a136a5d6cd2327e4a3bf890ac7143b113e563dbbaa9a42",
+   "arcade_jp_address": "0x183a14",
+   "arcade_jp_equal": true,
+   "english_pages": [
+    {
+     "record": 4,
+     "area_record": 274,
+     "address": "0x18d9aa",
+     "sha256": "17c05f45adc1f67dafe2dcbbb90a674fa5f687897e8f6b0a25584129a608bdd7"
+    },
+    {
+     "record": 5,
+     "area_record": 275,
+     "address": "0x18da0e",
+     "sha256": "14e30fd77b2c8470ae54d5ee365798ef1651380eda8473bbb8dd71f0f9d2d039"
+    }
+   ]
+  },
+  {
+   "index": 3,
+   "saturn_record": 3,
+   "saturn_address": "0x06085628",
+   "saturn_sha256": "2edb99879a872ee4c34395e41ab08c093738e3b7640b67e7a9c2810e8d1d1ef4",
+   "arcade_jp_address": "0x183a60",
+   "arcade_jp_equal": true,
+   "english_pages": [
+    {
+     "record": 6,
+     "area_record": 276,
+     "address": "0x18da72",
+     "sha256": "3ad4f4c517dd39200aef82ea12d9fe0b141cf36a6797057aa6c1cea47386ca4d"
+    },
+    {
+     "record": 7,
+     "area_record": 277,
+     "address": "0x18dad6",
+     "sha256": "b9974fc5d2b953e75839b89e3e7a847f1df0e295f5a7bf21d43e594bc1faae00"
+    }
+   ]
+  },
+  {
+   "index": 4,
+   "saturn_record": 4,
+   "saturn_address": "0x06085674",
+   "saturn_sha256": "683fd3f0bb42ee2d27fc77551e10c8bb495446d2eb7b52856780cb464bc3b0ab",
+   "arcade_jp_address": "0x183aac",
+   "arcade_jp_equal": true,
+   "english_pages": [
+    {
+     "record": 8,
+     "area_record": 278,
+     "address": "0x18db3a",
+     "sha256": "ecba0897856bc7f8bb0da295a4f823d2dc9852840f7fce7b5b9a2551f2dec572"
+    },
+    {
+     "record": 9,
+     "area_record": 279,
+     "address": "0x18db9e",
+     "sha256": "60e4f7bc5b0bda1177a34a89fa5874748d79374b53fbe0827f664bc697d1b27c"
+    }
+   ]
+  },
+  {
+   "index": 5,
+   "saturn_record": 5,
+   "saturn_address": "0x060856c0",
+   "saturn_sha256": "ac9b39297438ccd7d6c91883a99d73734409d66254ee44cec82fa8e28fa3d8c0",
+   "arcade_jp_address": "0x183af8",
+   "arcade_jp_equal": true,
+   "english_pages": [
+    {
+     "record": 10,
+     "area_record": 280,
+     "address": "0x18dc02",
+     "sha256": "08aa8e4d768a968cf86d75e446b73af252e10628ca99c523b7f67f58d1c099e7"
+    },
+    {
+     "record": 11,
+     "area_record": 281,
+     "address": "0x18dc66",
+     "sha256": "72e13e82d9038a5ae6e68502d18b4102851b01ce70eb95db85b5ff99ef042fa8"
+    }
+   ]
+  },
+  {
+   "index": 6,
+   "saturn_record": 6,
+   "saturn_address": "0x0608570c",
+   "saturn_sha256": "ea9ee5d3fdaa401c09d995aa9dfef5c7a2d14423faabfd2f138c816a8bee9acf",
+   "arcade_jp_address": "0x183b44",
+   "arcade_jp_equal": true,
+   "english_pages": [
+    {
+     "record": 12,
+     "area_record": 282,
+     "address": "0x18dcca",
+     "sha256": "37b57924810c13c435fb4c0ea31c0ba3ac61e526e88182a28805d725009914e0"
+    },
+    {
+     "record": 13,
+     "area_record": 283,
+     "address": "0x18dd2e",
+     "sha256": "3648f99d2bf28774864f9da5ad97ddff8c516500fe84c6bb64fada0f4d1c1de5"
+    }
+   ]
+  },
+  {
+   "index": 7,
+   "saturn_record": 7,
+   "saturn_address": "0x06085758",
+   "saturn_sha256": "f9c420f22d1010fa4f7f79188414869821b32b981f52835d0dd6e31d2138f5bc",
+   "arcade_jp_address": "0x183b90",
+   "arcade_jp_equal": true,
+   "english_pages": [
+    {
+     "record": 14,
+     "area_record": 284,
+     "address": "0x18dd92",
+     "sha256": "bc06fa2291b0352008a719c2d1524c3432357bb8581ef940a39d5d95e608286a"
+    },
+    {
+     "record": 15,
+     "area_record": 285,
+     "address": "0x18ddf6",
+     "sha256": "cdb80fb7c8222ad55f5cb28e1c5086ee36298cdbd35cdbfd98cde698bfef6fed"
+    }
+   ]
+  },
+  {
+   "index": 8,
+   "saturn_record": 8,
+   "saturn_address": "0x060857a4",
+   "saturn_sha256": "cac12ec2a3ac3b78c6f4f748763f71ebfef1c11a397aedb4cfd5594dc516c6f2",
+   "arcade_jp_address": "0x183bdc",
+   "arcade_jp_equal": true,
+   "english_pages": [
+    {
+     "record": 16,
+     "area_record": 286,
+     "address": "0x18de5a",
+     "sha256": "43b13c806534be82a4cb91f1f696a2268ff23d04f7ba1dfaf9c3d373f58ac840"
+    },
+    {
+     "record": 17,
+     "area_record": 287,
+     "address": "0x18debe",
+     "sha256": "a1b755e74d0644a961bb42b45ea2cc1d2dc56b8e47ec86169fdd46cbd516c1b2"
+    }
+   ]
+  },
+  {
+   "index": 9,
+   "saturn_record": 9,
+   "saturn_address": "0x060857f0",
+   "saturn_sha256": "15d1c893bef8ab0700e6592ac1aa22bc7f40ca45309ad5e3deb791a78df89d63",
+   "arcade_jp_address": "0x183c28",
+   "arcade_jp_equal": true,
+   "english_pages": [
+    {
+     "record": 18,
+     "area_record": 288,
+     "address": "0x18df22",
+     "sha256": "8e12a6bcc4a15f4f20fcaaee9a923858135566d42fe88afabbe0174a2f2ca2b4"
+    },
+    {
+     "record": 19,
+     "area_record": 289,
+     "address": "0x18df86",
+     "sha256": "132d982d3e881ff413262be4bddd9362cb606b34c510fd51d56182305a2948fe"
+    }
+   ]
+  },
+  {
+   "index": 10,
+   "saturn_record": 10,
+   "saturn_address": "0x0608583c",
+   "saturn_sha256": "873877cfd71c1aa7325cd57fde72b47bb6b533896c072020f8c4dba661b519cc",
+   "arcade_jp_address": "0x183c74",
+   "arcade_jp_equal": true,
+   "english_pages": [
+    {
+     "record": 20,
+     "area_record": 290,
+     "address": "0x18dfea",
+     "sha256": "89555439d36acf57a67fc8ffdce8a9d7f4449a226f427c7f6a12f2a6caf6a66c"
+    },
+    {
+     "record": 21,
+     "area_record": 291,
+     "address": "0x18e04e",
+     "sha256": "8591f4b3f4a6e87656d04817959a13c0d5e45c3a1159e7963207099e8e67d39e"
+    }
+   ]
+  },
+  {
+   "index": 11,
+   "saturn_record": 11,
+   "saturn_address": "0x06085888",
+   "saturn_sha256": "fe48b39de609adc203d73407a7b98cce41a3809d4dead4bc8ae983be7a600e88",
+   "arcade_jp_address": "0x183cc0",
+   "arcade_jp_equal": true,
+   "english_pages": [
+    {
+     "record": 22,
+     "area_record": 292,
+     "address": "0x18e0b2",
+     "sha256": "ddd315f4b8ca487987cb19154954b8f84c67a6d5656cca2657670f79a7278f35"
+    },
+    {
+     "record": 23,
+     "area_record": 293,
+     "address": "0x18e116",
+     "sha256": "bdd0b25623f18cf909d81d0264c2b1dc5d3e4cb625d22de5c6025837a17d453f"
+    }
+   ]
+  },
+  {
+   "index": 12,
+   "saturn_record": 12,
+   "saturn_address": "0x060858d4",
+   "saturn_sha256": "683fd3f0bb42ee2d27fc77551e10c8bb495446d2eb7b52856780cb464bc3b0ab",
+   "arcade_jp_address": "0x183d0c",
+   "arcade_jp_equal": true,
+   "english_pages": [
+    {
+     "record": 0,
+     "area_record": 270,
+     "address": "0x18d81a",
+     "sha256": "8a22c173e59f752d5244e03f985f221a8158a2c8f0df309f17ee2a0d6c46451d"
+    },
+    {
+     "record": 1,
+     "area_record": 271,
+     "address": "0x18d87e",
+     "sha256": "e944e634139dddccb0d60e269c0f813264ab6053e06206a182da899c48095e07"
+    }
+   ]
+  },
+  {
+   "index": 13,
+   "saturn_record": 13,
+   "saturn_address": "0x06085920",
+   "saturn_sha256": "5218f01f27d51cc8b1a136a5d6cd2327e4a3bf890ac7143b113e563dbbaa9a42",
+   "arcade_jp_address": "0x183d58",
+   "arcade_jp_equal": true,
+   "english_pages": [
+    {
+     "record": 2,
+     "area_record": 272,
+     "address": "0x18d8e2",
+     "sha256": "b4d65b9caec86d6c8e71af25c0dbf5b67bd26046012ec5596ea9f82b785ae76d"
+    },
+    {
+     "record": 3,
+     "area_record": 273,
+     "address": "0x18d946",
+     "sha256": "b31afebe0d1c12229c8a56aae2ccba02f7293665c5cbd159db749319664bf179"
+    }
+   ]
+  },
+  {
+   "index": 14,
+   "saturn_record": 14,
+   "saturn_address": "0x0608596c",
+   "saturn_sha256": "15d1c893bef8ab0700e6592ac1aa22bc7f40ca45309ad5e3deb791a78df89d63",
+   "arcade_jp_address": "0x183da4",
+   "arcade_jp_equal": true,
+   "english_pages": [
+    {
+     "record": 4,
+     "area_record": 274,
+     "address": "0x18d9aa",
+     "sha256": "17c05f45adc1f67dafe2dcbbb90a674fa5f687897e8f6b0a25584129a608bdd7"
+    },
+    {
+     "record": 5,
+     "area_record": 275,
+     "address": "0x18da0e",
+     "sha256": "14e30fd77b2c8470ae54d5ee365798ef1651380eda8473bbb8dd71f0f9d2d039"
+    }
+   ]
+  },
+  {
+   "index": 15,
+   "saturn_record": 15,
+   "saturn_address": "0x060859b8",
+   "saturn_sha256": "2edb99879a872ee4c34395e41ab08c093738e3b7640b67e7a9c2810e8d1d1ef4",
+   "arcade_jp_address": "0x183df0",
+   "arcade_jp_equal": true,
+   "english_pages": [
+    {
+     "record": 6,
+     "area_record": 276,
+     "address": "0x18da72",
+     "sha256": "3ad4f4c517dd39200aef82ea12d9fe0b141cf36a6797057aa6c1cea47386ca4d"
+    },
+    {
+     "record": 7,
+     "area_record": 277,
+     "address": "0x18dad6",
+     "sha256": "b9974fc5d2b953e75839b89e3e7a847f1df0e295f5a7bf21d43e594bc1faae00"
+    }
+   ]
+  }
+ ]
+}

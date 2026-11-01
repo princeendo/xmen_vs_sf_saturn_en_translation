@@ -3199,3 +3199,34 @@ User request (verbatim): "I'm back. Open the attract check on both images."
 Checks: `pytest` (239 passed), `ruff check`, `ruff format --check` clean. No build tool changed, so no regression run.
 
 Conclusion: `CAP-002` is `DONE`; `HINT-001` is next.
+
+
+## 2026-10-31 — SESSION-0100: Continue hints: census, selector and the arcade's English (HINT-001, EXP-0066)
+
+User request (verbatim): "Start HINT-001."
+
+- **Reaching the continue screen:** from the `pre_ko` checkpoint, the
+  player's vitality set to 0. The first run zeroed it from the load, but the
+  state is Ryu's winning blow, so the player won stage 1 (`run1`); the loss
+  is now forced in stage 2 (frames 1,500-3,000).
+- **Saturn:** the renderer's pointer named record 10 of a 76-byte table in
+  `MMPACK.PCA`; a PC log found the starter (`rand & 0x0F`, `0x06066730`).
+  Code reading alone suggested other routines; the live log settled which
+  one runs. Every index forced with `mov #i,r0`.
+- **A wrong turn:** the arcade's index map read from the program file was
+  garbage: the CPS-II file is encrypted where the starter reads PC-relative
+  (decrypted opcode space). The map was taken from the forced MAME runs
+  instead, and matches the Saturn's bytes.
+- **Arcade:** the same starter and map; forced for all 16 indices in English
+  and Japanese. From index 8 the English pairs are out of step with the
+  Japanese, and index 11 ends on COMING SOON: the arcade's own behaviour.
+- **No English on the disc:** the starter's English base holds unrelated
+  data; three arcade English records searched in every disc file, raw and
+  decoded: none.
+- **Fit:** the Saturn's own English path, switched on in RAM with two arcade
+  records at the base, drew both pages in the hint box; 25-code lines and
+  all six arrow codes fit.
+
+Checks: `pytest` (239 passed), `ruff check`, `ruff format --check`, `mypy tools` and `mypy research/experiments/EXP-0066` clean. No build tool changed, so no regression run.
+
+Conclusion: `HINT-001` is `DONE`; `HINT-002` (the user's plan) is next.

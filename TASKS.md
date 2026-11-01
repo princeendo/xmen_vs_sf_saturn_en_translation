@@ -492,8 +492,16 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
 - **2026-10-31** (`SESSION-0099`, `EXP-0065`): `CAP-002` is done (D-057).
   The user watched an attract cycle in each variant: English captions,
   NOW LOADING's colours and outline, centred, no black strip, no Japanese.
-- **Next:** `HINT-001` (continue hints: census, storage and official
-  English).
+- **2026-10-31** (`SESSION-0100`, `EXP-0066`): `HINT-001` is done (D-058).
+  - **Saturn:** 16 hint records (12 distinct) in `MMPACK.PCA`, index
+    `rand & 0x0F`; every index forced and shown.
+  - **Arcade:** the same starter and English map; two English pages per
+    index, out of step with the Japanese from index 8 (index 11 ends on
+    COMING SOON). The Saturn kept the map but not the English records.
+  - **Fit:** the Saturn's own English path draws the arcade records in the
+    hint box; every line and arrow fits.
+- **Next:** `HINT-002` (the user's plan for the hints: which English per
+  index, then build and verify).
   Backlog
   after the phases: `REL-001` (release patches), `TXT-001`, and the rest of
   `UI-001` and `UI-003`.
@@ -3198,7 +3206,7 @@ Known before Phase Q:
 
 ### HINT-001 - Continue hints: census, storage and official English
 
-- **Status:** `READY`
+- **Status:** `DONE`
 - **Milestone:** After M8 (`UI-003`)
 - **Dependencies:** SPEC-005 (the user's order).
 - **Blockers:** None (`SPEC-005` done 2026-10-31).
@@ -3211,13 +3219,25 @@ Known before Phase Q:
     by tracing the arcade code (MAME read taps); the pairing shown by forcing
     the same choice in both; any region branch recorded.
   - **Fit:** each English hint against the hint box's room.
+- **Notes:** Done 2026-10-31 (`EXP-0066`, D-058). Census: 16 records (12
+  distinct hints) at `0x06085544` in `MMPACK.PCA`, index `rand & 0x0F`
+  (`0x06066730`); every index forced and shown. Official English: the
+  arcade starter (`0x04F42A`) is the same routine, with a byte map the
+  Saturn keeps (`0x060667A8`); forced in MAME for all 16 indices in both
+  languages: English records `270 + map[i]`, `271 + map[i]`, two pages,
+  out of step with the Japanese from index 8, and index 11 ends on "COMING
+  SOON". No region branch beyond the language word (`0x060F547A`); the
+  Saturn's English base points at unrelated data, and no English hint is on
+  the disc. Fit: two arcade records drawn by the Saturn's own English path in
+  RAM; 25-code lines and every arrow fit. Pairing:
+  `data/translations/hint_pairing.json`.
 
 ### HINT-002 - Continue hints: the user's plan, build and verify
 
-- **Status:** `BLOCKED`
+- **Status:** `READY`
 - **Milestone:** After M8 (`UI-003`)
 - **Dependencies:** HINT-001.
-- **Blockers:** The census.
+- **Blockers:** None (`HINT-001` done 2026-10-31).
 - **Objective:** English continue hints in both name variants.
 - **Acceptance criteria:** as `CAP-002`, for the hints: a gate extension;
   both variants built; every hint forced and checked; a play check at a
