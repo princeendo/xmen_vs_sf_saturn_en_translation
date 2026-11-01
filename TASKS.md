@@ -489,8 +489,11 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   second found off-centre lines and the wrong orange: fixed, with NOW
   LOADING's purple outline (the user's choice) and captions 1 and 2's
   zoom removed in `XVSOPEN.PCA` (D-057).
-- **Next:** the user's attract check of this build, in each variant; then
-  `CAP-002` is done and `HINT-001` starts.
+- **2026-10-31** (`SESSION-0099`, `EXP-0065`): `CAP-002` is done (D-057).
+  The user watched an attract cycle in each variant: English captions,
+  NOW LOADING's colours and outline, centred, no black strip, no Japanese.
+- **Next:** `HINT-001` (continue hints: census, storage and official
+  English).
   Backlog
   after the phases: `REL-001` (release patches), `TXT-001`, and the rest of
   `UI-001` and `UI-003`.
@@ -3170,7 +3173,7 @@ Known before Phase Q:
 
 ### CAP-002 - Attract captions: the user's plan, build and verify
 
-- **Status:** `IN_PROGRESS`
+- **Status:** `DONE`
 - **Milestone:** After M8 (`UI-002`)
 - **Dependencies:** CAP-001.
 - **Blockers:** None (`CAP-001` done 2026-10-31).
@@ -3184,6 +3187,14 @@ Known before Phase Q:
   - **Screens and play check:** every caption shown from a cold boot and
     checked; the user watches an attract cycle in each variant.
   - **Register:** references, coverage register and README updated.
+- **Notes:** Done 2026-10-31 (`EXP-0065`, D-057). `build_english
+  --attract-captions` rebuilds the eight `OPENING*.ST2` from the arcade's
+  art (UNCANNY respelled from its own letters, the user's choice), with the
+  arcade's TO EXECUTE in the flash before caption 3, NOW LOADING's purple
+  outline, centred lines, and captions 1 and 2's zoom set to 1.0 in
+  `XVSOPEN.PCA`. Every caption checked from a cold boot; the user watched
+  an attract cycle in each variant. References `attract_captions_us_v4`
+  and `attract_captions_saturn_v4`.
 
 ### HINT-001 - Continue hints: census, storage and official English
 

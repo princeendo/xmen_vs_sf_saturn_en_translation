@@ -3179,3 +3179,23 @@ references match, the two attract-caption references included.
 
 Conclusion: `CAP-002` stays `IN_PROGRESS` until the user's attract check of
 this build in both variants.
+
+
+## 2026-10-31 — SESSION-0099: The user's attract check; CAP-002 done (EXP-0065)
+
+User request (verbatim): "I'm back. Open the attract check on both images."
+
+- **Play check:** `./invenv.sh python
+  research/experiments/EXP-0065/play_check.py local/cap002/play3` opened
+  the US-names image, then the Saturn-names image (exit 0, "all boots
+  done").
+- **The user's report (verbatim):** "Both variants look right: English
+  captions, orange-to-yellow with a purple outline, centred, no black
+  strip, no Japanese."
+- **Register:** README (build command with `--attract-captions`, hashes,
+  "Still Japanese" now the hints only), `docs/coverage_exceptions.md`
+  (attract captions section), `docs/text_surfaces.md`, EXP-0065 status.
+
+Checks: `pytest` (239 passed), `ruff check`, `ruff format --check` clean. No build tool changed, so no regression run.
+
+Conclusion: `CAP-002` is `DONE`; `HINT-001` is next.

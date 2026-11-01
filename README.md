@@ -42,10 +42,16 @@ and Cammy.
   in. See `docs/discoveries.md` (D-029 to D-042). What M8 leaves is listed
   in `docs/coverage_exceptions.md`.
 
-**Still Japanese:**
+**Still Japanese:** the continue-screen hints.
 
-- continue-screen hints;
-- attract-mode captions.
+**Attract captions: the arcade's English** (`CAP-002`, 2026-10-31). The
+four captions in the attract loop show the US arcade's English art, and the
+flash before the third shows the arcade's TO EXECUTE. "UNCCANY" is
+respelled UNCANNY from the arcade's own letters. The lettering keeps the
+arcade's colours with the purple outline of the Saturn's NOW LOADING, and
+every line is centred. The Saturn squeezed the first two captions sideways;
+the build turns that off for them. The user watched an attract cycle in
+each variant. See `docs/discoveries.md` (D-056, D-057).
 
 **"No challengers" sign: the arcade's English** (`NOCH-001`, 2026-10-31).
 After Apocalypse, the top-right sign reads `NO CHALLENGERS` in place of
@@ -145,15 +151,23 @@ never modified. The American-names variant (the default):
   data/translations/{wolverine,cyclops,storm,rogue,gambit,sabretooth,juggernaut,magneto,apocalypse,ryu,ken,chun_li,dhalsim,zangief,vega,gouki,nash,cammy}_win_quotes.json \
   data/translations/{wolverine,cyclops,storm,rogue,gambit,sabretooth,juggernaut,magneto,ryu,ken,chun_li,dhalsim,zangief,vega,gouki,nash,cammy}_ending.json \
   local/build_us --patch-version 4 --names us --boot-warnings --special \
-  --no-challengers --image build/names_us
+  --no-challengers --attract-captions local/cap002/art --image build/names_us
 ```
 
 The Saturn-names variant: the same specs, with
-`local/build_saturn --patch-version 4 --names saturn --boot-warnings --special --no-challengers --image build/names_saturn`.
+`local/build_saturn --patch-version 4 --names saturn --boot-warnings --special --no-challengers --attract-captions local/cap002/art --image build/names_saturn`.
+
+`--attract-captions` reads the arcade's caption art from
+`local/cap002/art`. It is game-derived, so it is never stored here: make it
+from MAME `xmvsfu` snapshots with
+`research/experiments/EXP-0065/caption_art.py` (the steps are in that
+experiment's README, "The Arcade Art").
 
 The expected hashes are in `data/regression/references.json`: Track 01
-`6820f12d…` (American, `no_challengers_us_v4`) and `57c397ea…` (Saturn
-names, `no_challengers_saturn_v4`). Without `--no-challengers` the sign
+`bedfefa6…` (American, `attract_captions_us_v4`) and `ce3f1fca…` (Saturn
+names, `attract_captions_saturn_v4`). Without `--attract-captions` the
+captions stay Japanese (`6820f12d…`, `no_challengers_us_v4`; `57c397ea…`,
+`no_challengers_saturn_v4`). Without `--no-challengers` too, the sign
 stays Japanese (`5d1f76e4…`, `special_us_v4`; `a4e3e98e…`,
 `special_saturn_v4`). Without `--special` too, Apocalypse's boxes and Alpha
 Chun-Li stay as before (`e8c9cc4f…`, `boot_warnings_us_v4`; `f53d2378…`,

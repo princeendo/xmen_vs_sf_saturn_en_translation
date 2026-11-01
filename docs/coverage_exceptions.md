@@ -165,3 +165,21 @@ route on both images and seen by the user in play on the American image.
 | A second similar block (`0x0605F894`, x = 96) | Not traced | It may be the other side's sign, for a second player | `EXP-0063` | — |
 | The user's play on the Saturn-names image | Not played | The change is byte-identical in both variants; the route showed it on both | `EXP-0063` | — |
 
+
+## Attract captions (`CAP-002`, 2026-10-31)
+
+`build_english --attract-captions ART` (`EXP-0065`, D-057; references
+`attract_captions_us_v4` and `attract_captions_saturn_v4`) rebuilds the eight
+`OPENING*.ST2` with the US arcade's caption art and its TO EXECUTE flash, and
+sets captions 1 and 2's horizontal zoom to 1.0 in `XVSOPEN.PCA`. Every
+caption was shown from a cold boot, and the user watched an attract cycle in
+each variant. No Japanese is left in the attract captions.
+
+| Item | Status | Why | Evidence | Taken up by |
+| --- | --- | --- | --- | --- |
+| The arcade's "UNCCANY" | Respelled UNCANNY from the arcade's own letters | The user's choice (`docs/localization_policy.md`) | `EXP-0065` | — |
+| The lettering's outline | NOW LOADING's purple (`502088` on screen), not the arcade's black | The user's choice | `EXP-0065` | — |
+| Caption 1's lines | Within 3 pixels of centre, not exact | Exact centring needs 140 characters; its room is 119-125 | `EXP-0065` | — |
+| The banner's scroll | 9 pixels a frame, not 8 | The English banner is longer; it is written column by column as it shows | `EXP-0065` | — |
+| Files 0 and 3 after caption 3 | Not compared frame by frame with the previous build | Stream timing drifts between runs from one state; their flash frames were checked directly | `EXP-0065` | — |
+| The `PDEMO*.ST2` streams | Unchanged | The zoom branch serves the opening only; the eight-cycle census found every caption in `OPENING*.ST2` | `EXP-0064`, `EXP-0065` | — |

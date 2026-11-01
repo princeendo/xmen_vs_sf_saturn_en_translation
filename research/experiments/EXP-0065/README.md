@@ -1,8 +1,8 @@
 # EXP-0065 (UI): English Attract Captions: the Map Path and the User's Options
 
 Task: CAP-002
-Status: IN_PROGRESS (built and checked, the flash before caption 3
-included; the user's attract check of the fixed build to come)
+Status: DONE (built, checked from a cold boot, and watched by the user in
+both variants, 2026-10-31)
 Confidence: CONFIRMED for the map and palette paths (offline replays equal
 RAM) and for the build's screens (self-check; forced captures of all eight
 files)
@@ -334,6 +334,14 @@ message, which is the palette I expected."
   orange `f88810`, outline `502088`.
 - **Against the previous build** (forced captures, all eight files): only
   caption frames differ (files 1, 2, 5, 7; 0, 3, 4, 6 drift in timing).
+
+## The User's Attract Check
+
+`play_check.py local/cap002/play3` opened `build/cap002_us`, then
+`build/cap002_saturn` (Track 01 `bedfefa6…` and `ce3f1fca…`, the two
+references). The user's report (2026-10-31, verbatim): "Both variants look
+right: English captions, orange-to-yellow with a purple outline, centred, no
+black strip, no Japanese."
 
 ## Uncertainty
 
