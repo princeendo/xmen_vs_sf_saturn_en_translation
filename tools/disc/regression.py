@@ -11,7 +11,8 @@ when absent, as for every reference made before `LOC-005`), whether the
 boot-warning pictures are built (``boot_warnings``, `BOOT-004`), whether the
 special cases are (``special``, `SPEC-004`), whether the "no challengers"
 sign is (``no_challengers``, `NOCH-001`), whether the attract captions are
-(``attract_captions``, `CAP-002`; art from ``CAPTION_ART``) and the expected
+(``attract_captions``, `CAP-002`; art from ``CAPTION_ART``), whether the
+continue hints are (``continue_hints``, `HINT-002`) and the expected
 SHA-256 of every changed file and of the built Track 01. The checks run in this order:
 
 1. **Inputs:** the source Track 01 and the US arcade program image
@@ -95,6 +96,7 @@ def rebuild(reference: dict[str, object]) -> dict[str, object]:
             if reference.get("attract_captions")
             else []
         ),
+        *(["--continue-hints"] if reference.get("continue_hints") else []),
         "--image",
         str(image),
     ]

@@ -500,8 +500,14 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
     COMING SOON). The Saturn kept the map but not the English records.
   - **Fit:** the Saturn's own English path draws the arcade records in the
     hint box; every line and arrow fits.
-- **Next:** `HINT-002` (the user's plan for the hints: which English per
-  index, then build and verify).
+- **2026-11-01** (`SESSION-0101`, `SESSION-0102`, `EXP-0067`): `HINT-002`
+  is done (D-059), and with it Phase Q. Each Saturn hint shows its own
+  arcade English on two pages, as written; the 24 pages sit in the empty
+  room after `MMPACK.PCA`'s first segment. Every index forced on the built
+  code, the cold-boot load checked against the untouched image, and the
+  user's play check passed in both variants.
+- **Next:** `LOC-008` (study the in-game name toggle, then the user's
+  decision).
   Backlog
   after the phases: `REL-001` (release patches), `TXT-001`, and the rest of
   `UI-001` and `UI-003`.
@@ -3234,7 +3240,7 @@ Known before Phase Q:
 
 ### HINT-002 - Continue hints: the user's plan, build and verify
 
-- **Status:** `READY`
+- **Status:** `DONE`
 - **Milestone:** After M8 (`UI-003`)
 - **Dependencies:** HINT-001.
 - **Blockers:** None (`HINT-001` done 2026-10-31).
@@ -3242,6 +3248,12 @@ Known before Phase Q:
 - **Acceptance criteria:** as `CAP-002`, for the hints: a gate extension;
   both variants built; every hint forced and checked; a play check at a
   continue screen; register updated.
+- **Notes:** Done 2026-11-01 (`EXP-0067`, D-059). The user chose each
+  hint's own English, as written ("B: matched (Recommended)"; "As written
+  (Recommended)"), extending `GATE-TRANSLATION`. Every index forced on the
+  built code in both variants; the table loads from a cold boot and nothing
+  overwrites it; the user's play check: "Both look right". References
+  `continue_hints_us_v4` and `continue_hints_saturn_v4`.
 
 ### NOCH-001 - The "no challengers" warning: storage, English art, build and verify
 
@@ -3272,10 +3284,10 @@ technical challenge is. We'll make a LOC-008 decision after the look."
 
 ### LOC-008 - Study an in-game toggle between the name variants
 
-- **Status:** `BLOCKED`
+- **Status:** `READY`
 - **Milestone:** After Phase N (`LOC-008`)
 - **Dependencies:** CAP-002, HINT-002, NOCH-001 (the user's order).
-- **Blockers:** Phase Q.
+- **Blockers:** None (Phase Q done 2026-11-01).
 - **Objective:** Measure what an in-game choice between the American and
   Saturn names would take, so the user can decide whether to build it.
 - **Acceptance criteria:**

@@ -184,6 +184,25 @@ centre the captions." So the captions keep the arcade's art and shades
 with NOW LOADING's purple outline, each line centred on the Saturn's
 screen (caption 1 to within 3 pixels, to fit its room).
 
+**Continue hints (2026-10-31, `HINT-002`, `EXP-0066`, `EXP-0067`).** The
+official English is the US arcade's 23 hint records (area records 270-292).
+The arcade picks two English pages per index through its own map, which is
+out of step with the Japanese hints from index 8 on: index 11 ends on
+"X-MEN VS STREET FIGHTER / COMING SOON", and indices 12-15 repeat hints
+0-3, while the Saturn's repeat hints 4, 2, 9 and 3. Shown samples of both on
+the Saturn, the user decided (the options chosen, verbatim):
+
+| Question (short) | Answer |
+| --- | --- |
+| Which English each hint shows: A, the arcade's own map; B, each Saturn hint's own English pages | "B: matched (Recommended)" |
+| Keep the arcade's wording as written ("put the lever ↑ to chase", "When grabbed,enter") | "As written (Recommended)" |
+
+So each Saturn hint shows the arcade's English pages for its own content,
+as written: the super-jump hint (one record) shows that record on both
+pages, and COMING SOON is never shown. Grammar fixes stay opt-in. This
+departs from "paired by the game's own selection logic" for the hints only,
+by the user's choice, and extends `GATE-TRANSLATION` to the continue hints.
+
 ## Deferred Until Evidence Exists
 
 These MSHvSF decisions depend on facts not yet known for XvSF. Each is put to

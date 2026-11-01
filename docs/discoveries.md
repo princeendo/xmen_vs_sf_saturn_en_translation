@@ -1220,3 +1220,33 @@ Reproduce: `research/experiments/EXP-0065/README.md`.
 - **Pairing:** `data/translations/hint_pairing.json` (addresses and hashes).
 
 Reproduce: `research/experiments/EXP-0066/README.md`.
+
+## D-059 (UI): The continue hints in English, from the disc (`HINT-002`, `EXP-0067`)
+
+- **Starter** (`0x06066746`-`0x0606678B`, rewritten at the same 70 bytes):
+  always maps the index through `0x060667A8`, and sets task +38 = page,
+  +39 = 2, +`0x5C` = 2 (the English byte the English builds' renderer
+  reads), +78 = `0x180` and +52 = the base, from the literal `0x06066798`
+  (`0x06085544` → `0x0601E460`). It leaves r14 = −1, T = 1 and
+  `@(6,gbr)` = 0, as the original Japanese path did.
+- **Map** (`0x060667A8`): `00 02 04 06 08 0A 0C 0E 10 12 14 16 08 04 12
+  06`, so index `i` shows table records `map[i]` and `map[i] + 1`.
+- **Page step** (`0x06066504`, the hint task's state-0 handler; the
+  dispatch at `0x06066486` selects it by task byte +39 = 2): it showed page
+  2 only when the global language word was set. `9017 00BD` → `E05C 00CC`
+  reads the task's English byte instead.
+- **Storage:** `0x0601E460`-`0x0601EFFF`, after `MMPACK.PCA`'s first
+  segment, is zero in every gameplay dump. The build extends the first
+  segment's size word (header offset 8, `0x2918` → `0x2B70` longs) and
+  inserts the 24 records (arcade area records 270-283, 284 twice, 285-292;
+  100 bytes each); the file keeps its size. From a cold boot the table is
+  in RAM by frame 3,000 and unchanged to 12,000. Its only writes are 600
+  from `0x0600D124` (the load); the BIOS clear writes the gap on the
+  untouched image too, and nothing writes it after frame 2,033.
+- **Result:** forced on the built code, every index 0-15 reads exactly its
+  two table records and draws both pages in English, arrows included,
+  identically in both name variants. The user saw hints from a cold boot
+  in each variant.
+
+Reproduce: `research/experiments/EXP-0067/README.md`
+(`cold_gap.py`, `force_built.py`, `play_check.py`).

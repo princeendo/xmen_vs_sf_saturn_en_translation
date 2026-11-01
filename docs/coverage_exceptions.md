@@ -183,3 +183,20 @@ each variant. No Japanese is left in the attract captions.
 | The banner's scroll | 9 pixels a frame, not 8 | The English banner is longer; it is written column by column as it shows | `EXP-0065` | — |
 | Files 0 and 3 after caption 3 | Not compared frame by frame with the previous build | Stream timing drifts between runs from one state; their flash frames were checked directly | `EXP-0065` | — |
 | The `PDEMO*.ST2` streams | Unchanged | The zoom branch serves the opening only; the eight-cycle census found every caption in `OPENING*.ST2` | `EXP-0064`, `EXP-0065` | — |
+
+## Continue hints (`HINT-002`, 2026-11-01)
+
+`build_english --continue-hints` (`EXP-0067`, D-059; references
+`continue_hints_us_v4` and `continue_hints_saturn_v4`) adds the US arcade's
+24 English hint pages to `MMPACK.PCA`'s first segment and switches the hint
+task, alone, to the English path. All 16 indices were forced on the built
+code in both variants, and the user saw hints from a cold boot in each. No
+Japanese is left in the continue hints.
+
+| Item | Status | Why | Evidence | Taken up by |
+| --- | --- | --- | --- | --- |
+| Which English each index shows | Each Saturn hint's own English (indices 12-15 repeat 4, 2, 9 and 3), not the arcade's map | The arcade's map is out of step with its hints from index 8; the user's choice (`docs/localization_policy.md`) | `EXP-0066`, `EXP-0067` | — |
+| The wording | The arcade's, as written (for example "When Air Combo starts to move hits the opponent.") | The user's choice | `EXP-0067` | — |
+| The super-jump hint (index 7) | Its one arcade page shown on both pages | The arcade has one record for it; every hint task shows two | `EXP-0067` | — |
+| Hint records 16-20 (an "in development" notice, a name list) | Unchanged, Japanese | The starter's index is at most 15; no other reader found yet | `EXP-0066` | `docs/known_unknowns.md` |
+| The language word `0x060F547A` | Still 0 | Only the hint task's own byte is set; other text keeps its path | `EXP-0067` | — |

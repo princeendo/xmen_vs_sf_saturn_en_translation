@@ -3230,3 +3230,60 @@ User request (verbatim): "Start HINT-001."
 Checks: `pytest` (239 passed), `ruff check`, `ruff format --check`, `mypy tools` and `mypy research/experiments/EXP-0066` clean. No build tool changed, so no regression run.
 
 Conclusion: `HINT-001` is `DONE`; `HINT-002` (the user's plan) is next.
+
+
+## 2026-10-31 — SESSION-0101: The hint plan and the English hints in RAM (HINT-002, EXP-0067)
+
+User requests (verbatim): "Start HINT-002."; later, "Don't cold boot without
+me. I'm leaving the computer for now. Finish any unattended work and don't
+launch anything until I give express consent."
+
+- **Plan:** samples of the arcade's map and of matched hints, drawn by the
+  Saturn's own English path. The user chose matched hints, wording as
+  written (`docs/localization_policy.md`).
+- **Storage:** the gap after `MMPACK.PCA`'s first segment is zero in every
+  gameplay dump; the gap after its second segment is not (in use), so it was
+  rejected. The extended file still fits its size.
+- **RAM:** the first run showed page 1 only; the hint task's page step reads
+  the global language word. With it reading the task byte, both pages show
+  (index 10: the throw input, then the escape).
+- **A shell slip:** a sample loop used zsh word splitting and failed at once;
+  rerun under bash. A `rm -rf` inside `bash -c` was refused by the safety
+  check and not retried; the folder was empty.
+- **Builds:** both name variants with `--continue-hints`: exit 0, Track 01 `84b1dd22…` (US) and `94dcd067…` (Saturn names). Offline: the extended segment, the table and every patch are in the built `MMPACK.PCA`; every other file equals the `attract_captions_*_v4` reference.
+- **Stopped** at the user's request before any cold boot or new run.
+
+Checks: `pytest` (245 passed), `ruff check`, `ruff format --check`, `mypy tools research/experiments/EXP-0067` clean. The build tools changed, so the full regression is due before the commit.
+
+Conclusion: `HINT-002` stays `IN_PROGRESS`: the cold boot, the forced check
+on the built code and the user's play check wait for the user.
+
+## 2026-11-01 — SESSION-0102: The built hints checked; HINT-002 done (EXP-0067)
+
+User requests (verbatim): "I'm back. Let's resume."; after the play check,
+"Both look right".
+
+- **Cold boot** (`cold_gap.py`, both built images and the untouched image as
+  the control, no input, frames 900-12,000): the table is in RAM from frame
+  3,000 to 12,000 on both built images and the gap stays zero on the
+  untouched one. Gap writes: the BIOS clear on all three (frames 8-2,033),
+  plus 600 from `0x0600D124` (the table's load) on the built ones; none
+  later. The first segment's code before the table is unchanged; RAM there
+  differs from the decoded file on all three images (runtime data).
+- **Forced** (`force_built.py`, new: the built `MMPACK.PCA`'s decoded
+  differences in RAM from the `pre_ko` state): all 16 indices, both
+  variants, reached exactly their two table records; the page sheets are
+  identical across variants and read English on every page. Index 10
+  matches the RAM run's screenshots byte for byte.
+- **Play check** (`play_check.py`): three continue screens, three hints,
+  English on both pages; the user: "Both look right".
+- **A tool gap:** PIL is not in the environment; contact sheets were tiled
+  with ffmpeg (no install).
+- **Register:** two references added (`continue_hints_us_v4`,
+  `continue_hints_saturn_v4`), README, `docs/coverage_exceptions.md`,
+  `docs/text_surfaces.md`, `docs/known_unknowns.md`, D-059, TASKS
+  (`HINT-002` done, `LOC-008` ready).
+
+Checks: `pytest` (245 passed), `ruff check`, `ruff format --check`, `mypy tools research/experiments/EXP-0067` clean. Full regression (`tools.disc.regression --report`, 14:54-15:42, the uncommitted tools on `a894e40`): all 15 references match. Then `--only continue_hints_us_v4 continue_hints_saturn_v4` (15:42-15:52): both match.
+
+Conclusion: `HINT-002` is `DONE` (D-059); Phase Q is done. Next: `LOC-008`.
