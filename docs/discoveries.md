@@ -1250,3 +1250,28 @@ Reproduce: `research/experiments/EXP-0066/README.md`.
 
 Reproduce: `research/experiments/EXP-0067/README.md`
 (`cold_gap.py`, `force_built.py`, `play_check.py`).
+
+## D-060 (Names): What separates the name variants, one word for the art, and the Options settings (`LOC-008`, `EXP-0068`)
+
+- **Census:** the two variants' built files differ in 243 decoded bytes, in
+  six files of unchanged size: the 10 name sites in `MMPACK.PCA` (D-047),
+  the edited records in `MC0E`, `MC10` and `MC11`, Apocalypse's second box
+  for slots 14-16 in `MC08`, and the label bytes and entry 9 in `MCED.SHP`
+  (D-048). No art or font differs.
+- **One word for the art:** the 10 sites load their offset `0xD478` from
+  six literals (`0x0604FD14`, `0x06063A08`, `0x0606E048`, `0x06073B2E`,
+  `0x0607FE68`, `0x06080026`); the only other reader of any of them is the
+  sound request at `0x0604FD02`. With the six literals pointing at
+  `0x060F3720` (`0xB720`) and that read pinned to 0, setting the word to 2
+  showed BISON and AKUMA on the select label, VS screen, life bar and win
+  banner, and 0 showed VEGA, in RAM from the route.
+- **Options:** the rows are ASCII in `MMPACK.PCA` (`0x0602A299`-
+  `0x0602A345`), chosen by four offset lists (`0x0602A234`-`0x0602A272`).
+  DIFFICULTY is the byte `0x0601E350`. A tenth row, `COMBO GAGE`, shows
+  when `0x0601E36C` is non-zero (set in RAM, it showed `NORMAL`). Leaving
+  Options did not change the save.
+- **Loads:** each file load seen (a fighter's `MC` file, a cart-RAM file)
+  passes through the main program's `0x0600CF00`, which reads the file's
+  directory record and calls `0x0600D056`.
+
+Reproduce: `research/experiments/EXP-0068/README.md`.

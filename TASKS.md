@@ -506,8 +506,10 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
   room after `MMPACK.PCA`'s first segment. Every index forced on the built
   code, the cold-boot load checked against the untouched image, and the
   user's play check passed in both variants.
-- **Next:** `LOC-008` (study the in-game name toggle, then the user's
-  decision).
+- **2026-11-01** (`SESSION-0103`, `EXP-0068`): `LOC-008` is done. The study
+  measured what a toggle takes; the user chose the full toggle
+  (`LOC-009`).
+- **Next:** `LOC-009` or `REL-001`, in the order the user gives.
   Backlog
   after the phases: `REL-001` (release patches), `TXT-001`, and the rest of
   `UI-001` and `UI-003`.
@@ -3284,7 +3286,7 @@ technical challenge is. We'll make a LOC-008 decision after the look."
 
 ### LOC-008 - Study an in-game toggle between the name variants
 
-- **Status:** `READY`
+- **Status:** `DONE`
 - **Milestone:** After Phase N (`LOC-008`)
 - **Dependencies:** CAP-002, HINT-002, NOCH-001 (the user's order).
 - **Blockers:** None (Phase Q done 2026-11-01).
@@ -3305,6 +3307,38 @@ technical challenge is. We'll make a LOC-008 decision after the look."
     from the Options table and its save, and what it would cost.
   - **Report:** options with costs and risks, put to the user; the user's
     decision recorded. No toggle is built in this task.
+- **Notes:** Done 2026-11-01 (`EXP-0068`). Census: 243 bytes in six
+  files, in four groups. Group A (art and voice) switches with one word read
+  through the name sites' six literals, shown in RAM. Groups B-D (quote and
+  ending records, Apocalypse's boxes, ending labels) need about 400 bytes of
+  data and a load hook; the room is the 576 bytes after the hint table, and
+  every file load passes through `0x0600CF00`. The Options menu has a
+  hidden tenth row (`COMBO GAGE`, shown when `0x0601E36C` is non-zero).
+  Leaving Options does not save the settings; when they are saved is
+  unknown. The user (verbatim): "Build the full toggle" (`LOC-009`).
+
+### LOC-009 - Build the in-game name toggle
+
+- **Status:** `READY`
+- **Milestone:** After Phase N (`LOC-008`)
+- **Dependencies:** LOC-008.
+- **Blockers:** None.
+- **Objective:** One image whose Options menu switches every name surface
+  between the American and Saturn conventions, as the two variants do.
+- **Acceptance criteria:**
+  - **Setting:** the menu row chosen and shown (the `COMBO GAGE` slot, or
+    another, with what that row controlled identified first), its handler
+    and storage traced, American by default; when the game saves its
+    settings found, or a per-power-on setting put to the user.
+  - **Art and voice:** the setting word confirmed unwritten by a write log
+    over a full session (attract, select, VS, fights, boss, ending,
+    continue); the seven site changes; the name calls heard in both
+    settings.
+  - **Text:** the load hook and the 14 Saturn-name runs, each shown in both
+    settings (Cammy's quotes 0 and 4, Vega's and Nash's ending records,
+    Apocalypse's second box for slots 14-16, the ending labels and entry 9).
+  - **Build and verify:** a build option; regression references; a cold-boot
+    play check by the user, switching in Options; register updated.
 
 ## Later Milestones (outline only)
 

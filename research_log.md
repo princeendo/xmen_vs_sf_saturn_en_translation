@@ -3287,3 +3287,33 @@ User requests (verbatim): "I'm back. Let's resume."; after the play check,
 Checks: `pytest` (245 passed), `ruff check`, `ruff format --check`, `mypy tools research/experiments/EXP-0067` clean. Full regression (`tools.disc.regression --report`, 14:54-15:42, the uncommitted tools on `a894e40`): all 15 references match. Then `--only continue_hints_us_v4 continue_hints_saturn_v4` (15:42-15:52): both match.
 
 Conclusion: `HINT-002` is `DONE` (D-059); Phase Q is done. Next: `LOC-008`.
+
+## 2026-11-01 — SESSION-0103: What an in-game name toggle takes (LOC-008, EXP-0068)
+
+User requests (verbatim): "Start LOC-008"; the decision, "Build the full
+toggle".
+
+- **Census** (`census.py`, offline, from the regression's built files): 243
+  bytes in six files, four groups (art and voice; quote and ending records;
+  Apocalypse's boxes; ending labels).
+- **Free space** (`free_space.py`, 225 WRAM-H dumps): 576 bytes after the
+  hint table; candidate setting words in R11's reach; the rest is buffers or
+  the stack.
+- **Group A in RAM** (`toggle_names.py`, route Vega/Gouki, 16:06-16:10): one
+  word through the six literals switched the select label, VS screen, life
+  bar and win banner. Run 1's second pick slipped to Cyclops (its load check
+  said so); the Saturn-side select label was not shown.
+- **Options** (`opt_walk.py`, cold boots and the saved menu state, 16:12-
+  16:28): A does not open OPTION MODE, Start does; DIFFICULTY is
+  `0x0601E350`; the hidden `COMBO GAGE` row shows with `0x0601E36C` set.
+  **Rejected:** that the 105 save bytes equal to the settings block mean the
+  game saves the block on leaving Options. Two changed settings left the
+  save's data unchanged and the flag was gone after a cold boot; the date
+  change first seen came with the save state, which carries backup RAM.
+- **Loader** (`trace_loader.py`): a halting PC breakpoint did not hold while
+  a key was sent (`trace1`); log mode found the caller, `0x0600CF00`.
+- **Decision:** the four options put to the user; "Build the full toggle".
+
+Checks: `pytest` (245 passed), `ruff check`, `ruff format --check`, `mypy tools research/experiments/EXP-0068` clean. No build tool changed, so no regression run.
+
+Conclusion: `LOC-008` is `DONE`; `LOC-009` (build the toggle) is ready.

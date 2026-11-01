@@ -203,6 +203,20 @@ pages, and COMING SOON is never shown. Grammar fixes stay opt-in. This
 departs from "paired by the game's own selection logic" for the hints only,
 by the user's choice, and extends `GATE-TRANSLATION` to the continue hints.
 
+**In-game name toggle (2026-11-01, `LOC-008`, `EXP-0068`).** The study
+measured four options: no toggle; art and voice only (one setting word,
+seven small code changes, with the text left in one convention); the full
+toggle (art, voice, quotes, endings, Apocalypse's boxes and labels, with a
+load hook and about 500 bytes in the room left after the hint table); and
+deciding later. The user decided (the option chosen, verbatim):
+
+| Question (short) | Answer |
+| --- | --- |
+| What should happen with an in-game toggle between the American and Saturn names? | "Build the full toggle" |
+
+The toggle is built as its own task (`LOC-009`); the two variants stay
+buildable as they are.
+
 ## Deferred Until Evidence Exists
 
 These MSHvSF decisions depend on facts not yet known for XvSF. Each is put to
@@ -215,4 +229,4 @@ the user when its task produces the evidence, with options and costs.
 | Caption font, style and colour | The caption renderer and font are known | Credits-font pairs, gold (`FONT-010`, `FONT-011`) |
 | Attract-caption style | Attract captions are found (`UI-002`) | Saturn win-banner letters, arcade wording and layout (`UI-003`) |
 | Per-option defaults (unlocks and similar) | Each option exists | Boss unlock on by default (`OPT-001`) |
-| Name-variant presentation and an in-game toggle (the default and each variant's contents are decided: American default, `LOC-004` above) | Both variants build (`LOC-008`) | American names default from 2026-10-28, both variants released, American first; the toggle deferred past 0.1.0 (`LOC-001`, `LOC-006`, `EXP-0095`) |
+| Name-variant presentation and an in-game toggle (the default and each variant's contents are decided: American default, `LOC-004` above; the full toggle chosen, `LOC-008` above) | Both variants build (`LOC-008`) | American names default from 2026-10-28, both variants released, American first; the toggle deferred past 0.1.0 (`LOC-001`, `LOC-006`, `EXP-0095`) |
