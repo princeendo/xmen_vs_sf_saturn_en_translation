@@ -530,6 +530,9 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
 - **2026-11-02** (`SESSION-0108`, `EXP-0074`): `RA-001` is done (D-063).
   RetroAchievements hashes only the disc header; the 0.1.0 image keeps it,
   and both patch tools now refuse an image that changes it.
+- **2026-11-02** (`SESSION-0109`): local cleanup; only save states,
+  the source image, Mednafen homes and executables, and build inputs kept
+  (`research_log.md`).
 - **Next:** no task is open. A new phase starts only on the user's request.
 
 ## Milestones

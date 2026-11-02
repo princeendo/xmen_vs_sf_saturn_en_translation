@@ -3459,3 +3459,31 @@ Checks: `./invenv.sh python -m pytest -q` 272 passed; `ruff check` and
 `ruff format --check` (ruff 0.17.3) clean; `mypy tools tests` clean.
 
 Conclusion: `RA-001` is `DONE`. No task is open.
+
+## 2026-11-02 — SESSION-0109: local cleanup after release 0.1.0
+
+User request (verbatim): "Let's perform some repo cleanup. Since this release
+is in a good spot, I'd like to retain only the stuff that can't be
+regenerated easily." The user chose to keep only the Mednafen executables and
+to delete play-session screenshots and audio. Ignored paths only; no tracked
+file changed except this log and `TASKS.md`.
+
+- Kept: all 125 save states (SHA-256 unchanged before and after), session
+  `index.tsv` files and text logs up to 1 MiB, the Saturn source image
+  (`local/disc_images/xmvsf_saturn_jp_3m`), the Mednafen homes (BIOS, pad
+  bindings, backup RAM), the build inputs `local/ref003/xmvsfu-68k.bin` and
+  `local/cap002/art`, `local/downloads` (Mednafen tarball), the stock and
+  agent executables (`892bb60a…29dd`, `290d4717…f9f8`, unchanged),
+  `build/release/v0.1.0` and `build/reddit_0.1.0`.
+- Deleted: 116,087 files under `local/` (screenshots, dumps, WAV captures,
+  extracted disc files, PS1 extractions, a Rust `target/`), the Mednafen
+  source trees and objects, `build/regression`, `build/release/v0.1.0-again`
+  and `toggle`, `research/memory_dumps/*`, and tool caches. Disk use: local
+  8.1 GB -> 1.1 GB, vendor 595 MB -> 41 MB, build 1.0 GB -> 8.7 MB.
+- PS1 images re-extract from `~/Downloads/xmvsf/`; Mednafen rebuilds from the
+  tarball and `vendor/mednafen/patches/` (`vendor/mednafen/README.md`; the
+  agent build needs V1-V4 again).
+
+Checks: source Track 01 `c904a386…da70` and program image `1b1a5a26…dd1`
+match `data/regression/references.json`; `./invenv.sh python -m pytest -q`
+272 passed; the agent executable starts.
