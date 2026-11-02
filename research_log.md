@@ -3487,3 +3487,14 @@ file changed except this log and `TASKS.md`.
 Checks: source Track 01 `c904a386…da70` and program image `1b1a5a26…dd1`
 match `data/regression/references.json`; `./invenv.sh python -m pytest -q`
 272 passed; the agent executable starts.
+
+Later in SESSION-0109, the user asked to back up the rest of `local/` to the
+homelab like MSHvSF ("Yes, archive it"), keeping the Mac copy. Copied to
+`/mnt/HD/Seagate22TB/filebrowser-inbox/Archives/XvSF-Saturn-EN` (File Browser
+`/Inbox/Archives/XvSF-Saturn-EN`): 6,887 files, 599,183,738 bytes, with
+`MANIFEST.tsv` (path, bytes, SHA-256), `SYMLINKS.tsv` and a README holding the
+restore command. All 125 save states are in it. Left out: the Saturn source
+image, the BIOS, `ref003/xmvsfu-68k.bin`, and the 25 `firmware` links to the
+BIOS (listed in `SYMLINKS.tsv`). Server-side `sha256sum -c` passed for every
+row; Plex health passed. Access and logging followed
+`remote_server_maintenance` (its research_log entry of 2026-11-02).
