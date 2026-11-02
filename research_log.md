@@ -3436,3 +3436,26 @@ What's Changed, Patch Files (with Applying a Patch), Build the Patch (files,
 set-up, release patches, build options) and Development. The research
 narrative moved out of it; `TASKS.md`, `docs/discoveries.md` and the
 regression report hold it. Check: every local link and anchor resolves.
+
+## 2026-11-02 — SESSION-0108: RetroAchievements detection (RA-001)
+
+User request (verbatim): "If I wanted to make sure this game detected
+correctly when playing with RetroAchievements, what would be necessary?",
+then "Add the check".
+
+- rcheevos `develop` `0aea57b` (`gh api`), `src/hash/rc_hash_disc.c`:
+  `rc_hash_sega_cd` hashes the first 512 bytes of track 1 sector 0 for
+  Saturn and Sega CD.
+- The untouched image and the 0.1.0 image both hash to
+  `5bfb1a925a03cc5bd6a7c04a38d31727`; their first 16 raw sectors are
+  identical (`EXP-0074`, D-063).
+- `retroachievements.org/game/14567` (found by web search) showed a bot
+  check in the built-in browser; not passed, not read.
+- `tools.disc.make_patch` (`ra_header`, `ra_hash`) and `tools.disc.make_ssp`
+  refuse a built track 01 whose header differs. Release tools only, not
+  used by `tools.disc.regression`'s builds, so no regression run.
+
+Checks: `./invenv.sh python -m pytest -q` 272 passed; `ruff check` and
+`ruff format --check` (ruff 0.17.3) clean; `mypy tools tests` clean.
+
+Conclusion: `RA-001` is `DONE`. No task is open.

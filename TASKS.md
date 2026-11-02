@@ -527,6 +527,9 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
 - **2026-11-02** (`SESSION-0107`): `REL-001` is done. The user published
   release 0.1.0 on tag `v0.1.0`; both assets' sizes and SHA-256 digests,
   read through the public API, equal the zips built in `EXP-0071`.
+- **2026-11-02** (`SESSION-0108`, `EXP-0074`): `RA-001` is done (D-063).
+  RetroAchievements hashes only the disc header; the 0.1.0 image keeps it,
+  and both patch tools now refuse an image that changes it.
 - **Next:** no task is open. A new phase starts only on the user's request.
 
 ## Milestones
@@ -3470,6 +3473,30 @@ Requested by the user after Phase R: "Start REL-001".
   `xmvsf_saturn_en_0.1.0_xdelta.zip` 3,852,177 bytes, `sha256:8de3a7e6…`;
   `xmvsf_saturn_en_0.1.0_ssp.zip` 4,872,893 bytes, `sha256:7347d30e…`; both
   equal the local zips.
+
+## Phase U: RetroAchievements Detection (`RA-001`, user request)
+
+The user asked what detection by RetroAchievements needs, then: "Add the
+check".
+
+### RA-001 - Keep the disc header RetroAchievements hashes
+
+- **Status:** `DONE`
+- **Milestone:** After 0.1.0
+- **Dependencies:** REL-001.
+- **Blockers:** None.
+- **Objective:** The English image is identified as the original game by
+  RetroAchievements, and no later build changes that unnoticed.
+- **Acceptance criteria:**
+  - **Method:** how rcheevos hashes a Saturn disc, from its source, with the
+    revision read.
+  - **Check:** the 0.1.0 image's hash against the untouched image's.
+  - **Guard:** both release tools refuse a build that changes the hashed
+    bytes, with unit tests.
+- **Notes:** Done 2026-11-02 (`EXP-0074`, D-063): both hash to
+  `5bfb1a925a03cc5bd6a7c04a38d31727`. Whether the site lists that hash, and
+  whether its achievements hold with the patch, are open
+  (`docs/known_unknowns.md`).
 
 ## Later Milestones (outline only)
 

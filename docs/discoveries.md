@@ -1331,3 +1331,19 @@ Reproduce: `research/experiments/EXP-0069/README.md`.
   checked the everyday screen and NAMES.
 
 Reproduce: `research/experiments/EXP-0070/README.md`.
+
+## D-063 (Release): RetroAchievements identifies the English image as the original (`RA-001`, `EXP-0074`)
+
+- **Method (external):** rcheevos (`develop` `0aea57b`,
+  `src/hash/rc_hash_disc.c`, `rc_hash_sega_cd`) hashes a Saturn disc as the
+  MD5 of the first 512 bytes of track 1, sector 0's user data, and nothing
+  else.
+- **XvSF:** the untouched image and the 0.1.0 image (`name_toggle_v4`) both
+  hash to `5bfb1a925a03cc5bd6a7c04a38d31727`; their first 16 raw sectors
+  (the system area) are identical. The header is product `T-1226G`, version
+  `V1.002`, dated `19970925`.
+- **Guard:** `tools.disc.make_patch` and `tools.disc.make_ssp` refuse a
+  built track 01 whose 512-byte header differs from the source
+  (`ra_header`).
+
+Reproduce: `research/experiments/EXP-0074/README.md`.

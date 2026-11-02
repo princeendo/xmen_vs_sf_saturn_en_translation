@@ -30,7 +30,8 @@ Each ``._DFR`` is made by ``bsdiff40`` below, a pure-Python bsdiff 4 scan
 (no new dependency) whose output any BSDIFF40 bspatch applies.
 
 Safety and reproducibility follow ``make_patch``: the source must be in the
-tracked manifest, the built track 01 must match its regression reference, the
+tracked manifest, the built track 01 must match its regression reference and
+keep the source's disc header (``make_patch.ra_header``, ``RA-001``), the
 patch is written under ``build/`` (it holds game-derived data and is never
 committed), it is built twice and must be byte-identical, and it is applied to
 a copy of the source with this module's own applier and compared with the built
@@ -57,6 +58,7 @@ from tools.disc.make_patch import (
     TRACK01,
     compare_images,
     components,
+    ra_header,
     reference_track01,
 )
 from tools.disc.patch_image import (
@@ -470,6 +472,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     differing, _ = compare_images(source, built)
     if differing != [TRACK01]:
         parser.error(f"an .ssp patches track 01 only; differing: {differing}")
+    if ra_header(built[TRACK01]) != ra_header(source[TRACK01]):
+        parser.error("built track 01 changes the disc header RetroAchievements hashes")
     target_sha256 = sha256_file(built[TRACK01])
     if args.reference and target_sha256 != reference_track01(
         args.baseline, args.reference

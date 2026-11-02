@@ -15,6 +15,8 @@ Safety and reproducibility:
   source manifest (``references/saturn_jp/README.md``).
 - With ``--reference``, the built track 01 must equal that regression reference's
   recorded hash (``data/regression/references.json``).
+- The built track 01 must keep the source's disc header (``ra_header``), the
+  bytes RetroAchievements identifies the game by (``RA-001``).
 - Patches are written under ``build/`` (git-ignored): their bytes include
   game-derived data, which is never committed (``AGENTS.md`` rule 21).
 - xdelta3 runs with fixed flags (``XDELTA_ENCODE``): no secondary compressor, so
@@ -29,6 +31,7 @@ Safety and reproducibility:
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import re
 import shutil
@@ -36,6 +39,7 @@ import subprocess
 from collections.abc import Sequence
 from pathlib import Path
 
+from tools.disc.iso9660 import Track
 from tools.disc.patch_image import REPO_ROOT, load_manifest_hashes, sha256_file
 
 # -W 16 MiB (xdelta3's largest input window; MSHvSF REL-003): later copies of
@@ -45,6 +49,10 @@ SOURCE_DIR = Path("local/disc_images/xmvsf_saturn_jp_3m")
 SOURCE_MANIFEST = Path("references/saturn_jp/README.md")
 BASELINE = Path("data/regression/references.json")
 TRACK01 = "X-Men vs. Street Fighter (Japan) (3M) (Track 01).bin"
+# RetroAchievements hashes a Saturn disc as the MD5 of the first 512 bytes of
+# track 01's sector 0 (rcheevos ``rc_hash_sega_cd``, ``src/hash/rc_hash_disc.c``
+# at ``0aea57b``). A patch that changes them makes the game unrecognised.
+RA_HEADER = 512
 
 
 def components(directory: Path) -> dict[str, Path]:
@@ -68,6 +76,16 @@ def compare_images(
         same = sha256_file(source[name]) == sha256_file(built[name])
         (unchanged if same else differing).append(name)
     return differing, unchanged
+
+
+def ra_header(track: Path) -> bytes:
+    """The first 512 bytes of sector 0's user data: what RetroAchievements hashes."""
+    with track.open("rb") as stream:
+        return Track(stream, track.stat().st_size).user(0)[:RA_HEADER]
+
+
+def ra_hash(track: Path) -> str:
+    return hashlib.md5(ra_header(track)).hexdigest()
 
 
 def patch_name(stem: str, component: str) -> str:
@@ -135,6 +153,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     differing, unchanged = compare_images(source, built)
     if any(not n.lower().endswith(".bin") for n in differing):
         parser.error(f"only BIN tracks may differ: {differing}")
+    if ra_header(built[TRACK01]) != ra_header(source[TRACK01]):
+        parser.error("built track 01 changes the disc header RetroAchievements hashes")
     if args.reference:
         expected = reference_track01(args.baseline, args.reference)
         if sha256_file(built[TRACK01]) != expected:
