@@ -4,7 +4,7 @@ Run from the repository root:
 
     ./invenv.sh python -m tools.disc.build_english SPEC [SPEC ...] OUT
         [--program PATH] [--fix-grammar] [--patch-version {2,3,4}]
-        [--names {us,none,saturn}] [--boot-warnings] [--image DIR]
+        [--names {us,none,saturn,toggle}] [--boot-warnings] [--image DIR]
 
 Each SPEC is a translation record such as
 `data/translations/ryu_win_quotes.json`. For each English record it names the
@@ -46,6 +46,11 @@ records it lists (each recompiled after its edit, instead of being checked
 against its source bytes) and, for ending slots, in ``MCED.SHP``'s English
 scripts and label list. ``OUT/changes.json`` lists each edited record with
 its source hash and the edit.
+``toggle`` (`LOC-009`, `EXP-0069`) builds the American files with the name
+sites unpatched, and adds `tools.disc.name_toggle`: a NAMES row in Options
+and a routine, in a third ``MMPACK.PCA`` segment, that switches the sites
+and copies the Saturn variant's bytes (built here in memory) over each
+changed file once it is loaded.
 
 ``--special`` (`SPEC-004`, `EXP-0061`) adds the special cases the user approved
 in `SPEC-003`. It needs patch version 4 and Apocalypse's win-quote SPEC
@@ -105,8 +110,9 @@ import json
 from collections.abc import Sequence
 from itertools import pairwise
 from pathlib import Path
+from typing import Any
 
-from tools.disc import boss_boxes, continue_hints
+from tools.disc import boss_boxes, continue_hints, name_toggle
 from tools.disc.attract_captions import ROOM as CAPTION_ROOM
 from tools.disc.attract_captions import XVSOPEN, XVSOPEN_BASE, ZOOM_PATCHES
 from tools.disc.attract_captions import build as build_captions
@@ -417,15 +423,22 @@ def build_mmpack(
     changes: list[dict[str, object]],
     patches: list[tuple[int, str, str]] = PATCHES,
     appended: bytes = b"",
+    segments: Sequence[tuple[int, bytes]] = (),
 ) -> bytes:
-    """Patch, and with ``appended``, extend the first segment by those bytes."""
+    """Patch, and with ``appended``, extend the first segment by those bytes.
+
+    Each of ``segments`` (load address, bytes) becomes one more header entry
+    and its bytes follow the decoded stream; the loader takes every entry's
+    address and size from the header (`EXP-0017`, `EXP-0069`).
+    """
     header, entries = split_header(raw)
     _, decoded, _ = decompress_entries(raw)
     code = bytearray(decoded)
     (first_dest, first_size), (second_dest, _) = entries
     base = second_dest - first_size  # address of decoded offset 0, for entry 1
     for address, old, new in patches:
-        offset = address - base
+        in_first = first_dest <= address < first_dest + first_size
+        offset = address - (first_dest if in_first else base)
         original = bytes(code[offset : offset + len(as_bytes(old))])
         if original != as_bytes(old):
             raise ValueError(f"{address:#x}: found {original.hex()}")
@@ -464,6 +477,25 @@ def build_mmpack(
             }
         )
         header = new_header
+    for dest, blob in segments:
+        if len(blob) % 4:
+            raise ValueError("a segment must be a whole number of longs")
+        count = int.from_bytes(header[:4], "big") + 1
+        entry = dest.to_bytes(4, "big") + (len(blob) // 4).to_bytes(4, "big")
+        new_header = count.to_bytes(4, "big") + header[4:] + entry
+        changes.append(
+            {
+                "file": "MMPACK.PCA",
+                "header_offset": f"{len(header):#x}",
+                "original": header[:4].hex(),
+                "modified": new_header[:4].hex() + " + " + entry.hex(),
+                "purpose": "one more segment",
+                "ram_address": f"{dest:#010x}",
+                "sha256": hashlib.sha256(blob).hexdigest(),
+            }
+        )
+        header = new_header
+        code += blob
     rebuilt = compress_file(
         bytes(code),
         size=len(raw),
@@ -497,13 +529,97 @@ def file_summary(raw: bytes, rebuilt: bytes) -> dict[str, object]:
     }
 
 
+def english_files(
+    spec_paths: Sequence[Path],
+    specs: list[dict[str, Any]],
+    program: bytes,
+    fix_grammar: bool,
+    special: bool,
+    names: str,
+    changes: list[dict[str, object]],
+    summary: dict[str, object],
+    edited: list[dict[str, object]],
+) -> dict[str, bytes]:
+    """The rebuilt fighter files and ``MCED.SHP``, by disc name, for ``names``."""
+    saturn = load_saturn() if names == "saturn" else None
+    named = {
+        str(spec["mc_file"]) + (" ending" if is_ending(spec) else ""): (
+            {} if saturn is None else text_edits(saturn, str(path))
+        )
+        for path, spec in zip(spec_paths, specs, strict=True)
+    }
+    files: dict[str, bytes] = {}
+    endings = {str(s["mc_file"]): s for s in specs if is_ending(s)}
+    for spec in (s for s in specs if not is_ending(s)):
+        name = str(spec["mc_file"])
+        english = compile_records(spec, program, fix_grammar, named[name], edited)
+        if name in endings:
+            if len(english) != ENDING_RECORDS:
+                raise ValueError(f"{name}: win quotes are not {ENDING_RECORDS} bytes")
+            ending = compile_records(
+                endings[name], program, fix_grammar, named[f"{name} ending"], edited
+            )
+            summary[f"{name} ending_sha256"] = hashlib.sha256(ending).hexdigest()
+            english += ending
+        raw = read_file(name)
+        table = int(str(spec["table_offset"]), 16)
+        extra = None
+        if special and name == SPECIAL_FILE:
+            extra = boss_boxes.records(boss_boxes.load(), names)
+        rebuilt = build_mc(raw, english, table, name, changes, extra)
+        summary[name] = file_summary(raw, rebuilt)
+        summary[f"{name} english_sha256"] = hashlib.sha256(english).hexdigest()
+        files[name] = rebuilt
+    if endings:
+        raw = read_file("MCED.SHP;1")
+        slots = [int(str(s["arcade_slot"])) for s in endings.values()]
+        shared = [
+            int(x) for s in endings.values() for x in s.get("mced_shared_with", [])
+        ]
+        rebuilt = build_mced(raw, slots, changes, shared, saturn)
+        summary["MCED shared slots"] = shared
+        summary["MCED.SHP;1"] = file_summary(raw, rebuilt)
+        files["MCED.SHP;1"] = rebuilt
+    return files
+
+
+def segment_end(raw: bytes) -> int:
+    """The address just past ``MMPACK.PCA``'s first segment."""
+    (dest, size), _ = split_header(raw)[1]
+    return dest + size
+
+
+def toggle_tables(
+    files: dict[str, bytes],
+    spec_paths: Sequence[Path],
+    specs: list[dict[str, Any]],
+    program: bytes,
+    fix_grammar: bool,
+    special: bool,
+) -> bytes:
+    """``--names toggle``: the name sites and the Saturn names' entries.
+
+    The Saturn files are built in memory from the same SPECs; each file that
+    differs from the American one gets an entry (`tools.disc.name_toggle`).
+    """
+    saturn = english_files(
+        spec_paths, specs, program, fix_grammar, special, "saturn", [], {}, []
+    )
+    entries = b"".join(
+        name_toggle.entry(decompress_file(us)[0], decompress_file(saturn[name])[0])
+        for name, us in files.items()
+        if us != saturn[name]
+    )
+    return name_toggle.tables(entries)
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("paths", type=Path, nargs="+", help="SPEC [SPEC ...] OUT")
     parser.add_argument("--program", type=Path, default=PROGRAM)
     parser.add_argument("--fix-grammar", action="store_true")
     parser.add_argument("--patch-version", type=int, choices=(2, 3, 4), default=3)
-    parser.add_argument("--names", choices=VARIANTS, default="us")
+    parser.add_argument("--names", choices=(*VARIANTS, "toggle"), default="us")
     parser.add_argument("--boot-warnings", action="store_true")
     parser.add_argument("--special", action="store_true")
     parser.add_argument("--no-challengers", action="store_true")
@@ -517,15 +633,13 @@ def main(argv: Sequence[str] | None = None) -> int:
         parser.error("give at least one SPEC and OUT")
     *spec_paths, out = args.paths
     specs = [json.loads(path.read_text()) for path in spec_paths]
-    saturn = load_saturn() if args.names == "saturn" else None
-    named = {
-        str(spec["mc_file"]) + (" ending" if is_ending(spec) else ""): (
-            {} if saturn is None else text_edits(saturn, str(path))
-        )
-        for path, spec in zip(spec_paths, specs, strict=True)
-    }
+    toggle = args.names == "toggle"
+    if toggle and args.patch_version != 4:
+        parser.error("--names toggle needs --patch-version 4")
     edited: list[dict[str, object]] = []
-    patches = with_names(mmpack_patches(specs, args.patch_version), args.names)
+    patches = with_names(
+        mmpack_patches(specs, args.patch_version), "none" if toggle else args.names
+    )
     if args.special:
         patches += special_patches(specs, args.patch_version)
     if args.no_challengers:
@@ -546,43 +660,20 @@ def main(argv: Sequence[str] | None = None) -> int:
         "attract_captions": args.attract_captions is not None,
         "continue_hints": args.continue_hints,
     }
-    endings = {str(s["mc_file"]): s for s in specs if is_ending(s)}
-    for spec in (s for s in specs if not is_ending(s)):
-        name = str(spec["mc_file"])
-        english = compile_records(spec, program, args.fix_grammar, named[name], edited)
-        if name in endings:
-            if len(english) != ENDING_RECORDS:
-                raise ValueError(f"{name}: win quotes are not {ENDING_RECORDS} bytes")
-            ending = compile_records(
-                endings[name],
-                program,
-                args.fix_grammar,
-                named[f"{name} ending"],
-                edited,
-            )
-            summary[f"{name} ending_sha256"] = hashlib.sha256(ending).hexdigest()
-            english += ending
-        raw = read_file(name)
-        table = int(str(spec["table_offset"]), 16)
-        extra = None
-        if args.special and name == SPECIAL_FILE:
-            extra = boss_boxes.records(boss_boxes.load(), args.names)
-        rebuilt = build_mc(raw, english, table, name, changes, extra)
-        summary[name] = file_summary(raw, rebuilt)
-        summary[f"{name} english_sha256"] = hashlib.sha256(english).hexdigest()
+    files = english_files(
+        spec_paths,
+        specs,
+        program,
+        args.fix_grammar,
+        args.special,
+        "us" if toggle else args.names,
+        changes,
+        summary,
+        edited,
+    )
+    for name, rebuilt in files.items():
         (out / name.split(";")[0]).write_bytes(rebuilt)
-    built = [str(spec["mc_file"]) for spec in specs if not is_ending(spec)]
-    if endings:
-        raw = read_file("MCED.SHP;1")
-        slots = [int(str(s["arcade_slot"])) for s in endings.values()]
-        shared = [
-            int(x) for s in endings.values() for x in s.get("mced_shared_with", [])
-        ]
-        rebuilt = build_mced(raw, slots, changes, shared, saturn)
-        summary["MCED shared slots"] = shared
-        summary["MCED.SHP;1"] = file_summary(raw, rebuilt)
-        (out / "MCED.SHP").write_bytes(rebuilt)
-        built.append("MCED.SHP;1")
+    built = list(files)
     if args.boot_warnings:
         originals = {name: read_file(f"{name};1") for name in BOOT_WARNINGS}
         pictures = build_boot_warnings(read_file("FIX.PRS;1"), originals, load_layout())
@@ -626,10 +717,22 @@ def main(argv: Sequence[str] | None = None) -> int:
     hints = continue_hints.table(program) if args.continue_hints else b""
     if hints:
         summary["continue_hints_sha256"] = hashlib.sha256(hints).hexdigest()
-    rebuilt = build_mmpack(raw, changes, patches, hints)
+    appended = hints
+    segments: list[tuple[int, bytes]] = []
+    if toggle:
+        tables = toggle_tables(
+            files, spec_paths, specs, program, args.fix_grammar, args.special
+        )
+        code = name_toggle.routine(name_toggle.CODE, segment_end(raw) + len(hints))
+        patches = with_extra(patches, name_toggle.patches(), "name-toggle")
+        appended += tables
+        segments.append((name_toggle.CODE, code + bytes(-len(code) % 4)))
+        summary["name_toggle_code_sha256"] = hashlib.sha256(code).hexdigest()
+        summary["name_toggle_tables_sha256"] = hashlib.sha256(tables).hexdigest()
+    rebuilt = build_mmpack(raw, changes, patches, appended, segments)
     summary["MMPACK.PCA;1"] = file_summary(raw, rebuilt)
     (out / "MMPACK.PCA").write_bytes(rebuilt)
-    if saturn is not None:
+    if args.names == "saturn":
         summary["saturn_name_records"] = edited
     (out / "changes.json").write_text(
         json.dumps({"files": summary, "changes": changes}, indent=1) + "\n"
@@ -637,13 +740,13 @@ def main(argv: Sequence[str] | None = None) -> int:
     print(json.dumps(summary, indent=1))
     if args.image is None:
         return 0
-    files = []
+    image_files = []
     for name in [*built, "MMPACK.PCA;1"]:
-        files += ["--file", name, "--data", str(out / name.split(";")[0])]
+        image_files += ["--file", name, "--data", str(out / name.split(";")[0])]
     return patch_image(
         [
             *("--source-dir", str(TRACK.parent), "--manifest", str(MANIFEST)),
-            *("--track", TRACK.name, *files, "--out-dir", str(args.image)),
+            *("--track", TRACK.name, *image_files, "--out-dir", str(args.image)),
         ]
     )
 

@@ -3317,3 +3317,39 @@ toggle".
 Checks: `pytest` (245 passed), `ruff check`, `ruff format --check`, `mypy tools research/experiments/EXP-0068` clean. No build tool changed, so no regression run.
 
 Conclusion: `LOC-008` is `DONE`; `LOC-009` (build the toggle) is ready.
+
+## 2026-11-01 — SESSION-0104: The in-game name toggle (LOC-009, EXP-0069)
+
+User requests (verbatim): "Toggle first"; after the play check, "Both
+settings right". Mid-session, a standing rule: give time estimates in every
+progress update (saved to memory).
+
+- **The save:** BACK UP: SAVE writes the settings (`s1`); the save holds RAM
+  `0x0601E350`-`0x0601E417`. **Rejected** (from `EXP-0068`): that an empty
+  write log on `0x00180000`-`0x0018FFFF` means no save was written; the
+  watch logs nothing even during a real save.
+- **COMBO GAGE:** a full super gauge, read every frame in play; the row can
+  be repurposed, its byte cannot.
+- **Rejected:** a setting word at `0x060F3720` (written by the ending's copy
+  loop, `writes2`); the sites are written directly instead.
+- **Rejected:** `0x0601E138` as free room. It is the interrupt-handler
+  table, read only at the title hand-over; the first toggle image put the
+  routine there, hung at the title and overwrote the whole backup RAM of the
+  test homes (throwaway copies). Found by a store log (the routine was
+  innocent), a poke bisection and a read log. **Rejected** too:
+  `0x0602712C` (pointed into by two literals).
+- **The routine** moved to a third `MMPACK.PCA` segment at `0x002FF900` (end
+  of WRAM-L after `VS00.PRS`); the loader honours it; nothing else touches
+  that tail through boot, title, attract, play and an ending.
+- **Tools:** `tools/sh2/asm.py` (a small assembler, tested against the
+  disassembler); `tools/disc/name_toggle.py`; `build_english --names toggle`
+  (the fighter files built by a new `english_files`, the Saturn files built
+  in memory); `build_mmpack` maps first-segment addresses correctly and
+  takes extra segments.
+- **Runs that stopped on focus:** five key-driven runs stopped when the
+  Mednafen window lost focus, and several route picks slipped; each was
+  rerun. None changed a result.
+
+Checks: `pytest` (253 passed), `ruff check`, `ruff format --check`, `mypy tools research/experiments/EXP-0068 research/experiments/EXP-0069` clean. Full regression (17:32-18:35): all 17 references match; `name_toggle_v4` with `--only` (18:54-19:03): match. The build tool's docstring changed after those runs (text only).
+
+Conclusion: `LOC-009` is `DONE` (D-061). Next: `REL-001`.

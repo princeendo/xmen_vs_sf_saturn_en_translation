@@ -200,3 +200,17 @@ Japanese is left in the continue hints.
 | The super-jump hint (index 7) | Its one arcade page shown on both pages | The arcade has one record for it; every hint task shows two | `EXP-0067` | — |
 | Hint records 16-20 (an "in development" notice, a name list) | Unchanged, Japanese | The starter's index is at most 15; no other reader found yet | `EXP-0066` | `docs/known_unknowns.md` |
 | The language word `0x060F547A` | Still 0 | Only the hint task's own byte is set; other text keeps its path | `EXP-0067` | — |
+
+## In-game name toggle (`LOC-009`, 2026-11-01)
+
+`build_english --names toggle` (`EXP-0069`, D-061; reference
+`name_toggle_v4`) switches every name surface of the two variants at run
+time, from a NAMES row in Options. The user played both settings.
+
+| Item | Status | Why | Evidence | Taken up by |
+| --- | --- | --- | --- | --- |
+| The hidden COMBO GAGE row (a full super gauge) | Gone in the toggle build: its row is NAMES, its byte stays 0 | The only spare Options row; it is hidden unless `0x0601E36C` is set, and what sets that was not traced | `EXP-0069` | `docs/known_unknowns.md` |
+| Keeping the choice | Kept only with BACK UP: SAVE, like every other setting | The game saves settings only then | `EXP-0069` `s1`, `menu1`, `menu2` | — |
+| Changing the setting mid-game | Fighter files already loaded keep their names until they load again (the next game) | Options is reached only from the main menu | `EXP-0069` | — |
+| The name variants' separate builds | Still built and checked (`*_us_v4`, `*_saturn_v4`) | The toggle build is a third option | `data/regression/references.json` | `REL-001` |
+| Versus mode, the second player's side | Not played with the toggle | The same sites and files as arcade mode | — | — |

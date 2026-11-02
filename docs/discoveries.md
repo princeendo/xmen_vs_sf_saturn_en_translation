@@ -1275,3 +1275,36 @@ Reproduce: `research/experiments/EXP-0067/README.md`
   directory record and calls `0x0600D056`.
 
 Reproduce: `research/experiments/EXP-0068/README.md`.
+
+## D-061 (Names): The in-game name toggle (`LOC-009`, `EXP-0069`)
+
+- **The save:** the game saves its settings when the player chooses BACK
+  UP: SAVE (A), not on leaving Options. The save's data holds RAM
+  `0x0601E350`-`0x0601E417` from data offset 294.
+- **The hidden row:** `COMBO GAGE` (shown when `0x0601E36C` is non-zero)
+  stores `0x0601E359`, NORMAL or FULL; play reads it every frame and, when
+  set, fills a fighter's super gauge (`0x0604126A`, `0x90`). Its row's code
+  takes the flag through literals `0x06028564` and `0x06028C60`, the byte
+  through `0x06028C64` and the strings through `0x06028C68`.
+- **The interrupt table:** `0x0601E138`-`0x0601E2B7` (64 + 32 longs) is
+  read when the title module takes over (`0x0601DF98`); each non-zero long
+  is installed as an interrupt handler through the BIOS (`0x06000310`,
+  `0x06000300`). It is zero in every dump and never written in play. Bytes
+  put there hung the title and wrecked the backup RAM.
+- **A third segment:** the loader takes every `MMPACK.PCA` header entry's
+  address and size; a third entry loads to `0x002FF900`, after `VS00.PRS`
+  (which ends at `0x002FF8C1`), and nothing else reads or writes that tail
+  from power-on through the title, the attract, play and an ending.
+- **The toggle** (`build_english --names toggle`, `tools/disc/name_toggle.py`):
+  the NAMES row (the COMBO GAGE row, its flag literals pointed at a byte
+  never zero, its byte at `0x0601E370`, values U.S. and SATURN) and a
+  routine in the third segment, called from the main V-blank-in handler
+  (`0x060148CC`; literal `0x06014958`, `jsr @r0` at `0x060148FA`). Each
+  frame it writes the 10 name sites (`E002` or `00BD`, only where the words
+  around each are the site's own) and, for SATURN, copies the Saturn
+  variant's bytes over each changed file it finds in a fighter buffer by a
+  4-byte signature (512 bytes of tables after the hints). Shown over routes
+  to an ending in both settings, from cold boots (row, save, reload), and
+  in the user's play of both settings.
+
+Reproduce: `research/experiments/EXP-0069/README.md`.

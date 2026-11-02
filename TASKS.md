@@ -509,7 +509,10 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
 - **2026-11-01** (`SESSION-0103`, `EXP-0068`): `LOC-008` is done. The study
   measured what a toggle takes; the user chose the full toggle
   (`LOC-009`).
-- **Next:** `LOC-009` or `REL-001`, in the order the user gives.
+- **2026-11-01** (`SESSION-0104`, `EXP-0069`): `LOC-009` is done. One image
+  switches the names from an Options row (NAMES: U.S. or SATURN), saved
+  with BACK UP: SAVE. The user played both settings.
+- **Next:** `REL-001` (release patches).
   Backlog
   after the phases: `REL-001` (release patches), `TXT-001`, and the rest of
   `UI-001` and `UI-003`.
@@ -3279,7 +3282,7 @@ Known before Phase Q:
   the American image only. References `no_challengers_us_v4` and
   `no_challengers_saturn_v4`.
 
-## Phase R: An In-Game Name Toggle, Studied (`LOC-008`)
+## Phase R: An In-Game Name Toggle, Studied and Built (`LOC-008`, `LOC-009`)
 
 Requested by the user after Phase Q: "look at LOC-008 to see what the
 technical challenge is. We'll make a LOC-008 decision after the look."
@@ -3319,7 +3322,7 @@ technical challenge is. We'll make a LOC-008 decision after the look."
 
 ### LOC-009 - Build the in-game name toggle
 
-- **Status:** `READY`
+- **Status:** `DONE`
 - **Milestone:** After Phase N (`LOC-008`)
 - **Dependencies:** LOC-008.
 - **Blockers:** None.
@@ -3339,6 +3342,13 @@ technical challenge is. We'll make a LOC-008 decision after the look."
     Apocalypse's second box for slots 14-16, the ending labels and entry 9).
   - **Build and verify:** a build option; regression references; a cold-boot
     play check by the user, switching in Options; register updated.
+- **Notes:** Done 2026-11-01 (`EXP-0069`, D-061). The NAMES row is the
+  hidden COMBO GAGE row; the setting `0x0601E370` is saved with BACK UP:
+  SAVE; a routine in a third `MMPACK.PCA` segment (`0x002FF900`, the end of
+  WRAM-L) switches the sites and patches the text. A first build put the
+  routine in the interrupt-handler table (`0x0601E138`): the title hung and
+  the test saves were wrecked; moved, fixed. The user (verbatim): "Both
+  settings right". Reference `name_toggle_v4`.
 
 ## Later Milestones (outline only)
 
@@ -3355,4 +3365,4 @@ for each is in `docs/playbook_from_mshvsf.md`.
 | UI-003 | after M8, user request | Continue hints. **Written up as Phase Q (`HINT-001`, `HINT-002`, 2026-10-30).** Other UI text stays here. |
 | UI-004 | user requests (2026-10-29) | Every error or warning message the game shows when it first loads. **Written up as Phase O (`BOOT-001` to `BOOT-005`, 2026-10-30).** User request (verbatim, 2026-10-29): "make sure you add to the backlog to translate any error messages that come up when you first load the game (like ones that are related to not having a 4M RAM cart, etc.)" |
 | TXT-001 | after M8, user request | Rare, random, or region-gated text: trace every reader of every text table. |
-| LOC-008 | after Phase N, user request | An in-game name toggle. **Its study is Phase R (`LOC-008`, 2026-10-30)**; building one waits for the user's decision. |
+| LOC-008 | after Phase N, user request | An in-game name toggle. **Studied (`LOC-008`) and built (`LOC-009`) as Phase R, 2026-11-01.** |

@@ -108,6 +108,13 @@ on both name variants. See `docs/text_surfaces.md` and `docs/discoveries.md` (D-
 - **Checks:** each variant was played from a cold boot by the user, and
   every edited quote and ending page was shown in the emulator. See
   `docs/names.md` and `docs/discoveries.md` (D-044 to D-048).
+- **Both in one image, switched in Options** (`LOC-008`, `LOC-009`,
+  2026-11-01): with `--names toggle`, Options has a NAMES row, U.S. (the
+  default) or SATURN, which switches every one of those surfaces. Like the
+  game's other settings, the choice is kept when you choose BACK UP: SAVE.
+  The row replaces the game's hidden COMBO GAGE row (a full super gauge,
+  normally not shown). The user played both settings. See
+  `docs/discoveries.md` (D-060, D-061).
 
 **Not released.** No patch has been published yet. Release patches (xdelta
 and SSP) are planned once the open tasks are done (`REL-001`).
@@ -166,6 +173,8 @@ never modified. The American-names variant (the default):
 
 The Saturn-names variant: the same specs, with
 `local/build_saturn --patch-version 4 --names saturn --boot-warnings --special --no-challengers --attract-captions local/cap002/art --continue-hints --image build/names_saturn`.
+The one-image toggle: the same specs, with
+`local/build_toggle --patch-version 4 --names toggle --boot-warnings --special --no-challengers --attract-captions local/cap002/art --continue-hints --image build/names_toggle`.
 
 `--attract-captions` reads the arcade's caption art from
 `local/cap002/art`. It is game-derived, so it is never stored here: make it
@@ -176,7 +185,9 @@ arcade's English hints from the same program image as the text above.
 
 The expected hashes are in `data/regression/references.json`: Track 01
 `84b1dd22…` (American, `continue_hints_us_v4`) and `94dcd067…` (Saturn
-names, `continue_hints_saturn_v4`). Without `--continue-hints` the hints
+names, `continue_hints_saturn_v4`). The toggle's is `53b24d27…`
+(`name_toggle_v4`); its files equal the American variant's but for
+`MMPACK.PCA`. Without `--continue-hints` the hints
 stay Japanese (`bedfefa6…`, `attract_captions_us_v4`; `ce3f1fca…`,
 `attract_captions_saturn_v4`). Without `--attract-captions` too, the
 captions stay Japanese (`6820f12d…`, `no_challengers_us_v4`; `57c397ea…`,
