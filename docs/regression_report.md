@@ -26,11 +26,12 @@ the script with `--report`; the last run is below.
 | `attract_captions_saturn_v4` | `EXP-0065` | `CAP-002` | 35 | 4 | 34 | `ce3f1fca…` |
 | `continue_hints_us_v4` | `EXP-0067` | `HINT-002` | 35 | 4 | 34 | `84b1dd22…` |
 | `continue_hints_saturn_v4` | `EXP-0067` | `HINT-002` | 35 | 4 | 34 | `94dcd067…` |
+| `name_toggle_v4` | `EXP-0070` | `LOC-010` | 35 | 4 | 34 | `68813e93…` |
 
 ## Last Run
 
-- Date: 2026-11-01T23:26:26+00:00
-- Commit: `b090992`
+- Date: 2026-11-02T02:20:39+00:00
+- Commit: `cef46fa`
 - Python: 3.13.13
 - Source Track 01: `c904a386…` (matches)
 - Program image: `1b1a5a26…` (matches)
@@ -444,5 +445,40 @@ the script with `--report`; the last run is below.
 | `continue_hints_saturn_v4` | `OPENING7.ST2;1` | `e54d7e65…` | `e54d7e65…` | yes |
 | `continue_hints_saturn_v4` | `XVSOPEN.PCA;1` | `df0055eb…` | `df0055eb…` | yes |
 | `continue_hints_saturn_v4` | `Track 01` | `94dcd067…` | `94dcd067…` | yes |
+| `name_toggle_v4` | `ERR1.BIN;1` | `72fbff0a…` | `72fbff0a…` | yes |
+| `name_toggle_v4` | `ERR2.BIN;1` | `5cee7adb…` | `5cee7adb…` | yes |
+| `name_toggle_v4` | `ERR3.BIN;1` | `017b7a5e…` | `017b7a5e…` | yes |
+| `name_toggle_v4` | `ERR4.BIN;1` | `970f953a…` | `970f953a…` | yes |
+| `name_toggle_v4` | `ERR5.BIN;1` | `7c918f31…` | `7c918f31…` | yes |
+| `name_toggle_v4` | `MC00.SHP;1` | `12367af4…` | `12367af4…` | yes |
+| `name_toggle_v4` | `MC01.SHP;1` | `3f5e7ab4…` | `3f5e7ab4…` | yes |
+| `name_toggle_v4` | `MC02.SHP;1` | `a608e360…` | `a608e360…` | yes |
+| `name_toggle_v4` | `MC03.SHP;1` | `fe4b9d82…` | `fe4b9d82…` | yes |
+| `name_toggle_v4` | `MC04.SHP;1` | `49233397…` | `49233397…` | yes |
+| `name_toggle_v4` | `MC05.SHP;1` | `02179ea7…` | `02179ea7…` | yes |
+| `name_toggle_v4` | `MC06.SHP;1` | `89fa13f2…` | `89fa13f2…` | yes |
+| `name_toggle_v4` | `MC07.SHP;1` | `b2776f78…` | `b2776f78…` | yes |
+| `name_toggle_v4` | `MC08.SHP;1` | `c3538551…` | `c3538551…` | yes |
+| `name_toggle_v4` | `MC09.SHP;1` | `f9c524a5…` | `f9c524a5…` | yes |
+| `name_toggle_v4` | `MC0A.SHP;1` | `4a8aafea…` | `4a8aafea…` | yes |
+| `name_toggle_v4` | `MC0B.SHP;1` | `76c6c033…` | `76c6c033…` | yes |
+| `name_toggle_v4` | `MC0C.SHP;1` | `284c9667…` | `284c9667…` | yes |
+| `name_toggle_v4` | `MC0D.SHP;1` | `2a3ae96e…` | `2a3ae96e…` | yes |
+| `name_toggle_v4` | `MC0E.SHP;1` | `35daca66…` | `35daca66…` | yes |
+| `name_toggle_v4` | `MC0F.SHP;1` | `983aca7b…` | `983aca7b…` | yes |
+| `name_toggle_v4` | `MC10.SHP;1` | `d97633a6…` | `d97633a6…` | yes |
+| `name_toggle_v4` | `MC11.SHP;1` | `736aab3d…` | `736aab3d…` | yes |
+| `name_toggle_v4` | `MCED.SHP;1` | `b37c3a64…` | `b37c3a64…` | yes |
+| `name_toggle_v4` | `MMPACK.PCA;1` | `5b68c8dd…` | `5b68c8dd…` | yes |
+| `name_toggle_v4` | `OPENING0.ST2;1` | `a6b0c040…` | `a6b0c040…` | yes |
+| `name_toggle_v4` | `OPENING1.ST2;1` | `7cc5b143…` | `7cc5b143…` | yes |
+| `name_toggle_v4` | `OPENING2.ST2;1` | `9e8e87c9…` | `9e8e87c9…` | yes |
+| `name_toggle_v4` | `OPENING3.ST2;1` | `a6b842e0…` | `a6b842e0…` | yes |
+| `name_toggle_v4` | `OPENING4.ST2;1` | `71807767…` | `71807767…` | yes |
+| `name_toggle_v4` | `OPENING5.ST2;1` | `2e697f69…` | `2e697f69…` | yes |
+| `name_toggle_v4` | `OPENING6.ST2;1` | `f6f391a9…` | `f6f391a9…` | yes |
+| `name_toggle_v4` | `OPENING7.ST2;1` | `e54d7e65…` | `e54d7e65…` | yes |
+| `name_toggle_v4` | `XVSOPEN.PCA;1` | `df0055eb…` | `df0055eb…` | yes |
+| `name_toggle_v4` | `Track 01` | `68813e93…` | `68813e93…` | yes |
 
 Result: all references match.

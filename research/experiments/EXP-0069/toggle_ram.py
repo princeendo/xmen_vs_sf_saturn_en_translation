@@ -3,7 +3,7 @@ r"""EXP-0069: the toggle build's routine, in RAM, over a route.
 Run from the repository root:
 
     ./invenv.sh python research/experiments/EXP-0069/toggle_ram.py \
-        CUE MMPACK US_FILES SATURN_FILES OUT FIRST SECOND VALUE [FRAMES]
+        CUE MMPACK US_FILES SATURN_FILES OUT FIRST SECOND VALUE [FRAMES] [--gauge]
 
 CUE is the toggle image and MMPACK its built ``MMPACK.PCA``. US_FILES and
 SATURN_FILES hold the two name variants' built files (the regression's
@@ -15,7 +15,8 @@ replaced by MMPACK's decoded differences from the untouched file
 (each segment, as `EXP-0067/force_built.py` ``code_patches`` does; the
 first segment's extension and any extra segment compared with zero) and
 the setting byte ``SETTING`` set to VALUE (0 American, 1 Saturn). At every
-screenshot it also records:
+screenshot it also records (with ``--gauge``, the COMBO GAUGE byte
+``GAUGE`` is set to 1 too, `EXP-0070`):
 
 - the 10 name sites' opcodes (``E002`` American, ``00BD`` Saturn);
 - for each file whose variants differ, at each fighter buffer, whether the
@@ -37,7 +38,7 @@ from collections.abc import Sequence
 from pathlib import Path
 
 sys.path.insert(0, str(Path.cwd()))
-from tools.disc.name_toggle import BASES, SETTING, SITES, runs
+from tools.disc.name_toggle import BASES, GAUGE, SETTING, SITES, runs
 from tools.disc.prs import (
     decompress_file,
 )
@@ -66,6 +67,7 @@ def main(
     second: int,
     value: int,
     frames: int,
+    gauge: bool = False,
 ) -> int:
     original = FORCE.segments(route.track_file(route.SOURCE_TRACK, "MMPACK.PCA;1"))
     built = FORCE.segments(mmpack.read_bytes())
@@ -80,6 +82,8 @@ def main(
         for a, o, n in (p.split(":") for p in code)
     ]
     ranges.append((SETTING, bytes(1), bytes([value])))
+    if gauge:
+        ranges.append((GAUGE, bytes(1), bytes([1])))
     route.code_ranges = lambda original, built: ranges
     checks = []
     for name in FILES:
@@ -138,7 +142,8 @@ def main(
 
 
 if __name__ == "__main__":
-    a = sys.argv[1:]
+    gauge = "--gauge" in sys.argv
+    a = [x for x in sys.argv[1:] if x != "--gauge"]
     raise SystemExit(
         main(
             Path(a[0]),
@@ -150,5 +155,6 @@ if __name__ == "__main__":
             int(a[6]),
             int(a[7]),
             int(a[8]) if len(a) > 8 else FRAMES,
+            gauge,
         )
     )

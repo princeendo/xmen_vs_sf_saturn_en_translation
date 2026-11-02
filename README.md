@@ -112,12 +112,13 @@ on both name variants. See `docs/text_surfaces.md` and `docs/discoveries.md` (D-
   2026-11-01): with `--names toggle`, Options has a NAMES row, U.S. (the
   default) or SATURN, which switches every one of those surfaces. Like the
   game's other settings, the choice is kept when you choose BACK UP: SAVE.
-  The row replaces the game's hidden COMBO GAGE row (a full super gauge,
-  normally not shown). The user played both settings. See
-  `docs/discoveries.md` (D-060, D-061).
+  The game's hidden COMBO GAGE row (a full super gauge, shown only when the
+  game unlocks it) stays, as an eleventh row spelled COMBO GAUGE. The user
+  played both settings. See `docs/discoveries.md` (D-060 to D-062).
 
-**Not released.** No patch has been published yet. Release patches (xdelta
-and SSP) are planned once the open tasks are done (`REL-001`).
+**Release 0.1.0: prepared, not yet published** (`REL-001`). One patch, the
+toggle build, as xdelta and SSP; how to apply and rebuild it is in
+[`release/README.md`](release/README.md).
 
 `TASKS.md` has the full plan. Its "Current State" section is the running
 summary, and `research_log.md` holds every session.
@@ -185,7 +186,7 @@ arcade's English hints from the same program image as the text above.
 
 The expected hashes are in `data/regression/references.json`: Track 01
 `84b1dd22…` (American, `continue_hints_us_v4`) and `94dcd067…` (Saturn
-names, `continue_hints_saturn_v4`). The toggle's is `53b24d27…`
+names, `continue_hints_saturn_v4`). The toggle's is `68813e93…`
 (`name_toggle_v4`); its files equal the American variant's but for
 `MMPACK.PCA`. Without `--continue-hints` the hints
 stay Japanese (`bedfefa6…`, `attract_captions_us_v4`; `ce3f1fca…`,

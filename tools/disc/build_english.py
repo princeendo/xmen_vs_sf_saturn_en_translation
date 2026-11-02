@@ -724,10 +724,19 @@ def main(argv: Sequence[str] | None = None) -> int:
             files, spec_paths, specs, program, args.fix_grammar, args.special
         )
         code = name_toggle.routine(name_toggle.CODE, segment_end(raw) + len(hints))
-        patches = with_extra(patches, name_toggle.patches(), "name-toggle")
+        code += bytes(-len(code) % 4)
+        (_, first_size), (second_dest, _) = split_header(raw)[1]
+        second = decompress_entries(raw)[1][first_size:]
+        menu, addresses = name_toggle.menu_blob(
+            name_toggle.CODE + len(code), second, second_dest
+        )
+        third = code + menu + bytes(-len(menu) % 4)
+        if name_toggle.CODE + len(third) > name_toggle.TAIL_END:
+            raise ValueError("the toggle's third segment does not fit WRAM-L")
+        patches = with_extra(patches, name_toggle.patches(addresses), "name-toggle")
         appended += tables
-        segments.append((name_toggle.CODE, code + bytes(-len(code) % 4)))
-        summary["name_toggle_code_sha256"] = hashlib.sha256(code).hexdigest()
+        segments.append((name_toggle.CODE, third))
+        summary["name_toggle_code_sha256"] = hashlib.sha256(third).hexdigest()
         summary["name_toggle_tables_sha256"] = hashlib.sha256(tables).hexdigest()
     rebuilt = build_mmpack(raw, changes, patches, appended, segments)
     summary["MMPACK.PCA;1"] = file_summary(raw, rebuilt)

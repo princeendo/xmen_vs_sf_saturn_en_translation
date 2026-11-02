@@ -1308,3 +1308,26 @@ Reproduce: `research/experiments/EXP-0068/README.md`.
   in the user's play of both settings.
 
 Reproduce: `research/experiments/EXP-0069/README.md`.
+
+## D-062 (Names): The Options menu's states, and COMBO GAUGE beside NAMES (`LOC-010`, `EXP-0070`)
+
+- **States:** the menu's state byte `0x0601E335` indexes a handler table at
+  `0x06028128` (literal `0x06027F78`): 0 setup, 1 wait, 2-10 the nine rows,
+  11 COMBO GAGE. The button-config screen indexes the same words from
+  `0x06028158` with `0x0601E336`, so the menu's slot 12 is its slot 0.
+- **Rows:** the cursor runs from state 2 to 10, or 11 with `0x0601E36C` set
+  (`mov #max,r7` at six sites); Start is handled by `0x06028AD0`, not a state.
+  The label loop (`0x06028538`) prints each label two lines apart from line
+  5 and then the exit text at line 25 (`0x0602856E`), where its R2 is already
+  the next free line. Row values are drawn at fixed lines by `0x06028B28`;
+  COMBO GAGE's by `0x06028BF8`.
+- **The change:** a copied 13-entry table (state 12: a COMBO GAUGE handler
+  like state 11's, for `0x0601E359`), new row lists (NAMES tenth, COMBO
+  GAUGE eleventh with the flag), the cursor's maximum one higher, the exit
+  line following the last row, and row 10's drawing replaced by a call that
+  draws NAMES always and COMBO GAUGE (line 25) with the flag, all in the
+  third segment. Shown from a cold boot with the flag clear (as before) and
+  set (eleven rows, values stepping, the gauge full in a fight); the user
+  checked the everyday screen and NAMES.
+
+Reproduce: `research/experiments/EXP-0070/README.md`.

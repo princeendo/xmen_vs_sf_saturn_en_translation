@@ -1122,8 +1122,8 @@
   },
   {
    "name": "name_toggle_v4",
-   "experiment": "EXP-0069",
-   "task": "LOC-009",
+   "experiment": "EXP-0070",
+   "task": "LOC-010",
    "specs": [
     "data/translations/wolverine_win_quotes.json",
     "data/translations/cyclops_win_quotes.json",
@@ -1189,7 +1189,7 @@
     "MC10.SHP;1": "d97633a69a6707f4ebdf20264dc49c26dcf2155f29e00a8829d5f7a0b32bb558",
     "MC11.SHP;1": "736aab3de21f67b8c5f649224fb2c7b775a5de7bb3c9ddbd1ed164a91429ebf4",
     "MCED.SHP;1": "b37c3a64d75b2c3b90f1849404cbfb18002cc53790ea1797e993288a69588e91",
-    "MMPACK.PCA;1": "6da88b04881e649ab5c7fa096abe5d32b5c8c4821301bfe9b193033ed7d304ab",
+    "MMPACK.PCA;1": "5b68c8dd233fbc6515240ed9a61787d050255871d54b7ae11a1e8c23944c8977",
     "OPENING0.ST2;1": "a6b0c0402c6d30b3c1ee2331f323a81f7f4d3a7e15739a40aeb039e9c86c6900",
     "OPENING1.ST2;1": "7cc5b14365e9b29d6adbdcdd9a786b47d063a198994f56922eba8c636f3581a9",
     "OPENING2.ST2;1": "9e8e87c9d0bdf348dd1ff57ed438770f4d3adfea402900ab7d287f870ca1d441",
@@ -1200,7 +1200,7 @@
     "OPENING7.ST2;1": "e54d7e65cad500ca18b0b1267f05accc0ef9c7ab3828cb346cd486c7a20526ad",
     "XVSOPEN.PCA;1": "df0055eb2cb84cd6c58e0445abe530a1e25de30f0141c4faa843346e9b1bd3e2"
    },
-   "track01_sha256": "53b24d272d4d100d6b942d7623c7c303a3b8ed764efdc9f3157b41135a58df2d",
+   "track01_sha256": "68813e93108f433a9b64e4b2e420baebbabb136634c2b927b938f56addf9ad1a",
    "special": true,
    "no_challengers": true,
    "attract_captions": true,

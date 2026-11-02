@@ -162,6 +162,24 @@ class Assembler:
     def jsr(self, m: int) -> None:
         self.op(0x400B | m << 8)
 
+    def shll(self, n: int) -> None:
+        self.op(0x4000 | n << 8)
+
+    def mov_w_index(self, m: int, n: int) -> None:
+        """mov.w @(r0,Rm),Rn."""
+        self.op(0x000D | n << 8 | m << 4)
+
+    def push_pr(self) -> None:
+        """sts.l pr,@-r15."""
+        self.op(0x4F22)
+
+    def pop_pr(self) -> None:
+        """lds.l @r15+,pr."""
+        self.op(0x4F26)
+
+    def trapa(self, imm: int) -> None:
+        self.op(0xC300 | imm & 0xFF)
+
     def assemble(self) -> bytes:
         out = bytearray()
         for pc, encode in self.items:

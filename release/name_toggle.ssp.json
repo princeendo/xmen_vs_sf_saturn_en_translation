@@ -1,0 +1,287 @@
+{
+ "tool": "tools.disc.make_ssp",
+ "reference": "name_toggle_v4",
+ "ssp_version": "1.3.7760.32512",
+ "patch": "xmvsf_saturn_en_toggle.ssp",
+ "patch_size": 4872268,
+ "patch_sha256": "2772e3d7c01ef0a0a61b0f5abba6685cfdebdea178d1a4ee873ef3828bcc7762",
+ "component": "X-Men vs. Street Fighter (Japan) (3M) (Track 01).bin",
+ "source_sha256": "c904a38644964e91e6dc0ee93ea41e921ca673efe708a8e2658207c736bfda70",
+ "target_sha256": "68813e93108f433a9b64e4b2e420baebbabb136634c2b927b938f56addf9ad1a",
+ "deterministic": true,
+ "round_trip": true,
+ "files": [
+  {
+   "name": "ERR1.BIN",
+   "lsn": 1058,
+   "size": 42358,
+   "source_md5": "ae170cc8b599357a75c2293d221a629f",
+   "target_sha256": "72fbff0a8ef962412045d8b8f0d2ff7364bfbd29428dd13a44cee932380f7154",
+   "dfr_stored_size": 5265
+  },
+  {
+   "name": "ERR2.BIN",
+   "lsn": 1079,
+   "size": 42358,
+   "source_md5": "93ad8b18ebbb065754ea0a8737d18907",
+   "target_sha256": "5cee7adbab6164bc35ebf23f25afebc2c8859eacae67029140ac222a56f0f91c",
+   "dfr_stored_size": 3603
+  },
+  {
+   "name": "ERR3.BIN",
+   "lsn": 1100,
+   "size": 42358,
+   "source_md5": "ed631256668fdd8eb83a0cb9387fccad",
+   "target_sha256": "017b7a5e61e4cb8508dfd5b9cf2661bba4f1851ebce8f77480cad75acc958226",
+   "dfr_stored_size": 6135
+  },
+  {
+   "name": "ERR4.BIN",
+   "lsn": 1121,
+   "size": 42358,
+   "source_md5": "b7abf990b5e6fff822049acb56759635",
+   "target_sha256": "970f953a609518701a2e6d007cc9b6fb9cdc159a5203e51f5cb11ed7594e2cea",
+   "dfr_stored_size": 4162
+  },
+  {
+   "name": "ERR5.BIN",
+   "lsn": 1142,
+   "size": 42358,
+   "source_md5": "e96fbcfa4e512ec09c442b376c3cc323",
+   "target_sha256": "7c918f311177ad94f5f4796678c84651a375ea38c0127cd0833ec91836a84c25",
+   "dfr_stored_size": 3209
+  },
+  {
+   "name": "OPENING0.ST2",
+   "lsn": 1163,
+   "size": 2269184,
+   "source_md5": "f5709b4833403c4cf2378f09e952cef8",
+   "target_sha256": "a6b0c0402c6d30b3c1ee2331f323a81f7f4d3a7e15739a40aeb039e9c86c6900",
+   "dfr_stored_size": 565446
+  },
+  {
+   "name": "OPENING1.ST2",
+   "lsn": 2271,
+   "size": 2074624,
+   "source_md5": "b1ce4d2cab76fe3402adac65bbab768a",
+   "target_sha256": "7cc5b14365e9b29d6adbdcdd9a786b47d063a198994f56922eba8c636f3581a9",
+   "dfr_stored_size": 536898
+  },
+  {
+   "name": "OPENING2.ST2",
+   "lsn": 3284,
+   "size": 2260992,
+   "source_md5": "c26fd0047ee47ea2d7dd78fd2620c89b",
+   "target_sha256": "9e8e87c9d0bdf348dd1ff57ed438770f4d3adfea402900ab7d287f870ca1d441",
+   "dfr_stored_size": 559479
+  },
+  {
+   "name": "OPENING3.ST2",
+   "lsn": 4388,
+   "size": 2068480,
+   "source_md5": "be3e652067c10d7b603359b9f5cdde3e",
+   "target_sha256": "a6b842e057b8a713cedd7bd014bf1d0fe3b8c9ccfea1d004c64269d108860343",
+   "dfr_stored_size": 535887
+  },
+  {
+   "name": "OPENING4.ST2",
+   "lsn": 5398,
+   "size": 2127872,
+   "source_md5": "226a2f2d8fedab64344b348367993cc1",
+   "target_sha256": "71807767ac9a8ca35578909b6f5fa003bf033cb92a3cf89284b78bbba86ab874",
+   "dfr_stored_size": 542426
+  },
+  {
+   "name": "OPENING5.ST2",
+   "lsn": 6437,
+   "size": 2043904,
+   "source_md5": "ad71e9aa30b0dcac63794b83e458d069",
+   "target_sha256": "2e697f692aa5a0a80408c5a20599396905208b6134770d83d184ce3e4267b5cb",
+   "dfr_stored_size": 463690
+  },
+  {
+   "name": "OPENING6.ST2",
+   "lsn": 7435,
+   "size": 2234368,
+   "source_md5": "0134401dbfe6f51c7ffac300ea6ac259",
+   "target_sha256": "f6f391a93c5d1ed8add70adb182bec6f5f64f7781b9e120db2fc93b8aa0a1e6a",
+   "dfr_stored_size": 492304
+  },
+  {
+   "name": "OPENING7.ST2",
+   "lsn": 8526,
+   "size": 2041856,
+   "source_md5": "fff25a027bb98381b911a2cbb592bc53",
+   "target_sha256": "e54d7e65cad500ca18b0b1267f05accc0ef9c7ab3828cb346cd486c7a20526ad",
+   "dfr_stored_size": 467733
+  },
+  {
+   "name": "XVSOPEN.PCA",
+   "lsn": 45414,
+   "size": 10732,
+   "source_md5": "38e461f69bdb67c245b67b8f21e7ad96",
+   "target_sha256": "df0055eb2cb84cd6c58e0445abe530a1e25de30f0141c4faa843346e9b1bd3e2",
+   "dfr_stored_size": 9828
+  },
+  {
+   "name": "MMPACK.PCA",
+   "lsn": 45462,
+   "size": 258319,
+   "source_md5": "5efc4afa274fb274f08e03b1396ff301",
+   "target_sha256": "5b68c8dd233fbc6515240ed9a61787d050255871d54b7ae11a1e8c23944c8977",
+   "dfr_stored_size": 205933
+  },
+  {
+   "name": "MC00.SHP",
+   "lsn": 53575,
+   "size": 31838,
+   "source_md5": "498cbd5018e1a13ae4405098c53111da",
+   "target_sha256": "12367af4ef40f1d0b0c15d2df8a31b047ffdfd3617697fd4707b34c9044bd9e7",
+   "dfr_stored_size": 26428
+  },
+  {
+   "name": "MC01.SHP",
+   "lsn": 53591,
+   "size": 35411,
+   "source_md5": "168291883808d04dcc90f2bc3e71e347",
+   "target_sha256": "3f5e7ab4069be42e6340bc4c2b26f37fd840be9f746eb84750698b108bf68584",
+   "dfr_stored_size": 30788
+  },
+  {
+   "name": "MC02.SHP",
+   "lsn": 53609,
+   "size": 28822,
+   "source_md5": "08639af1c309701b59a42bc478f3cff7",
+   "target_sha256": "a608e3608754465ad821d10f63562e2b5356048d7b514ce9063c9c3a08231029",
+   "dfr_stored_size": 24854
+  },
+  {
+   "name": "MC03.SHP",
+   "lsn": 53624,
+   "size": 33591,
+   "source_md5": "14dac8e2ee350305ec41aa05c0569267",
+   "target_sha256": "fe4b9d820c061108900f5bb40f45ae13606e2539d0db831cf1a3ad01422edc6d",
+   "dfr_stored_size": 28916
+  },
+  {
+   "name": "MC04.SHP",
+   "lsn": 53641,
+   "size": 29086,
+   "source_md5": "4b1de3e126b60cdbd2c1aa17033456ac",
+   "target_sha256": "492333978efb57fb5506989a6f04b50dc89f0b3ba2648596575212dd68a8ff2f",
+   "dfr_stored_size": 24726
+  },
+  {
+   "name": "MC05.SHP",
+   "lsn": 53656,
+   "size": 28746,
+   "source_md5": "602eac12f80b63e973e3ad2dd8d01062",
+   "target_sha256": "02179ea7e72906df89c4de687c66922daf6873ba34499a0eb58ccf148ba2b0ac",
+   "dfr_stored_size": 24003
+  },
+  {
+   "name": "MC06.SHP",
+   "lsn": 53671,
+   "size": 28820,
+   "source_md5": "4cf9fa5e9d8cbce639b03627ee8ca10e",
+   "target_sha256": "89fa13f2f20f6495c5b3f04fe46028a7e82499eb68ae04d3761733d8c8ec239a",
+   "dfr_stored_size": 26122
+  },
+  {
+   "name": "MC07.SHP",
+   "lsn": 53686,
+   "size": 34961,
+   "source_md5": "7d80d1cf6cdc9678fe1f6aa8ede23fe5",
+   "target_sha256": "b2776f785570c28e1611c4757f8a1ae93446cca96e60626b6bc7443eee40bc83",
+   "dfr_stored_size": 29129
+  },
+  {
+   "name": "MC08.SHP",
+   "lsn": 53704,
+   "size": 29667,
+   "source_md5": "f8c031b78633b93600782a1de99e7dca",
+   "target_sha256": "c35385510755cafa0397ce77171a33f14359e8629faf87cf70afeed43b640bb0",
+   "dfr_stored_size": 24254
+  },
+  {
+   "name": "MC09.SHP",
+   "lsn": 53719,
+   "size": 20686,
+   "source_md5": "9f433638e0704717e920841684ab3dc1",
+   "target_sha256": "f9c524a5e04d18b3b32901b596ab21fa8ba23b96238e89bcd1de615039633f8c",
+   "dfr_stored_size": 18670
+  },
+  {
+   "name": "MC0A.SHP",
+   "lsn": 53730,
+   "size": 23258,
+   "source_md5": "0100d479b4e3267dae7eacbd50d9d32b",
+   "target_sha256": "4a8aafeac7b802ab2e1645c480a1fdc1333e3eb96a042507e03d50503a5cfb9e",
+   "dfr_stored_size": 20186
+  },
+  {
+   "name": "MC0B.SHP",
+   "lsn": 53742,
+   "size": 33270,
+   "source_md5": "8951baa4b76ba1767fa3f33ecbbb2b59",
+   "target_sha256": "76c6c033be8f813301b8bd30bf330da71323a0c914ecdf6e53b7b773bb53539d",
+   "dfr_stored_size": 29534
+  },
+  {
+   "name": "MC0C.SHP",
+   "lsn": 53759,
+   "size": 27001,
+   "source_md5": "5b0e73ec9614ff5ecdddbd398323dac5",
+   "target_sha256": "284c9667d02dad645407fc6c13494b70d3238d9698483d038372f2c24181e9c1",
+   "dfr_stored_size": 23033
+  },
+  {
+   "name": "MC0D.SHP",
+   "lsn": 53773,
+   "size": 28016,
+   "source_md5": "a7b0ef0870025919c186c4a1c6d34b88",
+   "target_sha256": "2a3ae96e589c7c2108687604362caca351ff489a3f2fe532cb330af16560ac68",
+   "dfr_stored_size": 24153
+  },
+  {
+   "name": "MC0E.SHP",
+   "lsn": 53787,
+   "size": 24759,
+   "source_md5": "eb9260607628ebdfd174319c6acf82a9",
+   "target_sha256": "35daca663bc6031c63e8d86825a9736e2728e264b29b17d14293a7327741b478",
+   "dfr_stored_size": 21581
+  },
+  {
+   "name": "MC0F.SHP",
+   "lsn": 53800,
+   "size": 25139,
+   "source_md5": "9444ddb77a9164a46fece4e8b230130f",
+   "target_sha256": "983aca7b0b364ff68fa3b7f49267e12e3b2e3e4985d07f58ba0500f4e273a647",
+   "dfr_stored_size": 21363
+  },
+  {
+   "name": "MC10.SHP",
+   "lsn": 53813,
+   "size": 23913,
+   "source_md5": "8eee8b231a486f35e16bdc674d458eb8",
+   "target_sha256": "d97633a69a6707f4ebdf20264dc49c26dcf2155f29e00a8829d5f7a0b32bb558",
+   "dfr_stored_size": 21116
+  },
+  {
+   "name": "MC11.SHP",
+   "lsn": 53825,
+   "size": 28494,
+   "source_md5": "e160e2d783220736638fdee68cc7d2a3",
+   "target_sha256": "736aab3de21f67b8c5f649224fb2c7b775a5de7bb3c9ddbd1ed164a91429ebf4",
+   "dfr_stored_size": 25250
+  },
+  {
+   "name": "MCED.SHP",
+   "lsn": 53839,
+   "size": 21203,
+   "source_md5": "a6257f4c0664ef10e2e7ae15d358e058",
+   "target_sha256": "b37c3a64d75b2c3b90f1849404cbfb18002cc53790ea1797e993288a69588e91",
+   "dfr_stored_size": 19594
+  }
+ ]
+}

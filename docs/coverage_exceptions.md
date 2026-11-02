@@ -209,8 +209,19 @@ time, from a NAMES row in Options. The user played both settings.
 
 | Item | Status | Why | Evidence | Taken up by |
 | --- | --- | --- | --- | --- |
-| The hidden COMBO GAGE row (a full super gauge) | Gone in the toggle build: its row is NAMES, its byte stays 0 | The only spare Options row; it is hidden unless `0x0601E36C` is set, and what sets that was not traced | `EXP-0069` | `docs/known_unknowns.md` |
+| The hidden COMBO GAGE row (a full super gauge) | Kept as an eleventh row below NAMES, spelled COMBO GAUGE (the user's choice), shown when `0x0601E36C` is set; the exit text then moves down two lines | `LOC-010`; what sets the flag was not traced, so the user saw it only in the agent's screenshots | `EXP-0070` | `docs/known_unknowns.md` |
 | Keeping the choice | Kept only with BACK UP: SAVE, like every other setting | The game saves settings only then | `EXP-0069` `s1`, `menu1`, `menu2` | — |
 | Changing the setting mid-game | Fighter files already loaded keep their names until they load again (the next game) | Options is reached only from the main menu | `EXP-0069` | — |
 | The name variants' separate builds | Still built and checked (`*_us_v4`, `*_saturn_v4`) | The toggle build is a third option | `data/regression/references.json` | `REL-001` |
 | Versus mode, the second player's side | Not played with the toggle | The same sites and files as arcade mode | — | — |
+
+## Remaining screens (`UI-005`, 2026-11-01)
+
+The survey (`EXP-0072`) found no Japanese on versus mode's select screen,
+the Options rows and BUTTON CONFIG., the credits, GAME OVER, name entry,
+the rankings or the attract's legal text.
+
+| Item | Status | Why | Evidence | Taken up by |
+| --- | --- | --- | --- | --- |
+| The QSound notice's last line (after the credits) | Japanese, unchanged | A trademark sentence repeating the English lines above it, part of a picture; the user's choice ("Leave it (Recommended)") | `EXP-0072`, `r018960.png` `fc75088a…` | — |
+| Versus mode beyond its select screen | Not surveyed | Needs a second controller; its fights use the arcade screens | `EXP-0072` | — |

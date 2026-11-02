@@ -3353,3 +3353,58 @@ progress update (saved to memory).
 Checks: `pytest` (253 passed), `ruff check`, `ruff format --check`, `mypy tools research/experiments/EXP-0068 research/experiments/EXP-0069` clean. Full regression (17:32-18:35): all 17 references match; `name_toggle_v4` with `--only` (18:54-19:03): match. The build tool's docstring changed after those runs (text only).
 
 Conclusion: `LOC-009` is `DONE` (D-061). Next: `REL-001`.
+
+## 2026-11-01 — SESSION-0105: Release choices; COMBO GAUGE beside NAMES (REL-001, LOC-010, EXP-0070)
+
+User requests (verbatim): "Start REL-001"; the release answers (xdelta and
+SSP, 0.1.0, "Do them first" for the open tasks); on the toggle, "If we ship
+the toggle version, will that definitely make the "COMBO GAGE" option
+disappear? Is there no way to support them both? Also, shouldn't it be
+"COMBO GAUGE" instead?"; then "Keep both rows", "COMBO GAUGE
+(Recommended)", "Looks right".
+
+- **REL-001** written up as Phase S; the release waits for the open tasks
+  (`ENV-007`, `DOC-003`, the rest of `TXT-001`, `UI-001`, `UI-003`).
+- **The menu, traced** (static): states and the shared handler table, the
+  cursor's limits, the label loop and the per-row value drawing (D-062).
+- **The change:** a 13-entry table, new row lists and strings, a COMBO GAUGE
+  handler and a drawing routine in the third segment (540 bytes after the
+  routine), the cursor's maximum raised, the exit line following the rows.
+  `tools/sh2/asm.py` gained `shll`, `mov.w @(r0,Rm)`, `trapa` and PR
+  push/pop.
+- **Checks:** cold boot, flag clear and set (`menu1`, `menu2`; `menu1` was
+  disturbed by the user's own key presses, as they said); the gauge full in
+  a fight with the byte set (`gauge`); the user's check of the everyday
+  screen.
+
+Checks: `pytest` (269 passed), `ruff check`, `ruff format --check`, `mypy tools` and the experiment folders clean. Full regression (20:16-21:24): all 18 references match, `name_toggle_v4` (Track 01 `68813e93…`) included.
+
+Conclusion: `LOC-010` is `DONE` (D-062). `REL-001` continues.
+
+## 2026-11-01 — SESSION-0106: The open tasks settled; the release prepared (ENV-007, DOC-003, UI-005, TXT-001, REL-001)
+
+User requests (verbatim): "Toggle only"; "Yes, read it" (Redump); "Yes,
+download it" (saturn-patcher-egui); "Start now" (UI-005); "Survey, then
+decide (Recommended)"; "Static scan, then decide (Recommended)"; "Leave it
+(Recommended)" (the QSound line); "Leave them (Recommended)" (unshown
+records).
+
+- **REL-001:** `make_patch`, `make_ssp` and their tests, and `EXP-0102`'s zip
+  scripts, copied from MSHvSF with provenance and XvSF's paths. Trial
+  (`EXP-0071`): xdelta 4,007,441 bytes, SSP 4,872,268 bytes, both
+  deterministic and round-tripped; zips reproducible; both patches from the
+  unpacked zips give the reference track; `saturn-patcher-egui` (built in
+  the ignored `local/tools_ext/`) gives it too.
+- **ENV-007:** all 41 tracks equal Redump disc 62395; 1745 and 62394 share
+  track 01 (read in the browser; hashes in `references/saturn_jp/`).
+- **DOC-003:** `docs/references.md`.
+- **UI-005** (`EXP-0072`): walks of versus mode's select screen and BUTTON
+  CONFIG. (three walks lost their place on menu timing, one to the user's
+  own keys; each rerun) and the route screenshots: only the QSound line.
+- **TXT-001** (`EXP-0073`): a quote-font scan of every file; no unknown text.
+- **Release docs:** `release/README.md`, `RELEASING.md`, `notes_v0.1.0.md`.
+
+Checks: as SESSION-0105 (the same run). The zips were built twice identically and applied by both patchers.
+
+Conclusion: every open task is done; `REL-001` waits for the tag and the
+user's publication.

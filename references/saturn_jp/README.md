@@ -16,6 +16,16 @@ Release description: `X-Men vs. Street Fighter (Japan) (3M), Sega Saturn
 T-1226G V1.002 19970925; Redump-style BIN/CUE supplied by the user 2026-10-27;
 release identity as named, not independently verified`.
 
+**Database match (`ENV-007`, 2026-11-01): CONFIRMED.** All 41 tracks equal
+Redump disc 62395 (<http://redump.org/disc/62395/>: T-1227G, version
+1.002, build date 1997-09-25, edition "Original", write offset 0) in size,
+CRC-32, MD5 and SHA-1 (`redump_62395.json`, read in the browser and compared
+with hashes computed from the local files). Redump's two "Doukonban" (cart
+bundle, T-1226G) entries, 1745 and 62394, have the same track 01 and
+different audio tracks (`redump_1745.json`; 62394's track 02 SHA-1 is
+`cff752f6…`). Track 01, the only track the English patch changes, is
+therefore the same in all three.
+
 Hashes were produced with `./invenv.sh python -m tools.disc.hash_source --json`
 and agree with an independent `shasum -a 256` of the same files.
 

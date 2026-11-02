@@ -512,7 +512,20 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
 - **2026-11-01** (`SESSION-0104`, `EXP-0069`): `LOC-009` is done. One image
   switches the names from an Options row (NAMES: U.S. or SATURN), saved
   with BACK UP: SAVE. The user played both settings.
-- **Next:** `REL-001` (release patches).
+- **2026-11-01** (`SESSION-0105`, `EXP-0070`): `LOC-010` is done: the toggle
+  build keeps COMBO GAUGE (spelled so) as an eleventh row beside NAMES.
+  `REL-001` is in progress: formats xdelta and SSP, version 0.1.0; the open
+  tasks are to be done before publishing.
+- **2026-11-01:** `ENV-007` done (the image is Redump disc 62395; all three
+  Redump editions share track 01), `DOC-003` done (`docs/references.md`);
+  the SSP verified by `saturn-patcher-egui`. The rest of `UI-001` and
+  `UI-003` became `UI-005` (a survey) and `TXT-001` a static scan, by the
+  user's choice.
+- **2026-11-01:** `UI-005` (`EXP-0072`) and `TXT-001` (`EXP-0073`) done: the
+  only Japanese left on a reached screen is the QSound notice's trademark
+  line, and no unknown text exists; the user chose to leave both.
+- **Next:** `REL-001`: every open task is done; the release steps remain
+  (docs, tag, the user's publication).
   Backlog
   after the phases: `REL-001` (release patches), `TXT-001`, and the rest of
   `UI-001` and `UI-003`.
@@ -599,13 +612,13 @@ prerequisites before English text goes on disc).
 
 ### ENV-007 - Verify the source image against a database
 
-- **Status:** `BACKLOG`
+- **Status:** `DONE`
 - **Milestone:** M0 (optional)
 - **Dependencies:** ENV-006.
 - **Blockers:** Needs a Redump entry or `chdman` and MAME's `xmvssf`/`xmvssfdou` CHD hashes; ask before installing or downloading anything.
 - **Objective:** Raise the image identity from **SUPPORTED** to **CONFIRMED**.
 - **Acceptance criteria:** Track hashes match a named database entry, or a mismatch is recorded with its consequence.
-- **Notes:** Not required for M0. The release patch must name the exact image it applies to either way.
+- **Notes:** Not required for M0. The release patch must name the exact image it applies to either way. Done 2026-11-01 (the user approved a read of redump.org): all 41 tracks equal Redump disc 62395 (T-1227G, 1.002, "Original"); the "Doukonban" entries 1745 and 62394 share track 01 and differ in audio (`references/saturn_jp/README.md`).
 
 ## Phase B: Documentation And Decisions
 
@@ -631,13 +644,13 @@ prerequisites before English text goes on disc).
 
 ### DOC-003 - Point to the shared platform references
 
-- **Status:** `BACKLOG`
+- **Status:** `DONE`
 - **Milestone:** M0
 - **Dependencies:** DOC-001.
 - **Blockers:** None.
 - **Objective:** Reuse MSHvSF's Saturn, SH-2, CD/ISO 9660, and Mednafen reference catalog instead of re-collecting it.
 - **Acceptance criteria:** `docs/references.md` lists the platform references with their MSHvSF source, and separately lists any XvSF-specific prior art found.
-- **Notes:** MSHvSF `DOC-007` found no public XvSF Saturn translation or internals research (2026-10-24).
+- **Notes:** MSHvSF `DOC-007` found no public XvSF Saturn translation or internals research (2026-10-24). Done 2026-11-01: `docs/references.md` copies MSHvSF's platform sections (commit `abd3fa6`) with their source stated, sets XvSF's reference roles, and lists the XvSF prior art (MSHvSF's search) and this project's evidence records.
 
 ## Phase C: Emulator
 
@@ -3350,6 +3363,110 @@ technical challenge is. We'll make a LOC-008 decision after the look."
   the test saves were wrecked; moved, fixed. The user (verbatim): "Both
   settings right". Reference `name_toggle_v4`.
 
+### LOC-010 - Keep COMBO GAUGE beside NAMES
+
+- **Status:** `DONE`
+- **Milestone:** After Phase N (`LOC-009`)
+- **Dependencies:** LOC-009.
+- **Blockers:** None.
+- **Objective:** In the toggle build, NAMES is always the tenth Options row,
+  and the hidden row returns as an eleventh, labelled COMBO GAUGE, shown
+  when its flag is set and working as before.
+- **Acceptance criteria:**
+  - **Menu code:** the row lists, the cursor's row count, and each row's
+    value and drawing code traced for row 10, with the change for row 11
+    shown in RAM, flag clear and set.
+  - **Fit:** the eleventh row and its value fit above "PRESS START BUTTON
+    TO EXIT".
+  - **Build and verify:** the toggle build changed; its reference rebuilt;
+    COMBO GAUGE's gauge effect still works when on; NAMES unchanged; a
+    cold-boot check by the user; register updated.
+- **Notes:** Done 2026-11-01 (`EXP-0070`, D-062). The user: "Keep both
+  rows", "COMBO GAUGE (Recommended)", then "Looks right". What unlocks the
+  row was not traced. Reference `name_toggle_v4` updated.
+
+## Phase T: Before 0.1.0 (`UI-005`, `TXT-001`)
+
+The user chose (2026-11-01) to settle the open outline items before
+publishing: "Survey, then decide (Recommended)" for the leftovers of
+`UI-001` and `UI-003`, and "Static scan, then decide (Recommended)" for
+`TXT-001`.
+
+### UI-005 - Survey the remaining screens
+
+- **Status:** `DONE`
+- **Milestone:** Before 0.1.0
+- **Dependencies:** LOC-010.
+- **Blockers:** None.
+- **Objective:** Know every Japanese line or romanised word left on screens
+  the project has not inventoried, so the user can choose what to fix.
+- **Acceptance criteria:**
+  - **Walk:** on the toggle build, versus mode (both sides), every Options
+    sub-screen (button config, sound test, each value), the QSound screen,
+    game over, and any ranking or name entry, captured with the agent.
+  - **List:** each remaining Japanese or romanised item with its screen,
+    sample (frame, hash), storage if found, and whether the arcade or US PS1
+    has English for it, in `docs/text_surfaces.md`.
+  - **Decision:** the list and the cost of each fix put to the user; the
+    answer recorded. Fixes, if any, become their own tasks.
+- **Notes:** Done 2026-11-01 (`EXP-0072`). Only the QSound notice's last
+  line is Japanese; the user: "Leave it (Recommended)". Versus mode beyond
+  its select screen needs a second controller and was not reached.
+
+### TXT-001 - Rare, random or region-gated text: a static scan
+
+- **Status:** `DONE`
+- **Milestone:** Before 0.1.0
+- **Dependencies:** UI-005 (one investigation at a time).
+- **Blockers:** None.
+- **Objective:** Find any text the normal game never shows, before deciding
+  whether any of it matters.
+- **Acceptance criteria:**
+  - **Tables:** every text table in `MMPACK.PCA` and the fighter and ending
+    files listed with its readers (static), and which records the traced
+    readers can reach.
+  - **Unreached records:** each listed with what it holds (described, not
+    copied) and what would show it, where known (for example hint records
+    16-20).
+  - **Decision:** put to the user; recorded. No translation in this task.
+- **Notes:** Done 2026-11-01 (`EXP-0073`): no text table beyond the known
+  ones; the unshown records were already recorded. The user: "Leave them
+  (Recommended)".
+
+## Phase S: Release Patches (`REL-001`)
+
+Requested by the user after Phase R: "Start REL-001".
+
+### REL-001 - Release patches
+
+- **Status:** `READY`
+- **Milestone:** After M5 (outline `REL-001`)
+- **Dependencies:** LOC-009 (the user's order); LOC-010 for the toggle build.
+- **Blockers:** None for preparing patches. Publishing waits until every
+  open task (`ENV-007`, `DOC-003`, and the remainders of `TXT-001`,
+  `UI-001` and `UI-003`) is done or deferred by the user by name
+  (`local_agent_guidance.md`, "Releases").
+- **Objective:** Patches that turn the untouched Redump image into each
+  English build the user chooses, ready for the user to publish.
+- **Acceptance criteria:**
+  - **Choices:** which builds ship, the formats and the version, put to the
+    user and recorded in their words.
+  - **Tools:** MSHvSF's `make_patch.py` and `make_ssp.py` (and `EXP-0102`'s
+    zip scripts) copied with provenance, every MSHvSF path and name
+    parameterized, and re-validated on XvSF (rule 26).
+  - **Patches:** each chosen build's changed tracks found; each patch
+    encoded twice byte-identically and round-tripped; SSP applied by a second
+    patcher, or the gap recorded.
+  - **Zips:** reproducible, one per format, with a readme of expected
+    hashes; every patch applied from the unpacked zips to the untouched
+    image gives the reference track.
+  - **Release:** a final cold-boot play check of each shipped image by the
+    user; release notes and a rebuild README; the tag pushed; the user
+    publishes on github.com; asset hashes checked through the public API.
+- **Notes:** 2026-11-01 (`EXP-0071`): the user chose xdelta and SSP, 0.1.0,
+  the toggle build only, and the open tasks first. Tools copied and a trial
+  run made (patches, zips, applied from the zips). Blocked on the open tasks.
+
 ## Later Milestones (outline only)
 
 These are placeholders so the order is visible. Each becomes a full task, with
@@ -3358,11 +3475,11 @@ for each is in `docs/playbook_from_mshvsf.md`.
 
 | ID | Milestone | Outline |
 | --- | --- | --- |
-| REL-001 | after M5 | Release patches (xdelta3 and SSP of the changed files) with a rebuild README; may be GitHub Release assets, never committed. Splice rather than re-compress changed streams to keep patches small. |
+| REL-001 | after M5 | **Written up as Phase S (`REL-001`, 2026-11-01).** Release patches (xdelta3 and SSP of the changed files) with a rebuild README; may be GitHub Release assets, never committed. Splice rather than re-compress changed streams to keep patches small. |
 | SPECIAL-001 | M9, user request (2026-10-30) | Secret characters, bosses and their text. **Written up as Phase P (`SPEC-001` to `SPEC-005`, 2026-10-30).** |
 | UI-001 | after M8, user request | UI art. The `⚠乱入禁止` ("no challengers") sprite is **Phase Q's `NOCH-001`** (2026-10-30); a wider inventory of English art stays here. |
 | UI-002 | after M8, user request | Attract-mode captions. **Written up as Phase Q (`CAP-001`, `CAP-002`, 2026-10-30).** |
 | UI-003 | after M8, user request | Continue hints. **Written up as Phase Q (`HINT-001`, `HINT-002`, 2026-10-30).** Other UI text stays here. |
 | UI-004 | user requests (2026-10-29) | Every error or warning message the game shows when it first loads. **Written up as Phase O (`BOOT-001` to `BOOT-005`, 2026-10-30).** User request (verbatim, 2026-10-29): "make sure you add to the backlog to translate any error messages that come up when you first load the game (like ones that are related to not having a 4M RAM cart, etc.)" |
-| TXT-001 | after M8, user request | Rare, random, or region-gated text: trace every reader of every text table. |
+| TXT-001 | after M8, user request | Rare, random, or region-gated text. **Written up as Phase T (`TXT-001`, a static scan, 2026-11-01).** |
 | LOC-008 | after Phase N, user request | An in-game name toggle. **Studied (`LOC-008`) and built (`LOC-009`) as Phase R, 2026-11-01.** |

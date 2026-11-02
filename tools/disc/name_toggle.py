@@ -9,11 +9,18 @@ build starts from the American files with the sites unpatched, and adds:
   settings block the game saves with BACK UP: SAVE (`EXP-0069`); 0 is the
   American names (the default, and what existing saves hold), 1 the Saturn's.
   No code reads or writes it but the row (`EXP-0069` ``writes2``).
-* **The row:** the hidden tenth Options row (``COMBO GAGE``, shown when
-  ``0x0601E36C`` is non-zero). Its flag literals point at a byte that is
-  never zero (the row's own label), its value literal at ``SETTING``, and its
-  label and two values are rewritten in place (``menu_patches``). The gauge
-  byte it used to set, ``0x0601E359``, then stays 0.
+* **The rows** (`LOC-010`): NAMES is always the tenth Options row (menu
+  state 11, the old COMBO GAGE row's handler, its value literal pointed at
+  ``SETTING``); the hidden row returns as an eleventh, ``COMBO GAUGE`` (the
+  user's spelling), still shown only when ``0x0601E36C`` is non-zero and
+  still setting the gauge byte ``0x0601E359``. ``menu_blob`` builds, after
+  the routine: the four row lists with their label strings (copied from the
+  game's, NAMES and COMBO GAUGE added), the menu's dispatch table with a
+  thirteenth entry (state 12, COMBO GAUGE's handler), that handler, and a
+  routine that draws NAMES's value and, with the flag, COMBO GAUGE's.
+  ``menu_patches`` points the game at them, raises the cursor's row count by
+  one, and lets the exit line follow the last row (line 27 with eleven
+  rows).
 * **The routine** (``routine``, at ``CODE``), loaded as a third segment of
   ``MMPACK.PCA`` into the end of WRAM-L, after the last file loaded there
   (``VS00.PRS`` ends at ``0x002FF8C1``; zero in every WRAM-L dump,
@@ -46,6 +53,7 @@ from tools.sh2.asm import Assembler
 SETTING = 0x0601E370  # EXP-0068/EXP-0069: no other reader or writer
 # 0x0601E138 is the interrupt-handler table (EXP-0069), not free room.
 CODE, CODE_ROOM = 0x002FF900, 256  # EXP-0069: after VS00.PRS, zero in every dump
+TAIL_END = 0x00300000  # the end of WRAM-L; the menu blob follows the routine
 COUNTER = 0x060148C0  # the V-blank-in handler's frame counter
 BASES = (0x0024D000, 0x060B0000, 0x060C1000, 0x060D2000)  # D-012, D-022, D-033
 SIGNATURE = 4
@@ -65,12 +73,40 @@ SITES = {  # name site (tools.disc.names.US_SITES) -> the mov.w before it
 }
 HOOK_LITERAL = 0x06014958  # loaded only by 0x060148F8
 HOOK_CODE = (0x060148FA, "6102 7101 2012", "400B 0009 0009")
-FLAG_LITERALS = (0x06028564, 0x06028C60)  # 0x0601E36C
-VALUE_LITERAL = (0x06028C64, "0601 E359")
-LABEL = 0x0602A345  # "COMBO GAGE" + 6 spaces
-VALUES = 0x0602A504  # "NORMAL\0FULL  \0"
-MENU_LABEL = "NAMES"
-MENU_VALUES = ("U.S.", "SATURN")
+VALUE_LITERAL = (0x06028C64, "0601 E359")  # state 11's byte (and its drawing)
+NAMES_VALUES = ("U.S.", "SATURN")
+FLAG, GAUGE = 0x0601E36C, 0x0601E359
+GAUGE_VALUES = 0x0602A500  # the game's NORMAL / FULL list
+ROWS_LABEL, GAUGE_LABEL = "NAMES", "COMBO GAUGE"
+ROW_LISTS = {  # list literal -> the game's list (EXP-0068)
+    0x06028560: 0x0602A234,  # nine rows
+    0x06028568: 0x0602A248,  # ten (COMBO GAGE)
+    0x06028524: 0x0602A25E,  # nine, BACK UP blank
+    0x06028528: 0x0602A272,  # ten, BACK UP blank
+}
+DISPATCH = (0x06027F78, 0x06028128, 12)  # literal, table, entries (states 0-11)
+CURSOR_LIMITS = {  # mov #max,r7 for the cursor: nine/ten rows -> ten/eleven
+    0x060289EA: ("E70A", "E70B"),
+    0x06028A02: ("E70B", "E70C"),
+    0x06028A56: ("E70A", "E70B"),
+    0x06028A6E: ("E70B", "E70C"),
+    0x06028A9A: ("E70A", "E70B"),
+    0x06028AB2: ("E70B", "E70C"),
+}
+EXIT_LINE = (0x0602856E, "E219", "0009")  # mov #25,r2: r2 is already the next line
+DRAW_LITERAL = (0x06028C68, "0602 A500")
+DRAW_BLOCK = (
+    0x06028BF8,
+    "D119 6010 2008 890B D118 6010 D118 6813 4000 001D 380C E115 E217 E305 C330 0032",
+)
+CALLS = {  # the routines a row handler calls (EXP-0069)
+    "stepper": 0x06029CB4,
+    "cursor": 0x060289E0,
+    "labels": 0x060284C8,
+    "values": 0x06028B28,
+    "start": 0x06028AD0,
+    "pad": 0x060AC2EC,
+}
 
 
 def _hex(blob: bytes) -> str:
@@ -78,15 +114,138 @@ def _hex(blob: bytes) -> str:
     return " ".join(raw[i : i + 4] for i in range(0, len(raw), 4))
 
 
-def menu_patches() -> list[tuple[int, str, str]]:
-    label = LABEL.to_bytes(4, "big")
-    values = b"".join(v.ljust(6).encode("ascii") + b"\0" for v in MENU_VALUES)
-    out = [(lit, "0601 E36C", _hex(label)) for lit in FLAG_LITERALS]
-    out.append((*VALUE_LITERAL, _hex(SETTING.to_bytes(4, "big"))))
+def _string(seg2: bytes, base: int, address: int) -> bytes:
+    at = address - base
+    return seg2[at : seg2.index(b"\0", at) + 1]
+
+
+def menu_blob(
+    origin: int, seg2: bytes, base: int = 0x0601F000
+) -> tuple[bytes, dict[str, int]]:
+    """The menu data and code at ``origin``; ``seg2`` is the game's decoded
+    second segment, loaded at ``base``. Returns the bytes and their addresses."""
+    names = ROWS_LABEL.ljust(16).encode("ascii") + b"\0"
+    gauge = GAUGE_LABEL.ljust(16).encode("ascii") + b"\0"
+    lists: dict[int, list[bytes]] = {}
+    for literal, game in ROW_LISTS.items():
+        rows, at = [], game - base
+        while offset := int.from_bytes(seg2[at : at + 2], "big"):
+            rows.append(_string(seg2, base, game + offset))
+            at += 2
+        combo = rows[-1].startswith(b"COMBO GAGE")
+        rows = (rows[:-1] if combo else rows) + [names] + ([gauge] if combo else [])
+        lists[literal] = rows
+    strings = list(dict.fromkeys(s for rows in lists.values() for s in rows))
+    a = Assembler(origin)
+    addresses: dict[str, int] = {}
+    for literal, rows in lists.items():
+        a.label(f"list_{literal:x}")
+        addresses[f"list_{literal:x}"] = a.pc
+        for _row in rows:
+            a.word(0)  # placeholder, fixed below
+        a.word(0)
+    a.label("names_values")
+    addresses["names_values"] = a.pc
+    a.word(0)
+    a.word(0)
+    value_strings = [v.ljust(6).encode("ascii") + b"\0" for v in NAMES_VALUES]
+    string_at: dict[bytes, int] = {}
+    for s in strings + value_strings:
+        string_at[s] = a.pc
+        a.data(s)
+    a.data(bytes(-a.pc % 4))  # the strings end anywhere
+    a.label("table")
+    addresses["table"] = a.pc
+    for k in range(DISPATCH[2]):
+        at = DISPATCH[1] - base + 4 * k
+        a.long(int.from_bytes(seg2[at : at + 4], "big"))
+    a.long("gauge_handler")
+    a.label("gauge_handler")  # state 12: as state 11's handler, for the gauge byte
+    addresses["gauge_handler"] = a.pc
+    a.mov_l_label("pad", 1)
+    a.mov_l_label("gauge", 6)
+    a.mov_imm(1, 7)
+    a.mov_imm(1, 8)
+    a.mov_imm(1, 9)
+    for call in ("stepper", "cursor", "labels", "values", "start"):
+        a.mov_l_label(call, 0)
+        a.jsr(0)
+        a.push_pr()  # the game's convention: the callee pops it
+    a.pop_pr()
+    a.rts()
+    a.nop()
+    a.label("draw")  # called from the old row-10 drawing (DRAW_BLOCK)
+    addresses["draw"] = a.pc
+    for byte, values, line, skip in (
+        ("setting", "names_list", 23, None),
+        ("gauge", "gauge_list", 25, "flag"),
+    ):
+        if skip:
+            a.mov_l_label(skip, 1)
+            a.mov_b_load(1, 0)
+            a.tst(0, 0)
+            a.branch("bt", "drawn")
+        a.mov_l_label(byte, 1)
+        a.mov_b_load(1, 0)
+        a.mov_l_label(values, 1)
+        a.mov(1, 8)
+        a.shll(0)
+        a.mov_w_index(1, 0)
+        a.add(0, 8)
+        a.mov_imm(21, 1)
+        a.mov_imm(line, 2)
+        a.mov_imm(5, 3)
+        a.trapa(48)
+        a.word(0x0032)
+    a.label("drawn")
+    a.rts()
+    a.nop()
+    a.align4()
+    pool: list[tuple[str, int | str]] = [
+        ("pad", CALLS["pad"]),
+        ("gauge", GAUGE),
+        ("setting", SETTING),
+        ("flag", FLAG),
+        ("names_list", "names_values"),
+        ("gauge_list", GAUGE_VALUES),
+    ]
+    pool += [(c, CALLS[c]) for c in ("stepper", "cursor", "labels", "values", "start")]
+    for name, value in pool:
+        a.label(name)
+        a.long(value)
+    blob = bytearray(a.assemble())
+    for literal, rows in lists.items():
+        start = addresses[f"list_{literal:x}"]
+        for k, row in enumerate(rows):
+            at = start - origin + 2 * k
+            blob[at : at + 2] = (string_at[row] - start).to_bytes(2, "big")
+    start = addresses["names_values"]
+    for k, s in enumerate(value_strings):
+        at = start - origin + 2 * k
+        blob[at : at + 2] = (string_at[s] - start).to_bytes(2, "big")
+    return bytes(blob), addresses
+
+
+def menu_patches(addresses: dict[str, int]) -> list[tuple[int, str, str]]:
+    """Point the game's menu at ``menu_blob``'s rows, table and drawing."""
+    out = [(*VALUE_LITERAL, _hex(SETTING.to_bytes(4, "big")))]
+    for literal, game in ROW_LISTS.items():
+        new = addresses[f"list_{literal:x}"]
+        out.append(
+            (literal, _hex(game.to_bytes(4, "big")), _hex(new.to_bytes(4, "big")))
+        )
     out.append(
-        (LABEL, _hex(b"COMBO GAGE".ljust(16)), _hex(MENU_LABEL.ljust(16).encode()))
+        (
+            DISPATCH[0],
+            _hex(DISPATCH[1].to_bytes(4, "big")),
+            _hex(addresses["table"].to_bytes(4, "big")),
+        )
     )
-    out.append((VALUES, _hex(b"NORMAL\0FULL  \0"), _hex(values)))
+    out += [(at, old, new) for at, (old, new) in CURSOR_LIMITS.items()]
+    out.append(EXIT_LINE)
+    out.append((*DRAW_LITERAL, _hex(addresses["draw"].to_bytes(4, "big"))))
+    call = "D01B 400B 0009" + " 0009" * 13
+    out.append((DRAW_BLOCK[0], DRAW_BLOCK[1], call))
     return out
 
 
@@ -245,7 +404,8 @@ def routine(origin: int, data: int) -> bytes:
     return code
 
 
-def patches() -> list[tuple[int, str, str]]:
-    """Every in-place patch: the hook and the row (the routine is a segment)."""
+def patches(addresses: dict[str, int]) -> list[tuple[int, str, str]]:
+    """Every in-place patch: the hook and the rows (the routine and
+    ``menu_blob`` are the third segment)."""
     out = [(HOOK_LITERAL, "0601 48C0", _hex(CODE.to_bytes(4, "big"))), HOOK_CODE]
-    return out + menu_patches()
+    return out + menu_patches(addresses)

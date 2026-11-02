@@ -86,8 +86,70 @@ def test_an_entry_holds_the_us_signature_and_the_saturn_bytes() -> None:
     assert blob[8:] == (10).to_bytes(2, "big") + b"\x02\xaa\xbb"
 
 
+BASE = 0x0601F000
+
+
+def synthetic_second_segment() -> bytes:
+    """The four row lists and the dispatch table at their real addresses,
+    with made-up labels (no game text)."""
+    seg = bytearray(0x0602B000 - BASE)
+    labels = [f"ROW{k}".ljust(16).encode() + b"\0" for k in range(9)]
+    combo = b"COMBO GAGE".ljust(16) + b"\0"
+    strings_at = 0x0602A800
+    where = {}
+    for s in [*labels, combo]:
+        where[s] = strings_at
+        seg[strings_at - BASE : strings_at - BASE + len(s)] = s
+        strings_at += len(s)
+    for game, rows in (
+        (0x0602A234, labels),
+        (0x0602A248, [*labels, combo]),
+        (0x0602A25E, labels),
+        (0x0602A272, [*labels, combo]),
+    ):
+        for k, row in enumerate(rows):
+            at = game - BASE + 2 * k
+            seg[at : at + 2] = (where[row] - game).to_bytes(2, "big")
+    for k in range(12):
+        at = 0x06028128 - BASE + 4 * k
+        seg[at : at + 4] = (0x06028000 + k).to_bytes(4, "big")
+    return bytes(seg)
+
+
+def read_list(blob: bytes, origin: int, at: int, count: int = 99) -> list[bytes]:
+    rows = []
+    for k in range(count):
+        word = at - origin + 2 * k
+        offset = int.from_bytes(blob[word : word + 2], "big")
+        if not offset:
+            break
+        start = at + offset - origin
+        rows.append(blob[start : blob.index(b"\0", start)])
+    return rows
+
+
+def test_the_menu_blob_adds_names_and_combo_gauge() -> None:
+    origin = 0x002FF9D0
+    blob, addresses = name_toggle.menu_blob(origin, synthetic_second_segment(), BASE)
+    nine = read_list(blob, origin, addresses["list_6028560"])
+    ten = read_list(blob, origin, addresses["list_6028568"])
+    assert [r.strip() for r in nine][-1] == b"NAMES" and len(nine) == 10
+    assert [r.strip() for r in ten][-2:] == [b"NAMES", b"COMBO GAUGE"]
+    values = read_list(blob, origin, addresses["names_values"], 2)
+    assert [v.strip() for v in values] == [b"U.S.", b"SATURN"]
+    table = addresses["table"] - origin
+    entries = [
+        int.from_bytes(blob[table + 4 * k : table + 4 * k + 4], "big")
+        for k in range(13)
+    ]
+    assert entries[:12] == [0x06028000 + k for k in range(12)]
+    assert entries[12] == addresses["gauge_handler"]
+    assert origin + len(blob) <= name_toggle.TAIL_END
+
+
 def test_patches_keep_their_size() -> None:
-    for _, old, new in patches():
+    _, addresses = name_toggle.menu_blob(0x002FF9D0, synthetic_second_segment(), BASE)
+    for _, old, new in patches(addresses):
         assert len(as_bytes(old)) == len(as_bytes(new))
 
 
@@ -98,11 +160,14 @@ def test_the_routine_fits_its_room_and_the_tables_hold_every_site() -> None:
     assert blob[:4] == (0x0604FBDA).to_bytes(4, "big") and blob[4:6] == b"\x90\x9c"
 
 
-def test_the_row_points_at_the_setting() -> None:
-    by_address = {a: n for a, _, n in menu_patches()}
+def test_the_names_row_stores_the_setting_and_the_draw_block_calls_out() -> None:
+    _, addresses = name_toggle.menu_blob(0x002FF9D0, synthetic_second_segment(), BASE)
+    by_address = {a: n for a, _, n in menu_patches(addresses)}
     assert as_bytes(by_address[0x06028C64]) == name_toggle.SETTING.to_bytes(4, "big")
-    values = as_bytes(by_address[name_toggle.VALUES])
-    assert values == b"U.S.  \0SATURN\0"
+    assert as_bytes(by_address[0x06028C68]) == addresses["draw"].to_bytes(4, "big")
+    block = as_bytes(by_address[0x06028BF8])
+    code = [decode(block, 0x06028BF8, 0x06028BF8 + i)[1] for i in (0, 2)]
+    assert code[0].startswith("mov.l @(0x06028C68),r0") and code[1] == "jsr @r0"
 
 
 def test_the_routine_starts_with_the_handlers_increment() -> None:

@@ -217,6 +217,28 @@ deciding later. The user decided (the option chosen, verbatim):
 The toggle is built as its own task (`LOC-009`); the two variants stay
 buildable as they are.
 
+**Release choices and COMBO GAUGE (2026-11-01, `REL-001`, `LOC-010`).** For
+the release (verbatim answers):
+
+| Question (short) | Answer |
+| --- | --- |
+| Patch formats | "xdelta and SSP (Recommended)" |
+| Version | "0.1.0 (Recommended)" |
+| The open tasks (`ENV-007`, `DOC-003`, the rest of `TXT-001`, `UI-001`, `UI-003`) | "Do them first" |
+| Toggle and the hidden COMBO GAGE row | "Keep both rows" |
+| Its label | "COMBO GAUGE (Recommended)" |
+| Which builds ship, after `LOC-010` | "Toggle only" |
+
+The release ships the toggle build alone (`name_toggle_v4`): NAMES in Options
+covers both conventions. Before 0.1.0 (verbatim): for the leftovers of `UI-001` and
+`UI-003`, "Survey, then decide (Recommended)" (`UI-005`); for `TXT-001`,
+"Static scan, then decide (Recommended)". The survey's one finding, the QSound
+notice's Japanese trademark line: "Leave it (Recommended)". The scan's unshown records (`TXT-001`):
+"Leave them (Recommended)". The American and Saturn builds stay buildable and
+in the regression. Asked whether the toggle must
+lose COMBO GAGE, the user asked: "Is there no way to support them both?
+Also, shouldn't it be "COMBO GAUGE" instead?"
+
 ## Deferred Until Evidence Exists
 
 These MSHvSF decisions depend on facts not yet known for XvSF. Each is put to

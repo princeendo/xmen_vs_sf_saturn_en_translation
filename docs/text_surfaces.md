@@ -58,7 +58,13 @@ names; fight HUD and callouts (`FIGHT!`, `FIRST ATTACK`, hit counts, `K.O.`,
 
 Endings other than Nash's (reached in `EXP-0034`, above); boss and secret-character text;
 versus mode screens; options sub-screens (button config, sound test, other
-values); rare or region-gated text. The boot-time warnings (save/backup and cart
+values); rare or region-gated text.
+
+**Surveyed 2026-11-01 (`UI-005`, `EXP-0072`):** versus mode's select screen,
+every Options row and value, BUTTON CONFIG., the credits, GAME OVER, name
+entry and both rankings, and the attract's legal text show no Japanese. The
+QSound notice keeps one Japanese line. Versus mode beyond its select screen
+needs a second controller and was not reached; rare text is `TXT-001`. The boot-time warnings (save/backup and cart
 messages) are listed below (`BOOT-001`). Each needs its own capture before it
 can be inventoried.
 
