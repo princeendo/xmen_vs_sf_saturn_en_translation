@@ -524,11 +524,10 @@ repeats an MSHvSF task, the note names the MSHvSF task for its method only.
 - **2026-11-01:** `UI-005` (`EXP-0072`) and `TXT-001` (`EXP-0073`) done: the
   only Japanese left on a reached screen is the QSound notice's trademark
   line, and no unknown text exists; the user chose to leave both.
-- **Next:** `REL-001`: every open task is done; the release steps remain
-  (docs, tag, the user's publication).
-  Backlog
-  after the phases: `REL-001` (release patches), `TXT-001`, and the rest of
-  `UI-001` and `UI-003`.
+- **2026-11-02** (`SESSION-0107`): `REL-001` is done. The user published
+  release 0.1.0 on tag `v0.1.0`; both assets' sizes and SHA-256 digests,
+  read through the public API, equal the zips built in `EXP-0071`.
+- **Next:** no task is open. A new phase starts only on the user's request.
 
 ## Milestones
 
@@ -3439,7 +3438,7 @@ Requested by the user after Phase R: "Start REL-001".
 
 ### REL-001 - Release patches
 
-- **Status:** `READY`
+- **Status:** `DONE`
 - **Milestone:** After M5 (outline `REL-001`)
 - **Dependencies:** LOC-009 (the user's order); LOC-010 for the toggle build.
 - **Blockers:** None for preparing patches. Publishing waits until every
@@ -3466,6 +3465,11 @@ Requested by the user after Phase R: "Start REL-001".
 - **Notes:** 2026-11-01 (`EXP-0071`): the user chose xdelta and SSP, 0.1.0,
   the toggle build only, and the open tasks first. Tools copied and a trial
   run made (patches, zips, applied from the zips). Blocked on the open tasks.
+  2026-11-02: the open tasks done; the user published "0.1.0: first English
+  release" on tag `v0.1.0` (2026-11-02T13:46:46Z, as princeendo). Public API:
+  `xmvsf_saturn_en_0.1.0_xdelta.zip` 3,852,177 bytes, `sha256:8de3a7e6…`;
+  `xmvsf_saturn_en_0.1.0_ssp.zip` 4,872,893 bytes, `sha256:7347d30e…`; both
+  equal the local zips.
 
 ## Later Milestones (outline only)
 

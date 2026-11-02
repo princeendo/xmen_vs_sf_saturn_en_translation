@@ -116,9 +116,10 @@ on both name variants. See `docs/text_surfaces.md` and `docs/discoveries.md` (D-
   game unlocks it) stays, as an eleventh row spelled COMBO GAUGE. The user
   played both settings. See `docs/discoveries.md` (D-060 to D-062).
 
-**Release 0.1.0: prepared, not yet published** (`REL-001`). One patch, the
-toggle build, as xdelta and SSP; how to apply and rebuild it is in
-[`release/README.md`](release/README.md).
+**Release 0.1.0: published 2026-11-02**
+([download](https://github.com/princeendo/xmen_vs_sf_saturn_en_translation/releases/tag/v0.1.0),
+`REL-001`). One patch, the toggle build, as xdelta and SSP; how to apply and
+rebuild it is in [`release/README.md`](release/README.md).
 
 `TASKS.md` has the full plan. Its "Current State" section is the running
 summary, and `research_log.md` holds every session.

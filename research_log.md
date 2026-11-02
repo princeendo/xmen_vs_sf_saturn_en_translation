@@ -3408,3 +3408,23 @@ Checks: as SESSION-0105 (the same run). The zips were built twice identically an
 
 Conclusion: every open task is done; `REL-001` waits for the tag and the
 user's publication.
+
+## 2026-11-02 — SESSION-0107: Release 0.1.0 published (REL-001)
+
+User request (verbatim): "Published".
+
+- The release, read without credentials:
+  `curl -s https://api.github.com/repos/princeendo/xmen_vs_sf_saturn_en_translation/releases/tags/v0.1.0`.
+  Title "0.1.0: first English release", not a draft or pre-release,
+  published 2026-11-02T13:46:46Z by princeendo.
+- Assets (size, API digest) against `shasum -a 256 build/release/v0.1.0/*.zip`:
+  `xmvsf_saturn_en_0.1.0_xdelta.zip` 3,852,177,
+  `sha256:8de3a7e6255d7cdcd4b14cef148e8ca25782102d2215fac2b4d7c564fb2c2ff4`;
+  `xmvsf_saturn_en_0.1.0_ssp.zip` 4,872,893,
+  `sha256:7347d30ed91c8ae367e703cdc66789c22cdf279b4c16e9a7acb810590360d7d0`.
+  Both equal.
+- The top-level README links the release.
+
+Checks: documentation only; `git diff --check` clean.
+
+Conclusion: `REL-001` is `DONE`. No task is open.
