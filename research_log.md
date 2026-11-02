@@ -3428,3 +3428,11 @@ User request (verbatim): "Published".
 Checks: documentation only; `git diff --check` clean.
 
 Conclusion: `REL-001` is `DONE`. No task is open.
+
+Later in SESSION-0107, the user asked (verbatim): "Can we update the main
+`README.md` file to look more the like `msh_vs_sf_saturn_en_translation`
+one?" The top-level README now follows MSHvSF's (`40b3ad0`) layout: Download,
+What's Changed, Patch Files (with Applying a Patch), Build the Patch (files,
+set-up, release patches, build options) and Development. The research
+narrative moved out of it; `TASKS.md`, `docs/discoveries.md` and the
+regression report hold it. Check: every local link and anchor resolves.
